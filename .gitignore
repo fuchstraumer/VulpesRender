@@ -2,3 +2,4 @@ assets/
 ext/lib/assimp.pdb
 ext/lib/assimp-vc140-mt.lib
 ext/lib/assimp-vc140-mt-gd.lib
+ext/lib/x64/debug/

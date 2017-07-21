@@ -301,7 +301,7 @@ namespace detail
 
 		static texel_type call(texture_type const & Texture, fetch_type Fetch, normalized_type const & SampleCoordWrap, size_type Layer, size_type Face, interpolate_type Level, texel_type const & BorderColor)
 		{
-			return nearest<Dimension, texture_type, interpolate_type, normalized_type, fetch_type, texel_type, is_float, support_border>::call(Texture, Fetch, SampleCoordWrap, Layer, Face, glm::iround(Level), BorderColor);
+			return nearest<Dimension, texture_type, interpolate_type, normalized_type, fetch_type, texel_type, is_float, support_border>::call(Texture, Fetch, SampleCoordWrap, Layer, Face, round(Level), BorderColor);
 		}
 	};
 
@@ -331,7 +331,7 @@ namespace detail
 
 		static texel_type call(texture_type const & Texture, fetch_type Fetch, normalized_type const & SampleCoordWrap, size_type Layer, size_type Face, interpolate_type Level, texel_type const & BorderColor)
 		{
-			return linear<Dimension, texture_type, interpolate_type, normalized_type, fetch_type, texel_type, is_float, support_border>::call(Texture, Fetch, SampleCoordWrap, Layer, Face, glm::iround(Level), BorderColor);
+			return linear<Dimension, texture_type, interpolate_type, normalized_type, fetch_type, texel_type, is_float, support_border>::call(Texture, Fetch, SampleCoordWrap, Layer, Face, round(Level), BorderColor);
 		}
 	};
 
