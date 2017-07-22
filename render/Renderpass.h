@@ -2,9 +2,9 @@
 #ifndef VULPES_VK_RENDER_PASS_H
 #define VULPES_VK_RENDER_PASS_H
 
-#include "vpr_stdafx.h"
-#include "ForwardDecl.h"
-#include "NonCopyable.h"
+#include "stdafx.h"
+#include "../ForwardDecl.h"
+#include "../NonCopyable.h"
 
 namespace vulpes {
 

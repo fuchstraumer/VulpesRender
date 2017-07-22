@@ -1,13 +1,13 @@
 #pragma once
 #ifndef VULPES_VK_TEXTURE_H
 #define VULPES_VK_TEXTURE_H
-#include "vpr_stdafx.h"
-#include "ForwardDecl.h"
-#include "NonCopyable.h"
-#include "resource/Allocator.h"
-#include "resource/Buffer.h"
-#include "core/LogicalDevice.h"
-#include "render/Multisampling.h"
+#include "stdafx.h"
+#include "../ForwardDecl.h"
+#include "../NonCopyable.h"
+#include "../resource/Allocator.h"
+#include "../resource/Buffer.h"
+#include "../core/LogicalDevice.h"
+#include "../render/Multisampling.h"
 #include "Image.h"
 
 namespace vulpes {

@@ -2,10 +2,10 @@
 #ifndef VULPES_VK_MULTISAMPLING_H
 #define VULPES_VK_MULTISAMPLING_H
 
-#include "vpr_stdafx.h"
-#include "ForwardDecl.h"
-#include "NonCopyable.h"
-#include "resource/Image.h"
+#include "stdafx.h"
+#include "../ForwardDecl.h"
+#include "../NonCopyable.h"
+#include "../resource/Image.h"
 namespace vulpes {
 
 	class Multisampling {

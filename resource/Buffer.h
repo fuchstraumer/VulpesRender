@@ -1,10 +1,10 @@
 #pragma once
 #ifndef VULPES_VK_BUFFER_H
 #define VULPES_VK_BUFFER_H
-#include "vpr_stdafx.h"
-#include "ForwardDecl.h"
-#include "NonCopyable.h"
-#include "resource/Allocator.h"
+#include "stdafx.h"
+#include "../ForwardDecl.h"
+#include "../NonCopyable.h"
+#include "../resource/Allocator.h"
 namespace vulpes {
 
 	class Buffer : public NonCopyable {

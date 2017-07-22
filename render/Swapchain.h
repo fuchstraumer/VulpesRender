@@ -1,9 +1,9 @@
 #pragma once
 #ifndef VULPES_VK_SWAPCHAIN_H
 #define VULPES_VK_SWAPCHAIN_H
-#include "vpr_stdafx.h"
-#include "ForwardDecl.h"
-#include "NonCopyable.h"
+#include "stdafx.h"
+#include "../ForwardDecl.h"
+#include "../NonCopyable.h"
 
 namespace vulpes {
 

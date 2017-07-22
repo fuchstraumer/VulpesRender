@@ -2,10 +2,10 @@
 #ifndef VULPES_VK_GRAPHICS_PIPELINE_H
 #define VULPES_VK_GRAPHICS_PIPELINE_H
 
-#include "vpr_stdafx.h"
-#include "ForwardDecl.h"
-#include "NonCopyable.h"
-#include "resource/ShaderModule.h"
+#include "stdafx.h"
+#include "../ForwardDecl.h"
+#include "../NonCopyable.h"
+#include "../resource/ShaderModule.h"
 
 namespace vulpes {
 

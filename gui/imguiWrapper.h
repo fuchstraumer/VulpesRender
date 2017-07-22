@@ -4,16 +4,16 @@
 #include "vpr_stdafx.h"
 #include <imgui/imgui.h>
 #include "imguiShaders.h"
-#include "command/TransferPool.h"
-#include "resource/Texture.h"
-#include "core/LogicalDevice.h"
-#include "resource/Buffer.h"
-#include "render/GraphicsPipeline.h"
-#include "render/Swapchain.h"
-#include "core/PhysicalDevice.h"
-#include "core/Instance.h"
-#include "render/Multisampling.h"
-#include "resource/PipelineCache.h"
+#include "../command/TransferPool.h"
+#include "../resource/Texture.h"
+#include "../core/LogicalDevice.h"
+#include "../resource/Buffer.h"
+#include "../render/GraphicsPipeline.h"
+#include "../render/Swapchain.h"
+#include "../core/PhysicalDevice.h"
+#include "../core/Instance.h"
+#include "../render/Multisampling.h"
+#include "../resource/PipelineCache.h"
 
 namespace vulpes {
 
