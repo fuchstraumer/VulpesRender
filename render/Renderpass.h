@@ -3,8 +3,8 @@
 #define VULPES_VK_RENDER_PASS_H
 
 #include "stdafx.h"
-#include "ForwardDecl.h"
-#include "NonCopyable.h"
+#include "../ForwardDecl.h"
+#include "../NonCopyable.h"
 
 namespace vulpes {
 

@@ -2,8 +2,8 @@
 #ifndef VULPES_VK_SWAPCHAIN_H
 #define VULPES_VK_SWAPCHAIN_H
 #include "stdafx.h"
-#include "ForwardDecl.h"
-#include "NonCopyable.h"
+#include "../ForwardDecl.h"
+#include "../NonCopyable.h"
 
 namespace vulpes {
 

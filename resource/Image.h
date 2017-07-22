@@ -2,9 +2,9 @@
 #ifndef VULPES_VK_IMAGE_H
 #define VULPES_VK_IMAGE_H
 #include "stdafx.h"
-#include "ForwardDecl.h"
-#include "NonCopyable.h"
-#include "resource/Allocator.h"
+#include "../ForwardDecl.h"
+#include "../NonCopyable.h"
+#include "../resource/Allocator.h"
 /*
 
 	Wraps the common image creation, transfer, and staging methods. 

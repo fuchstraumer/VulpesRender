@@ -2,8 +2,8 @@
 #ifndef VULPES_VK_SHADER_MODULE_H
 #define VULPES_VK_SHADER_MODULE_H
 #include "stdafx.h"
-#include "ForwardDecl.h"
-#include "NonCopyable.h"
+#include "../ForwardDecl.h"
+#include "../NonCopyable.h"
 
 namespace vulpes {
 
