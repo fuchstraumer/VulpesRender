@@ -44,16 +44,16 @@ namespace vulpes {
 
 	protected:
 		std::unique_ptr<Multisampling> msaa;
-		imguiWrapper* gui;
+		std::unique_ptr<imguiWrapper> gui;
 		uint32_t width, height;
 		VkSemaphore semaphores[2];
-		InstanceGLFW* instance;
-		Device* device;
-		Swapchain* swapchain;
+		std::unique_ptr<InstanceGLFW> instance;
+		std::unique_ptr<Device> device;
+		std::unique_ptr<Swapchain> swapchain;
 		std::vector<VkFramebuffer> framebuffers;
-		DepthStencil* depthStencil;
-		CommandPool *transferPool, *graphicsPool, *secondaryPool;
-		Renderpass* renderPass;
+		std::unique_ptr<DepthStencil> depthStencil;
+		std::unique_ptr<CommandPool> transferPool, graphicsPool, secondaryPool;
+		std::unique_ptr<Renderpass> renderPass;
 		float frameTime;
 	};
 

@@ -14,15 +14,15 @@
 vulpes::BaseScene::BaseScene(const size_t& num_secondary_buffers, const uint32_t& _width, const uint32_t& _height) : width(_width), height(_height) {
 
 	VkInstanceCreateInfo create_info = vk_base_instance_info;
-	instance = new InstanceGLFW(create_info, true);
+	instance = std::make_unique<InstanceGLFW>(create_info, true);
 	glfwSetWindowUserPointer(instance->Window, this);
 	instance->SetupPhysicalDevices();
 	instance->SetupSurface();
 
-	device = new Device(instance, instance->physicalDevice);
+	device = std::make_unique<Device>(instance.get(), instance->physicalDevice);
 
-	swapchain = new Swapchain();
-	swapchain->Init(instance, instance->physicalDevice, device);
+	swapchain = std::make_unique<Swapchain>();
+	swapchain->Init(instance.get(), instance->physicalDevice, device.get());
 
 	CreateCommandPools(num_secondary_buffers * swapchain->ImageCount);
 	SetupRenderpass();
@@ -41,33 +41,25 @@ vulpes::BaseScene::~BaseScene() {
 	}
 	msaa->ColorBufferMS.reset();
 	msaa->DepthBufferMS.reset();
-	delete gui;
-	delete swapchain;
-	delete renderPass;
-	delete secondaryPool;
-	delete transferPool;
-	delete graphicsPool;
 	vkDestroySemaphore(device->vkHandle(), semaphores[1], nullptr);
 	vkDestroySemaphore(device->vkHandle(), semaphores[0], nullptr);
-	delete device;
-	delete instance;
 }
 
 void vulpes::BaseScene::CreateCommandPools(const size_t& num_secondary_buffers) {
 	VkCommandPoolCreateInfo pool_info = vk_command_pool_info_base;
 	pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
 	pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
-	graphicsPool = new CommandPool(device, pool_info, true);
+	graphicsPool = std::make_unique<CommandPool>(device.get(), pool_info, true);
 
 	VkCommandBufferAllocateInfo alloc_info = vk_command_buffer_allocate_info_base;
 	graphicsPool->AllocateCmdBuffers(swapchain->ImageCount, alloc_info);
 
 	pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
-	transferPool = new CommandPool(device, pool_info, true);
+	transferPool = std::make_unique<CommandPool>(device.get(), pool_info, true);
 	transferPool->AllocateCmdBuffers(1);
 
 	pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
-	secondaryPool = new CommandPool(device, pool_info, false);
+	secondaryPool = std::make_unique<CommandPool>(device.get(), pool_info, false);
 	alloc_info.level = VK_COMMAND_BUFFER_LEVEL_SECONDARY;
 	secondaryPool->AllocateCmdBuffers(swapchain->ImageCount * static_cast<uint32_t>(num_secondary_buffers), alloc_info);
 }
@@ -106,7 +98,7 @@ void vulpes::BaseScene::SetupRenderpass(const VkSampleCountFlagBits& sample_coun
 		Setup Multisampling
 	*/
 
-	msaa = std::make_unique<Multisampling>(device, swapchain, sample_count, swapchain->Extent.width, swapchain->Extent.height);
+	msaa = std::make_unique<Multisampling>(device.get(), swapchain.get(), sample_count, swapchain->Extent.width, swapchain->Extent.height);
 	Multisampling::SampleCount = sample_count;
 
 	VkAttachmentDescription msaa_color_attachment = vk_attachment_description_base;
@@ -177,12 +169,12 @@ void vulpes::BaseScene::SetupRenderpass(const VkSampleCountFlagBits& sample_coun
 	rp_info.dependencyCount = static_cast<uint32_t>(subpasses.size());
 	rp_info.pDependencies = subpasses.data();
 
-	renderPass = new Renderpass(device, rp_info);
+	renderPass = std::make_unique<Renderpass>(device.get(), rp_info);
 }
 
 void vulpes::BaseScene::SetupDepthStencil(){
 	VkQueue depth_queue = device->GraphicsQueue(0);
-	depthStencil = new DepthStencil(device, VkExtent3D{ swapchain->Extent.width, swapchain->Extent.height, 1 }, transferPool, depth_queue);
+	depthStencil = std::make_unique<DepthStencil>(device.get(), VkExtent3D{ swapchain->Extent.width, swapchain->Extent.height, 1 }, transferPool.get(), depth_queue);
 }
 
 void vulpes::BaseScene::SetupFramebuffers(){
