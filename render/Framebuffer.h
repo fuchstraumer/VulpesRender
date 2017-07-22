@@ -2,7 +2,7 @@
 #ifndef VULPES_VK_FRAMEBUFFER_H
 #define VULPES_VK_FRAMEBUFFER_H
 
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
 #include "../NonCopyable.h"
 #include "../resource/Image.h"

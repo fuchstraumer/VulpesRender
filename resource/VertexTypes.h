@@ -3,7 +3,7 @@
 #define VULPES_VK_VERTEX_TYPES_H
 
 #include "vpr_stdafx.h"
-#include "objects\ForwardDecl.h"
+#include "objects/ForwardDecl.h"
 
 
 namespace vulpes {
