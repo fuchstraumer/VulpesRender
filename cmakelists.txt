@@ -29,21 +29,15 @@ FILE(GLOB COMMON "src/common/*.h")
 FILE(GLOB COMMAND_FILES "src/command/*.cpp" "include/command/*.h")
 FILE(GLOB CORE "src/core/*.cpp" "include/core/*.h")
 FILE(GLOB RESOURCES "src/resource/*.cpp" "include/resource/*.h")
-FILE(GLOB RENDER "src/resource/*.cpp" "include/resource/*.h")
+FILE(GLOB RENDER "src/render/*.cpp" "include/render/*.h")
 FILE(GLOB GUI "src/gui/*.cpp" "include/gui/*.h")
+FILE(GLOB IMGUI "imgui/imgui.cpp" "imgui/imgui.h" "imgui/imgui_draw.cpp" "imgui/imgui_internal.h")
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
 INCLUDE_DIRECTORIES("ext/include/")
+INCLUDE_DIRECTORIES(${VULKAN_SDK}/Include)
 
 FIND_PACKAGE(Vulkan REQUIRED)
-
-ExternalProject_Add(imgui
-    PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/imgui"
-    GIT_REPOSITORY "https://github.com/ocornut/imgui.git"
-    GIT_TAG "v1.49"
-    CONFIGURE_COMMAND ""
-    BUILD_COMMAND ""
-    INSTALL_COMMMAND "")
 
 FILE(GLOB PROJECT_SOURCES "src/util/*.cpp" "src/command/*.cpp" "src/core/*.cpp" "src/render/*.cpp" "src/resource/*.cpp" "src/gui/*.cpp" "src/BaseScene.cpp")
 ADD_MSVC_PRECOMPILED_HEADER("vpr_stdafx.h" "src/vpr_stdafx.cpp" ${PROJECT_SOURCES})
@@ -53,8 +47,12 @@ SOURCE_GROUP("common" FILES ${COMMON})
 SOURCE_GROUP("command" FILES ${COMMAND_FILES})
 SOURCE_GROUP("core" FILES ${CORE})
 SOURCE_GROUP("resource" FILES ${RESOURCES})
+SOURCE_GROUP("render" FILES ${RENDER})
 SOURCE_GROUP("gui" FILES ${GUI})
-#TARGET_LINK_LIBRARIES("ext/lib/x64/glfw3dll.lib")
-ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/BaseScene.h" "src/BaseScene.cpp" ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${GUI})
+SOURCE_GROUP("imgui" FILES ${IMGUI})
 
+ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/BaseScene.h" "src/BaseScene.cpp" ${IMGUI} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
+TARGET_LINK_LIBRARIES(VulpesRender "ext/lib/x64/debug/glfw3dll.lib" DEBUG)
+TARGET_LINK_LIBRARIES(VulpesRender "ext/lib/x64/glfw3dll.lib")
+TARGET_LINK_LIBRARIES(VulpesRender "${VULKAN_SDK}/Lib/vulkan-1.lib")
 
