@@ -2,7 +2,7 @@
 #ifndef VULPES_VK_BASE_SCENE_H
 #define VULPES_VK_BASE_SCENE_H
 
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 
 #include "core/Instance.h"
 #include "core/LogicalDevice.h"

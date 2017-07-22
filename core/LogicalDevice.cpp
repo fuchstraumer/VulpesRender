@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include "LogicalDevice.h"
 #include "PhysicalDevice.h"
 #include "Instance.h"

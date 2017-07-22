@@ -2,7 +2,7 @@
 #ifndef VULPES_VK_IMGUI_SHADERS_H
 #define VULPES_VK_IMGUI_SHADERS_H
 
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 
 namespace vulpes {
 

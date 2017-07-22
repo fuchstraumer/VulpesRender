@@ -1,7 +1,7 @@
 #pragma once
 #ifndef VULPES_VK_PHYSICAL_DEVICE_H
 #define VULPES_VK_PHYSICAL_DEVICE_H
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 namespace vulpes {
 
 	class PhysicalDevice {

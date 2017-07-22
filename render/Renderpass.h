@@ -2,7 +2,7 @@
 #ifndef VULPES_VK_RENDER_PASS_H
 #define VULPES_VK_RENDER_PASS_H
 
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include "ForwardDecl.h"
 #include "NonCopyable.h"
 

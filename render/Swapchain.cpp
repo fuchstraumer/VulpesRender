@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include "Swapchain.h"
 #include "core/Instance.h"
 #include "core/PhysicalDevice.h"

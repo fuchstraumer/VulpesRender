@@ -1,7 +1,7 @@
 #pragma once
 #ifndef VULPES_VK_DEPTH_STENCIL_H
 #define VULPES_VK_DEPTH_STENCIL_H
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include "resource/Image.h"
 
 namespace vulpes {

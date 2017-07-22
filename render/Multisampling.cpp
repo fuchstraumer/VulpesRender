@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include "Multisampling.h"
 #include "core/LogicalDevice.h"
 #include "render/Swapchain.h"

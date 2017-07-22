@@ -1,7 +1,7 @@
 #pragma once
 #ifndef COMMON_UTIL_H
 #define COMMON_UTIL_H
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include <xmmintrin.h>
 
 static glm::dvec3 map_to_sphere(const glm::dvec3& cube_pos) {

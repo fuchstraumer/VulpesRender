@@ -1,7 +1,7 @@
 #pragma once
 #ifndef VULPES_VK_IMGUI_WRAPPER_H
 #define VULPES_VK_IMGUI_WRAPPER_H
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include <imgui/imgui.h>
 #include "imguiShaders.h"
 #include "command/TransferPool.h"

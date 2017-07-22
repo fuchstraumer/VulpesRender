@@ -2,7 +2,7 @@
 #ifndef VULPES_VK_VERTEX_TYPES_H
 #define VULPES_VK_VERTEX_TYPES_H
 
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include "objects\ForwardDecl.h"
 
 

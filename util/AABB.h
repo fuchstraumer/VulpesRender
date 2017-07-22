@@ -2,7 +2,7 @@
 #ifndef VULPES_UTIL_AABB_H
 #define VULPES_UTIL_AABB_H
 
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 
 namespace vulpes {
 

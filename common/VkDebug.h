@@ -2,7 +2,7 @@
 #ifndef VULPES_VK_DEBUG_H
 #define VULPES_VK_DEBUG_H
 
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 
 namespace vulpes {
 

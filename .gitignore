@@ -36,3 +36,15 @@ x64/Debug/AABB.obj
 .vs/VulpesRender2/v15/ipch/VULPESRENDER2-6009246c/VULPESRENDER2-894b187b.ipch
 .vs/VulpesRender2/v15/Browse.VC.db
 .vs/VulpesRender2/v15/.suo
+x64/Debug/vpr_stdafx.obj
+x64/Debug/imgui_draw.obj
+x64/Debug/imgui.obj
+x64/Debug/easylogging++.obj
+x64/Debug/VulpesRender2.tlog/link.write.1.tlog
+x64/Debug/VulpesRender2.tlog/link.read.1.tlog
+x64/Debug/VulpesRender2.tlog/link.command.1.tlog
+x64/Debug/VulpesRender2.pdb
+x64/Debug/VulpesRender2.ilk
+x64/Debug/VulpesRender2.exe
+.vs/VulpesRender2/v15/ipch/AutoPCH/VULPESRENDER2-6009246c/IMGUI_DRAW-c3600e88/IMGUI_DRAW.ipch
+.vs/VulpesRender2/v15/Browse.VC.opendb

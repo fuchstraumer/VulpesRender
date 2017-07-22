@@ -5,7 +5,7 @@
 #include <vector>
 #include "glm/ext.hpp"
 // GL Includes
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include <iostream>
 
 namespace vulpes {

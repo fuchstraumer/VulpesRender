@@ -1,7 +1,7 @@
 #pragma once
 #ifndef VULPES_VK_TEXTURE_H
 #define VULPES_VK_TEXTURE_H
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include "ForwardDecl.h"
 #include "NonCopyable.h"
 #include "resource/Allocator.h"

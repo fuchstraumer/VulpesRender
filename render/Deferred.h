@@ -2,7 +2,7 @@
 #ifndef VULPES_VK_DEFERRED_H
 #define VULPES_VK_DEFERRED_H
 
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
 #include "Framebuffer.h"
 

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include "Instance.h"
 #include "common/VkDebug.h"
 #include "PhysicalDevice.h"

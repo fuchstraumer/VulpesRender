@@ -2,7 +2,7 @@
 #ifndef VULPES_VK_LOGICAL_DEVICE_H
 #define VULPES_VK_LOGICAL_DEVICE_H
 
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include "ForwardDecl.h"
 #include "NonCopyable.h"
 #include "../resource/Allocator.h"

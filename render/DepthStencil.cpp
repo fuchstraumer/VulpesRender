@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include "DepthStencil.h"
 #include "core/LogicalDevice.h"
 

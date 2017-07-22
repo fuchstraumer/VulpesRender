@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include "PipelineCache.h"
 #include "../core/LogicalDevice.h"
 #include "../core/PhysicalDevice.h"

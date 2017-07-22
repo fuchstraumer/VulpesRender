@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include "Allocator.h"
 #include "util/easylogging++.h"
 #include "../core/LogicalDevice.h"

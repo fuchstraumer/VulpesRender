@@ -1,7 +1,7 @@
 #ifndef VULPES_VK_TRANSFER_POOL_H  
 #define VULPES_VK_TRANSFER_POOL_H
 
-#include "stdafx.h"
+#include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
 #include "CommandPool.h"
 
