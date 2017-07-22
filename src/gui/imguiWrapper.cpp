@@ -359,9 +359,9 @@ namespace vulpes {
 		VkDeviceSize vtx_offset = 0, idx_offset = 0;
 		for (int i = 0; i < draw_data->CmdListsCount; ++i) {
 			const ImDrawList* list = draw_data->CmdLists[i];
-			vbo->CopyTo(list->VtxBuffer.Data, list->VtxBuffer.Size * sizeof(ImDrawVert), vtx_offset);
+			vbo->CopyToMapped(list->VtxBuffer.Data, list->VtxBuffer.Size * sizeof(ImDrawVert), vtx_offset);
 			vtx_offset += list->VtxBuffer.Size * sizeof(ImDrawVert);
-			ebo->CopyTo(list->IdxBuffer.Data, list->IdxBuffer.Size * sizeof(ImDrawIdx), idx_offset);
+			ebo->CopyToMapped(list->IdxBuffer.Data, list->IdxBuffer.Size * sizeof(ImDrawIdx), idx_offset);
 			idx_offset += list->IdxBuffer.Size * sizeof(ImDrawIdx);
 		}
 

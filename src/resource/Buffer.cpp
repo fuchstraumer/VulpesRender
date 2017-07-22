@@ -59,7 +59,7 @@ namespace vulpes {
 		}
 	}
 
-	void Buffer::CopyTo(void * data, const VkDeviceSize & copy_size, const VkDeviceSize& offset){
+	void Buffer::CopyToMapped(void * data, const VkDeviceSize & copy_size, const VkDeviceSize& offset){
 		if (MappedMemory == nullptr) {
 			Map();
 		}
