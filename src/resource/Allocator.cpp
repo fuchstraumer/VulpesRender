@@ -1,8 +1,8 @@
 #include "vpr_stdafx.h"
 #include "resource/Allocator.h"
 #include "util/easylogging++.h"
-#include "../core/LogicalDevice.h"
-#include "../core/PhysicalDevice.h"
+#include "core/LogicalDevice.h"
+#include "core/PhysicalDevice.h"
 
 namespace vulpes {
 
@@ -141,7 +141,7 @@ namespace vulpes {
 	}
 
 	bool MemoryBlock::RequestSuballocation(const VkDeviceSize & buffer_image_granularity, const VkDeviceSize & allocation_size, const VkDeviceSize & allocation_alignment, SuballocationType allocation_type, SuballocationRequest * dest_request) {
-		if (availSize < allocation_size | availSuballocations.empty()) {
+		if ((availSize < allocation_size) || availSuballocations.empty()) {
 			// not enough space in this allocation object
 			return false;
 		}

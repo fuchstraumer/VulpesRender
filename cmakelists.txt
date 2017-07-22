@@ -1,0 +1,60 @@
+MACRO(ADD_MSVC_PRECOMPILED_HEADER PrecompiledHeader PrecompiledSource SourcesVar)
+  IF(MSVC)
+    GET_FILENAME_COMPONENT(PrecompiledBasename ${PrecompiledHeader} NAME_WE)
+    SET(PrecompiledBinary "${CMAKE_CURRENT_BINARY_DIR}/${PrecompiledBasename}.pch")
+    SET(Sources ${${SourcesVar}})
+
+    SET_SOURCE_FILES_PROPERTIES(${PrecompiledSource}
+                                PROPERTIES COMPILE_FLAGS "/Yc\"${PrecompiledHeader}\" /Fp\"${PrecompiledBinary}\""
+                                           OBJECT_OUTPUTS "${PrecompiledBinary}")
+    SET_SOURCE_FILES_PROPERTIES(${Sources}
+                                PROPERTIES COMPILE_FLAGS "/Yu\"${PrecompiledHeader}\" /FI\"${PrecompiledHeader}\" /Fp\"${PrecompiledBinary}\""
+                                           OBJECT_DEPENDS "${PrecompiledBinary}")  
+    # Add precompiled header to SourcesVar
+    LIST(APPEND ${SourcesVar} ${PrecompiledSource})
+  ENDIF(MSVC)
+ENDMACRO(ADD_MSVC_PRECOMPILED_HEADER)
+INCLUDE(ExternalProject)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.6)
+PROJECT(VulpesRender)
+
+SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
+SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+SET(CMAKE_CXX_STANDARD LATEST)
+SET(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+FILE(GLOB UTIL "src/util/*.cc" "src/util/*.cpp" "include/util/*.h")
+FILE(GLOB COMMON "src/common/*.h")
+FILE(GLOB COMMAND_FILES "src/command/*.cpp" "include/command/*.h")
+FILE(GLOB CORE "src/core/*.cpp" "include/core/*.h")
+FILE(GLOB RESOURCES "src/resource/*.cpp" "include/resource/*.h")
+FILE(GLOB RENDER "src/resource/*.cpp" "include/resource/*.h")
+FILE(GLOB GUI "src/gui/*.cpp" "include/gui/*.h")
+
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
+INCLUDE_DIRECTORIES("ext/include/")
+
+FIND_PACKAGE(Vulkan REQUIRED)
+
+ExternalProject_Add(imgui
+    PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/imgui"
+    GIT_REPOSITORY "https://github.com/ocornut/imgui.git"
+    GIT_TAG "v1.49"
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND ""
+    INSTALL_COMMMAND "")
+
+FILE(GLOB PROJECT_SOURCES "src/util/*.cpp" "src/command/*.cpp" "src/core/*.cpp" "src/render/*.cpp" "src/resource/*.cpp" "src/gui/*.cpp" "src/BaseScene.cpp")
+ADD_MSVC_PRECOMPILED_HEADER("vpr_stdafx.h" "src/vpr_stdafx.cpp" ${PROJECT_SOURCES})
+
+SOURCE_GROUP("util" FILES ${UTIL})
+SOURCE_GROUP("common" FILES ${COMMON})
+SOURCE_GROUP("command" FILES ${COMMAND_FILES})
+SOURCE_GROUP("core" FILES ${CORE})
+SOURCE_GROUP("resource" FILES ${RESOURCES})
+SOURCE_GROUP("gui" FILES ${GUI})
+#TARGET_LINK_LIBRARIES("ext/lib/x64/glfw3dll.lib")
+ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/BaseScene.h" "src/BaseScene.cpp" ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${GUI})
+
+
