@@ -1,1 +1,5 @@
-Testing vulkan stuff go away im bad and this is all bad
+Vulkan Rendering Framework.
+
+- Currently only supports Windows. 
+- Horrifyingly undocumented.
+- Don't use this.
