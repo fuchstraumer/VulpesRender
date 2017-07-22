@@ -2,7 +2,7 @@
 #ifndef VULPES_VK_DEPTH_STENCIL_H
 #define VULPES_VK_DEPTH_STENCIL_H
 #include "stdafx.h"
-#include "engine/renderer\resource\Image.h"
+#include "resource/Image.h"
 
 namespace vulpes {
 

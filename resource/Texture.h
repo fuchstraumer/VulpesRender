@@ -2,12 +2,12 @@
 #ifndef VULPES_VK_TEXTURE_H
 #define VULPES_VK_TEXTURE_H
 #include "stdafx.h"
-#include "engine/renderer/ForwardDecl.h"
-#include "engine/renderer/NonCopyable.h"
-#include "engine/renderer/resource/Allocator.h"
-#include "engine/renderer/resource/Buffer.h"
-#include "engine/renderer/core/LogicalDevice.h"
-#include "engine/renderer/render/Multisampling.h"
+#include "ForwardDecl.h"
+#include "NonCopyable.h"
+#include "resource/Allocator.h"
+#include "resource/Buffer.h"
+#include "core/LogicalDevice.h"
+#include "render/Multisampling.h"
 #include "Image.h"
 
 namespace vulpes {

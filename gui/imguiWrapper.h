@@ -2,18 +2,18 @@
 #ifndef VULPES_VK_IMGUI_WRAPPER_H
 #define VULPES_VK_IMGUI_WRAPPER_H
 #include "stdafx.h"
-#include <imgui\imgui.h>
+#include <imgui/imgui.h>
 #include "imguiShaders.h"
-#include "engine\renderer\command\TransferPool.h"
-#include "engine/renderer/resource/Texture.h"
-#include "engine/renderer/core/LogicalDevice.h"
-#include "engine/renderer\resource/Buffer.h"
-#include "engine/renderer\render/GraphicsPipeline.h"
-#include "engine/renderer\render/Swapchain.h"
-#include "engine/renderer\core/PhysicalDevice.h"
-#include "engine/renderer\core/Instance.h"
-#include "engine/renderer/render/Multisampling.h"
-#include "engine/renderer/resource/PipelineCache.h"
+#include "command/TransferPool.h"
+#include "resource/Texture.h"
+#include "core/LogicalDevice.h"
+#include "resource/Buffer.h"
+#include "render/GraphicsPipeline.h"
+#include "render/Swapchain.h"
+#include "core/PhysicalDevice.h"
+#include "core/Instance.h"
+#include "render/Multisampling.h"
+#include "resource/PipelineCache.h"
 
 namespace vulpes {
 

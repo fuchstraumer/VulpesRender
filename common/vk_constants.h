@@ -2,7 +2,7 @@
 #ifndef VULPES_VK_CONSTANTS_H
 #define VULPES_VK_CONSTANTS_H
 
-#include "vulkan\vulkan.h"
+#include "vulkan/vulkan.h"
 #include <iostream>
 
 /*

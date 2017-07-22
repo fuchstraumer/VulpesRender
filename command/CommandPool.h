@@ -2,8 +2,8 @@
 #ifndef VULPES_VK_COMMAND_POOL_H
 #define VULPES_VK_COMMAND_POOL_H
 #include "stdafx.h"
-#include "engine/renderer/ForwardDecl.h"
-#include "engine/renderer/NonCopyable.h"
+#include "ForwardDecl.h"
+#include "NonCopyable.h"
 
 namespace vulpes {
 

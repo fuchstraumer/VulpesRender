@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ShaderModule.h"
-#include "engine/renderer\core\LogicalDevice.h"
+#include "core\LogicalDevice.h"
 namespace vulpes {
 	ShaderModule::ShaderModule(const Device* device, const char * filename, const VkShaderStageFlagBits & _stages, const char * shader_name) : pipelineInfo(vk_pipeline_shader_stage_create_info_base), stages(_stages), createInfo(vk_shader_module_create_info_base), parent(device) {
 		

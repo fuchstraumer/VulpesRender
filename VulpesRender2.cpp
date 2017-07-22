@@ -2,13 +2,9 @@
 //
 
 #include "stdafx.h"
-#include "scenes\NBody.h"
+
 
 int main(){
-
-	using namespace vulpes;
-	nbody::NBodyScene scene;
-	scene.RenderLoop();
 	return 0;
 }
 

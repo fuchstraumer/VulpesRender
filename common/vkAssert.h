@@ -2,7 +2,7 @@
 #ifndef VK_ASSERT_H
 #define VK_ASSERT_H
 #include <iostream>
-#include "vulkan\vulkan.h"
+#include "vulkan/vulkan.h"
 #ifdef VK_FORCE_ASSERT
 #define VkAssert(expression) { vkErrCheck((expression), __FILE__, __LINE__); }
 inline void vkErrCheck(VkResult res, const char* file, unsigned line, bool abort = true) {

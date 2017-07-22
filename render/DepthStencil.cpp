@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "DepthStencil.h"
-#include "engine/renderer\core\LogicalDevice.h"
+#include "core/LogicalDevice.h"
 
 namespace vulpes {
 

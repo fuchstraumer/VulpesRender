@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Swapchain.h"
-#include "engine/renderer\core\Instance.h"
-#include "engine/renderer\core\PhysicalDevice.h"
-#include "engine/renderer\core\LogicalDevice.h"
+#include "core/Instance.h"
+#include "core/PhysicalDevice.h"
+#include "core/LogicalDevice.h"
 
 namespace vulpes {
 

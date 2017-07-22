@@ -71,13 +71,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)ext/include;$(ProjectDir);$(VULKAN_SDK)\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ext/include;$(ProjectDir);$(VULKAN_SDK)\include;$(ProjectDir);</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)ext\lib;$(VULKAN_SDK)\Lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>vulkan-1.lib;glfw3dll.lib;assimp-vc140-mt-gd.lib;zlibstaticd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>vulkan-1.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='UnitTests|x64'">
@@ -126,60 +126,69 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseScene.h" />
+    <ClInclude Include="command\CommandPool.h" />
+    <ClInclude Include="command\TransferPool.h" />
+    <ClInclude Include="common\CommonDef.h" />
+    <ClInclude Include="common\CommonUtil.h" />
     <ClInclude Include="common\CreateInfoBase.h" />
-    <ClInclude Include="objects\core\Camera.h" />
-    <ClInclude Include="objects\render\DepthStencil.h" />
-    <ClInclude Include="objects\resource\Image.h" />
-    <ClInclude Include="objects\resource\Model.h" />
-    <ClInclude Include="scenes\BaseScene.h" />
-    <ClInclude Include="scenes\Cubemap.h" />
-    <ClInclude Include="scenes\DepthTest.h" />
-    <ClInclude Include="scenes\DynamicUBO.h" />
-    <ClInclude Include="scenes\House.h" />
-    <ClInclude Include="objects\command\CommandPool.h" />
-    <ClInclude Include="objects\resource\Buffer.h" />
-    <ClInclude Include="objects\resource\Texture.h" />
-    <ClInclude Include="objects\resource\VertexTypes.h" />
-    <ClInclude Include="scenes\NBody.h" />
-    <ClInclude Include="scenes\Pipelines.h" />
-    <ClInclude Include="scenes\Quad.h" />
-    <ClInclude Include="objects\core\Instance.h" />
-    <ClInclude Include="objects\core\LogicalDevice.h" />
-    <ClInclude Include="objects\core\PhysicalDevice.h" />
-    <ClInclude Include="objects\ForwardDecl.h" />
-    <ClInclude Include="objects\NonCopyable.h" />
-    <ClInclude Include="objects\render\GraphicsPipeline.h" />
-    <ClInclude Include="objects\render\Renderpass.h" />
-    <ClInclude Include="objects\render\Swapchain.h" />
-    <ClInclude Include="objects\render\Framebuffer.h" />
-    <ClInclude Include="objects\resource\ShaderModule.h" />
-    <ClInclude Include="scenes\VulkanTutorial.h" />
+    <ClInclude Include="core\Camera.h" />
+    <ClInclude Include="core\Instance.h" />
+    <ClInclude Include="core\LogicalDevice.h" />
+    <ClInclude Include="core\PhysicalDevice.h" />
+    <ClInclude Include="ForwardDecl.h" />
+    <ClInclude Include="gui\imguiShaders.h" />
+    <ClInclude Include="gui\imguiWrapper.h" />
+    <ClInclude Include="NonCopyable.h" />
+    <ClInclude Include="render\Deferred.h" />
+    <ClInclude Include="render\DepthStencil.h" />
+    <ClInclude Include="render\Framebuffer.h" />
+    <ClInclude Include="render\GraphicsPipeline.h" />
+    <ClInclude Include="render\Multisampling.h" />
+    <ClInclude Include="render\Renderpass.h" />
+    <ClInclude Include="render\Swapchain.h" />
+    <ClInclude Include="resource\Allocator.h" />
+    <ClInclude Include="resource\Buffer.h" />
+    <ClInclude Include="resource\Image.h" />
+    <ClInclude Include="resource\PipelineCache.h" />
+    <ClInclude Include="resource\ShaderModule.h" />
+    <ClInclude Include="resource\Texture.h" />
+    <ClInclude Include="resource\VertexTypes.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="common\vkAssert.h" />
     <ClInclude Include="common\VkDebug.h" />
     <ClInclude Include="common\vk_constants.h" />
+    <ClInclude Include="util\AABB.h" />
+    <ClInclude Include="util\easylogging++.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="objects\command\CommandPool.cpp" />
-    <ClCompile Include="objects\core\Instance.cpp" />
-    <ClCompile Include="objects\core\LogicalDevice.cpp" />
-    <ClCompile Include="objects\core\PhysicalDevice.cpp" />
-    <ClCompile Include="objects\render\GraphicsPipeline.cpp" />
-    <ClCompile Include="objects\render\Renderpass.cpp" />
-    <ClCompile Include="objects\render\Swapchain.cpp" />
-    <ClCompile Include="objects\resource\Buffer.cpp" />
-    <ClCompile Include="objects\render\DepthStencil.cpp" />
-    <ClCompile Include="objects\render\Framebuffer.cpp" />
-    <ClCompile Include="objects\resource\Image.cpp" />
-    <ClCompile Include="objects\resource\ShaderModule.cpp" />
-    <ClCompile Include="objects\resource\Texture.cpp" />
-    <ClCompile Include="scenes\BaseScene.cpp" />
+    <ClCompile Include="BaseScene.cpp" />
+    <ClCompile Include="command\CommandPool.cpp" />
+    <ClCompile Include="command\TransferPool.cpp" />
+    <ClCompile Include="core\Instance.cpp" />
+    <ClCompile Include="core\LogicalDevice.cpp" />
+    <ClCompile Include="core\PhysicalDevice.cpp" />
+    <ClCompile Include="gui\imguiWrapper.cpp" />
+    <ClCompile Include="render\DepthStencil.cpp" />
+    <ClCompile Include="render\Framebuffer.cpp" />
+    <ClCompile Include="render\GraphicsPipeline.cpp" />
+    <ClCompile Include="render\Multisampling.cpp" />
+    <ClCompile Include="render\Renderpass.cpp" />
+    <ClCompile Include="render\Swapchain.cpp" />
+    <ClCompile Include="resource\Allocator.cpp" />
+    <ClCompile Include="resource\Buffer.cpp" />
+    <ClCompile Include="resource\Image.cpp" />
+    <ClCompile Include="resource\PipelineCache.cpp" />
+    <ClCompile Include="resource\ShaderModule.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnitTests|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="common\VkDebug.cpp" />
+    <ClCompile Include="util\AABB.cpp" />
+    <ClCompile Include="util\easylogging++.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="VulpesRender2.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>

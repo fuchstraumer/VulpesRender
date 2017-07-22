@@ -3,8 +3,8 @@
 #define VULPES_VK_LOGICAL_DEVICE_H
 
 #include "stdafx.h"
-#include "engine/renderer\ForwardDecl.h"
-#include "engine/renderer\NonCopyable.h"
+#include "ForwardDecl.h"
+#include "NonCopyable.h"
 #include "../resource/Allocator.h"
 namespace vulpes {
 

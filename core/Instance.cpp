@@ -2,7 +2,7 @@
 #include "Instance.h"
 #include "common/VkDebug.h"
 #include "PhysicalDevice.h"
-#include "scenes\BaseScene.h"
+#include "BaseScene.h"
 #ifndef VK_CUSTOM_ALLOCATION_CALLBACKS
 const VkAllocationCallbacks* vulpes::Instance::AllocationCallbacks = nullptr;
 #endif // !VK_CUSTOM_ALLOCATION_CALLBACKS

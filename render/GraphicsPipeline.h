@@ -3,9 +3,9 @@
 #define VULPES_VK_GRAPHICS_PIPELINE_H
 
 #include "stdafx.h"
-#include "engine/renderer\ForwardDecl.h"
-#include "engine/renderer\NonCopyable.h"
-#include "engine/renderer/resource/ShaderModule.h"
+#include "ForwardDecl.h"
+#include "NonCopyable.h"
+#include "resource/ShaderModule.h"
 
 namespace vulpes {
 

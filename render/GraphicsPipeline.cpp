@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "GraphicsPipeline.h"
-#include "engine/renderer/core/LogicalDevice.h"
-#include "engine/renderer/render/Swapchain.h"
-#include "engine/renderer/resource/ShaderModule.h"
-#include "..\resource\PipelineCache.h"
+#include "core/LogicalDevice.h"
+#include "render/Swapchain.h"
+#include "resource/ShaderModule.h"
+#include "../resource/PipelineCache.h"
 
 namespace vulpes {
 	GraphicsPipeline::GraphicsPipeline(const Device * _parent, const GraphicsPipelineInfo & _info) : parent(_parent), info(_info) {}
