@@ -579,7 +579,8 @@ namespace vulpes {
 		uint32_t type_idx = 0;
 		MemoryBlock* alloc_to_delete = nullptr;
 		bool found = false; // searching for given memory range.
-		for (; type_idx < GetMemoryTypeCount(); ++type_idx) {
+		{
+			type_idx = memory_to_free->MemoryTypeIdx();
 			auto& allocation_collection = allocations[type_idx];
 			assert(allocation_collection->allocations.size() == 1);
 			
