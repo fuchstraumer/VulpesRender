@@ -579,7 +579,7 @@ namespace vulpes {
 		uint32_t type_idx = 0;
 		MemoryBlock* alloc_to_delete = nullptr;
 		bool found = false; // searching for given memory range.
-		{
+		if (memory_to_free->Type == Allocation::allocType::BLOCK_ALLOCATION) {
 			type_idx = memory_to_free->MemoryTypeIdx();
 			auto& allocation_collection = allocations[type_idx];
 			assert(allocation_collection->allocations.size() == 1);
@@ -624,9 +624,6 @@ namespace vulpes {
 			return;
 		}
 
-		LOG(ERROR) << "Failed to free memory.";
-		throw std::runtime_error("Unable to free given memory.");
-		return;
 	}
 
 	uint32_t Allocator::findMemoryTypeIdx(const VkMemoryRequirements& mem_reqs, const AllocationRequirements & details) const noexcept {
