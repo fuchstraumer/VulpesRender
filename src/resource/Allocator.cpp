@@ -38,6 +38,7 @@ namespace vulpes {
 	}
 
 	void MemoryBlock::Destroy(Allocator * alloc) {
+		
 		vkFreeMemory(alloc->DeviceHandle(), memory, nullptr);
 		memory = VK_NULL_HANDLE;
 	}
