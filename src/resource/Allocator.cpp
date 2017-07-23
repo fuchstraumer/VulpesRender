@@ -283,7 +283,6 @@ namespace vulpes {
 		if (padding_begin) {
 			Suballocation padding_suballoc{ request.offset - padding_begin, padding_begin, SuballocationType::Free };
 			auto next_iter = request.freeSuballocation;
-			++next_iter;
 			const auto insert_iter = Suballocations.insert(next_iter, padding_suballoc);
 			insertFreeSuballocation(insert_iter);
 		}
@@ -492,9 +491,14 @@ namespace vulpes {
 	size_t AllocationCollection::Free(const Allocation * memory_to_free) {
 		
 		VkDeviceSize alloc_offset = memory_to_free->blockAllocation.Offset;
+		
+		if (allocations.empty()) {
+			return std::numeric_limits<size_t>::max();
+		}
+
 		allocations[memory_to_free->blockAllocation.ParentBlock->MemoryTypeIdx]->Free(memory_to_free);
 
-		return std::numeric_limits<size_t>::max();
+		
 	}
 
 	void AllocationCollection::SortAllocations() {
@@ -709,7 +713,7 @@ namespace vulpes {
 				VkMemoryAllocateInfo alloc_info{ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO, nullptr, preferredBlockSize, memory_type_idx };
 				VkDeviceMemory new_memory = VK_NULL_HANDLE;
 				VkResult result = vkAllocateMemory(parent->vkHandle(), &alloc_info, nullptr, &new_memory);
-				//assert(result != VK_ERROR_OUT_OF_DEVICE_MEMORY); // make sure we're not over-allocating and using all device memory.
+				assert(result != VK_ERROR_OUT_OF_DEVICE_MEMORY); // make sure we're not over-allocating and using all device memory.
 				if (result != VK_SUCCESS) {
 					// halve allocation size
 					alloc_info.allocationSize /= 2;
