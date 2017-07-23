@@ -427,6 +427,8 @@ namespace vulpes {
 		// able to free or not able to find desired memory
 		size_t Free(const Allocation* memory_to_free);
 
+		void RemoveBlock(MemoryBlock * block_to_erase);
+
 		// performs single sort step, to order "allocations" so that it is sorted
 		// by total available free memory.
 		void SortAllocations();

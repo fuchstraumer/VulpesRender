@@ -501,6 +501,14 @@ namespace vulpes {
 		
 	}
 
+	void AllocationCollection::RemoveBlock(MemoryBlock* block_to_erase) {
+		for (auto iter = allocations.begin(); iter != allocations.end(); ++iter) {
+			if (*iter == block_to_erase) {
+				allocations.erase(iter);
+			}
+		}
+	}
+
 	void AllocationCollection::SortAllocations() {
 
 		// sorts collection so that allocation with most free space is first.
@@ -573,31 +581,31 @@ namespace vulpes {
 		bool found = false; // searching for given memory range.
 		for (; type_idx < GetMemoryTypeCount(); ++type_idx) {
 			auto& allocation_collection = allocations[type_idx];
-			const size_t alloc_idx = allocation_collection->Free(memory_to_free);
-			if (alloc_idx != std::numeric_limits<size_t>::max()) {
-				LOG(INFO) << "Memory freed successfully.";
-				found = true;
-				auto& alloc = allocation_collection->allocations[alloc_idx];
-				// did freeing the given memory made "alloc" empty?
-				if (alloc->Empty()) {
-					// alloc is now empty: but, we already have an empty allocation instance
-					// for this memory type index, so remove it from the vector and specify 
-					// that we'll fully delete it.
-					if (emptyAllocations[type_idx]) {
-						// remove allocation.
-						alloc_to_delete = alloc;
-						allocation_collection->allocations.erase(allocation_collection->allocations.begin() + alloc_idx);
-						break;
-					}
-					else {
-						// alloc is now the empty allocation at that index.
-						emptyAllocations[type_idx] = true;
-					}
+			assert(allocation_collection->allocations.size() == 1);
+			
+			auto& block = allocation_collection->allocations.front();
+			block->Free(memory_to_free);
+			if (VALIDATE_MEMORY) {
+				auto err = block->Validate();
+				if (err != ValidationCode::VALIDATION_PASSED) {
+					LOG(ERROR) << "Validation of memory failed: " << err;
+					throw std::runtime_error("Validation of memory failed");
 				}
-				// re-sort the collection.
-				allocation_collection->SortAllocations();
-				break;
 			}
+
+			if (block->Empty()) {
+				if (emptyAllocations[type_idx]) {
+					alloc_to_delete = block;
+					allocation_collection->RemoveBlock(alloc_to_delete);
+				}
+				else {
+					emptyAllocations[type_idx] = true;
+				}
+			}
+
+			// re-sort the collection.
+			allocation_collection->SortAllocations();
+			
 		}
 
 		if (found) {
