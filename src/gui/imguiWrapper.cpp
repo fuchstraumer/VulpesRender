@@ -22,7 +22,7 @@ namespace vulpes {
 		
 		device = dvc;
 		cache = _cache;
-		
+
 		createResources();
 		createDescriptorPools();
 		
@@ -140,8 +140,8 @@ namespace vulpes {
 		vbo = std::make_unique<Buffer>(device);
 		ebo = std::make_unique<Buffer>(device);
 
-		vert = std::make_unique<ShaderModule>(device, "shaders/gui/ui.vert.spv", VK_SHADER_STAGE_VERTEX_BIT);
-		frag = std::make_unique<ShaderModule>(device, "shaders/gui/ui.frag.spv", VK_SHADER_STAGE_FRAGMENT_BIT);
+		vert = std::make_unique<ShaderModule>(device, "rsrc/shaders/gui/ui.vert.spv", VK_SHADER_STAGE_VERTEX_BIT);
+		frag = std::make_unique<ShaderModule>(device, "rsrc/shaders/gui/ui.frag.spv", VK_SHADER_STAGE_FRAGMENT_BIT);
 
 	}
 
@@ -164,6 +164,7 @@ namespace vulpes {
 
 	size_t imguiWrapper::loadFontTextureData() {
 		ImGuiIO& io = ImGui::GetIO();
+		io.Fonts->AddFontFromFileTTF("./VulpesRender/imgui/extra_fonts/ProggyClean.ttf", 16.0f);
 		io.Fonts->GetTexDataAsRGBA32(&fontTextureData, &imgWidth, &imgHeight);
 		return imgWidth * imgHeight * 4 * sizeof(char);
 	}
@@ -186,12 +187,14 @@ namespace vulpes {
 		buffer_image_copy.imageExtent = VkExtent3D{ static_cast<uint32_t>(imgWidth), static_cast<uint32_t>(imgHeight), 1 };
 		buffer_image_copy.imageSubresource = VkImageSubresourceLayers{ VK_IMAGE_ASPECT_COLOR_BIT, 0, 0, 1 };
 		stagingToTextureCopy = std::move(buffer_image_copy);
-		
-		delete fontTextureData;
 
 	}
 
 	void imguiWrapper::createFontTexture() {
+
+		ImGuiIO& io = ImGui::GetIO();
+		io.IniFilename = nullptr;
+		io.LogFilename = "imgui.log";
 
 		// Load texture.
 		size_t texture_data_size = loadFontTextureData();
