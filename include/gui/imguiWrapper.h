@@ -2,7 +2,7 @@
 #ifndef VULPES_VK_IMGUI_WRAPPER_H
 #define VULPES_VK_IMGUI_WRAPPER_H
 #include "vpr_stdafx.h"
-#include <imgui/imgui.h>
+#include <imgui.h>
 #include "imguiShaders.h"
 #include "../command/TransferPool.h"
 #include "../resource/Texture.h"

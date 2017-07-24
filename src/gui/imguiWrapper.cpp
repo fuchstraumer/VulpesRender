@@ -78,19 +78,6 @@ namespace vulpes {
 		else {
 			captureMouse(instance);
 		}
-
-		ImGui::Begin("Debug");
-		ImGui::Text("DiamondDogs");
-		ImGui::Text(device->GetPhysicalDevice().Properties.deviceName);
-
-		updateFramegraph(instance->frameTime);
-
-		ImGui::Text("Camera");
-		glm::vec3 pos = instance->GetCamPos();
-		ImGui::InputFloat3("Position", glm::value_ptr(pos), 2);
-		ImGui::SetNextWindowPos(ImVec2(50, 20), ImGuiSetCond_FirstUseEver);
-		ImGui::End();
-		
 	}
 
 	void imguiWrapper::UpdateBuffers() {
@@ -164,7 +151,6 @@ namespace vulpes {
 
 	size_t imguiWrapper::loadFontTextureData() {
 		ImGuiIO& io = ImGui::GetIO();
-		io.Fonts->AddFontFromFileTTF("./VulpesRender/imgui/extra_fonts/ProggyClean.ttf", 16.0f);
 		io.Fonts->GetTexDataAsRGBA32(&fontTextureData, &imgWidth, &imgHeight);
 		return imgWidth * imgHeight * 4 * sizeof(char);
 	}
@@ -193,6 +179,7 @@ namespace vulpes {
 	void imguiWrapper::createFontTexture() {
 
 		ImGuiIO& io = ImGui::GetIO();
+		io.MemFreeFn = std::free;
 		io.IniFilename = nullptr;
 		io.LogFilename = "imgui.log";
 
