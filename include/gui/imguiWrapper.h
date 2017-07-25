@@ -30,7 +30,7 @@ namespace vulpes {
 
 		void Init(const Device* dvc, std::shared_ptr<PipelineCache> _cache, const VkRenderPass& renderpass);
 
-		void UploadTextureData(CommandPool* transfer_pool);
+		void UploadTextureData(TransferPool* transfer_pool);
 
 		void NewFrame(Instance* instance, bool update_framegraph = true);
 

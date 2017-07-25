@@ -1,6 +1,6 @@
 #include "vpr_stdafx.h"
 #include "gui/imguiWrapper.h"
-
+#include "command/TransferPool.h"
 
 namespace vulpes {
 
@@ -50,15 +50,15 @@ namespace vulpes {
 
 	}
 
-	void imguiWrapper::UploadTextureData(CommandPool * transfer_pool) {
+	void imguiWrapper::UploadTextureData(TransferPool * transfer_pool) {
 		
 		// Transfer image data from transfer buffer onto the device.
-		auto cmd = transfer_pool->StartSingleCmdBuffer();
+		auto cmd = transfer_pool->Begin();
 
 		texture->TransferToDevice(cmd);
 
-		VkQueue queue = device->GraphicsQueue(0);
-		transfer_pool->EndSingleCmdBuffer(cmd, queue);
+		transfer_pool->End();
+		transfer_pool->Submit();
 
 	}
 
