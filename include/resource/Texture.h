@@ -179,7 +179,7 @@ namespace vulpes {
 		createInfo.mipLevels = mipLevels;
 		createInfo.arrayLayers = layerCount;
 		createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
-		createInfo.samples = Multisampling::SampleCount;
+		createInfo.samples = VK_SAMPLE_COUNT_1_BIT;
 		createInfo.tiling = parent->GetFormatTiling(format, VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT);
 
 		Image::CreateImage(handle, memoryAllocation, parent, createInfo, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
@@ -210,7 +210,7 @@ namespace vulpes {
 		createInfo.mipLevels = mipLevels;
 		createInfo.arrayLayers = layerCount;
 		createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
-		createInfo.samples = Multisampling::SampleCount;
+		createInfo.samples = VK_SAMPLE_COUNT_1_BIT;
 		createInfo.tiling = parent->GetFormatTiling(format, VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT);
 
 		Image::CreateImage(handle, memoryAllocation, parent, createInfo, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
@@ -336,7 +336,7 @@ namespace vulpes {
 		createInfo.mipLevels = mipLevels;
 		createInfo.arrayLayers = layerCount;
 		createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
-		createInfo.samples = Multisampling::SampleCount;
+		createInfo.samples = VK_SAMPLE_COUNT_1_BIT;
 		createInfo.tiling = parent->GetFormatTiling(format, VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT);
 
 		Image::CreateImage(handle, memoryAllocation, parent, createInfo, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
