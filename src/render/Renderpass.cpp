@@ -8,11 +8,14 @@ namespace vulpes {
 	}
 
 	Renderpass::~Renderpass(){
-		vkDestroyRenderPass(parent->vkHandle(), handle, allocators);
+		Destroy();
 	}
 
 	void Renderpass::Destroy(){
-		vkDestroyRenderPass(parent->vkHandle(), handle, allocators);
+		if (handle != VK_NULL_HANDLE) {
+			vkDestroyRenderPass(parent->vkHandle(), handle, allocators);
+			handle = VK_NULL_HANDLE;
+		}
 	}
 
 	const VkRenderPass & Renderpass::vkHandle() const noexcept{
