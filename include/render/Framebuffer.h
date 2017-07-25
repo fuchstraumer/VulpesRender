@@ -90,7 +90,7 @@ namespace vulpes {
 		
 		Image attachment(parent);
 
-		VkImageCreateInfo attachment_create_info{
+		const VkImageCreateInfo attachment_create_info{
 			VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
 			nullptr,
 			0,
@@ -99,7 +99,7 @@ namespace vulpes {
 			extents,
 			1, 
 			1,
-			Multisampling::SampleCount,
+			VK_SAMPLE_COUNT_1_BIT,
 			VK_IMAGE_TILING_OPTIMAL,
 			VkImageUsageFlags(attachment_usage | VK_IMAGE_USAGE_SAMPLED_BIT),
 			VK_SHARING_MODE_EXCLUSIVE,
@@ -157,7 +157,7 @@ namespace vulpes {
 
 		VkAttachmentDescription attachment_description = vk_attachment_description_base;
 
-		attachment_description.samples = Multisampling::SampleCount;
+		attachment_description.samples = VK_SAMPLE_COUNT_1_BIT;
 
 		attachment_description.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
 		attachment_description.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
