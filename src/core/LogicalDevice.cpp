@@ -36,11 +36,17 @@ namespace vulpes {
 			createInfo.enabledExtensionCount = static_cast<uint32_t>(device_extensions_debug.size());
 			createInfo.ppEnabledExtensionNames = device_extensions_debug.data();
 		}
-		else {
+		else if (parentInstance->validationEnabled) {
 			createInfo.enabledExtensionCount = static_cast<uint32_t>(device_extensions.size());
 			createInfo.ppEnabledExtensionNames = device_extensions.data();
 			createInfo.enabledLayerCount = 1;
 			createInfo.ppEnabledLayerNames = validation_layers.data();
+		}
+		else {
+			createInfo.enabledExtensionCount = static_cast<uint32_t>(device_extensions.size());
+			createInfo.ppEnabledExtensionNames = device_extensions.data();
+			createInfo.enabledLayerCount = 0;
+			createInfo.ppEnabledLayerNames = nullptr;
 		}
 
 		VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, AllocCallbacks, &handle);
@@ -59,6 +65,9 @@ namespace vulpes {
 		auto create_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_GRAPHICS_BIT));
 		create_info.queueFamilyIndex = QueueFamilyIndices.Graphics;
 		NumGraphicsQueues = create_info.queueCount;
+		static std::vector<float> priorities;
+		priorities.assign(NumGraphicsQueues, 1.0f);
+		create_info.pQueuePriorities = priorities.data();
 		queueInfos.insert(std::make_pair(VK_QUEUE_GRAPHICS_BIT, create_info));
 	}
 
@@ -68,6 +77,9 @@ namespace vulpes {
 			auto compute_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_COMPUTE_BIT));
 			compute_info.queueFamilyIndex = QueueFamilyIndices.Compute;
 			NumComputeQueues = compute_info.queueCount;
+			static std::vector<float> priorities;
+			priorities.assign(NumComputeQueues, 1.0f);
+			compute_info.pQueuePriorities = priorities.data();
 			queueInfos.insert(std::make_pair(VK_QUEUE_COMPUTE_BIT, compute_info));
 		}
 		else {
@@ -75,6 +87,7 @@ namespace vulpes {
 			if (queue_properties.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
 				QueueFamilyIndices.Compute = QueueFamilyIndices.Graphics;
 				NumComputeQueues = NumGraphicsQueues;
+
 			}
 		}
 	}
@@ -85,6 +98,9 @@ namespace vulpes {
 			auto transfer_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_TRANSFER_BIT));
 			transfer_info.queueFamilyIndex = QueueFamilyIndices.Transfer;
 			NumTransferQueues = transfer_info.queueCount;
+			static std::vector<float> priorities;
+			priorities.assign(NumTransferQueues, 1.0f);
+			transfer_info.pQueuePriorities = priorities.data();
 			queueInfos.insert(std::make_pair(VK_QUEUE_TRANSFER_BIT, transfer_info));
 		}
 		else {
@@ -260,11 +276,9 @@ namespace vulpes {
 		for (auto& ext : extensions) {
 			if (!strcmp(ext.extensionName, VK_EXT_DEBUG_MARKER_EXTENSION_NAME)) {
 				MarkersEnabled = true;
-				std::cerr << "Markers enabled\n";
 			}
 			else {
 				MarkersEnabled = false;
-				std::cerr << "Markers disabled\n";
 			}
 		}
 

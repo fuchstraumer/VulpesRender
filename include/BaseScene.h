@@ -52,7 +52,8 @@ namespace vulpes {
 		std::unique_ptr<Swapchain> swapchain;
 		std::vector<VkFramebuffer> framebuffers;
 		std::unique_ptr<DepthStencil> depthStencil;
-		std::unique_ptr<CommandPool> transferPool, graphicsPool, secondaryPool;
+		std::unique_ptr<CommandPool> graphicsPool, secondaryPool;
+		std::unique_ptr<TransferPool> transferPool;
 		std::unique_ptr<Renderpass> renderPass;
 		float frameTime;
 	};
