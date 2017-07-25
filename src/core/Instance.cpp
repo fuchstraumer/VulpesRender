@@ -144,7 +144,7 @@ namespace vulpes {
 			glfwSetKeyCallback(Window, KeyboardCallback);
 			glfwSetWindowSizeCallback(Window, ResizeCallback);
 
-			glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+			glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		}
 		else {
 			GLFWmonitor* monitor = glfwGetPrimaryMonitor();

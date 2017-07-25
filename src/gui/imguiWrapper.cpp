@@ -63,22 +63,28 @@ namespace vulpes {
 	}
 
 	void imguiWrapper::NewFrame(Instance* instance, bool update_framegraph) {
-		ImGui::NewFrame();
+		
 		
 		auto& io = ImGui::GetIO();
 		auto* window_ptr = dynamic_cast<InstanceGLFW*>(instance)->Window;
+
+		if (glfwGetWindowAttrib(window_ptr, GLFW_FOCUSED)) {
+			double mouse_x, mouse_y;
+			glfwGetCursorPos(window_ptr, &mouse_x, &mouse_y);
+			io.MousePos = ImVec2(static_cast<float>(mouse_x), static_cast<float>(mouse_y));
+		}
+		else {
+			io.MousePos = ImVec2(-1.0f, -1.0f);
+		}
 
 		for (auto i = 0; i < 3; i++){
 			io.MouseDown[i] = mouseClick[i] || glfwGetMouseButton(window_ptr, i) != 0;
 			mouseClick[i] = false;
 		}
 
-		if (instance->keys[GLFW_KEY_LEFT_ALT]) {
-			freeMouse(instance);
-		}
-		else {
-			captureMouse(instance);
-		}
+		glfwSetInputMode(window_ptr, GLFW_CURSOR, io.MouseDrawCursor ? GLFW_CURSOR_HIDDEN : GLFW_CURSOR_NORMAL);
+
+		ImGui::NewFrame();
 	}
 
 	void imguiWrapper::UpdateBuffers() {
@@ -288,8 +294,6 @@ namespace vulpes {
 	}
 
 	void imguiWrapper::setupGraphicsPipelineCreateInfo(const VkRenderPass& renderpass) {
-
-		
 
 		pipelineCreateInfo = vk_graphics_pipeline_create_info_base;
 		pipelineCreateInfo.flags = 0;
