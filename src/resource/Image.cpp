@@ -64,6 +64,9 @@ namespace vulpes {
 	void Image::TransitionLayout(const VkImageLayout & initial, const VkImageLayout & final, CommandPool* pool, VkQueue & queue) {
 		VkImageMemoryBarrier barrier = vk_image_memory_barrier_base;
 		barrier = GetMemoryBarrier(handle, format, initial, final);
+		if (final == VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL) {
+			barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT;
+		}
 		VkCommandBuffer cmd = pool->StartSingleCmdBuffer();
 			vkCmdPipelineBarrier(cmd, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier);	
 		pool->EndSingleCmdBuffer(cmd, queue);
