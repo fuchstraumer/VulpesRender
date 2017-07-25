@@ -8,7 +8,7 @@ namespace vulpes {
 	PipelineCache::PipelineCache(const Device* _parent, const uint16_t& hash_id) : parent(_parent), 
 		createInfo(VkPipelineCacheCreateInfo{ VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO, nullptr, 0, 0, nullptr }), hashID(hash_id) {
 		
-		std::string cache_dir = std::string("./shader_cache/");
+		std::string cache_dir = std::string("./rsrc/shader_cache/");
 		std::string fname = cache_dir + std::to_string(hash_id) + std::string(".vkdat");
 		filename = fname;
 
