@@ -120,7 +120,7 @@ namespace vulpes {
 				scissor.offset.x = std::max(static_cast<int32_t>(draw_cmd->ClipRect.x), 0);
 				scissor.offset.y = std::max(static_cast<int32_t>(draw_cmd->ClipRect.y), 0);
 				scissor.extent.width = static_cast<uint32_t>(draw_cmd->ClipRect.z - draw_cmd->ClipRect.x);
-				scissor.extent.height = static_cast<uint32_t>(draw_cmd->ClipRect.w - draw_cmd->ClipRect.y);
+				scissor.extent.height = static_cast<uint32_t>(draw_cmd->ClipRect.w - draw_cmd->ClipRect.y + 1);
 				vkCmdSetScissor(cmd, 0, 1, &scissor);
 				vkCmdDrawIndexed(cmd, draw_cmd->ElemCount, 1, idx_offset, vtx_offset, 0);
 				idx_offset += draw_cmd->ElemCount;
@@ -186,9 +186,6 @@ namespace vulpes {
 	void imguiWrapper::createFontTexture() {
 
 		ImGuiIO& io = ImGui::GetIO();
-		io.MemFreeFn = std::free;
-		io.IniFilename = nullptr;
-		io.LogFilename = "imgui.log";
 
 		// Load texture.
 		size_t texture_data_size = loadFontTextureData();
@@ -265,8 +262,6 @@ namespace vulpes {
 		pipelineStateInfo.VertexInfo.vertexAttributeDescriptionCount = 3;
 		pipelineStateInfo.VertexInfo.pVertexAttributeDescriptions = attr_descr.data();
 
-		pipelineStateInfo.RasterizationInfo.cullMode = VK_CULL_MODE_NONE;
-
 		static const VkPipelineColorBlendAttachmentState color_blend{
 			VK_TRUE,
 			VK_BLEND_FACTOR_SRC_ALPHA,
@@ -286,11 +281,10 @@ namespace vulpes {
 		static const VkDynamicState states[2] = { VK_DYNAMIC_STATE_VIEWPORT, VK_DYNAMIC_STATE_SCISSOR };
 		pipelineStateInfo.DynamicStateInfo.pDynamicStates = states;
 
-		//pipelineInfo.DepthStencilInfo.depthTestEnable = VK_FALSE;
+		pipelineStateInfo.DepthStencilInfo.depthTestEnable = VK_FALSE;
 		pipelineStateInfo.DepthStencilInfo.depthCompareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
 
-		pipelineStateInfo.MultisampleInfo.rasterizationSamples = Multisampling::SampleCount;
-
+		pipelineStateInfo.RasterizationInfo.cullMode = VK_CULL_MODE_NONE;
 	}
 
 	void imguiWrapper::setupGraphicsPipelineCreateInfo(const VkRenderPass& renderpass) {
@@ -329,7 +323,7 @@ namespace vulpes {
 			}
 
 			vbo = std::make_unique<Buffer>(device);
-			vbo->CreateBuffer(VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, vtx_size);
+			vbo->CreateBuffer(VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, vtx_size);
 		}
 
 		if (ebo->InitDataSize() != idx_size) {
@@ -339,7 +333,7 @@ namespace vulpes {
 			}
 
 			ebo = std::make_unique<Buffer>(device);
-			ebo->CreateBuffer(VK_BUFFER_USAGE_INDEX_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, idx_size);
+			ebo->CreateBuffer(VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, idx_size);
 		}
 
 	}
