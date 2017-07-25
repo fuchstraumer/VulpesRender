@@ -29,8 +29,8 @@ namespace vulpes {
 	};
 
 	constexpr std::array<const char*, 1> device_extensions = {
-		khr_swapchain_extension,
-
+		VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+		
 	};
 
 	constexpr std::array<const char*, 2> device_extensions_debug = {

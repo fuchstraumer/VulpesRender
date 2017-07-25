@@ -32,15 +32,15 @@ namespace vulpes {
 
 		if (MarkersEnabled) {
 			createInfo.enabledLayerCount = 1;
-			createInfo.ppEnabledLayerNames = &standard_validation_layer;
-			createInfo.enabledExtensionCount = 2;
+			createInfo.ppEnabledLayerNames = validation_layers.data();
+			createInfo.enabledExtensionCount = static_cast<uint32_t>(device_extensions_debug.size());
 			createInfo.ppEnabledExtensionNames = device_extensions_debug.data();
 		}
 		else {
-			createInfo.enabledExtensionCount = 1;
+			createInfo.enabledExtensionCount = static_cast<uint32_t>(device_extensions.size());
 			createInfo.ppEnabledExtensionNames = device_extensions.data();
 			createInfo.enabledLayerCount = 1;
-			createInfo.ppEnabledLayerNames = &standard_validation_layer;
+			createInfo.ppEnabledLayerNames = validation_layers.data();
 		}
 
 		VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, AllocCallbacks, &handle);
