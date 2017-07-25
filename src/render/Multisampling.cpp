@@ -43,6 +43,7 @@ vulpes::Multisampling::Multisampling(const Device * dvc, const Swapchain * swapc
 
 	msaa_view_info.image = DepthBufferMS->vkHandle();
 	msaa_view_info.format = device->FindDepthFormat();
+	msaa_view_info.subresourceRange = VkImageSubresourceRange{ VK_IMAGE_ASPECT_DEPTH_BIT, 0, 1, 0, 1 };
 
 	DepthBufferMS->CreateView(msaa_view_info);
 
