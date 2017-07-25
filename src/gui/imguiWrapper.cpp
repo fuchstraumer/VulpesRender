@@ -42,6 +42,7 @@ namespace vulpes {
 			vert->PipelineInfo(),
 			frag->PipelineInfo()
 		};
+
 		pipelineCreateInfo.pStages = shader_stages.data();
 		
 		pipeline = std::make_unique<GraphicsPipeline>(device);
@@ -260,7 +261,7 @@ namespace vulpes {
 
 		pipelineStateInfo.RasterizationInfo.cullMode = VK_CULL_MODE_NONE;
 
-		VkPipelineColorBlendAttachmentState color_blend{
+		static const VkPipelineColorBlendAttachmentState color_blend{
 			VK_TRUE,
 			VK_BLEND_FACTOR_SRC_ALPHA,
 			VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA,
