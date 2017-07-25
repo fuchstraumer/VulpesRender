@@ -29,6 +29,9 @@ namespace vulpes {
 		if (parentInstance->validationEnabled) {
 			EnableValidation();
 		}
+		else {
+			MarkersEnabled = false;
+		}
 
 		if (MarkersEnabled) {
 			createInfo.enabledLayerCount = 1;

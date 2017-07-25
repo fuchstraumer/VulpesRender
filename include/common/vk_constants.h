@@ -16,7 +16,7 @@ namespace vulpes {
 	constexpr char* standard_validation_layer = "VK_LAYER_LUNARG_standard_validation";
 
 	constexpr std::array<const char*, 1> validation_layers = {
-		standard_validation_layer,
+		"VK_LAYER_LUNARG_standard_validation"
 	};
 
 

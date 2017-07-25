@@ -126,6 +126,7 @@ namespace vulpes {
 		VkAssert(err);
 
 		if (validationEnabled) {
+			//CreateDebugCallback(*this, VK_DEBUG_REPORT_DEBUG_BIT_EXT, &vkCallback, AllocationCallbacks);
 			CreateDebugCallback(*this, VK_DEBUG_REPORT_WARNING_BIT_EXT, &warningCallback, AllocationCallbacks);
 			CreateDebugCallback(*this, VK_DEBUG_REPORT_ERROR_BIT_EXT, &errorCallback, AllocationCallbacks);
 			CreateDebugCallback(*this, VK_DEBUG_REPORT_INFORMATION_BIT_EXT, &infoCallback, AllocationCallbacks);
