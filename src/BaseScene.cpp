@@ -211,7 +211,7 @@ void vulpes::BaseScene::RecreateSwapchain(){
 	WindowResized();
 
 	renderPass->Destroy();
-
+	renderPass.reset();
 	swapchain->Destroy();
 
 	/*
@@ -225,7 +225,9 @@ void vulpes::BaseScene::RecreateSwapchain(){
 	secondaryPool->AllocateCmdBuffers(static_cast<uint32_t>(num_secondary_buffers));
 	SetupRenderpass();
 	RecreateObjects();
+	depthStencil.reset();
 	SetupDepthStencil();
+	framebuffers.clear();
 	SetupFramebuffers();
 	RecordCommands();
 
