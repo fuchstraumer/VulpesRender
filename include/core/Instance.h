@@ -4,7 +4,7 @@
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
 #include "../NonCopyable.h"
-#include "Camera.h"
+#include "../util/Camera.h"
 #include "../gui/imguiWrapper.h"
 
 namespace vulpes {
