@@ -64,6 +64,10 @@ SOURCE_GROUP("render" FILES ${RENDER})
 SOURCE_GROUP("gui" FILES ${GUI})
 SOURCE_GROUP("imgui" FILES ${IMGUI})
 
+IF(MSVC)
+SET(CMAKE_STATIC_LINKER_FLAGS "-NODEFAULTLIB msvcrtd.lib; ${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib" )
+ENDIF(MSVC)
+
 ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/BaseScene.h" "src/BaseScene.cpp" ${IMGUI} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
 TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "ext/lib/x64/glfw3dll.lib")
 TARGET_LINK_LIBRARIES(VulpesRender INTERFACE $ENV{VULKAN_SDK}/Lib/vulkan-1.lib)
