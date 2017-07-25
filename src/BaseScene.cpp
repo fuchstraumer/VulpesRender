@@ -14,7 +14,7 @@
 vulpes::BaseScene::BaseScene(const size_t& num_secondary_buffers, const uint32_t& _width, const uint32_t& _height) : width(_width), height(_height) {
 
 	VkInstanceCreateInfo create_info = vk_base_instance_info;
-	instance = std::make_unique<InstanceGLFW>(create_info, true);
+	instance = std::make_unique<InstanceGLFW>(create_info, false);
 	glfwSetWindowUserPointer(instance->Window, this);
 	instance->SetupPhysicalDevices();
 	instance->SetupSurface();
@@ -55,7 +55,7 @@ void vulpes::BaseScene::CreateCommandPools(const size_t& num_secondary_buffers) 
 	graphicsPool->AllocateCmdBuffers(swapchain->ImageCount, alloc_info);
 
 	pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
-	transferPool = std::make_unique<CommandPool>(device.get(), pool_info, true);
+	transferPool = std::make_unique<TransferPool>(device.get());
 	transferPool->AllocateCmdBuffers(1);
 
 	pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
@@ -174,7 +174,7 @@ void vulpes::BaseScene::SetupRenderpass(const VkSampleCountFlagBits& sample_coun
 
 void vulpes::BaseScene::SetupDepthStencil(){
 	VkQueue depth_queue = device->GraphicsQueue(0);
-	depthStencil = std::make_unique<DepthStencil>(device.get(), VkExtent3D{ swapchain->Extent.width, swapchain->Extent.height, 1 }, transferPool.get(), depth_queue);
+	depthStencil = std::make_unique<DepthStencil>(device.get(), VkExtent3D{ swapchain->Extent.width, swapchain->Extent.height, 1 }, graphicsPool.get(), depth_queue);
 }
 
 void vulpes::BaseScene::SetupFramebuffers(){
