@@ -2,7 +2,7 @@
 #include "render/Renderpass.h"
 #include "core/LogicalDevice.h"
 namespace vulpes {
-	Renderpass::Renderpass(const Device* dvc, const VkRenderPassCreateInfo & create_info) : parent(dvc) {
+	Renderpass::Renderpass(const Device* dvc, const VkRenderPassCreateInfo & create_info) : parent(dvc), createInfo(create_info) {
 		VkResult result = vkCreateRenderPass(dvc->vkHandle(), &create_info, allocators, &handle);
 		VkAssert(result);
 	}
