@@ -24,6 +24,18 @@ SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 SET(CMAKE_CXX_STANDARD LATEST)
 SET(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+ExternalProject_Add(glfw3
+  PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/glfw"
+  GIT_REPOSITORY "https://github.com/glfw/glfw.git"
+  GIT_TAG ""
+  BINARY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/ext/lib"
+  CMAKE_ARGS 
+    "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext/"
+    "-DGLFW_BUILD_EXAMPLES=OFF"
+    "-DGLFW_BUILD_TESTS=OFF"
+    "-DGLFW_BUILD_DOCS=OFF"
+    "-DGLFW_DOCUMENT_INTERNALS=OFF")
+
 FILE(GLOB UTIL "src/util/*.cc" "src/util/*.cpp" "include/util/*.h")
 FILE(GLOB COMMON "src/common/*.h")
 FILE(GLOB COMMAND_FILES "src/command/*.cpp" "include/command/*.h")
@@ -34,8 +46,9 @@ FILE(GLOB GUI "src/gui/*.cpp" "include/gui/*.h")
 FILE(GLOB IMGUI "imgui/imgui.cpp" "imgui/imgui.h" "imgui/imgui_draw.cpp" "imgui/imgui_internal.h")
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
+INCLUDE_DIRECTORIES("imgui/")
 INCLUDE_DIRECTORIES("ext/include/")
-INCLUDE_DIRECTORIES(${VULKAN_SDK}/Include)
+INCLUDE_DIRECTORIES($ENV{VULKAN_SDK}/Include)
 
 FIND_PACKAGE(Vulkan REQUIRED)
 
@@ -52,7 +65,6 @@ SOURCE_GROUP("gui" FILES ${GUI})
 SOURCE_GROUP("imgui" FILES ${IMGUI})
 
 ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/BaseScene.h" "src/BaseScene.cpp" ${IMGUI} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
-TARGET_LINK_LIBRARIES(VulpesRender "ext/lib/x64/debug/glfw3dll.lib" DEBUG)
-TARGET_LINK_LIBRARIES(VulpesRender "ext/lib/x64/glfw3dll.lib")
-TARGET_LINK_LIBRARIES(VulpesRender "${VULKAN_SDK}/Lib/vulkan-1.lib")
+TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "ext/lib/x64/glfw3dll.lib")
+TARGET_LINK_LIBRARIES(VulpesRender INTERFACE $ENV{VULKAN_SDK}/Lib/vulkan-1.lib)
 
