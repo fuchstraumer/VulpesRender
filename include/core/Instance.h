@@ -39,6 +39,7 @@ namespace vulpes {
 		static std::array<bool, 3> mouse_buttons;
 		static float LastX, LastY;
 		static float mouseDx, mouseDy;
+		static float mouseScroll;
 		float frameTime;
 		static bool cameraLock;
 
@@ -77,8 +78,8 @@ namespace vulpes {
 		GLFWwindow* Window;
 
 		static void MousePosCallback(GLFWwindow* window, double mouse_x, double mouse_y);
-		//static void MouseButtonCallback(GLFWwindow* window, int button, int action, int code);
-		//static void MouseScrollCallback(GLFWwindow* window, double x_offset, double y_offset);
+		static void MouseButtonCallback(GLFWwindow* window, int button, int action, int code);
+		static void MouseScrollCallback(GLFWwindow* window, double x_offset, double y_offset);
 		static void KeyboardCallback(GLFWwindow* window, int key, int scan_code, int action, int mods);
 		static void CharCallback(GLFWwindow *, unsigned int c);
 		static void ResizeCallback(GLFWwindow* window, int width, int height);

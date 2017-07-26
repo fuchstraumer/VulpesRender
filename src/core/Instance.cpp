@@ -142,6 +142,8 @@ namespace vulpes {
 			Window = glfwCreateWindow(width, height, createInfo.pApplicationInfo->pApplicationName, nullptr, nullptr);
 			glfwSetCursorPosCallback(Window, MousePosCallback);
 			glfwSetKeyCallback(Window, KeyboardCallback);
+			glfwSetMouseButtonCallback(Window, MouseButtonCallback);
+			glfwSetScrollCallback(Window, MouseScrollCallback);
 			glfwSetCharCallback(Window, CharCallback);
 			glfwSetWindowSizeCallback(Window, ResizeCallback);
 
@@ -202,6 +204,16 @@ namespace vulpes {
 		if (!cameraLock) {
 			cam.ProcessMouseMovement(mouseDx, mouseDy);
 		}
+	}
+
+	void InstanceGLFW::MouseButtonCallback(GLFWwindow * window, int button, int action, int code) {
+		if (action == GLFW_PRESS && button >= 0 && button < 3) {
+			mouse_buttons[button] = true;
+		}
+	}
+
+	void InstanceGLFW::MouseScrollCallback(GLFWwindow * window, double x_offset, double y_offset) {
+		mouseScroll += static_cast<float>(y_offset);
 	}
 
 	void InstanceGLFW::KeyboardCallback(GLFWwindow * window, int key, int scan_code, int action, int mods){
