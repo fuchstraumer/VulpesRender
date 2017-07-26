@@ -10,10 +10,6 @@ namespace vulpes {
 		vkDestroyDescriptorSetLayout(device->vkHandle(), descriptorSetLayout, nullptr);
 		vkDestroyDescriptorPool(device->vkHandle(), descriptorPool, nullptr);
 		vkDestroyPipelineLayout(device->vkHandle(), pipelineLayout, nullptr);
-		vkDestroyImage(device->vkHandle(), fontImage, nullptr);
-		vkDestroyImageView(device->vkHandle(), fontView, nullptr);
-		vkDestroySampler(device->vkHandle(), fontSampler, nullptr);
-		
 		cache.reset();
 
 	}
