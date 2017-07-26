@@ -82,6 +82,7 @@ namespace vulpes {
 			mouseClick[i] = false;
 		}
 
+		io.MouseWheel = instance->mouseScroll;
 		glfwSetInputMode(window_ptr, GLFW_CURSOR, io.MouseDrawCursor ? GLFW_CURSOR_HIDDEN : GLFW_CURSOR_NORMAL);
 
 		ImGui::NewFrame();
