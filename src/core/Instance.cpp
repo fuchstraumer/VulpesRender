@@ -12,10 +12,12 @@ vulpes::Camera vulpes::Instance::cam = vulpes::Camera();
 namespace vulpes {
 
 	std::array<bool, 1024> Instance::keys = std::array<bool, 1024>();
+	std::array<bool, 3> Instance::mouse_buttons = std::array<bool, 3>();
 	float Instance::LastX = DEFAULT_WIDTH / 2.0f;
 	float Instance::LastY = DEFAULT_HEIGHT / 2.0f;
 	float Instance::mouseDx = 0.0f;
 	float Instance::mouseDy = 0.0f;
+	float Instance::mouseScroll = 0.0f;
 	bool Instance::cameraLock = false;
 
 	void Instance::SetupPhysicalDevices(){
