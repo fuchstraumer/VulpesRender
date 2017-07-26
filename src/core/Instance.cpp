@@ -142,6 +142,7 @@ namespace vulpes {
 			Window = glfwCreateWindow(width, height, createInfo.pApplicationInfo->pApplicationName, nullptr, nullptr);
 			glfwSetCursorPosCallback(Window, MousePosCallback);
 			glfwSetKeyCallback(Window, KeyboardCallback);
+			glfwSetCharCallback(Window, CharCallback);
 			glfwSetWindowSizeCallback(Window, ResizeCallback);
 
 			glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
@@ -227,6 +228,13 @@ namespace vulpes {
 				keys[key] = false;
 				io.KeysDown[key] = false;
 			}
+		}
+	}
+
+	void InstanceGLFW::CharCallback(GLFWwindow*, unsigned int c) {
+		ImGuiIO& io = ImGui::GetIO();
+		if (c > 0 && c < 0x10000) {
+			io.AddInputCharacter(static_cast<unsigned short>(c));
 		}
 	}
 
