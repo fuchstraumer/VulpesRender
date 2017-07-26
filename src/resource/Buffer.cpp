@@ -85,7 +85,8 @@ namespace vulpes {
 
 		VkBufferCopy copy{};
 		copy.size = copy_size;
-		copy.dstOffset = copy_offset;
+		copy.srcOffset = staging_alloc.Offset();
+		copy.dstOffset = memoryAllocation.Offset() + copy_offset;
 		vkCmdCopyBuffer(transfer_cmd, staging_buffer, handle, 1, &copy);
 
 		stagingBuffers.push_back(std::make_pair(staging_buffer, staging_alloc));
@@ -98,7 +99,7 @@ namespace vulpes {
 		createStagingBuffer(copy_size, offset, staging_buffer, staging_alloc);
 
 		void* mapped;
-		VkResult result = vkMapMemory(parent->vkHandle(), staging_alloc.Memory(), staging_alloc.Offset() + offset, copy_size, 0, &mapped);
+		VkResult result = vkMapMemory(parent->vkHandle(), staging_alloc.Memory(), staging_alloc.Offset(), copy_size, 0, &mapped);
 		VkAssert(result);
 			memcpy(mapped, data, copy_size);
 		vkUnmapMemory(parent->vkHandle(), staging_alloc.Memory());
@@ -106,6 +107,8 @@ namespace vulpes {
 		VkCommandBuffer copy_cmd = cmd_pool->StartSingleCmdBuffer();
 		VkBufferCopy copy_region{};
 		copy_region.size = copy_size;
+		copy_region.srcOffset = staging_alloc.Offset();
+		copy_region.dstOffset = memoryAllocation.Offset() + offset;
 		size = copy_size;
 		vkCmdCopyBuffer(copy_cmd, staging_buffer, handle, 1, &copy_region);
 		cmd_pool->EndSingleCmdBuffer(copy_cmd, transfer_queue);
