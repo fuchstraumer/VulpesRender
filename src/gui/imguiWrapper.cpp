@@ -59,8 +59,8 @@ namespace vulpes {
 	}
 
 	void imguiWrapper::NewFrame(Instance* instance, bool update_framegraph) {
-		
-		
+
+
 		auto& io = ImGui::GetIO();
 		auto* window_ptr = dynamic_cast<InstanceGLFW*>(instance)->Window;
 
@@ -73,13 +73,17 @@ namespace vulpes {
 			io.MousePos = ImVec2(-1.0f, -1.0f);
 		}
 
-		for (auto i = 0; i < 3; i++){
+		for (auto i = 0; i < 3; i++) {
 			io.MouseDown[i] = mouseClick[i] || glfwGetMouseButton(window_ptr, i) != 0;
 			mouseClick[i] = false;
 		}
 
-		io.MouseWheel = instance->mouseScroll;
-		glfwSetInputMode(window_ptr, GLFW_CURSOR, io.MouseDrawCursor ? GLFW_CURSOR_HIDDEN : GLFW_CURSOR_NORMAL);
+		if (instance->keys[GLFW_KEY_LEFT_ALT]) {
+			freeMouse(instance);
+		}
+		else {
+			captureMouse(instance);
+		}
 
 		ImGui::NewFrame();
 	}
@@ -278,7 +282,7 @@ namespace vulpes {
 		static const VkDynamicState states[2] = { VK_DYNAMIC_STATE_VIEWPORT, VK_DYNAMIC_STATE_SCISSOR };
 		pipelineStateInfo.DynamicStateInfo.pDynamicStates = states;
 
-		pipelineStateInfo.DepthStencilInfo.depthTestEnable = VK_FALSE;
+		pipelineStateInfo.DepthStencilInfo.depthTestEnable = VK_TRUE;
 		pipelineStateInfo.DepthStencilInfo.depthCompareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
 
 		pipelineStateInfo.RasterizationInfo.cullMode = VK_CULL_MODE_NONE;
@@ -391,11 +395,8 @@ namespace vulpes {
 		double mouse_x, mouse_y;
 		glfwGetCursorPos(window_ptr, &mouse_x, &mouse_y);
 		io.MousePos = ImVec2(float(mouse_x), float(mouse_y));
-		io.MouseDrawCursor = true;
-		io.WantCaptureMouse = true;
-
 		Instance::cameraLock = true;
-		glfwSetInputMode(window_ptr, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+		glfwSetInputMode(window_ptr, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 	}
 
@@ -403,11 +404,8 @@ namespace vulpes {
 
 		auto& io = ImGui::GetIO();
 		auto* window_ptr = dynamic_cast<InstanceGLFW*>(instance)->Window;
-
 		io.MousePos = ImVec2(-1, -1);
 		Instance::cameraLock = false;
-		io.WantCaptureMouse = false;
-		io.MouseDrawCursor = false;
 		glfwSetInputMode(window_ptr, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	}
