@@ -240,22 +240,6 @@ namespace vulpes {
 		}
 	};
 
-	/*
-		super-simple mutex helper struct that automatically locks-unlocks a mutex
-		when it enters/exists scope.
-	*/
-	struct mutexWrapper {
-		mutexWrapper(std::mutex& _mutex) : mutex(_mutex) {
-			mutex.lock();
-		}
-
-		~mutexWrapper() {
-			mutex.unlock();
-		}
-	private:
-		std::mutex& mutex;
-	};
-
 	typedef std::vector<suballocationList::iterator>::iterator avail_suballocation_iterator_t;
 	typedef std::vector<suballocationList::iterator>::const_iterator const_avail_suballocation_iterator_t;
 	typedef suballocationList::iterator suballocation_iterator_t;
@@ -409,7 +393,7 @@ namespace vulpes {
 	typedef std::vector<MemoryBlock*>::const_iterator const_allocation_iterator_t;
 
 	struct AllocationCollection {
-		std::vector<MemoryBlock*> allocations;
+		std::vector<std::unique_ptr<MemoryBlock>> allocations;
 
 		AllocationCollection() = default;
 		AllocationCollection(Allocator* allocator);
@@ -420,10 +404,6 @@ namespace vulpes {
 		const MemoryBlock* operator[](const size_t& idx) const;
 
 		bool Empty() const;
-
-		// attempts to free memory: returns index of free'd allocation or -1 if not 
-		// able to free or not able to find desired memory
-		size_t Free(const Allocation* memory_to_free);
 
 		void RemoveBlock(MemoryBlock * block_to_erase);
 

@@ -473,38 +473,25 @@ namespace vulpes {
 	AllocationCollection::~AllocationCollection() {
 		for (size_t i = 0; i < allocations.size(); ++i) {
 			allocations[i]->Destroy(allocator);
-			delete allocations[i];
+			allocations[i].reset();
 		}
 	}
 
-	MemoryBlock * AllocationCollection::operator[](const size_t & idx) {
-		return allocations[idx];
+	MemoryBlock* AllocationCollection::operator[](const size_t & idx) {
+		return allocations[idx].get();
 	}
 
-	const MemoryBlock * AllocationCollection::operator[](const size_t & idx) const {
-		return allocations[idx];
+	const MemoryBlock* AllocationCollection::operator[](const size_t & idx) const {
+		return allocations[idx].get();
 	}
 
 	bool AllocationCollection::Empty() const {
 		return allocations.empty();
 	}
 
-	size_t AllocationCollection::Free(const Allocation * memory_to_free) {
-		
-		VkDeviceSize alloc_offset = memory_to_free->blockAllocation.Offset;
-		
-		if (allocations.empty()) {
-			return std::numeric_limits<size_t>::max();
-		}
-
-		allocations[memory_to_free->blockAllocation.ParentBlock->MemoryTypeIdx]->Free(memory_to_free);
-
-		
-	}
-
 	void AllocationCollection::RemoveBlock(MemoryBlock* block_to_erase) {
 		for (auto iter = allocations.begin(); iter != allocations.end(); ++iter) {
-			if (*iter == block_to_erase) {
+			if ((*iter).get() == block_to_erase) {
 				allocations.erase(iter);
 			}
 		}
@@ -578,7 +565,7 @@ namespace vulpes {
 
 	void Allocator::FreeMemory(const Allocation* memory_to_free) {
 		uint32_t type_idx = 0;
-		MemoryBlock* alloc_to_delete = nullptr;
+		std::unique_ptr<MemoryBlock> alloc_to_delete = std::unique_ptr<MemoryBlock>(nullptr);
 		bool found = false; // searching for given memory range.
 		if (memory_to_free->Type == Allocation::allocType::BLOCK_ALLOCATION) {
 			type_idx = memory_to_free->MemoryTypeIdx();
@@ -597,8 +584,8 @@ namespace vulpes {
 
 			if (block->Empty()) {
 				if (emptyAllocations[type_idx]) {
-					alloc_to_delete = block;
-					allocation_collection->RemoveBlock(alloc_to_delete);
+					allocation_collection->RemoveBlock(block.get());
+					alloc_to_delete = std::move(block);
 				}
 				else {
 					emptyAllocations[type_idx] = true;
@@ -615,7 +602,7 @@ namespace vulpes {
 				LOG(INFO) << "Deleted an allocation.";
 				// need to cleanup resources first, before deleting the actual object.
 				alloc_to_delete->Destroy(this);
-				delete alloc_to_delete;
+				alloc_to_delete.reset();
 			}
 			return;
 		}
@@ -697,7 +684,7 @@ namespace vulpes {
 					}
 
 					block->Allocate(request, type, memory_reqs.size);
-					dest_allocation.Init(block, request.offset, memory_reqs.alignment, memory_reqs.size, type);
+					dest_allocation.Init(block.get(), request.offset, memory_reqs.alignment, memory_reqs.size, type);
 
 					if (VALIDATE_MEMORY) {
 						ValidationCode result_code = block->Validate();
@@ -747,16 +734,18 @@ namespace vulpes {
 					}
 				}
 
-				MemoryBlock* new_block = new MemoryBlock(this);
+				std::unique_ptr<MemoryBlock> new_block = std::make_unique<MemoryBlock>(this);
+				// need pointer to initialize child objects, but need to move unique_ptr into container.
+				auto new_block_ptr = new_block.get();
 				// allocation size is more up-to-date than mem reqs size
 				new_block->Init(new_memory, alloc_info.allocationSize);
 				new_block->MemoryTypeIdx = memory_type_idx;
-				alloc_collection->allocations.push_back(new_block);
+				alloc_collection->allocations.push_back(std::move(new_block));
 
 				SuballocationRequest request{ *new_block->avail_begin(), 0 };
 				new_block->Allocate(request, type, memory_reqs.size);
 				
-				dest_allocation.Init(new_block, request.offset, memory_reqs.alignment, memory_reqs.size, type);
+				dest_allocation.Init(new_block_ptr, request.offset, memory_reqs.alignment, memory_reqs.size, type);
 
 				if (VALIDATE_MEMORY) {
 					ValidationCode result_code = new_block->Validate();
