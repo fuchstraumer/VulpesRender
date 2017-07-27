@@ -55,7 +55,19 @@ namespace vulpes {
 		std::unique_ptr<CommandPool> graphicsPool, secondaryPool;
 		std::unique_ptr<TransferPool> transferPool;
 		std::unique_ptr<Renderpass> renderPass;
+
+		std::array<VkAttachmentDescription, 4> attachmentDescriptions;
+		std::array<VkAttachmentReference, 3> attachmentReferences;
+		std::array<VkSubpassDependency, 2> subpassDependencies;
+
 		float frameTime;
+		void createRenderTargetAttachment();
+		void createResolveAttachment();
+		void createMultisampleDepthAttachment();
+		void createResolveDepthAttachment();
+		void createAttachmentReferences();
+		VkSubpassDescription createSubpassDescription();
+		void createSubpassDependencies();
 	};
 
 }
