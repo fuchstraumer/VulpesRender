@@ -736,19 +736,20 @@ namespace vulpes {
 
 				std::unique_ptr<MemoryBlock> new_block = std::make_unique<MemoryBlock>(this);
 				// need pointer to initialize child objects, but need to move unique_ptr into container.
-				auto new_block_ptr = new_block.get();
-				// allocation size is more up-to-date than mem reqs size
-				new_block->Init(new_memory, alloc_info.allocationSize);
-				new_block->MemoryTypeIdx = memory_type_idx;
 				alloc_collection->allocations.push_back(std::move(new_block));
 
-				SuballocationRequest request{ *new_block->avail_begin(), 0 };
-				new_block->Allocate(request, type, memory_reqs.size);
+				auto new_block_ptr = alloc_collection->allocations.back().get();
+				// allocation size is more up-to-date than mem reqs size
+				new_block_ptr->Init(new_memory, alloc_info.allocationSize);
+				new_block_ptr->MemoryTypeIdx = memory_type_idx;
+
+				SuballocationRequest request{ *new_block_ptr->avail_begin(), 0 };
+				new_block_ptr->Allocate(request, type, memory_reqs.size);
 				
 				dest_allocation.Init(new_block_ptr, request.offset, memory_reqs.alignment, memory_reqs.size, type);
 
 				if (VALIDATE_MEMORY) {
-					ValidationCode result_code = new_block->Validate();
+					ValidationCode result_code = new_block_ptr->Validate();
 					if (result_code != ValidationCode::VALIDATION_PASSED) {
 						LOG(ERROR) << "Validation of new allocation failed with reason: " << result_code;
 					}
