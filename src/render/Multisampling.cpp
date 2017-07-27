@@ -3,7 +3,7 @@
 #include "core/LogicalDevice.h"
 #include "render/Swapchain.h"
 
-VkSampleCountFlagBits vulpes::Multisampling::SampleCount = VK_SAMPLE_COUNT_1_BIT;
+VkSampleCountFlagBits vulpes::Multisampling::SampleCount = VK_SAMPLE_COUNT_8_BIT;
 
 vulpes::Multisampling::Multisampling(const Device * dvc, const Swapchain * swapchain, const VkSampleCountFlagBits & sample_count, const uint32_t & width, const uint32_t & height) : device(dvc), sampleCount(sample_count) {
 

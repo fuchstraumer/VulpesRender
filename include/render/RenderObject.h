@@ -5,7 +5,18 @@
 
 namespace vulpes {
 
+	class RenderObject {
+		RenderObject(const RenderObject&) = delete;
+		RenderObject& operator=(const RenderObject&) = delete;
+	public:
 
+
+
+	private:
+
+
+
+	};
 
 }
 

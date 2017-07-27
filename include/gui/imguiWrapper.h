@@ -28,6 +28,8 @@ namespace vulpes {
 		imguiWrapper(const imguiWrapper&) = delete;
 		imguiWrapper& operator=(const imguiWrapper&) = delete;
 	public:
+
+		imguiWrapper() = default;
 		~imguiWrapper();
 
 		void Init(const Device* dvc, std::shared_ptr<PipelineCache> _cache, const VkRenderPass& renderpass);

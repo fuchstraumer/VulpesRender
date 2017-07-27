@@ -60,15 +60,17 @@ namespace vulpes {
 	}
 
 	void Buffer::CopyToMapped(void * data, const VkDeviceSize & copy_size, const VkDeviceSize& offset){
-		if (MappedMemory == nullptr) {
-			Map();
-		}
+
+		Map();
+
 		if (size == 0) {
 			memcpy(MappedMemory, data, Size());
 		}
 		else {
 			memcpy(MappedMemory, data, copy_size);
 		}
+
+		Unmap();
 	}
 
 	void Buffer::CopyTo(void* data, VkCommandBuffer& transfer_cmd, const VkDeviceSize& copy_size, const VkDeviceSize& copy_offset) {

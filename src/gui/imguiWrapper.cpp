@@ -342,7 +342,6 @@ namespace vulpes {
 	void imguiWrapper::updateBufferData() {
 		
 		const ImDrawData* draw_data = ImGui::GetDrawData();
-		vbo->Map();
 		
 		VkDeviceSize vtx_offset = 0, idx_offset = 0;
 		for (int i = 0; i < draw_data->CmdListsCount; ++i) {
@@ -351,16 +350,11 @@ namespace vulpes {
 			vtx_offset += list->VtxBuffer.Size * sizeof(ImDrawVert);
 		}
 
-		vbo->Unmap();
-		ebo->Map();
-
 		for (int i = 0; i < draw_data->CmdListsCount; ++i) {
 			const ImDrawList* list = draw_data->CmdLists[i];
 			ebo->CopyToMapped(list->IdxBuffer.Data, list->IdxBuffer.Size * sizeof(ImDrawIdx), idx_offset);
 			idx_offset += list->IdxBuffer.Size * sizeof(ImDrawIdx);
 		}
-
-		ebo->Unmap();
 
 	}
 
