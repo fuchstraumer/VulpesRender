@@ -3,7 +3,6 @@
 #define VULPES_VK_IMAGE_H
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
-#include "../NonCopyable.h"
 #include "../resource/Allocator.h"
 /*
 
@@ -15,7 +14,9 @@
 
 namespace vulpes {
 
-	class Image : public NonCopyable {
+	class Image {
+		Image(const Image&) = delete;
+		Image& operator=(const Image&) = delete;
 	public:
 
 		Image(const Device* parent);

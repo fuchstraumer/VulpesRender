@@ -4,7 +4,6 @@
 
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
-#include "../NonCopyable.h"
 #include "../resource/Image.h"
 namespace vulpes {
 

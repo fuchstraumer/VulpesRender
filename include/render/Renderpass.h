@@ -4,17 +4,19 @@
 
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
-#include "../NonCopyable.h"
 
 namespace vulpes {
 
-	class Renderpass : public NonCopyable {
+	class Renderpass {
+		Renderpass(const Renderpass&) = delete;
+		Renderpass& operator=(const Renderpass&) = delete;
 	public:
 
 		Renderpass(const Device* dvc, const VkRenderPassCreateInfo& create_info);
-
+		Renderpass(Renderpass&& other) noexcept;
+		Renderpass& operator=(Renderpass&& other) noexcept;
 		~Renderpass();
-
+		
 		void Destroy();
 
 		const VkRenderPass& vkHandle() const noexcept;

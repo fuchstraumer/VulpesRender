@@ -3,11 +3,12 @@
 #define VULPES_VK_COMMAND_POOL_H
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
-#include "../NonCopyable.h"
 
 namespace vulpes {
 
-	class CommandPool : public NonCopyable {
+	class CommandPool {
+		CommandPool(const CommandPool&) = delete;
+		CommandPool& operator=(const CommandPool&) = delete;
 	public:
 
 		CommandPool(const Device* parent, const VkCommandPoolCreateInfo& create_info, bool primary);

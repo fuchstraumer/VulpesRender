@@ -4,7 +4,6 @@
 
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
-#include "../NonCopyable.h"
 #include "../resource/Allocator.h"
 namespace vulpes {
 
@@ -17,7 +16,11 @@ namespace vulpes {
 				 Present = std::numeric_limits<uint32_t>::max();
 	};
 
-	class Device : public NonMovable {
+	class Device {
+		Device(const Device&) = delete;
+		Device(Device&&) = delete;
+		Device& operator=(const Device&) = delete;
+		Device& operator=(Device&&) = delete;
 	public:
 		
 		Device(const Instance* instance, const PhysicalDevice* device);

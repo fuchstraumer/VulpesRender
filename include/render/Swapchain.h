@@ -3,7 +3,6 @@
 #define VULPES_VK_SWAPCHAIN_H
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
-#include "../NonCopyable.h"
 
 namespace vulpes {
 
@@ -17,22 +16,21 @@ namespace vulpes {
 		VkExtent2D ChooseSwapchainExtent(const Instance* _instance) const;
 	};
 
-	class Swapchain : public NonCopyable {
+	class Swapchain {
+		Swapchain(const Swapchain&) = delete;
+		Swapchain& operator=(const Swapchain&) = delete;
 	public:
 
+		Swapchain() = default;
 		~Swapchain();
 		
 		void Init(const Instance* _instance, const PhysicalDevice* _phys_device, const Device* _device);
 
 		void Recreate();
 
-		uint32_t GetNextImage(const VkSemaphore& present_semaphore = VK_NULL_HANDLE) const;
-
-		void Present(const VkQueue& queue, const uint32_t& image_index, const VkSemaphore& present_semaphore = VK_NULL_HANDLE);
-
 		void Destroy();
 
-		SwapchainInfo* Info;
+		std::unique_ptr<SwapchainInfo> Info;
 
 		const VkSwapchainKHR& vkHandle() const;
 		operator VkSwapchainKHR() const;
@@ -44,6 +42,7 @@ namespace vulpes {
 		uint32_t ImageCount;
 		VkColorSpaceKHR ColorSpace;
 		VkExtent2D Extent;
+
 	private:
 
 		void setParameters();

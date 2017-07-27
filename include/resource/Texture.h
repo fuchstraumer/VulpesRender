@@ -3,7 +3,6 @@
 #define VULPES_VK_TEXTURE_H
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
-#include "../NonCopyable.h"
 #include "../resource/Allocator.h"
 #include "../resource/Buffer.h"
 #include "../core/LogicalDevice.h"

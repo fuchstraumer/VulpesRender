@@ -4,8 +4,6 @@
 
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
-#include "../NonCopyable.h"
-
 /*
 	
 	TODO:
@@ -446,7 +444,11 @@ namespace vulpes {
 		uint32_t AllocationsMoved;
 	};
 
-	class Allocator : public NonMovable {
+	class Allocator {
+		Allocator(const Allocator&) = delete;
+		Allocator(Allocator&&) = delete;
+		Allocator& operator=(const Allocator&) = delete;
+		Allocator& operator=(Allocator&&) = delete;
 	public:
 
 		Allocator(const Device* parent_dvc);
@@ -463,12 +465,6 @@ namespace vulpes {
 		VkResult AllocateMemory(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const SuballocationType& suballoc_type, Allocation& dest_allocation);
 
 		void FreeMemory(const Allocation* memory_to_free);
-
-		//  Maps given memory range to given void** destination
-		VkResult MapMemoryAllocation(const Allocation& alloc_to_map, void** dest);
-
-		// Unmaps given range
-		VkResult UnmapMemoryAllocation(const Allocation& range);
 
 		// Allocates memory for an image, using given handle to get requirements. Allocation information is written to dest_memory_range, so it can then be used to bind the resources together.
 		VkResult AllocateForImage(VkImage& image_handle, const AllocationRequirements& details, const SuballocationType& alloc_type, Allocation& dest_allocation);

@@ -4,7 +4,6 @@
 
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
-#include "../NonCopyable.h"
 #include "../resource/ShaderModule.h"
 
 namespace vulpes {
@@ -22,7 +21,9 @@ namespace vulpes {
 	};
 
 
-	class GraphicsPipeline : public NonCopyable {
+	class GraphicsPipeline {
+		GraphicsPipeline(const GraphicsPipeline&) = delete;
+		GraphicsPipeline& operator=(const GraphicsPipeline&) = delete;
 	public:
 
 		GraphicsPipeline(const Device* parent, const GraphicsPipelineInfo& info);

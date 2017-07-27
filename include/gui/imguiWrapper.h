@@ -24,8 +24,10 @@ namespace vulpes {
 		float frameTimeMin = 9999.0f, frameTimeMax = 0.0f;
 	};
 
-	struct imguiWrapper : public NonCopyable {
-		
+	class imguiWrapper  {
+		imguiWrapper(const imguiWrapper&) = delete;
+		imguiWrapper& operator=(const imguiWrapper&) = delete;
+	public:
 		~imguiWrapper();
 
 		void Init(const Device* dvc, std::shared_ptr<PipelineCache> _cache, const VkRenderPass& renderpass);

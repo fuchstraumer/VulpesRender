@@ -3,7 +3,6 @@
 #define VULPES_VK_INSTANCE_H
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
-#include "../NonCopyable.h"
 #include "../util/Camera.h"
 #include "../gui/imguiWrapper.h"
 
@@ -11,7 +10,11 @@ namespace vulpes {
 
 	struct PhysicalDeviceFactory;
 
-	class Instance : NonMovable {
+	class Instance {
+		Instance(const Instance&) = delete;
+		Instance(Instance&&) = delete;
+		Instance& operator=(const Instance&) = delete;
+		Instance& operator=(Instance&&) = delete;
 	public:
 		
 		Instance() = default;

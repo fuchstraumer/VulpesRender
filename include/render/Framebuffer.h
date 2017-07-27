@@ -4,14 +4,15 @@
 
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
-#include "../NonCopyable.h"
 #include "../resource/Image.h"
 #include "../render/Multisampling.h"
 #include "../core/LogicalDevice.h"
 
 namespace vulpes {
 
-	class Framebuffer : public NonCopyable {
+	class Framebuffer {
+		Framebuffer(const Framebuffer&) = delete;
+		Framebuffer& operator=(const Framebuffer&) = delete;
 	public:
 
 		virtual ~Framebuffer();

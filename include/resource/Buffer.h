@@ -3,11 +3,12 @@
 #define VULPES_VK_BUFFER_H
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
-#include "../NonCopyable.h"
 #include "../resource/Allocator.h"
 namespace vulpes {
 
-	class Buffer : public NonCopyable {
+	class Buffer {
+		Buffer(const Buffer&) = delete;
+		Buffer& operator=(const Buffer&) = delete;
 	public:
 
 		Buffer(const Device* parent = nullptr);

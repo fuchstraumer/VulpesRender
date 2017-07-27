@@ -3,11 +3,12 @@
 #define VULPES_VK_SHADER_MODULE_H
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
-#include "../NonCopyable.h"
 
 namespace vulpes {
 
-	class ShaderModule : public NonCopyable {
+	class ShaderModule {
+		ShaderModule(const ShaderModule&) = delete;
+		ShaderModule& operator=(const ShaderModule&) = delete;
 	public:
 	
 		ShaderModule(const Device* device, const char* filename, const VkShaderStageFlagBits& stages, const char* shader_name = nullptr);
