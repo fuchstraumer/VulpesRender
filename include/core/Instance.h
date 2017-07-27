@@ -10,6 +10,29 @@ namespace vulpes {
 
 	struct PhysicalDeviceFactory;
 
+	enum class cameraType {
+		FPS,
+		FREE,
+		ARCBALL
+	};
+
+	struct vulpesInstanceInfo {
+		std::string ApplicationName = std::string("DefaultAppName"), EngineName = std::string("DefaultEngineName");
+		uint32_t ApplicationVersion = VK_MAKE_VERSION(0,1,0), EngineVersion = VK_MAKE_VERSION(0,1,0), apiVersion = VK_API_VERSION_1_0;
+		bool EnableValidation;
+		bool EnableMarkers = true;
+		bool EnableFullscreen = true;
+		bool DefaultFullscreen = false;
+		VkRect2D DefaultWindowSize = VkRect2D{ VkOffset2D{}, VkExtent2D{ 1440, 900 } };
+		cameraType CameraType = cameraType::FPS;
+		bool EnableMSAA = true;
+		VkSampleCountFlagBits SampleCount = VK_SAMPLE_COUNT_4_BIT;
+		bool EnableHDR = false;
+		bool EnableBloom = false;
+		bool TextureAnisotropy = false;
+		VkSampleCountFlagBits AnisotropySamples = VK_SAMPLE_COUNT_1_BIT;
+	} VulpesInstanceInfo;
+
 	class Instance {
 		Instance(const Instance&) = delete;
 		Instance(Instance&&) = delete;
@@ -58,7 +81,6 @@ namespace vulpes {
 		glm::mat4 projection;
 
 		void SetCamPos(const glm::vec3& pos);
-		void SetCamRot(const glm::vec3& rot);
 
 	protected:
 		static Camera cam;

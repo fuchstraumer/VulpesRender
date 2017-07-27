@@ -112,23 +112,26 @@ namespace vulpes {
 			}
 		}
 
-		if (enable_validation) {
+		if (VulpesInstanceInfo.EnableValidation) {
 			create_info.enabledLayerCount = 1;
 			create_info.ppEnabledLayerNames = validation_layers.data();
-			ext.push_back(debug_callback_extension);
-			
+			ext.push_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
 		}
 		else {
 			createInfo.ppEnabledLayerNames = nullptr;
 			createInfo.enabledLayerCount = 0;
 		}
+
+		if (VulpesInstanceInfo.EnableFullscreen) {
+			ext.push_back(VK_KHR_DISPLAY_EXTENSION_NAME);
+		}
+
 		createInfo.ppEnabledExtensionNames = ext.data();
 		createInfo.enabledExtensionCount = static_cast<uint32_t>(ext.size());
 		VkResult err = vkCreateInstance(&createInfo, AllocationCallbacks, &this->handle);
 		VkAssert(err);
 
 		if (validationEnabled) {
-			//CreateDebugCallback(*this, VK_DEBUG_REPORT_DEBUG_BIT_EXT, &vkCallback, AllocationCallbacks);
 			CreateDebugCallback(*this, VK_DEBUG_REPORT_WARNING_BIT_EXT, &warningCallback, AllocationCallbacks);
 			CreateDebugCallback(*this, VK_DEBUG_REPORT_ERROR_BIT_EXT, &errorCallback, AllocationCallbacks);
 			CreateDebugCallback(*this, VK_DEBUG_REPORT_INFORMATION_BIT_EXT, &infoCallback, AllocationCallbacks);
