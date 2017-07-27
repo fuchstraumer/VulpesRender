@@ -95,11 +95,12 @@ namespace vulpes {
 
 		setupSwapImages();
 		setupImageViews();
+
 	}
 
 	void Swapchain::Recreate() {
 		
-		delete Info;
+		Info.reset();
 		
 		setParameters();
 		setupCreateInfo();
@@ -114,7 +115,7 @@ namespace vulpes {
 
 	void Swapchain::setParameters() {
 
-		Info = new SwapchainInfo(phys_device->vkHandle(), instance->GetSurface());
+		Info = std::make_unique<SwapchainInfo>(phys_device->vkHandle(), instance->GetSurface());
 		surfaceFormat = Info->GetBestFormat();
 		ColorFormat = surfaceFormat.format;
 		presentMode = Info->GetBestPresentMode();

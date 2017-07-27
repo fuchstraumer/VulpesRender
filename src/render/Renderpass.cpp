@@ -7,6 +7,19 @@ namespace vulpes {
 		VkAssert(result);
 	}
 
+	Renderpass::Renderpass(Renderpass && other) noexcept : createInfo(std::move(other.createInfo)), handle(std::move(other.handle)), parent(other.parent), allocators(other.allocators) {
+		other.handle = VK_NULL_HANDLE;
+	}
+
+	Renderpass & Renderpass::operator=(Renderpass && other) noexcept {
+		handle = std::move(other.handle);
+		createInfo = std::move(other.createInfo);
+		parent = other.parent;
+		allocators = other.allocators;
+		other.handle = VK_NULL_HANDLE;
+		return *this;
+	}
+
 	Renderpass::~Renderpass(){
 		Destroy();
 	}
