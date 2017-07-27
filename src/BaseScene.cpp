@@ -27,7 +27,7 @@ namespace vulpes {
 		swapchain = std::make_unique<Swapchain>();
 		swapchain->Init(instance.get(), instance->physicalDevice, device.get());
 
-		CreateCommandPools(num_secondary_buffers * swapchain->ImageCount);
+		CreateCommandPools(num_secondary_buffers);
 		SetupRenderpass();
 		SetupDepthStencil();
 
