@@ -28,9 +28,10 @@ ExternalProject_Add(assimp
   PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/assimp"
   GIT_REPOSITORY "https://github.com/assimp/assimp.git"
   GIT_TAG ""
-  BINARY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/ext/lib/assimp"
+  BUILD_IN_SOURCE 1
   CMAKE_ARGS
-    "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext/"
+    "-DASSIMP_LIB_INSTALL_DIR=${CMAKE_CURRENT_SOURCE_DIR}/ext/assimp/"
+    "-DASSIMP_INCLUDE_INSTALL_DIR=${CMAKE_CURRENT_SOURCE_DIR}/ext/"
     "-DASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT=OFF"
     "-DASSIMP_BUILD_AMF_IMPORTER=ON"
     "-DASSIMP_BUILD_STL_IMPORTER=ON"
@@ -47,13 +48,14 @@ ExternalProject_Add(assimp
     "-DASSIMP_BUILD_DOCS=OFF"
     "-DASSIMP_NO_EXPORT=ON"
     "-DCMAKE_DEBUG_POSTFIX=-gd"
-    "-DLIBRARY_SUFFIX=-vc141-mt")
+    "-DLIBRARY_SUFFIX=-vc141-mt"
+    INSTALL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/ext/")
 
 ExternalProject_Add(glfw3
   PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/glfw"
   GIT_REPOSITORY "https://github.com/glfw/glfw.git"
   GIT_TAG ""
-  BINARY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/ext/lib/glfw"
+  BUILD_IN_SOURCE 1
   CMAKE_ARGS 
     "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext/"
     "-DGLFW_BUILD_EXAMPLES=OFF"
@@ -75,7 +77,7 @@ FILE(GLOB IMGUI "imgui/imgui.cpp" "imgui/imgui.h" "imgui/imgui_draw.cpp" "imgui/
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
 INCLUDE_DIRECTORIES("imgui/")
-INCLUDE_DIRECTORIES("ext/include/")
+INCLUDE_DIRECTORIES("ext/")
 INCLUDE_DIRECTORIES($ENV{VULKAN_SDK}/Include)
 
 FILE(GLOB PROJECT_SOURCES "src/util/*.cpp" "src/command/*.cpp" "src/core/*.cpp" "src/render/*.cpp" "src/resource/*.cpp" "src/gui/*.cpp" "src/BaseScene.cpp")
@@ -92,14 +94,12 @@ SOURCE_GROUP("imgui" FILES ${IMGUI})
 
 IF(MSVC)
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-SET(CMAKE_STATIC_LINKER_FLAGS "-NODEFAULTLIB \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib\" \"${PROJECT_SOURCE_DIR}/ext/lib/assimp-vc141-mt-gd.lib\"")
+SET(CMAKE_STATIC_LINKER_FLAGS "-NODEFAULTLIB \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib\" \"${PROJECT_SOURCE_DIR}/ext/assimp/assimp-vc141-mt-gd.lib\"")
 ELSE()
-SET(CMAKE_STATIC_LINKER_FLAGS "-NODEFAULTLIB \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib\" \"${PROJECT_SOURCE_DIR}/ext/lib/assimp-vc141-mt.lib\"")
+SET(CMAKE_STATIC_LINKER_FLAGS "-NODEFAULTLIB \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib\" \"${PROJECT_SOURCE_DIR}/ext/assimp/assimp-vc141-mt.lib\"")
 ENDIF()
 ENDIF(MSVC)
 
-
 ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/BaseScene.h" "src/BaseScene.cpp" ${IMGUI} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
-TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "ext/lib/x64/glfw3dll.lib")
-TARGET_LINK_LIBRARIES(VulpesRender INTERFACE $ENV{VULKAN_SDK}/Lib/vulkan-1.lib)
+
 
