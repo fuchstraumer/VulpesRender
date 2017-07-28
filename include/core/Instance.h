@@ -26,6 +26,7 @@ namespace vulpes {
 		VkRect2D DefaultWindowSize = VkRect2D{ VkOffset2D{}, VkExtent2D{ 1440, 900 } };
 		cameraType CameraType = cameraType::FPS;
 		bool EnableMSAA = true;
+		bool EnableMouseLocking = false;
 		VkSampleCountFlagBits SampleCount = VK_SAMPLE_COUNT_4_BIT;
 		bool EnableHDR = false;
 		bool EnableBloom = false;

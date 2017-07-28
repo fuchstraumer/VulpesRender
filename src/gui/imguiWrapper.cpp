@@ -1,6 +1,7 @@
 #include "vpr_stdafx.h"
 #include "gui/imguiWrapper.h"
 #include "command/TransferPool.h"
+#include "core/Instance.h"
 
 namespace vulpes {
 
@@ -78,11 +79,24 @@ namespace vulpes {
 			mouseClick[i] = false;
 		}
 
-		if (instance->keys[GLFW_KEY_LEFT_ALT]) {
-			freeMouse(instance);
+		if (Instance::VulpesInstanceConfig.EnableMouseLocking) {
+			if (instance->keys[GLFW_KEY_LEFT_ALT]) {
+				freeMouse(instance);
+			}
+			else {
+				captureMouse(instance);
+			}
 		}
-		else {
-			captureMouse(instance);
+
+		if (Instance::VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
+			if (ImGui::IsMouseDragging(0)) {
+				auto change = ImGui::GetMouseDragDelta(0);
+				instance->UpdateCameraRotation(change.x, change.y);
+			}
+			if (ImGui::IsMouseDragging(1)) {
+				auto change = ImGui::GetMouseDragDelta(1);
+				instance->UpdateCameraZoom(change.y);
+			}
 		}
 
 		ImGui::NewFrame();

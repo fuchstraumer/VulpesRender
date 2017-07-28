@@ -183,8 +183,12 @@ namespace vulpes {
 			glfwSetScrollCallback(Window, MouseScrollCallback);
 			glfwSetCharCallback(Window, CharCallback);
 			glfwSetWindowSizeCallback(Window, ResizeCallback);
-
-			glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+			if (VulpesInstanceConfig.EnableMouseLocking) {
+				glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+			}
+			else {
+				glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+			}
 		}
 		else {
 			GLFWmonitor* monitor = glfwGetPrimaryMonitor();
