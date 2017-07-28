@@ -33,6 +33,7 @@ namespace vulpes {
 
 	using hdr_framebuffer_t = std::integral_constant<int, 0>;
 	using bloom_framebuffer_t = std::integral_constant<int, 1>;
+	using ssao_framebuffer_t = std::integral_constant<int, 2>;
 
 	template<typename offscreen_framebuffer_type>
 	class OffscreenFramebuffer : public Framebuffer {
@@ -65,8 +66,6 @@ namespace vulpes {
 		std::vector<VkSubpassDependency> subpassDependencies;
 
 		VkRenderPass renderpass;
-		
-		VkSemaphore semaphore = VK_NULL_HANDLE;
 		VkSampler sampler;
 		VkExtent3D extents;
 		std::vector<VkSubpassDescription> subpassDescriptions;
@@ -153,6 +152,17 @@ namespace vulpes {
 
 	}
 
+	template<>
+	inline void OffscreenFramebuffer<ssao_framebuffer_t>::createAttachments() {
+
+		size_t idx = createAttachment(VK_FORMAT_R8_UNORM, VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT);
+		createAttachmentView(idx);
+
+		idx = createAttachment(VK_FORMAT_R8_UNORM, VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT);
+		createAttachmentView(idx);
+
+	}
+
 	template<typename offscreen_framebuffer_type>
 	inline void OffscreenFramebuffer<offscreen_framebuffer_type>::createAttachmentDescription(const size_t & attachment_idx, const VkImageLayout & final_attachment_layout) {
 
@@ -182,6 +192,14 @@ namespace vulpes {
 		
 	}
 
+	template<>
+	inline void OffscreenFramebuffer<ssao_framebuffer_t>::createAttachmentDescriptions() {
+
+		createAttachmentDescription(0, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+		createAttachmentDescription(1, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+
+	}
+
 	template<typename offscreen_framebuffer_type>
 	inline void OffscreenFramebuffer<offscreen_framebuffer_type>::createAttachmentReference(const size_t & attachment_idx, const VkImageLayout & final_attachment_layout) {
 
@@ -195,6 +213,14 @@ namespace vulpes {
 		attachmentReferences.push_back(VkAttachmentReference{ 0, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL });
 		attachmentReferences.push_back(VkAttachmentReference{ 1, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL });
 		attachmentReferences.push_back(VkAttachmentReference{ 2, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL });
+
+	}
+
+	template<>
+	inline void OffscreenFramebuffer<ssao_framebuffer_t>::createAttachmentReferences() {
+
+		attachmentReferences.push_back(VkAttachmentReference{ 0, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL });
+		attachmentReferences.push_back(VkAttachmentReference{ 1, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL });
 
 	}
 

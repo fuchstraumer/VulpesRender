@@ -8,13 +8,34 @@
 
 namespace vulpes {
 
-	class DeferredRenderer {
-	public:
+	template<typename renderpass_type>
+	struct DeferredPass {
 
-	private:
+		DeferredPass(const Device* device) : Parent(device) {};
 
-		OffscreenFramebuffer<hdr_framebuffer_t> framebuffer;
+		void Begin();
+		void End();
+
+		VkRenderPass Renderpass;
+		VkRenderPassBeginInfo RenderpassBeginInfo;
+		OffscreenFramebuffer<renderpass_type> RenderTarget;
+		VkSemaphore Semaphore = VK_NULL_HANDLE;
+		const Device* Parent;
 	};
+
+	template<typename renderpass_type>
+	void DeferredPass<renderpass_type>::Begin() {
+
+		VkResult result = VK_SUCCESS;
+
+		if (Semaphore == VK_NULL_HANDLE) {
+			static const VkSemaphoreCreateInfo semaphore_info{ VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO, nullptr, 0 };
+			result = vkCreateSemaphore(Parent->vkHandle(), &semaphore_info, nullptr, &Semaphore);
+			VkAssert(result);
+		}
+
+
+	}
 
 }
 
