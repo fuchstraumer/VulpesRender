@@ -8,6 +8,7 @@ const VkAllocationCallbacks* vulpes::Instance::AllocationCallbacks = nullptr;
 #endif // !VK_CUSTOM_ALLOCATION_CALLBACKS
 
 vulpes::Camera vulpes::Instance::cam = vulpes::Camera();
+vulpes::vulpesInstanceInfo vulpes::Instance::VulpesInstanceConfig = vulpes::vulpesInstanceInfo();
 
 namespace vulpes {
 
@@ -112,7 +113,7 @@ namespace vulpes {
 			}
 		}
 
-		if (VulpesInstanceInfo.EnableValidation) {
+		if (VulpesInstanceConfig.EnableValidation) {
 			create_info.enabledLayerCount = 1;
 			create_info.ppEnabledLayerNames = validation_layers.data();
 			ext.push_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
@@ -120,10 +121,6 @@ namespace vulpes {
 		else {
 			createInfo.ppEnabledLayerNames = nullptr;
 			createInfo.enabledLayerCount = 0;
-		}
-
-		if (VulpesInstanceInfo.EnableFullscreen) {
-			ext.push_back(VK_KHR_DISPLAY_EXTENSION_NAME);
 		}
 
 		createInfo.ppEnabledExtensionNames = ext.data();

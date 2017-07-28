@@ -31,7 +31,7 @@ namespace vulpes {
 		bool EnableBloom = false;
 		bool TextureAnisotropy = false;
 		VkSampleCountFlagBits AnisotropySamples = VK_SAMPLE_COUNT_1_BIT;
-	} VulpesInstanceInfo;
+	};
 
 	class Instance {
 		Instance(const Instance&) = delete;
@@ -81,6 +81,8 @@ namespace vulpes {
 		glm::mat4 projection;
 
 		void SetCamPos(const glm::vec3& pos);
+
+		static vulpesInstanceInfo VulpesInstanceConfig;
 
 	protected:
 		static Camera cam;
