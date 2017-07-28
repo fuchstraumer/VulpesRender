@@ -82,10 +82,12 @@ namespace vulpes {
 		void* mapped;
 		VkResult result = vkMapMemory(parent->vkHandle(), staging_alloc.Memory(), staging_alloc.Offset(), copy_size, 0, &mapped);
 		VkAssert(result);
-			memcpy(mapped, data, copy_size);
+		memcpy(mapped, data, copy_size);
 		vkUnmapMemory(parent->vkHandle(), staging_alloc.Memory());
 
-		static const VkBufferCopy copy{ 0, copy_offset, staging_alloc.Size };
+		VkBufferCopy copy{};
+		copy.size = copy_size;
+		copy.dstOffset = copy_offset;
 		vkCmdCopyBuffer(transfer_cmd, staging_buffer, handle, 1, &copy);
 
 		stagingBuffers.push_back(std::make_pair(staging_buffer, staging_alloc));
