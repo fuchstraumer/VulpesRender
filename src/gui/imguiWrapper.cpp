@@ -91,13 +91,15 @@ namespace vulpes {
 		if (Instance::VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
 			if (ImGui::IsMouseDragging(0)) {
 				auto change = ImGui::GetMouseDragDelta(0);
-				instance->UpdateCameraRotation(change.x, change.y);
+				instance->UpdateCameraRotation(change.x * 0.02f, change.y * 0.02f);
 			}
 			if (ImGui::IsMouseDragging(1)) {
 				auto change = ImGui::GetMouseDragDelta(1);
-				instance->UpdateCameraZoom(change.y);
+				instance->SetCamPos(instance->GetCamPos() + glm::vec3(change.x * 0.02f, change.y * 0.02f, 0.0f));
 			}
 		}
+
+		instance->UpdateCameraZoom(io.MouseWheel);
 
 		ImGui::NewFrame();
 	}

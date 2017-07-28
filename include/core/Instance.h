@@ -4,6 +4,7 @@
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
 #include "../util/Camera.h"
+#include "../util/Arcball.h"
 #include "../gui/imguiWrapper.h"
 
 namespace vulpes {
@@ -35,13 +36,6 @@ namespace vulpes {
 		VkSampleCountFlagBits AnisotropySamples = VK_SAMPLE_COUNT_1_BIT;
 	};
 
-	struct Arcball {
-		glm::mat4 GetViewMatrix();
-		glm::mat4 View = glm::mat4(1.0f);
-		glm::vec3 Position = glm::vec3(0.0f, 0.0f, -100.0f);
-		glm::vec2 Rotation = glm::vec2(0.0f);
-		float Zoom;
-	};
 
 	class Instance {
 		Instance(const Instance&) = delete;
@@ -122,15 +116,6 @@ namespace vulpes {
 		static void KeyboardCallback(GLFWwindow* window, int key, int scan_code, int action, int mods);
 		static void CharCallback(GLFWwindow *, unsigned int c);
 		static void ResizeCallback(GLFWwindow* window, int width, int height);
-	};
-
-	class InstanceAndroid : public Instance {
-	public:
-
-		InstanceAndroid(VkInstanceCreateInfo* create_info, const bool& enable_validation, const uint32_t& width = DEFAULT_WIDTH, const uint32_t& height = DEFAULT_HEIGHT);
-
-		virtual void SetupSurface() override;
-
 	};
 
 }

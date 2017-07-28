@@ -3,13 +3,14 @@
 #include "common/VkDebug.h"
 #include "core/PhysicalDevice.h"
 #include "BaseScene.h"
+#include "..\..\include\core\Arcball.h"
 #ifndef VK_CUSTOM_ALLOCATION_CALLBACKS
 const VkAllocationCallbacks* vulpes::Instance::AllocationCallbacks = nullptr;
 #endif // !VK_CUSTOM_ALLOCATION_CALLBACKS
 
 vulpes::Camera vulpes::Instance::cam = vulpes::Camera();
 vulpes::vulpesInstanceInfo vulpes::Instance::VulpesInstanceConfig = vulpes::vulpesInstanceInfo();
-vulpes::Arcball vulpes::Instance::arcball = vulpes::Arcball();
+vulpes::Arcball vulpes::Instance::arcball = vulpes::Arcball(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
 namespace vulpes {
 
@@ -35,6 +36,8 @@ namespace vulpes {
 	}
 
 	void Instance::UpdateMovement(const float & dt) {
+		ImGuiIO& io = ImGui::GetIO();
+		io.DeltaTime = dt;
 		if (keys[GLFW_KEY_W]) {
 			cam.ProcessKeyboard(Direction::FORWARD, dt);
 		}
@@ -115,7 +118,7 @@ namespace vulpes {
 
 	void Instance::UpdateCameraRotation(const float & rot_x, const float & rot_y) {
 		if (VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
-			arcball.Rotation += (glm::vec2(rot_x, rot_y) * VulpesInstanceConfig.MouseSensitivity);
+			arcball.Rotation += (glm::vec2(rot_x, rot_y) * (VulpesInstanceConfig.MouseSensitivity / 30.0f));
 		}
 	}
 
@@ -184,10 +187,10 @@ namespace vulpes {
 			glfwSetCharCallback(Window, CharCallback);
 			glfwSetWindowSizeCallback(Window, ResizeCallback);
 			if (VulpesInstanceConfig.EnableMouseLocking) {
-				glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+				glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 			}
 			else {
-				glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+				glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 			}
 		}
 		else {
@@ -255,6 +258,8 @@ namespace vulpes {
 
 	void InstanceGLFW::MouseScrollCallback(GLFWwindow * window, double x_offset, double y_offset) {
 		mouseScroll += static_cast<float>(y_offset);
+		ImGuiIO& io = ImGui::GetIO();
+		io.MouseWheel += mouseScroll;
 	}
 
 	void InstanceGLFW::KeyboardCallback(GLFWwindow * window, int key, int scan_code, int action, int mods){
@@ -300,21 +305,8 @@ namespace vulpes {
 		scene->RecreateSwapchain();
 	}
 
-	InstanceAndroid::InstanceAndroid(VkInstanceCreateInfo * create_info, const bool & enable_validation, const uint32_t & width, const uint32_t & height)
-	{
-	}
 
-	void InstanceAndroid::SetupSurface()
-	{
-	}
 
-	glm::mat4 Arcball::GetViewMatrix() {
-		glm::mat4 updated_view = glm::translate(glm::mat4(1.0f), Position);
-		updated_view = glm::rotate(updated_view, -Rotation.y, glm::vec3(1.0f, 0.0f, 0.0f));
-		updated_view = glm::rotate(updated_view, Rotation.x, glm::vec3(0.0f, 1.0f, 0.0f));
-		updated_view *= basis_matrix;
-		View = updated_view;
-		return View;
-	}
+
 
 }
