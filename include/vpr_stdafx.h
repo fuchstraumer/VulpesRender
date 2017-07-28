@@ -26,7 +26,8 @@
 #include <iostream>
 #include <chrono>
 #include <forward_list>
-#include <future>
+#include <future>\
+#include <tuple>
 
 #define GLFW_INCLUDE_VULKAN
 #include "glfw/glfw3.h"
@@ -58,12 +59,17 @@
 #include "common/vkAssert.h"
 #include "common/vk_constants.h"
 #include "common/CommonDef.h"
+
 #pragma warning(pop)
 
 // Number of odd/broken defines in this, as it includes windows.h 
 #define NOMINMAX
 #include "util/easylogging++.h"
 #undef NOMINMAX
+
+#include "assimp/Importer.hpp"
+#include "assimp/postprocess.h"
+#include "assimp/scene.h"
 
 // Default width/height of window. Should probably move this elsewhere and/or remove it entirely.
 constexpr uint32_t DEFAULT_WIDTH = 1920, DEFAULT_HEIGHT = 1080;
