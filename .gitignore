@@ -83,3 +83,7 @@ ext/lib/GLFW.sln
 ext/lib/CMakeCache.txt
 ext/lib/ALL_BUILD.vcxproj.filters
 ext/lib/ALL_BUILD.vcxproj
+assimp/
+ext/lib/assimp-vc141-mt-gd.lib
+ext/lib/zlibstaticd.lib
+ext/lib/pkgconfig/
