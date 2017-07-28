@@ -27,6 +27,7 @@ namespace vulpes {
 		cameraType CameraType = cameraType::FPS;
 		bool EnableMSAA = true;
 		bool EnableMouseLocking = false;
+		float MouseSensitivity = 0.2f;
 		VkSampleCountFlagBits SampleCount = VK_SAMPLE_COUNT_4_BIT;
 		bool EnableHDR = false;
 		bool EnableBloom = false;

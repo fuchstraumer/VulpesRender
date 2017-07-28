@@ -115,13 +115,13 @@ namespace vulpes {
 
 	void Instance::UpdateCameraRotation(const float & rot_x, const float & rot_y) {
 		if (VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
-			arcball.Rotation += glm::vec2(rot_x, rot_y);
+			arcball.Rotation += (glm::vec2(rot_x, rot_y) * VulpesInstanceConfig.MouseSensitivity);
 		}
 	}
 
 	void Instance::UpdateCameraZoom(const float & zoom_delta) {
 		if (VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
-			arcball.Position.z += zoom_delta;
+			arcball.Position.z += (zoom_delta * VulpesInstanceConfig.MouseSensitivity);
 		}
 	}
 
