@@ -9,8 +9,16 @@ const VkAllocationCallbacks* vulpes::Instance::AllocationCallbacks = nullptr;
 
 vulpes::Camera vulpes::Instance::cam = vulpes::Camera();
 vulpes::vulpesInstanceInfo vulpes::Instance::VulpesInstanceConfig = vulpes::vulpesInstanceInfo();
+vulpes::Arcball vulpes::Instance::arcball = vulpes::Arcball();
 
 namespace vulpes {
+
+	static const glm::mat4 basis_matrix = glm::mat4(
+		0.0f, 0.0f, -1.0f, 0.0f, 
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, -1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f);
+
 
 	std::array<bool, 1024> Instance::keys = std::array<bool, 1024>();
 	std::array<bool, 3> Instance::mouse_buttons = std::array<bool, 3>();
@@ -75,7 +83,12 @@ namespace vulpes {
 	}
 
 	glm::mat4 Instance::GetViewMatrix() const noexcept{
-		return cam.GetViewMatrix();
+		if (VulpesInstanceConfig.CameraType == cameraType::FPS) {
+			return cam.GetViewMatrix();
+		}
+		else if (VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
+			return arcball.GetViewMatrix();
+		}
 	}
 
 	glm::mat4 Instance::GetProjectionMatrix() const noexcept{
@@ -83,11 +96,33 @@ namespace vulpes {
 	}
 
 	glm::vec3 Instance::GetCamPos() const noexcept{
-		return cam.Position;
+		if (VulpesInstanceConfig.CameraType == cameraType::FPS) {
+			return cam.Position;
+		}
+		else if (VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
+			return arcball.Position;
+		}
 	}
 
 	void Instance::SetCamPos(const glm::vec3 & pos){
-		cam.Position = pos;
+		if (VulpesInstanceConfig.CameraType == cameraType::FPS) {
+			cam.Position = pos;
+		}
+		else if (VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
+			arcball.Position = pos;
+		}
+	}
+
+	void Instance::UpdateCameraRotation(const float & rot_x, const float & rot_y) {
+		if (VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
+			arcball.Rotation += glm::vec2(rot_x, rot_y);
+		}
+	}
+
+	void Instance::UpdateCameraZoom(const float & zoom_delta) {
+		if (VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
+			arcball.Position.z += zoom_delta;
+		}
 	}
 
 	InstanceGLFW::InstanceGLFW(VkInstanceCreateInfo create_info, const bool & enable_validation, const uint32_t& _width, const uint32_t& _height) {
@@ -267,6 +302,15 @@ namespace vulpes {
 
 	void InstanceAndroid::SetupSurface()
 	{
+	}
+
+	glm::mat4 Arcball::GetViewMatrix() {
+		glm::mat4 updated_view = glm::translate(glm::mat4(1.0f), Position);
+		updated_view = glm::rotate(updated_view, -Rotation.y, glm::vec3(1.0f, 0.0f, 0.0f));
+		updated_view = glm::rotate(updated_view, Rotation.x, glm::vec3(0.0f, 1.0f, 0.0f));
+		updated_view *= basis_matrix;
+		View = updated_view;
+		return View;
 	}
 
 }

@@ -33,6 +33,14 @@ namespace vulpes {
 		VkSampleCountFlagBits AnisotropySamples = VK_SAMPLE_COUNT_1_BIT;
 	};
 
+	struct Arcball {
+		glm::mat4 GetViewMatrix();
+		glm::mat4 View = glm::mat4(1.0f);
+		glm::vec3 Position = glm::vec3(0.0f, 0.0f, -100.0f);
+		glm::vec2 Rotation = glm::vec2(0.0f);
+		float Zoom;
+	};
+
 	class Instance {
 		Instance(const Instance&) = delete;
 		Instance(Instance&&) = delete;
@@ -81,15 +89,17 @@ namespace vulpes {
 		glm::mat4 projection;
 
 		void SetCamPos(const glm::vec3& pos);
+		void UpdateCameraRotation(const float& rot_x, const float& rot_y);
+		void UpdateCameraZoom(const float& zoom_delta);
 
 		static vulpesInstanceInfo VulpesInstanceConfig;
 
 	protected:
 		static Camera cam;
+		static Arcball arcball;
 		VkInstance handle;
 		uint32_t width, height;
 		VkInstanceCreateInfo createInfo;
-
 	};
 
 
