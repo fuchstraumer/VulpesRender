@@ -26,7 +26,7 @@
 #include <iostream>
 #include <chrono>
 #include <forward_list>
-#include <future>\
+#include <future>
 #include <tuple>
 
 #define GLFW_INCLUDE_VULKAN

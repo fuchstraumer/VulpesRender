@@ -1,16 +1,9 @@
 #include "vpr_stdafx.h"
 #include "core/Instance.h"
+#include <imgui.h>
 #include "common/VkDebug.h"
 #include "core/PhysicalDevice.h"
 #include "BaseScene.h"
-#include "..\..\include\core\Arcball.h"
-#ifndef VK_CUSTOM_ALLOCATION_CALLBACKS
-const VkAllocationCallbacks* vulpes::Instance::AllocationCallbacks = nullptr;
-#endif // !VK_CUSTOM_ALLOCATION_CALLBACKS
-
-vulpes::Camera vulpes::Instance::cam = vulpes::Camera();
-vulpes::vulpesInstanceInfo vulpes::Instance::VulpesInstanceConfig = vulpes::vulpesInstanceInfo();
-vulpes::Arcball vulpes::Instance::arcball = vulpes::Arcball(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
 namespace vulpes {
 
@@ -86,10 +79,10 @@ namespace vulpes {
 	}
 
 	glm::mat4 Instance::GetViewMatrix() const noexcept{
-		if (VulpesInstanceConfig.CameraType == cameraType::FPS) {
+		if (VulpesInstanceConfig.CameraType == cfg::cameraType::FPS) {
 			return cam.GetViewMatrix();
 		}
-		else if (VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
+		else if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
 			return arcball.GetViewMatrix();
 		}
 	}
@@ -99,31 +92,31 @@ namespace vulpes {
 	}
 
 	glm::vec3 Instance::GetCamPos() const noexcept{
-		if (VulpesInstanceConfig.CameraType == cameraType::FPS) {
+		if (VulpesInstanceConfig.CameraType == cfg::cameraType::FPS) {
 			return cam.Position;
 		}
-		else if (VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
+		else if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
 			return arcball.Position;
 		}
 	}
 
 	void Instance::SetCamPos(const glm::vec3 & pos){
-		if (VulpesInstanceConfig.CameraType == cameraType::FPS) {
+		if (VulpesInstanceConfig.CameraType == cfg::cameraType::FPS) {
 			cam.Position = pos;
 		}
-		else if (VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
+		else if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
 			arcball.Position = pos;
 		}
 	}
 
 	void Instance::UpdateCameraRotation(const float & rot_x, const float & rot_y) {
-		if (VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
+		if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
 			arcball.Rotation += (glm::vec2(rot_x, rot_y) * (VulpesInstanceConfig.MouseSensitivity / 30.0f));
 		}
 	}
 
 	void Instance::UpdateCameraZoom(const float & zoom_delta) {
-		if (VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
+		if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
 			arcball.Position.z += (zoom_delta * VulpesInstanceConfig.MouseSensitivity);
 		}
 	}
