@@ -93,28 +93,29 @@ namespace vulpes {
 		stagingBuffers.push_back(std::make_pair(staging_buffer, staging_alloc));
 	}
 
-	void Buffer::CopyTo(void * data, CommandPool* cmd_pool, const VkQueue & transfer_queue, const VkDeviceSize & copy_size, const VkDeviceSize & offset){
+	void Buffer::CopyTo(void * data, CommandPool* cmd_pool, const VkQueue & transfer_queue, const VkDeviceSize & copy_size, const VkDeviceSize & copy_offset){
 		
 		VkBuffer staging_buffer;
 		Allocation staging_alloc;
-		createStagingBuffer(copy_size, offset, staging_buffer, staging_alloc);
+		createStagingBuffer(copy_size, 0, staging_buffer, staging_alloc);
 
 		void* mapped;
 		VkResult result = vkMapMemory(parent->vkHandle(), staging_alloc.Memory(), staging_alloc.Offset(), copy_size, 0, &mapped);
 		VkAssert(result);
-			memcpy(mapped, data, copy_size);
+		memcpy(mapped, data, copy_size);
 		vkUnmapMemory(parent->vkHandle(), staging_alloc.Memory());
 
 		VkCommandBuffer copy_cmd = cmd_pool->StartSingleCmdBuffer();
-		static const VkBufferCopy copy{ 0, offset, staging_alloc.Size };
-		vkCmdCopyBuffer(copy_cmd, staging_buffer, handle, 1, &copy);
+			VkBufferCopy copy{};
+			copy.size = copy_size;
+			copy.dstOffset = copy_offset;
+			vkCmdCopyBuffer(copy_cmd, staging_buffer, handle, 1, &copy);
 		cmd_pool->EndSingleCmdBuffer(copy_cmd, transfer_queue);
 
 		parent->vkAllocator->DestroyBuffer(staging_buffer, staging_alloc);
 	}
 
 	void Buffer::Update(VkCommandBuffer & cmd, const VkDeviceSize & data_sz, const VkDeviceSize & offset, const void * data) {
-		assert(MappedMemory);
 		vkCmdUpdateBuffer(cmd, handle, memoryAllocation.Offset() + offset, data_sz, data);
 	}
 
@@ -136,7 +137,7 @@ namespace vulpes {
 	}
 
 	VkDescriptorBufferInfo Buffer::GetDescriptor() const noexcept{
-		return VkDescriptorBufferInfo{ handle, 0, size };
+		return VkDescriptorBufferInfo{ handle, 0, dataSize };
 	}
 
 	VkDeviceSize Buffer::Size() const noexcept{

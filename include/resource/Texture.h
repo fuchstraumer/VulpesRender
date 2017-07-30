@@ -273,6 +273,7 @@ namespace vulpes {
 		createInfo.extent = VkExtent3D{ Width, Height, 1 };
 		createInfo.mipLevels = mipLevels;
 		createInfo.arrayLayers = 6;
+		layerCount = 6;
 		createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
 		createInfo.tiling = parent->GetFormatTiling(format, VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT);
 
@@ -283,7 +284,7 @@ namespace vulpes {
 	inline void Texture<gli::texture_cube>::createView() {
 
 		VkImageViewCreateInfo view_create_info = vk_image_view_create_info_base;
-		view_create_info.subresourceRange.layerCount = layerCount;
+		view_create_info.subresourceRange.layerCount = 6;
 		view_create_info.subresourceRange.levelCount = mipLevels;
 		view_create_info.image = handle;
 		view_create_info.format = format;

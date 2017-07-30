@@ -226,7 +226,7 @@ namespace vulpes {
 		const VkDeviceSize padding_end = (next_iter != Suballocations.cend()) ? DEBUG_PADDING : 0;
 
 		// Can't allocate if padding at begin and end is greater than requested size.
-		if (padding_begin + padding_end > suballoc.size) {
+		if (padding_begin + padding_end + allocation_size > suballoc.size) {
 			return false;
 		}
 
