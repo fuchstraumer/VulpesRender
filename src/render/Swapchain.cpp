@@ -101,6 +101,10 @@ namespace vulpes {
 	void Swapchain::Recreate() {
 		
 		Info.reset();
+
+		if (handle != VK_NULL_HANDLE) {
+			vkDestroySwapchainKHR(device->vkHandle(), handle, nullptr);
+		}
 		
 		setParameters();
 		setupCreateInfo();
@@ -156,7 +160,7 @@ namespace vulpes {
 		createInfo.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
 		createInfo.presentMode = presentMode;
 		createInfo.clipped = VK_TRUE;
-		createInfo.oldSwapchain = handle;
+		createInfo.oldSwapchain = VK_NULL_HANDLE;
 
 	}
 

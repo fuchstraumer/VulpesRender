@@ -28,11 +28,14 @@ namespace vulpes {
 	}
 
 	Image::~Image() {
-		Destroy();
+		if (handle != VK_NULL_HANDLE) {
+			Destroy();
+		}
 	}
 
 	void Image::Destroy(){
 		parent->vkAllocator->DestroyImage(handle, memoryAllocation);
+		handle = VK_NULL_HANDLE;
 	}
 
 	void Image::Create(const VkImageCreateInfo & create_info, const VkMemoryPropertyFlagBits& memory_flags) {

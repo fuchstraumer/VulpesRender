@@ -229,39 +229,32 @@ namespace vulpes {
 		// First wait to make sure nothing is in use.
 		vkDeviceWaitIdle(device->vkHandle());
 
-		depthStencil->Destroy();
-
+		depthStencil.reset();
 		framebuffers.clear();
 		framebuffers.shrink_to_fit();
 
-		transferPool->FreeCommandBuffers();
-		graphicsPool->FreeCommandBuffers();
+		transferPool.reset();
 		size_t num_secondary_buffers = secondaryPool->size();
-		secondaryPool->FreeCommandBuffers();
+		secondaryPool.reset();
+		graphicsPool.reset();
 
 		WindowResized();
-
+		msaa->ColorBufferMS.reset();
+		msaa->DepthBufferMS.reset();
+		msaa.reset();
 		renderPass->Destroy();
 		renderPass.reset();
-		swapchain->Destroy();
+		swapchain->Recreate();
 
 		/*
 			Done destroying resources, recreate resources and objects now
 		*/
-
-		swapchain->Recreate();
-
-		graphicsPool->AllocateCmdBuffers(swapchain->ImageCount);
-		transferPool->AllocateCmdBuffers(1);
-		secondaryPool->AllocateCmdBuffers(static_cast<uint32_t>(num_secondary_buffers));
+		
+		CreateCommandPools(num_secondary_buffers);
 		SetupRenderpass();
-		RecreateObjects();
-		depthStencil.reset();
 		SetupDepthStencil();
-		framebuffers.clear();
 		SetupFramebuffers();
-		RecordCommands();
-
+		RecreateObjects();
 		vkDeviceWaitIdle(device->vkHandle());
 
 	}
