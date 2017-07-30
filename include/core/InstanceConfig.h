@@ -30,8 +30,8 @@ namespace vulpes {
             bool EnableBloom = false;
             bool TextureAnisotropy = false;
             VkSampleCountFlagBits AnisotropySamples = VK_SAMPLE_COUNT_1_BIT;
-            bool EnableMouseLocking = false;
-            float MouseSensitivity = 0.2f;
+            bool EnableMouseLocking = true;
+            float MouseSensitivity = 0.1f;
             float MovementSpeed = 25.0f;
 	    };
 

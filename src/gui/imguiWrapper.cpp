@@ -88,7 +88,7 @@ namespace vulpes {
 			}
 		}
 
-		if (Instance::VulpesInstanceConfig.CameraType == cameraType::ARCBALL) {
+		if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
 			if (ImGui::IsMouseDragging(0)) {
 				auto change = ImGui::GetMouseDragDelta(0);
 				instance->UpdateCameraRotation(change.x * 0.02f, change.y * 0.02f);

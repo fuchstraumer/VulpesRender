@@ -13,6 +13,8 @@ namespace vulpes {
 		glm::mat4 GetViewMatrix() override;
 		glm::mat4 GetModelRotationMatrix(const glm::mat4& view_matrix);
 
+		void ProcessMouseMovement(const float& x, const float& y) override;
+		void ProcessMouseScroll(const float& scroll) override;
 
 	private:
 

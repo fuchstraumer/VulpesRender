@@ -22,6 +22,10 @@ namespace vulpes {
 	float Instance::mouseDy = 0.0f;
 	float Instance::mouseScroll = 0.0f;
 	bool Instance::cameraLock = false;
+	cfg::vulpesInstanceInfo Instance::VulpesInstanceConfig = cfg::vulpesInstanceInfo();
+	Camera Instance::cam = Camera();
+	Arcball Instance::arcball = Arcball(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	const VkAllocationCallbacks* Instance::AllocationCallbacks = nullptr;
 
 	void Instance::SetupPhysicalDevices(){
 		physicalDeviceFactory = new PhysicalDeviceFactory();
@@ -111,7 +115,7 @@ namespace vulpes {
 
 	void Instance::UpdateCameraRotation(const float & rot_x, const float & rot_y) {
 		if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
-			arcball.Rotation += (glm::vec2(rot_x, rot_y) * (VulpesInstanceConfig.MouseSensitivity / 30.0f));
+			arcball.ProcessMouseMovement(rot_x, rot_y);
 		}
 	}
 
@@ -264,11 +268,12 @@ namespace vulpes {
 		}
 
 		if (key == GLFW_KEY_LEFT_BRACKET && action == GLFW_PRESS) {
-			cam.MovementSpeed += 25.0f;
+			VulpesInstanceConfig.MovementSpeed += 25.0f;
 		}
 		if (key == GLFW_KEY_RIGHT_BRACKET && action == GLFW_PRESS) {
-			cam.MovementSpeed -= 25.0f;
+			VulpesInstanceConfig.MovementSpeed -= 25.0f;
 		}
+
 		// Rest feed into movement
 		if (key >= 0 && key < 1024) {
 			if (action == GLFW_PRESS) {
@@ -280,6 +285,7 @@ namespace vulpes {
 				io.KeysDown[key] = false;
 			}
 		}
+
 	}
 
 	void InstanceGLFW::CharCallback(GLFWwindow*, unsigned int c) {

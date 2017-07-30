@@ -1,7 +1,6 @@
 #include "vpr_stdafx.h"
-#include "Camera.h"
-#include "../core/Instance.h"
-#include "..\core\Camera.h"
+#include "util/Camera.h"
+#include "core/Instance.h"
 namespace vulpes {
 
 	cameraBase::cameraBase(const glm::vec3 & position, const glm::vec3 & up, const glm::vec3& front) : Position(position), Up(up), Front(front) {}
@@ -80,7 +79,7 @@ namespace vulpes {
 		front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
 		Front = glm::normalize(front);
 
-		Right = glm::normalize(glm::cross(Front, Up));
+		Right = glm::normalize(glm::cross(Front, glm::vec3(0.0f, 1.0f, 0.0f)));
 		Up = glm::normalize(glm::cross(Right, Front));
 
 	}
