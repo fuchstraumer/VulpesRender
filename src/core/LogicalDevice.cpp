@@ -250,6 +250,10 @@ namespace vulpes {
 		return FindSupportedFormat({ VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT }, VK_IMAGE_TILING_OPTIMAL, VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
 	}
 
+	VkFormat Device::GetSwapchainColorFormat() const {
+		return VK_FORMAT_B8G8R8A8_UNORM;
+	}
+
 	uint32_t Device::GetMemoryTypeIdx(const uint32_t & type_bitfield, const VkMemoryPropertyFlags & property_flags, VkBool32 * memory_type_found) const{
 		return parent->GetMemoryTypeIdx(type_bitfield, property_flags, memory_type_found);
 	}
