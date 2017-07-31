@@ -61,23 +61,8 @@ namespace vulpes {
 
 	void imguiWrapper::NewFrame(Instance* instance, bool update_framegraph) {
 
-
 		auto& io = ImGui::GetIO();
 		auto* window_ptr = dynamic_cast<InstanceGLFW*>(instance)->Window;
-
-		if (glfwGetWindowAttrib(window_ptr, GLFW_FOCUSED)) {
-			double mouse_x, mouse_y;
-			glfwGetCursorPos(window_ptr, &mouse_x, &mouse_y);
-			io.MousePos = ImVec2(static_cast<float>(mouse_x), static_cast<float>(mouse_y));
-		}
-		else {
-			io.MousePos = ImVec2(-1.0f, -1.0f);
-		}
-
-		for (auto i = 0; i < 3; i++) {
-			io.MouseDown[i] = mouseClick[i] || glfwGetMouseButton(window_ptr, i) != 0;
-			mouseClick[i] = false;
-		}
 
 		if (Instance::VulpesInstanceConfig.EnableMouseLocking) {
 			if (instance->keys[GLFW_KEY_LEFT_ALT]) {
@@ -88,20 +73,8 @@ namespace vulpes {
 			}
 		}
 
-		if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
-			if (ImGui::IsMouseDragging(0)) {
-				auto change = ImGui::GetMouseDragDelta(0);
-				instance->UpdateCameraRotation(change.x * 0.02f, change.y * 0.02f);
-			}
-			if (ImGui::IsMouseDragging(1)) {
-				auto change = ImGui::GetMouseDragDelta(1);
-				instance->SetCamPos(instance->GetCamPos() + glm::vec3(change.x * 0.02f, change.y * 0.02f, 0.0f));
-			}
-		}
-
-		instance->UpdateCameraZoom(io.MouseWheel);
-
 		ImGui::NewFrame();
+
 	}
 
 	void imguiWrapper::UpdateBuffers() {
@@ -110,6 +83,7 @@ namespace vulpes {
 		updateBufferData();
 		
 	}
+
 
 	void imguiWrapper::DrawFrame(VkCommandBuffer & cmd) {
 		auto& io = ImGui::GetIO();

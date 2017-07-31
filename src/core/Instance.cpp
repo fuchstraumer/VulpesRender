@@ -87,6 +87,7 @@ namespace vulpes {
 			return cam.GetViewMatrix();
 		}
 		else if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+			glm::mat4 view = arcball.GetViewMatrix();
 			return arcball.GetViewMatrix();
 		}
 	}
@@ -113,13 +114,13 @@ namespace vulpes {
 		}
 	}
 
-	void Instance::UpdateCameraRotation(const float & rot_x, const float & rot_y) {
+	void Instance::MouseDrag(const float & rot_x, const float & rot_y) {
 		if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
-			arcball.ProcessMouseMovement(rot_x, rot_y);
+			arcball.MouseDrag(rot_x, rot_y);
 		}
 	}
 
-	void Instance::UpdateCameraZoom(const float & zoom_delta) {
+	void Instance::MouseScroll(const float & zoom_delta) {
 		if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
 			arcball.Position.z += (zoom_delta * VulpesInstanceConfig.MouseSensitivity);
 		}
@@ -242,14 +243,39 @@ namespace vulpes {
 		LastX = static_cast<float>(mouse_x);
 		LastY = static_cast<float>(mouse_y);
 
+		ImGuiIO& io = ImGui::GetIO();
+		io.MousePos.x = LastX;
+		io.MousePos.y = LastY;
+
 		if (!cameraLock) {
-			cam.ProcessMouseMovement(mouseDx, mouseDy);
+			cam.UpdateMousePos(mouseDx, mouseDy);
+			arcball.UpdateMousePos(mouseDx, mouseDy);
 		}
 	}
 
 	void InstanceGLFW::MouseButtonCallback(GLFWwindow * window, int button, int action, int code) {
-		if (action == GLFW_PRESS && button >= 0 && button < 3) {
-			mouse_buttons[button] = true;
+		ImGuiIO& io = ImGui::GetIO();
+		if (button >= 0 && button < 3) {
+			if (action == GLFW_PRESS) {
+				mouse_buttons[button] = true;
+				io.MouseDown[button] = true;
+			}
+			else if (action == GLFW_RELEASE) {
+				mouse_buttons[button] = false;
+				io.MouseDown[button] = false;
+			}
+		}
+	}
+
+	void Instance::MouseDown(const float& x, const float& y) {
+		if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+			arcball.MouseDown(x, y);
+		}
+	}
+
+	void Instance::MouseUp(const float & x, const float & y) {
+		if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+			arcball.MouseUp(x, y);
 		}
 	}
 

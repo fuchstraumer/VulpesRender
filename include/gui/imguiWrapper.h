@@ -40,6 +40,8 @@ namespace vulpes {
 
 		void UpdateBuffers();
 
+		void updateMouseActions(Instance* instance);
+
 		void DrawFrame(VkCommandBuffer& cmd);
 
 		imguiSettings settings;

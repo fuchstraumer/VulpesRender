@@ -24,6 +24,9 @@ namespace vulpes {
 
 		~BaseScene();
 
+		// updates mouse actions via ImGui.
+		void UpdateMouseActions();
+
 		virtual void CreateCommandPools(const size_t& num_secondary_buffers);
 
 		virtual void SetupRenderpass(const VkSampleCountFlagBits& sample_count = VK_SAMPLE_COUNT_8_BIT);

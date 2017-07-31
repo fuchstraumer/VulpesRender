@@ -3,7 +3,7 @@
 #include "core/Instance.h"
 namespace vulpes {
 
-	cameraBase::cameraBase(const glm::vec3 & position, const glm::vec3 & up, const glm::vec3& front) : Position(position), Up(up), Front(front) {}
+	cameraBase::cameraBase(const glm::vec3 & position, const glm::vec3 & up, const glm::vec3& front) : Position(position), Up(up), Front(front), WorldUp(0.0f, 1.0f, 0.0f) {}
 
 	void cameraBase::ProcessKeyboard(const Direction & dir, const float & delta_time) {
 		float velocity = Instance::VulpesInstanceConfig.MovementSpeed * delta_time;
@@ -33,9 +33,25 @@ namespace vulpes {
 		updateCameraVectors();
 	}
 
-	void Camera::ProcessMouseMovement(const float & xoffset, const float & yoffset) {
-		float x_offset = xoffset * Instance::VulpesInstanceConfig.MouseSensitivity;
-		float y_offset = yoffset * Instance::VulpesInstanceConfig.MouseSensitivity;
+	void Camera::MouseDrag(const float & xoffset, const float & yoffset) {
+		
+	}
+
+	void Camera::MouseScroll(const float & yoffset) {
+		if (Zoom >= 1.0f && Zoom <= 45.0f) {
+			Zoom -= yoffset;
+		}
+		else if (Zoom <= 1.0f) {
+			Zoom = 1.0f;
+		}
+		else if (Zoom >= 45.0f) {
+			Zoom = 45.0f;
+		}
+	}
+
+	void Camera::UpdateMousePos(const float & x, const float & y) {
+		float x_offset = x * Instance::VulpesInstanceConfig.MouseSensitivity;
+		float y_offset = y * Instance::VulpesInstanceConfig.MouseSensitivity;
 
 		Yaw += x_offset;
 		Pitch -= y_offset;
@@ -55,16 +71,12 @@ namespace vulpes {
 		updateCameraVectors();
 	}
 
-	void Camera::ProcessMouseScroll(const float & yoffset) {
-		if (Zoom >= 1.0f && Zoom <= 45.0f) {
-			Zoom -= yoffset;
-		}
-		else if (Zoom <= 1.0f) {
-			Zoom = 1.0f;
-		}
-		else if (Zoom >= 45.0f) {
-			Zoom = 45.0f;
-		}
+	void Camera::MouseDown(const float & x, const float & y)
+	{
+	}
+
+	void Camera::MouseUp(const float & x, const float & y)
+	{
 	}
 
 	glm::mat4 Camera::GetViewMatrix() {
@@ -79,7 +91,7 @@ namespace vulpes {
 		front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
 		Front = glm::normalize(front);
 
-		Right = glm::normalize(glm::cross(Front, glm::vec3(0.0f, 1.0f, 0.0f)));
+		Right = glm::normalize(glm::cross(Front, WorldUp));
 		Up = glm::normalize(glm::cross(Right, Front));
 
 	}

@@ -53,6 +53,24 @@ namespace vulpes {
 
 	}
 
+	void BaseScene::UpdateMouseActions() {
+
+		ImGuiIO& io = ImGui::GetIO();
+
+		if (ImGui::IsMouseDragging(0)) {
+			Instance::MouseDrag(io.MousePos.x, io.MousePos.y);
+		}
+
+		if (ImGui::IsMouseDown(0) && !ImGui::IsMouseDragging(0)) {
+			Instance::MouseDown(io.MouseClickedPos[0].x, io.MouseClickedPos[0].y);
+		}
+
+		if (ImGui::IsMouseReleased(0)) {
+			Instance::MouseUp(io.MousePos.x, io.MousePos.y);
+		}
+
+	}
+
 	void vulpes::BaseScene::CreateCommandPools(const size_t& num_secondary_buffers) {
 
 		VkCommandPoolCreateInfo pool_info = vk_command_pool_info_base;

@@ -6,6 +6,9 @@
 
 namespace vulpes {
 
+	// Default width/height of window. Should probably move this elsewhere and/or remove it entirely.
+	constexpr uint32_t DEFAULT_WIDTH = 1760, DEFAULT_HEIGHT = 990;
+
     namespace cfg {
 
         
@@ -22,7 +25,7 @@ namespace vulpes {
             bool EnableMarkers = true;
             bool EnableFullscreen = false;
             bool DefaultFullscreen = false;
-            VkRect2D DefaultWindowSize = VkRect2D{ VkOffset2D{}, VkExtent2D{ 1440, 900 } };
+            VkRect2D DefaultWindowSize = VkRect2D{ VkOffset2D{}, VkExtent2D{ DEFAULT_WIDTH, DEFAULT_HEIGHT } };
             cameraType CameraType = cameraType::FPS;
             bool EnableMSAA = true;
             VkSampleCountFlagBits MSAA_SampleCount = VK_SAMPLE_COUNT_4_BIT;

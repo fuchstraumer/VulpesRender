@@ -13,8 +13,13 @@ namespace vulpes {
 		glm::mat4 GetViewMatrix() override;
 		glm::mat4 GetModelRotationMatrix(const glm::mat4& view_matrix);
 
-		void ProcessMouseMovement(const float& x, const float& y) override;
-		void ProcessMouseScroll(const float& scroll) override;
+		void UpdateMousePos(const float & x, const float & y);
+		void MouseDown(const float & x, const float & y) override;
+		void MouseUp(const float & x, const float & y) override;
+		void MouseDrag(const float& x, const float& y) override;
+		void MouseScroll(const float& scroll) override;
+
+		glm::vec3 Center;
 
 	private:
 
@@ -22,8 +27,10 @@ namespace vulpes {
 
 		size_t windowWidth, windowHeight;
 		float rollSpeed, angle;
+		bool clicked = false, dragging = false;
 		glm::vec3 cameraAxis;
-
+		glm::vec3 currPos, prevPos;
+		glm::mat4 tmpView;
     };
 
 

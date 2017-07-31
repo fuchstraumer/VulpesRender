@@ -60,8 +60,11 @@ namespace vulpes {
 		glm::mat4 projection;
 
 		void SetCamPos(const glm::vec3& pos);
-		void UpdateCameraRotation(const float& rot_x, const float& rot_y);
-		void UpdateCameraZoom(const float& zoom_delta);
+
+		static void MouseDrag(const float& rot_x, const float& rot_y);
+		static void MouseScroll(const float& zoom_delta);
+		static void MouseDown(const float & x, const float & y);
+		static void MouseUp(const float & x, const float & y);
 
         static cfg::vulpesInstanceInfo VulpesInstanceConfig;
 

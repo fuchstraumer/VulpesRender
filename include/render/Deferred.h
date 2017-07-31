@@ -4,7 +4,7 @@
 
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
-#include "Framebuffer.h"
+#include "OffscreenFramebuffers.h"
 
 namespace vulpes {
 

@@ -30,11 +30,15 @@ namespace vulpes {
 		virtual glm::mat4 GetViewMatrix() = 0;
 
 		virtual void ProcessKeyboard(const Direction& dir, const float& delta_time);
-		virtual void ProcessMouseMovement(const float& x_offset, const float& y_offset) = 0;
-		virtual void ProcessMouseScroll(const float& y_scroll) = 0;
+		virtual void MouseDrag(const float& x_offset, const float& y_offset) = 0;
+		virtual void MouseScroll(const float& y_scroll) = 0;
+		virtual void MouseDown(const float& x, const float& y) = 0;
+		virtual void MouseUp(const float& x, const float& y) = 0;
+		virtual void UpdateMousePos(const float& x, const float& y) = 0;
 
 		glm::vec3 Position;
-		glm::vec3 Front, Up, Right;
+		glm::vec3 Front, Up, WorldUp, Right;
+		glm::mat4 LastView;
 
 	};
 
@@ -49,8 +53,11 @@ namespace vulpes {
 		Camera(const glm::vec3& position = glm::vec3(0.0f, 0.0f, 0.0f), const glm::vec3& up = glm::vec3(0.0f, 1.0f, 0.0f), const float& yaw = YAW, const float& pitch = PITCH);
 
 		glm::mat4 GetViewMatrix() override;
-		void ProcessMouseMovement(const float& xoffset, const float& yoffset) override;
-		void ProcessMouseScroll(const float& yoffset) override;
+		void MouseDrag(const float& xoffset, const float& yoffset) override;
+		void MouseScroll(const float& yoffset) override;
+		void UpdateMousePos(const float& x, const float& y) override;
+		void MouseDown(const float& x, const float& y) override;
+		void MouseUp(const float& x, const float& y) override;
 
 	private:
 
