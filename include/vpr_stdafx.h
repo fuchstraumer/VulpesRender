@@ -72,4 +72,4 @@
 #include "assimp/scene.h"
 
 // Default width/height of window. Should probably move this elsewhere and/or remove it entirely.
-constexpr uint32_t DEFAULT_WIDTH = 1920, DEFAULT_HEIGHT = 1080;
+constexpr uint32_t DEFAULT_WIDTH = 2400, DEFAULT_HEIGHT = 1380;

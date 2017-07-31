@@ -60,6 +60,7 @@ namespace vulpes {
 		VkImageTiling GetFormatTiling(const VkFormat& format, const VkFormatFeatureFlags & flags) const;
 		VkFormat FindSupportedFormat(const std::vector<VkFormat>& options, const VkImageTiling& tiling, const VkFormatFeatureFlags& flags) const;
 		VkFormat FindDepthFormat() const;
+		VkFormat GetSwapchainColorFormat() const;
 
 		/*
 			Methods related to physical device

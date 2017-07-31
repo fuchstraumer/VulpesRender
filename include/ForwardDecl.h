@@ -21,7 +21,7 @@ namespace vulpes {
 	class CommandPool;
 	class TransferPool;
 	class GraphicsPipeline;
-
+	class DeferredPass;
 	class PipelineCache;
 }
 #endif // !VULPES_VK_FORWARD_DECL_H
