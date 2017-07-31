@@ -14,10 +14,10 @@ namespace vulpes {
 		glm::mat4 GetModelRotationMatrix(const glm::mat4& view_matrix);
 
 		void UpdateMousePos(const float & x, const float & y);
-		void MouseDown(const float & x, const float & y) override;
-		void MouseUp(const float & x, const float & y) override;
-		void MouseDrag(const float& x, const float& y) override;
-		void MouseScroll(const float& scroll) override;
+		void MouseDown(const int& button, const float & x, const float & y) override;
+		void MouseUp(const int& button, const float & x, const float & y) override;
+		void MouseDrag(const int& button, const float& x, const float& y) override;
+		void MouseScroll(const int& button, const float& scroll) override;
 
 		glm::vec3 Center;
 

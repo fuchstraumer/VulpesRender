@@ -37,7 +37,7 @@ namespace vulpes {
 		
 	}
 
-	void Camera::MouseScroll(const float & yoffset) {
+	void Camera::MouseScroll(const int& button, const float & yoffset) {
 		if (Zoom >= 1.0f && Zoom <= 45.0f) {
 			Zoom -= yoffset;
 		}
@@ -71,11 +71,11 @@ namespace vulpes {
 		updateCameraVectors();
 	}
 
-	void Camera::MouseDown(const float & x, const float & y)
+	void Camera::MouseDown(const int& button, const float & x, const float & y)
 	{
 	}
 
-	void Camera::MouseUp(const float & x, const float & y)
+	void Camera::MouseUp(const int& button, const float & x, const float & y)
 	{
 	}
 

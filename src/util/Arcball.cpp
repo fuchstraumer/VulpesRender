@@ -17,22 +17,27 @@ namespace vulpes {
 		return glm::rotate(view_matrix, angle * rollSpeed, axis);
 	}
 
-	void Arcball::MouseUp(const float& x, const float& y) {}
+	void Arcball::MouseUp(const int& button, const float& x, const float& y) {}
 
 	void Arcball::UpdateMousePos(const float& x, const float& y) {}
 
-	void Arcball::MouseDown(const float& x, const float& y) {
-		prevPos = toScreenCoordinates(x, y);
+	void Arcball::MouseDown(const int& button, const float& x, const float& y) {
+		if (button == 0) {
+			prevPos = toScreenCoordinates(x, y);
+		}
+		if (button == 1) {
+
+		}
 	}
 
-	void Arcball::MouseDrag(const float & x, const float & y) {
+	void Arcball::MouseDrag(const int& button, const float & x, const float & y) {
 		currPos = toScreenCoordinates(x, y);
 		angle = std::acos(std::min(1.0f, glm::dot(prevPos, currPos)));
 		cameraAxis = glm::cross(prevPos, currPos);
 		LastView = glm::rotate(LastView, angle * rollSpeed, cameraAxis);
 	}
 
-	void Arcball::MouseScroll(const float& scroll) {}
+	void Arcball::MouseScroll(const int& button, const float& scroll) {}
 
 	glm::vec3 Arcball::toScreenCoordinates(const float & x, const float & y) const {
 
