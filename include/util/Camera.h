@@ -39,7 +39,7 @@ namespace vulpes {
 		glm::vec3 Position;
 		glm::vec3 Front, Up, WorldUp, Right;
 		glm::mat4 LastView;
-
+		glm::vec2 prevMouse;
 	};
 
 	// An abstract camera class that processes input and calculates the corresponding Eular Angles, Vectors and Matrices for use in OpenGL

@@ -9,6 +9,8 @@ namespace vulpes {
 	public:
 
 		Arcball(const size_t& window_width, const size_t& window_height);
+
+
 		
 		glm::mat4 GetViewMatrix() override;
 		glm::mat4 GetModelRotationMatrix(const glm::mat4& view_matrix);
@@ -24,13 +26,17 @@ namespace vulpes {
 	private:
 
 		glm::vec3 toScreenCoordinates(const float& x, const float& y) const;
+		glm::vec3 mouseToArcball(const float & x, const float & y) const;
+		glm::vec3 constrainToAxis(const glm::vec3 & unconstrained) const;
+		void updateVectors();
 
 		size_t windowWidth, windowHeight;
 		float rollSpeed, angle;
-		bool clicked = false, dragging = false;
 		glm::vec3 cameraAxis;
 		glm::vec3 currPos, prevPos;
-		glm::mat4 tmpView;
+		glm::vec3 viewDirection;
+		glm::vec3 constraintAxis = glm::vec3(0.0f, 0.0f, 1.0f);
+		bool constrained = true;
     };
 
 

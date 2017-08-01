@@ -114,15 +114,15 @@ namespace vulpes {
 		}
 	}
 
-	void Instance::MouseDrag(const float & rot_x, const float & rot_y) {
+	void Instance::MouseDrag(const int& button, const float & rot_x, const float & rot_y) {
 		if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
-			arcball.MouseDrag(rot_x, rot_y);
+			arcball.MouseDrag(button, rot_x, rot_y);
 		}
 	}
 
-	void Instance::MouseScroll(const float & zoom_delta) {
+	void Instance::MouseScroll(const int& button, const float & zoom_delta) {
 		if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
-			arcball.Position.z += (zoom_delta * VulpesInstanceConfig.MouseSensitivity);
+			arcball.MouseScroll(button, zoom_delta);
 		}
 	}
 
@@ -267,15 +267,15 @@ namespace vulpes {
 		}
 	}
 
-	void Instance::MouseDown(const float& x, const float& y) {
+	void Instance::MouseDown(const int& button, const float& x, const float& y) {
 		if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
-			arcball.MouseDown(x, y);
+			arcball.MouseDown(button, x, y);
 		}
 	}
 
-	void Instance::MouseUp(const float & x, const float & y) {
+	void Instance::MouseUp(const int& button, const float & x, const float & y) {
 		if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
-			arcball.MouseUp(x, y);
+			arcball.MouseUp(button, x, y);
 		}
 	}
 

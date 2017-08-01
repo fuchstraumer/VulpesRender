@@ -33,7 +33,7 @@ namespace vulpes {
 		updateCameraVectors();
 	}
 
-	void Camera::MouseDrag(const float & xoffset, const float & yoffset) {
+	void Camera::MouseDrag(const int& button, const float & xoffset, const float & yoffset) {
 		
 	}
 
