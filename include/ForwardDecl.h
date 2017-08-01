@@ -23,5 +23,7 @@ namespace vulpes {
 	class GraphicsPipeline;
 	class DeferredPass;
 	class PipelineCache;
+	class DescriptorSet;
+	class DescriptorPool;
 }
 #endif // !VULPES_VK_FORWARD_DECL_H

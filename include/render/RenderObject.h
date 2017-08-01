@@ -14,7 +14,7 @@ namespace vulpes {
 
 	private:
 
-
+		virtual void createDescriptors();
 
 	};
 
