@@ -36,27 +36,33 @@ namespace vulpes {
         DescriptorSet(const Device* parent);
         ~DescriptorSet();
 
-        // Descriptor type is the resource that will be bound: num_of_resource is the quantity we expect to use.
-        void AddDescriptorType(const VkDescriptorType& descriptor_type, const size_t& num_of_resource);
-
-        // shader_stage sets the stage we're accessing the descriptor in, descriptor_binding_loc is the uniform location specified in the shader for
-        // this specified resource.
         void AddDescriptorBinding(const VkDescriptorType& descriptor_type, const VkShaderStageFlagBits& shader_stage, const uint32_t& descriptor_binding_loc);
+        void AddDescriptorInfo(const VkDescriptorImageInfo& info, const size_t& item_binding_idx);
+        void AddDescriptorInfo(const VkDescriptorBufferInfo& info, const size_t& item_binding_idx);
+
+        void CreateLayout();
+        void Allocate(const DescriptorPool* parent_pool);
+        void Update();
+
 
         const VkDescriptorSet& vkHandle() const noexcept;
         const VkDescriptorSetLayout& vkLayout() const noexcept;
 
         static descriptorLimits DescriptorLimits;
         static descriptorStageLimits descriptorStageLimits;
+
+        const std::map<size_t, VkDescriptorSetLayoutBinding>& GetBindings() const noexcept;
+        
     private:
 
         const Device* device;
         const DescriptorPool* descriptorPool;
         VkDescriptorSetLayout descriptorSetLayout;
         VkDescriptorSet descriptorSet;
+        bool updated = false;
         bool allocated = false;
-        std::vector<VkWriteDescriptorSet> writeDescriptors;
-        std::unordered_map<VkDescriptorType, size_t> resourceMap;
+        std::map<size_t, VkWriteDescriptorSet> writeDescriptors;
+        std::map<size_t, VkDescriptorSetLayoutBinding> bindings;
     };
 
 }
