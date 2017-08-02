@@ -60,18 +60,19 @@ ExternalProject_Add(glfw3
     "-DUSE_MSVC_RUNTIME_LIBRARY_DLL=OFF")
 
 
-#ExternalProject_Add(glslang
-#  PREFIX "{$CMAKE_CURRENT_SOURCE_DIR}/glslang"
-#  GIT_REPOSITORY "https://github.com/KhronosGroup/glslang/glslang.git"
-#  GIT_TAG ""
-#  BUILD_IN_SOURCE 1 
-#  CMAKE_ARGS
-#    "-DBUILD_TESTING=OFF"
-#    "-DENABLE_AMD_EXTENSIONS=OFF"
-#    "-DENABLE_NV_EXTENSIONS=OFF"
-#    "-DENABLE_GLSLANG_BINARIES=OFF"
-#    "-DENABLE_HLSL=OFF"
-#  INSTALL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/ext/")
+ExternalProject_Add(glslang
+  PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/glslang"
+  GIT_REPOSITORY "https://github.com/KhronosGroup/glslang.git"
+  GIT_TAG ""
+  BUILD_IN_SOURCE 1 
+  CMAKE_ARGS
+    "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext/"
+    "-DBUILD_TESTING=OFF"
+    "-DENABLE_AMD_EXTENSIONS=OFF"
+    "-DENABLE_NV_EXTENSIONS=OFF"
+    "-DENABLE_GLSLANG_BINARIES=OFF"
+    "-DENABLE_HLSL=OFF"
+ )
 
 FILE(GLOB UTIL "src/util/*.cc" "src/util/*.cpp" "include/util/*.h")
 FILE(GLOB COMMON "src/common/*.h")
@@ -99,13 +100,19 @@ SOURCE_GROUP("render" FILES ${RENDER})
 SOURCE_GROUP("gui" FILES ${GUI})
 SOURCE_GROUP("imgui" FILES ${IMGUI})
 
-IF(MSVC)
-IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-SET(CMAKE_STATIC_LINKER_FLAGS "-NODEFAULTLIB \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib\" \"${PROJECT_SOURCE_DIR}/ext/assimp/assimp-vc141-mt-gd.lib\"")
-ELSE()
-SET(CMAKE_STATIC_LINKER_FLAGS "-NODEFAULTLIB \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib\" \"${PROJECT_SOURCE_DIR}/ext/assimp/assimp-vc141-mt.lib\"")
-ENDIF()
-ENDIF(MSVC)
+SET(CMAKE_STATIC_LINKER_FLAGS_DEBUG "-NODEFAULTLIB 
+  \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3-gd.lib\" 
+  \"${PROJECT_SOURCE_DIR}/ext/assimp/assimp-vc141-mt-gd.lib\"
+  \"${PROJECT_SOURCE_DIR}/ext/lib/glslangd.lib\"
+  \"${PROJECT_SOURCE_DIR}/ext/lib/SPIRVd.lib\"
+  \"${PROJECT_SOURCE_DIR}/ext/lib/SPVRemapperd.lib\"")
+SET(CMAKE_STATIC_LINKER_FLAGS_RELEASE "-NODEFAULTLIB 
+  \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib\" 
+  \"${PROJECT_SOURCE_DIR}/ext/assimp/assimp-vc141-mt.lib\"
+  \"${PROJECT_SOURCE_DIR}/ext/lib/glslang.lib\"
+  \"${PROJECT_SOURCE_DIR}/ext/lib/SPIRV.lib\"
+  \"${PROJECT_SOURCE_DIR}/ext/lib/SPVRemapper.lib\"")
+
 
 ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/BaseScene.h" "src/BaseScene.cpp" ${IMGUI} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
 

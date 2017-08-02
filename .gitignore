@@ -91,3 +91,7 @@ x64/Release/glfw3/glfw3.log
 x64/Release/ZERO_CHECK/ZERO_CHECK.log
 x64/RelWithDebInfo/ZERO_CHECK/ZERO_CHECK.log
 ext/lib/glfw3-gd.lib
+ext/glslang/
+ext/SPIRV/
+glslang/
+ext/lib/
