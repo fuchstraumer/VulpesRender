@@ -11,19 +11,18 @@ namespace vulpes {
 
 	namespace util {
 
-		using spir_v_code_type = uint32_t;
-		using spir_v_code_vector = std::vector<uint32_t>;
-
 		class ShaderCompiler {
 		public:
 
 			ShaderCompiler();
 
 			~ShaderCompiler();
-
-			static std::tuple<bool, spir_v_code_vector> CompileShader(const std::string& source_code);
+			
+			std::vector<uint32_t> CompileShader(const std::string& source_code);
 
 		private:
+
+			std::vector<uint32_t> compileShaderToSpirV(const EShLanguage& stage, const std::string& source_code);
 
 			void initializeGLSLang();
 			void finalizeGLSLang();

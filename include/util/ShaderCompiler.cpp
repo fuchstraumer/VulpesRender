@@ -27,12 +27,46 @@ namespace vulpes {
 
 		}
 
-		ShaderCompiler::ShaderCompiler() {
-			bool init_glslang = initializeGLSLang();
+		static EShLanguage GetShaderStage(const std::string& filename) {
+			size_t idx = filename.find_last_of(".");
+			const std::string extension = filename.substr(idx + 1);
+			if (extension == "vert") {
+				return EShLangVertex;
+			}
+			if (extension == "tesc") {
+				return EShLangTessControl;
+			}
+			if (extension == "tese") {
+				return EShLangTessEvaluation;
+			}
+			if (extension == "geom") {
+				return EShLangGeometry;
+			}
+			if (extension == "frag") {
+				return EShLangFragment;
+			}
+			if (extension == "comp") {
+				return EShLangCompute;
+			}
 		}
 
-		ShaderCompiler::~ShaderCompiler()
-		{
+		ShaderCompiler::ShaderCompiler() {
+			initializeGLSLang();
+		}
+
+		ShaderCompiler::~ShaderCompiler() {
+			finalizeGLSLang();
+		}
+
+		std::vector<uint32_t> ShaderCompiler::CompileShader(const std::string & filename) {
+
+			auto shader_stage = GetShaderStage(filename);
+
+			std::unique_ptr<glslang::TShader> shader = std::make_unique<glslang::TShader>(shader_stage);
+			std::unique_ptr<glslang::TProgram> program;
+			glslang::TShader::ForbidIncluder includer;
+
+			return std::vector<uint32_t>();
 		}
 
 		void ShaderCompiler::initializeGLSLang() {
@@ -45,7 +79,7 @@ namespace vulpes {
 		}
 
 		void ShaderCompiler::finalizeGLSLang() {
-			return false;
+			glslang::FinalizeProcess();
 		}
 
 	}
