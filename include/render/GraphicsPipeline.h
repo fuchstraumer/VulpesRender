@@ -4,7 +4,6 @@
 
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.h"
-#include "../resource/ShaderModule.h"
 
 namespace vulpes {
 
@@ -26,23 +25,18 @@ namespace vulpes {
 		GraphicsPipeline& operator=(const GraphicsPipeline&) = delete;
 	public:
 
-		GraphicsPipeline(const Device* parent, const GraphicsPipelineInfo& info);
-
 		GraphicsPipeline(const Device* parent);
-
 		~GraphicsPipeline();
 
 		void Init(VkGraphicsPipelineCreateInfo& create_info, const VkPipelineCache& cache = VK_NULL_HANDLE);
 
-		void SetRenderpass(const VkRenderPass& renderpass);
-
 		const VkPipeline& vkHandle() const noexcept;
 
 	private:
+
 		const VkAllocationCallbacks* allocators = nullptr;
 		const Device* parent;
 		VkPipeline handle;
-		GraphicsPipelineInfo info;
 		VkGraphicsPipelineCreateInfo createInfo;
 
 	};
