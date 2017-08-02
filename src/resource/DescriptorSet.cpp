@@ -4,8 +4,11 @@
 #include "resource/DescriptorPool.h"
 namespace vulpes {
 
-    DescriptorSet::~DescriptorSet() {
+	DescriptorSet::DescriptorSet(const Device * parent) : device(parent) { }
+
+	DescriptorSet::~DescriptorSet() {
         vkFreeDescriptorSets(device->vkHandle(), descriptorPool->vkHandle(), 1, &descriptorSet);
+		vkDestroyDescriptorSetLayout(device->vkHandle(), descriptorSetLayout, nullptr);
     }
 
     void DescriptorSet::AddDescriptorBinding(const VkDescriptorType& descriptor_type, const VkShaderStageFlagBits& shader_stage, const uint32_t& descriptor_binding_loc){
@@ -95,6 +98,16 @@ namespace vulpes {
     void DescriptorSet::Update() {
 
         assert(descriptorPool && allocated);
+
+		std::vector<VkWriteDescriptorSet> write_descriptors;
+
+		for (const auto& entry : writeDescriptors) {
+			write_descriptors.push_back(entry.second);
+		}
+
+		vkUpdateDescriptorSets(device->vkHandle(), static_cast<uint32_t>(write_descriptors.size()), write_descriptors.data(), 0, nullptr);
+
+		updated = true;
         
     }
 

@@ -19,7 +19,6 @@ namespace vulpes {
         // Allocates based on added descriptor sets.
         void Create();
 
-
         const VkDescriptorPool& vkHandle() const noexcept;
 
     private:
