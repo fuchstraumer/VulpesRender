@@ -64,7 +64,7 @@ namespace vulpes {
 	void BaseScene::UpdateMouseActions() {
 
 		ImGuiIO& io = ImGui::GetIO();
-		if (!ImGui::IsAnyItemHovered()) {
+	
 			// use else-if to only allow one drag at a time.
 			if (ImGui::IsMouseDragging(0)) {
 				Instance::MouseDrag(0, io.MousePos.x, io.MousePos.y);
@@ -86,7 +86,7 @@ namespace vulpes {
 			if (ImGui::IsMouseReleased(0)) {
 				Instance::MouseUp(0, io.MousePos.x, io.MousePos.y);
 			}
-		}
+		
 	}
 
 	void vulpes::BaseScene::CreateCommandPools(const size_t& num_secondary_buffers) {
@@ -297,30 +297,28 @@ namespace vulpes {
 
 	void BaseScene::RenderLoop() {
 
-		instance->frameTime = static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs);
+		instance->frameTime = static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs / 1000.0);
 		size_t frame_counter = 0;
 
 		while(!glfwWindowShouldClose(instance->Window)) {
 
 			limitFrame();
 
-			gui->NewFrame(instance.get(), false);
+			glfwPollEvents();
+
+			gui->NewFrame(instance.get(), true);
 			imguiDrawcalls();
 
-			glfwPollEvents();
 			UpdateMouseActions();
-			instance->UpdateMovement(Instance::VulpesInstanceConfig.FrameTimeMs);
+			instance->UpdateMovement(static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs / 1000.0));
 			
 			RecordCommands();
 			submitFrame();
 
-			if(frame_counter >= 600) {
-				// Only attempt to clean up staging resource about every
-				// 10 seconds or so.
-				Buffer::DestroyStagingResources(device.get());
-			}
+			vkResetCommandPool(device->vkHandle(), secondaryPool->vkHandle(), 0);
+			vkResetCommandPool(device->vkHandle(), graphicsPool->vkHandle(), 0);
 
-			++frame_counter;
+			Buffer::DestroyStagingResources(device.get());
 		}
 	}
 
@@ -376,7 +374,8 @@ namespace vulpes {
 
 		vkQueuePresentKHR(device->GraphicsQueue(), &present_info);
 		vkWaitForFences(device->vkHandle(), 1, &presentFence, VK_TRUE, vk_default_fence_timeout);
-
+		//vkQueueWaitIdle(device->GraphicsQueue());
+		vkResetFences(device->vkHandle(), 1, &presentFence);
 	}
 
 	void BaseScene::renderGUI(VkCommandBuffer& gui_buffer, const VkCommandBufferBeginInfo& begin_info, const size_t& frame_idx) const {

@@ -46,7 +46,6 @@ namespace vulpes {
 		// Call ImGui drawing functions (like ImGui::ShowMainMenuBar(), etc) here.
 		virtual void imguiDrawcalls() const = 0;
 		virtual void renderGUI(VkCommandBuffer& gui_buffer, const VkCommandBufferBeginInfo& begin_info, const size_t& frame_idx) const;
-		virtual void resetFrameResources();
 
 		std::unique_ptr<Multisampling> msaa;
 		std::unique_ptr<imguiWrapper> gui;
