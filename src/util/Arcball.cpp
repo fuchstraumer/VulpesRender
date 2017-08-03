@@ -5,8 +5,8 @@ namespace vulpes {
 
 	Arcball::Arcball(const size_t & window_width, const size_t & window_height) : cameraBase(glm::vec3(0.0f, 0.0f, -10.0f)), windowWidth(window_width), windowHeight(window_height), 
 		angle(0.0f), cameraAxis(0.0f, 1.0f, 0.0f), rollSpeed(0.2f), prevPos(toScreenCoordinates(windowWidth / 2, windowHeight / 2)) {
-		LastView = glm::lookAt(Position, glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		viewDirection = glm::vec3(0.0f, 0.0f, -1.0f);
+		LastView = glm::lookAt(Position, Position + viewDirection, glm::vec3(0.0f, 1.0f, 0.0f));
 	}
 
 	void Arcball::updateVectors() {

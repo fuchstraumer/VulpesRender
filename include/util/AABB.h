@@ -18,6 +18,8 @@ namespace vulpes {
 
 			void UpdateMinMax(const float& y_min, const float& y_max);
 
+			bool Intersection(const glm::vec3& origin, const glm::vec3& ray) const;
+
 		};
 
 		
