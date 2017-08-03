@@ -14,6 +14,7 @@
 #include "../core/Instance.h"
 #include "../render/Multisampling.h"
 #include "../resource/PipelineCache.h"
+#include "../resource/ShaderModule.h"
 
 namespace vulpes {
 

@@ -33,7 +33,7 @@ namespace vulpes {
                 an instance-wide property. EnableMarkers enables debug markers,
                 which can be used to clarify things in RenderDoc
             */
-            bool EnableValidation;
+            bool EnableValidation = false;
             bool EnableMarkers = true;
 
             /*
@@ -73,6 +73,15 @@ namespace vulpes {
             */
             bool EnableMouseLocking = true;
 
+            /*
+                Frame limiting. Enabled by default. Time can be modified too: currently locked to 60fps max.
+            */
+            bool LimitFramerate = true;
+            double FrameTimeMs = 16.0;
+
+            /*
+                Movement speed affects camera speed in FPS/FREE camera modes.
+            */
             float MouseSensitivity = 0.1f;
             float MovementSpeed = 25.0f;
 	    };

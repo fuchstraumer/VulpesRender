@@ -37,6 +37,14 @@ namespace vulpes {
 		result = vkCreateSemaphore(device->vkHandle(), &semaphore_info, nullptr, &semaphores[1]);
 		VkAssert(result);
 
+		VkFenceCreateInfo fence_info = vk_fence_create_info_base;
+		result = vkCreateFence(device->vkHandle(), &fence_info, nullptr, &presentFence);
+		VkAssert(result);
+
+		// init frame limiters.
+		limiter_a = std::chrono::system_clock::now();
+		limiter_b = std::chrono::system_clock::now();
+
 	}
 
 	vulpes::BaseScene::~BaseScene() {
@@ -287,7 +295,112 @@ namespace vulpes {
 
 	}
 
-	float vulpes::BaseScene::GetFrameTime() {
-		return frameTime;
+	void BaseScene::RenderLoop() {
+
+		instance->frameTime = static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs);
+		size_t frame_counter = 0;
+
+		while(!glfwWindowShouldClose(instance->Window)) {
+
+			limitFrame();
+
+			gui->NewFrame(instance.get(), false);
+			imguiDrawcalls();
+
+			glfwPollEvents();
+			UpdateMouseActions();
+			instance->UpdateMovement(Instance::VulpesInstanceConfig.FrameTimeMs);
+			
+			RecordCommands();
+			submitFrame();
+
+			if(frame_counter >= 600) {
+				// Only attempt to clean up staging resource about every
+				// 10 seconds or so.
+				Buffer::DestroyStagingResources(device.get());
+			}
+
+			++frame_counter;
+		}
 	}
+
+	void BaseScene::limitFrame() {
+
+		if(!Instance::VulpesInstanceConfig.LimitFramerate) {
+			return;
+		}
+
+		limiter_a = std::chrono::system_clock::now();
+		std::chrono::duration<double, std::milli> work_time = limiter_a - limiter_b;
+		
+		if(work_time.count() < Instance::VulpesInstanceConfig.FrameTimeMs) {
+			std::chrono::duration<double, std::milli> delta_ms(Instance::VulpesInstanceConfig.FrameTimeMs - work_time.count());
+			auto delta_ms_dur = std::chrono::duration_cast<std::chrono::milliseconds>(delta_ms);
+			std::this_thread::sleep_for(std::chrono::milliseconds(delta_ms_dur.count()));
+		}
+
+		limiter_b = std::chrono::system_clock::now();
+
+	}
+
+	void BaseScene::submitFrame() {
+
+		uint32_t image_idx;
+		vkAcquireNextImageKHR(device->vkHandle(), swapchain->vkHandle(), std::numeric_limits<uint64_t>::max(), semaphores[0], VK_NULL_HANDLE, &image_idx);
+
+		VkSubmitInfo submit_info = vk_submit_info_base;
+		VkPipelineStageFlags wait_stages[] = { VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT };
+		submit_info.waitSemaphoreCount = 1;
+		submit_info.pWaitSemaphores = &semaphores[0];
+		submit_info.pWaitDstStageMask = wait_stages;
+		submit_info.commandBufferCount = 1;
+		submit_info.pCommandBuffers = &graphicsPool->GetCmdBuffer(image_idx);
+		submit_info.signalSemaphoreCount = 1;
+		submit_info.pSignalSemaphores = &semaphores[1];
+
+		VkResult result = vkQueueSubmit(device->GraphicsQueue(), 1, &submit_info, presentFence);
+		switch(result) { // switch faster than if/else, important in this code called every frame.
+			case VK_ERROR_DEVICE_LOST:
+				LOG(WARNING) << "vkQueueSubmit returned VK_ERROR_DEVICE_LOST";
+			default:
+				VkAssert(result);
+		}
+
+		VkPresentInfoKHR present_info{ VK_STRUCTURE_TYPE_PRESENT_INFO_KHR };
+		present_info.waitSemaphoreCount = 1;
+		present_info.pWaitSemaphores = &semaphores[1];
+		present_info.swapchainCount = 1;
+		present_info.pSwapchains = &swapchain->vkHandle();
+		present_info.pImageIndices = &image_idx;
+		present_info.pResults = nullptr;
+
+		vkQueuePresentKHR(device->GraphicsQueue(), &present_info);
+		vkWaitForFences(device->vkHandle(), 1, &presentFence, VK_TRUE, vk_default_fence_timeout);
+
+	}
+
+	void BaseScene::renderGUI(VkCommandBuffer& gui_buffer, const VkCommandBufferBeginInfo& begin_info, const size_t& frame_idx) const {
+		ImGui::Render();
+			
+		if (device->MarkersEnabled) {
+			device->vkCmdInsertDebugMarker(graphicsPool->GetCmdBuffer(frame_idx), "Update GUI", glm::vec4(0.6f, 0.6f, 0.0f, 1.0f));
+		}
+
+		gui->UpdateBuffers();
+
+		vkBeginCommandBuffer(gui_buffer, &begin_info);
+
+		if (device->MarkersEnabled) {
+			device->vkCmdBeginDebugMarkerRegion(gui_buffer, "Draw GUI", glm::vec4(0.6f, 0.7f, 0.0f, 1.0f));
+		}
+
+		gui->DrawFrame(gui_buffer);
+
+		if (device->MarkersEnabled) {
+			device->vkCmdEndDebugMarkerRegion(gui_buffer);
+		}
+
+		vkEndCommandBuffer(gui_buffer);
+	}
+
 }
