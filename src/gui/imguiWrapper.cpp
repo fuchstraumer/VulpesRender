@@ -2,6 +2,7 @@
 #include "gui/imguiWrapper.h"
 #include "command/TransferPool.h"
 #include "core/Instance.h"
+#include "resource/ShaderModule.h"
 
 namespace vulpes {
 

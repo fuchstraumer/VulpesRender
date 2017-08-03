@@ -3,9 +3,7 @@
 
 #include "vpr_stdafx.h"
 
-#include "SPIRV/GlslangToSpv.h"
-#include "glslang/Public/ShaderLang.h"
-#include "SPIRV/disassemble.h"
+
 
 namespace vulpes {
 
@@ -18,7 +16,7 @@ namespace vulpes {
 
 			~ShaderCompiler();
 			
-			std::vector<uint32_t> CompileShader(const std::string& source_code);
+			std::vector<uint32_t> CompileShader(const std::string& filename);
 
 		private:
 
@@ -27,8 +25,6 @@ namespace vulpes {
 			void initializeGLSLang();
 			void finalizeGLSLang();
 
-			// avoids cost of opening a file to read an included glsl file.
-			std::unordered_map<std::string, std::string> includeCache;
 		};
 
 	}

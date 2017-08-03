@@ -28,6 +28,8 @@
 #include <forward_list>
 #include <future>
 #include <tuple>
+#include <regex>
+
 
 #define GLFW_INCLUDE_VULKAN
 #include "glfw/glfw3.h"
@@ -70,4 +72,8 @@
 #include "assimp/Importer.hpp"
 #include "assimp/postprocess.h"
 #include "assimp/scene.h"
+
+#include "SPIRV/GlslangToSpv.h"
+#include "glslang/Public/ShaderLang.h"
+#include "SPIRV/disassemble.h"
 
