@@ -114,7 +114,9 @@ SET(CMAKE_STATIC_LINKER_FLAGS_RELEASE "-NODEFAULTLIB
   \"${PROJECT_SOURCE_DIR}/ext/assimp/assimp-vc141-mt.lib\"
   \"${PROJECT_SOURCE_DIR}/ext/lib/glslang.lib\"
   \"${PROJECT_SOURCE_DIR}/ext/lib/SPIRV.lib\"
-  \"${PROJECT_SOURCE_DIR}/ext/lib/SPVRemapper.lib\"")
+  \"${PROJECT_SOURCE_DIR}/ext/lib/SPVRemapper.lib\"
+  \"${PROJECT_SOURCE_DIR}/ext/lib/OGLCompiler.lib\"
+  \"${PROJECT_SOURCE_DIR}/ext/lib/OSDependent.lib\"")
 
 
 ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/BaseScene.h" "src/BaseScene.cpp" ${IMGUI} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
