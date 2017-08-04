@@ -105,7 +105,6 @@ SET(CMAKE_STATIC_LINKER_FLAGS_DEBUG "-NODEFAULTLIB
   \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3-gd.lib\" 
   \"${PROJECT_SOURCE_DIR}/ext/assimp/assimp-vc141-mt-gd.lib\"
   \"${PROJECT_SOURCE_DIR}/ext/lib/glslangd.lib\"
-  \"${PROJECT_SOURCE_DIR}/ext/lib/SPIRVd.lib\"
   \"${PROJECT_SOURCE_DIR}/ext/lib/SPVRemapperd.lib\"
   \"${PROJECT_SOURCE_DIR}/ext/lib/OSDependentd.lib\"
   \"${PROJECT_SOURCE_DIR}/ext/lib/OGLCompilerd.lib\"")
@@ -113,7 +112,6 @@ SET(CMAKE_STATIC_LINKER_FLAGS_RELEASE "-NODEFAULTLIB
   \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib\" 
   \"${PROJECT_SOURCE_DIR}/ext/assimp/assimp-vc141-mt.lib\"
   \"${PROJECT_SOURCE_DIR}/ext/lib/glslang.lib\"
-  \"${PROJECT_SOURCE_DIR}/ext/lib/SPIRV.lib\"
   \"${PROJECT_SOURCE_DIR}/ext/lib/SPVRemapper.lib\"
   \"${PROJECT_SOURCE_DIR}/ext/lib/OGLCompiler.lib\"
   \"${PROJECT_SOURCE_DIR}/ext/lib/OSDependent.lib\"")
