@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "cmakeccompilerid.c": "cpp"
+        "cmakeccompilerid.c": "cpp",
+        "xiosbase": "cpp",
+        "functional": "cpp"
     }
 }

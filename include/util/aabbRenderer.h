@@ -41,11 +41,11 @@ namespace vulpes {
             void updateVBO(const VkCommandBuffer& cmd);
             bool updateRequired = false;
             std::vector<glm::vec3> vertices;
+			std::vector<uint16_t> indices;
 
             const Device* device;
 
-            std::unique_ptr<Buffer> vbo;
-            std::unique_ptr<Buffer> staging;
+            std::unique_ptr<Buffer> vbo, ebo;
             std::unique_ptr<ShaderModule> vert, frag;
             std::unique_ptr<GraphicsPipeline> pipeline;
             std::unique_ptr<PipelineCache> pipelineCache;

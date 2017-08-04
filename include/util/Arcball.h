@@ -21,6 +21,16 @@ namespace vulpes {
 		void MouseDrag(const int& button, const float& x, const float& y) override;
 		void MouseScroll(const int& button, const float& scroll) override;
 
+		void SetTarget(const glm::vec3& new_target);
+
+		void RotateUp(const float& delta_time);
+		void RotateDown(const float& delta_time);
+		void RotateLeft(const float& delta_time);
+		void RotateRight(const float& delta_time);
+
+		void TranslateUp(const float& delta_time);
+		void TranslateDown(const float& delta_time);
+
 		glm::vec3 Center;
 
 	private:
@@ -32,10 +42,11 @@ namespace vulpes {
 
 		size_t windowWidth, windowHeight;
 		float rollSpeed, angle;
+		glm::vec3 target;
 		glm::vec3 cameraAxis;
 		glm::vec3 currPos, prevPos;
 		glm::vec3 viewDirection;
-		glm::vec3 constraintAxis = glm::vec3(0.0f, 0.0f, 1.0f);
+		glm::vec3 constraintAxis = glm::vec3(0.0f, 0.0f, 0.0f);
 		bool constrained = true;
     };
 

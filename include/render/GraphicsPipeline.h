@@ -17,6 +17,8 @@ namespace vulpes {
 		VkPipelineDynamicStateCreateInfo DynamicStateInfo = vk_pipeline_dynamic_state_create_info_base;
 		VkPipelineVertexInputStateCreateInfo VertexInfo = vk_pipeline_vertex_input_state_create_info_base;
 		GraphicsPipelineInfo() {}
+
+		VkGraphicsPipelineCreateInfo GetPipelineCreateInfo() const;
 	};
 
 

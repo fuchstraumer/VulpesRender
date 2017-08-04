@@ -44,11 +44,55 @@ namespace vulpes {
         void aabbRenderer::createBuffers() {
 
             vbo = std::make_unique<Buffer>(device);
-            staging = std::make_unique<Buffer>(device);
+			ebo = std::make_unique<Buffer>(device);
 
             if(!vertices.empty()) {
                 rebuildBuffers();
             }
+
+        }
+
+        void aabbRenderer::setupGraphicsPipelineInfo() {
+
+            static const VkVertexInputBindingDescription bind_descr{ 0, sizeof(glm::vec3), VK_VERTEX_INPUT_RATE_VERTEX };
+
+            static const std::array<VkVertexInputAttributeDescription, 1> attr_descr{
+                VkVertexInputAttributeDescription{ 0, 0, VK_FORMAT_R32G32B32_SFLOAT, 0 },
+            };
+
+			pipelineStateInfo.AssemblyInfo.topology = VK_PRIMITIVE_TOPOLOGY_LINE_LIST;
+			pipelineStateInfo.RasterizationInfo.polygonMode = VK_POLYGON_MODE_LINE;
+
+            pipelineStateInfo.VertexInfo.vertexBindingDescriptionCount = 1;
+            pipelineStateInfo.VertexInfo.pVertexBindingDescriptions = &bind_descr;
+            pipelineStateInfo.VertexInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attr_descr.size());
+            pipelineStateInfo.VertexInfo.pVertexAttributeDescriptions = attr_descr.data();
+
+            pipelineStateInfo.DynamicStateInfo.dynamicStateCount = 2;
+            static const VkDynamicState states[2] = { VK_DYNAMIC_STATE_VIEWPORT, VK_DYNAMIC_STATE_SCISSOR };
+            pipelineStateInfo.DynamicStateInfo.pDynamicStates = states;
+
+            pipelineStateInfo.DepthStencilInfo.depthTestEnable = VK_TRUE;
+            pipelineStateInfo.DepthStencilInfo.depthCompareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
+
+            pipelineStateInfo.RasterizationInfo.cullMode = VK_CULL_MODE_NONE;
+
+        }
+
+        void aabbRenderer::createGraphicsPipeline(const VkRenderPass& renderpass) {
+
+            pipelineCreateInfo = pipelineStateInfo.GetPipelineCreateInfo();
+            pipelineCreateInfo.renderPass = renderpass;
+            pipelineCreateInfo.layout = pipelineLayout->vkHandle();
+			pipelineCreateInfo.subpass = 0;
+
+			std::array<VkPipelineShaderStageCreateInfo, 2> shader_stages{ vert->PipelineInfo(), frag->PipelineInfo() };
+			pipelineCreateInfo.stageCount = static_cast<uint32_t>(shader_stages.size());
+			pipelineCreateInfo.pStages = shader_stages.data();
+
+            pipeline = std::make_unique<GraphicsPipeline>(device);
+            pipelineCache = std::make_unique<PipelineCache>(device, static_cast<uint16_t>(typeid(aabbRenderer).hash_code()));
+            pipeline->Init(pipelineCreateInfo, pipelineCache->vkHandle());
 
         }
 
@@ -66,41 +110,29 @@ namespace vulpes {
             VkResult result = vkBeginCommandBuffer(cmd, &begin_info);
             VkAssert(result);
 
-            if(updateRequired) {
-                updateVBO(cmd);
-            }
-
             vkCmdBindPipeline(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline->vkHandle());
             vkCmdSetViewport(cmd, 0, 1, &viewport);
             vkCmdSetScissor(cmd, 0, 1, &scissor);
             vkCmdPushConstants(cmd, pipelineLayout->vkHandle(), VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(pushData), &pushData);
-            vkCmdDraw(cmd, static_cast<uint32_t>(vertices.size()), 1, 0, 0);
+			VkDeviceSize offsets[1]{ 0 };
+			vkCmdBindVertexBuffers(cmd, 0, 1, &vbo->vkHandle(), offsets);
+			vkCmdBindIndexBuffer(cmd, ebo->vkHandle(), 0, VK_INDEX_TYPE_UINT16);
+			vkCmdDrawIndexed(cmd, static_cast<uint32_t>(indices.size()), 1, 0, 0, 0);
 
             result = vkEndCommandBuffer(cmd);
             VkAssert(result);
 
         }
 
-        void aabbRenderer::updateVBO(const VkCommandBuffer& cmd) {
-
-            VkBufferCopy staging_to_device{ 0, 0, sizeof(glm::vec3) * vertices.size() };
-            // update, then specify barrier to say no rendering until next frame reached (since transfer comes after shader, will "wrap around")
-            vkCmdCopyBuffer(cmd, staging->vkHandle(), vbo->vkHandle(), 1, &staging_to_device);
-            vkCmdPipelineBarrier(cmd, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_VERTEX_SHADER_BIT, VK_DEPENDENCY_BY_REGION_BIT, 0, nullptr, 1, &updateBarrier, 0, nullptr);
-
-        }
-
         void aabbRenderer::rebuildBuffers() {
 
-            // make sure to recreate vbo to account for updated size.
             vbo->Destroy();
-            vbo->CreateBuffer(VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, sizeof(glm::vec3) * vertices.size());
+            vbo->CreateBuffer(VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, sizeof(glm::vec3) * vertices.size());
+            vbo->CopyToMapped(vertices.data(), vbo->Size(), 0);
 
-            staging->Destroy();
-            staging->CreateBuffer(VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, sizeof(glm::vec3) * vertices.size());
-            staging->CopyToMapped(vertices.data(), staging->Size(), 0);
-
-            updateRequired = true;
+			ebo->Destroy();
+			ebo->CreateBuffer(VK_BUFFER_USAGE_INDEX_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, sizeof(uint16_t) * indices.size());
+			ebo->CopyToMapped(indices.data(), ebo->Size(), 0);
 
         }
 
@@ -119,7 +151,15 @@ namespace vulpes {
                 glm::vec3(aabb.Min.x, aabb.Max.y, aabb.Max.z)
             };
 
+			std::initializer_list<uint16_t> new_indices = {
+				0, 1, 1, 3, 3, 2, 2, 0,
+				0, 5, 1, 6, 2, 7, 3, 4, 
+				5, 6, 6, 4, 4, 7, 7, 5,
+			};
+
             vertices.insert(vertices.end(), new_vertices);
+			indices.insert(indices.end(), new_indices);
+			
             rebuildBuffers();
 
         }

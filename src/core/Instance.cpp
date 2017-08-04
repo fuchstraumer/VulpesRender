@@ -37,21 +37,27 @@ namespace vulpes {
 		io.DeltaTime = dt;
 		if (keys[GLFW_KEY_W]) {
 			cam.ProcessKeyboard(Direction::FORWARD, dt);
+			arcball.RotateUp(dt);
 		}
 		if (keys[GLFW_KEY_S]) {
 			cam.ProcessKeyboard(Direction::BACKWARD, dt);
+			arcball.RotateDown(dt);
 		}
 		if (keys[GLFW_KEY_D]) {
 			cam.ProcessKeyboard(Direction::RIGHT, dt);
+			arcball.RotateRight(dt);
 		}
 		if (keys[GLFW_KEY_A]) {
 			cam.ProcessKeyboard(Direction::LEFT, dt);
+			arcball.RotateLeft(dt);
 		}
 		if (keys[GLFW_KEY_X]) {
 			cam.ProcessKeyboard(Direction::DOWN, dt);
+			arcball.TranslateDown(dt);
 		}
 		if (keys[GLFW_KEY_C]) {
 			cam.ProcessKeyboard(Direction::UP, dt);
+			arcball.TranslateUp(dt);
 		}
 	}
 
@@ -281,8 +287,7 @@ namespace vulpes {
 
 	void InstanceGLFW::MouseScrollCallback(GLFWwindow * window, double x_offset, double y_offset) {
 		mouseScroll += static_cast<float>(y_offset);
-		ImGuiIO& io = ImGui::GetIO();
-		io.MouseWheel += mouseScroll;
+		arcball.MouseScroll(0, static_cast<float>(y_offset));
 	}
 
 	void InstanceGLFW::KeyboardCallback(GLFWwindow * window, int key, int scan_code, int action, int mods){

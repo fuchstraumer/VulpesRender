@@ -12,6 +12,7 @@ namespace vulpes {
 	using bloom_framebuffer_t = std::integral_constant<int, 1>;
 	using ssao_framebuffer_t = std::integral_constant<int, 2>;
 	using g_buffer_t = std::integral_constant<int, 3>; // Dummy colorbuffer, Position, Normals, Tangents, Depth
+	using picking_framebuffer_t = std::integral_constant<int, 4>; // Write triangle index into this Framebuffer 
 
 	template<typename offscreen_framebuffer_type>
 	class OffscreenFramebuffers {

@@ -20,27 +20,28 @@ namespace vulpes {
 		bool AABB::Intersection(const glm::vec3& origin, const glm::vec3& ray) const {
 			
 			glm::vec3 inv_ray = glm::vec3(1.0f) / ray;
-
-			float tx1 = (Min.x - origin.x) * inv_ray.x;
-			float tx2 = (Max.x - origin.x) * inv_ray.x;
-
-			float tmin = std::min(tx1, tx2);
-			float tmax = std::max(tx1, tx2);
-
-			float ty1 = (Min.y - origin.y) * inv_ray.y;
-			float ty2 = (Max.y - origin.y) * inv_ray.y;
-
-			tmin = std::max(tmin, std::min(ty1, ty2));
-			tmax = std::min(tmax, std::max(ty1, ty2));
-
-			float tz1 = (Min.z - origin.z) * inv_ray.z;
-			float tz2 = (Max.z - origin.z) * inv_ray.z;
-
-			tmin = std::max(tmin, std::min(tz1, tz2));
-			tmax = std::min(tmax, std::max(tz1, tz2));
-
-			return tmax >= tmin;
 			
+			float txmin, txmax, tymin, tymax, tzmin, tzmax;
+			txmin = (Min.x - origin.x) * inv_ray.x;
+			txmax = (Max.x - origin.x) * inv_ray.x;
+			tymin = (Min.y - origin.y) * inv_ray.y;
+			tymax = (Max.y - origin.y) * inv_ray.y;
+			tzmin = (Min.z - origin.z) * inv_ray.z;
+			tzmax = (Max.z - origin.z) * inv_ray.z;
+
+			float tmin = std::max(std::max(std::min(txmin, txmax), std::min(tymin, tymax)), std::min(tzmin, tzmax));
+			float tmax = std::min(std::min(std::max(txmin, txmax), std::max(tymin, tymax)), std::max(tzmin, tzmax));
+			
+			if (tmax < 0.0f) {
+				return false;
+			}
+
+			if (tmin > tmax) {
+				return false;
+			}
+
+			return true;
+
 		}
 	}
 

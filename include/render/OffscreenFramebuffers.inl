@@ -127,6 +127,18 @@ namespace vulpes {
 
 	}
 
+	template<>
+	inline void OffscreenFramebuffers<picking_framebuffer_t>::createAttachments() {
+
+		// same as GBuffer, add a dummy colorbuffer attachment as our first attachment.
+		attachments.push_back(vulpes::Image(parent));
+		attachments.push_back(vulpes::Image(parent));
+
+		size_t idx = createAttachment(VK_FORMAT_R32G32B32_UINT, VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT);
+		createAttachmentView(idx);
+
+	}
+
 	template<typename offscreen_framebuffer_type>
 	inline void OffscreenFramebuffers<offscreen_framebuffer_type>::createAttachmentDescription(const size_t & attachment_idx, const VkImageLayout & final_attachment_layout,  const VkAttachmentLoadOp& load_op, const VkAttachmentStoreOp& store_op) {
 
@@ -175,6 +187,15 @@ namespace vulpes {
 
 	}
 
+	template<>
+	inline void OffscreenFramebuffers<picking_framebuffer_t>::createAttachmentDescriptions() {
+
+		createAttachmentDescription(0, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR, VK_ATTACHMENT_LOAD_OP_CLEAR, VK_ATTACHMENT_STORE_OP_DONT_CARE);
+		createAttachmentDescription(1, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR, VK_ATTACHMENT_STORE_OP_STORE);
+		createAttachmentDescription(2, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR, VK_ATTACHMENT_STORE_OP_DONT_CARE);
+
+	}
+
 	template<typename offscreen_framebuffer_type>
 	inline void OffscreenFramebuffers<offscreen_framebuffer_type>::createAttachmentReference(const size_t & attachment_idx, const VkImageLayout & final_attachment_layout) {
 
@@ -216,6 +237,15 @@ namespace vulpes {
 
 		// Third subpass - forward transparency.
 		attachmentReferences.push_back(VkAttachmentReference{ 0, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL });
+
+	}
+
+	template<>
+	inline void OffscreenFramebuffers<picking_framebuffer_t>::createAttachmentReferences() {
+
+		attachmentReferences.push_back(VkAttachmentReference{ 0, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL });
+		attachmentReferences.push_back(VkAttachmentReference{ 1, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL });
+		attachmentReferences.push_back(VkAttachmentReference{ 2, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL });
 
 	}
 
@@ -294,6 +324,26 @@ namespace vulpes {
 	}
 
 	template<>
+	inline void OffscreenFramebuffers<picking_framebuffer_t>::setupSubpassDescriptions() {
+
+		auto subpass_description = VkSubpassDescription {
+			0,
+			VK_PIPELINE_BIND_POINT_GRAPHICS,
+			0,
+			nullptr,
+			2,
+			&attachmentDescriptions[0],
+			nullptr,
+			&attachmentReferences[2],
+			0,
+			nullptr
+		};
+
+		subpassDescriptions.push_back(subpass_description);
+
+	}
+
+	template<>
 	inline void OffscreenFramebuffers<hdr_framebuffer_t>::setupSubpassDependencies() {
 
 		VkSubpassDependency first_dependency{
@@ -368,6 +418,34 @@ namespace vulpes {
 		subpassDependencies.push_back(transition_dependency);
 		subpassDependencies.push_back(transparency_dependency);
 		subpassDependencies.push_back(composition_dependency);
+
+	}
+
+	template<>
+	inline void OffscreenFramebuffers<picking_framebuffer_t>::setupSubpassDependencies() {
+
+		VkSubpassDependency first_dependency{
+			VK_SUBPASS_EXTERNAL,
+			0,
+			VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
+			VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+			VK_ACCESS_MEMORY_READ_BIT,
+			VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
+			VK_DEPENDENCY_BY_REGION_BIT,
+		};
+
+		VkSubpassDependency second_dependency{
+			0,
+			VK_SUBPASS_EXTERNAL,
+			VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+			VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
+			VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
+			VK_ACCESS_MEMORY_READ_BIT,
+			VK_DEPENDENCY_BY_REGION_BIT,
+		};
+
+		subpassDependencies.push_back(std::move(first_dependency));
+		subpassDependencies.push_back(std::move(second_dependency));
 
 	}
 

@@ -310,7 +310,7 @@ namespace vulpes {
 			imguiDrawcalls();
 
 			UpdateMouseActions();
-			instance->UpdateMovement(static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs / 1000.0));
+			instance->UpdateMovement(static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs));
 			
 			RecordCommands();
 			submitFrame();

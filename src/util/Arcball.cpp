@@ -6,6 +6,7 @@ namespace vulpes {
 	Arcball::Arcball(const size_t & window_width, const size_t & window_height) : cameraBase(glm::vec3(0.0f, 0.0f, -10.0f)), windowWidth(window_width), windowHeight(window_height), 
 		angle(0.0f), cameraAxis(0.0f, 1.0f, 0.0f), rollSpeed(0.2f), prevPos(toScreenCoordinates(windowWidth / 2, windowHeight / 2)) {
 		viewDirection = glm::vec3(0.0f, 0.0f, -1.0f);
+		target = Position + viewDirection;
 		LastView = glm::lookAt(Position, Position + viewDirection, glm::vec3(0.0f, 1.0f, 0.0f));
 	}
 
@@ -19,16 +20,16 @@ namespace vulpes {
 		glm::mat4 final = translate * glm::mat4_cast(rotation) * inv_translate;
 
 		Position = glm::vec3(final * glm::vec4(Position.x, Position.y, Position.z, 1.0f));
-		viewDirection = rotation * viewDirection;
+		target = rotation * target;
 		WorldUp = rotation * WorldUp;
 
-		Right = glm::normalize(glm::cross(viewDirection, WorldUp));
+		Right = glm::normalize(glm::cross(target, WorldUp));
 		angle = 0.0f;
 	}
 
 	glm::mat4 Arcball::GetViewMatrix() {
 		updateVectors();
-		return glm::lookAt(Position, Position + viewDirection, Up);
+		return glm::lookAt(Position, target, Up);
 	}
 
 	glm::mat4 Arcball::GetModelRotationMatrix(const glm::mat4 & view_matrix) {
@@ -58,13 +59,41 @@ namespace vulpes {
 		}
 		else if (button == 1) {
 			glm::vec2 d_mouse = glm::vec2(x, y) - prevMouse;
-			Position.xz += (d_mouse * 0.01f);	
+			Position.xz += (d_mouse * 0.01f);
+			target.xz += (d_mouse * 0.01f);	
 		}
 
 	}
 
 	void Arcball::MouseScroll(const int& button, const float& scroll) {
-		Position.y += 0.2f * scroll;
+		glm::vec3 target_dir = target - Position;
+		Position += (target_dir * 0.1f);
+	}
+
+	void Arcball::RotateUp(const float& delta_time) {
+		Position -= glm::normalize(glm::cross(target, Right)) * (0.1f * delta_time);
+	}
+
+	void Arcball::RotateDown(const float& delta_time) {
+		Position += glm::normalize(glm::cross(target, Right)) * (0.1f * delta_time);
+	}
+
+	void Arcball::RotateRight(const float& delta_time) {
+		Position -= glm::normalize(glm::cross(target, Up)) * (0.3f * delta_time);
+	}
+
+	void Arcball::RotateLeft(const float& delta_time) {
+		Position += glm::normalize(glm::cross(target, Up)) * (0.3f * delta_time);
+	}
+
+	void Arcball::TranslateDown(const float& delta_time) {
+		Position.y -= 0.1f * delta_time;
+		target.y -= 0.1f * delta_time;
+	}
+
+	void Arcball::TranslateUp(const float& delta_time) {
+		Position.y += 0.1f * delta_time;
+		target.y += 0.1f * delta_time;
 	}
 
 	glm::vec3 Arcball::toScreenCoordinates(const float & x, const float & y) const {
