@@ -95,3 +95,4 @@ ext/glslang/
 ext/SPIRV/
 glslang/
 ext/lib/
+.vscode/

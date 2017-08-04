@@ -2,17 +2,11 @@
 #ifndef VULPES_VK_IMGUI_WRAPPER_H
 #define VULPES_VK_IMGUI_WRAPPER_H
 #include "vpr_stdafx.h"
-#include <imgui.h>
-#include "imguiShaders.h"
+#include "../../imgui/imgui.h"
 #include "../command/TransferPool.h"
 #include "../resource/Texture.h"
-#include "../core/LogicalDevice.h"
 #include "../resource/Buffer.h"
 #include "../render/GraphicsPipeline.h"
-#include "../render/Swapchain.h"
-#include "../core/PhysicalDevice.h"
-#include "../core/Instance.h"
-#include "../render/Multisampling.h"
 #include "../resource/PipelineCache.h"
 #include "../resource/ShaderModule.h"
 
