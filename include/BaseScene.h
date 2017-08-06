@@ -42,10 +42,11 @@ namespace vulpes {
 	protected:
 
 		virtual void limitFrame();
-		virtual void submitFrame();
+		virtual uint32_t submitFrame();
 		// Call ImGui drawing functions (like ImGui::ShowMainMenuBar(), etc) here.
-		virtual void imguiDrawcalls() const = 0;
+		virtual void imguiDrawcalls() = 0;
 		virtual void renderGUI(VkCommandBuffer& gui_buffer, const VkCommandBufferBeginInfo& begin_info, const size_t& frame_idx) const;
+		virtual void endFrame(const size_t& curr_idx) = 0;
 
 		std::unique_ptr<Multisampling> msaa;
 		std::unique_ptr<imguiWrapper> gui;
@@ -66,7 +67,7 @@ namespace vulpes {
 
 		std::chrono::system_clock::time_point limiter_a, limiter_b;
 		double desiredFrameTimeMs = 16.0;
-		VkFence presentFence;
+		std::vector<VkFence> presentFences;
 
 		float frameTime;
 		void createRenderTargetAttachment();

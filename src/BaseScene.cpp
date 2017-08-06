@@ -37,9 +37,12 @@ namespace vulpes {
 		result = vkCreateSemaphore(device->vkHandle(), &semaphore_info, nullptr, &semaphores[1]);
 		VkAssert(result);
 
+		presentFences.resize(swapchain->ImageCount);
 		VkFenceCreateInfo fence_info = vk_fence_create_info_base;
-		result = vkCreateFence(device->vkHandle(), &fence_info, nullptr, &presentFence);
-		VkAssert(result);
+		for (auto& presentFence : presentFences) {
+			result = vkCreateFence(device->vkHandle(), &fence_info, nullptr, &presentFence);
+			VkAssert(result);
+		}
 
 		// init frame limiters.
 		limiter_a = std::chrono::system_clock::now();
@@ -68,11 +71,9 @@ namespace vulpes {
 			// use else-if to only allow one drag at a time.
 			if (ImGui::IsMouseDragging(0)) {
 				Instance::MouseDrag(0, io.MousePos.x, io.MousePos.y);
-				ImGui::ResetMouseDragDelta(0);
 			}
 			else if (ImGui::IsMouseDragging(1)) {
 				Instance::MouseDrag(1, io.MousePos.x, io.MousePos.y);
-				ImGui::ResetMouseDragDelta(1);
 			}
 
 			if (ImGui::IsMouseDown(0) && !ImGui::IsMouseDragging(0)) {
@@ -281,6 +282,8 @@ namespace vulpes {
 		renderPass->Destroy();
 		renderPass.reset();
 		swapchain->Recreate();
+		instance->projection = glm::perspective(80.0f, static_cast<float>(swapchain->Extent.width) / static_cast<float>(swapchain->Extent.height), 0.1f, 30000.0f);
+		instance->projection[1][1] *= -1.0f;
 
 		/*
 			Done destroying resources, recreate resources and objects now
@@ -306,19 +309,17 @@ namespace vulpes {
 
 			glfwPollEvents();
 
-			gui->NewFrame(instance.get(), true);
-			imguiDrawcalls();
-
 			UpdateMouseActions();
 			instance->UpdateMovement(static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs));
 			
 			RecordCommands();
-			submitFrame();
+			auto idx = submitFrame();
+			endFrame(idx);
 
-			vkResetCommandPool(device->vkHandle(), secondaryPool->vkHandle(), 0);
-			vkResetCommandPool(device->vkHandle(), graphicsPool->vkHandle(), 0);
+			vkResetCommandPool(device->vkHandle(), secondaryPool->vkHandle(), VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
+			vkResetCommandPool(device->vkHandle(), graphicsPool->vkHandle(), VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
 
-			Buffer::DestroyStagingResources(device.get());
+			//Buffer::DestroyStagingResources(device.get());
 		}
 	}
 
@@ -341,7 +342,7 @@ namespace vulpes {
 
 	}
 
-	void BaseScene::submitFrame() {
+	uint32_t BaseScene::submitFrame() {
 
 		uint32_t image_idx;
 		vkAcquireNextImageKHR(device->vkHandle(), swapchain->vkHandle(), std::numeric_limits<uint64_t>::max(), semaphores[0], VK_NULL_HANDLE, &image_idx);
@@ -356,7 +357,7 @@ namespace vulpes {
 		submit_info.signalSemaphoreCount = 1;
 		submit_info.pSignalSemaphores = &semaphores[1];
 
-		VkResult result = vkQueueSubmit(device->GraphicsQueue(), 1, &submit_info, presentFence);
+		VkResult result = vkQueueSubmit(device->GraphicsQueue(), 1, &submit_info, presentFences[image_idx]);
 		switch(result) { // switch faster than if/else, important in this code called every frame.
 			case VK_ERROR_DEVICE_LOST:
 				LOG(WARNING) << "vkQueueSubmit returned VK_ERROR_DEVICE_LOST";
@@ -373,9 +374,7 @@ namespace vulpes {
 		present_info.pResults = nullptr;
 
 		vkQueuePresentKHR(device->GraphicsQueue(), &present_info);
-		vkWaitForFences(device->vkHandle(), 1, &presentFence, VK_TRUE, vk_default_fence_timeout);
-		//vkQueueWaitIdle(device->GraphicsQueue());
-		vkResetFences(device->vkHandle(), 1, &presentFence);
+		return image_idx;
 	}
 
 	void BaseScene::renderGUI(VkCommandBuffer& gui_buffer, const VkCommandBufferBeginInfo& begin_info, const size_t& frame_idx) const {

@@ -8,6 +8,7 @@ namespace vulpes {
 
 	imguiWrapper::~imguiWrapper() {
 		
+		texture.reset();
 		vkFreeDescriptorSets(device->vkHandle(), descriptorPool, 1, &descriptorSet);
 		vkDestroyDescriptorSetLayout(device->vkHandle(), descriptorSetLayout, nullptr);
 		vkDestroyDescriptorPool(device->vkHandle(), descriptorPool, nullptr);
