@@ -312,7 +312,7 @@ namespace vulpes {
 		VK_FALSE, // Don't want to do this, discards certain fragments. Useful for shadow maps, mainly.
 		VK_FALSE, // If set to true this stage is disabled.
 		VK_POLYGON_MODE_FILL, 
-		VK_CULL_MODE_BACK_BIT,
+		VK_CULL_MODE_NONE,
 		VK_FRONT_FACE_CLOCKWISE,
 		VK_FALSE,
 		0.0f,
