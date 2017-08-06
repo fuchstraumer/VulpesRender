@@ -1,3 +1,4 @@
+#include "..\..\include\command\TransferPool.h"
 #include "vpr_stdafx.h"
 #include "command/TransferPool.h"
 #include "core/LogicalDevice.h"
@@ -28,6 +29,13 @@ namespace vulpes {
 			parent->vkSetObjectDebugMarkerName((uint64_t)handle, VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT, "TransferPool");
 		}
 
+	}
+
+	TransferPool::~TransferPool() {
+		if (fence != VK_NULL_HANDLE) {
+			vkDestroyFence(parent->vkHandle(), fence, nullptr);
+			fence = VK_NULL_HANDLE;
+		}
 	}
 
 	VkCommandBuffer& TransferPool::Begin() {

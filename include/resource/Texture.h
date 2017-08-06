@@ -21,7 +21,7 @@ namespace vulpes {
 
 		Texture(const Device* _parent, const VkImageUsageFlags& flags = VK_IMAGE_USAGE_SAMPLED_BIT);
 
-		~Texture() = default;
+		~Texture();
 
 		// Having to use texture_format an unfortunate artifact of the range of formats supported by GLI and Vulkan, and the mismatch
 		// in specification, quantity, and naming between the two. When in doubt, set a breakpoint after loading the texture in question
@@ -67,6 +67,14 @@ namespace vulpes {
 	inline Texture<texture_type>::Texture(const Device * _parent, const VkImageUsageFlags & flags) : Image(_parent) {
 		createInfo = vk_image_create_info_base;
 		createInfo.usage = flags;
+	}
+
+	template<typename texture_type>
+	inline Texture<texture_type>::~Texture() {
+		if (sampler != VK_NULL_HANDLE) {
+			vkDestroySampler(parent->vkHandle(), sampler, nullptr);
+			sampler = VK_NULL_HANDLE;
+		}
 	}
 
 	template<typename texture_type>
@@ -131,7 +139,7 @@ namespace vulpes {
 	template<typename texture_type>
 	inline void Texture<texture_type>::FreeStagingBuffer() {
 		// can now destroy staging object
-		parent->vkAllocator->DestroyBuffer(stagingBuffer, stagingMemory);
+		//parent->vkAllocator->DestroyBuffer(stagingBuffer, stagingMemory);
 	}
 
 	template<typename texture_type>

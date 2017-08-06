@@ -48,3 +48,8 @@ vulpes::Multisampling::Multisampling(const Device * dvc, const Swapchain * swapc
 	DepthBufferMS->CreateView(msaa_view_info);
 
 }
+
+vulpes::Multisampling::~Multisampling() {
+	ColorBufferMS.reset();
+	DepthBufferMS.reset();
+}

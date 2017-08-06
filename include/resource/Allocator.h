@@ -366,26 +366,15 @@ namespace vulpes {
 
 	protected:
 
-		VkDeviceSize availSize; // total available size among all sub-allocations.
+		VkDeviceSize availSize;
 		uint32_t freeCount;
 		VkDeviceMemory memory;
 
-		// given a free suballocation, this method merges it with the one immediately after it in the list
-		// the second item must also be free: this is a method used to pool smaller adjacent regions together.
-		// (which reduces fragmentation and increases the max available size)
 		void mergeFreeWithNext(const suballocationList::iterator& item_to_merge);
-
-		// releases given suballocation, and then merges it with any adjacent blocks if possible.
 		void freeSuballocation(const suballocationList::iterator& item_to_free);
-
-		// given a free suballocation, place it in the correct location of our suballocation list (based on avail size)
 		void insertFreeSuballocation(const suballocationList::iterator& item_to_insert);
-
-		// given a free suballocation, remove it from the list (if possible)
 		void removeFreeSuballocation(const suballocationList::iterator& item_to_remove);
 
-		// Suballocations sorted by available size, only in this vector
-		// if available size is greater than a threshold we set shortly.
 		std::vector<suballocationList::iterator> availSuballocations;
 	};
 
@@ -407,8 +396,6 @@ namespace vulpes {
 
 		void RemoveBlock(MemoryBlock * block_to_erase);
 
-		// performs single sort step, to order "allocations" so that it is sorted
-		// by total available free memory.
 		void SortAllocations();
 
 		

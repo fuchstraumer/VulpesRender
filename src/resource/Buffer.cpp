@@ -112,7 +112,7 @@ namespace vulpes {
 			vkCmdCopyBuffer(copy_cmd, staging_buffer, handle, 1, &copy);
 		cmd_pool->EndSingleCmdBuffer(copy_cmd, transfer_queue);
 
-		parent->vkAllocator->DestroyBuffer(staging_buffer, staging_alloc);
+		stagingBuffers.push_back(std::make_pair(staging_buffer, staging_alloc));
 	}
 
 	void Buffer::Update(VkCommandBuffer & cmd, const VkDeviceSize & data_sz, const VkDeviceSize & offset, const void * data) {
@@ -166,9 +166,15 @@ namespace vulpes {
 	}
 
 	void Buffer::DestroyStagingResources(const Device* device){
+
+		if (stagingBuffers.empty()) {
+			return;
+		}
+
 		for (auto& buff : stagingBuffers) {
 			device->vkAllocator->DestroyBuffer(buff.first, buff.second);
 		}
+
 		stagingBuffers.clear(); 
 		stagingBuffers.shrink_to_fit();
 	}

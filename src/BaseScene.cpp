@@ -52,12 +52,22 @@ namespace vulpes {
 
 	vulpes::BaseScene::~BaseScene() {
 
+		depthStencil.reset();
+		graphicsPool.reset();
+		transferPool.reset();
+		secondaryPool.reset();
+		swapchain.reset();
+		msaa.reset();
+
 		for (const auto& fbuf : framebuffers) {
 			vkDestroyFramebuffer(device->vkHandle(), fbuf, nullptr);
 		}
 
-		msaa->ColorBufferMS.reset();
-		msaa->DepthBufferMS.reset();
+		for (const auto& fence : presentFences) {
+			vkDestroyFence(device->vkHandle(), fence, nullptr);
+		}
+
+		renderPass.reset();
 
 		vkDestroySemaphore(device->vkHandle(), semaphores[1], nullptr);
 		vkDestroySemaphore(device->vkHandle(), semaphores[0], nullptr);
@@ -276,13 +286,11 @@ namespace vulpes {
 		graphicsPool.reset();
 
 		WindowResized();
-		msaa->ColorBufferMS.reset();
-		msaa->DepthBufferMS.reset();
 		msaa.reset();
-		renderPass->Destroy();
 		renderPass.reset();
 		swapchain->Recreate();
-		instance->projection = glm::perspective(80.0f, static_cast<float>(swapchain->Extent.width) / static_cast<float>(swapchain->Extent.height), 0.1f, 30000.0f);
+
+		instance->projection = glm::perspective(glm::radians(75.0f), static_cast<float>(swapchain->Extent.width) / static_cast<float>(swapchain->Extent.height), 0.1f, 30000.0f);
 		instance->projection[1][1] *= -1.0f;
 
 		/*
@@ -319,7 +327,7 @@ namespace vulpes {
 			vkResetCommandPool(device->vkHandle(), secondaryPool->vkHandle(), VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
 			vkResetCommandPool(device->vkHandle(), graphicsPool->vkHandle(), VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
 
-			//Buffer::DestroyStagingResources(device.get());
+			Buffer::DestroyStagingResources(device.get());
 		}
 	}
 

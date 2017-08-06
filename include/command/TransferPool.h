@@ -30,7 +30,7 @@ namespace vulpes {
 
 		TransferPool(const Device* _parent);
 
-		~TransferPool() = default;
+		~TransferPool();
 
 		VkCommandBuffer& Begin();
 

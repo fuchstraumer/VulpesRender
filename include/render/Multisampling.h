@@ -13,7 +13,7 @@ namespace vulpes {
 	public:
 
 		Multisampling(const Device* dvc, const Swapchain* swapchain, const VkSampleCountFlagBits& sample_count, const uint32_t& width, const uint32_t& height);
-
+		~Multisampling();
 
 		// Objects we sample from
 		std::unique_ptr<Image> ColorBufferMS, DepthBufferMS;
