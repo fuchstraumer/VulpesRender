@@ -38,11 +38,15 @@ namespace vulpes {
 		VkAssert(result);
 
 		presentFences.resize(swapchain->ImageCount);
+	
 		VkFenceCreateInfo fence_info = vk_fence_create_info_base;
-		for (auto& presentFence : presentFences) {
-			result = vkCreateFence(device->vkHandle(), &fence_info, nullptr, &presentFence);
+		for (size_t i = 0; i < presentFences.size(); ++i) {
+			result = vkCreateFence(device->vkHandle(), &fence_info, nullptr, &presentFences[i]);
 			VkAssert(result);
 		}
+
+		result = vkCreateFence(device->vkHandle(), &fence_info, nullptr, &acquireFence);
+		VkAssert(result);
 
 		// init frame limiters.
 		limiter_a = std::chrono::system_clock::now();
@@ -67,6 +71,8 @@ namespace vulpes {
 			vkDestroyFence(device->vkHandle(), fence, nullptr);
 		}
 
+		vkDestroyFence(device->vkHandle(), acquireFence, nullptr);
+
 		renderPass.reset();
 
 		vkDestroySemaphore(device->vkHandle(), semaphores[1], nullptr);
@@ -77,7 +83,7 @@ namespace vulpes {
 	void BaseScene::UpdateMouseActions() {
 
 		ImGuiIO& io = ImGui::GetIO();
-	
+		if (!io.WantCaptureMouse) {
 			// use else-if to only allow one drag at a time.
 			if (ImGui::IsMouseDragging(0)) {
 				Instance::MouseDrag(0, io.MousePos.x, io.MousePos.y);
@@ -97,7 +103,7 @@ namespace vulpes {
 			if (ImGui::IsMouseReleased(0)) {
 				Instance::MouseUp(0, io.MousePos.x, io.MousePos.y);
 			}
-		
+		}
 	}
 
 	void vulpes::BaseScene::CreateCommandPools(const size_t& num_secondary_buffers) {
@@ -350,10 +356,15 @@ namespace vulpes {
 
 	}
 
+	uint32_t BaseScene::submitExtra(const uint32_t & frame_idx) {
+		return frame_idx;
+	}
+
 	uint32_t BaseScene::submitFrame() {
 
 		uint32_t image_idx;
 		vkAcquireNextImageKHR(device->vkHandle(), swapchain->vkHandle(), std::numeric_limits<uint64_t>::max(), semaphores[0], VK_NULL_HANDLE, &image_idx);
+		//vkWaitForFences(device->vkHandle(), 1, &acquireFence, VK_TRUE, vk_default_fence_timeout);
 
 		VkSubmitInfo submit_info = vk_submit_info_base;
 		VkPipelineStageFlags wait_stages[] = { VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT };
@@ -382,6 +393,8 @@ namespace vulpes {
 		present_info.pResults = nullptr;
 
 		vkQueuePresentKHR(device->GraphicsQueue(), &present_info);
+		vkWaitForFences(device->vkHandle(), 1, &presentFences[image_idx], VK_TRUE, vk_default_fence_timeout);
+		submitExtra(image_idx);
 		return image_idx;
 	}
 

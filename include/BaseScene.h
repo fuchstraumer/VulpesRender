@@ -42,6 +42,8 @@ namespace vulpes {
 	protected:
 
 		virtual void limitFrame();
+		// override in derived classes to perform extra work per frame. Does nothing by default.
+		virtual uint32_t submitExtra(const uint32_t& frame_idx);
 		virtual uint32_t submitFrame();
 		// Call ImGui drawing functions (like ImGui::ShowMainMenuBar(), etc) here.
 		virtual void imguiDrawcalls() = 0;
@@ -68,6 +70,7 @@ namespace vulpes {
 		std::chrono::system_clock::time_point limiter_a, limiter_b;
 		double desiredFrameTimeMs = 16.0;
 		std::vector<VkFence> presentFences;
+		VkFence acquireFence;
 
 		float frameTime;
 		void createRenderTargetAttachment();

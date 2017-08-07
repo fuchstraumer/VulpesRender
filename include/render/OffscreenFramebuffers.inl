@@ -1,11 +1,16 @@
+#include "OffscreenFramebuffers.h"
+#include "OffscreenFramebuffers.h"
 
 namespace vulpes {
 
     template<typename offscreen_framebuffer_type>
-	inline OffscreenFramebuffers<offscreen_framebuffer_type>::OffscreenFramebuffers(const Device * _parent, const Swapchain* _swapchain) : framebufferCreateInfo(vk_framebuffer_create_info_base), parent(_parent), swapchain(_swapchain) {
-        extents.width = swapchain->Width;
-        extents.height = swapchain->Height;
+	inline OffscreenFramebuffers<offscreen_framebuffer_type>::OffscreenFramebuffers(const Device * _device, const Swapchain* _swapchain) : framebufferCreateInfo(vk_framebuffer_create_info_base), device(_device), swapchain(_swapchain) {
+        extents.width = swapchain->Extent.width;
+        extents.height = swapchain->Extent.height;
         extents.depth = 1;
+		framebufferCreateInfo.width = swapchain->Extent.width;
+		framebufferCreateInfo.height = swapchain->Extent.height;
+		framebufferCreateInfo.layers = 1;
 		framebuffers.resize(swapchain->ImageCount);
 	}
 
@@ -26,9 +31,24 @@ namespace vulpes {
 	}
 
 	template<typename offscreen_framebuffer_type>
+	inline const VkRenderPass & OffscreenFramebuffers<offscreen_framebuffer_type>::GetRenderpass() const noexcept {
+		return renderpass;
+	}
+
+	template<typename offscreen_framebuffer_type>
+	inline const VkFramebuffer & OffscreenFramebuffers<offscreen_framebuffer_type>::GetFramebuffer(const size_t & idx) const noexcept {
+		return framebuffers[idx];
+	}
+
+	template<typename offscreen_framebuffer_type>
+	inline const Image& OffscreenFramebuffers<offscreen_framebuffer_type>::GetAttachment(const size_t& idx) const noexcept {
+		return attachments[idx];
+	}
+
+	template<typename offscreen_framebuffer_type>
 	inline size_t OffscreenFramebuffers<offscreen_framebuffer_type>::createAttachment(const VkFormat & attachment_format, const VkImageUsageFlagBits & attachment_usage) {
 		
-		Image attachment(parent);
+		Image attachment(device);
 
 		const VkImageCreateInfo attachment_create_info{
 			VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
@@ -66,7 +86,7 @@ namespace vulpes {
 			aspect_flags = VK_IMAGE_ASPECT_COLOR_BIT;
 		}
 		else if (image_usage & VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT) {
-			aspect_flags = VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
+			aspect_flags = VK_IMAGE_ASPECT_DEPTH_BIT;
 		}
 
 		VkImageViewCreateInfo attachment_view_create_info = vk_image_view_create_info_base;
@@ -87,7 +107,7 @@ namespace vulpes {
 		idx = createAttachment(VK_FORMAT_R32G32B32A32_SFLOAT, VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT);
 		createAttachmentView(idx);
 
-		idx = createAttachment(parent->FindDepthFormat(), VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
+		idx = createAttachment(device->FindDepthFormat(), VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
 		createAttachmentView(idx);
 
 	}
@@ -107,7 +127,7 @@ namespace vulpes {
 	inline void OffscreenFramebuffers<g_buffer_t>::createAttachments() {
 
 		// add a dummy attachment for colorbuffer (output from fragment shader). view will be taken from swapchain.
-		attachments.push_back(vulpes::Image(parent));
+		attachments.push_back(vulpes::Image(device));
 
 		// position 
 		size_t idx = createAttachment(VK_FORMAT_R32G32B32A32_SFLOAT, VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT);
@@ -122,7 +142,7 @@ namespace vulpes {
 		createAttachmentView(idx);
 
 		// depth
-		idx = createAttachment(parent->FindDepthFormat(), VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
+		idx = createAttachment(device->FindDepthFormat(), VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
 		createAttachmentView(idx);
 
 	}
@@ -130,11 +150,13 @@ namespace vulpes {
 	template<>
 	inline void OffscreenFramebuffers<picking_framebuffer_t>::createAttachments() {
 
-		// same as GBuffer, add a dummy colorbuffer attachment as our first attachment.
-		attachments.push_back(vulpes::Image(parent));
-		attachments.push_back(vulpes::Image(parent));
+		size_t idx = createAttachment(VK_FORMAT_R8G8B8A8_UNORM, VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT);
+		createAttachmentView(idx);
 
-		size_t idx = createAttachment(VK_FORMAT_R32G32B32_UINT, VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT);
+		idx = createAttachment(VK_FORMAT_R32G32_UINT, static_cast<VkImageUsageFlagBits>(VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT));
+		createAttachmentView(idx);
+
+		idx = createAttachment(device->FindDepthFormat(), VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
 		createAttachmentView(idx);
 
 	}
@@ -190,9 +212,10 @@ namespace vulpes {
 	template<>
 	inline void OffscreenFramebuffers<picking_framebuffer_t>::createAttachmentDescriptions() {
 
-		createAttachmentDescription(0, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR, VK_ATTACHMENT_LOAD_OP_CLEAR, VK_ATTACHMENT_STORE_OP_DONT_CARE);
-		createAttachmentDescription(1, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR, VK_ATTACHMENT_STORE_OP_STORE);
+		createAttachmentDescription(0, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR, VK_ATTACHMENT_STORE_OP_DONT_CARE);
+		createAttachmentDescription(1, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, VK_ATTACHMENT_LOAD_OP_DONT_CARE, VK_ATTACHMENT_STORE_OP_DONT_CARE);
 		createAttachmentDescription(2, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR, VK_ATTACHMENT_STORE_OP_DONT_CARE);
+		// just need to copy to buffer before end of renderpass (so in same series of rendering commands, using pipeline barriers)
 
 	}
 
@@ -332,7 +355,7 @@ namespace vulpes {
 			0,
 			nullptr,
 			2,
-			&attachmentDescriptions[0],
+			&attachmentReferences[0],
 			nullptr,
 			&attachmentReferences[2],
 			0,
@@ -452,7 +475,7 @@ namespace vulpes {
 	template<typename offscreen_framebuffer_type>
 	inline void OffscreenFramebuffers<offscreen_framebuffer_type>::createRenderpass() {
 
-		VkRenderPassCreateInfo renderpass_info = vk_renderpass_create_info_base;
+		VkRenderPassCreateInfo renderpass_info = vk_render_pass_create_info_base;
 		renderpass_info.attachmentCount = static_cast<uint32_t>(attachmentDescriptions.size());
 		renderpass_info.pAttachments = attachmentDescriptions.data();
 		renderpass_info.subpassCount = static_cast<uint32_t>(subpassDescriptions.size());
@@ -460,7 +483,7 @@ namespace vulpes {
 		renderpass_info.dependencyCount = static_cast<uint32_t>(subpassDependencies.size());
 		renderpass_info.pDependencies = subpassDependencies.data();
 
-		VkResult result = vkCreateRenderPass(parent->vkHandle(), &renderpass_info, nullptr, &renderpass);
+		VkResult result = vkCreateRenderPass(device->vkHandle(), &renderpass_info, nullptr, &renderpass);
 		VkAssert(result);
 
 	}
@@ -474,11 +497,12 @@ namespace vulpes {
 			attachment_views.push_back(attachment.View());
 		}
 
-        framebufferCreateInfo.attachment_count = static_cast<uint32_t>(attachment_views.size());
+        framebufferCreateInfo.attachmentCount = static_cast<uint32_t>(attachment_views.size());
         framebufferCreateInfo.pAttachments = attachment_views.data();
+		framebufferCreateInfo.renderPass = renderpass;
 
 		for(size_t i = 0; i < framebuffers.size(); ++i) {
-            VkResult result = vkCreateFramebuffer(parent->vkHandle(), &framebufferCreateInfo, nullptr, &framebuffers[i]);
+            VkResult result = vkCreateFramebuffer(device->vkHandle(), &framebufferCreateInfo, nullptr, &framebuffers[i]);
             VkAssert(result);
         }
 
@@ -493,14 +517,14 @@ namespace vulpes {
 		attachment_views[3] = attachments[3].View();
 		attachment_views[4] = attachments[4].View();
 
-        framebufferCreateInfo.extents = extents;
+        //framebufferCreateInfo.extent = extents;
         framebufferCreateInfo.renderPass = renderpass;
 
 		for (size_t i = 0; i < framebuffers.size(); ++i) {
 			attachment_views[0] = swapchain->ImageViews[i];
 			framebufferCreateInfo.attachmentCount = static_cast<uint32_t>(attachment_views.size());
 			framebufferCreateInfo.pAttachments = attachment_views.data();
-			VkResult result = vkCreateFramebuffer(parent->vkHandle(), &framebufferCreateInfo, nullptr, &framebuffers[i]);
+			VkResult result = vkCreateFramebuffer(device->vkHandle(), &framebufferCreateInfo, nullptr, &framebuffers[i]);
 			VkAssert(result);
 		}
 
@@ -513,7 +537,7 @@ namespace vulpes {
 		sampler_info.magFilter = VK_FILTER_NEAREST;
 		sampler_info.minFilter = VK_FILTER_NEAREST;
 
-		VkResult result = vkCreateSampler(parent->vkHandle(), &sampler_info, nullptr, &sampler);
+		VkResult result = vkCreateSampler(device->vkHandle(), &sampler_info, nullptr, &sampler);
 		VkAssert(result);
 
 	}

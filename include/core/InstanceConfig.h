@@ -84,6 +84,12 @@ namespace vulpes {
             */
             float MouseSensitivity = 0.1f;
             float MovementSpeed = 25.0f;
+
+            /*
+                Enable the usage of 3D mouse picking by using data read back from the renderpass. Writes data about primitives
+                under the mouse if enabled.
+            */
+            bool Enable3DMousePicking = true;
 	    };
 
     }

@@ -16,7 +16,6 @@ namespace vulpes {
 
 	template<typename offscreen_framebuffer_type>
 	class OffscreenFramebuffers {
-		friend struct DeferredPass;
 	public:
 
 
@@ -25,6 +24,10 @@ namespace vulpes {
 		void Create();
 		
 		bool Created = false;
+
+		const VkRenderPass& GetRenderpass() const noexcept;
+		const VkFramebuffer& GetFramebuffer(const size_t& idx) const noexcept;
+		const Image& GetAttachment(const size_t& idx) const noexcept;
 
 	protected:
 		
@@ -54,7 +57,7 @@ namespace vulpes {
 		std::vector<VkSubpassDescription> subpassDescriptions;
 		std::vector<VkFramebuffer> framebuffers;
 		VkFramebufferCreateInfo framebufferCreateInfo;
-		const Device* parent;
+		const Device* device;
         const Swapchain* swapchain;
 	};
 

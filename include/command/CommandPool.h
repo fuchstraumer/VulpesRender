@@ -17,25 +17,21 @@ namespace vulpes {
 		CommandPool& operator=(CommandPool&& other) noexcept;
 
 		virtual ~CommandPool();
-		// Resets the CommandPool to the state it's in when constructed: invalid for use.
-		void Destroy();
 
-		// Creates command pool handle: does not allocate buffers.
+		void Destroy();
 		void Create();
 
 		void AllocateCmdBuffers(const uint32_t& num_buffers, const VkCommandBufferAllocateInfo& alloc_info = vk_command_buffer_allocate_info_base);
-
 		void ResetCmdPool();
 		void ResetCmdBuffer(const size_t& idx);
-
-		// Freeing command buffers makes them invalid, unlike resetting.
 		void FreeCommandBuffers();
 
 		const VkCommandPool& vkHandle() const noexcept;
 
 		VkCommandBuffer& operator[](const size_t& idx);
 		VkCommandBuffer& GetCmdBuffer(const size_t& idx);
-		const std::vector<VkCommandBuffer>& GetCmdBuffers() const;
+
+		std::pair<size_t, VkCommandBuffer> GetAvailCmdBuffer();
 
 		VkCommandBuffer StartSingleCmdBuffer();
 		void EndSingleCmdBuffer(VkCommandBuffer& cmd_buffer, const VkQueue & queue);
@@ -45,6 +41,7 @@ namespace vulpes {
 	protected:
 
 		std::vector<VkCommandBuffer> cmdBuffers;
+		std::vector<bool> bufferInUse;
 		VkCommandPool handle;
 		VkCommandPoolCreateInfo createInfo;
 		const Device* parent;
