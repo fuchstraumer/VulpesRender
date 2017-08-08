@@ -37,6 +37,10 @@ namespace vulpes {
 		result = vkCreateSemaphore(device->vkHandle(), &semaphore_info, nullptr, &semaphores[1]);
 		VkAssert(result);
 
+		renderCompleteSemaphores.resize(1);
+		result = vkCreateSemaphore(device->vkHandle(), &semaphore_info, nullptr, &renderCompleteSemaphores[0]);
+		VkAssert(result);
+
 		presentFences.resize(swapchain->ImageCount);
 	
 		VkFenceCreateInfo fence_info = vk_fence_create_info_base;
@@ -315,7 +319,6 @@ namespace vulpes {
 	void BaseScene::RenderLoop() {
 
 		instance->frameTime = static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs / 1000.0);
-		size_t frame_counter = 0;
 
 		while(!glfwWindowShouldClose(instance->Window)) {
 
@@ -328,6 +331,7 @@ namespace vulpes {
 			
 			RecordCommands();
 			auto idx = submitFrame();
+			submitExtra(idx);
 			endFrame(idx);
 
 			vkResetCommandPool(device->vkHandle(), secondaryPool->vkHandle(), VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
@@ -363,8 +367,10 @@ namespace vulpes {
 	uint32_t BaseScene::submitFrame() {
 
 		uint32_t image_idx;
-		vkAcquireNextImageKHR(device->vkHandle(), swapchain->vkHandle(), std::numeric_limits<uint64_t>::max(), semaphores[0], VK_NULL_HANDLE, &image_idx);
-		//vkWaitForFences(device->vkHandle(), 1, &acquireFence, VK_TRUE, vk_default_fence_timeout);
+		VkResult result = vkAcquireNextImageKHR(device->vkHandle(), swapchain->vkHandle(), std::numeric_limits<uint64_t>::max(), semaphores[0], acquireFence, &image_idx);
+		VkAssert(result);
+		result = vkWaitForFences(device->vkHandle(), 1, &acquireFence, VK_TRUE, vk_default_fence_timeout);
+		VkAssert(result);
 
 		VkSubmitInfo submit_info = vk_submit_info_base;
 		VkPipelineStageFlags wait_stages[] = { VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT };
@@ -373,28 +379,34 @@ namespace vulpes {
 		submit_info.pWaitDstStageMask = wait_stages;
 		submit_info.commandBufferCount = 1;
 		submit_info.pCommandBuffers = &graphicsPool->GetCmdBuffer(image_idx);
-		submit_info.signalSemaphoreCount = 1;
-		submit_info.pSignalSemaphores = &semaphores[1];
+		submit_info.signalSemaphoreCount = static_cast<uint32_t>(renderCompleteSemaphores.size());
+		submit_info.pSignalSemaphores = renderCompleteSemaphores.data();
 
-		VkResult result = vkQueueSubmit(device->GraphicsQueue(), 1, &submit_info, presentFences[image_idx]);
-		switch(result) { // switch faster than if/else, important in this code called every frame.
+		result = vkQueueSubmit(device->GraphicsQueue(), 1, &submit_info, presentFences[image_idx]);
+		switch(result) {
 			case VK_ERROR_DEVICE_LOST:
 				LOG(WARNING) << "vkQueueSubmit returned VK_ERROR_DEVICE_LOST";
+				break;
 			default:
 				VkAssert(result);
+				break;
 		}
 
 		VkPresentInfoKHR present_info{ VK_STRUCTURE_TYPE_PRESENT_INFO_KHR };
 		present_info.waitSemaphoreCount = 1;
-		present_info.pWaitSemaphores = &semaphores[1];
+		present_info.pWaitSemaphores = &renderCompleteSemaphores[0];
 		present_info.swapchainCount = 1;
 		present_info.pSwapchains = &swapchain->vkHandle();
 		present_info.pImageIndices = &image_idx;
 		present_info.pResults = nullptr;
 
-		vkQueuePresentKHR(device->GraphicsQueue(), &present_info);
-		vkWaitForFences(device->vkHandle(), 1, &presentFences[image_idx], VK_TRUE, vk_default_fence_timeout);
-		submitExtra(image_idx);
+		result = vkQueuePresentKHR(device->GraphicsQueue(), &present_info);
+		VkAssert(result);
+		result = vkWaitForFences(device->vkHandle(), 1, &presentFences[image_idx], VK_TRUE, vk_default_fence_timeout);
+		VkAssert(result);
+		result = vkResetFences(device->vkHandle(), 1, &acquireFence);
+		VkAssert(result);
+
 		return image_idx;
 	}
 

@@ -54,6 +54,7 @@ namespace vulpes {
 		std::unique_ptr<imguiWrapper> gui;
 		uint32_t width, height;
 		VkSemaphore semaphores[2];
+		std::vector<VkSemaphore> renderCompleteSemaphores;
 		std::unique_ptr<InstanceGLFW> instance;
 		std::unique_ptr<Device> device;
 		std::unique_ptr<Swapchain> swapchain;
