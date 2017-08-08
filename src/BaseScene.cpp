@@ -191,6 +191,8 @@ namespace vulpes {
 
 	void BaseScene::createAttachmentReferences() {
 
+		attachmentReferences.resize(3);
+
 		attachmentReferences[0] = VkAttachmentReference{ 0, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL };
 		attachmentReferences[1] = VkAttachmentReference{ 2, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL };
 		attachmentReferences[2] = VkAttachmentReference{ 1, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL };
@@ -209,6 +211,8 @@ namespace vulpes {
 	}
 
 	void BaseScene::createSubpassDependencies() {
+
+		subpassDependencies.resize(2);
 		
 		subpassDependencies[0].srcSubpass = VK_SUBPASS_EXTERNAL;
 		subpassDependencies[0].dstSubpass = 0;
@@ -232,6 +236,7 @@ namespace vulpes {
 
 		msaa = std::make_unique<Multisampling>(device.get(), swapchain.get(), sample_count, swapchain->Extent.width, swapchain->Extent.height);
 
+		attachmentDescriptions.resize(4);
 		createRenderTargetAttachment();
 		createResolveAttachment();
 		createMultisampleDepthAttachment();

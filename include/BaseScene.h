@@ -64,9 +64,9 @@ namespace vulpes {
 		std::unique_ptr<TransferPool> transferPool;
 		std::unique_ptr<Renderpass> renderPass;
 
-		std::array<VkAttachmentDescription, 4> attachmentDescriptions;
-		std::array<VkAttachmentReference, 3> attachmentReferences;
-		std::array<VkSubpassDependency, 2> subpassDependencies;
+		std::vector<VkAttachmentDescription> attachmentDescriptions;
+		std::vector<VkAttachmentReference> attachmentReferences;
+		std::vector<VkSubpassDependency> subpassDependencies;
 
 		std::chrono::system_clock::time_point limiter_a, limiter_b;
 		double desiredFrameTimeMs = 16.0;
@@ -74,13 +74,13 @@ namespace vulpes {
 		VkFence acquireFence;
 
 		float frameTime;
-		void createRenderTargetAttachment();
-		void createResolveAttachment();
-		void createMultisampleDepthAttachment();
-		void createResolveDepthAttachment();
-		void createAttachmentReferences();
-		VkSubpassDescription createSubpassDescription();
-		void createSubpassDependencies();
+		virtual void createRenderTargetAttachment();
+		virtual void createResolveAttachment();
+		virtual void createMultisampleDepthAttachment();
+		virtual void createResolveDepthAttachment();
+		virtual void createAttachmentReferences();
+		virtual VkSubpassDescription createSubpassDescription();
+		virtual void createSubpassDependencies();
 	};
 
 }
