@@ -28,7 +28,7 @@ namespace vulpes {
 		swapchain->Init(instance.get(), instance->physicalDevice, device.get());
 
 		CreateCommandPools(num_secondary_buffers);
-		SetupRenderpass();
+		SetupRenderpass(VK_SAMPLE_COUNT_4_BIT);
 		SetupDepthStencil();
 
 		VkSemaphoreCreateInfo semaphore_info{ VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO, nullptr, 0 };
@@ -313,7 +313,7 @@ namespace vulpes {
 		*/
 		
 		CreateCommandPools(num_secondary_buffers);
-		SetupRenderpass();
+		SetupRenderpass(VK_SAMPLE_COUNT_4_BIT);
 		SetupDepthStencil();
 		SetupFramebuffers();
 		RecreateObjects();
