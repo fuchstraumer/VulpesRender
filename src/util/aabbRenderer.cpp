@@ -9,7 +9,7 @@ namespace vulpes {
 
         aabbRenderer::aabbRenderer(const Device* dvc) : device(dvc), updateBarrier(vk_buffer_memory_barrier_info_base) {}
 
-        void aabbRenderer::Init(const VkRenderPass& renderpass, const glm::mat4& projection) {
+        void aabbRenderer::Init(const VkRenderPass& renderpass, const glm::mat4& projection, const GraphicsPipelineInfo& pipeline_info) {
 
             pushData.projection = projection;
 
@@ -22,7 +22,7 @@ namespace vulpes {
             updateBarrier.buffer = vbo->vkHandle();
             updateBarrier.size = vbo->Size();
 
-            setupGraphicsPipelineInfo();
+            setupGraphicsPipelineInfo(pipeline_info);
             createGraphicsPipeline(renderpass);
 
         }
@@ -52,7 +52,9 @@ namespace vulpes {
 
         }
 
-        void aabbRenderer::setupGraphicsPipelineInfo() {
+        void aabbRenderer::setupGraphicsPipelineInfo(const GraphicsPipelineInfo& pipeline_info = GraphicsPipelineInfo()) {
+
+			pipelineStateInfo = pipeline_info;
 
             static const VkVertexInputBindingDescription bind_descr{ 0, sizeof(glm::vec3), VK_VERTEX_INPUT_RATE_VERTEX };
 

@@ -27,7 +27,7 @@ namespace vulpes {
 		imguiWrapper() = default;
 		~imguiWrapper();
 
-		void Init(const Device* dvc, std::shared_ptr<PipelineCache> _cache, const VkRenderPass& renderpass);
+		void Init(const Device* dvc, std::shared_ptr<PipelineCache> _cache, const VkRenderPass& renderpass, const GraphicsPipelineInfo& pipeline_info = GraphicsPipelineInfo());
 
 		void UploadTextureData(TransferPool* transfer_pool);
 
@@ -54,7 +54,7 @@ namespace vulpes {
 		void createPipelineLayout();
 		void allocateDescriptors();
 		void updateDescriptors();
-		void setupGraphicsPipelineInfo();
+		void setupGraphicsPipelineInfo(const GraphicsPipelineInfo& pipeline_info);
 		void setupGraphicsPipelineCreateInfo(const VkRenderPass& renderpass);
 
 		void validateBuffers();

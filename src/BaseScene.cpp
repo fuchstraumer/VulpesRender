@@ -28,7 +28,7 @@ namespace vulpes {
 		swapchain->Init(instance.get(), instance->physicalDevice, device.get());
 
 		CreateCommandPools(num_secondary_buffers);
-		SetupRenderpass(VK_SAMPLE_COUNT_4_BIT);
+		//SetupRenderpass(Instance::VulpesInstanceConfig.MSAA_SampleCount);
 		SetupDepthStencil();
 
 		VkSemaphoreCreateInfo semaphore_info{ VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO, nullptr, 0 };
@@ -136,7 +136,7 @@ namespace vulpes {
 
 		attachmentDescriptions[0] = vk_attachment_description_base;
 		attachmentDescriptions[0].format = swapchain->ColorFormat;
-		attachmentDescriptions[0].samples = Multisampling::SampleCount;
+		attachmentDescriptions[0].samples = Instance::VulpesInstanceConfig.MSAA_SampleCount;
 		attachmentDescriptions[0].loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
 		attachmentDescriptions[0].storeOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
 		attachmentDescriptions[0].stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
@@ -164,7 +164,7 @@ namespace vulpes {
 
 		attachmentDescriptions[2] = vk_attachment_description_base;
 		attachmentDescriptions[2].format = device->FindDepthFormat();
-		attachmentDescriptions[2].samples = Multisampling::SampleCount;
+		attachmentDescriptions[2].samples = Instance::VulpesInstanceConfig.MSAA_SampleCount;
 		attachmentDescriptions[2].loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
 		attachmentDescriptions[2].storeOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
 		attachmentDescriptions[2].stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
@@ -313,7 +313,7 @@ namespace vulpes {
 		*/
 		
 		CreateCommandPools(num_secondary_buffers);
-		SetupRenderpass(VK_SAMPLE_COUNT_4_BIT);
+		SetupRenderpass(Instance::VulpesInstanceConfig.MSAA_SampleCount);
 		SetupDepthStencil();
 		SetupFramebuffers();
 		RecreateObjects();
