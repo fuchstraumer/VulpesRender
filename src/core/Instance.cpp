@@ -253,7 +253,7 @@ namespace vulpes {
 		io.MousePos.x = LastX;
 		io.MousePos.y = LastY;
 
-		if (!cameraLock) {
+		if (!cameraLock || !io.WantCaptureMouse) {
 			cam.UpdateMousePos(mouseDx, mouseDy);
 			arcball.UpdateMousePos(mouseDx, mouseDy);
 		}

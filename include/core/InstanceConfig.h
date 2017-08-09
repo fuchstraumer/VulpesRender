@@ -59,7 +59,7 @@ namespace vulpes {
                 SampleCount can max out at 64, or can be a slow as 1. Changing this still requires rebuilding the swapchain.
             */
             bool EnableMSAA = true;
-            VkSampleCountFlagBits MSAA_SampleCount = VK_SAMPLE_COUNT_4_BIT;
+            VkSampleCountFlagBits MSAA_SampleCount = VK_SAMPLE_COUNT_8_BIT;
 
             /*
                 Texture anisotropy is not supported for all txture formats/types, but can still be safely set to true.
@@ -84,6 +84,12 @@ namespace vulpes {
             */
             float MouseSensitivity = 0.1f;
             float MovementSpeed = 25.0f;
+
+            /*
+                Enable the usage of 3D mouse picking by using data read back from the renderpass. Writes data about primitives
+                under the mouse if enabled.
+            */
+            bool Enable3DMousePicking = true;
 	    };
 
     }

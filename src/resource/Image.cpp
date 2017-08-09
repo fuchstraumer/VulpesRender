@@ -10,6 +10,7 @@ namespace vulpes {
 
 	Image::Image(Image && other) noexcept : handle(std::move(other.handle)), createInfo(std::move(other.createInfo)), view(std::move(other.view)), memoryAllocation(std::move(other.memoryAllocation)), 
 		finalLayout(std::move(other.finalLayout)), extents(std::move(other.extents)), format(std::move(other.format)), usageFlags(std::move(other.usageFlags)), imageDataSize(std::move(other.imageDataSize)) {
+		parent = other.parent;
 		other.handle = VK_NULL_HANDLE;
 	}
 
@@ -24,6 +25,7 @@ namespace vulpes {
 		format = std::move(other.format);
 		usageFlags = std::move(other.usageFlags);
 		imageDataSize = std::move(other.imageDataSize);
+		parent = other.parent;
 		return *this;
 	}
 
@@ -47,6 +49,9 @@ namespace vulpes {
 
 	void Image::Create(const VkImageCreateInfo & create_info, const VkMemoryPropertyFlagBits& memory_flags) {
 		this->createInfo = create_info;
+		format = create_info.format;
+		usageFlags = create_info.usage;
+		extents = create_info.extent;
 		CreateImage(handle, memoryAllocation, parent, createInfo, memory_flags);
 	}
 

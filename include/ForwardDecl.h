@@ -26,5 +26,7 @@ namespace vulpes {
 	class DescriptorSet;
 	class DescriptorPool;
 	class PipelineLayout;
+	class PrimaryCommandBuffer;
+	class SecondaryCommandBuffer;
 }
 #endif // !VULPES_VK_FORWARD_DECL_H

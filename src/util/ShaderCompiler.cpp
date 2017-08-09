@@ -1,6 +1,5 @@
 #include "vpr_stdafx.h"
 #include "util/ShaderCompiler.h"
-#include "util/DirStackIncluder.h"
 
 namespace vulpes {
 
