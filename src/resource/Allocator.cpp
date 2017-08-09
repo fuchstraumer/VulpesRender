@@ -38,9 +38,12 @@ namespace vulpes {
 	}
 
 	void MemoryBlock::Destroy(Allocator * alloc) {
-		
+
+		Suballocations.clear();
+		availSuballocations.clear();
 		vkFreeMemory(alloc->DeviceHandle(), memory, nullptr);
 		memory = VK_NULL_HANDLE;
+
 	}
 
 	bool MemoryBlock::operator<(const MemoryBlock & other) {
@@ -151,12 +154,16 @@ namespace vulpes {
 
 		// use lower_bound to find location of avail suballocation
 
-		size_t avail_idx = 0;
+		size_t avail_idx = std::numeric_limits<size_t>::max();
 		for (auto iter = availSuballocations.cbegin(); iter != availSuballocations.cend(); ++iter) {
 			if ((*iter)->size > allocation_size) {
 				avail_idx = iter - availSuballocations.cbegin();
 				break;
 			}
+		}
+
+		if (avail_idx == std::numeric_limits<size_t>::max()) {
+			return false;
 		}
 
 		for (size_t idx = avail_idx; idx < numFreeSuballocs; ++idx) {
@@ -303,44 +310,20 @@ namespace vulpes {
 	}
 
 	void MemoryBlock::Free(const Allocation* memory_to_free) {
-		// Choose search direction based based on size of object to free
-		const bool forward_direction = (memory_to_free->blockAllocation.Offset) < (Size / 2);
-		if (forward_direction) {
-			for (auto iter = Suballocations.begin(); iter != Suballocations.end(); ++iter) {
-				auto& suballoc = *iter;
-				if (suballoc.offset == memory_to_free->blockAllocation.Offset) {
-					freeSuballocation(iter);
-					if (VALIDATE_MEMORY) {
-						auto vcode = Validate();
-						if (vcode != ValidationCode::VALIDATION_PASSED) {
-							LOG(ERROR) << "Validation of memory failed: " << vcode;
-							throw std::runtime_error("Validation of memory failed");
-						}
+		for (auto iter = Suballocations.begin(); iter != Suballocations.end(); ++iter) {
+			auto& suballoc = *iter;
+			if (suballoc.offset == memory_to_free->blockAllocation.Offset) {
+				freeSuballocation(iter);
+				if (VALIDATE_MEMORY) {
+					auto vcode = Validate();
+					if (vcode != ValidationCode::VALIDATION_PASSED) {
+						LOG(ERROR) << "Validation of memory failed: " << vcode;
+						throw std::runtime_error("Validation of memory failed");
 					}
-					return;
 				}
+				return;
 			}
 		}
-		else {
-			auto iter = Suballocations.end();
-			--iter;
-			for (; iter != Suballocations.begin(); --iter) {
-				auto& suballoc = *iter;
-				if (suballoc.offset == memory_to_free->blockAllocation.Offset) {
-					freeSuballocation(iter);
-					if (VALIDATE_MEMORY) {
-						auto vcode = Validate();
-						if (vcode != ValidationCode::VALIDATION_PASSED) {
-							LOG(ERROR) << "Validation of memory failed: " << vcode;
-							throw std::runtime_error("Validation of memory failed");
-						}
-					}
-					return;
-				}
-			}
-		}
-
-
 	}
 
 	VkDeviceSize MemoryBlock::LargestAvailRegion() const noexcept {
@@ -475,6 +458,10 @@ namespace vulpes {
 			allocations[i]->Destroy(allocator);
 			allocations[i].reset();
 		}
+
+		allocations.clear();
+		allocations.shrink_to_fit();
+
 	}
 
 	MemoryBlock* AllocationCollection::operator[](const size_t & idx) {
@@ -527,6 +514,39 @@ namespace vulpes {
 		for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
 			delete allocations[i];
 		}
+
+		allocations.clear();
+		privateAllocations.clear();
+		emptyAllocations.clear();
+		allocations.shrink_to_fit();
+		privateAllocations.shrink_to_fit();
+		emptyAllocations.shrink_to_fit();
+
+	}
+
+	void Allocator::Recreate() {
+
+		for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
+			delete allocations[i];
+		}
+
+		allocations.clear();
+		privateAllocations.clear();
+		emptyAllocations.clear();
+		allocations.shrink_to_fit();
+		privateAllocations.shrink_to_fit();
+		emptyAllocations.shrink_to_fit();
+
+		allocations.resize(GetMemoryTypeCount());
+		privateAllocations.resize(GetMemoryTypeCount());
+		emptyAllocations.resize(GetMemoryTypeCount());
+		// initialize base pools, one per memory type.
+		for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
+			allocations[i] = new AllocationCollection(this);
+			privateAllocations[i] = new AllocationCollection(this);
+			emptyAllocations[i] = false;
+		}
+
 	}
 
 	VkDeviceSize Allocator::GetPreferredBlockSize(const uint32_t& memory_type_idx) const noexcept {
@@ -570,7 +590,6 @@ namespace vulpes {
 		if (memory_to_free->Type == Allocation::allocType::BLOCK_ALLOCATION) {
 			type_idx = memory_to_free->MemoryTypeIdx();
 			auto& allocation_collection = allocations[type_idx];
-			assert(allocation_collection->allocations.size() == 1);
 			
 			auto& block = allocation_collection->allocations.front();
 			block->Free(memory_to_free);
@@ -584,8 +603,8 @@ namespace vulpes {
 
 			if (block->Empty()) {
 				if (emptyAllocations[type_idx]) {
-					allocation_collection->RemoveBlock(block.get());
-					alloc_to_delete = std::move(block);
+					alloc_to_delete = std::unique_ptr<MemoryBlock>(block.release());
+					allocation_collection->RemoveBlock(alloc_to_delete.get());
 				}
 				else {
 					emptyAllocations[type_idx] = true;
@@ -788,7 +807,7 @@ namespace vulpes {
 		// Get memory info.
 		VkMemoryRequirements memreqs;
 		vkGetImageMemoryRequirements(parent->vkHandle(), image_handle, &memreqs);
-
+		size_t mem_sz = memreqs.size;
 		return AllocateMemory(memreqs, details, alloc_type, dest_allocation);
 	}
 

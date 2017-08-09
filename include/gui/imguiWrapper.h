@@ -27,7 +27,7 @@ namespace vulpes {
 		imguiWrapper() = default;
 		~imguiWrapper();
 
-		void Init(const Device* dvc, std::shared_ptr<PipelineCache> _cache, const VkRenderPass& renderpass);
+		void Init(const Device* dvc, const VkRenderPass& renderpass);
 
 		void UploadTextureData(TransferPool* transfer_pool);
 

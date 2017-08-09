@@ -421,6 +421,8 @@ namespace vulpes {
 		Allocator(const Device* parent_dvc);
 		~Allocator();
 
+		void Recreate();
+
 		VkDeviceSize GetPreferredBlockSize(const uint32_t& memory_type_idx) const noexcept;
 		VkDeviceSize GetBufferImageGranularity() const noexcept;
 

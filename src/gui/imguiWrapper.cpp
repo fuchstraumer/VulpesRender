@@ -17,10 +17,10 @@ namespace vulpes {
 
 	}
 
-	void imguiWrapper::Init(const Device * dvc, std::shared_ptr<PipelineCache> _cache, const VkRenderPass & renderpass) {
+	void imguiWrapper::Init(const Device * dvc, const VkRenderPass & renderpass) {
 		
 		device = dvc;
-		cache = _cache;
+		cache = std::make_unique<PipelineCache>(device, static_cast<uint16_t>(typeid(imguiWrapper).hash_code()));
 
 		createResources();
 		createDescriptorPools();

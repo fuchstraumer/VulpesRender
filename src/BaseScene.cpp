@@ -288,6 +288,9 @@ namespace vulpes {
 		WindowResized();
 		msaa.reset();
 		renderPass.reset();
+
+		device->vkAllocator->Recreate();
+
 		swapchain->Recreate();
 
 		instance->projection = glm::perspective(glm::radians(75.0f), static_cast<float>(swapchain->Extent.width) / static_cast<float>(swapchain->Extent.height), 0.1f, 30000.0f);
