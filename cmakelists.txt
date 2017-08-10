@@ -1,3 +1,4 @@
+
 MACRO(ADD_MSVC_PRECOMPILED_HEADER PrecompiledHeader PrecompiledSource SourcesVar)
   IF(MSVC)
     GET_FILENAME_COMPONENT(PrecompiledBasename ${PrecompiledHeader} NAME_WE)
@@ -14,6 +15,7 @@ MACRO(ADD_MSVC_PRECOMPILED_HEADER PrecompiledHeader PrecompiledSource SourcesVar
     LIST(APPEND ${SourcesVar} ${PrecompiledSource})
   ENDIF(MSVC)
 ENDMACRO(ADD_MSVC_PRECOMPILED_HEADER)
+
 INCLUDE(ExternalProject)
 CMAKE_MINIMUM_REQUIRED(VERSION 3.6)
 PROJECT(VulpesRender)
@@ -34,7 +36,6 @@ ExternalProject_Add(assimp
     "-DASSIMP_INCLUDE_INSTALL_DIR=${CMAKE_CURRENT_SOURCE_DIR}/ext/"
     "-DASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT=OFF"
     "-DASSIMP_BUILD_STL_IMPORTER=ON"
-    "-DASSIMP_BUILD_OBJ_IMPORTER=ON"
     "-DASSIMP_BUILD_ASSIMP_TOOLS=OFF"
     "-DASSIMP_INSTALL_PDB=OFF"
     "-DBUILD_SHARED_LIBS=OFF"
@@ -82,6 +83,8 @@ FILE(GLOB CORE "src/core/*.cpp" "include/core/*.h")
 FILE(GLOB RESOURCES "src/resource/*.cpp" "include/resource/*.h")
 FILE(GLOB RENDER "src/render/*.cpp" "include/render/*.h")
 FILE(GLOB GUI "src/gui/*.cpp" "include/gui/*.h")
+FILE(GLOB GUI_ADDONS "src/gui/addons/*.cpp" "include/gui/addons/*.h")
+#FILE(GLOB MINIZIP "src/gui/addons/minizip/*.c" "src/gui/addons/minizip/*.h")
 FILE(GLOB IMGUI "imgui/imgui.cpp" "imgui/imgui.h" "imgui/imgui_draw.cpp" "imgui/imgui_internal.h")
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -99,6 +102,7 @@ SOURCE_GROUP("core" FILES ${CORE})
 SOURCE_GROUP("resource" FILES ${RESOURCES})
 SOURCE_GROUP("render" FILES ${RENDER})
 SOURCE_GROUP("gui" FILES ${GUI})
+SOURCE_GROUP("imgui addons" FILES ${GUI_ADDONS})
 SOURCE_GROUP("imgui" FILES ${IMGUI})
 
 SET(CMAKE_STATIC_LINKER_FLAGS_DEBUG "-NODEFAULTLIB 
@@ -117,6 +121,6 @@ SET(CMAKE_STATIC_LINKER_FLAGS_RELEASE "-NODEFAULTLIB
   \"${PROJECT_SOURCE_DIR}/ext/lib/OSDependent.lib\"")
 
 
-ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/BaseScene.h" "src/BaseScene.cpp" ${IMGUI} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
+ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/BaseScene.h" "src/BaseScene.cpp" ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
 
 
