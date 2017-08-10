@@ -69,9 +69,11 @@ namespace vulpes {
 		if (Instance::VulpesInstanceConfig.EnableMouseLocking) {
 			if (instance->keys[GLFW_KEY_LEFT_ALT]) {
 				freeMouse(instance);
+				Instance::cameraLock = true;
 			}
 			else {
 				captureMouse(instance);
+				Instance::cameraLock = false;
 			}
 		}
 
@@ -278,6 +280,10 @@ namespace vulpes {
 		pipelineStateInfo.DepthStencilInfo.depthCompareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
 
 		pipelineStateInfo.RasterizationInfo.cullMode = VK_CULL_MODE_NONE;
+
+		pipelineStateInfo.MultisampleInfo.rasterizationSamples = Instance::VulpesInstanceConfig.MSAA_SampleCount;
+		pipelineStateInfo.MultisampleInfo.sampleShadingEnable = Instance::VulpesInstanceConfig.EnableMSAA;
+
 	}
 
 	void imguiWrapper::setupGraphicsPipelineCreateInfo(const VkRenderPass& renderpass) {

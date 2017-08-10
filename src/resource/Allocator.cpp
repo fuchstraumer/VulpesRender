@@ -14,7 +14,9 @@ namespace vulpes {
 	MemoryBlock::MemoryBlock(Allocator * alloc) : allocator(alloc), availSize(0), freeCount(0), memory(VK_NULL_HANDLE), Size(0) {}
 
 	MemoryBlock::~MemoryBlock() {
-		assert(memory == VK_NULL_HANDLE);
+		if (memory != VK_NULL_HANDLE) {
+			Destroy(allocator);
+		}
 	}
 
 	void MemoryBlock::Init(VkDeviceMemory & new_memory, const VkDeviceSize & new_size) {

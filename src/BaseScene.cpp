@@ -22,6 +22,8 @@ namespace vulpes {
 		instance->SetupPhysicalDevices();
 		instance->SetupSurface();
 
+		Multisampling::SampleCount = Instance::VulpesInstanceConfig.MSAA_SampleCount;
+
 		device = std::make_unique<Device>(instance.get(), instance->physicalDevice);
 
 		swapchain = std::make_unique<Swapchain>();
@@ -346,6 +348,10 @@ namespace vulpes {
 			vkResetCommandPool(device->vkHandle(), graphicsPool->vkHandle(), VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
 
 			Buffer::DestroyStagingResources(device.get());
+
+			if (Instance::VulpesInstanceConfig.RequestRefresh) {
+				instance->Refresh();
+			}
 		}
 	}
 

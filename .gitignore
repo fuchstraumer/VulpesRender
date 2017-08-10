@@ -96,3 +96,5 @@ ext/SPIRV/
 glslang/
 ext/lib/
 .vscode/
+ext/include/SPIRV/bitutils.h
+ext/include/
