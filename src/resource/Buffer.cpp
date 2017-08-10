@@ -62,7 +62,7 @@ namespace vulpes {
 
 	void Buffer::CopyToMapped(void * data, const VkDeviceSize & copy_size, const VkDeviceSize& offset){
 
-		Map();
+		Map(offset);
 
 		if (size == 0) {
 			memcpy(MappedMemory, data, Size());
@@ -120,8 +120,9 @@ namespace vulpes {
 		vkCmdUpdateBuffer(cmd, handle, memoryAllocation.Offset() + offset, data_sz, data);
 	}
 
-	void Buffer::Map(){
-		VkResult result = vkMapMemory(parent->vkHandle(), memoryAllocation.Memory(), memoryAllocation.Offset(), memoryAllocation.Size, 0, &MappedMemory);
+	void Buffer::Map(const VkDeviceSize& offset){
+		assert(offset < memoryAllocation.Size);
+		VkResult result = vkMapMemory(parent->vkHandle(), memoryAllocation.Memory(), memoryAllocation.Offset() + offset, memoryAllocation.Size, 0, &MappedMemory);
 		VkAssert(result);
 	}
 

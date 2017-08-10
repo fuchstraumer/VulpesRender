@@ -28,7 +28,7 @@ namespace vulpes {
 
 		void Update(VkCommandBuffer& cmd, const VkDeviceSize& data_sz, const VkDeviceSize& offset, const void* data);
 
-		void Map();
+		void Map(const VkDeviceSize& offset = 0);
 		void Unmap();
 
 		const VkBuffer& vkHandle() const noexcept;

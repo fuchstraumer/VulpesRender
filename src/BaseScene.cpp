@@ -316,6 +316,10 @@ namespace vulpes {
 		/*
 			Done destroying resources, recreate resources and objects now
 		*/
+
+		ImGuiIO& io = ImGui::GetIO();
+		io.DisplaySize.x = static_cast<float>(swapchain->Extent.width);
+		io.DisplaySize.y = static_cast<float>(swapchain->Extent.height);
 		
 		CreateCommandPools(num_secondary_buffers);
 		SetupRenderpass(Instance::VulpesInstanceConfig.MSAA_SampleCount);
