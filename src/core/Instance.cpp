@@ -126,6 +126,12 @@ namespace vulpes {
 		}
 	}
 
+	void Instance::SetCameraLookAt(const glm::vec3& new_look_at) {
+		if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+			arcball.SetTarget(new_look_at);
+		}
+	}
+
 	void Instance::MouseDrag(const int& button, const float & rot_x, const float & rot_y) {
 		if (VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
 			arcball.MouseDrag(button, rot_x, rot_y);

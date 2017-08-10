@@ -28,7 +28,6 @@
 
 #include "gui/addons/imguifilesystem.h"
 
-
 #ifdef DIRENT_USES_UTF8_CHARS
 #	warning DIRENT_USES_UTF8_CHARS is deprecated and has become the default. (IMGUIFILESYSTEM_USE_ASCII_SHORT_PATHS_ON_WINDOWS can be used to disable it).
 #endif //IMGUIBINDINGS_CLEAR_INPUT_DATA_SOON
@@ -112,11 +111,15 @@ enum Sorting {
 #include "gui/addons/dirent_portable.h"
 #include <sys/stat.h>
 #include <ctype.h>  // tolower,...
+
 #include <string.h> // strcmp
 #ifndef _WIN32
 #include <stdlib.h> // realpath getenv
 #endif //_WIN32
-
+#define VULPES_FILESYSTEM_USE_STD_EXPERIMENTAL_FILESYSTEM
+#ifdef VULPES_FILESYSTEM_USE_STD_EXPERIMENTAL_FILESYSTEM
+#include <experimental\filesystem>
+#endif 
 
 #if (defined(_MSC_VER) && !defined(strcasecmp))
 #   define strcasecmp _stricmp
@@ -545,16 +548,20 @@ protected:
     }
 
 };
+
+
 const SortingHelper::SorterSignature SortingHelper::Sorters[] = {&SortingHelper::Alphasort,&SortingHelper::Alphasortinverse,&SortingHelper::Lastmodsort,&SortingHelper::Lastmodsortinverse,&SortingHelper::Sizesort,&SortingHelper::Sizesortinverse,&SortingHelper::Typesort,&SortingHelper::Typesortinverse};
 SortingHelper::SorterSignature SortingHelper::sorter;
 struct stat SortingHelper::stat1;
 struct stat SortingHelper::stat2;
+
 class Directory {
 public:
     static void GetDirectories(const char* directoryName,PathStringVector& result,FilenameStringVector* pOptionalNamesOut=NULL,Sorting sorting= SORT_ORDER_ALPHABETIC)   {
+
         result.clear();if (pOptionalNamesOut) pOptionalNamesOut->clear();
         static char tempString[MAX_PATH_BYTES];size_t sz;
-        struct dirent **eps = NULL;
+        
 
         sz = strlen(directoryName);
         static char directoryName2[MAX_PATH_BYTES];
@@ -562,6 +569,8 @@ public:
 #       ifdef _WIN32
         if (sz>0 && directoryName[sz-1]==':') {directoryName2[sz]='\\';directoryName2[sz+1]='\0';}
 #       endif //_WIN32
+#ifndef VULPES_FILESYSTEM_USE_STD_EXPERIMENTAL_FILESYSTEM
+		struct dirent **eps = NULL;
         const int n = scandir (directoryName2, &eps, DirentGetDirectories, SortingHelper::SetSorter(sorting));
 
         static char directoryNameWithoutSlash[MAX_PATH_BYTES];
@@ -593,23 +602,51 @@ public:
             }
         }
         if (eps) {free(eps);eps=NULL;}
-    }
-    static void GetFiles(const char* directoryName,PathStringVector& result,FilenameStringVector* pOptionalNamesOut=NULL, Sorting sorting= SORT_ORDER_ALPHABETIC)    {
-        result.clear();if (pOptionalNamesOut) pOptionalNamesOut->clear();
-        static char tempString[MAX_PATH_BYTES];size_t sz;
-        struct dirent **eps = NULL;
+#else 
+		std::experimental::filesystem::path directory(directoryName);
+		assert(std::experimental::filesystem::exists(directory));
 
+		for (auto& p : std::experimental::filesystem::directory_iterator(directory)) {
+			if (std::experimental::filesystem::is_directory(p.status())) {
+				auto str = p.path().string();
+				String::PushBack(result, str.c_str());
+				auto fname = p.path().filename().string();
+				if (pOptionalNamesOut) {
+					String::PushBack(*pOptionalNamesOut, fname.c_str());
+				}
+			}
+		}
+		return;
+#endif // !VULPES_FILESYSTEM_USE_STD_EXPERIMENTAL_FILESYSTEM
+    }
+
+
+
+    static void GetFiles(const char* directoryName,PathStringVector& result,FilenameStringVector* pOptionalNamesOut=NULL, Sorting sorting= SORT_ORDER_ALPHABETIC)    {
+        result.clear();
+		if (pOptionalNamesOut) {
+			pOptionalNamesOut->clear();
+		}
+
+        static char tempString[MAX_PATH_BYTES];size_t sz;
         sz = strlen(directoryName);
         static char directoryName2[MAX_PATH_BYTES];
         strcpy(directoryName2,directoryName);
-#       ifdef _WIN32
-        if (sz>0 && directoryName[sz-1]==':') {directoryName2[sz]='\\';directoryName2[sz+1]='\0';}
-#       endif //_WIN32
-        const int n = scandir (directoryName2, &eps, DirentGetFiles, SortingHelper::SetSorter(sorting));
 
-        static char directoryNameWithoutSlash[MAX_PATH_BYTES];
-        if (sz>0 && directoryName[sz-1] == '/') String::Substr(directoryName,directoryNameWithoutSlash,0,sz-1);
-        else strcpy(directoryNameWithoutSlash,directoryName);
+#       ifdef _WIN32
+        if (sz>0 && directoryName[sz-1]==':') {
+			directoryName2[sz]='\\';
+			directoryName2[sz+1]='\0';
+		}
+#       endif //_WIN32
+
+		static char directoryNameWithoutSlash[MAX_PATH_BYTES];
+		if (sz>0 && directoryName[sz - 1] == '/') String::Substr(directoryName, directoryNameWithoutSlash, 0, sz - 1);
+		else strcpy(directoryNameWithoutSlash, directoryName);
+
+#ifndef VULPES_FILESYSTEM_USE_STD_EXPERIMENTAL_FILESYSTEM
+		struct dirent **eps = NULL;
+        const int n = scandir (directoryName2, &eps, DirentGetFiles, SortingHelper::SetSorter(sorting));
 
         if (n >= 0) {
         result.reserve((size_t)n);
@@ -630,6 +667,24 @@ public:
             }
         }
         if (eps) {free(eps);eps=NULL;}
+
+#else 
+		std::experimental::filesystem::path directory(directoryName);
+		assert(std::experimental::filesystem::exists(directory));
+
+		for (auto& p : std::experimental::filesystem::directory_iterator(directory)) {
+			if (std::experimental::filesystem::is_regular_file(p.status())) {
+				auto str = p.path().string();
+				String::PushBack(result, str.c_str());
+				auto fname = p.path().filename().string();
+				if (pOptionalNamesOut) {
+					String::PushBack(*pOptionalNamesOut, fname.c_str());
+				}
+			}
+		}
+		return;
+
+#endif // !VULPES_FILESYSTEM_USE_STD_EXPERIMENTAL_FILESYSTEM
     }
 
     // e.g. ".txt;.jpg;.png". To use unwantedExtensions, set wantedExtensions="".
@@ -1960,7 +2015,6 @@ const char* ChooseFileMainMethod(Dialog& ist,const char* directory,const bool _i
 
     if (I.rescan)   {
         char validDirectory[MAX_PATH_BYTES];validDirectory[0]='\0';   // for robustness
-#       ifndef IMGUI_USE_MINIZIP
         if (directory && strlen(directory)>0) {
             if (Directory::Exists(directory)) strcpy(validDirectory,directory);
             else {
@@ -1969,27 +2023,6 @@ const char* ChooseFileMainMethod(Dialog& ist,const char* directory,const bool _i
             }
         }
         Path::GetAbsolutePath(validDirectory,I.currentFolder);
-#       else //IMGUI_USE_MINIZIP
-        char basePath[MAX_PATH_BYTES];basePath[0]='\0';char zipPath[MAX_PATH_BYTES];zipPath[0]='\0';
-        bool isInsideZipFile = false;
-        if (directory && strlen(directory)>0) isInsideZipFile = PathSplitFirstZipFolder(directory,basePath,zipPath);
-        else isInsideZipFile = PathSplitFirstZipFolder(I.currentFolder,basePath,zipPath);
-        if (isInsideZipFile ? FileExists(basePath) : Directory::Exists(basePath)) {
-            strcpy(validDirectory,basePath);
-            if (zipPath[0]!='\0') {
-                char zipPathDir[MAX_PATH_BYTES];zipPathDir[0]='\0';
-                Path::GetDirectoryName(zipPath,zipPathDir);
-                Path::Append(zipPathDir,validDirectory);
-            }
-            //fprintf(stderr,"basePath=%s zipPath=%s validDirectory=%s\n",basePath,zipPath,validDirectory);
-        }
-        else {
-            Path::GetDirectoryName(directory,validDirectory);
-            if (!Directory::Exists(validDirectory)) validDirectory[0]='\0';
-        }
-        strcpy(I.currentFolder,validDirectory);
-        //fprintf(stderr,"%s %d\n",I.currentFolder,isInsideZipFile);
-#       endif //IMGUI_USE_MINIZIP
 
         I.editLocationCheckButtonPressed = false;
         I.history.reset(); // reset history

@@ -1,3 +1,5 @@
+#include "..\..\include\util\aabbRenderer.h"
+#include "..\..\include\util\aabbRenderer.h"
 #include "vpr_stdafx.h"
 #include "util/aabbRenderer.h"
 #include "core/LogicalDevice.h"
@@ -9,7 +11,25 @@ namespace vulpes {
 
         aabbRenderer::aabbRenderer(const Device* dvc) : device(dvc), updateBarrier(vk_buffer_memory_barrier_info_base) {}
 
-        void aabbRenderer::Init(const VkRenderPass& renderpass, const glm::mat4& projection, const GraphicsPipelineInfo& pipeline_info) {
+		aabbRenderer::~aabbRenderer() {
+			Clear();
+		}
+
+		void aabbRenderer::Clear() {
+			vbo.reset();
+			ebo.reset();
+			vertices.clear();
+			vertices.shrink_to_fit();
+			indices.clear();
+			indices.shrink_to_fit();
+			vert.reset();
+			frag.reset();
+			pipelineLayout.reset();
+			pipeline.reset();
+			pipelineCache.reset();
+		}
+
+		void aabbRenderer::Init(const VkRenderPass& renderpass, const glm::mat4& projection, const GraphicsPipelineInfo& pipeline_info) {
 
             pushData.projection = projection;
 

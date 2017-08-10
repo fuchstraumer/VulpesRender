@@ -61,6 +61,8 @@ namespace vulpes {
 
 		void SetCamPos(const glm::vec3& pos);
 
+		void SetCameraLookAt(const glm::vec3 & new_look_at);
+
 		static void MouseDrag(const int& button, const float& rot_x, const float& rot_y);
 		static void MouseScroll(const int& button, const float& zoom_delta);
 		static void MouseDown(const int& button, const float & x, const float & y);

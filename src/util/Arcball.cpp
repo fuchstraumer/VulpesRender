@@ -70,6 +70,10 @@ namespace vulpes {
 		Position += (target_dir * 0.1f);
 	}
 
+	void Arcball::SetTarget(const glm::vec3 & new_target) {
+		target = new_target;
+	}
+
 	void Arcball::RotateUp(const float& delta_time) {
 		Position -= glm::normalize(glm::cross(target, Right)) * (0.1f * delta_time);
 	}

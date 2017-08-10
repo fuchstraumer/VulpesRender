@@ -21,6 +21,9 @@ namespace vulpes {
         public:
 
             aabbRenderer(const Device* dvc);
+			~aabbRenderer();
+
+			void Clear();
             void Init(const VkRenderPass& renderpass, const glm::mat4& projection, const GraphicsPipelineInfo& pipeline_info = GraphicsPipelineInfo());
             void RecordCommands(const VkCommandBuffer& cmd, const VkCommandBufferBeginInfo& begin_info, const glm::mat4& view, const VkViewport& viewport, const VkRect2D& scissor);
             void AddAABB(const AABB& aabb);
