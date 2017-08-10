@@ -22,6 +22,8 @@ namespace vulpes {
 		instance->SetupPhysicalDevices();
 		instance->SetupSurface();
 
+		Multisampling::SampleCount = Instance::VulpesInstanceConfig.MSAA_SampleCount;
+
 		device = std::make_unique<Device>(instance.get(), instance->physicalDevice);
 
 		swapchain = std::make_unique<Swapchain>();
@@ -303,6 +305,9 @@ namespace vulpes {
 		WindowResized();
 		msaa.reset();
 		renderPass.reset();
+
+		device->vkAllocator->Recreate();
+
 		swapchain->Recreate();
 
 		instance->projection = glm::perspective(glm::radians(75.0f), static_cast<float>(swapchain->Extent.width) / static_cast<float>(swapchain->Extent.height), 0.1f, 30000.0f);
@@ -343,6 +348,10 @@ namespace vulpes {
 			vkResetCommandPool(device->vkHandle(), graphicsPool->vkHandle(), VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
 
 			Buffer::DestroyStagingResources(device.get());
+
+			if (Instance::VulpesInstanceConfig.RequestRefresh) {
+				instance->Refresh();
+			}
 		}
 	}
 

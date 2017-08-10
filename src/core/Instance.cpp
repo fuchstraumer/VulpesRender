@@ -35,6 +35,11 @@ namespace vulpes {
 	void Instance::UpdateMovement(const float & dt) {
 		ImGuiIO& io = ImGui::GetIO();
 		io.DeltaTime = dt;
+
+		if (io.WantCaptureKeyboard) {
+			return;
+		}
+
 		if (keys[GLFW_KEY_W]) {
 			cam.ProcessKeyboard(Direction::FORWARD, dt);
 			arcball.RotateUp(dt);
@@ -96,6 +101,7 @@ namespace vulpes {
 			glm::mat4 view = arcball.GetViewMatrix();
 			return arcball.GetViewMatrix();
 		}
+		return cam.GetViewMatrix();
 	}
 
 	glm::mat4 Instance::GetProjectionMatrix() const noexcept{
@@ -253,7 +259,7 @@ namespace vulpes {
 		io.MousePos.x = LastX;
 		io.MousePos.y = LastY;
 
-		if (!cameraLock || !io.WantCaptureMouse) {
+		if (!io.WantCaptureMouse && !cameraLock) {
 			cam.UpdateMousePos(mouseDx, mouseDy);
 			arcball.UpdateMousePos(mouseDx, mouseDy);
 		}
@@ -324,6 +330,12 @@ namespace vulpes {
 		if (c > 0 && c < 0x10000) {
 			io.AddInputCharacter(static_cast<unsigned short>(c));
 		}
+	}
+
+	void InstanceGLFW::Refresh() {
+		BaseScene* scene = reinterpret_cast<BaseScene*>(glfwGetWindowUserPointer(Window));
+		scene->RecreateSwapchain();
+		VulpesInstanceConfig.RequestRefresh = false;
 	}
 
 	void InstanceGLFW::ResizeCallback(GLFWwindow * window, int width, int height) {

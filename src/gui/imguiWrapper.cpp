@@ -17,10 +17,10 @@ namespace vulpes {
 
 	}
 
-	void imguiWrapper::Init(const Device * dvc, std::shared_ptr<PipelineCache> _cache, const VkRenderPass & renderpass, const GraphicsPipelineInfo& pipeline_info) {
+	void imguiWrapper::Init(const Device * dvc, const VkRenderPass & renderpass) {
 		
 		device = dvc;
-		cache = _cache;
+		cache = std::make_unique<PipelineCache>(device, static_cast<uint16_t>(typeid(imguiWrapper).hash_code()));
 
 		createResources();
 		createDescriptorPools();
@@ -33,7 +33,7 @@ namespace vulpes {
 		allocateDescriptors();
 		updateDescriptors();
 	
-		setupGraphicsPipelineInfo(pipeline_info);
+		setupGraphicsPipelineInfo();
 		setupGraphicsPipelineCreateInfo(renderpass);
 
 		// This has to be done here, due to scoping issues and auto-destruction rules.
@@ -69,9 +69,11 @@ namespace vulpes {
 		if (Instance::VulpesInstanceConfig.EnableMouseLocking) {
 			if (instance->keys[GLFW_KEY_LEFT_ALT]) {
 				freeMouse(instance);
+				Instance::cameraLock = true;
 			}
 			else {
 				captureMouse(instance);
+				Instance::cameraLock = false;
 			}
 		}
 
@@ -240,9 +242,7 @@ namespace vulpes {
 
 	}
 
-	void imguiWrapper::setupGraphicsPipelineInfo(const GraphicsPipelineInfo& pipeline_info) {
-
-		pipelineStateInfo = pipeline_info;
+	void imguiWrapper::setupGraphicsPipelineInfo() {
 
 		static const VkVertexInputBindingDescription bind_descr{ 0, sizeof(ImDrawVert), VK_VERTEX_INPUT_RATE_VERTEX };
 
@@ -268,10 +268,8 @@ namespace vulpes {
 			VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT
 		};
 
-		if (pipelineStateInfo.ColorBlendInfo.attachmentCount == 1) {
-			pipelineStateInfo.ColorBlendInfo.attachmentCount = 1;
-			pipelineStateInfo.ColorBlendInfo.pAttachments = &color_blend;
-		}
+		pipelineStateInfo.ColorBlendInfo.attachmentCount = 1;
+		pipelineStateInfo.ColorBlendInfo.pAttachments = &color_blend;
 
 		// Set this through dynamic state so we can do it when rendering.
 		pipelineStateInfo.DynamicStateInfo.dynamicStateCount = 2;
@@ -282,6 +280,10 @@ namespace vulpes {
 		pipelineStateInfo.DepthStencilInfo.depthCompareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
 
 		pipelineStateInfo.RasterizationInfo.cullMode = VK_CULL_MODE_NONE;
+
+		pipelineStateInfo.MultisampleInfo.rasterizationSamples = Instance::VulpesInstanceConfig.MSAA_SampleCount;
+		pipelineStateInfo.MultisampleInfo.sampleShadingEnable = Instance::VulpesInstanceConfig.EnableMSAA;
+
 	}
 
 	void imguiWrapper::setupGraphicsPipelineCreateInfo(const VkRenderPass& renderpass) {

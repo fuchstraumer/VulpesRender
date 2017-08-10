@@ -11,9 +11,8 @@ namespace vulpes {
 
     namespace cfg {
 
-	    enum class cameraType {
-		    FPS,
-		    FREE,
+	    enum class cameraType : int {
+		    FPS = 0,
 		    ARCBALL
         };
 
@@ -77,7 +76,7 @@ namespace vulpes {
                 Frame limiting. Enabled by default. Time can be modified too: currently locked to 60fps max.
             */
             bool LimitFramerate = true;
-            double FrameTimeMs = 16.0;
+            float FrameTimeMs = 16.0f;
 
             /*
                 Movement speed affects camera speed in FPS/FREE camera modes.
@@ -90,6 +89,8 @@ namespace vulpes {
                 under the mouse if enabled.
             */
             bool Enable3DMousePicking = true;
+
+			bool RequestRefresh = false;
 	    };
 
     }

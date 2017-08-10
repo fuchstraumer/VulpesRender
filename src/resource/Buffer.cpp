@@ -56,6 +56,7 @@ namespace vulpes {
 	void Buffer::Destroy(){
 		if (handle != VK_NULL_HANDLE) {
 			parent->vkAllocator->DestroyBuffer(handle, memoryAllocation);
+			handle = VK_NULL_HANDLE;
 		}
 	}
 
