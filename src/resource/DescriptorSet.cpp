@@ -65,9 +65,9 @@ namespace vulpes {
 
 	void DescriptorSet::Init(const DescriptorPool * parent_pool) {
 
-		CreateLayout();
-		Allocate(parent_pool);
-		Update();
+		createLayout();
+		allocate(parent_pool);
+		update();
 
 	}
 
@@ -111,6 +111,7 @@ namespace vulpes {
 
 		for (const auto& entry : writeDescriptors) {
 			write_descriptors.push_back(entry.second);
+			write_descriptors.back().dstSet = descriptorSet;
 		}
 
 		vkUpdateDescriptorSets(device->vkHandle(), static_cast<uint32_t>(write_descriptors.size()), write_descriptors.data(), 0, nullptr);

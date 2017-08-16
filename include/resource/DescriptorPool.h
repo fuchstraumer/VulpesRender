@@ -16,6 +16,7 @@ namespace vulpes {
 
         // Counts up the resources in descriptor_set, updates resourceTypes appropriately.
         void AddDescriptorSet(const DescriptorSet* descriptor_set);
+		void AddResourceType(const VkDescriptorType& descriptor_type, const uint32_t& descriptor_count);
         // Allocates based on added descriptor sets.
         void Create();
 

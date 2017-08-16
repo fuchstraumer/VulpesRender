@@ -98,3 +98,4 @@ ext/lib/
 .vscode/
 ext/include/SPIRV/bitutils.h
 ext/include/
+x64/RelWithDebInfo/glfw3/glfw3.log
