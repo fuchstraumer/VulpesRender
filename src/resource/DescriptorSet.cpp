@@ -46,6 +46,8 @@ namespace vulpes {
 
     void DescriptorSet::AddDescriptorInfo(const VkDescriptorBufferInfo& info, const size_t& item_binding_idx) {
         
+		bufferInfos.insert(std::make_pair(item_binding_idx, info));
+
         VkWriteDescriptorSet write_descriptor {
             VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
             nullptr,
@@ -55,7 +57,7 @@ namespace vulpes {
             1,
             bindings.at(item_binding_idx).descriptorType,
             nullptr,
-            &info,
+            &bufferInfos.at(item_binding_idx),
             nullptr,
         };
 
@@ -112,6 +114,7 @@ namespace vulpes {
 		for (const auto& entry : writeDescriptors) {
 			write_descriptors.push_back(entry.second);
 			write_descriptors.back().dstSet = descriptorSet;
+			write_descriptors.back().pBufferInfo = std::move(entry.second.pBufferInfo);
 		}
 
 		vkUpdateDescriptorSets(device->vkHandle(), static_cast<uint32_t>(write_descriptors.size()), write_descriptors.data(), 0, nullptr);

@@ -64,6 +64,7 @@ namespace vulpes {
         bool allocated = false;
         std::map<size_t, VkWriteDescriptorSet> writeDescriptors;
         std::map<size_t, VkDescriptorSetLayoutBinding> bindings;
+		std::map<size_t, VkDescriptorBufferInfo> bufferInfos;
     };
 
 }
