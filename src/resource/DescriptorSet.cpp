@@ -63,7 +63,15 @@ namespace vulpes {
 
     }
 
-    void DescriptorSet::CreateLayout() {
+	void DescriptorSet::Init(const DescriptorPool * parent_pool) {
+
+		CreateLayout();
+		Allocate(parent_pool);
+		Update();
+
+	}
+
+    void DescriptorSet::createLayout() {
        
         size_t num_bindings = bindings.size();
         std::vector<VkDescriptorSetLayoutBinding> bindings_vec;
@@ -81,7 +89,7 @@ namespace vulpes {
 
     }
 
-    void DescriptorSet::Allocate(const DescriptorPool* parent_pool) {
+    void DescriptorSet::allocate(const DescriptorPool* parent_pool) {
         
         descriptorPool = parent_pool;
 
@@ -95,9 +103,9 @@ namespace vulpes {
 
     }
 
-    void DescriptorSet::Update() {
+    void DescriptorSet::update() {
 
-        assert(descriptorPool && allocated);
+        assert(descriptorPool && allocated && !writeDescriptors.empty());
 
 		std::vector<VkWriteDescriptorSet> write_descriptors;
 
@@ -110,6 +118,14 @@ namespace vulpes {
 		updated = true;
         
     }
+
+	const VkDescriptorSet & DescriptorSet::vkHandle() const noexcept {
+		return descriptorSet;
+	}
+
+	const VkDescriptorSetLayout & DescriptorSet::vkLayout() const noexcept {
+		return descriptorSetLayout;
+	}
 
      const std::map<size_t, VkDescriptorSetLayoutBinding>& DescriptorSet::GetBindings() const noexcept {
          return bindings;

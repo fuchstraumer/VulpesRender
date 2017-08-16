@@ -40,10 +40,7 @@ namespace vulpes {
         void AddDescriptorInfo(const VkDescriptorImageInfo& info, const size_t& item_binding_idx);
         void AddDescriptorInfo(const VkDescriptorBufferInfo& info, const size_t& item_binding_idx);
 
-        void CreateLayout();
-        void Allocate(const DescriptorPool* parent_pool);
-        void Update();
-
+		void Init(const DescriptorPool* parent_pool);
 
         const VkDescriptorSet& vkHandle() const noexcept;
         const VkDescriptorSetLayout& vkLayout() const noexcept;
@@ -54,6 +51,10 @@ namespace vulpes {
         const std::map<size_t, VkDescriptorSetLayoutBinding>& GetBindings() const noexcept;
         
     private:
+
+		void createLayout();
+		void allocate(const DescriptorPool* parent_pool);
+		void update();
 
         const Device* device;
         const DescriptorPool* descriptorPool;
