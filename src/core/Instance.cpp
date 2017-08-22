@@ -177,6 +177,17 @@ namespace vulpes {
 			createInfo.enabledLayerCount = 0;
 		}
 
+		static const VkApplicationInfo application_info{
+			VK_STRUCTURE_TYPE_APPLICATION_INFO,
+			nullptr,
+			VulpesInstanceConfig.ApplicationName.c_str(),
+			VulpesInstanceConfig.ApplicationVersion,
+			VulpesInstanceConfig.EngineName.c_str(),
+			VulpesInstanceConfig.EngineVersion
+		};
+
+		createInfo.pApplicationInfo = &application_info;
+
 		createInfo.ppEnabledExtensionNames = ext.data();
 		createInfo.enabledExtensionCount = static_cast<uint32_t>(ext.size());
 		VkResult err = vkCreateInstance(&createInfo, AllocationCallbacks, &this->handle);
