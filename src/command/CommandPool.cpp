@@ -51,6 +51,11 @@ namespace vulpes {
 	}
 
 	void CommandPool::AllocateCmdBuffers(const uint32_t & num_buffers, const VkCommandBufferAllocateInfo& _alloc_info){
+
+		if (!cmdBuffers.empty()) {
+			return;
+		}
+
 		cmdBuffers.resize(num_buffers);
 		auto alloc_info = _alloc_info;
 		alloc_info.commandPool = handle;

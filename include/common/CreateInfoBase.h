@@ -17,9 +17,9 @@ namespace vulpes {
 	constexpr VkApplicationInfo vk_base_application_info{
 		VK_STRUCTURE_TYPE_APPLICATION_INFO,
 		nullptr,
-		"DiamondDogs-VK",
+		"Slice Engine",
 		VK_MAKE_VERSION(0, 1, 0),
-		"DiamondDogs",
+		"VulpesRender",
 		VK_MAKE_VERSION(0, 1, 0),
 		VK_API_VERSION_1_0
 	};

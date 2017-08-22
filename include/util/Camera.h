@@ -38,7 +38,7 @@ namespace vulpes {
 
 		glm::vec3 Position;
 		glm::vec3 Front, Up, WorldUp, Right;
-		glm::mat4 LastView;
+		glm::mat4 LastView, rotation;
 		glm::vec2 prevMouse;
 	};
 
@@ -64,4 +64,5 @@ namespace vulpes {
 		void updateCameraVectors();
 	};
 }
+
 #endif // !VULPES_CAMERA_H

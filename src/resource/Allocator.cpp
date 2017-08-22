@@ -501,8 +501,8 @@ namespace vulpes {
 		emptyAllocations.resize(GetMemoryTypeCount());
 		// initialize base pools, one per memory type.
 		for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
-			allocations[i] = new AllocationCollection(this);
-			privateAllocations[i] = new AllocationCollection(this);
+			allocations[i] = std::make_unique<AllocationCollection>(this);
+			privateAllocations[i] = std::make_unique<AllocationCollection>(this);
 			emptyAllocations[i] = false;
 		}
 	}
@@ -512,10 +512,6 @@ namespace vulpes {
 		/*
 			Delete collections: destructors of these should take care of the rest.
 		*/
-
-		for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
-			delete allocations[i];
-		}
 
 		allocations.clear();
 		privateAllocations.clear();
@@ -527,10 +523,6 @@ namespace vulpes {
 	}
 
 	void Allocator::Recreate() {
-
-		for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
-			delete allocations[i];
-		}
 
 		allocations.clear();
 		privateAllocations.clear();
@@ -544,8 +536,8 @@ namespace vulpes {
 		emptyAllocations.resize(GetMemoryTypeCount());
 		// initialize base pools, one per memory type.
 		for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
-			allocations[i] = new AllocationCollection(this);
-			privateAllocations[i] = new AllocationCollection(this);
+			allocations[i] = std::make_unique<AllocationCollection>(this);
+			privateAllocations[i] = std::make_unique<AllocationCollection>(this);
 			emptyAllocations[i] = false;
 		}
 
@@ -587,7 +579,7 @@ namespace vulpes {
 
 	void Allocator::FreeMemory(const Allocation* memory_to_free) {
 		uint32_t type_idx = 0;
-		std::unique_ptr<MemoryBlock> alloc_to_delete = std::unique_ptr<MemoryBlock>(nullptr);
+		MemoryBlock* alloc_to_delete = nullptr;
 		bool found = false; // searching for given memory range.
 		if (memory_to_free->Type == Allocation::allocType::BLOCK_ALLOCATION) {
 			type_idx = memory_to_free->MemoryTypeIdx();
@@ -605,8 +597,8 @@ namespace vulpes {
 
 			if (block->Empty()) {
 				if (emptyAllocations[type_idx]) {
-					alloc_to_delete = std::unique_ptr<MemoryBlock>(block.release());
-					allocation_collection->RemoveBlock(alloc_to_delete.get());
+					alloc_to_delete = block.release();
+					allocation_collection->RemoveBlock(alloc_to_delete);
 				}
 				else {
 					emptyAllocations[type_idx] = true;
@@ -623,7 +615,7 @@ namespace vulpes {
 				LOG(INFO) << "Deleted an allocation.";
 				// need to cleanup resources first, before deleting the actual object.
 				alloc_to_delete->Destroy(this);
-				alloc_to_delete.reset();
+				delete alloc_to_delete;
 			}
 			return;
 		}

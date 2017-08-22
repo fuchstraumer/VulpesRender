@@ -465,8 +465,8 @@ namespace vulpes {
 		// called from "FreeMemory" if memory to free isn't found in the allocation vectors for any of our active memory types.
 		bool freePrivateMemory(const Allocation* memory_to_free);
 
-		std::vector<AllocationCollection*> allocations;
-		std::vector<AllocationCollection*> privateAllocations;
+		std::vector<std::unique_ptr<AllocationCollection>> allocations;
+		std::vector<std::unique_ptr<AllocationCollection>> privateAllocations;
 		std::vector<bool> emptyAllocations;
 
 		const Device* parent;

@@ -1,5 +1,6 @@
 #include "vpr_stdafx.h"
 #include "util/Arcball.h"
+#include "imgui.h"
 
 namespace vulpes {
 
@@ -11,19 +12,9 @@ namespace vulpes {
 	}
 
 	void Arcball::updateVectors() {
-		// translate to rotation center
-		glm::mat4 translate = glm::translate(glm::mat4(1.0f), Position);
-		glm::mat4 inv_translate = glm::translate(glm::mat4(1.0f), -1.0f * Position);
-		glm::mat3 view_to_world = glm::mat3(glm::inverse(LastView));
-		glm::vec3 world_axis = view_to_world * cameraAxis;
-		glm::quat rotation = glm::angleAxis(-angle, glm::normalize(world_axis));
-		glm::mat4 final = translate * glm::mat4_cast(rotation) * inv_translate;
-
-		Position = glm::vec3(final * glm::vec4(Position.x, Position.y, Position.z, 1.0f));
-		target = rotation * target;
-		WorldUp = rotation * WorldUp;
-
-		Right = glm::normalize(glm::cross(target, WorldUp));
+		auto rot = glm::quat_cast(rotation);
+		Up = rot * Up;
+		Right = rot * Right;
 		angle = 0.0f;
 	}
 
@@ -37,7 +28,9 @@ namespace vulpes {
 		return glm::rotate(view_matrix, angle * rollSpeed, axis);
 	}
 
-	void Arcball::MouseUp(const int& button, const float& x, const float& y) {}
+	void Arcball::MouseUp(const int& button, const float& x, const float& y) {
+	
+	}
 
 	void Arcball::UpdateMousePos(const float& x, const float& y) {}
 
@@ -50,24 +43,35 @@ namespace vulpes {
 		}	
 	}
 
+	void Arcball::rotateAround(const glm::vec3& pt, const glm::vec3& axis, const float& angle) {
+
+		glm::vec3 dir = Position - pt;
+		auto quat = glm::angleAxis(angle, axis);
+		dir = quat * dir;
+		Position = pt + dir;
+		rotation = glm::mat4_cast(quat) * rotation;
+
+	}
+
 	void Arcball::MouseDrag(const int& button, const float & x, const float & y) {
+		ImGuiIO& io = ImGui::GetIO();
+		auto delta = io.MouseDelta;
 		if (button == 0) {
-			currPos = toScreenCoordinates(x, y);
-			angle = std::acos(std::min(1.0f, glm::dot(prevPos, currPos)));
-			angle *= 0.1f;
-			cameraAxis = glm::cross(prevPos, currPos);
+			rotateAround(target, Up, -delta.x * 0.01f);
+			rotateAround(target, glm::quat_cast(rotation) * Right, -delta.y * 0.01f);
 		}
 		else if (button == 1) {
-			glm::vec2 d_mouse = glm::vec2(x, y) - prevMouse;
-			Position.xz += (d_mouse * 0.01f);
-			target.xz += (d_mouse * 0.01f);	
+			Position.x += (-delta.x * 0.1f);
+			Position.z += (-delta.y * 0.1f);
+			target.x += (-delta.x * 0.1f);
+			target.z += (-delta.y * 0.1f);
 		}
 
 	}
 
 	void Arcball::MouseScroll(const int& button, const float& scroll) {
 		glm::vec3 target_dir = target - Position;
-		Position += (target_dir * 0.1f);
+		Position += (target_dir * scroll * 0.1f);
 	}
 
 	void Arcball::SetTarget(const glm::vec3 & new_target) {

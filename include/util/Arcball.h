@@ -39,6 +39,7 @@ namespace vulpes {
 		glm::vec3 mouseToArcball(const float & x, const float & y) const;
 		glm::vec3 constrainToAxis(const glm::vec3 & unconstrained) const;
 		void updateVectors();
+		void rotateAround(const glm::vec3& pt, const glm::vec3& axis, const float& angle);
 
 		size_t windowWidth, windowHeight;
 		float rollSpeed, angle;
