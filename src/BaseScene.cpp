@@ -109,9 +109,7 @@ namespace vulpes {
 
 					uint16_t id = static_cast<uint16_t>(std::stoi(cache_name));
 
-					while(!pipelineCacheHandles.empty()) {
-						uint16_t curr = pipelineCacheHandles.back();
-						pipelineCacheHandles.pop_back();
+					for(uint16_t& curr : pipelineCacheHandles) {
 						if (curr == id) {
 							id_used = true;
 							continue;
