@@ -106,6 +106,7 @@ namespace vulpes {
 			vkDestroySwapchainKHR(device->vkHandle(), handle, nullptr);
 		}
 		
+		ImageCount = 0;
 		setParameters();
 		setupCreateInfo();
 

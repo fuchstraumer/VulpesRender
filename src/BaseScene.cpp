@@ -15,7 +15,7 @@ namespace vulpes {
 
 	std::vector<uint16_t> BaseScene::pipelineCacheHandles = std::vector<uint16_t>();
 
-	vulpes::BaseScene::BaseScene(const size_t& num_secondary_buffers, const uint32_t& _width, const uint32_t& _height) : width(_width), height(_height) {
+	vulpes::BaseScene::BaseScene(const size_t& num_secondary_buffers, const uint32_t& _width, const uint32_t& _height) : width(_width), height(_height), numSecondaryBuffers(num_secondary_buffers) {
 
 		const bool verbose_logging = Instance::VulpesInstanceConfig.VerboseLogging;
 
@@ -37,7 +37,7 @@ namespace vulpes {
 
 		LOG_IF(verbose_logging, INFO) << "Swapchain created.";
 
-		CreateCommandPools(num_secondary_buffers);
+		CreateCommandPools();
 		SetupDepthStencil();
 
 		VkSemaphoreCreateInfo semaphore_info{ VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO, nullptr, 0 };
@@ -160,7 +160,7 @@ namespace vulpes {
 		pipelineCacheHandles.push_back(cache_id);
 	}
 
-	void vulpes::BaseScene::CreateCommandPools(const size_t& num_secondary_buffers) {
+	void vulpes::BaseScene::CreateCommandPools() {
 
 		VkCommandPoolCreateInfo pool_info = vk_command_pool_info_base;
 		pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
@@ -169,6 +169,7 @@ namespace vulpes {
 
 		VkCommandBufferAllocateInfo alloc_info = vk_command_buffer_allocate_info_base;
 		graphicsPool->AllocateCmdBuffers(swapchain->ImageCount, alloc_info);
+		assert(swapchain->ImageCount < 10);
 
 		pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
 		transferPool = std::make_unique<TransferPool>(device.get());
@@ -177,7 +178,7 @@ namespace vulpes {
 		pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
 		secondaryPool = std::make_unique<CommandPool>(device.get(), pool_info, false);
 		alloc_info.level = VK_COMMAND_BUFFER_LEVEL_SECONDARY;
-		secondaryPool->AllocateCmdBuffers(swapchain->ImageCount * static_cast<uint32_t>(num_secondary_buffers), alloc_info);
+		secondaryPool->AllocateCmdBuffers(swapchain->ImageCount * static_cast<uint32_t>(numSecondaryBuffers), alloc_info);
 
 	}
 
@@ -350,7 +351,6 @@ namespace vulpes {
 		framebuffers.shrink_to_fit();
 
 		transferPool.reset();
-		size_t num_secondary_buffers = secondaryPool->size();
 		secondaryPool.reset();
 		graphicsPool.reset();
 
@@ -373,7 +373,7 @@ namespace vulpes {
 		io.DisplaySize.x = static_cast<float>(swapchain->Extent.width);
 		io.DisplaySize.y = static_cast<float>(swapchain->Extent.height);
 		
-		CreateCommandPools(num_secondary_buffers);
+		CreateCommandPools();
 		SetupRenderpass(Instance::VulpesInstanceConfig.MSAA_SampleCount);
 		SetupDepthStencil();
 		SetupFramebuffers();

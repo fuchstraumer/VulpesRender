@@ -471,7 +471,7 @@ namespace vulpes {
 		allocations.clear();
 		allocations.shrink_to_fit();
 
-		LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "AllocationCollection " << std::to_string(reinterpret_cast<size_t>(this)) << " was destroyed.";
+		LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "AllocationCollection " << this << " was destroyed.";
 
 	}
 

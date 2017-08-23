@@ -24,7 +24,7 @@ namespace vulpes {
 
 		~BaseScene();
 
-		virtual void CreateCommandPools(const size_t& num_secondary_buffers);
+		virtual void CreateCommandPools();
 		virtual void SetupRenderpass(const VkSampleCountFlagBits& sample_count);
 		virtual void SetupDepthStencil();
 		virtual void SetupFramebuffers();
@@ -85,6 +85,7 @@ namespace vulpes {
 		virtual void createSubpassDependencies();
 
 		static std::vector<uint16_t> pipelineCacheHandles;
+		size_t numSecondaryBuffers;
 	};
 
 }
