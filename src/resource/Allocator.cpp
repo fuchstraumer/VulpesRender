@@ -615,6 +615,7 @@ namespace vulpes {
 
 			if (block->Empty()) {
 				if (emptyAllocations[type_idx]) {
+					block->Destroy(this);
 					allocation_collection->RemoveBlock(block.get());
 				}
 				else {
