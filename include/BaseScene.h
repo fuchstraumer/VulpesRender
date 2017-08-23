@@ -39,6 +39,8 @@ namespace vulpes {
 		// updates mouse actions via ImGui.
 		virtual void UpdateMouseActions();
 
+		static void PipelineCacheCreated(const uint16_t& cache_id);
+
 	protected:
 
 		virtual void limitFrame();
@@ -81,6 +83,8 @@ namespace vulpes {
 		virtual void createAttachmentReferences();
 		virtual VkSubpassDescription createSubpassDescription();
 		virtual void createSubpassDependencies();
+
+		static std::vector<uint16_t> pipelineCacheHandles;
 	};
 
 }

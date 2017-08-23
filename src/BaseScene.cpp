@@ -13,6 +13,7 @@
 
 namespace vulpes {
 
+	std::vector<uint16_t> BaseScene::pipelineCacheHandles = std::vector<uint16_t>();
 
 	vulpes::BaseScene::BaseScene(const size_t& num_secondary_buffers, const uint32_t& _width, const uint32_t& _height) : width(_width), height(_height) {
 
@@ -92,6 +93,43 @@ namespace vulpes {
 		vkDestroySemaphore(device->vkHandle(), semaphores[1], nullptr);
 		vkDestroySemaphore(device->vkHandle(), semaphores[0], nullptr);
 
+		std::experimental::filesystem::path pipeline_cache_path("rsrc/shader_cache");
+
+		if (std::experimental::filesystem::exists(pipeline_cache_path) && !pipelineCacheHandles.empty()) {
+			auto dir_iter = std::experimental::filesystem::directory_iterator(pipeline_cache_path);
+			for (auto& p : dir_iter) {
+
+				bool id_used = false;
+
+				if (p.path().extension().string() == ".vkdat") {
+
+					std::string cache_name = p.path().filename().string();
+					size_t idx = cache_name.find_last_of('.');
+					cache_name = cache_name.substr(0, idx);
+
+					uint16_t id = static_cast<uint16_t>(std::stoi(cache_name));
+
+					while(!pipelineCacheHandles.empty()) {
+						uint16_t curr = pipelineCacheHandles.back();
+						pipelineCacheHandles.pop_back();
+						if (curr == id) {
+							id_used = true;
+							continue;
+						}
+					}
+
+				}
+
+				if (!id_used) {
+					bool erased = std::experimental::filesystem::remove(p.path());
+					if (!erased) {
+						LOG(WARNING) << "Failed to erase a pipeline cache with ID " << p.path().filename().string();
+					}
+				}
+
+			}
+		}
+
 	}
 
 	void BaseScene::UpdateMouseActions() {
@@ -118,6 +156,10 @@ namespace vulpes {
 				Instance::MouseUp(0, io.MousePos.x, io.MousePos.y);
 			}
 		}
+	}
+
+	void BaseScene::PipelineCacheCreated(const uint16_t & cache_id) {
+		pipelineCacheHandles.push_back(cache_id);
 	}
 
 	void vulpes::BaseScene::CreateCommandPools(const size_t& num_secondary_buffers) {

@@ -2,6 +2,7 @@
 #include "resource/PipelineCache.h"
 #include "core/LogicalDevice.h"
 #include "core/PhysicalDevice.h"
+#include "BaseScene.h"
 
 namespace vulpes {
 
@@ -9,6 +10,13 @@ namespace vulpes {
 		createInfo(VkPipelineCacheCreateInfo{ VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO, nullptr, 0, 0, nullptr }), hashID(hash_id) {
 		
 		std::string cache_dir = std::string("./rsrc/shader_cache/");
+		std::experimental::filesystem::path cache_path(cache_dir);
+
+		if (!std::experimental::filesystem::exists(cache_path)) {
+			LOG(INFO) << "Shader cache path didn't exist, creating...";
+			std::experimental::filesystem::create_directories(cache_path);
+		}
+
 		std::string fname = cache_dir + std::to_string(hash_id) + std::string(".vkdat");
 		filename = fname;
 
@@ -18,6 +26,7 @@ namespace vulpes {
 		VkResult result = vkCreatePipelineCache(parent->vkHandle(), &createInfo, nullptr, &handle);
 		VkAssert(result);
 
+		BaseScene::PipelineCacheCreated(hash_id);
 	}
 
 	PipelineCache::~PipelineCache() {
