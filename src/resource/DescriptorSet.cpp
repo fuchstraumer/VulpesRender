@@ -17,7 +17,7 @@ namespace vulpes {
             descriptor_binding_loc,
             descriptor_type,
             1,
-            shader_stage,
+            VkShaderStageFlags(shader_stage),
             nullptr
         };
 
@@ -31,7 +31,7 @@ namespace vulpes {
             VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
             nullptr,
             descriptorSet,
-            item_binding_idx,
+            static_cast<uint32_t>(item_binding_idx),
             0,
             1,
             bindings.at(item_binding_idx).descriptorType,
@@ -52,7 +52,7 @@ namespace vulpes {
             VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
             nullptr,
             descriptorSet,
-            item_binding_idx,
+            static_cast<uint32_t>(item_binding_idx),
             0,
             1,
             bindings.at(item_binding_idx).descriptorType,

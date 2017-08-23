@@ -91,6 +91,16 @@ namespace vulpes {
             bool Enable3DMousePicking = true;
 
 			bool RequestRefresh = false;
+
+			/*
+			
+				Verbose logging includes several extra info log calls at various locations. This is useful 
+				for tracking where crashes occur in release builds. 
+
+			*/
+
+			bool VerboseLogging = true;
+
 	    };
 
     }

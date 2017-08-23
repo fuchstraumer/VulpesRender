@@ -34,8 +34,6 @@ namespace vulpes {
 
 		void TransferToDevice(VkCommandBuffer& transfer_cmd_buffer) const;
 
-		void FreeStagingBuffer();
-
 		VkDescriptorImageInfo GetDescriptor() const noexcept;
 		const VkSampler& Sampler() const noexcept;
 
@@ -134,12 +132,6 @@ namespace vulpes {
 		vkCmdCopyBufferToImage(transfer_cmd_buffer, stagingBuffer, handle, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, static_cast<uint32_t>(copyInfo.size()), copyInfo.data());
 		vkCmdPipelineBarrier(transfer_cmd_buffer, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier1);
 
-	}
-
-	template<typename texture_type>
-	inline void Texture<texture_type>::FreeStagingBuffer() {
-		// can now destroy staging object
-		//parent->vkAllocator->DestroyBuffer(stagingBuffer, stagingMemory);
 	}
 
 	template<typename texture_type>

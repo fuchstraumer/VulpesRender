@@ -1,5 +1,6 @@
 #include "vpr_stdafx.h"
 #include "command/CommandPool.h"
+#include "core/Instance.h"
 #include "core/LogicalDevice.h"
 
 namespace vulpes {
@@ -11,6 +12,7 @@ namespace vulpes {
 	CommandPool::CommandPool(const Device * _parent, bool _primary) : parent(_parent), primary(_primary) {}
 
 	void CommandPool::Create() {
+		assert(handle == VK_NULL_HANDLE);
 		VkResult result = vkCreateCommandPool(parent->vkHandle(), &createInfo, allocators, &handle);
 		VkAssert(result);
 	}
@@ -25,6 +27,7 @@ namespace vulpes {
 		cmdBuffers = std::move(other.cmdBuffers);
 		parent = std::move(other.parent);
 		allocators = std::move(other.allocators);
+		createInfo = std::move(other.createInfo);
 		other.handle = VK_NULL_HANDLE;
 	}
 
@@ -33,6 +36,7 @@ namespace vulpes {
 		cmdBuffers = std::move(other.cmdBuffers);
 		parent = std::move(other.parent);
 		allocators = std::move(other.allocators);
+		createInfo = std::move(other.createInfo);
 		other.handle = VK_NULL_HANDLE;
 		return *this;
 	}
@@ -43,10 +47,12 @@ namespace vulpes {
 
 	void CommandPool::Destroy(){
 		if (!cmdBuffers.empty()) {
-			vkFreeCommandBuffers(parent->vkHandle(), handle, static_cast<uint32_t>(cmdBuffers.size()), cmdBuffers.data());
+			FreeCommandBuffers();
 		}
 		if (handle != VK_NULL_HANDLE) {
 			vkDestroyCommandPool(parent->vkHandle(), handle, allocators);
+			LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "Command Pool " << handle << " destroyed.";
+			handle = VK_NULL_HANDLE;
 		}
 	}
 
@@ -61,11 +67,15 @@ namespace vulpes {
 		alloc_info.commandPool = handle;
 		alloc_info.commandBufferCount = num_buffers;
 		VkResult result = vkAllocateCommandBuffers(parent->vkHandle(), &alloc_info, cmdBuffers.data());
+		LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << std::to_string(num_buffers) << " command buffers allocated for command pool " << handle;
 		VkAssert(result);
 	}
 
 	void CommandPool::FreeCommandBuffers(){
 		vkFreeCommandBuffers(parent->vkHandle(), handle, static_cast<uint32_t>(cmdBuffers.size()), cmdBuffers.data());
+		LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << std::to_string(cmdBuffers.size()) << " command buffers freed.";
+		cmdBuffers.clear();
+		cmdBuffers.shrink_to_fit();
 	}
 
 	void CommandPool::ResetCmdBuffer(const size_t & idx) {

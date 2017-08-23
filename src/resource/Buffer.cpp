@@ -91,7 +91,9 @@ namespace vulpes {
 		copy.dstOffset = copy_offset;
 		vkCmdCopyBuffer(transfer_cmd, staging_buffer, handle, 1, &copy);
 
-		stagingBuffers.push_back(std::make_pair(staging_buffer, staging_alloc));
+		auto pair = std::make_pair(std::move(staging_buffer), std::move(staging_alloc));
+		stagingBuffers.push_back(std::move(pair));
+
 	}
 
 	void Buffer::CopyTo(void * data, CommandPool* cmd_pool, const VkQueue & transfer_queue, const VkDeviceSize & copy_size, const VkDeviceSize & copy_offset){
@@ -113,7 +115,9 @@ namespace vulpes {
 			vkCmdCopyBuffer(copy_cmd, staging_buffer, handle, 1, &copy);
 		cmd_pool->EndSingleCmdBuffer(copy_cmd, transfer_queue);
 
-		stagingBuffers.push_back(std::make_pair(staging_buffer, staging_alloc));
+		auto pair = std::make_pair(std::move(staging_buffer), std::move(staging_alloc));
+		stagingBuffers.push_back(std::move(pair));
+
 	}
 
 	void Buffer::Update(VkCommandBuffer & cmd, const VkDeviceSize & data_sz, const VkDeviceSize & offset, const void * data) {
@@ -164,7 +168,8 @@ namespace vulpes {
 		VkResult result = dvc->vkAllocator->CreateBuffer(&dest, &create_info, alloc_reqs, dest_memory_alloc);
 		VkAssert(result);
 
-		stagingBuffers.push_back(std::make_pair(dest, dest_memory_alloc));
+		auto pair = std::make_pair(std::move(dest), dest_memory_alloc);
+		stagingBuffers.push_back(std::move(pair));
 	}
 
 	void Buffer::DestroyStagingResources(const Device* device){

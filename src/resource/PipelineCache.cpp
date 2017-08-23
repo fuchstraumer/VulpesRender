@@ -48,7 +48,7 @@ namespace vulpes {
 
 		if (cache_size != 0) {
 			try {
-				std::ofstream file(filename, std::ios::out);
+				std::ofstream file(filename, std::ios::out | std::ios::trunc);
 
 				void* cache_data;
 				cache_data = malloc(cache_size);
@@ -98,6 +98,14 @@ namespace vulpes {
 			return false;
 		}
 
+		uint8_t cache_uuid[VK_UUID_SIZE] = {};
+		memcpy(cache_uuid, cache_header.data() + 16, VK_UUID_SIZE);
+
+		if (memcmp(cache_uuid, physical_device.Properties.pipelineCacheUUID, sizeof(cache_uuid)) != 0) {
+			LOG(INFO) << "Pipeline cache UUID incorrect, requires rebuilding.";
+			return false;
+		}
+
 		return true;
 	}
 
@@ -109,8 +117,8 @@ namespace vulpes {
 		if (cache) {
 
 			// get header (4 uint32_t, 16 int8_t) = (32 int8_t)
-			std::vector<int8_t> header(32);
-			cache.get(reinterpret_cast<char*>(header.data()), 32);
+			std::vector<int8_t> header(64);
+			cache.get(reinterpret_cast<char*>(header.data()), 64);
 
 			// Check to see if header data matches current device.
 			if (Verify(header)) {
@@ -123,6 +131,11 @@ namespace vulpes {
 			else {
 				LOG(INFO) << "Pre-existing cache file isn't valid: creating new pipeline cache.";
 				// header data doesn't match, wouldn't be valid. need to create new/fresh cache.
+				std::experimental::filesystem::path cache_path(filename);
+				if (std::experimental::filesystem::exists(cache_path)) {
+					std::experimental::filesystem::remove(cache_path);
+					LOG(INFO) << "Erased an invalid pipeline cache file with ID " << filename;
+				}
 				createInfo.initialDataSize = 0;
 				createInfo.pInitialData = nullptr;
 			}

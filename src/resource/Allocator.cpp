@@ -1,6 +1,6 @@
 #include "vpr_stdafx.h"
 #include "resource/Allocator.h"
-#include "util/easylogging++.h"
+#include "core/Instance.h"
 #include "core/LogicalDevice.h"
 #include "core/PhysicalDevice.h"
 
@@ -15,6 +15,7 @@ namespace vulpes {
 
 	MemoryBlock::~MemoryBlock() {
 		if (memory != VK_NULL_HANDLE) {
+			LOG(WARNING) << "Memory block destructor called before memory block's memory was destroyed.";
 			Destroy(allocator);
 		}
 	}
@@ -37,12 +38,14 @@ namespace vulpes {
 		--suballoc_iter;
 		availSuballocations.push_back(suballoc_iter);
 
+		LOG(INFO) << "Created new MemoryBlock with size " << std::to_string(Size * 1e-6) << "mb ";
 	}
 
 	void MemoryBlock::Destroy(Allocator * alloc) {
 
 		Suballocations.clear();
 		availSuballocations.clear();
+		LOG(INFO) << "MemoryBlock destroyed, memory handle was: " << memory;
 		vkFreeMemory(alloc->DeviceHandle(), memory, nullptr);
 		memory = VK_NULL_HANDLE;
 
@@ -143,6 +146,7 @@ namespace vulpes {
 			return ValidationCode::FREE_SUBALLOC_COUNT_MISMATCH;
 		}
 
+		LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "A memory validation pass succeeded.";
 		return ValidationCode::VALIDATION_PASSED;
 	}
 
@@ -213,6 +217,7 @@ namespace vulpes {
 				if (on_same_page) {
 					conflict_found = CheckBufferImageGranularityConflict(prev_suballoc.type, allocation_type);
 					if (conflict_found) {
+						LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "A buffer-image granularity conflict was identified in suballocation " << std::to_string(reinterpret_cast<size_t>(&prev_suballoc));
 						break;
 					}
 				}
@@ -236,6 +241,7 @@ namespace vulpes {
 
 		// Can't allocate if padding at begin and end is greater than requested size.
 		if (padding_begin + padding_end + allocation_size > suballoc.size) {
+			LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "Suballocation verification failed as required padding for alignment + required size is greater than available space.";
 			return false;
 		}
 
@@ -248,6 +254,7 @@ namespace vulpes {
 				bool on_same_page = CheckBlocksOnSamePage(*dest_offset, allocation_size, next_suballoc.offset, buffer_image_granularity);
 				if (on_same_page) {
 					if (CheckBufferImageGranularityConflict(allocation_type, next_suballoc.type)) {
+						LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "Suballocation verification failed as there were too many buffer-image granularity conflicts.";
 						return false;
 					}
 				}
@@ -464,6 +471,8 @@ namespace vulpes {
 		allocations.clear();
 		allocations.shrink_to_fit();
 
+		LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "AllocationCollection " << std::to_string(reinterpret_cast<size_t>(this)) << " was destroyed.";
+
 	}
 
 	MemoryBlock* AllocationCollection::operator[](const size_t & idx) {
@@ -481,6 +490,7 @@ namespace vulpes {
 	void AllocationCollection::RemoveBlock(MemoryBlock* block_to_erase) {
 		for (auto iter = allocations.begin(); iter != allocations.end(); ++iter) {
 			if ((*iter).get() == block_to_erase) {
+				LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "Destroyed memory block " << reinterpret_cast<size_t>((*iter).get());
 				allocations.erase(iter);
 			}
 		}
@@ -869,6 +879,19 @@ namespace vulpes {
 
 		FreeMemory(&allocation_to_free);
 
+	}
+
+	Allocation::Allocation(Allocation && other) noexcept : Type(std::move(other.Type)), SuballocType(std::move(other.SuballocType)), Size(std::move(other.Size)), Alignment(std::move(other.Alignment)), 
+		blockAllocation(std::move(other.blockAllocation)), privateAllocation(std::move(other.privateAllocation)) {}
+
+	Allocation & Allocation::operator=(Allocation && other) noexcept {
+		Type = std::move(other.Type);
+		SuballocType = std::move(other.SuballocType);
+		Size = std::move(other.Size);
+		Alignment = std::move(other.Alignment);
+		blockAllocation = std::move(other.blockAllocation);
+		privateAllocation = std::move(other.privateAllocation);
+		return *this;
 	}
 
 	void Allocation::Init(MemoryBlock * parent_block, const VkDeviceSize & offset, const VkDeviceSize & alignment, const VkDeviceSize & alloc_size, const SuballocationType & suballoc_type) {

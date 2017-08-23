@@ -16,8 +16,13 @@ namespace vulpes {
 
 	vulpes::BaseScene::BaseScene(const size_t& num_secondary_buffers, const uint32_t& _width, const uint32_t& _height) : width(_width), height(_height) {
 
+		const bool verbose_logging = Instance::VulpesInstanceConfig.VerboseLogging;
+
 		VkInstanceCreateInfo create_info = vk_base_instance_info;
 		instance = std::make_unique<InstanceGLFW>(create_info, false);
+
+		LOG_IF(verbose_logging, INFO) << "VkInstance created.";
+
 		glfwSetWindowUserPointer(instance->Window, this);
 		instance->SetupPhysicalDevices();
 		instance->SetupSurface();
@@ -29,8 +34,9 @@ namespace vulpes {
 		swapchain = std::make_unique<Swapchain>();
 		swapchain->Init(instance.get(), instance->physicalDevice, device.get());
 
+		LOG_IF(verbose_logging, INFO) << "Swapchain created.";
+
 		CreateCommandPools(num_secondary_buffers);
-		//SetupRenderpass(Instance::VulpesInstanceConfig.MSAA_SampleCount);
 		SetupDepthStencil();
 
 		VkSemaphoreCreateInfo semaphore_info{ VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO, nullptr, 0 };
@@ -57,6 +63,8 @@ namespace vulpes {
 		// init frame limiters.
 		limiter_a = std::chrono::system_clock::now();
 		limiter_b = std::chrono::system_clock::now();
+
+		LOG_IF(verbose_logging, INFO) << "BaseScene setup complete.";
 
 	}
 
@@ -258,6 +266,8 @@ namespace vulpes {
 
 		renderPass = std::make_unique<Renderpass>(device.get(), renderpass_create_info);
 
+		LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "Renderpass created.";
+
 	}
 
 	void vulpes::BaseScene::SetupDepthStencil() {
@@ -289,6 +299,8 @@ namespace vulpes {
 	}
 
 	void vulpes::BaseScene::RecreateSwapchain() {
+
+		LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "Began to recreate swapchain...";
 
 		// First wait to make sure nothing is in use.
 		vkDeviceWaitIdle(device->vkHandle());
@@ -327,6 +339,8 @@ namespace vulpes {
 		SetupFramebuffers();
 		RecreateObjects();
 		vkDeviceWaitIdle(device->vkHandle());
+
+		LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "Swapchain recreation successful.";
 
 	}
 

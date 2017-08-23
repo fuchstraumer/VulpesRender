@@ -266,9 +266,13 @@ namespace vulpes {
 			PRIVATE_ALLOCATION,
 		};
 
-		allocType Type;
 
 		Allocation() = default;
+		~Allocation() = default;
+		Allocation(const Allocation&) = default;
+		Allocation& operator=(const Allocation&) = default;
+		Allocation(Allocation&& other) noexcept;
+		Allocation& operator=(Allocation&& other) noexcept;
 
 		void Init(MemoryBlock* parent_block, const VkDeviceSize& offset, const VkDeviceSize& alignment, const VkDeviceSize& alloc_size, const SuballocationType& suballoc_type);
 		void Update(MemoryBlock* new_parent_block, const VkDeviceSize& new_offset);
@@ -278,6 +282,7 @@ namespace vulpes {
 		VkDeviceSize Offset() const noexcept;
 		uint32_t MemoryTypeIdx() const noexcept;
 
+		allocType Type;
 		SuballocationType SuballocType;
 		VkDeviceSize Size, Alignment;
 
