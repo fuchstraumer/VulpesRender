@@ -45,7 +45,7 @@ namespace vulpes {
 
 		Suballocations.clear();
 		availSuballocations.clear();
-		LOG(INFO) << "MemoryBlock destroyed, memory handle was: " << memory;
+		LOG(INFO) << "MemoryBlock memory freed, memory handle was: " << memory << " and size was " << std::to_string(Size * 1e-6) << "mb";
 		vkFreeMemory(alloc->DeviceHandle(), memory, nullptr);
 		memory = VK_NULL_HANDLE;
 
@@ -464,14 +464,14 @@ namespace vulpes {
 
 	AllocationCollection::~AllocationCollection() {
 		for (size_t i = 0; i < allocations.size(); ++i) {
-			allocations[i]->Destroy(allocator);
-			allocations[i].reset();
+			if (allocations[i]) {
+				allocations[i]->Destroy(allocator);
+				allocations[i].reset();
+			}
 		}
 
 		allocations.clear();
 		allocations.shrink_to_fit();
-
-		LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "AllocationCollection " << this << " was destroyed.";
 
 	}
 
@@ -490,7 +490,7 @@ namespace vulpes {
 	void AllocationCollection::RemoveBlock(MemoryBlock* block_to_erase) {
 		for (auto iter = allocations.begin(); iter != allocations.end(); ++iter) {
 			if ((*iter).get() == block_to_erase) {
-				LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "Destroyed memory block " << reinterpret_cast<size_t>((*iter).get());
+				LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "Removed memory block " << (*iter).get() << " from allocation collection.";
 				allocations.erase(iter);
 			}
 		}
@@ -513,7 +513,7 @@ namespace vulpes {
 		for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
 			allocations[i] = std::make_unique<AllocationCollection>(this);
 			privateAllocations[i] = std::make_unique<AllocationCollection>(this);
-			emptyAllocations[i] = false;
+			emptyAllocations[i] = true;
 		}
 	}
 
@@ -548,7 +548,7 @@ namespace vulpes {
 		for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
 			allocations[i] = std::make_unique<AllocationCollection>(this);
 			privateAllocations[i] = std::make_unique<AllocationCollection>(this);
-			emptyAllocations[i] = false;
+			emptyAllocations[i] = true;
 		}
 
 	}
@@ -589,11 +589,14 @@ namespace vulpes {
 
 	void Allocator::FreeMemory(const Allocation* memory_to_free) {
 		uint32_t type_idx = 0;
+
 		MemoryBlock* alloc_to_delete = nullptr;
-		bool found = false; // searching for given memory range.
+
 		if (memory_to_free->Type == Allocation::allocType::BLOCK_ALLOCATION) {
+
 			type_idx = memory_to_free->MemoryTypeIdx();
 			auto& allocation_collection = allocations[type_idx];
+			MemoryBlock* block_to_free = nullptr;
 			
 			auto& block = allocation_collection->allocations.front();
 			block->Free(memory_to_free);
@@ -620,15 +623,15 @@ namespace vulpes {
 			
 		}
 
-		if (found) {
-			if (alloc_to_delete != nullptr) {
-				LOG(INFO) << "Deleted an allocation.";
-				// need to cleanup resources first, before deleting the actual object.
-				alloc_to_delete->Destroy(this);
-				delete alloc_to_delete;
-			}
-			return;
+	
+		if (alloc_to_delete != nullptr) {
+			LOG(INFO) << "Deleted block allocation " << alloc_to_delete;
+			// need to cleanup resources first, before deleting the actual object.
+			alloc_to_delete->Destroy(this);
+			delete alloc_to_delete;
 		}
+		return;
+
 
 		// memory_to_free not found, possible a privately/singularly allocated memory object
 		if (freePrivateMemory(memory_to_free)) {
@@ -778,7 +781,7 @@ namespace vulpes {
 					}
 				}
 
-				LOG(INFO) << "Created new allocation object w/ size of " << std::to_string(alloc_info.allocationSize);
+				LOG(INFO) << "Created new allocation object w/ size of " << std::to_string(alloc_info.allocationSize * 1e-6) << "mb";
 				return VK_SUCCESS;
 			}
 		}

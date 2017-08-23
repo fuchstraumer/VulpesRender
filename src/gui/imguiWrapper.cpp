@@ -14,6 +14,8 @@ namespace vulpes {
 		vkDestroyDescriptorPool(device->vkHandle(), descriptorPool, nullptr);
 		vkDestroyPipelineLayout(device->vkHandle(), pipelineLayout, nullptr);
 		cache.reset();
+		vbo.reset();
+		ebo.reset();
 
 	}
 
