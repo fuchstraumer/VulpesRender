@@ -43,8 +43,14 @@ namespace vulpes {
 
 	void MemoryBlock::Destroy(Allocator * alloc) {
 
-		Suballocations.clear();
-		availSuballocations.clear();
+		if (!Suballocations.empty()) {
+			Suballocations.clear();
+		}
+
+		if (!availSuballocations.empty()) {
+			availSuballocations.clear();
+		}
+
 		LOG(INFO) << "MemoryBlock memory freed, memory handle was: " << memory << " and size was " << std::to_string(Size * 1e-6) << "mb";
 		vkFreeMemory(alloc->DeviceHandle(), memory, nullptr);
 		memory = VK_NULL_HANDLE;
@@ -146,7 +152,6 @@ namespace vulpes {
 			return ValidationCode::FREE_SUBALLOC_COUNT_MISMATCH;
 		}
 
-		LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "A memory validation pass succeeded.";
 		return ValidationCode::VALIDATION_PASSED;
 	}
 
@@ -492,8 +497,11 @@ namespace vulpes {
 			if ((*iter).get() == block_to_erase) {
 				LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "Removed memory block " << (*iter).get() << " from allocation collection.";
 				allocations.erase(iter);
+				return;
 			}
 		}
+
+		LOG(ERROR) << "Couldn't free memory block " << block_to_erase << " !";
 	}
 
 	void AllocationCollection::SortAllocations() {
@@ -590,13 +598,10 @@ namespace vulpes {
 	void Allocator::FreeMemory(const Allocation* memory_to_free) {
 		uint32_t type_idx = 0;
 
-		MemoryBlock* alloc_to_delete = nullptr;
-
 		if (memory_to_free->Type == Allocation::allocType::BLOCK_ALLOCATION) {
 
 			type_idx = memory_to_free->MemoryTypeIdx();
 			auto& allocation_collection = allocations[type_idx];
-			MemoryBlock* block_to_free = nullptr;
 			
 			auto& block = allocation_collection->allocations.front();
 			block->Free(memory_to_free);
@@ -610,8 +615,7 @@ namespace vulpes {
 
 			if (block->Empty()) {
 				if (emptyAllocations[type_idx]) {
-					alloc_to_delete = block.release();
-					allocation_collection->RemoveBlock(alloc_to_delete);
+					allocation_collection->RemoveBlock(block.get());
 				}
 				else {
 					emptyAllocations[type_idx] = true;
@@ -623,13 +627,6 @@ namespace vulpes {
 			
 		}
 
-	
-		if (alloc_to_delete != nullptr) {
-			LOG(INFO) << "Deleted block allocation " << alloc_to_delete;
-			// need to cleanup resources first, before deleting the actual object.
-			alloc_to_delete->Destroy(this);
-			delete alloc_to_delete;
-		}
 		return;
 
 
