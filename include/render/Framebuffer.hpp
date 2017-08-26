@@ -3,10 +3,10 @@
 #define VULPES_VK_FRAMEBUFFER_H
 
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.h"
-#include "../resource/Image.h"
-#include "../render/Multisampling.h"
-#include "../core/LogicalDevice.h"
+#include "../ForwardDecl.hpp"
+#include "../resource/Image.hpp"
+#include "../render/Multisampling.hpp"
+#include "../core/LogicalDevice.hpp"
 
 
 namespace vulpes {

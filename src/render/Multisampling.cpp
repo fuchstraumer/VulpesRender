@@ -1,7 +1,7 @@
 #include "vpr_stdafx.h"
-#include "render/Multisampling.h"
-#include "core/LogicalDevice.h"
-#include "render/Swapchain.h"
+#include "render/Multisampling.hpp"
+#include "core/LogicalDevice.hpp"
+#include "render/Swapchain.hpp"
 
 VkSampleCountFlagBits vulpes::Multisampling::SampleCount = VK_SAMPLE_COUNT_8_BIT;
 

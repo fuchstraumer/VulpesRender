@@ -1,7 +1,7 @@
 #include "vpr_stdafx.h"
-#include "resource/DescriptorPool.h"
-#include "core/LogicalDevice.h"
-#include "resource/DescriptorSet.h"
+#include "resource/DescriptorPool.hpp"
+#include "core/LogicalDevice.hpp"
+#include "resource/DescriptorSet.hpp"
 
 namespace vulpes {
 

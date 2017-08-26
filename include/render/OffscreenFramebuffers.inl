@@ -1,5 +1,4 @@
-#include "OffscreenFramebuffers.h"
-#include "OffscreenFramebuffers.h"
+#include "OffscreenFramebuffers.hpp"
 
 namespace vulpes {
 

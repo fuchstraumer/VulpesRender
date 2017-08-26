@@ -2,11 +2,11 @@
 #ifndef VULPES_VK_INSTANCE_H
 #define VULPES_VK_INSTANCE_H
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.h"
-#include "InstanceConfig.h"
-#include "../util/Camera.h"
-#include "../util/Arcball.h"
-#include "../gui/imguiWrapper.h"
+#include "../ForwardDecl.hpp"
+#include "InstanceConfig.hpp"
+#include "../util/Camera.hpp"
+#include "../util/Arcball.hpp"
+#include "../gui/imguiWrapper.hpp"
 
 namespace vulpes {
 

@@ -1,5 +1,5 @@
 #include "vpr_stdafx.h"
-#include "core/PhysicalDevice.h"
+#include "core/PhysicalDevice.hpp"
 
 namespace vulpes {
 

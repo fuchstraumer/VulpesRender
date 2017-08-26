@@ -1,5 +1,5 @@
 #include "vpr_stdafx.h"
-#include "util/Arcball.h"
+#include "util/Arcball.hpp"
 #include "imgui.h"
 
 namespace vulpes {

@@ -1,6 +1,6 @@
 #include "vpr_stdafx.h"
-#include "resource/PipelineLayout.h"
-#include "core/LogicalDevice.h"
+#include "resource/PipelineLayout.hpp"
+#include "core/LogicalDevice.hpp"
 
 namespace vulpes {
 

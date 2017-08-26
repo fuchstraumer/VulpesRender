@@ -3,8 +3,8 @@
 #define VULPES_VK_LOGICAL_DEVICE_H
 
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.h"
-#include "../resource/Allocator.h"
+#include "../ForwardDecl.hpp"
+#include "../resource/Allocator.hpp"
 namespace vulpes {
 
 	struct vkQueueFamilyIndices {

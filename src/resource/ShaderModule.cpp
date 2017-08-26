@@ -1,7 +1,7 @@
 #include "vpr_stdafx.h"
-#include "resource/ShaderModule.h"
-#include "core/LogicalDevice.h"
-#include "util/ShaderCompiler.h"
+#include "resource/ShaderModule.hpp"
+#include "core/LogicalDevice.hpp"
+#include "util/ShaderCompiler.hpp"
 namespace vulpes {
 	ShaderModule::ShaderModule(const Device* device, const char * filename, const VkShaderStageFlagBits & _stages, const char * shader_name) : pipelineInfo(vk_pipeline_shader_stage_create_info_base), stages(_stages), createInfo(vk_shader_module_create_info_base), parent(device) {
 		

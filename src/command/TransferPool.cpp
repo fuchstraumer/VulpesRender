@@ -1,7 +1,6 @@
-#include "..\..\include\command\TransferPool.h"
 #include "vpr_stdafx.h"
-#include "command/TransferPool.h"
-#include "core/LogicalDevice.h"
+#include "command/TransferPool.hpp"
+#include "core/LogicalDevice.hpp"
 
 namespace vulpes {
 

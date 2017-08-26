@@ -2,8 +2,8 @@
 #ifndef VULPES_VK_IMAGE_H
 #define VULPES_VK_IMAGE_H
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.h"
-#include "../resource/Allocator.h"
+#include "../ForwardDecl.hpp"
+#include "../resource/Allocator.hpp"
 /*
 
 	Wraps the common image creation, transfer, and staging methods. 

@@ -78,13 +78,13 @@ ExternalProject_Add(glslang
     "-DENABLE_HLSL=OFF"
  )
 
-FILE(GLOB UTIL "src/util/*.cc" "src/util/*.cpp" "include/util/*.h")
-FILE(GLOB COMMON "src/common/*.h")
-FILE(GLOB COMMAND_FILES "src/command/*.cpp" "include/command/*.h")
-FILE(GLOB CORE "src/core/*.cpp" "include/core/*.h")
-FILE(GLOB RESOURCES "src/resource/*.cpp" "include/resource/*.h")
-FILE(GLOB RENDER "src/render/*.cpp" "include/render/*.h")
-FILE(GLOB GUI "src/gui/*.cpp" "include/gui/*.h")
+FILE(GLOB UTIL "src/util/*.cc" "src/util/*.cpp" "include/util/*.h" "include/util/*.hpp")
+FILE(GLOB COMMON "src/common/*.h" "src/common/*.hpp")
+FILE(GLOB COMMAND_FILES "src/command/*.cpp" "include/command/*.hpp")
+FILE(GLOB CORE "src/core/*.cpp" "include/core/*.hpp")
+FILE(GLOB RESOURCES "src/resource/*.cpp" "include/resource/*.hpp")
+FILE(GLOB RENDER "src/render/*.cpp" "include/render/*.hpp")
+FILE(GLOB GUI "src/gui/*.cpp" "include/gui/*.hpp")
 FILE(GLOB GUI_ADDONS "src/gui/addons/*.cpp" "include/gui/addons/*.h")
 #FILE(GLOB MINIZIP "src/gui/addons/minizip/*.c" "src/gui/addons/minizip/*.h")
 FILE(GLOB IMGUI "imgui/imgui.cpp" "imgui/imgui.h" "imgui/imgui_draw.cpp" "imgui/imgui_internal.h" "imgui/imgui_demo.cpp")
@@ -123,6 +123,6 @@ SET(CMAKE_STATIC_LINKER_FLAGS_RELEASE "-NODEFAULTLIB
   \"${PROJECT_SOURCE_DIR}/ext/lib/OSDependent.lib\"")
 
 
-ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/BaseScene.h" "src/BaseScene.cpp" ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
+ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" "include/BaseScene.hpp" "src/BaseScene.cpp" ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
 
 

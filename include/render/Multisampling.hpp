@@ -3,8 +3,8 @@
 #define VULPES_VK_MULTISAMPLING_H
 
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.h"
-#include "../resource/Image.h"
+#include "../ForwardDecl.hpp"
+#include "../resource/Image.hpp"
 namespace vulpes {
 
 	class Multisampling {
