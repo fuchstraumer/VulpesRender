@@ -1,5 +1,5 @@
 #include "vpr_stdafx.h"
-#include "util/ShaderCompiler.h"
+#include "util/ShaderCompiler.hpp"
 
 namespace vulpes {
 

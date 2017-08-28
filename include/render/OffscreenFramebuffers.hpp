@@ -3,8 +3,8 @@
 #define VULPES_VK_OFFSCREEN_FRAMEBUFFERS_H
 
 #include "vpr_stdafx.h"
-#include "Framebuffer.h"
-#include "Swapchain.h"
+#include "Framebuffer.hpp"
+#include "Swapchain.hpp"
 
 namespace vulpes {
     

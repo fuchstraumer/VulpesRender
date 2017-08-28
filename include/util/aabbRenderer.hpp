@@ -3,13 +3,13 @@
 #define VULPES_VK_AABB_RENDERER_H
 
 #include "vpr_stdafx.h"
-#include "AABB.h"
-#include "ForwardDecl.h"
-#include "../resource/Buffer.h"
-#include "../render/GraphicsPipeline.h"
-#include "../resource/PipelineCache.h"
-#include "../resource/ShaderModule.h"
-#include "../resource/PipelineLayout.h"
+#include "AABB.hpp"
+#include "ForwardDecl.hpp"
+#include "../resource/Buffer.hpp"
+#include "../render/GraphicsPipeline.hpp"
+#include "../resource/PipelineCache.hpp"
+#include "../resource/ShaderModule.hpp"
+#include "../resource/PipelineLayout.hpp"
 
 namespace vulpes {
 

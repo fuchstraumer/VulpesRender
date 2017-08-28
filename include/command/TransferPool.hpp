@@ -2,8 +2,8 @@
 #define VULPES_VK_TRANSFER_POOL_H
 
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.h"
-#include "CommandPool.h"
+#include "../ForwardDecl.hpp"
+#include "CommandPool.hpp"
 
 namespace vulpes {
 

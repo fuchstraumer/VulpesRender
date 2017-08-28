@@ -3,7 +3,7 @@
 #define VULPES_VK_RENDER_PASS_H
 
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.h"
+#include "../ForwardDecl.hpp"
 
 namespace vulpes {
 

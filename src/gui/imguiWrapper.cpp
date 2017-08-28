@@ -1,8 +1,8 @@
 #include "vpr_stdafx.h"
-#include "gui/imguiWrapper.h"
-#include "command/TransferPool.h"
-#include "core/Instance.h"
-#include "resource/ShaderModule.h"
+#include "gui/imguiWrapper.hpp"
+#include "command/TransferPool.hpp"
+#include "core/Instance.hpp"
+#include "resource/ShaderModule.hpp"
 
 namespace vulpes {
 

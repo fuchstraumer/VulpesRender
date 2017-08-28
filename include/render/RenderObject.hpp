@@ -1,13 +1,13 @@
 #ifndef VULPES_RENDER_OBJECT_H
 #define VULPES_RENDER_OBJECT_H
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.h"
+#include "../ForwardDecl.hpp"
 
-#include "resource/DescriptorPool.h"
-#include "resource/DescriptorSet.h"
-#include "resource/PipelineLayout.h"
-#include "resource/PipelineCache.h"
-#include "render/GraphicsPipeline.h"
+#include "resource/DescriptorPool.hpp"
+#include "resource/DescriptorSet.hpp"
+#include "resource/PipelineLayout.hpp"
+#include "resource/PipelineCache.hpp"
+#include "render/GraphicsPipeline.hpp"
 
 namespace vulpes {
 

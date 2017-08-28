@@ -1,6 +1,6 @@
 #include "vpr_stdafx.h"
-#include "render/GraphicsPipeline.h"
-#include "core/LogicalDevice.h"
+#include "render/GraphicsPipeline.hpp"
+#include "core/LogicalDevice.hpp"
 
 namespace vulpes {
 

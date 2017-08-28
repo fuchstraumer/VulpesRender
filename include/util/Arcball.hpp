@@ -1,7 +1,7 @@
 #ifndef VULPES_VK_ARCBALL_H
 #define VULPES_VK_ARCBALL_H
 #include "vpr_stdafx.h"
-#include "Camera.h"
+#include "Camera.hpp"
 
 namespace vulpes {
 

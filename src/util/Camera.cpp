@@ -1,6 +1,6 @@
 #include "vpr_stdafx.h"
-#include "util/Camera.h"
-#include "core/Instance.h"
+#include "util/Camera.hpp"
+#include "core/Instance.hpp"
 namespace vulpes {
 
 	cameraBase::cameraBase(const glm::vec3 & position, const glm::vec3 & up, const glm::vec3& front) : Position(position), Up(up), Front(front), WorldUp(0.0f, 1.0f, 0.0f) {}

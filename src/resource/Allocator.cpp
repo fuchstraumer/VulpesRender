@@ -1,8 +1,8 @@
 #include "vpr_stdafx.h"
-#include "resource/Allocator.h"
-#include "core/Instance.h"
-#include "core/LogicalDevice.h"
-#include "core/PhysicalDevice.h"
+#include "resource/Allocator.hpp"
+#include "core/Instance.hpp"
+#include "core/LogicalDevice.hpp"
+#include "core/PhysicalDevice.hpp"
 
 namespace vulpes {
 

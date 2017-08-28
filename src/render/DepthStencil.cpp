@@ -1,6 +1,6 @@
 #include "vpr_stdafx.h"
-#include "render/DepthStencil.h"
-#include "core/LogicalDevice.h"
+#include "render/DepthStencil.hpp"
+#include "core/LogicalDevice.hpp"
 
 namespace vulpes {
 

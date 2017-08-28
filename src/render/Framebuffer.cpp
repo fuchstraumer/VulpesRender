@@ -1,6 +1,6 @@
 #include "vpr_stdafx.h"
-#include "render/Framebuffer.h"
-#include "core/LogicalDevice.h"
+#include "render/Framebuffer.hpp"
+#include "core/LogicalDevice.hpp"
 namespace vulpes {
 
 	Framebuffer::~Framebuffer() {

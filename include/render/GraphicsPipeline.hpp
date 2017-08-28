@@ -3,7 +3,7 @@
 #define VULPES_VK_GRAPHICS_PIPELINE_H
 
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.h"
+#include "../ForwardDecl.hpp"
 
 namespace vulpes {
 

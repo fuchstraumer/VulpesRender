@@ -1,8 +1,6 @@
-#include "..\..\include\util\aabbRenderer.h"
-#include "..\..\include\util\aabbRenderer.h"
 #include "vpr_stdafx.h"
-#include "util/aabbRenderer.h"
-#include "core/LogicalDevice.h"
+#include "util/aabbRenderer.hpp"
+#include "core/LogicalDevice.hpp"
 
 
 namespace vulpes {

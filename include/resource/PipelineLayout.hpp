@@ -2,7 +2,7 @@
 #define VULPES_VK_PIPELINE_LAYOUT_H
 
 #include "vpr_stdafx.h"
-#include "ForwardDecl.h"
+#include "ForwardDecl.hpp"
 
 namespace vulpes {
 

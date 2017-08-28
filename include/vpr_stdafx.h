@@ -59,13 +59,11 @@
 
 #define  VK_FORCE_ASSERT
 #include "vulkan/vulkan.h"
-#include "common/CreateInfoBase.h"
-#include "common/vkAssert.h"
-#include "common/vk_constants.h"
-#include "common/CommonDef.h"
+#include "common/CreateInfoBase.hpp"
+#include "common/vkAssert.hpp"
+#include "common/vk_constants.hpp"
 
 #pragma warning(pop)
-
 // Number of odd/broken defines in this, as it includes windows.h 
 #define NOMINMAX
 #include "util/easylogging++.h"

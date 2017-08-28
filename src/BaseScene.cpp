@@ -1,15 +1,15 @@
 #include "vpr_stdafx.h"
-#include "BaseScene.h"
+#include "BaseScene.hpp"
 
-#include "core/Instance.h"
-#include "core/LogicalDevice.h"
-#include "core/PhysicalDevice.h"
-#include "render/Swapchain.h"
-#include "render/Renderpass.h"
-#include "render/Framebuffer.h"
-#include "command/CommandPool.h"
-#include "render/DepthStencil.h"
-#include "util/AABB.h"
+#include "core/Instance.hpp"
+#include "core/LogicalDevice.hpp"
+#include "core/PhysicalDevice.hpp"
+#include "render/Swapchain.hpp"
+#include "render/Renderpass.hpp"
+#include "render/Framebuffer.hpp"
+#include "command/CommandPool.hpp"
+#include "render/DepthStencil.hpp"
+#include "util/AABB.hpp"
 
 namespace vulpes {
 

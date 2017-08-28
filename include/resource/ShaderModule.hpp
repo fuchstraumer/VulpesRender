@@ -2,7 +2,7 @@
 #ifndef VULPES_VK_SHADER_MODULE_H
 #define VULPES_VK_SHADER_MODULE_H
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.h"
+#include "../ForwardDecl.hpp"
 
 namespace vulpes {
 

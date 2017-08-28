@@ -1,8 +1,8 @@
 #include "vpr_stdafx.h"
-#include "resource/PipelineCache.h"
-#include "core/LogicalDevice.h"
-#include "core/PhysicalDevice.h"
-#include "BaseScene.h"
+#include "resource/PipelineCache.hpp"
+#include "core/LogicalDevice.hpp"
+#include "core/PhysicalDevice.hpp"
+#include "BaseScene.hpp"
 
 namespace vulpes {
 

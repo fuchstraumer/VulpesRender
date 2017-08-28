@@ -1,9 +1,9 @@
 #include "vpr_stdafx.h"
-#include "core/Instance.h"
+#include "core/Instance.hpp"
 #include <imgui.h>
-#include "common/VkDebug.h"
-#include "core/PhysicalDevice.h"
-#include "BaseScene.h"
+#include "common/VkDebug.hpp"
+#include "core/PhysicalDevice.hpp"
+#include "BaseScene.hpp"
 
 namespace vulpes {
 

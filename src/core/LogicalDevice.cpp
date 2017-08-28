@@ -1,7 +1,7 @@
 #include "vpr_stdafx.h"
-#include "core/LogicalDevice.h"
-#include "core/PhysicalDevice.h"
-#include "core/Instance.h"
+#include "core/LogicalDevice.hpp"
+#include "core/PhysicalDevice.hpp"
+#include "core/Instance.hpp"
 
 namespace vulpes {
 

@@ -1,7 +1,7 @@
 #include "vpr_stdafx.h"
-#include "resource/Buffer.h"
-#include "core/LogicalDevice.h"
-#include "command/CommandPool.h"
+#include "resource/Buffer.hpp"
+#include "core/LogicalDevice.hpp"
+#include "command/CommandPool.hpp"
 
 namespace vulpes {
 
