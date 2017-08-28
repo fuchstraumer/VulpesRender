@@ -6,7 +6,14 @@ namespace vulpes {
 
     struct VulpesIO {
         
-        
+        std::array<bool, 6> Mouse;
+        std::array<bool, 1024> Keys;
+        glm::vec2 MousePos;
+        glm::vec2 MouseDelta;
+
+    private:
+
+        glm::vec2 lastMousePos;
     };
 
 }
