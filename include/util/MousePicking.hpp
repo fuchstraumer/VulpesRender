@@ -2,7 +2,7 @@
 #define VULPES_VK_MOUSE_PICKING_H
 
 #include "vpr_stdafx.h"
-#include "core/Instance.h"
+#include "core/Instance.hpp"
 namespace vulpes {
 
     struct MousePicker {
