@@ -328,6 +328,7 @@ namespace vulpes {
 			VulpesInstanceConfig.MovementSpeed -= 25.0f;
 		}
 
+
 		// Rest feed into movement
 		if (key >= 0 && key < 1024) {
 			if (action == GLFW_PRESS) {
