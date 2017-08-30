@@ -387,14 +387,17 @@ namespace vulpes {
 	void BaseScene::RenderLoop() {
 
 		instance->frameTime = static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs / 1000.0);
+		ImGuiIO& io = ImGui::GetIO();
 
 		while(!glfwWindowShouldClose(instance->Window)) {
 
 			limitFrame();
 
 			glfwPollEvents();
-
+			
 			UpdateMouseActions();
+			gui->NewFrame(instance.get(), false);
+
 			instance->UpdateMovement(static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs));
 			
 			RecordCommands();
@@ -451,7 +454,6 @@ namespace vulpes {
 		submit_info.pCommandBuffers = &graphicsPool->GetCmdBuffer(image_idx);
 		submit_info.signalSemaphoreCount = static_cast<uint32_t>(renderCompleteSemaphores.size());
 		submit_info.pSignalSemaphores = renderCompleteSemaphores.data();
-
 		result = vkQueueSubmit(device->GraphicsQueue(), 1, &submit_info, presentFences[image_idx]);
 		switch(result) {
 			case VK_ERROR_DEVICE_LOST:

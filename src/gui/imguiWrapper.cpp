@@ -6,6 +6,8 @@
 
 namespace vulpes {
 
+	static std::array<bool, 3> mouse_pressed{ false, false, false };
+
 	imguiWrapper::~imguiWrapper() {
 		
 		texture.reset();
@@ -67,6 +69,8 @@ namespace vulpes {
 
 		auto& io = ImGui::GetIO();
 		auto* window_ptr = dynamic_cast<InstanceGLFW*>(instance)->Window;
+		io.ClipboardUserData = reinterpret_cast<void*>(window_ptr); // required for clipboard funcs to work.
+		static double curr_time = 0.0;
 
 		if (Instance::VulpesInstanceConfig.EnableMouseLocking) {
 			if (instance->keys[GLFW_KEY_LEFT_ALT]) {
@@ -79,8 +83,46 @@ namespace vulpes {
 			}
 		}
 
-		ImGui::NewFrame();
+		{
+			io.KeysDown[io.KeyMap[ImGuiKey_Tab]] = instance->keys[GLFW_KEY_TAB];
+			io.KeysDown[io.KeyMap[ImGuiKey_LeftArrow]] = instance->keys[GLFW_KEY_LEFT];
+			io.KeysDown[io.KeyMap[ImGuiKey_RightArrow]] = instance->keys[GLFW_KEY_RIGHT];
+			io.KeysDown[io.KeyMap[ImGuiKey_UpArrow]] = instance->keys[GLFW_KEY_UP];
+			io.KeysDown[io.KeyMap[ImGuiKey_DownArrow]] = instance->keys[GLFW_KEY_DOWN];
+			io.KeysDown[io.KeyMap[ImGuiKey_PageUp]] = instance->keys[GLFW_KEY_PAGE_UP];
+			io.KeysDown[io.KeyMap[ImGuiKey_PageDown]] = instance->keys[GLFW_KEY_PAGE_DOWN];
+			io.KeysDown[io.KeyMap[ImGuiKey_Home]] = instance->keys[GLFW_KEY_HOME];
+			io.KeysDown[io.KeyMap[ImGuiKey_End]] = instance->keys[GLFW_KEY_END];
+			io.KeysDown[io.KeyMap[ImGuiKey_Delete]] = instance->keys[GLFW_KEY_DELETE];
+			io.KeysDown[io.KeyMap[ImGuiKey_Backspace]] = instance->keys[GLFW_KEY_BACKSPACE];
+			io.KeysDown[io.KeyMap[ImGuiKey_Enter]] = instance->keys[GLFW_KEY_ENTER];
+			io.KeysDown[io.KeyMap[ImGuiKey_Escape]] = instance->keys[GLFW_KEY_ESCAPE];
+			io.KeysDown[io.KeyMap[ImGuiKey_A]] = instance->keys[GLFW_KEY_A];
+			io.KeysDown[io.KeyMap[ImGuiKey_C]] = instance->keys[GLFW_KEY_C];
+			io.KeysDown[io.KeyMap[ImGuiKey_V]] = instance->keys[GLFW_KEY_V];
+			io.KeysDown[io.KeyMap[ImGuiKey_X]] = instance->keys[GLFW_KEY_X];
+			io.KeysDown[io.KeyMap[ImGuiKey_Y]] = instance->keys[GLFW_KEY_Y];
+			io.KeysDown[io.KeyMap[ImGuiKey_Z]] = instance->keys[GLFW_KEY_Z];
+			io.KeyCtrl = instance->keys[GLFW_KEY_LEFT_CONTROL] || instance->keys[GLFW_KEY_RIGHT_CONTROL];
+			io.KeyShift = instance->keys[GLFW_KEY_LEFT_SHIFT] || instance->keys[GLFW_KEY_RIGHT_SHIFT];
+			io.KeyAlt = instance->keys[GLFW_KEY_LEFT_ALT] || instance->keys[GLFW_KEY_RIGHT_ALT];
+			io.KeySuper = instance->keys[GLFW_KEY_LEFT_SUPER] || instance->keys[GLFW_KEY_RIGHT_SUPER];
+		}
 
+		for (size_t i = 0; i < 3; ++i) {
+			io.MouseDown[i] = mouse_pressed[i] || glfwGetMouseButton(window_ptr, i) != 0;
+			mouse_pressed[i] = false;
+		}
+
+		double frame_time = glfwGetTime();
+		io.DeltaTime = curr_time > 0.0 ? static_cast<float>(frame_time - curr_time) : (1.0f / 60.0f);
+		curr_time = frame_time;
+		
+		io.MouseWheel = instance->mouseScroll;
+		io.MouseWheel = 0.0f;
+
+		ImGui::NewFrame();
+		
 	}
 
 	void imguiWrapper::UpdateBuffers() {
@@ -181,8 +223,6 @@ namespace vulpes {
 	}
 
 	void imguiWrapper::createFontTexture() {
-
-		ImGuiIO& io = ImGui::GetIO();
 
 		// Load texture.
 		size_t texture_data_size = loadFontTextureData();

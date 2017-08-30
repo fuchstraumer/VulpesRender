@@ -254,8 +254,11 @@ namespace vulpes {
 		io.KeyMap[ImGuiKey_X] = GLFW_KEY_X;
 		io.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
 		io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;
-
+		io.SetClipboardTextFn = SetClipboardCallback;
+		io.GetClipboardTextFn = GetClipboardCallback;
+#ifdef _WIN32
 		io.ImeWindowHandle = glfwGetWin32Window(Window);
+#endif
 		io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
 		io.DisplaySize = ImVec2(static_cast<float>(DEFAULT_WIDTH), static_cast<float>(DEFAULT_HEIGHT));
 	}
@@ -335,7 +338,7 @@ namespace vulpes {
 				keys[key] = true;
 				io.KeysDown[key] = true;
 			}
-			else if (action == GLFW_RELEASE) {
+			if (action == GLFW_RELEASE) {
 				keys[key] = false;
 				io.KeysDown[key] = false;
 			}
@@ -348,6 +351,14 @@ namespace vulpes {
 		if (c > 0 && c < 0x10000) {
 			io.AddInputCharacter(static_cast<unsigned short>(c));
 		}
+	}
+
+	void InstanceGLFW::SetClipboardCallback(void * window, const char * text) {
+		glfwSetClipboardString(reinterpret_cast<GLFWwindow*>(window), text);
+	}
+
+	const char* InstanceGLFW::GetClipboardCallback(void* window) {
+		return glfwGetClipboardString(reinterpret_cast<GLFWwindow*>(window));
 	}
 
 	void InstanceGLFW::Refresh() {
