@@ -88,7 +88,6 @@ FILE(GLOB RESOURCES "src/resource/*.cpp" "include/resource/*.hpp")
 FILE(GLOB RENDER "src/render/*.cpp" "include/render/*.hpp")
 FILE(GLOB GUI "src/gui/*.cpp" "include/gui/*.hpp")
 FILE(GLOB GUI_ADDONS "src/gui/addons/*.cpp" "include/gui/addons/*.h")
-#FILE(GLOB MINIZIP "src/gui/addons/minizip/*.c" "src/gui/addons/minizip/*.h")
 FILE(GLOB IMGUI "imgui/imgui.cpp" "imgui/imgui.h" "imgui/imgui_draw.cpp" "imgui/imgui_internal.h" "imgui/imgui_demo.cpp")
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
