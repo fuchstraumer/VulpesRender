@@ -11,11 +11,21 @@
 #include "render/DepthStencil.hpp"
 #include "util/AABB.hpp"
 
+#ifdef _WIN32
+#include "util/EnableWER.hpp"
+#endif // _WIN32
+
+
 namespace vulpes {
 
 	std::vector<uint16_t> BaseScene::pipelineCacheHandles = std::vector<uint16_t>();
 
 	vulpes::BaseScene::BaseScene(const size_t& num_secondary_buffers, const uint32_t& _width, const uint32_t& _height) : width(_width), height(_height), numSecondaryBuffers(num_secondary_buffers) {
+
+#ifdef _WIN32
+        util::wer_enabler_t __wer;
+        __wer.enable();
+#endif 
 
 		const bool verbose_logging = Instance::VulpesInstanceConfig.VerboseLogging;
 
