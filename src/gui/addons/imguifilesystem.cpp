@@ -12,25 +12,24 @@
 //    misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 
+#pragma warning(push, 0) // ridiculous quantity of warnings abour deprecated functions and such.
+
 #ifdef _WIN32
 #	include <windows.h>
 #endif //_WIN32
 
-//- Common Code For All Addons needed just to ease inclusion as separate files in user code ----------------------
-#include <imgui.h>
+
 #undef IMGUI_DEFINE_PLACEMENT_NEW
 #define IMGUI_DEFINE_PLACEMENT_NEW
 /*#undef IMGUI_DEFINE_MATH_OPERATORS
 #define IMGUI_DEFINE_MATH_OPERATORS*/
+#include <imgui.h>
 #include <imgui_internal.h>
 //-----------------------------------------------------------------------------------------------------------------
 
 
 #include "gui/addons/imguifilesystem.h"
 
-#ifdef DIRENT_USES_UTF8_CHARS
-#	warning DIRENT_USES_UTF8_CHARS is deprecated and has become the default. (IMGUIFILESYSTEM_USE_ASCII_SHORT_PATHS_ON_WINDOWS can be used to disable it).
-#endif //IMGUIBINDINGS_CLEAR_INPUT_DATA_SOON
 
 #ifdef _WIN32
 #include <shlobj.h> // Known Directory locations
@@ -2910,4 +2909,5 @@ bool FileExists(const char* path) {
 
 } // namespace ImGuiFs
 
+#pragma warning(pop)
 
