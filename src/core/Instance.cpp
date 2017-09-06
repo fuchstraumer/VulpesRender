@@ -313,7 +313,8 @@ namespace vulpes {
 
 	void InstanceGLFW::MouseScrollCallback(GLFWwindow * window, double x_offset, double y_offset) {
 		mouseScroll += static_cast<float>(y_offset);
-		arcball.MouseScroll(0, static_cast<float>(y_offset));
+        ImGuiIO& io = ImGui::GetIO();
+        io.MouseWheel = y_offset;
 	}
 
 	void InstanceGLFW::KeyboardCallback(GLFWwindow * window, int key, int scan_code, int action, int mods){

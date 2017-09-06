@@ -117,8 +117,7 @@ namespace vulpes {
 		double frame_time = glfwGetTime();
 		io.DeltaTime = curr_time > 0.0 ? static_cast<float>(frame_time - curr_time) : (1.0f / 60.0f);
 		curr_time = frame_time;
-		
-		io.MouseWheel = instance->mouseScroll;
+
 		io.MouseWheel = 0.0f;
 
 		ImGui::NewFrame();

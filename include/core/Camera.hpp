@@ -1,12 +1,8 @@
 #pragma once
 #ifndef CAMERA_H
 #define CAMERA_H
-// Std. Includes
-#include <vector>
-#include "glm/ext.hpp"
-// GL Includes
 #include "vpr_stdafx.h"
-#include <iostream>
+
 
 namespace vulpes {
 

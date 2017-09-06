@@ -163,6 +163,8 @@ namespace vulpes {
 			if (ImGui::IsMouseReleased(0)) {
 				Instance::MouseUp(0, io.MousePos.x, io.MousePos.y);
 			}
+
+            Instance::MouseScroll(0, io.MouseWheel);
 		}
 	}
 
