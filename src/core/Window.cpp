@@ -13,11 +13,15 @@ namespace vulpes {
         createWindow();
     }
 
+    Window::~Window() {
+        vkDestroySurfaceKHR(Parent->vkHandle(), surface, nullptr);
+    }
+
     void Window::createWindow() {
 
         std::string window_title = Instance::VulpesInstanceConfig.ApplicationName;
         window = glfwCreateWindow(static_cast<int>(width), static_cast<int>(height), window_title.c_str(), nullptr, nullptr);
-        
+
         ImGuiIO& io = ImGui::GetIO();
 #ifdef _WIN32
 		io.ImeWindowHandle = glfwGetWin32Window(Window);
@@ -57,6 +61,10 @@ namespace vulpes {
         VkAssert(err);
         LOG(INFO) << "Created window surface.";
 
+    }
+
+    void Window::createInputHandler() {
+        InputHandler = std::make_unique<InputHandler>(this);
     }
 
     void Window::ResizeCallback(GLFWwindow* window, int width, int height) {

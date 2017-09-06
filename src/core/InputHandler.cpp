@@ -11,9 +11,11 @@ namespace vulpes {
     float InputHandler::LastY = 1.0f;
     float InputHandler::MouseDx = 0.0f;
     float InputHandler::MouseDy = 0.0f;
+    bool InputHandler::CameraLock = false;
 
     InputHandler::InputHandler(const Window* _parent) : parent(_parent) {
         setCallbacks();
+        setImguiMapping();
     }
 
     void InputHandler::MouseDrag(const int& button, const float & rot_x, const float & rot_y) {

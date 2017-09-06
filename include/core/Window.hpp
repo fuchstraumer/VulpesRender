@@ -13,6 +13,8 @@
 #include "GLFW/glfw3native.h"
 #endif
 
+#include "InputHandler.hpp"
+
 namespace vulpes {
 
     class Window {
@@ -21,10 +23,7 @@ namespace vulpes {
     public:
 
         Window(const Instance* parent_instance, const uint32_t& width, const uint32_t& height);
-        Window(const VkInstance& parent_instance, const bool& borderless);
-
-        void Recreate();
-        void Resize(const uint32_t& width, const uint32_t& height);
+        ~Window();
 
         const GLFWwindow* Window() const noexcept;
         const std::vector<std::string>& Extensions() const noexcept;
@@ -32,6 +31,8 @@ namespace vulpes {
 
         virtual static void ResizeCallback(GLFWwindow* window, int width, int height);
         
+        std::unique_ptr<InputHandler> InputHandler;
+
     private:
 
         void createWindow();
