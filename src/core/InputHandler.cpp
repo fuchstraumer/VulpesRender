@@ -10,9 +10,68 @@ namespace vulpes {
     float InputHandler::LastX = 1.0f;
     float InputHandler::LastY = 1.0f;
     float InputHandler::MouseDx = 0.0f;
+    float InputHandler::MouseDy = 0.0f;
 
     InputHandler::InputHandler(const Window* _parent) : parent(_parent) {
         setCallbacks();
+    }
+
+    void InputHandler::MouseDrag(const int& button, const float & rot_x, const float & rot_y) {
+		if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+			arcball.MouseDrag(button, rot_x, rot_y);
+		}
+	}
+
+	void InputHandler::MouseScroll(const int& button, const float & zoom_delta) {
+		if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+			arcball.MouseScroll(button, zoom_delta);
+		}
+	}
+
+    void InputHandler::MouseDown(const int& button, const float& x, const float& y) {
+		if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+			arcball.MouseDown(button, x, y);
+		}
+	}
+
+	void InputHandler::MouseUp(const int& button, const float & x, const float & y) {
+		if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+			arcball.MouseUp(button, x, y);
+		}
+	}
+
+    void InputHandler::UpdateMovement(const float& dt) {
+        ImGuiIO& io = ImGui::GetIO();
+		io.DeltaTime = dt;
+
+		if (io.WantCaptureKeyboard) {
+			return;
+		}
+
+		if (keys[GLFW_KEY_W]) {
+			cam.ProcessKeyboard(Direction::FORWARD, dt);
+			arcball.RotateUp(dt);
+		}
+		if (keys[GLFW_KEY_S]) {
+			cam.ProcessKeyboard(Direction::BACKWARD, dt);
+			arcball.RotateDown(dt);
+		}
+		if (keys[GLFW_KEY_D]) {
+			cam.ProcessKeyboard(Direction::RIGHT, dt);
+			arcball.RotateRight(dt);
+		}
+		if (keys[GLFW_KEY_A]) {
+			cam.ProcessKeyboard(Direction::LEFT, dt);
+			arcball.RotateLeft(dt);
+		}
+		if (keys[GLFW_KEY_X]) {
+			cam.ProcessKeyboard(Direction::DOWN, dt);
+			arcball.TranslateDown(dt);
+		}
+		if (keys[GLFW_KEY_C]) {
+			cam.ProcessKeyboard(Direction::UP, dt);
+			arcball.TranslateUp(dt);
+		}
     }
 
     void InputHandler::setCallbacks() const {
