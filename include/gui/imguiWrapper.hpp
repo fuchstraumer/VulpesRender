@@ -56,7 +56,7 @@ namespace vulpes {
 		void updateDescriptors();
 		void setupGraphicsPipelineInfo();
 		void setupGraphicsPipelineCreateInfo(const VkRenderPass& renderpass);
-
+        void updateImguiSpecialKeys() noexcept;
 		void validateBuffers();
 		void updateBufferData();
 		void updateFramegraph(const float& frame_time);

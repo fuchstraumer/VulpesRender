@@ -3,6 +3,7 @@
 #include "command/TransferPool.hpp"
 #include "core/Instance.hpp"
 #include "resource/ShaderModule.hpp"
+#include "BaseScene.hpp"
 
 namespace vulpes {
 
@@ -67,50 +68,28 @@ namespace vulpes {
 
 	void imguiWrapper::NewFrame(Instance* instance, bool update_framegraph) {
 
-		auto& io = ImGui::GetIO();
-		auto* window_ptr = dynamic_cast<InstanceGLFW*>(instance)->Window;
+        auto* window_ptr = instance->GetWindow();
+        updateImguiSpecialKeys();
+
+        auto& io = ImGui::GetIO();
 		io.ClipboardUserData = reinterpret_cast<void*>(window_ptr); // required for clipboard funcs to work.
 		static double curr_time = 0.0;
 
 		if (Instance::VulpesInstanceConfig.EnableMouseLocking) {
-			if (instance->keys[GLFW_KEY_LEFT_ALT]) {
+			if (input_handler::Keys[GLFW_KEY_LEFT_ALT]) {
 				freeMouse(instance);
-				Instance::cameraLock = true;
+				BaseScene::CameraLock = true;
 			}
 			else {
 				captureMouse(instance);
-				Instance::cameraLock = false;
+                BaseScene::CameraLock = false;
 			}
 		}
 
-		{
-			io.KeysDown[io.KeyMap[ImGuiKey_Tab]] = instance->keys[GLFW_KEY_TAB];
-			io.KeysDown[io.KeyMap[ImGuiKey_LeftArrow]] = instance->keys[GLFW_KEY_LEFT];
-			io.KeysDown[io.KeyMap[ImGuiKey_RightArrow]] = instance->keys[GLFW_KEY_RIGHT];
-			io.KeysDown[io.KeyMap[ImGuiKey_UpArrow]] = instance->keys[GLFW_KEY_UP];
-			io.KeysDown[io.KeyMap[ImGuiKey_DownArrow]] = instance->keys[GLFW_KEY_DOWN];
-			io.KeysDown[io.KeyMap[ImGuiKey_PageUp]] = instance->keys[GLFW_KEY_PAGE_UP];
-			io.KeysDown[io.KeyMap[ImGuiKey_PageDown]] = instance->keys[GLFW_KEY_PAGE_DOWN];
-			io.KeysDown[io.KeyMap[ImGuiKey_Home]] = instance->keys[GLFW_KEY_HOME];
-			io.KeysDown[io.KeyMap[ImGuiKey_End]] = instance->keys[GLFW_KEY_END];
-			io.KeysDown[io.KeyMap[ImGuiKey_Delete]] = instance->keys[GLFW_KEY_DELETE];
-			io.KeysDown[io.KeyMap[ImGuiKey_Backspace]] = instance->keys[GLFW_KEY_BACKSPACE];
-			io.KeysDown[io.KeyMap[ImGuiKey_Enter]] = instance->keys[GLFW_KEY_ENTER];
-			io.KeysDown[io.KeyMap[ImGuiKey_Escape]] = instance->keys[GLFW_KEY_ESCAPE];
-			io.KeysDown[io.KeyMap[ImGuiKey_A]] = instance->keys[GLFW_KEY_A];
-			io.KeysDown[io.KeyMap[ImGuiKey_C]] = instance->keys[GLFW_KEY_C];
-			io.KeysDown[io.KeyMap[ImGuiKey_V]] = instance->keys[GLFW_KEY_V];
-			io.KeysDown[io.KeyMap[ImGuiKey_X]] = instance->keys[GLFW_KEY_X];
-			io.KeysDown[io.KeyMap[ImGuiKey_Y]] = instance->keys[GLFW_KEY_Y];
-			io.KeysDown[io.KeyMap[ImGuiKey_Z]] = instance->keys[GLFW_KEY_Z];
-			io.KeyCtrl = instance->keys[GLFW_KEY_LEFT_CONTROL] || instance->keys[GLFW_KEY_RIGHT_CONTROL];
-			io.KeyShift = instance->keys[GLFW_KEY_LEFT_SHIFT] || instance->keys[GLFW_KEY_RIGHT_SHIFT];
-			io.KeyAlt = instance->keys[GLFW_KEY_LEFT_ALT] || instance->keys[GLFW_KEY_RIGHT_ALT];
-			io.KeySuper = instance->keys[GLFW_KEY_LEFT_SUPER] || instance->keys[GLFW_KEY_RIGHT_SUPER];
-		}
+        
 
 		for (size_t i = 0; i < 3; ++i) {
-			io.MouseDown[i] = mouse_pressed[i] || glfwGetMouseButton(window_ptr, i) != 0;
+			io.MouseDown[i] = mouse_pressed[i] || glfwGetMouseButton(window_ptr->glfwWindow(), i) != 0;
 			mouse_pressed[i] = false;
 		}
 
@@ -349,6 +328,35 @@ namespace vulpes {
 
 	}
 
+    void imguiWrapper::updateImguiSpecialKeys() noexcept {
+        
+        ImGuiIO& io = ImGui::GetIO();
+        io.KeysDown[io.KeyMap[ImGuiKey_Tab]] = input_handler::Keys[GLFW_KEY_TAB];
+        io.KeysDown[io.KeyMap[ImGuiKey_LeftArrow]] = input_handler::Keys[GLFW_KEY_LEFT];
+        io.KeysDown[io.KeyMap[ImGuiKey_RightArrow]] = input_handler::Keys[GLFW_KEY_RIGHT];
+        io.KeysDown[io.KeyMap[ImGuiKey_UpArrow]] = input_handler::Keys[GLFW_KEY_UP];
+        io.KeysDown[io.KeyMap[ImGuiKey_DownArrow]] = input_handler::Keys[GLFW_KEY_DOWN];
+        io.KeysDown[io.KeyMap[ImGuiKey_PageUp]] = input_handler::Keys[GLFW_KEY_PAGE_UP];
+        io.KeysDown[io.KeyMap[ImGuiKey_PageDown]] = input_handler::Keys[GLFW_KEY_PAGE_DOWN];
+        io.KeysDown[io.KeyMap[ImGuiKey_Home]] = input_handler::Keys[GLFW_KEY_HOME];
+        io.KeysDown[io.KeyMap[ImGuiKey_End]] = input_handler::Keys[GLFW_KEY_END];
+        io.KeysDown[io.KeyMap[ImGuiKey_Delete]] = input_handler::Keys[GLFW_KEY_DELETE];
+        io.KeysDown[io.KeyMap[ImGuiKey_Backspace]] = input_handler::Keys[GLFW_KEY_BACKSPACE];
+        io.KeysDown[io.KeyMap[ImGuiKey_Enter]] = input_handler::Keys[GLFW_KEY_ENTER];
+        io.KeysDown[io.KeyMap[ImGuiKey_Escape]] = input_handler::Keys[GLFW_KEY_ESCAPE];
+        io.KeysDown[io.KeyMap[ImGuiKey_A]] = input_handler::Keys[GLFW_KEY_A];
+        io.KeysDown[io.KeyMap[ImGuiKey_C]] = input_handler::Keys[GLFW_KEY_C];
+        io.KeysDown[io.KeyMap[ImGuiKey_V]] = input_handler::Keys[GLFW_KEY_V];
+        io.KeysDown[io.KeyMap[ImGuiKey_X]] = input_handler::Keys[GLFW_KEY_X];
+        io.KeysDown[io.KeyMap[ImGuiKey_Y]] = input_handler::Keys[GLFW_KEY_Y];
+        io.KeysDown[io.KeyMap[ImGuiKey_Z]] = input_handler::Keys[GLFW_KEY_Z];
+        io.KeyCtrl = input_handler::Keys[GLFW_KEY_LEFT_CONTROL] || input_handler::Keys[GLFW_KEY_RIGHT_CONTROL];
+        io.KeyShift = input_handler::Keys[GLFW_KEY_LEFT_SHIFT] || input_handler::Keys[GLFW_KEY_RIGHT_SHIFT];
+        io.KeyAlt = input_handler::Keys[GLFW_KEY_LEFT_ALT] || input_handler::Keys[GLFW_KEY_RIGHT_ALT];
+        io.KeySuper = input_handler::Keys[GLFW_KEY_LEFT_SUPER] || input_handler::Keys[GLFW_KEY_RIGHT_SUPER];
+
+    }
+
 	void imguiWrapper::validateBuffers() {
 		
 		ImDrawData* draw_data = ImGui::GetDrawData();
@@ -423,23 +431,23 @@ namespace vulpes {
 	void imguiWrapper::freeMouse(Instance * instance) {
 		
 		auto& io = ImGui::GetIO();
-		auto* window_ptr = dynamic_cast<InstanceGLFW*>(instance)->Window;
+        auto* window_ptr = instance->GetWindow();
 
 		double mouse_x, mouse_y;
-		glfwGetCursorPos(window_ptr, &mouse_x, &mouse_y);
+		glfwGetCursorPos(window_ptr->glfwWindow(), &mouse_x, &mouse_y);
 		io.MousePos = ImVec2(float(mouse_x), float(mouse_y));
-		Instance::cameraLock = true;
-		glfwSetInputMode(window_ptr, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        BaseScene::CameraLock = true;
+		glfwSetInputMode(window_ptr->glfwWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 	}
 
 	void imguiWrapper::captureMouse(Instance* instance) {
 
 		auto& io = ImGui::GetIO();
-		auto* window_ptr = dynamic_cast<InstanceGLFW*>(instance)->Window;
+        auto* window_ptr = instance->GetWindow();
 		io.MousePos = ImVec2(-1, -1);
-		Instance::cameraLock = false;
-		glfwSetInputMode(window_ptr, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        BaseScene::CameraLock = false;
+		glfwSetInputMode(window_ptr->glfwWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	}
 
