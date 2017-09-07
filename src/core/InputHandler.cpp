@@ -12,6 +12,7 @@ namespace vulpes {
     float input_handler::LastY = 1.0f;
     float input_handler::MouseDx = 0.0f;
     float input_handler::MouseDy = 0.0f;
+    float input_handler::MouseScroll = 0.0f;
 
     input_handler::input_handler(Window* _parent) : parent(_parent) {
         setCallbacks();
