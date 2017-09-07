@@ -15,7 +15,6 @@
 #include "render/DepthStencil.hpp"
 #include "render/Multisampling.hpp"
 #include "resource/PipelineCache.hpp"
-
 #include "util/Camera.hpp"
 #include "util/Arcball.hpp"
 
@@ -47,8 +46,8 @@ namespace vulpes {
 
 		static void PipelineCacheCreated(const uint16_t& cache_id);
 
-        const glm::mat4& ViewMatrix() const noexcept;
-        const glm::mat4& ProjectionMatrix() const noexcept;
+        glm::mat4 GetViewMatrix() const noexcept;
+        glm::mat4 GetProjectionMatrix() const noexcept;
         const glm::vec3& CameraPosition() const noexcept;
 
         void UpdateCameraPosition(const glm::vec3& new_position) noexcept;
