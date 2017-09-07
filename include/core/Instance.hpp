@@ -32,10 +32,8 @@ namespace vulpes {
 
 		std::unique_ptr<PhysicalDevice> physicalDevice;        
 		VkDebugReportCallbackEXT errorCallback, warningCallback, perfCallback, infoCallback, vkCallback;
-        std::vector<std::string> layers;
         std::unique_ptr<Window> window;
 		VkInstance handle;
-		uint32_t width, height;
         VkInstanceCreateInfo createInfo;
         bool validationEnabled{ false };
 	};

@@ -189,9 +189,12 @@ namespace vulpes {
 			return std::make_tuple(result, code_size);
 		}
 
+#pragma warning(push)
+#pragma warning(disable : 4302)
+
 		static void DumpBadShaderLog(glslang::TShader* bad_shader, const std::string& shader_code) {
 			std::ofstream shader_failure_log;
-			std::string filename = std::string("logs/shader_failure_") + std::to_string(reinterpret_cast<uint32_t>(bad_shader)) + std::string(".txt");
+			std::string filename = std::string("logs/shader_failure_") + std::to_string(reinterpret_cast<uint64_t>(bad_shader)) + std::string(".txt");
 			shader_failure_log.open(filename.c_str(), std::ios::out);
 			if (shader_failure_log.good()) {
 				shader_failure_log << "Shader code: \n";
@@ -208,7 +211,7 @@ namespace vulpes {
 
 		static void DumpBadProgramLog(glslang::TProgram* bad_program) {
 			std::ofstream program_failure_log;
-			std::string filename = std::string("logs/program_failure_") + std::to_string(reinterpret_cast<uint32_t>(bad_program)) + std::string(".txt");
+			std::string filename = std::string("logs/program_failure_") + std::to_string(reinterpret_cast<uint64_t>(bad_program)) + std::string(".txt");
 			program_failure_log.open(filename.c_str(), std::ios::out);
 			if (program_failure_log.good()) {
 				program_failure_log << "Shader info log: \n";
@@ -220,6 +223,8 @@ namespace vulpes {
 				throw std::runtime_error("Couldn't open output log dump.");
 			}
 		}
+
+#pragma warning(pop)
 
 		ShaderCompiler::ShaderCompiler() {
 			initializeGLSLang();
@@ -236,7 +241,6 @@ namespace vulpes {
 			std::unique_ptr<glslang::TShader> shader = std::make_unique<glslang::TShader>(shader_stage);
 			glslang::TShader::ForbidIncluder includer;
 
-			EProfile profile = ECoreProfile;
 			EShMessages messages = static_cast<EShMessages>(EShMsgDefault | EShMsgSpvRules | EShMsgVulkanRules);
 			int default_version = 450;
 

@@ -92,8 +92,8 @@ namespace vulpes {
 
     }
 
-    void Window::SetWindowUserPointer(std::any user_ptr) {
-        glfwSetWindowUserPointer(window, std::any_cast<void*>(user_ptr));
+    void Window::SetWindowUserPointer(void* user_ptr) {
+        glfwSetWindowUserPointer(window, user_ptr);
     }
 
 }

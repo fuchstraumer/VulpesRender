@@ -1,18 +1,6 @@
 #ifndef VULPES_VK_WINDOW_H
 #define VULPES_VK_WINDOW_H
 #include "vpr_stdafx.h"
-#define GLFW_INCLUDE_VULKAN
-#include "glfw/glfw3.h"
-
-#if defined(__linux__)
-#include <wayland-client.h>
-#elif defined(_WIN32) 
-#undef APIENTRY
-#define GLFW_EXPOSE_NATIVE_WIN32
-#define GLFW_EXPOSE_NATIVE_WGL
-#include "GLFW/glfw3native.h"
-#endif
-
 #include "InputHandler.hpp"
 #include "ForwardDecl.hpp"
 namespace vulpes {
@@ -25,7 +13,7 @@ namespace vulpes {
         Window(const Instance* parent_instance, const uint32_t& width, const uint32_t& height);
         ~Window();
 
-        void SetWindowUserPointer(std::any user_ptr);
+        void SetWindowUserPointer(void* user_ptr);
 
         GLFWwindow* glfwWindow() noexcept;
         const std::vector<const char*>& Extensions() const noexcept;

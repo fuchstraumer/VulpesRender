@@ -9,8 +9,6 @@ namespace vulpes {
 	public:
 
 		Arcball(const size_t& window_width, const size_t& window_height);
-
-
 		
 		glm::mat4 GetViewMatrix() override;
 		glm::mat4 GetModelRotationMatrix(const glm::mat4& view_matrix);

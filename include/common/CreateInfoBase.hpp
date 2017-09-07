@@ -1,6 +1,7 @@
 #pragma once
 #ifndef VULPES_VK_CREATE_INFO_BASE_H
 #define VULPES_VK_CREATE_INFO_BASE_H
+#include <limits>
 #include "vulkan/vulkan.h"
 /*
 	
@@ -435,9 +436,9 @@ namespace vulpes {
 		nullptr,
 		VK_NULL_HANDLE,
 		VK_NULL_HANDLE,
-		-1,
+		std::numeric_limits<uint32_t>::max(),
 		VK_NULL_HANDLE,
-		-1,
+		std::numeric_limits<uint32_t>::max(),
 	};
 
 	constexpr VkPipelineVertexInputStateCreateInfo vk_pipeline_vertex_input_state_create_info_base{

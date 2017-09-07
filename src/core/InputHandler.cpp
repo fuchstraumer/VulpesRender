@@ -94,7 +94,7 @@ namespace vulpes {
         
         MouseScroll += static_cast<float>(y_offset);
         ImGuiIO& io = ImGui::GetIO();
-        io.MouseWheel = y_offset;
+        io.MouseWheel = static_cast<float>(y_offset);
 
 	}
 

@@ -5,7 +5,7 @@
 namespace vulpes {
 
 	Arcball::Arcball(const size_t & window_width, const size_t & window_height) : cameraBase(glm::vec3(0.0f, 0.0f, -10.0f)), windowWidth(window_width), windowHeight(window_height), 
-		angle(0.0f), cameraAxis(0.0f, 1.0f, 0.0f), rollSpeed(0.2f), prevPos(toScreenCoordinates(windowWidth / 2, windowHeight / 2)) {
+		angle(0.0f), cameraAxis(0.0f, 1.0f, 0.0f), rollSpeed(0.2f), prevPos(toScreenCoordinates(static_cast<float>(windowWidth / 2), static_cast<float>(windowHeight / 2))) {
 		viewDirection = glm::vec3(0.0f, 0.0f, -1.0f);
 		target = Position + viewDirection;
 		LastView = glm::lookAt(Position, Position + viewDirection, glm::vec3(0.0f, 1.0f, 0.0f));
@@ -43,10 +43,10 @@ namespace vulpes {
 		}	
 	}
 
-	void Arcball::rotateAround(const glm::vec3& pt, const glm::vec3& axis, const float& angle) {
+	void Arcball::rotateAround(const glm::vec3& pt, const glm::vec3& axis, const float& _angle) {
 
 		glm::vec3 dir = Position - pt;
-		auto quat = glm::angleAxis(angle, axis);
+		auto quat = glm::angleAxis(_angle, axis);
 		dir = quat * dir;
 		Position = pt + dir;
 		rotation = glm::mat4_cast(quat) * rotation;

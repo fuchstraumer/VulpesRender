@@ -89,7 +89,7 @@ namespace vulpes {
         
 
 		for (size_t i = 0; i < 3; ++i) {
-			io.MouseDown[i] = mouse_pressed[i] || glfwGetMouseButton(window_ptr->glfwWindow(), i) != 0;
+			io.MouseDown[i] = mouse_pressed[i] || glfwGetMouseButton(window_ptr->glfwWindow(), static_cast<int>(i)) != 0;
 			mouse_pressed[i] = false;
 		}
 

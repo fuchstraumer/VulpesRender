@@ -12,7 +12,7 @@ namespace vulpes {
         createInfo = create_info;
         validationEnabled = enable_validation;
 
-        createWindow(width, height);
+        createWindow(_width, _height);
 
         createInfo.ppEnabledExtensionNames = window->Extensions().data();
         if (!window->Extensions().empty()) {
@@ -98,9 +98,9 @@ namespace vulpes {
 
     }
 
-	void Instance::createWindow(const uint32_t& width, const uint32_t& height) {
+	void Instance::createWindow(const uint32_t& _width, const uint32_t& _height) {
         
-        window = std::make_unique<Window>(this, width, height);
+        window = std::make_unique<Window>(this, _width, _height);
         LOG(INFO) << "Created a GLFW window object.";
 
 	}
