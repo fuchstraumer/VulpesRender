@@ -5,35 +5,32 @@
 namespace vulpes {
 
 	class PhysicalDevice {
+        PhysicalDevice(const PhysicalDevice& other) = delete;
+        PhysicalDevice& operator=(const PhysicalDevice& other) = delete;
 	public:
-		PhysicalDevice() = delete;
-		PhysicalDevice(const PhysicalDevice& other) = delete;
-		PhysicalDevice& operator=(const PhysicalDevice& other) = delete;
 
-		PhysicalDevice(const VkPhysicalDevice& handle);
+        PhysicalDevice(const VkInstance& instance_handle);
+        const VkPhysicalDevice& vkHandle() const noexcept;
 
-		uint32_t GetMemoryTypeIdx(const uint32_t& type_bitfield, const VkMemoryPropertyFlags& property_flags, VkBool32* memory_type_found = nullptr) const;
-		uint32_t GetQueueFamilyIndex(const VkQueueFlagBits& bitfield) const;
+		uint32_t GetMemoryTypeIdx(const uint32_t& type_bitfield, const VkMemoryPropertyFlags& property_flags, VkBool32* memory_type_found = nullptr) const noexcept;
+		uint32_t GetQueueFamilyIndex(const VkQueueFlagBits& bitfield) const noexcept ;
 		VkQueueFamilyProperties GetQueueFamilyProperties(const VkQueueFlagBits& bitfield) const;
-
-		const VkPhysicalDevice& vkHandle() const;
-		operator VkPhysicalDevice() const;
 
 		VkPhysicalDeviceProperties Properties;
 		VkPhysicalDeviceFeatures Features;
-		//VkPhysicalDeviceFeatures EnabledFeatures;
 		VkPhysicalDeviceMemoryProperties MemoryProperties;
-		std::vector<VkQueueFamilyProperties> QueueFamilyProperties;
-		std::vector<VkExtensionProperties> ExtensionProperties;
-	private:
-		VkPhysicalDevice handle;
-		const VkAllocationCallbacks* AllocationCallbacks;
-		
-	};
+        std::vector<VkExtensionProperties> ExtensionProperties;
 
-	struct PhysicalDeviceFactory {
-		VkPhysicalDevice GetBestDevice(const VkInstance& parent_instance);
-		std::map<uint32_t, VkPhysicalDevice> UnusedDevices;
+	private:
+
+        void getAttributes() noexcept;
+        void retrieveQueueFamilyProperties() noexcept;
+        void retrieveExtensionProperties() noexcept;
+        VkPhysicalDevice getBestDevice(const VkInstance & parent_instance);
+
+        std::vector<VkQueueFamilyProperties> queueFamilyProperties;
+		VkPhysicalDevice handle;
+		
 	};
 
 }
