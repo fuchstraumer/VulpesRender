@@ -223,6 +223,10 @@ namespace vulpes {
         else if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::FPS) {
             return fpsCamera.Position;
         }
+        else {
+            LOG(ERROR) << "Camera Type not set correctly!";
+            throw std::runtime_error("No active camera/viewer found!");
+        }
     }
 
 	void vulpes::BaseScene::CreateCommandPools() {
