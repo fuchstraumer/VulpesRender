@@ -2,11 +2,11 @@
 #include "core/Window.hpp"
 #include <imgui.h>
 #include "core/Instance.hpp"
-#include "core/BaseScene.hpp"
+#include "BaseScene.hpp"
 
 namespace vulpes {
 
-    Window::Window(const Instance* instance, const uint32_t& _width, const uint32_t& _height) : Parent(instance), width(_width), height(_height) {
+    Window::Window(const Instance* instance, const uint32_t& _width, const uint32_t& _height) : parent(instance), width(_width), height(_height) {
 
         glfwInit();
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -14,7 +14,7 @@ namespace vulpes {
     }
 
     Window::~Window() {
-        vkDestroySurfaceKHR(Parent->vkHandle(), surface, nullptr);
+        vkDestroySurfaceKHR(parent->vkHandle(), surface, nullptr);
     }
 
     void Window::createWindow() {
@@ -24,19 +24,19 @@ namespace vulpes {
 
         ImGuiIO& io = ImGui::GetIO();
 #ifdef _WIN32
-		io.ImeWindowHandle = glfwGetWin32Window(Window);
+		io.ImeWindowHandle = glfwGetWin32Window(window);
 #endif
         io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
         io.DisplaySize = ImVec2(static_cast<float>(width), static_cast<float>(height));
 
         glfwSetWindowSizeCallback(window, ResizeCallback);
         createInputHandler(); // TODO: Input handler class.
-        getExtensions();
+        setExtensions();
         createSurface();
 
     }
 
-    const GLFWwindow* Window() const noexcept {
+    GLFWwindow* Window::glfwWindow() noexcept {
         return window;
     }
 
@@ -44,27 +44,37 @@ namespace vulpes {
 
         uint32_t extension_count = 0;
         const char** extension_names;
-        names = glfwGetRequiredInstanceExtensions(&extension_count);
+        extension_names = glfwGetRequiredInstanceExtensions(&extension_count);
         for(uint32_t i = 0; i < extension_count; ++i) {
             extensions.emplace_back(extension_names[i]);
         }
 
     }
 
-    const std::vector<std::string>& Window::Extensions() const noexcept {
+    const std::vector<const char*>& Window::Extensions() const noexcept {
         return extensions;
+    }
+
+    const VkSurfaceKHR & Window::vkSurface() const noexcept {
+        return surface;
+    }
+
+    glm::ivec2 Window::GetWindowSize() const noexcept{
+        glm::ivec2 result(0, 0);
+        glfwGetWindowSize(const_cast<GLFWwindow*>(window), &result.x, &result.y);
+        return result;
     }
 
     void Window::createSurface() {
 
-        VkResult err = glfwCreateWindowSurface(Parent->vkHandle(), window, nullptr, &surface);
+        VkResult err = glfwCreateWindowSurface(parent->vkHandle(), window, nullptr, &surface);
         VkAssert(err);
         LOG(INFO) << "Created window surface.";
 
     }
 
     void Window::createInputHandler() {
-        InputHandler = std::make_unique<InputHandler>(this);
+        InputHandler = std::make_unique<input_handler>(this);
     }
 
     void Window::ResizeCallback(GLFWwindow* window, int width, int height) {
@@ -80,6 +90,10 @@ namespace vulpes {
         BaseScene* scene = reinterpret_cast<BaseScene*>(glfwGetWindowUserPointer(window));
         scene->RecreateSwapchain();
 
+    }
+
+    void Window::SetWindowUserPointer(std::any user_ptr) {
+        glfwSetWindowUserPointer(window, std::any_cast<void*>(user_ptr));
     }
 
 }

@@ -2,21 +2,14 @@
 #define VULPES_VK_INPUT_HANDLER_HPP
 
 #include "vpr_stdafx.h"
-
+#include "ForwardDecl.hpp"
 namespace vulpes {
 
     class Window;
 
-    struct InputHandler {
+    struct input_handler {
 
-        InputHandler(const Window* _parent);
-
-        void MouseDrag(const int& button, const float& dx, const float& dy);
-        void MouseScroll(const int& button, const float& delta);
-        void MouseDown(const int& button, const float& x, const float& y);
-        void MouseUp(const int& button, const float& x, const float& y);
-
-        void UpdateMovement(const float& dt);
+        input_handler(Window* _parent);
 
         static void MousePosCallback(GLFWwindow* window, double mouse_x, double mouse_y);
 		static void MouseButtonCallback(GLFWwindow* window, int button, int action, int code);
@@ -29,13 +22,12 @@ namespace vulpes {
         static std::array<bool, 1024> Keys;
         static std::array<bool, 3> MouseButtons;
         static float LastX, LastY, MouseDx, MouseDy, MouseScroll;
-        static bool CameraLock;
 
     private:
 
         void setImguiMapping() const;
-        void setCallbacks() const;
-        const Window* parent;
+        void setCallbacks();
+        Window* parent;
     };
 
 }

@@ -14,7 +14,7 @@
 #endif
 
 #include "InputHandler.hpp"
-
+#include "ForwardDecl.hpp"
 namespace vulpes {
 
     class Window {
@@ -25,14 +25,15 @@ namespace vulpes {
         Window(const Instance* parent_instance, const uint32_t& width, const uint32_t& height);
         ~Window();
 
-        const GLFWwindow* Window() const noexcept;
-        const std::vector<std::string>& Extensions() const noexcept;
+        void SetWindowUserPointer(std::any user_ptr);
+
+        GLFWwindow* glfwWindow() noexcept;
+        const std::vector<const char*>& Extensions() const noexcept;
         const VkSurfaceKHR& vkSurface() const noexcept;
+        glm::ivec2 GetWindowSize() const noexcept;
+        static void ResizeCallback(GLFWwindow* window, int width, int height);
 
-        virtual static void ResizeCallback(GLFWwindow* window, int width, int height);
-        
-        std::unique_ptr<InputHandler> InputHandler;
-
+        std::unique_ptr<input_handler> InputHandler;
     private:
 
         void createWindow();
@@ -40,11 +41,12 @@ namespace vulpes {
         void createSurface();
         void setExtensions();
 
+        
         GLFWwindow* window;
         uint32_t width, height;
         const Instance* parent;
         VkSurfaceKHR surface;
-        std::vector<std::string> extensions;
+        std::vector<const char*> extensions;
 
     };
 }

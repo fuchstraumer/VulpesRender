@@ -2,97 +2,39 @@
 #include "core/InputHandler.hpp"
 #include "core/Window.hpp"
 #include <imgui.h>
+#include "core/Instance.hpp"
 
 namespace vulpes {
 
-    std::array<bool, 1024> InputHandler::Keys = std::array<bool, 1024>();
-    std::array<bool, 3> InputHandler::MouseButtons = std::array<bool, 3>();
-    float InputHandler::LastX = 1.0f;
-    float InputHandler::LastY = 1.0f;
-    float InputHandler::MouseDx = 0.0f;
-    float InputHandler::MouseDy = 0.0f;
-    bool InputHandler::CameraLock = false;
+    std::array<bool, 1024> input_handler::Keys = std::array<bool, 1024>();
+    std::array<bool, 3> input_handler::MouseButtons = std::array<bool, 3>();
+    float input_handler::LastX = 1.0f;
+    float input_handler::LastY = 1.0f;
+    float input_handler::MouseDx = 0.0f;
+    float input_handler::MouseDy = 0.0f;
 
-    InputHandler::InputHandler(const Window* _parent) : parent(_parent) {
+    input_handler::input_handler(Window* _parent) : parent(_parent) {
         setCallbacks();
         setImguiMapping();
     }
 
-    void InputHandler::MouseDrag(const int& button, const float & rot_x, const float & rot_y) {
-		if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
-			arcball.MouseDrag(button, rot_x, rot_y);
-		}
-	}
+    void input_handler::setCallbacks() {
 
-	void InputHandler::MouseScroll(const int& button, const float & zoom_delta) {
-		if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
-			arcball.MouseScroll(button, zoom_delta);
-		}
-	}
-
-    void InputHandler::MouseDown(const int& button, const float& x, const float& y) {
-		if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
-			arcball.MouseDown(button, x, y);
-		}
-	}
-
-	void InputHandler::MouseUp(const int& button, const float & x, const float & y) {
-		if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
-			arcball.MouseUp(button, x, y);
-		}
-	}
-
-    void InputHandler::UpdateMovement(const float& dt) {
-        ImGuiIO& io = ImGui::GetIO();
-		io.DeltaTime = dt;
-
-		if (io.WantCaptureKeyboard) {
-			return;
-		}
-
-		if (keys[GLFW_KEY_W]) {
-			cam.ProcessKeyboard(Direction::FORWARD, dt);
-			arcball.RotateUp(dt);
-		}
-		if (keys[GLFW_KEY_S]) {
-			cam.ProcessKeyboard(Direction::BACKWARD, dt);
-			arcball.RotateDown(dt);
-		}
-		if (keys[GLFW_KEY_D]) {
-			cam.ProcessKeyboard(Direction::RIGHT, dt);
-			arcball.RotateRight(dt);
-		}
-		if (keys[GLFW_KEY_A]) {
-			cam.ProcessKeyboard(Direction::LEFT, dt);
-			arcball.RotateLeft(dt);
-		}
-		if (keys[GLFW_KEY_X]) {
-			cam.ProcessKeyboard(Direction::DOWN, dt);
-			arcball.TranslateDown(dt);
-		}
-		if (keys[GLFW_KEY_C]) {
-			cam.ProcessKeyboard(Direction::UP, dt);
-			arcball.TranslateUp(dt);
-		}
-    }
-
-    void InputHandler::setCallbacks() const {
-
-        glfwSetCursorPosCallback(Window, MousePosCallback);
-        glfwSetKeyCallback(Window, KeyboardCallback);
-        glfwSetMouseButtonCallback(Window, MouseButtonCallback);
-        glfwSetScrollCallback(Window, MouseScrollCallback);
-        glfwSetCharCallback(Window, CharCallback);
+        glfwSetCursorPosCallback(parent->glfwWindow(), MousePosCallback);
+        glfwSetKeyCallback(parent->glfwWindow(), KeyboardCallback);
+        glfwSetMouseButtonCallback(parent->glfwWindow(), MouseButtonCallback);
+        glfwSetScrollCallback(parent->glfwWindow(), MouseScrollCallback);
+        glfwSetCharCallback(parent->glfwWindow(), CharCallback);
         if (Instance::VulpesInstanceConfig.EnableMouseLocking) {
-            glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+            glfwSetInputMode(parent->glfwWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         }
         else {
-            glfwSetInputMode(Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+            glfwSetInputMode(parent->glfwWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
         }
 
     }
 
-    void InputHandler::setImguiMapping() const {
+    void input_handler::setImguiMapping() const {
 
         ImGuiIO& io = ImGui::GetIO();
 		io.KeyMap[ImGuiKey_Tab] = GLFW_KEY_TAB;                        
@@ -119,7 +61,7 @@ namespace vulpes {
 
     }
 
-    void InputHandler::MousePosCallback(GLFWwindow * window, double mouse_x, double mouse_y) {
+    void input_handler::MousePosCallback(GLFWwindow * window, double mouse_x, double mouse_y) {
 		MouseDx = static_cast<float>(mouse_x) - LastX;
 		MouseDy = static_cast<float>(mouse_y) - LastY;
 
@@ -129,19 +71,10 @@ namespace vulpes {
 		ImGuiIO& io = ImGui::GetIO();
 		io.MousePos.x = LastX;
 		io.MousePos.y = LastY;
-
-		if (!io.WantCaptureMouse && !cameraLock) {
-            if(Instance::VulpesInstanceConfig.CameraType == cfg::CameraType::FPS) {
-                cam.UpdateMousePos(mouseDx, mouseDy);
-            }
-            else if(Instance::VulpesInstanceConfig.CameraType == cfg::CameraType::ARCBALL) {
-                arcball.UpdateMousePos(mouseDx, mouseDy);
-            }
-        }
         
 	}
 
-	void InputHandler::MouseButtonCallback(GLFWwindow * window, int button, int action, int code) {
+	void input_handler::MouseButtonCallback(GLFWwindow * window, int button, int action, int code) {
 
         ImGuiIO& io = ImGui::GetIO();
         
@@ -157,27 +90,20 @@ namespace vulpes {
 		}
 	}
 
-    void InputHandler::MouseScrollCallback(GLFWwindow * window, double x_offset, double y_offset) {
+    void input_handler::MouseScrollCallback(GLFWwindow * window, double x_offset, double y_offset) {
         
-        mouseScroll += static_cast<float>(y_offset);
+        MouseScroll += static_cast<float>(y_offset);
         ImGuiIO& io = ImGui::GetIO();
         io.MouseWheel = y_offset;
 
 	}
 
-	void InputHandler::KeyboardCallback(GLFWwindow * window, int key, int scan_code, int action, int mods){
+	void input_handler::KeyboardCallback(GLFWwindow * window, int key, int scan_code, int action, int mods){
 		
 		auto io = ImGui::GetIO();
 
 		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
 			glfwSetWindowShouldClose(window, true);
-		}
-
-		if (key == GLFW_KEY_LEFT_BRACKET && action == GLFW_PRESS) {
-			VulpesInstanceConfig.MovementSpeed += 25.0f;
-		}
-		if (key == GLFW_KEY_RIGHT_BRACKET && action == GLFW_PRESS) {
-			VulpesInstanceConfig.MovementSpeed -= 25.0f;
 		}
 
 		if (key >= 0 && key < 1024) {
@@ -193,18 +119,18 @@ namespace vulpes {
 
 	}
 
-	void InputHandler::CharCallback(GLFWwindow*, unsigned int c) {
+	void input_handler::CharCallback(GLFWwindow*, unsigned int c) {
 		ImGuiIO& io = ImGui::GetIO();
 		if (c > 0 && c < 0x10000) {
 			io.AddInputCharacter(static_cast<unsigned short>(c));
 		}
 	}
 
-	void InputHandler::SetClipboardCallback(void * window, const char * text) {
+	void input_handler::SetClipboardCallback(void * window, const char * text) {
 		glfwSetClipboardString(reinterpret_cast<GLFWwindow*>(window), text);
 	}
 
-	const char* InputHandler::GetClipboardCallback(void* window) {
+	const char* input_handler::GetClipboardCallback(void* window) {
 		return glfwGetClipboardString(reinterpret_cast<GLFWwindow*>(window));
 	}
 
