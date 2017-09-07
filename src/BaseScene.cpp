@@ -20,6 +20,9 @@ namespace vulpes {
 
     bool BaseScene::CameraLock = false;
 
+    Camera BaseScene::fpsCamera = Camera();
+    Arcball BaseScene::arcballCamera = Arcball(1440, 900);
+
 	std::vector<uint16_t> BaseScene::pipelineCacheHandles = std::vector<uint16_t>();
 
 	vulpes::BaseScene::BaseScene(const size_t& num_secondary_buffers, const uint32_t& _width, const uint32_t& _height) : width(_width), height(_height), numSecondaryBuffers(num_secondary_buffers) {
@@ -33,8 +36,8 @@ namespace vulpes {
 
 		VkInstanceCreateInfo create_info = vk_base_instance_info;
 		instance = std::make_unique<Instance>(create_info, false, _width, _height);
-        instance->GetWindow()->SetWindowUserPointer(std::any(this));
-
+        arcballCamera = Arcball(_width, _height);
+        instance->GetWindow()->SetWindowUserPointer(this);
 
 		LOG_IF(verbose_logging, INFO) << "VkInstance created.";
 
@@ -144,7 +147,6 @@ namespace vulpes {
 	void BaseScene::UpdateMouseActions() {
 
 		ImGuiIO& io = ImGui::GetIO();
-        auto& input_handler = instance->GetWindow()->InputHandler;
 
 		if (!io.WantCaptureMouse) {
 
@@ -224,8 +226,18 @@ namespace vulpes {
             return fpsCamera.Position;
         }
         else {
+            static const glm::vec3 zero_vec(0.0f);
             LOG(ERROR) << "Camera Type not set correctly!";
-            return glm::vec3(0.0f);
+            return zero_vec;
+        }
+    }
+
+    void BaseScene::UpdateCameraPosition(const glm::vec3& new_position) noexcept {
+        if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+            arcballCamera.Position = new_position;
+        }
+        else if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::FPS) {
+            fpsCamera.Position = new_position;
         }
     }
 
@@ -441,6 +453,7 @@ namespace vulpes {
 		ImGuiIO& io = ImGui::GetIO();
 		io.DisplaySize.x = static_cast<float>(swapchain->Extent.width);
 		io.DisplaySize.y = static_cast<float>(swapchain->Extent.height);
+        arcballCamera = Arcball(swapchain->Extent.width, swapchain->Extent.height);
 		
 		CreateCommandPools();
 		SetupRenderpass(Instance::VulpesInstanceConfig.MSAA_SampleCount);
@@ -456,7 +469,6 @@ namespace vulpes {
 	void BaseScene::RenderLoop() {
 
 		frameTime = static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs / 1000.0);
-		ImGuiIO& io = ImGui::GetIO();
 
 		while(!glfwWindowShouldClose(instance->GetWindow()->glfwWindow())) {
 
