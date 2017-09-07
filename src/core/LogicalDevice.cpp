@@ -26,7 +26,7 @@ namespace vulpes {
 		createInfo.pQueueCreateInfos = queue_infos.data();
 		createInfo.pEnabledFeatures = &device->Features;
 
-		if (parentInstance->validationEnabled) {
+		if (Instance::VulpesInstanceConfig.EnableValidation) {
 			EnableValidation();
 		}
 		else {
@@ -39,7 +39,7 @@ namespace vulpes {
 			createInfo.enabledExtensionCount = static_cast<uint32_t>(device_extensions_debug.size());
 			createInfo.ppEnabledExtensionNames = device_extensions_debug.data();
 		}
-		else if (parentInstance->validationEnabled) {
+		else if (Instance::VulpesInstanceConfig.EnableValidation) {
 			createInfo.enabledExtensionCount = static_cast<uint32_t>(device_extensions.size());
 			createInfo.ppEnabledExtensionNames = device_extensions.data();
 			createInfo.enabledLayerCount = 1;
@@ -136,7 +136,7 @@ namespace vulpes {
 		// Check presentation support
 		VkBool32 present_support = false;
 		for (uint32_t i = 0; i < 3; ++i) {
-			vkGetPhysicalDeviceSurfaceSupportKHR(parent->vkHandle(), i, parentInstance->GetSurface(), &present_support);
+			vkGetPhysicalDeviceSurfaceSupportKHR(parent->vkHandle(), i, parentInstance->vkSurface(), &present_support);
 			if (present_support) {
 				QueueFamilyIndices.Present = i;
 				break;
@@ -303,14 +303,15 @@ namespace vulpes {
 
 	VkQueue Device::GeneralQueue(const uint32_t & desired_idx) const {
 		
-		uint32_t idx = 0;
-
-		for (uint32_t i = 0; i < static_cast<uint32_t>(parent->QueueFamilyProperties.size()); ++i) {
-			if ((parent->QueueFamilyProperties[i].queueFlags | VK_QUEUE_TRANSFER_BIT) && (parent->QueueFamilyProperties[i].queueFlags | VK_QUEUE_GRAPHICS_BIT)) {
-				idx = i;
-				break;
-			}
-		}
+        uint32_t idx = parent->GetQueueFamilyIndex(VkQueueFlagBits(VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_TRANSFER_BIT | VK_QUEUE_COMPUTE_BIT));
+        if (idx == std::numeric_limits<uint32_t>::max()) {
+            LOG(WARNING) << "Couldn't find a generalized queue supporting compute, graphics, and transfer: trying graphics and transfer.";
+            idx = parent->GetQueueFamilyIndex(VkQueueFlagBits(VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_TRANSFER_BIT));
+            if (idx == std::numeric_limits<uint32_t>::max()) {
+                LOG(WARNING) << "Couldn't find a generalized queue supporting transfer and graphics operations: just returning a graphics queue.";
+                idx = QueueFamilyIndices.Graphics;
+            }
+        }
 
 		VkQueue result;
 		vkGetDeviceQueue(vkHandle(), idx, desired_idx, &result);

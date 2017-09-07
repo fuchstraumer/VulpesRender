@@ -67,9 +67,8 @@ namespace vulpes {
 			return Capabilities.currentExtent;
 		}
 		else {
-			int glfw_width, glfw_height;
-			glfwGetWindowSize(reinterpret_cast<const InstanceGLFW*>(instance)->Window, &glfw_width, &glfw_height);
-			VkExtent2D actual_extent = { static_cast<uint32_t>(glfw_width), static_cast<uint32_t>(glfw_height) };
+            auto window_size = instance->GetWindow()->GetWindowSize();
+			VkExtent2D actual_extent = { static_cast<uint32_t>(window_size.x), static_cast<uint32_t>(window_size.y) };
 			actual_extent.width = std::max(Capabilities.minImageExtent.width, std::min(Capabilities.maxImageExtent.width, actual_extent.width));
 			actual_extent.height = std::max(Capabilities.minImageExtent.height, std::min(Capabilities.maxImageExtent.height, actual_extent.height));
 			return actual_extent;
@@ -120,7 +119,7 @@ namespace vulpes {
 
 	void Swapchain::setParameters() {
 
-		Info = std::make_unique<SwapchainInfo>(phys_device->vkHandle(), instance->GetSurface());
+		Info = std::make_unique<SwapchainInfo>(phys_device->vkHandle(), instance->vkSurface());
 		surfaceFormat = Info->GetBestFormat();
 		ColorFormat = surfaceFormat.format;
 		presentMode = Info->GetBestPresentMode();
@@ -137,7 +136,7 @@ namespace vulpes {
 	void Swapchain::setupCreateInfo() {
 
 		createInfo = vk_swapchain_create_info_base;
-		createInfo.surface = instance->GetSurface();
+		createInfo.surface = instance->vkSurface();
 		createInfo.imageFormat = surfaceFormat.format;
 		createInfo.imageColorSpace = surfaceFormat.colorSpace;
 		createInfo.imageExtent = Extent;
