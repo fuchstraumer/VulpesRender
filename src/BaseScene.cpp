@@ -18,6 +18,8 @@
 
 namespace vulpes {
 
+    bool BaseScene::CameraLock = false;
+
 	std::vector<uint16_t> BaseScene::pipelineCacheHandles = std::vector<uint16_t>();
 
 	vulpes::BaseScene::BaseScene(const size_t& num_secondary_buffers, const uint32_t& _width, const uint32_t& _height) : width(_width), height(_height), numSecondaryBuffers(num_secondary_buffers) {
@@ -30,20 +32,19 @@ namespace vulpes {
 		const bool verbose_logging = Instance::VulpesInstanceConfig.VerboseLogging;
 
 		VkInstanceCreateInfo create_info = vk_base_instance_info;
-		instance = std::make_unique<InstanceGLFW>(create_info, false);
+		instance = std::make_unique<Instance>(create_info, false, _width, _height);
+        instance->GetWindow()->SetWindowUserPointer(std::any(this));
+
 
 		LOG_IF(verbose_logging, INFO) << "VkInstance created.";
 
-		glfwSetWindowUserPointer(instance->Window, this);
-		instance->SetupPhysicalDevices();
-		instance->SetupSurface();
-
 		Multisampling::SampleCount = Instance::VulpesInstanceConfig.MSAA_SampleCount;
+        LOG_IF(verbose_logging, INFO) << "MSAA level set to " << std::to_string(Multisampling::SampleCount);
 
-		device = std::make_unique<Device>(instance.get(), instance->physicalDevice);
+		device = std::make_unique<Device>(instance.get(), instance->GetPhysicalDevice());
 
 		swapchain = std::make_unique<Swapchain>();
-		swapchain->Init(instance.get(), instance->physicalDevice, device.get());
+		swapchain->Init(instance.get(), instance->GetPhysicalDevice(), device.get());
 
 		LOG_IF(verbose_logging, INFO) << "Swapchain created.";
 
@@ -143,34 +144,86 @@ namespace vulpes {
 	void BaseScene::UpdateMouseActions() {
 
 		ImGuiIO& io = ImGui::GetIO();
+        auto& input_handler = instance->GetWindow()->InputHandler;
+
 		if (!io.WantCaptureMouse) {
-			// use else-if to only allow one drag at a time.
+
+            if (!CameraLock) {
+                if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::FPS) {
+                    fpsCamera.UpdateMousePos(input_handler::MouseDx, input_handler::MouseDx);
+                }
+                else if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+                    arcballCamera.UpdateMousePos(input_handler::MouseDx, input_handler::MouseDx);
+                }
+            }
+
 			if (ImGui::IsMouseDragging(0)) {
-				Instance::MouseDrag(0, io.MousePos.x, io.MousePos.y);
+				mouseDrag(0, io.MousePos.x, io.MousePos.y);
 			}
 			else if (ImGui::IsMouseDragging(1)) {
-				Instance::MouseDrag(1, io.MousePos.x, io.MousePos.y);
+                mouseDrag(1, io.MousePos.x, io.MousePos.y);
 			}
 
 			if (ImGui::IsMouseDown(0) && !ImGui::IsMouseDragging(0)) {
-				Instance::MouseDown(0, io.MouseClickedPos[0].x, io.MouseClickedPos[0].y);
+                mouseDown(0, io.MouseClickedPos[0].x, io.MouseClickedPos[0].y);
 			}
 
 			if (ImGui::IsMouseDown(1) && !ImGui::IsMouseDragging(1)) {
-				Instance::MouseDown(1, io.MouseClickedPos[1].x, io.MouseClickedPos[1].y);
+                mouseDown(1, io.MouseClickedPos[1].x, io.MouseClickedPos[1].y);
 			}
 
 			if (ImGui::IsMouseReleased(0)) {
-				Instance::MouseUp(0, io.MousePos.x, io.MousePos.y);
+                mouseUp(0, io.MousePos.x, io.MousePos.y);
 			}
 
-            Instance::MouseScroll(0, io.MouseWheel);
+            mouseScroll(0, io.MouseWheel);
 		}
 	}
+
+    void BaseScene::mouseDrag(const int& button, const float & rot_x, const float & rot_y) {
+        if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+            arcballCamera.MouseDrag(button, rot_x, rot_y);
+        }
+    }
+
+    void BaseScene::mouseScroll(const int& button, const float & zoom_delta) {
+        if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+            arcballCamera.MouseScroll(button, zoom_delta);
+        }
+    }
+
+    void BaseScene::mouseDown(const int& button, const float& x, const float& y) {
+        if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+            arcballCamera.MouseDown(button, x, y);
+        }
+    }
+
+    void BaseScene::mouseUp(const int& button, const float & x, const float & y) {
+        if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+            arcballCamera.MouseUp(button, x, y);
+        }
+    }
 
 	void BaseScene::PipelineCacheCreated(const uint16_t & cache_id) {
 		pipelineCacheHandles.push_back(cache_id);
 	}
+
+    const glm::mat4 & BaseScene::ViewMatrix() const noexcept {
+        return view;
+    }
+
+    const glm::mat4 & BaseScene::ProjectionMatrix() const noexcept {
+        return projection;
+    }
+
+    const glm::vec3 & BaseScene::CameraPosition() const noexcept {
+        if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+            return arcballCamera.Position;
+        }
+        else if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::FPS) {
+            return fpsCamera.Position;
+        }
+    }
 
 	void vulpes::BaseScene::CreateCommandPools() {
 
@@ -374,8 +427,8 @@ namespace vulpes {
 
 		swapchain->Recreate();
 
-		instance->projection = glm::perspective(glm::radians(75.0f), static_cast<float>(swapchain->Extent.width) / static_cast<float>(swapchain->Extent.height), 0.1f, 30000.0f);
-		instance->projection[1][1] *= -1.0f;
+		projection = glm::perspective(glm::radians(75.0f), static_cast<float>(swapchain->Extent.width) / static_cast<float>(swapchain->Extent.height), 0.1f, 30000.0f);
+		projection[1][1] *= -1.0f;
 
 		/*
 			Done destroying resources, recreate resources and objects now
@@ -398,10 +451,10 @@ namespace vulpes {
 
 	void BaseScene::RenderLoop() {
 
-		instance->frameTime = static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs / 1000.0);
+		frameTime = static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs / 1000.0);
 		ImGuiIO& io = ImGui::GetIO();
 
-		while(!glfwWindowShouldClose(instance->Window)) {
+		while(!glfwWindowShouldClose(instance->GetWindow()->glfwWindow())) {
 
 			limitFrame();
 
@@ -410,7 +463,7 @@ namespace vulpes {
 			UpdateMouseActions();
 			gui->NewFrame(instance.get(), false);
 
-			instance->UpdateMovement(static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs));
+			UpdateMovement(static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs));
 			
 			RecordCommands();
 			auto idx = submitFrame();
@@ -420,11 +473,46 @@ namespace vulpes {
 			vkResetCommandPool(device->vkHandle(), secondaryPool->vkHandle(), VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
 			vkResetCommandPool(device->vkHandle(), graphicsPool->vkHandle(), VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
 
-			if (Instance::VulpesInstanceConfig.RequestRefresh) {
-				instance->Refresh();
-			}
 		}
 	}
+
+    void BaseScene::UpdateMovement(const float& delta_time) {
+
+        frameTime = delta_time;
+        ImGuiIO& io = ImGui::GetIO();
+        io.DeltaTime = delta_time;
+
+        if (io.WantCaptureKeyboard) {
+            return;
+        }
+
+        if (input_handler::Keys[GLFW_KEY_W]) {
+            fpsCamera.ProcessKeyboard(Direction::FORWARD, delta_time);
+            arcballCamera.RotateUp(delta_time);
+        }
+        else if (input_handler::Keys[GLFW_KEY_S]) {
+            fpsCamera.ProcessKeyboard(Direction::BACKWARD, delta_time);
+            arcballCamera.RotateDown(delta_time);
+        }
+
+        if (input_handler::Keys[GLFW_KEY_D]) {
+            fpsCamera.ProcessKeyboard(Direction::RIGHT, delta_time);
+            arcballCamera.RotateRight(delta_time);
+        }
+        else if (input_handler::Keys[GLFW_KEY_A]) {
+            fpsCamera.ProcessKeyboard(Direction::LEFT, delta_time);
+            arcballCamera.RotateLeft(delta_time);
+        }
+
+        if (input_handler::Keys[GLFW_KEY_X]) {
+            fpsCamera.ProcessKeyboard(Direction::DOWN, delta_time);
+            arcballCamera.TranslateDown(delta_time);
+        }
+        else if (input_handler::Keys[GLFW_KEY_C]) {
+            fpsCamera.ProcessKeyboard(Direction::UP, delta_time);
+            arcballCamera.TranslateUp(delta_time);
+        }
+    }
 
 	void BaseScene::limitFrame() {
 
