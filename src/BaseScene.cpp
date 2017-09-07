@@ -225,7 +225,7 @@ namespace vulpes {
         }
         else {
             LOG(ERROR) << "Camera Type not set correctly!";
-            throw std::runtime_error("No active camera/viewer found!");
+            return glm::vec3(0.0f);
         }
     }
 
