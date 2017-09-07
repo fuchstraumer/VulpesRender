@@ -39,6 +39,7 @@ namespace vulpes {
 
 	VkCommandBuffer& TransferPool::Begin() {
 
+        LOG(INFO) << "Beginning transfer via transfer pool...";
 		VkCommandBufferBeginInfo beginInfo = {};
 		beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
 		beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT | VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT;
@@ -60,6 +61,8 @@ namespace vulpes {
 	}
 
 	void TransferPool::Submit() {
+
+        LOG(INFO) << "Submitting a transfer via a transfer pool...";
 		VkSubmitInfo submitInfo = {};
 		submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 		submitInfo.commandBufferCount = 1;

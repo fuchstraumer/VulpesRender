@@ -139,12 +139,6 @@ namespace vulpes {
 			}
 			else {
 				LOG(INFO) << "Pre-existing cache file isn't valid: creating new pipeline cache.";
-				// header data doesn't match, wouldn't be valid. need to create new/fresh cache.
-				std::experimental::filesystem::path cache_path(filename);
-				if (std::experimental::filesystem::exists(cache_path)) {
-					std::experimental::filesystem::remove(cache_path);
-					LOG(INFO) << "Erased an invalid pipeline cache file with ID " << filename;
-				}
 				createInfo.initialDataSize = 0;
 				createInfo.pInitialData = nullptr;
 			}

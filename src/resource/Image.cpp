@@ -179,7 +179,8 @@ namespace vulpes {
 		alloc_reqs.requiredFlags = memory_flags;
 
 		VkResult result = parent->vkAllocator->CreateImage(&dest_image, &create_info, alloc_reqs, dest_alloc);
-		VkAssert(result);
+        VkAssert(result);
+
 	}
 
 	void Image::CreateImage(VkImage & dest_image, Allocation& dest_alloc, const Device * parent, const VkImageCreateInfo & create_info, const VkMemoryPropertyFlags & memory_flags) {

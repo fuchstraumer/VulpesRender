@@ -28,6 +28,7 @@ namespace vulpes {
 	vulpes::BaseScene::BaseScene(const size_t& num_secondary_buffers, const uint32_t& _width, const uint32_t& _height) : width(_width), height(_height), numSecondaryBuffers(num_secondary_buffers) {
 
 #ifdef _WIN32
+        LOG(INFO) << "Attempting to enable Windows Error Reporting (WER) subsystem...";
         util::wer_enabler_t __wer;
         __wer.enable();
 #endif 
@@ -37,6 +38,7 @@ namespace vulpes {
 		VkInstanceCreateInfo create_info = vk_base_instance_info;
 		instance = std::make_unique<Instance>(create_info, false, _width, _height);
         arcballCamera = Arcball(_width, _height);
+        view = arcballCamera.GetViewMatrix();
         instance->GetWindow()->SetWindowUserPointer(this);
 
 		LOG_IF(verbose_logging, INFO) << "VkInstance created.";
@@ -48,6 +50,9 @@ namespace vulpes {
 
 		swapchain = std::make_unique<Swapchain>();
 		swapchain->Init(instance.get(), instance->GetPhysicalDevice(), device.get());
+
+        projection = glm::perspective(glm::radians(75.0f), static_cast<float>(_width) / static_cast<float>(_height), 0.1f, 30000.0f);
+        projection[1][1] *= -1.0f;
 
 		LOG_IF(verbose_logging, INFO) << "Swapchain created.";
 
@@ -210,11 +215,16 @@ namespace vulpes {
 		pipelineCacheHandles.push_back(cache_id);
 	}
 
-    const glm::mat4 & BaseScene::ViewMatrix() const noexcept {
-        return view;
+    glm::mat4 BaseScene::GetViewMatrix() const noexcept {
+        if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+            return arcballCamera.GetViewMatrix();
+        }
+        else if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::FPS) {
+            return fpsCamera.GetViewMatrix();
+        }
     }
 
-    const glm::mat4 & BaseScene::ProjectionMatrix() const noexcept {
+    glm::mat4 BaseScene::GetProjectionMatrix() const noexcept {
         return projection;
     }
 
@@ -243,6 +253,8 @@ namespace vulpes {
 
 	void vulpes::BaseScene::CreateCommandPools() {
 
+        LOG(INFO) << "Creating primary graphics and transfer command pools...";
+
 		VkCommandPoolCreateInfo pool_info = vk_command_pool_info_base;
 		pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
 		pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
@@ -256,6 +268,7 @@ namespace vulpes {
 		transferPool = std::make_unique<TransferPool>(device.get());
 		transferPool->AllocateCmdBuffers(1);
 
+        LOG(INFO) << "Creating command pool for secondary command buffers. " << std::to_string(swapchain->ImageCount * static_cast<uint32_t>(numSecondaryBuffers)) << " buffers requested.";
 		pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
 		secondaryPool = std::make_unique<CommandPool>(device.get(), pool_info, false);
 		alloc_info.level = VK_COMMAND_BUFFER_LEVEL_SECONDARY;
@@ -366,6 +379,8 @@ namespace vulpes {
 
 	void vulpes::BaseScene::SetupRenderpass(const VkSampleCountFlagBits& sample_count) {
 
+        LOG(INFO) << "Creating renderpass and MSAA attachments now...";
+
 		msaa = std::make_unique<Multisampling>(device.get(), swapchain.get(), sample_count, swapchain->Extent.width, swapchain->Extent.height);
 
 		attachmentDescriptions.resize(4);
@@ -394,6 +409,7 @@ namespace vulpes {
 
 	void vulpes::BaseScene::SetupDepthStencil() {
 
+        LOG(INFO) << "Creating depth stencil...";
 		VkQueue depth_queue = device->GraphicsQueue(0);
 		depthStencil = std::make_unique<DepthStencil>(device.get(), VkExtent3D{ swapchain->Extent.width, swapchain->Extent.height, 1 }, graphicsPool.get(), depth_queue);
 
@@ -401,6 +417,7 @@ namespace vulpes {
 
 	void vulpes::BaseScene::SetupFramebuffers() {
 
+        LOG(INFO) << "Creating framebuffers...";
 		std::array<VkImageView, 4> attachments{ msaa->ColorBufferMS->View(), VK_NULL_HANDLE, msaa->DepthBufferMS->View(), depthStencil->View() };
 		VkFramebufferCreateInfo framebuffer_create_info = vk_framebuffer_create_info_base;
 		framebuffer_create_info.attachmentCount = static_cast<uint32_t>(attachments.size());
@@ -469,6 +486,7 @@ namespace vulpes {
 	void BaseScene::RenderLoop() {
 
 		frameTime = static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs / 1000.0);
+        LOG(INFO) << "Entering rendering loop.";
 
 		while(!glfwWindowShouldClose(instance->GetWindow()->glfwWindow())) {
 

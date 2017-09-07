@@ -42,6 +42,7 @@ namespace vulpes {
         }
 
         setupPhysicalDevice();
+        window->CreateSurface();
 
     }
 

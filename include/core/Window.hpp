@@ -14,19 +14,19 @@ namespace vulpes {
         ~Window();
 
         void SetWindowUserPointer(void* user_ptr);
-
+        void CreateSurface();
         GLFWwindow* glfwWindow() noexcept;
         const std::vector<const char*>& Extensions() const noexcept;
         const VkSurfaceKHR& vkSurface() const noexcept;
         glm::ivec2 GetWindowSize() const noexcept;
         static void ResizeCallback(GLFWwindow* window, int width, int height);
-
+        
         std::unique_ptr<input_handler> InputHandler;
     private:
 
         void createWindow();
         void createInputHandler();
-        void createSurface();
+        
         void setExtensions();
 
         

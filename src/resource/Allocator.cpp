@@ -298,7 +298,7 @@ namespace vulpes {
 			++next_iter;
 			const auto insert_iter = Suballocations.insert(next_iter, padding_suballoc);
 			// insert_iter returns iterator giving location of inserted item
-			insertFreeSuballocation(insert_iter);
+            insertFreeSuballocation(insert_iter);
 		}
 
 		// if there's any remaining memory before the allocation, register it.
@@ -603,8 +603,10 @@ namespace vulpes {
 			type_idx = memory_to_free->MemoryTypeIdx();
 			auto& allocation_collection = allocations[type_idx];
 			
-			auto& block = allocation_collection->allocations.front();
-			block->Free(memory_to_free);
+            auto& block = allocation_collection->allocations.front();
+            auto free_size = memory_to_free->Size;
+            block->Free(memory_to_free);
+            LOG(INFO) << "Freed a memory allocation with size " << std::to_string(free_size / 1e6) << "mb"; 
 			if (VALIDATE_MEMORY) {
 				auto err = block->Validate();
 				if (err != ValidationCode::VALIDATION_PASSED) {
@@ -624,11 +626,12 @@ namespace vulpes {
 			}
 
 			// re-sort the collection.
-			allocation_collection->SortAllocations();
-			
+            allocation_collection->SortAllocations();
+            
+			return;
 		}
 
-		return;
+		
 
 
 		// memory_to_free not found, possible a privately/singularly allocated memory object
@@ -692,6 +695,7 @@ namespace vulpes {
 				return VK_ERROR_OUT_OF_DEVICE_MEMORY;
 			}
 			else {
+                LOG(INFO) << "Allocating private memory object...";
 				return allocatePrivateMemory(memory_reqs.size, type, memory_type_idx, dest_allocation);
 			}
 		}
@@ -717,7 +721,7 @@ namespace vulpes {
 							throw std::runtime_error("");
 						}
 					}
-
+                    LOG(INFO) << "Successfully allocated by binding to suballocation with size of " << std::to_string(memory_reqs.size / 1e6) << "mb at offset " << std::to_string(request.offset);
 					return VK_SUCCESS;
 				}
 			}

@@ -57,7 +57,7 @@ namespace vulpes {
 
 		}
 		catch (std::ifstream::failure&) {
-			std::cerr << "OBJECTS::RESOURCE::SHADER_MODULE: Failure opening or reading shader file." << std::endl;
+			LOG(ERROR) << "OBJECTS::RESOURCE::SHADER_MODULE: Failure opening or reading shader file." << std::endl;
 			throw(std::runtime_error("OBJECTS::RESOURCE::SHADER_MODULE: Failure opening or reading shader file."));
 		}
 	}

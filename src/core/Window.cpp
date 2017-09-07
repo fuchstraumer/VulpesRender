@@ -32,7 +32,6 @@ namespace vulpes {
         glfwSetWindowSizeCallback(window, ResizeCallback);
         createInputHandler(); // TODO: Input handler class.
         setExtensions();
-        createSurface();
 
     }
 
@@ -65,7 +64,7 @@ namespace vulpes {
         return result;
     }
 
-    void Window::createSurface() {
+    void Window::CreateSurface() {
 
         VkResult err = glfwCreateWindowSurface(parent->vkHandle(), window, nullptr, &surface);
         VkAssert(err);
@@ -79,13 +78,16 @@ namespace vulpes {
 
     void Window::ResizeCallback(GLFWwindow* window, int width, int height) {
 
-        if(width == 0 || height == 0) {
-            LOG(WARNING) << "Resize callback called with zero width or height for window.";
-            return;
-        }
-
         ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2(static_cast<float>(width), static_cast<float>(height));
+        if(width == 0 || height == 0) {
+            LOG(WARNING) << "Resize callback called with zero width or height for window. Attempting to fall back on last stored value...";
+            width = io.DisplaySize.x;
+            height = io.DisplaySize.y;
+            
+        }
+        else {
+            io.DisplaySize = ImVec2(static_cast<float>(width), static_cast<float>(height));
+        }
 
         BaseScene* scene = reinterpret_cast<BaseScene*>(glfwGetWindowUserPointer(window));
         scene->RecreateSwapchain();

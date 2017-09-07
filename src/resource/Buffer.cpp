@@ -36,6 +36,7 @@ namespace vulpes {
 	void Buffer::CreateBuffer(const VkBufferUsageFlags & usage_flags, const VkMemoryPropertyFlags & memory_flags, const VkDeviceSize & _size) {
 		
 		if (parent == nullptr) {
+            LOG(ERROR) << "Tried to create a buffer without a parent device object.";
 			throw(std::runtime_error("Set the parent of a buffer before trying to populate it, you dolt."));
 		}
 
@@ -169,7 +170,9 @@ namespace vulpes {
 		VkAssert(result);
 
 		auto pair = std::make_pair(std::move(dest), dest_memory_alloc);
-		stagingBuffers.push_back(std::move(pair));
+        stagingBuffers.push_back(std::move(pair));
+        
+        LOG(INFO) << "Created a staging buffer. Currently have " << std::to_string(stagingBuffers.size()) << " staging buffers in the pool.";
 	}
 
 	void Buffer::DestroyStagingResources(const Device* device){
@@ -199,7 +202,9 @@ namespace vulpes {
 		alloc_reqs.requiredFlags = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
 
 		VkResult result = parent->vkAllocator->CreateBuffer(&staging_buffer, &create_info, alloc_reqs, dest_memory_alloc);
-		VkAssert(result);
+        VkAssert(result);
+        LOG(INFO) << "Created a staging buffer. Currently have " << std::to_string(stagingBuffers.size()) << " staging buffers in the pool.";
+
 	}
 
 }

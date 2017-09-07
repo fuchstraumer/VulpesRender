@@ -243,6 +243,7 @@ namespace vulpes {
 				return fmt;
 			}
 		}
+        LOG(ERROR) << "Could not find texture format that supports requested tiling and feature flags: ( " << std::to_string(tiling) << " , " << std::to_string(flags) << " )";
 		throw(std::runtime_error("Failed to find a supported format!"));
 	}
 
