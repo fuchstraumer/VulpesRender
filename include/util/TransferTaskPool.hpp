@@ -9,24 +9,18 @@ namespace vulpes {
 
     namespace util {
 
-        struct TransferTask {
-            std::shared_ptr<void> Data;
-            VkDeviceMemory StagingMemory;
-            
-            TransferTask(const Device* dvc, const void* src_data, const VkDeviceSize& copy_size, const VkBuffer& destination_buffer)
-        };
-
         class TransferTaskPool {
             TransferTaskPool(const TransferTaskPool&) = delete;
             TransferTaskPool& operator=(const TransferTaskPool&) = delete;
         public:
 
-            TransferTaskPool(const Device* device);
+            TransferTaskPool(const Device* _device);
             
-            
+            void AddTransferTask(const void* src_data, const VkDeviceSize& copy_size, const VkBuffer& destination_buffer);
 
         private:
             
+            const Device* device;
             std::unique_ptr<TaskPool> taskPool;
             std::unique_ptr<TransferPool> transferCmdPool;
         };
