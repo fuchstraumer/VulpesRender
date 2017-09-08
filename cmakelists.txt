@@ -30,6 +30,12 @@ IF(MSVC)
   OPTION(USE_MSVC_RUNTIME_LIBRARY_DLL "Use MSVC runtime DLL" ON)
 ENDIF()
 
+OPTION(FORCE_ALLOCATOR_VALIDATION "Force validation of Vulkan memory even in Release builds." OFF)
+
+IF(FORCE_ALLOCATOR_VALIDATION) 
+    ADD_DEFINITIONS("-DFORCE_ALLOCATOR_VALIDATION")
+ENDIF()
+
 ExternalProject_Add(assimp
   PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/assimp"
   GIT_REPOSITORY "https://github.com/assimp/assimp.git"

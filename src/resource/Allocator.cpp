@@ -278,6 +278,8 @@ namespace vulpes {
 	}
 
 	void MemoryBlock::Allocate(const SuballocationRequest & request, const SuballocationType & allocation_type, const VkDeviceSize & allocation_size) {
+
+        std::lock_guard<std::mutex> alloc_guard(memoryMutex);
 		assert(request.freeSuballocation != Suballocations.cend());
 		Suballocation& suballoc = *request.freeSuballocation;
 		assert(suballoc.type == SuballocationType::Free); 
@@ -324,6 +326,7 @@ namespace vulpes {
 	}
 
 	void MemoryBlock::Free(const Allocation* memory_to_free) {
+        std::lock_guard<std::mutex> suballoc_guard(memoryMutex);
 		for (auto iter = Suballocations.begin(); iter != Suballocations.end(); ++iter) {
 			auto& suballoc = *iter;
 			if (suballoc.offset == memory_to_free->blockAllocation.Offset) {
@@ -338,7 +341,18 @@ namespace vulpes {
 				return;
 			}
 		}
-	}
+    }
+    
+    void MemoryBlock::Map(const Allocation* alloc_being_mapped, const VkDeviceSize& size_of_map, const VkDeviceSize& offset_to_map_at, void* destination_address) {
+        std::lock_guard<std::mutex> mapping_lock(memoryMutex);
+        VkResult result = vkMapMemory(allocator->DeviceHandle(), memory, alloc_being_mapped->Offset() + offset_to_map_at, size_of_map, 0, &destination_address);
+        VkAssert(result);
+    }
+
+    void MemoryBlock::Unmap() {
+        std::lock_guard<std::mutex> unmapping_lock(memoryMutex);
+        vkUnmapMemory(allocator->DeviceHandle(), memory);
+    }
 
 	VkDeviceSize MemoryBlock::LargestAvailRegion() const noexcept {
 		return (*availSuballocations.front()).size;
@@ -606,7 +620,7 @@ namespace vulpes {
             auto& block = allocation_collection->allocations.front();
             auto free_size = memory_to_free->Size;
             block->Free(memory_to_free);
-            LOG(INFO) << "Freed a memory allocation with size " << std::to_string(free_size / 1e6) << "mb"; 
+            LOG_IF((static_cast<float>(free_size) / 1.0e6f) > 0.5f, INFO) << "Freed a memory allocation with size " << std::to_string(free_size / 1e6) << "mb";
 			if (VALIDATE_MEMORY) {
 				auto err = block->Validate();
 				if (err != ValidationCode::VALIDATION_PASSED) {
@@ -721,7 +735,8 @@ namespace vulpes {
 							throw std::runtime_error("");
 						}
 					}
-                    LOG(INFO) << "Successfully allocated by binding to suballocation with size of " << std::to_string(memory_reqs.size / 1e6) << "mb at offset " << std::to_string(request.offset);
+                    // only log for larger allocations of at least half a mb: otherwise, log gets clogged with updates
+                    LOG_IF((static_cast<float>(memory_reqs.size) / 1.0e6f) > 0.5f, INFO) << "Successfully allocated by binding to suballocation with size of " << std::to_string(memory_reqs.size / 1e6) << "mb at offset " << std::to_string(request.offset);
 					return VK_SUCCESS;
 				}
 			}
@@ -821,7 +836,9 @@ namespace vulpes {
 	}
 
 	VkResult Allocator::AllocateForBuffer(VkBuffer & buffer_handle, const AllocationRequirements & details, const SuballocationType & alloc_type, Allocation& dest_allocation) {
-		VkMemoryRequirements memreqs;
+        std::mutex buffer_alloc_mutex;
+        std::lock_guard<std::mutex> buffer_alloc_guard(buffer_alloc_mutex);
+        VkMemoryRequirements memreqs;
 		vkGetBufferMemoryRequirements(parent->vkHandle(), buffer_handle, &memreqs);
 		return AllocateMemory(memreqs, details, alloc_type, dest_allocation);
 	}
@@ -919,7 +936,25 @@ namespace vulpes {
 		privateAllocation.MemoryTypeIdx = type_idx;
 		privateAllocation.PersistentlyMapped = persistently_mapped;
 		privateAllocation.MappedData = mapped_data;
-	}
+    }
+    
+    void Allocation::Map(const VkDeviceSize& size_to_map, const VkDeviceSize& offset_to_map_at, void* address_to_map_to) const {
+        if(Type == allocType::BLOCK_ALLOCATION) {
+            blockAllocation.ParentBlock->Map(this, size_to_map, offset_to_map_at, address_to_map_to);
+        }
+        else {
+            LOG(ERROR) << "Attempted to map a private allocation: this is currently not supported.";
+        }
+    }
+
+    void Allocation::Unmap() const noexcept {
+        if (Type == allocType::BLOCK_ALLOCATION) {
+            blockAllocation.ParentBlock->Unmap();
+        }
+        else {
+            LOG(ERROR) << "Attempted to unmap a private allocation: this is currently not supported.";
+        }
+    }
 
 	const VkDeviceMemory & Allocation::Memory() const {
 		if (Type == allocType::BLOCK_ALLOCATION) {

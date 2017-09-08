@@ -32,7 +32,7 @@ namespace vulpes {
 		of reporting a likely critical failure
 	*/
 
-#ifndef NDEBUG
+#if !defined NDEBUG || defined FORCE_ALLOCATOR_VALIDATION
 	constexpr bool VALIDATE_MEMORY = true;
 #else 
 	constexpr bool VALIDATE_MEMORY = false;
@@ -277,6 +277,8 @@ namespace vulpes {
 		void Init(MemoryBlock* parent_block, const VkDeviceSize& offset, const VkDeviceSize& alignment, const VkDeviceSize& alloc_size, const SuballocationType& suballoc_type);
 		void Update(MemoryBlock* new_parent_block, const VkDeviceSize& new_offset);
 		void InitPrivate(const uint32_t& type_idx, VkDeviceMemory& dvc_memory, const SuballocationType& suballoc_type, bool persistently_mapped, void* mapped_data, const VkDeviceSize& data_size);
+        void Map(const VkDeviceSize& size_to_map, const VkDeviceSize& offset_to_map_at, void* address_to_map_to) const;
+        void Unmap() const noexcept;
 
 		const VkDeviceMemory& Memory() const;
 		VkDeviceSize Offset() const noexcept;
@@ -342,8 +344,11 @@ namespace vulpes {
 		void Allocate(const SuballocationRequest& request, const SuballocationType& allocation_type, const VkDeviceSize& allocation_size);
 
 		// Frees memory in region specified (i.e frees/destroys a suballocation)
-		void Free(const Allocation* memory_to_free);
-
+        void Free(const Allocation* memory_to_free);
+        
+        void Map(const Allocation* alloc_being_mapped, const VkDeviceSize& size_of_map, const VkDeviceSize& offset_to_map_at, void* destination_address);
+        void Unmap();
+        
 		VkDeviceSize LargestAvailRegion() const noexcept;
 
 		suballocation_iterator_t begin();
@@ -371,6 +376,7 @@ namespace vulpes {
 
 	protected:
 
+        std::mutex memoryMutex; // protects access to VkDeviceMemory object
 		VkDeviceSize availSize;
 		uint32_t freeCount;
 		VkDeviceMemory memory;

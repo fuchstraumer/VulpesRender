@@ -1,7 +1,6 @@
 #pragma once
 #ifndef VULPES_VK_FORWARD_DECL_H
 #define VULPES_VK_FORWARD_DECL_H
-
 namespace vulpes {
 	class Allocator;
 	class MemoryBlock;
@@ -25,8 +24,12 @@ namespace vulpes {
 	class PipelineCache;
 	class DescriptorSet;
 	class DescriptorPool;
-	class PipelineLayout;
-	class PrimaryCommandBuffer;
-	class SecondaryCommandBuffer;
+    class PipelineLayout;
+    class Camera;
+    class Arcball;
+	namespace util {
+        class TransferTaskPool;
+        class TaskPool;
+    }
 }
 #endif // !VULPES_VK_FORWARD_DECL_H

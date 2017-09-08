@@ -1,11 +1,8 @@
-// vpr_stdafx.h : include file for standard system include files,
-// or project specific include files that are used frequently, but
-// are changed infrequently
-//
-
 #pragma once
 #pragma warning(push, 0)
+
 #define NOMINMAX
+
 #include <string>
 #include <vector>
 #include <iostream>
@@ -22,6 +19,8 @@
 #include <condition_variable>
 #include <regex>
 #include <limits>
+#include <functional>
+#include <deque>
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -65,9 +64,7 @@
 
 // Disable warning of initialized local variable not referenced (occurs with VkAssert in release)
 #ifdef NDEBUG
-#pragma warning(push)
 #pragma warning(disable : 4189)
-#pragma warning(pop)
 #endif //!NDEBUG
 
 #include "common/CreateInfoBase.hpp"

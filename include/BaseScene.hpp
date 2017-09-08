@@ -66,7 +66,6 @@ namespace vulpes {
 		virtual uint32_t submitExtra(const uint32_t& frame_idx);
 		virtual uint32_t submitFrame();
 		// Call ImGui drawing functions (like ImGui::ShowMainMenuBar(), etc) here.
-		virtual void imguiDrawcalls() = 0;
 		virtual void renderGUI(VkCommandBuffer& gui_buffer, const VkCommandBufferBeginInfo& begin_info, const size_t& frame_idx) const;
 		virtual void endFrame(const size_t& curr_idx) = 0;
 
