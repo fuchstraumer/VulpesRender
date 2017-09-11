@@ -17,18 +17,24 @@ namespace vulpes {
 		Renderpass& operator=(Renderpass&& other) noexcept;
 		~Renderpass();
 		
+        void SetupRenderPassBeginInfo(const std::vector<VkClearValue>& clear_values, const VkExtent2D& render_area);
+        void UpdateRenderPassBeginInfo(const VkFramebuffer& current_framebuffer);
 		void Destroy();
 
 		const VkRenderPass& vkHandle() const noexcept;
-		operator VkRenderPass() const noexcept;
 
 		const VkRenderPassCreateInfo& CreateInfo() const noexcept;
+        const VkRenderPassBeginInfo& BeginInfo() const noexcept;
 
 	private:
+
 		const Device* parent;
 		VkRenderPass handle;
 		VkRenderPassCreateInfo createInfo;
+        VkRenderPassBeginInfo beginInfo;
+        std::vector<VkClearValue> clearValues;
 		const VkAllocationCallbacks* allocators = nullptr;
+
 	};
 
 }
