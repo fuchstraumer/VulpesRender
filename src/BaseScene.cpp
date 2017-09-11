@@ -411,7 +411,7 @@ namespace vulpes {
             { 1.0f, 0 }
         };
 
-        renderPass->SetupRenderPassBeginInfo(clear_values, swapchain->Extent);
+        renderPass->SetupBeginInfo(clear_values, swapchain->Extent);
 
 	}
 

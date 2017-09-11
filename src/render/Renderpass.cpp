@@ -24,7 +24,7 @@ namespace vulpes {
 		Destroy();
 	}
 
-    void Renderpass::SetupRenderPassBeginInfo(const std::vector<VkClearValue>& clear_values, const VkExtent2D & render_area) {
+    void Renderpass::SetupBeginInfo(const std::vector<VkClearValue>& clear_values, const VkExtent2D & render_area) {
 
         clearValues = clear_values;
         clearValues.shrink_to_fit();
@@ -41,7 +41,7 @@ namespace vulpes {
 
     }
 
-    void Renderpass::UpdateRenderPassBeginInfo(const VkFramebuffer & current_framebuffer) {
+    void Renderpass::UpdateBeginInfo(const VkFramebuffer & current_framebuffer) {
         beginInfo.framebuffer = current_framebuffer;
     }
 

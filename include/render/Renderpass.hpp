@@ -17,8 +17,8 @@ namespace vulpes {
 		Renderpass& operator=(Renderpass&& other) noexcept;
 		~Renderpass();
 		
-        void SetupRenderPassBeginInfo(const std::vector<VkClearValue>& clear_values, const VkExtent2D& render_area);
-        void UpdateRenderPassBeginInfo(const VkFramebuffer& current_framebuffer);
+        void SetupBeginInfo(const std::vector<VkClearValue>& clear_values, const VkExtent2D& render_area);
+        void UpdateBeginInfo(const VkFramebuffer& current_framebuffer);
 		void Destroy();
 
 		const VkRenderPass& vkHandle() const noexcept;
