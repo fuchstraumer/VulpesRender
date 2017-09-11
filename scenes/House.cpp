@@ -1,5 +1,6 @@
 #include "vpr_stdafx.h"
 #include "BaseScene.hpp"
+#include "common/CreateInfoBase.hpp"
 #include "core/Instance.hpp"
 #include "resource/Buffer.hpp"
 #include "resource/DescriptorPool.hpp"
@@ -14,11 +15,14 @@
 #include "stb/stb_image.h"
 
 class HouseScene : public vulpes::BaseScene {
-    
+public:  
+
     struct vertex_t {
         glm::vec3 pos;
         glm::vec2 uv;
     };
+
+private:
 
     struct mesh {
         std::vector<uint32_t> indices;
@@ -41,6 +45,7 @@ public:
 private:
 
     virtual void endFrame(const size_t& idx) override;
+    void updateUBO();
 
     void create();
     void loadMeshTexture();
@@ -67,10 +72,22 @@ private:
     VkGraphicsPipelineCreateInfo pipelineCreateInfo;
     std::unique_ptr<vulpes::GraphicsPipeline> graphicsPipeline;
 
+    VkViewport viewport;
+    VkRect2D scissor;
+
 };
 
 int main() {
 
+}
+
+// specialize hash() operator for vertex_t
+namespace std {
+    template<> struct hash<HouseScene::vertex_t> {
+        size_t operator()(const HouseScene::vertex_t& vert) const {
+            return (hash<glm::vec3>()(vert.pos) ^ (hash<glm::vec2>()(vert.uv) << 1));
+        }
+    };
 }
 
 HouseScene::HouseScene() : BaseScene(1, 1440, 900) {
@@ -91,6 +108,79 @@ void HouseScene::RecreateObjects() {
 
 void HouseScene::RecordCommands() {
     
+    static VkCommandBufferBeginInfo primary_cmd_buffer_begin_info {
+        VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO,
+        nullptr,
+        VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT | VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT,
+        nullptr
+    };
+
+    static VkCommandBufferInheritanceInfo secondary_cmd_buffer_inheritance_info = vulpes::vk_command_buffer_inheritance_info_base;
+    secondary_cmd_buffer_inheritance_info.renderPass = renderPass->vkHandle();
+    secondary_cmd_buffer_inheritance_info.subpass = 0;
+
+    static VkCommandBufferBeginInfo secondary_cmd_buffer_begin_info {
+        VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO,
+        nullptr,
+        VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT | VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT | VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT,
+        &secondary_cmd_buffer_inheritance_info
+    };
+
+    updateUBO();
+
+    for(size_t i = 0; i < graphicsPool->size(); ++i) {
+
+        secondary_cmd_buffer_inheritance_info.framebuffer = framebuffers[i];
+        renderPass->UpdateBeginInfo(framebuffers[i]);
+
+        viewport.width = static_cast<float>(swapchain->Extent.width);
+        viewport.height = static_cast<float>(swapchain->Extent.height);
+
+        scissor.extent.width = swapchain->Extent.width;
+        scissor.extent.height = swapchain->Extent.height;
+
+        VkResult err = vkBeginCommandBuffer(graphicsPool->GetCmdBuffer(i), &primary_cmd_buffer_begin_info);
+        VkAssert(err);
+
+            vkCmdBeginRenderPass(graphicsPool->GetCmdBuffer(i), &renderPass->BeginInfo(), VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS);
+            auto& secondary_cmd_buffer = secondaryPool->GetCmdBuffer(i);
+            vkBeginCommandBuffer(secondary_cmd_buffer, &secondary_cmd_buffer_begin_info);
+                vkCmdBindPipeline(secondary_cmd_buffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline->vkHandle());
+                vkCmdSetViewport(secondary_cmd_buffer, 0, 1, &viewport);
+                vkCmdSetScissor(secondary_cmd_buffer, 0, 1, &scissor);
+                vkCmdBindDescriptorSets(secondary_cmd_buffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout->vkHandle(), 0, 1, &descriptorSet->vkHandle(), 0, nullptr);
+                vkCmdPushConstants(secondary_cmd_buffer, pipelineLayout->vkHandle(), VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(vs_ubo), &uboData);
+                vkCmdBindIndexBuffer(secondary_cmd_buffer, ebo->vkHandle(), 0, VK_INDEX_TYPE_UINT32);
+                constexpr static VkDeviceSize offsets[1] { 0 }; // required, even if set to zero
+                vkCmdBindVertexBuffers(secondary_cmd_buffer, 0, 1, &vbo->vkHandle(), offsets);
+                vkCmdDrawIndexed(secondary_cmd_buffer, static_cast<uint32_t>(meshData.indices.size()), 1, 0, 0, 0);
+            vkEndCommandBuffer(secondary_cmd_buffer);
+
+            vkCmdExecuteCommands(graphicsPool->GetCmdBuffer(i), 1, &secondaryPool->GetCmdBuffer(i));
+            vkCmdEndRenderPass(graphicsPool->GetCmdBuffer(i));
+
+        err = vkEndCommandBuffer(graphicsPool->GetCmdBuffer(i));
+        VkAssert(err);
+
+    }
+
+}
+
+void HouseScene::endFrame(const size_t& idx) {
+    secondaryPool->ResetCmdBuffer(idx);
+    graphicsPool->ResetCmdBuffer(idx);
+}
+
+void HouseScene::updateUBO() {
+
+    uboData.view = GetViewMatrix();
+    uboData.projection = GetProjectionMatrix();
+
+    static auto start_time = std::chrono::high_resolution_clock::now();
+    auto curr_time = std::chrono::high_resolution_clock::now();
+    float diff = std::chrono::duration_cast<std::chrono::milliseconds>(curr_time - start_time).count() / 1000.0f;
+    uboData.model = glm::rotate(glm::mat4(1.0f), diff * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f)); // pivot house around center axis based on time.
+
 }
 
 void HouseScene::create() {
