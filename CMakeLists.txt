@@ -135,6 +135,12 @@ SET(CMAKE_STATIC_LINKER_FLAGS_RELEASE "-NODEFAULTLIB
   \"${PROJECT_SOURCE_DIR}/ext/lib/OGLCompiler.lib\"
   \"${PROJECT_SOURCE_DIR}/ext/lib/OSDependent.lib\"")
 
+IF(MSVC) # enable multi-threaded compile for release builds, when its available
+  SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MP")
+  SET(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_MINSIZEREL} /MP")
+  SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /MP")
+ENDIF()
+
 IF (NOT USE_MSVC_RUNTIME_LIBRARY_DLL)
   FOREACH (flag CMAKE_C_FLAGS
                 CMAKE_C_FLAGS_DEBUG
@@ -152,12 +158,14 @@ IF (NOT USE_MSVC_RUNTIME_LIBRARY_DLL)
   ENDFOREACH()
 ENDIF()
 
-ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" "include/BaseScene.hpp" "src/BaseScene.cpp" ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
-ADD_DEPENDENCIES(VulpesRender update_imgui_submodule)
 
-IF(BUILD_EXAMPLE_SCENES) 
-    ADD_CUSTOM_TARGET(EXAMPLE_SCENES
-        COMMAND cmake  ${PROJECT_SOURCE_DIR}/scenes/CMakeLists.txt
-        DEPENDS VulpesRender
-        )
-ENDIF()
+
+ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" "include/BaseScene.hpp" "src/BaseScene.cpp" ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
+ADD_DEPENDENCIES(VulpesRender update_imgui_submodule) # make sure we update+init imgui before creating the project
+
+#IF(BUILD_EXAMPLE_SCENES) 
+#    ADD_CUSTOM_TARGET(EXAMPLE_SCENES
+#        COMMAND cmake  ${PROJECT_SOURCE_DIR}/scenes/CMakeLists.txt
+#        DEPENDS VulpesRender
+#        )
+#ENDIF()
