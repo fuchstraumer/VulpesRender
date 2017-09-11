@@ -403,7 +403,15 @@ namespace vulpes {
 
 		renderPass = std::make_unique<Renderpass>(device.get(), renderpass_create_info);
 
-		LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "Renderpass created.";
+        LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "Renderpass created.";
+        
+        static const std::vector<VkClearValue> clear_values {
+            { 0.025f, 0.025f, 0.065f, 1.0f },
+            { 0.025f, 0.025f, 0.065f, 1.0f },
+            { 1.0f, 0 }
+        };
+
+        renderPass->SetupRenderPassBeginInfo(clear_values, swapchain->Extent);
 
 	}
 
