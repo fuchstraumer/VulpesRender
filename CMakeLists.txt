@@ -68,7 +68,7 @@ FILE(GLOB IMGUI "imgui/imgui.cpp" "imgui/imgui.h" "imgui/imgui_draw.cpp" "imgui/
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
 INCLUDE_DIRECTORIES("imgui/")
-INCLUDE_DIRECTORIES("ext/")
+INCLUDE_DIRECTORIES("ext/include")
 INCLUDE_DIRECTORIES($ENV{VULKAN_SDK}/Include)
 
 FILE(GLOB PROJECT_SOURCES "src/util/*.cpp" "src/command/*.cpp" "src/core/*.cpp" "src/render/*.cpp" "src/resource/*.cpp" "src/gui/*.cpp" "src/BaseScene.cpp")
