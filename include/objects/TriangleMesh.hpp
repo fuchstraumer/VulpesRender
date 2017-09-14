@@ -10,6 +10,10 @@ namespace vulpes {
         vertex_t() = default;
         ~vertex_t() = default;
         vertex_t(const vertex_t&) = default;
+
+        vertex_t(const glm::vec3& _pos, const glm::vec3& _norm = glm::vec3(0.0f), const glm::vec2 _uv = glm::vec2(0.0f)) :
+            pos(_pos), normal(_norm), uv(_uv) {}
+
         vertex_t& operator=(const vertex_t&) = default;
 
         vertex_t& operator=(vertex_t&& other) {
@@ -69,7 +73,7 @@ namespace vulpes {
         const glm::vec3& GetScale() const noexcept;
         const glm::vec3& GetRotation() const noexcept;
 
-    private:
+    protected:
 
         void updateModelMatrix();
 
