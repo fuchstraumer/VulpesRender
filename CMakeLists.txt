@@ -52,6 +52,16 @@ ExternalProject_Add(glfw3
     "-DCMAKE_DEBUG_POSTFIX=-gd"
     "-DUSE_MSVC_RUNTIME_LIBRARY_DLL=ON")
 
+ExternalProject_Add(gli 
+    PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/gli"
+    GIT_REPOSITORY "https://github.com/g-truc/gli.git"
+    CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
+
+ExternalProject_Add(glm
+    PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/glm"
+    GIT_REPOSITORY "https://github.com/g-truc/glm.git"
+    CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
+
  # Update and init imgui
  ADD_CUSTOM_TARGET(update_imgui_submodule
     COMMAND git submodule update --init ${PROJECT_SOURCE_DIR}/imgui)
