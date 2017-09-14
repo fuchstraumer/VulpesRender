@@ -2,8 +2,8 @@
 #define VULPESRENDER_TRIANGLE_MESH_HPP
 
 #include "vpr_stdafx.h"
-#include "VertexType.hpp"
 #include "resource/Buffer.hpp"
+
 namespace vulpes {
 
     struct vertex_t {
@@ -71,6 +71,9 @@ namespace vulpes {
         } vertices;
 
         std::vector<uint32_t> indices;
+
+        std::unique_ptr<Buffer> vertexPositions() noexcept;
+        std::unique_ptr<Buffer> vertexNormals() noexcept;
 
         using vertex_positions = std::integral_constant<size_t, 0>;
         using vertex_normals = std::integral_constant<size_t, 1>;

@@ -47,19 +47,6 @@
 #include "GLFW/glfw3native.h"
 #endif
 
-// Number of odd/broken defines in this, as it includes windows.h 
-
-#include "util/easylogging++.h"
-
-
-#include "assimp/Importer.hpp"
-#include "assimp/postprocess.h"
-#include "assimp/scene.h"
-
-#include "SPIRV/GlslangToSpv.h"
-#include "glslang/Public/ShaderLang.h"
-#include "SPIRV/disassemble.h"
-
 #pragma warning(pop)
 
 // Disable warning of initialized local variable not referenced (occurs with VkAssert in release)
