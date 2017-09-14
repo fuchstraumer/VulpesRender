@@ -62,6 +62,16 @@ ExternalProject_Add(glm
     GIT_REPOSITORY "https://github.com/g-truc/glm.git"
     CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
 
+ExternalProject_Add(stb,
+    PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/stb"
+    GIT_REPOSITORY "https://github.com/nothings/stb.git"
+    CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
+
+ExternalProject_Add(tinyobj
+    PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/tinyobj"
+    GIT_REPOSITORY "https://github.com/syoyo/tinyobjloader.git"
+    CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
+
  # Update and init imgui
  ADD_CUSTOM_TARGET(update_imgui_submodule
     COMMAND git submodule update --init ${PROJECT_SOURCE_DIR}/imgui)
