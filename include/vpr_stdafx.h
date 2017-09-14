@@ -47,6 +47,8 @@
 #include "GLFW/glfw3native.h"
 #endif
 
+#include "util/easylogging++.h"
+
 #pragma warning(pop)
 
 // Disable warning of initialized local variable not referenced (occurs with VkAssert in release)
