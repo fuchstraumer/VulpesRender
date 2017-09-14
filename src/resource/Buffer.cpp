@@ -75,7 +75,7 @@ namespace vulpes {
 		Unmap();
 	}
 
-	void Buffer::CopyTo(void* data, VkCommandBuffer& transfer_cmd, const VkDeviceSize& copy_size, const VkDeviceSize& copy_offset) {
+	void Buffer::CopyTo(void* data, const VkCommandBuffer& transfer_cmd, const VkDeviceSize& copy_size, const VkDeviceSize& copy_offset) {
 
 		VkBuffer staging_buffer;
 		Allocation staging_alloc;
