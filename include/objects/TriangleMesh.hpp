@@ -7,11 +7,24 @@
 namespace vulpes {
 
     struct vertex_t {
+        vertex_t() = default;
+        ~vertex_t() = default;
+        vertex_t(const vertex_t&) = default;
+        vertex_t& operator=(const vertex_t&) = default;
+
+        vertex_t& operator=(vertex_t&& other) {
+            pos = std::move(other.pos);
+            normal = std::move(other.normal);
+            uv = std::move(other.uv);
+            return *this;
+        }
+
+        vertex_t(vertex_t&& other) : pos(other.pos), normal(other.normal), uv(other.uv) {}
+        
         glm::vec3 pos = glm::vec3(0.0f);
         glm::vec3 normal = glm::vec3(0.0f);
-        glm::vec3 tangent = glm::vec3(0.0f);
-        glm::vec3 bitangent = glm::vec3(0.0f);
         glm::vec2 uv = glm::vec2(0.0f);
+
     };
 
     class TriangleMesh {
@@ -19,14 +32,15 @@ namespace vulpes {
         TriangleMesh& operator=(const TriangleMesh&) = delete;
     public:
 
-        TriangleMesh();
+        TriangleMesh() = default;
+        TriangleMesh(const glm::vec3& _position, const glm::vec3& scale = glm::vec3(1.0f), const glm::vec3& rotation = glm::vec3(0.0f));
         ~TriangleMesh();
 
-        uint32_t AddVertex(const vertex_t& vert) noexcept;
-        uint32_t AddVertex(vertex_t&& vert) noexcept;
-
-        void AddIndex(const uint32_t& idx) noexcept;
-        void AddTriangle(const uint32_t& i0, const uint32_t& i1, const uint32_t& i2) noexcept;
+        // pass by value used here as vertex_t and uint32_t are cheap to move
+        // and are always copied into this object's private containers.
+        uint32_t AddVertex(vertex_t vert) noexcept;
+        void AddIndex(uint32_t idx) noexcept;
+        void AddTriangle(uint32_t i0, uint32_t i1, uint32_t i2) noexcept;
 
         const vertex_t& GetVertex(const uint32_t& index) const;
 
@@ -39,7 +53,7 @@ namespace vulpes {
         void CreateBuffers(const Device* dvc);
 
         void RecordTransferCommands(const VkCommandBuffer& transfer_cmd);
-        void Render(const VkCommandBuffer& draw_cmd);
+        void Render(const VkCommandBuffer& draw_cmd) const noexcept;
 
         void DestroyVulkanObjects();
         void FreeCpuData();
@@ -62,26 +76,13 @@ namespace vulpes {
         glm::mat4 model;
         glm::vec3 position, scale, rotation;
 
-        struct vertex_data_pool {
-            std::vector<glm::vec3> positions;
-            std::vector<glm::vec3> normals;
-            std::vector<glm::vec3> bitangents;
-            std::vector<glm::vec3> tangents;
-            std::vector<glm::vec2> uvs;
-        } vertices;
-
+        std::vector<vertex_t> vertices;
         std::vector<uint32_t> indices;
 
         std::unique_ptr<Buffer> vertexPositions() noexcept;
         std::unique_ptr<Buffer> vertexNormals() noexcept;
 
-        using vertex_positions = std::integral_constant<size_t, 0>;
-        using vertex_normals = std::integral_constant<size_t, 1>;
-        using vertex_uvs = std::integral_constant<size_t, 4>;
-        using vertex_tangents = std::integral_constant<size_t, 3>;
-        using vertex_bitangents = std::integral_constant<size_t, 2>; 
-
-        std::array<std::unique_ptr<Buffer>, 5> vbos;
+        std::unique_ptr<Buffer> vbo;
         std::unique_ptr<Buffer> ebo;
         const Device* device;
     };
