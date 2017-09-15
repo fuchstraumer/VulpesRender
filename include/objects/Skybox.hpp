@@ -29,9 +29,7 @@ namespace vulpes {
     private:
 
         void createMesh();
-        void createResources(TransferPool* transfer_pool);
         void uploadData(TransferPool* transfer_pool);
-        void createBuffers();
         void createTexture(const std::string& filename, const VkFormat& file_format);
         void createShaders();
         void createPipelineCache();
