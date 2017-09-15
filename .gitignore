@@ -4,8 +4,7 @@ build/
 VulpesRender.dir/ 
 ext/lib/
 .vscode/
-ext/include/gli
-ext/include/glm
-ext/include/GLFW
+ext/include/
 x64/RelWithDebInfo/glfw3/glfw3.log
 download/
+glfw/
