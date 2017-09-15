@@ -52,6 +52,19 @@ namespace vulpes {
         9, 8, 1
     };
 
+    Icosphere::Icosphere(const size_t& subdivision_level, const glm::vec3& pos, const glm::vec3& scale, const glm::vec3& rotation) : TriangleMesh(pos, scale, rotation), subdivisionLevel(subdivision_level) {}
+
+    void Icosphere::Init(const glm::mat4& projection, const VkRenderPass& renderpass, TransferPool* transfer_pool) {
+
+        uboData.projection = projection;
+        createMesh(subdivisionLevel);
+        uploadData(transfer_pool);
+        createPipelineCache();
+        createPipelineLayout();
+        createGraphicsPipeline(renderpass);
+
+    }
+
     static inline glm::vec3 midpoint(const vertex_t& v0, const vertex_t v1) noexcept {
         return (v0.pos + v1.pos) / 2.0f;
     }
@@ -121,6 +134,7 @@ namespace vulpes {
             vert.normal = glm::normalize(vert.pos - glm::vec3(0.0f));
         }
 
+        uboData.model = GetModelMatrix();
         CreateBuffers(device);
     }
 
@@ -137,6 +151,53 @@ namespace vulpes {
         pipelineCache = std::make_unique<PipelineCache>(device, static_cast<uint16_t>(typeid(Icosphere).hash_code()));
     }
 
+    void Icosphere::createPipelineLayout() {
+        pipelineLayout = std::make_unique<PipelineLayout>(device);
+        pipelineLayout->Create({ VkPushConstantRange{ VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(uboData) } });
+    }
 
+    void Icosphere::setPipelineStateInfo() {
+
+        constexpr static VkDynamicState dynamic_states[2]{ VK_DYNAMIC_STATE_VIEWPORT, VK_DYNAMIC_STATE_SCISSOR };
+        pipelineStateInfo.DynamicStateInfo.dynamicStateCount = 2;
+        pipelineStateInfo.DynamicStateInfo.pDynamicStates = dynamic_states;
+
+        pipelineStateInfo.MultisampleInfo.sampleShadingEnable = Instance::VulpesInstanceConfig.EnableMSAA;
+        if (pipelineStateInfo.MultisampleInfo.sampleShadingEnable) {
+            pipelineStateInfo.MultisampleInfo.rasterizationSamples = Instance::VulpesInstanceConfig.MSAA_SampleCount;
+        }
+
+        pipelineStateInfo.VertexInfo.vertexBindingDescriptionCount = 1;
+        pipelineStateInfo.VertexInfo.pVertexBindingDescriptions = &bindingDescription;
+        pipelineStateInfo.VertexInfo.vertexAttributeDescriptionCount = 1;
+        pipelineStateInfo.VertexInfo.pVertexAttributeDescriptions = &attributeDescription;
+
+    }
+
+    void Icosphere::createGraphicsPipeline(const VkRenderPass& renderpass) {
+
+        if(!vert || !frag) {
+            LOG(ERROR) << "Didn't specify shaders for an icosphere before attempting initilization!";
+            throw std::runtime_error("No shaders for icosphere object found.");
+        }
+
+        pipelineCreateInfo = pipelineStateInfo.GetPipelineCreateInfo();
+        const std::array<VkPipelineShaderStageCreateInfo, 2> shader_stages {
+            vert->PipelineInfo(), frag->PipelineInfo()
+        };
+
+        pipelineCreateInfo.stageCount = static_cast<uint32_t>(shader_stages.size());
+        pipelineCreateInfo.pStages = shader_stages.data();
+
+        pipelineCreateInfo.layout = pipelineLayout->vkHandle();
+        pipelineCreateInfo.renderPass = renderpass;
+        pipelineCreateInfo.subpass = 0;
+        pipelineCreateInfo.basePipelineHandle = VK_NULL_HANDLE;
+        pipelineCreateInfo.basePipelineIndex = -1;
+
+        graphicsPipeline = std::make_unique<GraphicsPipeline>(device);
+        graphicsPipeline->Init(pipelineCreateInfo, pipelineCache->vkHandle());
+
+    }
 
 }
