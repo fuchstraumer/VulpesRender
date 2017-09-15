@@ -28,20 +28,31 @@ namespace vulpes {
             } miscInfo;
         };
 
+        Material(const Material&) = delete;
+        Material& operator=(const Material&) = delete;
+
     public:
 
         Material() = default;
         ~Material();
 
+        Material(Material&&) noexcept;
+        Material& operator=(Material&&) noexcept;
+
         void Create(const std::string& mtl_file_path, const Device* device, DescriptorPool* descriptor_pool);
         void Create(const tinyobj::material_t& tinyobj_imported_material, const Device* dvc, DescriptorPool* descriptor_pool);
         void UploadToDevice(TransferPool* transfer_pool);
 
+        void BindMaterial(const VkCommandBuffer& cmd, const VkPipelineLayout& pipeline_layout) const noexcept;
+
+        VkDescriptorSetLayout GetSetLayout() const noexcept;
+        VkDescriptorSetLayout GetPbrSetLayout() const noexcept;
 
     private:
 
         void createUBO(const tinyobj::material_t& material_);
         void createTextures(const tinyobj::material_t& material_);
+        void createPbrTexturePack(const tinyobj::material_t& material_, const uint32_t& curr_binding_idx);
     
         std::unique_ptr<Texture<texture_2d_t>> ambient;
         std::unique_ptr<Texture<texture_2d_t>> diffuse;
@@ -59,6 +70,8 @@ namespace vulpes {
         std::unique_ptr<pbrTexturePack> pbrTextures;
 
         const Device* device;
+
+        std::list<Texture<texture_2d_t>*> activeTextures;
 
     };
 
