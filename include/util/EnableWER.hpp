@@ -1,3 +1,4 @@
+#pragma once
 #ifndef VULPES_ENABLE_WER_HPP
 #define VULPES_ENABLE_WER_HPP
 

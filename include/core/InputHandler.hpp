@@ -1,3 +1,4 @@
+#pragma once
 #ifndef VULPES_VK_INPUT_HANDLER_HPP
 #define VULPES_VK_INPUT_HANDLER_HPP
 
