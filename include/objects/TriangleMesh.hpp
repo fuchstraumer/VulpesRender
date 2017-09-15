@@ -3,33 +3,9 @@
 
 #include "vpr_stdafx.h"
 #include "resource/Buffer.hpp"
+#include "vertex_t.hpp"
 
-namespace vulpes {
-
-    struct vertex_t {
-        vertex_t() = default;
-        ~vertex_t() = default;
-        vertex_t(const vertex_t&) = default;
-
-        vertex_t(const glm::vec3& _pos, const glm::vec3& _norm = glm::vec3(0.0f), const glm::vec2 _uv = glm::vec2(0.0f)) :
-            pos(_pos), normal(_norm), uv(_uv) {}
-
-        vertex_t& operator=(const vertex_t&) = default;
-
-        vertex_t& operator=(vertex_t&& other) {
-            pos = std::move(other.pos);
-            normal = std::move(other.normal);
-            uv = std::move(other.uv);
-            return *this;
-        }
-
-        vertex_t(vertex_t&& other) : pos(other.pos), normal(other.normal), uv(other.uv) {}
-        
-        glm::vec3 pos = glm::vec3(0.0f);
-        glm::vec3 normal = glm::vec3(0.0f);
-        glm::vec2 uv = glm::vec2(0.0f);
-
-    };
+namespace vulpes {    
 
     class TriangleMesh {
         TriangleMesh(const TriangleMesh&) = delete;
