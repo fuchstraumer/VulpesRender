@@ -19,6 +19,16 @@ namespace vulpes {
 
     Skybox::Skybox(const Device* dvc) : device(dvc) {}
 
+    Skybox::~Skybox() {
+        texture.reset();
+        pipelineLayout.reset();
+        frag.reset();
+        vert.reset();
+        descriptorSet.reset();
+        pipelineCache.reset();
+        graphicsPipeline.reset();
+    }
+
     void Skybox::CreateTexture(const std::string& texture_filename, const VkFormat& texture_format) {
         createTexture(texture_filename, texture_format);
     }
