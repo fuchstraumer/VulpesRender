@@ -1,6 +1,7 @@
 #pragma once
 #ifndef VULPES_VK_TEXTURE_H
 #define VULPES_VK_TEXTURE_H
+
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.hpp"
 #include "../resource/Allocator.hpp"
@@ -9,11 +10,52 @@
 #include "../render/Multisampling.hpp"
 #include "Image.hpp"
 
+#include "stb/stb_image.h"
+
 namespace vulpes {
 
 	// TODO: 1D texture, 2D texture array.
 	using texture_1d_t = std::integral_constant<int, 0>;
-	using texture_2d_t = std::integral_constant<int, 1>;
+    
+    struct texture_2d_t {
+        texture_2d_t(const texture_2d_t&) = delete;
+        texture_2d_t& operator=(const texture_2d_t&) = delete;
+
+        texture_2d_t(const char* filename) {
+            pixels = stbi_load(filename, &x, &y, &channels, 4);
+        }
+
+        ~texture_2d_t() {
+            if(pixels) {
+                stbi_image_free(pixels);
+            }
+        }
+
+        texture_2d_t(texture_2d_t&& other) : pixels(std::move(other.pixels)), x(std::move(other.x)), y(std::move(other.y)), channels(std::move(other.channels)) {
+            other.pixels = nullptr;
+        }
+
+        texture_2d_t& operator=(texture_2d_t&& other) {
+            pixels = std::move(other.pixels);
+            x = std::move(other.x);
+            y = std::move(other.y);
+            channels = std::move(other.channels);
+            other.pixels = nullptr;
+            return *this;
+        }
+
+        size_t size() const noexcept {
+            return x * y * channels * sizeof(uint8_t);
+        }
+
+        stbi_uc* data() noexcept {
+            return pixels;
+        }
+
+        int x, y;
+        int channels;
+        stbi_uc* pixels;
+    };
 
 	template<typename texture_type>
 	class Texture : public Image {
@@ -26,10 +68,11 @@ namespace vulpes {
 		// Having to use texture_format an unfortunate artifact of the range of formats supported by GLI and Vulkan, and the mismatch
 		// in specification, quantity, and naming between the two. When in doubt, set a breakpoint after loading the texture in question
 		// from file, and check the gli object's "Format" field.
-		void CreateFromFile(const char* filename, const VkFormat& texture_format);
-
+        void CreateFromFile(const char* filename, const VkFormat& texture_format);
+        // This particular method for loading from file uses STB, and attempts to find the correct texture format based on the given file.
+        // Usually just ends up being RGBA8: for compressed textures, use the other method as GLI is required for loading compressed images.
+        void CreateFromFile(const char* filename);
 		void CreateFromBuffer(VkBuffer&& staging_buffer, const VkFormat& texture_format, const std::vector<VkBufferImageCopy>& copy_info);
-
 		void CreateEmptyTexture(const VkFormat& texture_format, const uint32_t& width, const uint32_t& height);
 
 		void TransferToDevice(VkCommandBuffer& transfer_cmd_buffer) const;
@@ -45,7 +88,6 @@ namespace vulpes {
 		void createTexture();
 		void createView();
 		void createSampler();
-
 		texture_type loadTextureDataFromFile(const char* filename);
 		void updateTextureParameters(const texture_type& texture_data);
 		void createCopyInformation(const texture_type& texture_data);
@@ -82,7 +124,15 @@ namespace vulpes {
 		createTexture(); 
 		createView();
 		createSampler();
-	}
+    }
+    
+    template<typename texture_type>
+    inline void Texture<texture_type>::CreateFromFile(const char* filename) {
+        copyFromFileToStaging(filename);
+        createTexture();
+        createView();
+        createSampler();
+    }
 
 	template<typename texture_type>
 	inline void Texture<texture_type>::CreateFromBuffer(VkBuffer&& staging_buffer, const VkFormat & texture_format, const std::vector<VkBufferImageCopy>& copy_info) {
@@ -158,7 +208,7 @@ namespace vulpes {
 		memcpy(mapped, texture_data.data(), texture_data.size());
 		vkUnmapMemory(parent->vkHandle(), stagingMemory.Memory());
 
-	}
+    }
 
 	template<typename texture_type>
 	inline void Texture<texture_type>::updateTextureParameters(const texture_type& texture_data) {
@@ -244,7 +294,7 @@ namespace vulpes {
 		updateTextureParameters(result);
 		createCopyInformation(result);
 		return std::move(result);
-	}
+    }
 
 	template<>
 	inline void Texture<gli::texture2d>::createCopyInformation(const gli::texture2d& texture_data) {
@@ -388,7 +438,43 @@ namespace vulpes {
 				offset += texture_data[layer][mip_level].size();
 			}
 		}
-	}
+    }
+    
+    template<>
+    inline texture_2d_t Texture<texture_2d_t>::loadTextureDataFromFile(const char* filename) {
+        texture_2d_t result(filename);
+        
+        if(result.channels == 1) {
+            format = VK_FORMAT_R8_UNORM;
+        }
+        else if(result.channels == 2) {
+            format = VK_FORMAT_R8G8_UNORM;
+        }
+        else if(result.channels == 3) {
+            format = VK_FORMAT_R8G8B8_UNORM;
+        }
+        else if(result.channels == 4) {
+            format = VK_FORMAT_R8G8B8A8_UNORM;
+        }
+        else {
+            LOG(ERROR) << "Couldn't interpet format of image data imported by STB.";
+            throw std::runtime_error("Invalid or incorrect image format.");
+        }
+
+        return std::move(result);
+    }
+
+    template<>
+    inline void Texture<texture_2d_t>::createCopyInformation(const texture_2d_t& texture) {
+        copyInfo.push_back(VkBufferImageCopy{
+            0,
+            0,
+            0,
+            VkImageSubresourceLayers{ VK_IMAGE_ASPECT_COLOR_BIT, 0, 0, 1 },
+            VkOffset3D{ 0, 0, 0 },
+            VkExtent3D{ static_cast<uint32_t>(texture.x), static_cast<uint32_t>(texture.y), 1 }
+        });
+    }
 
 }
 
