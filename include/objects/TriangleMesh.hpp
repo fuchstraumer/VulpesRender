@@ -1,3 +1,4 @@
+#pragma once
 #ifndef VULPESRENDER_TRIANGLE_MESH_HPP
 #define VULPESRENDER_TRIANGLE_MESH_HPP
 
@@ -14,7 +15,7 @@ namespace vulpes {
 
         TriangleMesh() = default;
         TriangleMesh(const glm::vec3& _position, const glm::vec3& scale = glm::vec3(1.0f), const glm::vec3& rotation = glm::vec3(0.0f));
-        ~TriangleMesh();
+        virtual ~TriangleMesh();
 
         // pass by value used here as vertex_t and uint32_t are cheap to move
         // and are always copied into this object's private containers.
