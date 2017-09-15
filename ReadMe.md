@@ -27,16 +27,11 @@ loop and Vulkan command buffer submission. The following methods must be overrid
 
 There are a considerable amount of items on my TODO list. The list below may be inaccurate or out of date, but reflects priorities:
 
-- [ ] Get threaded transfer task pool functioning
+- [ ] Get threaded transfer task pool functioning - DELAYED. MSVC std::promised_task broken, needs fix
 - [x] In line with above, make Allocator subsystem and Buffer objects thread-safe. Synchronize mapping of VkDeviceMemory objects. (requires testing)
-- [ ] Test the library on other OS's
 - [ ] Build a demo suite capable of testing most library items, and for demonstrating usage of the library
 - [ ] Read/Write configuration values to a file and use the VulpesConfig struct more often
-- [ ] Create higher-level wrapper for setting up offscreen passes
-- [ ] Create wrapper for compute tasks and pipelines
-- [ ] Attempt to support runtime shader recompiliation
-- [ ] Make creating complex renderpasses easier, and make BaseScene class more customizable on this front
-- [ ] Defragmentation system for Allocator
+- [ ] Improve how descriptor pools are handled: currently have to guess max sets and required resource count upon first init call. Maybe build "requests"?
 - [ ] Recover from ValidateMemory() errors
 
 Example code of this library in use can be found in my DiamondDogs project, which is updated relatively frequently. The two primary scenes are:
