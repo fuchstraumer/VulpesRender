@@ -222,6 +222,9 @@ namespace vulpes {
         else if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::FPS) {
             return fpsCamera.GetViewMatrix();
         }
+		else {
+			return glm::mat4(0.0f);
+		}
     }
 
     glm::mat4 BaseScene::GetProjectionMatrix() const noexcept {

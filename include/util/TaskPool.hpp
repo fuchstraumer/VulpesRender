@@ -1,3 +1,4 @@
+#pragma once
 #ifndef VULPES_VK_TASK_POOL_HPP
 #define VULPES_VK_TASK_POOL_HPP
 

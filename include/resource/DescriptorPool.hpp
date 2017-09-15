@@ -1,3 +1,4 @@
+#pragma once
 #ifndef VULPES_VK_DESCRIPTOR_POOL_H
 #define VULPES_VK_DESCRIPTOR_POOL_H
 

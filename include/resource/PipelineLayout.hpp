@@ -1,3 +1,4 @@
+#pragma once
 #ifndef VULPES_VK_PIPELINE_LAYOUT_H
 #define VULPES_VK_PIPELINE_LAYOUT_H
 

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef VULPES_VK_MOUSE_PICKING_H
 #define VULPES_VK_MOUSE_PICKING_H
 

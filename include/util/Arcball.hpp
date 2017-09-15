@@ -1,3 +1,4 @@
+#pragma once
 #ifndef VULPES_VK_ARCBALL_H
 #define VULPES_VK_ARCBALL_H
 #include "vpr_stdafx.h"
