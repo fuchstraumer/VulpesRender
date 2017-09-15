@@ -39,7 +39,7 @@ IF(FORCE_ALLOCATOR_VALIDATION)
 ENDIF()
 
 ExternalProject_Add(glfw3
-  PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/glfw"
+  PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/glfw"
   GIT_REPOSITORY "https://github.com/glfw/glfw.git"
   GIT_TAG ""
   BUILD_IN_SOURCE 1
@@ -62,19 +62,13 @@ ExternalProject_Add(glm
     GIT_REPOSITORY "https://github.com/g-truc/glm.git"
     CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
 
-ExternalProject_Add(stb,
-    PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/stb"
-    GIT_REPOSITORY "https://github.com/nothings/stb.git"
-    CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
-
-ExternalProject_Add(tinyobj
-    PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/tinyobj"
-    GIT_REPOSITORY "https://github.com/syoyo/tinyobjloader.git"
-    CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
-
- # Update and init imgui
- ADD_CUSTOM_TARGET(update_imgui_submodule
+# Update and init imgui
+ADD_CUSTOM_TARGET(update_imgui_submodule
     COMMAND git submodule update --init ${PROJECT_SOURCE_DIR}/imgui)
+
+ADD_CUSTOM_TARGET(UPDATE_STB COMMAND git submodule update --init ${PROJECT_SOURCE_DIR}/ext/include/stb)
+ADD_CUSTOM_TARGET(UPDATE_TINYOBJ COMMAND git submodule update --init ${PROJECT_SOURCE_DIR}/ext/include/tinyobj)
+
 
 FILE(GLOB UTIL "src/util/*.cc" "src/util/*.cpp" "include/util/*.h" "include/util/*.hpp")
 FILE(GLOB COMMON "src/common/*.h" "src/common/*.hpp")
@@ -105,19 +99,9 @@ SOURCE_GROUP("imgui addons" FILES ${GUI_ADDONS})
 SOURCE_GROUP("imgui" FILES ${IMGUI})
 
 SET(CMAKE_STATIC_LINKER_FLAGS_DEBUG "-NODEFAULTLIB 
-  \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3-gd.lib\" 
-  \"${PROJECT_SOURCE_DIR}/ext/assimp/assimp-vc141-mt-gd.lib\"
-  \"${PROJECT_SOURCE_DIR}/ext/lib/glslangd.lib\"
-  \"${PROJECT_SOURCE_DIR}/ext/lib/SPVRemapperd.lib\"
-  \"${PROJECT_SOURCE_DIR}/ext/lib/OSDependentd.lib\"
-  \"${PROJECT_SOURCE_DIR}/ext/lib/OGLCompilerd.lib\"")
+  \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3-gd.lib")
 SET(CMAKE_STATIC_LINKER_FLAGS_RELEASE "-NODEFAULTLIB 
-  \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib\" 
-  \"${PROJECT_SOURCE_DIR}/ext/assimp/assimp-vc141-mt.lib\"
-  \"${PROJECT_SOURCE_DIR}/ext/lib/glslang.lib\"
-  \"${PROJECT_SOURCE_DIR}/ext/lib/SPVRemapper.lib\"
-  \"${PROJECT_SOURCE_DIR}/ext/lib/OGLCompiler.lib\"
-  \"${PROJECT_SOURCE_DIR}/ext/lib/OSDependent.lib\"")
+  \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib\"")
 
 IF(MSVC) # enable multi-threaded compile for release builds, when its available
   SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MP")
@@ -145,7 +129,7 @@ ENDIF()
 
 
 ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" "include/BaseScene.hpp" "src/BaseScene.cpp" ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
-ADD_DEPENDENCIES(VulpesRender update_imgui_submodule) # make sure we update+init imgui before creating the project
+ADD_DEPENDENCIES(VulpesRender update_imgui_submodule UPDATE_STB UPDATE_TINYOBJ) # make sure we update+init imgui before creating the project
 
 #IF(BUILD_EXAMPLE_SCENES) 
 #    ADD_CUSTOM_TARGET(EXAMPLE_SCENES
