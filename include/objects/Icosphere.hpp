@@ -29,8 +29,6 @@ namespace vulpes {
 
         void createMesh(const size_t& subdivision_level);
         void uploadData(TransferPool* transfer_pool);
-        void createTexture(const std::string& filename, const VkFormat& file_format);
-       
         void createPipelineCache();
         void setupDescriptorSet(DescriptorPool* descriptor_pool);
         void setupPipelineLayout();
@@ -54,7 +52,6 @@ namespace vulpes {
 
         GraphicsPipelineInfo graphicsPipelineStateInfo;
         VkGraphicsPipelineCreateInfo graphicsPipelineCreateInfo;
-        const Device* device;
 
     };
 

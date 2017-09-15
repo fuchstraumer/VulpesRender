@@ -3,6 +3,7 @@
 #include "objects/Icosphere.hpp"
 #include "core/Instance.hpp"
 #include "core/LogicalDevice.hpp"
+#include "command/TransferPool.hpp"
 
 namespace vulpes {
 
@@ -53,6 +54,13 @@ namespace vulpes {
 
     static inline glm::vec3 midpoint(const vertex_t& v0, const vertex_t v1) noexcept {
         return (v0.pos + v1.pos) / 2.0f;
+    }
+
+    void Icosphere::CreateShaders(const std::string& vertex_shader_path, const std::string& fragment_shader_path) {
+
+        vert = std::make_unique<ShaderModule>(device, vertex_shader_path, VK_SHADER_STAGE_VERTEX_BIT);
+        frag = std::make_unique<ShaderModule>(device, fragment_shader_path, VK_SHADER_STAGE_FRAGMENT_BIT);
+    
     }
 
     void Icosphere::createMesh(const size_t& subdivision_level) {
@@ -112,6 +120,23 @@ namespace vulpes {
         for(auto& vert : vertices) {
             vert.normal = glm::normalize(vert.pos - glm::vec3(0.0f));
         }
+
+        CreateBuffers(device);
     }
+
+    void Icosphere::uploadData(TransferPool* transfer_pool) {
+
+        auto& cmd = transfer_pool->Begin();
+        RecordTransferCommands(cmd);
+        transfer_pool->End();
+        transfer_pool->Submit();
+
+    }
+
+    void Icosphere::createPipelineCache() {
+        pipelineCache = std::make_unique<PipelineCache>(device, static_cast<uint16_t>(typeid(Icosphere).hash_code()));
+    }
+
+
 
 }

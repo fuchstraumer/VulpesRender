@@ -55,7 +55,6 @@ namespace vulpes {
 
         GraphicsPipelineInfo graphicsPipelineStateInfo;
         VkGraphicsPipelineCreateInfo graphicsPipelineCreateInfo;
-        const Device* device;
 
     };
 
