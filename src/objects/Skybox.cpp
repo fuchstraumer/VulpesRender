@@ -17,7 +17,7 @@ namespace vulpes {
         glm::vec3(+1.0f, +1.0f, -1.0f),
     };
 
-    Skybox::Skybox(const Device* dvc) : device(dvc) {}
+	Skybox::Skybox(const Device* dvc) { device = dvc; }
 
     Skybox::~Skybox() {
         texture.reset();

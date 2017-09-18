@@ -10,14 +10,14 @@ namespace vulpes {
 
     uint32_t TriangleMesh::AddVertex(vertex_t vertex) noexcept {
         vertices.push_back(std::move(vertex));
-        return vertices.size() - 1;
+        return static_cast<uint32_t>(vertices.size() - 1);
     }
 
-    void TriangleMesh::AddIndex(uint32_t index) {
+    void TriangleMesh::AddIndex(uint32_t index) noexcept {
         indices.push_back(std::move(index));
     }
 
-    void TriangleMesh::AddTriangle(uint32_t i0, uint32_t i1, uint32_t i2) {
+    void TriangleMesh::AddTriangle(uint32_t i0, uint32_t i1, uint32_t i2) noexcept {
         indices.insert(indices.cend(), { std::move(i0), std::move(i1), std::move(i2) });
     }
 
@@ -65,7 +65,7 @@ namespace vulpes {
         constexpr static VkDeviceSize offsets[1] { 0 };
         vkCmdBindVertexBuffers(draw_cmd, 0, 1, &vbo->vkHandle(), offsets);
         vkCmdBindIndexBuffer(draw_cmd, ebo->vkHandle(), 0, VK_INDEX_TYPE_UINT32);
-        vkCmdDrawIndexed(draw_cmd, NumIndices(), 1, 0, 0, 0);
+        vkCmdDrawIndexed(draw_cmd, static_cast<uint32_t>(NumIndices()), 1, 0, 0, 0);
 
     }
 

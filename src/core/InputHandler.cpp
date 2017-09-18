@@ -8,8 +8,8 @@ namespace vulpes {
 
     std::array<bool, 1024> input_handler::Keys = std::array<bool, 1024>();
     std::array<bool, 3> input_handler::MouseButtons = std::array<bool, 3>();
-    float input_handler::LastX = 1.0f;
-    float input_handler::LastY = 1.0f;
+    float input_handler::LastX = 0.0f;
+    float input_handler::LastY = 0.0f;
     float input_handler::MouseDx = 0.0f;
     float input_handler::MouseDy = 0.0f;
     float input_handler::MouseScroll = 0.0f;
@@ -64,7 +64,7 @@ namespace vulpes {
 
     void input_handler::MousePosCallback(GLFWwindow * window, double mouse_x, double mouse_y) {
 		MouseDx = static_cast<float>(mouse_x) - LastX;
-		MouseDy = static_cast<float>(mouse_y) - LastY;
+		MouseDy = LastY - static_cast<float>(mouse_y);
 
 		LastX = static_cast<float>(mouse_x);
 		LastY = static_cast<float>(mouse_y);

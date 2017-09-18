@@ -11,7 +11,7 @@ namespace vulpes {
 
 		Arcball(const size_t& window_width, const size_t& window_height);
 		
-		glm::mat4 GetViewMatrix() override;
+		glm::mat4 GetViewMatrix();
 		glm::mat4 GetModelRotationMatrix(const glm::mat4& view_matrix);
 
 		void UpdateMousePos(const float & x, const float & y);

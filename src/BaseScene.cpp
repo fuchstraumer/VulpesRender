@@ -86,6 +86,9 @@ namespace vulpes {
 
 		LOG_IF(verbose_logging, INFO) << "BaseScene setup complete.";
 
+		input_handler::LastX = swapchain->Extent.width / 2.0f;
+		input_handler::LastY = swapchain->Extent.height / 2.0f;
+
 	}
 
 	vulpes::BaseScene::~BaseScene() {
@@ -156,12 +159,12 @@ namespace vulpes {
 		if (!io.WantCaptureMouse) {
 
             if (!CameraLock) {
-                if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::FPS) {
-                    fpsCamera.UpdateMousePos(input_handler::MouseDx, input_handler::MouseDx);
-                }
-                else if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
-                    arcballCamera.UpdateMousePos(input_handler::MouseDx, input_handler::MouseDx);
-                }
+				if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::FPS) {
+						fpsCamera.UpdateMousePos(input_handler::MouseDx, input_handler::MouseDy);
+				}
+				else if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+						arcballCamera.UpdateMousePos(input_handler::MouseDx, input_handler::MouseDy);
+				}
             }
 
 			if (ImGui::IsMouseDragging(0)) {
@@ -185,6 +188,9 @@ namespace vulpes {
 
             mouseScroll(0, io.MouseWheel);
 		}
+
+		input_handler::MouseDx = 0.0f;
+		input_handler::MouseDy = 0.0f;
 	}
 
     void BaseScene::mouseDrag(const int& button, const float & rot_x, const float & rot_y) {
@@ -482,6 +488,8 @@ namespace vulpes {
 		io.DisplaySize.x = static_cast<float>(swapchain->Extent.width);
 		io.DisplaySize.y = static_cast<float>(swapchain->Extent.height);
         arcballCamera = Arcball(swapchain->Extent.width, swapchain->Extent.height);
+		input_handler::LastX = swapchain->Extent.width / 2.0f;
+		input_handler::LastY = swapchain->Extent.height / 2.0f;
 		
 		CreateCommandPools();
 		SetupRenderpass(Instance::VulpesInstanceConfig.MSAA_SampleCount);
@@ -517,6 +525,8 @@ namespace vulpes {
 
 			vkResetCommandPool(device->vkHandle(), secondaryPool->vkHandle(), VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
 			vkResetCommandPool(device->vkHandle(), graphicsPool->vkHandle(), VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
+
+			Buffer::DestroyStagingResources(device.get());
 
 		}
 	}

@@ -203,7 +203,7 @@ namespace vulpes {
 
 		VkResult result = parent->vkAllocator->CreateBuffer(&staging_buffer, &create_info, alloc_reqs, dest_memory_alloc);
         VkAssert(result);
-        LOG(INFO) << "Created a staging buffer. Currently have " << std::to_string(stagingBuffers.size()) << " staging buffers in the pool.";
+		LOG_IF(stagingBuffers.size() > 100, WARNING) << "Warning! More than 100 staging buffers currently in the staging buffer pool!";
 
 	}
 

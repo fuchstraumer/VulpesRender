@@ -151,8 +151,8 @@ namespace vulpes {
 		vbo = std::make_unique<Buffer>(device);
 		ebo = std::make_unique<Buffer>(device);
 
-		vert = std::make_unique<ShaderModule>(device, "rsrc/shaders/gui/ui.vert.spv", VK_SHADER_STAGE_VERTEX_BIT);
-		frag = std::make_unique<ShaderModule>(device, "rsrc/shaders/gui/ui.frag.spv", VK_SHADER_STAGE_FRAGMENT_BIT);
+		vert = std::make_unique<ShaderModule>(device, "../rsrc/shaders/gui/ui.vert.spv", VK_SHADER_STAGE_VERTEX_BIT);
+		frag = std::make_unique<ShaderModule>(device, "../rsrc/shaders/gui/ui.frag.spv", VK_SHADER_STAGE_FRAGMENT_BIT);
 
 	}
 

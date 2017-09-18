@@ -71,8 +71,8 @@ namespace vulpes {
 
     void Icosphere::CreateShaders(const std::string& vertex_shader_path, const std::string& fragment_shader_path) {
 
-        vert = std::make_unique<ShaderModule>(device, vertex_shader_path, VK_SHADER_STAGE_VERTEX_BIT);
-        frag = std::make_unique<ShaderModule>(device, fragment_shader_path, VK_SHADER_STAGE_FRAGMENT_BIT);
+        vert = std::make_unique<ShaderModule>(device, vertex_shader_path.c_str(), VK_SHADER_STAGE_VERTEX_BIT);
+        frag = std::make_unique<ShaderModule>(device, fragment_shader_path.c_str(), VK_SHADER_STAGE_FRAGMENT_BIT);
     
     }
 
