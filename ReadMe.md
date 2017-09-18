@@ -35,5 +35,6 @@ There are a considerable amount of items on my TODO list. The list below may be 
 - [ ] Read/Write configuration values to a file and use the VulpesConfig struct more often (possibly make "SceneConfig", not "InstanceConfig")
 - [ ] Improve how descriptor pools are handled: currently have to guess max sets and required resource count upon first init call. Maybe build "requests"?
 - [ ] Recover from ValidateMemory() errors
+- [ ] BIG TODO: Un-FUBAR the spacing due to files not completely converted from tabs to spaces! This is really gross right now!
 
 Example code of this library in use can be found in my other projects, in their respective "scenes" folders.
