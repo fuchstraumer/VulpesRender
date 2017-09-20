@@ -95,14 +95,17 @@ namespace vulpes {
 
     void TriangleMesh::UpdatePosition(const glm::vec3& new_position) {
         position = new_position;
+        updateModelMatrix();
     }
 
     void TriangleMesh::UpdateScale(const glm::vec3& new_scale) {
         scale = new_scale;
+        updateModelMatrix();
     }
 
     void TriangleMesh::UpdateRotation(const glm::vec3& new_rotation) {
         rotation = new_rotation;
+        updateModelMatrix();
     }
 
     const glm::vec3& TriangleMesh::GetPosition() const noexcept {

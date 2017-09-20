@@ -3,7 +3,7 @@
 	url = https://github.com/ocornut/imgui
 [submodule "ext/include/tinyobj"]
 	path = ext/include/tinyobj
-	url = https://github.com/syoyo/tinyobj
+	url = https://github.com/syoyo/tinyobjloader
 [submodule "ext/include/stb"]
 	path = ext/include/stb
 	url = https://github.com/nothings/stb

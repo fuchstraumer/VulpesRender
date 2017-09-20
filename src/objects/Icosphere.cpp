@@ -54,9 +54,11 @@ namespace vulpes {
 
     Icosphere::Icosphere(const size_t& subdivision_level, const glm::vec3& pos, const glm::vec3& scale, const glm::vec3& rotation) : TriangleMesh(pos, scale, rotation), subdivisionLevel(subdivision_level) {}
 
-    void Icosphere::Init(const glm::mat4& projection, const VkRenderPass& renderpass, TransferPool* transfer_pool) {
-
+    void Icosphere::Init(const Device* dvc, const glm::mat4& projection, const VkRenderPass& renderpass, TransferPool* transfer_pool) {
+        
+        device = dvc;
         uboData.projection = projection;
+        
         createMesh(subdivisionLevel);
         uploadData(transfer_pool);
         createPipelineCache();

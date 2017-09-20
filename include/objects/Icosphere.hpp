@@ -22,7 +22,7 @@ namespace vulpes {
         Icosphere(const size_t& detail_level, const glm::vec3& position, const glm::vec3& scale = glm::vec3(1.0f), const glm::vec3& rotation = glm::vec3(0.0f));
         ~Icosphere();
 
-        void Init(const glm::mat4& projection, const VkRenderPass& renderpass, TransferPool* transfer_pool);
+        void Init(const Device* dvc, const glm::mat4& projection, const VkRenderPass& renderpass, TransferPool* transfer_pool);
         void CreateShaders(const std::string& vertex_shader_path, const std::string& fragment_shader_path);
         void UpdateUBO(const glm::mat4& view) noexcept;
         void SetColor(const glm::vec3& new_color) noexcept;
