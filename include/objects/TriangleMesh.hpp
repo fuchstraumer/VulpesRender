@@ -33,8 +33,8 @@ namespace vulpes {
 
         void CreateBuffers(const Device* dvc);
 
-        void RecordTransferCommands(const VkCommandBuffer& transfer_cmd);
-        void Render(const VkCommandBuffer& draw_cmd) const noexcept;
+        virtual void RecordTransferCommands(const VkCommandBuffer& transfer_cmd);
+        virtual void Render(const VkCommandBuffer& draw_cmd) const noexcept;
 
         void DestroyVulkanObjects();
         void FreeCpuData();
@@ -52,6 +52,8 @@ namespace vulpes {
 
     protected:
 
+        virtual void bindBuffers(const VkCommandBuffer& draw_cmd_buffer) const noexcept;
+        virtual void drawIndexed(const VkCommandBuffer& draw_cmd_buffer) const noexcept;
         void updateModelMatrix();
 
         glm::mat4 model;

@@ -62,10 +62,8 @@ namespace vulpes {
 
     void TriangleMesh::Render(const VkCommandBuffer& draw_cmd) const noexcept {
     
-        constexpr static VkDeviceSize offsets[1] { 0 };
-        vkCmdBindVertexBuffers(draw_cmd, 0, 1, &vbo->vkHandle(), offsets);
-        vkCmdBindIndexBuffer(draw_cmd, ebo->vkHandle(), 0, VK_INDEX_TYPE_UINT32);
-        vkCmdDrawIndexed(draw_cmd, static_cast<uint32_t>(NumIndices()), 1, 0, 0, 0);
+        bindBuffers(draw_cmd);
+        drawIndexed(draw_cmd);
 
     }
 
@@ -129,4 +127,13 @@ namespace vulpes {
         model = translation_matrix * rotation_x_matrix * rotation_y_matrix * rotation_z_matrix * scale_matrix;
     }
 
+    void TriangleMesh::bindBuffers(const VkCommandBuffer& draw_cmd) const noexcept {
+        constexpr static VkDeviceSize offsets[1] { 0 };
+        vkCmdBindVertexBuffers(draw_cmd, 0, 1, &vbo->vkHandle(), offsets);
+        vkCmdBindIndexBuffer(draw_cmd, ebo->vkHandle(), 0, VK_INDEX_TYPE_UINT32);
+    }
+
+    void TriangleMesh::drawIndexed(const VkCommandBuffer& draw_cmd_buffer) const noexcept {
+        vkCmdDrawIndexed(draw_cmd_buffer, static_cast<uint32_t>(NumIndices()), 1, 0, 0, 0);
+    }
 }
