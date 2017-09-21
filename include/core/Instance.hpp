@@ -8,8 +8,18 @@
 
 namespace vulpes {
 
-    /**! Instance is a wrapper around a VkInstance object, that also handles/holds a Window pointer
-    * \defgroup<Core>
+    /*! The Core group handles the base Vulkan resources and objects: LogicalDevice, PhysicalDevice, Instance, and Window. It also 
+    *   includes the InputHandler class, which is responsible for handling input events and updats from the Window class.
+    * \defgroup Core
+    */
+
+    /*! Instance is a wrapper around the base Vulkan object that must be initialized first. The VkInstanceCreateInfo struct passed to the constructor
+        contains information about the current layers enabled, and which Vulkan Instance extensions to enable. By default, this should/will contain
+        extensions required to support the creation of a window surface (VkSurfaceKHR).
+
+        This class also contains a Window object, which it is responsible for creating and destroying as necessary, along with a PhysicalDevice object.
+        These can both be retrieved through the relevant methods.
+
     */
 	class Instance {
 		Instance(const Instance&) = delete;
@@ -34,7 +44,11 @@ namespace vulpes {
         void destroyDebugCallbacks() noexcept;
 
 		std::unique_ptr<PhysicalDevice> physicalDevice;        
-		VkDebugReportCallbackEXT errorCallback, warningCallback, perfCallback, infoCallback, vkCallback;
+        VkDebugReportCallbackEXT errorCallback;
+        VkDebugReportCallbackEXT warningCallback;
+        VkDebugReportCallbackEXT perfCallback;
+        VkDebugReportCallbackEXT infoCallback; 
+        VkDebugReportCallbackEXT vkCallback;
         std::unique_ptr<Window> window;
 		VkInstance handle;
         VkInstanceCreateInfo createInfo;
