@@ -14,12 +14,12 @@ namespace vulpes {
     */
 
     /*! Instance is a wrapper around the base Vulkan object that must be initialized first. The VkInstanceCreateInfo struct passed to the constructor
-        contains information about the current layers enabled, and which Vulkan Instance extensions to enable. By default, this should/will contain
-        extensions required to support the creation of a window surface (VkSurfaceKHR).
-
-        This class also contains a Window object, which it is responsible for creating and destroying as necessary, along with a PhysicalDevice object.
-        These can both be retrieved through the relevant methods.
-
+    *    contains information about the current layers enabled, and which Vulkan Instance extensions to enable. By default, this should/will contain
+    *    extensions required to support the creation of a window surface (VkSurfaceKHR).
+    *
+    *    This class also contains a Window object, which it is responsible for creating and destroying as necessary, along with a PhysicalDevice object.
+    *    These can both be retrieved through the relevant methods.
+    *    \ingroup Core
     */
 	class Instance {
 		Instance(const Instance&) = delete;

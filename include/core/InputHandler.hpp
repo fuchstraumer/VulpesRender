@@ -7,6 +7,11 @@
 namespace vulpes {
 
     class Window;
+    /**! The input_handler class "contains" the static callback functions that glfw updates during each frame. It also (truly) contains
+    *    two arrays that are updated with input values from the keyboard and mouse, along with parameters relating to the mouse's previous
+    *    location and the mouse position's deltas.
+    *    \ingroup Core
+    */
 
     struct input_handler {
 

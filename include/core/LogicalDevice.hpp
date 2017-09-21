@@ -16,6 +16,13 @@ namespace vulpes {
 				 Present = std::numeric_limits<uint32_t>::max();
 	};
 
+    /**! The Device class is a wrapper around the vkLogicalDevice object. This object is what most Vulkan resources and objects are spawned from,
+    *    and is then responsible for managing these resources. Most Vulkan functions relating to resource creation, binding, or updating will take
+    *    a vkLogicalDevice reference as a parameter.
+    *   
+    *   The vast majority of classes in this codebase contain a private const Device pointer, for use in their internal functions requiring this object's
+    *   handle. 
+    */
 	class Device {
 		Device(const Device&) = delete;
 		Device(Device&&) = delete;
@@ -39,13 +46,17 @@ namespace vulpes {
 
 		void CheckSurfaceSupport(const VkSurfaceKHR& surf);
 
+        /**! Returns whether or not the currently active physical device, along with the logical device, supports/has queues dedicated compute operations */
 		bool HasDedicatedComputeQueues() const;
 
 		void EnableValidation();
 
 		void GetMarkerFuncPtrs();
 
-		// Returns queue that has support for most operation types.
+        /**! Returns queue that has support for most operation types. First checks for graphics, compute, and transfer. 
+        *    Then proceeds to graphics and compute. Lastly, it will just return a graphics-only queue and log a warning.
+        *   \param idx - in the case of a device with several "generalized" queues, selects which queue to return.
+        */
 		VkQueue GeneralQueue(const uint32_t& idx = 0) const;
 
 		// Attempts to find queue that only does requested operation first, then returns omni-purpose queues.
@@ -54,11 +65,23 @@ namespace vulpes {
 		VkQueue ComputeQueue(const uint32_t & idx = 0) const;
 		VkQueue SparseBindingQueue(const uint32_t& idx = 0) const;
 
-		/*
-			Methods related to supported features and/or formats
-		*/
-		VkImageTiling GetFormatTiling(const VkFormat& format, const VkFormatFeatureFlags & flags) const;
-		VkFormat FindSupportedFormat(const std::vector<VkFormat>& options, const VkImageTiling& tiling, const VkFormatFeatureFlags& flags) const;
+        /**! Checks whether or not the given format along with the specified flags supports optimal or linear tiling.
+        *   \param format - Vulkan format enum specifying the type of image data
+        *   \param flags - flags specifying features of format: commonly what it is being used for, e.g cube map, sampled image, storage image, etc
+        */
+        VkImageTiling GetFormatTiling(const VkFormat& format, const VkFormatFeatureFlags & flags) const;
+        
+        /**! Checks a collection of possible formats, returning the one that supports the given tiling and feature flags.
+        *   \param options - vector of formats that are usable for the desired task.
+        *   \param tiling - required image tiling setting.
+        *   \param flags - features required, commonly related to intended use for the image.
+        *   \return Returns found format if successful, otherwise returns VK_FORMAT_UNDEFINED and logs a detailed error.
+        */
+        VkFormat FindSupportedFormat(const std::vector<VkFormat>& options, const VkImageTiling& tiling, const VkFormatFeatureFlags& flags) const;
+        
+        /**! Finds a Vulkan image format suitable for use in the depth buffer
+
+        */
 		VkFormat FindDepthFormat() const;
 		VkFormat GetSwapchainColorFormat() const;
 
