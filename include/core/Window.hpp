@@ -5,7 +5,11 @@
 #include "InputHandler.hpp"
 #include "ForwardDecl.hpp"
 namespace vulpes {
-
+    /**! Window is a wrapper around the GLFW windowing system, and handles creating the underlying rendering
+    *    window along with creating a suitable VkSurfaceKHR object. It is also responsible for signaling a
+    *    window resizing event.
+    * \ingroup<Core>
+    */
     class Window {
         Window(const Window& other) = delete;
         Window& operator=(const Window& other) = delete;

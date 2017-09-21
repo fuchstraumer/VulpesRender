@@ -8,6 +8,9 @@
 
 namespace vulpes {
 
+    /**! Instance is a wrapper around a VkInstance object, that also handles/holds a Window pointer
+    * \defgroup<Core>
+    */
 	class Instance {
 		Instance(const Instance&) = delete;
 		Instance& operator=(const Instance&) = delete;
