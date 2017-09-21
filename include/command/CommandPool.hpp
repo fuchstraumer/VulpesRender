@@ -24,12 +24,13 @@ namespace vulpes {
 		void AllocateCmdBuffers(const uint32_t& num_buffers, const VkCommandBufferAllocateInfo& alloc_info = vk_command_buffer_allocate_info_base);
 		void ResetCmdPool();
 		void ResetCmdBuffer(const size_t& idx);
-		void FreeCommandBuffers();
-
+        void FreeCommandBuffers();
+    
 		const VkCommandPool& vkHandle() const noexcept;
 
 		VkCommandBuffer& operator[](const size_t& idx);
-		VkCommandBuffer& GetCmdBuffer(const size_t& idx);
+        VkCommandBuffer& GetCmdBuffer(const size_t& idx);
+        std::vector<VkCommandBuffer> GetCommandBuffers(const size_t& num, const size_t& offset);
 
 		std::pair<size_t, VkCommandBuffer> GetAvailCmdBuffer();
 

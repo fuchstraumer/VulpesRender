@@ -86,7 +86,11 @@ namespace vulpes {
 	
 	const VkCommandPool & CommandPool::vkHandle() const noexcept{
 		return handle;
-	}
+    }
+    
+    std::vector<VkCommandBuffer> CommandPool::GetCommandBuffers(const size_t& num, const size_t& offset) {
+        return std::vector<VkCommandBuffer>(cmdBuffers.begin() + offset, cmdBuffers.end() + num);
+    }
 
 	VkCommandBuffer & vulpes::CommandPool::operator[](const size_t & idx) {
 		return cmdBuffers[idx];
