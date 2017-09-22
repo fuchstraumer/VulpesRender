@@ -30,29 +30,7 @@ namespace vulpes {
 		cameraBase(const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& up = glm::vec3(0.0f, 1.0f, 0.0f), const glm::vec3& front = glm::vec3(0.0f, 0.0f, -1.0f)) : Position(position), Up(up), Front(front), WorldUp(0.0f, 1.0f, 0.0f) {}
 		virtual ~cameraBase() = default;
 
-		virtual void ProcessKeyboard(const Direction& dir, const float& delta_time) {
-			float velocity = Instance::VulpesInstanceConfig.MovementSpeed * delta_time;
-			switch (dir) {
-			case Direction::FORWARD:
-				translate(Front, velocity);
-				break;
-			case Direction::BACKWARD:
-				translate(-Front, velocity);
-				break;
-			case Direction::LEFT:
-				translate(-Right, velocity);
-				break;
-			case Direction::RIGHT:
-				translate(Right, velocity);
-				break;
-			case Direction::UP:
-				translate(Up, velocity);
-				break;
-			case Direction::DOWN:
-				translate(-Up, velocity);
-				break;
-			}
-		}
+        virtual void ProcessKeyboard(const Direction& dir, const float& delta_time);
 
 		virtual void MouseDrag(const int& button, const float& x_offset, const float& y_offset) = 0;
 		virtual void MouseScroll(const int& button, const float& y_scroll) = 0;
@@ -93,28 +71,7 @@ namespace vulpes {
 
 		void MouseScroll(const int& button, const float& yoffset) override {}
 
-		void UpdateMousePos(const float& x, const float& y) override {
-			float x_offset = x * Instance::VulpesInstanceConfig.MouseSensitivity;
-			float y_offset = y * Instance::VulpesInstanceConfig.MouseSensitivity;
-
-			Yaw += x_offset;
-			Pitch += y_offset;
-
-			// Make sure that when pitch is out of bounds, screen doesn't get flipped
-
-			{
-				if (Pitch > 89.0f) {
-					Pitch = 89.0f;
-				}
-				if (Pitch < -89.0f) {
-					Pitch = -89.0f;
-				}
-			}
-
-			// Update Front, Right and Up Vectors using the updated Eular angles
-			updateCameraVectors();
-
-		}
+        void UpdateMousePos(const float& x, const float& y) override;
 
 		void MouseDown(const int& button, const float& x, const float& y) override {}
 
@@ -123,18 +80,7 @@ namespace vulpes {
 
 	private:
 
-		void updateCameraVectors() {
-
-			glm::vec3 front;
-			front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-			front.y = sin(glm::radians(Pitch));
-			front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-			Front = glm::normalize(front);
-
-			Right = glm::normalize(glm::cross(Front, WorldUp));
-			Up = glm::normalize(glm::cross(Right, Front));
-
-		}
+        void updateCameraVectors();
 	};
 
 	class FreeCamera : public cameraBase {

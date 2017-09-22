@@ -3,7 +3,7 @@
 #include "objects/ObjModel.hpp"
 #include "core/Instance.hpp"
 #include "command/TransferPool.hpp"
-
+#include "BaseScene.hpp"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h"
 
@@ -119,9 +119,9 @@ namespace vulpes {
         pipelineStateInfo.DynamicStateInfo.dynamicStateCount = 2;
         pipelineStateInfo.DynamicStateInfo.pDynamicStates = dynamic_states;
 
-        pipelineStateInfo.MultisampleInfo.sampleShadingEnable = Instance::VulpesInstanceConfig.EnableMSAA;
+        pipelineStateInfo.MultisampleInfo.sampleShadingEnable = BaseScene::SceneConfiguration.EnableMSAA;
         if (pipelineStateInfo.MultisampleInfo.sampleShadingEnable) {
-            pipelineStateInfo.MultisampleInfo.rasterizationSamples = Instance::VulpesInstanceConfig.MSAA_SampleCount;
+            pipelineStateInfo.MultisampleInfo.rasterizationSamples = BaseScene::SceneConfiguration.MSAA_SampleCount;
         }
 
         pipelineStateInfo.VertexInfo.vertexBindingDescriptionCount = 1;

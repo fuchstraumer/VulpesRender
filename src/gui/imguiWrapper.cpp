@@ -75,7 +75,7 @@ namespace vulpes {
 		io.ClipboardUserData = reinterpret_cast<void*>(window_ptr); // required for clipboard funcs to work.
 		static double curr_time = 0.0;
 
-		if (Instance::VulpesInstanceConfig.EnableMouseLocking) {
+		if (BaseScene::SceneConfiguration.EnableMouseLocking) {
 			if (input_handler::Keys[GLFW_KEY_LEFT_ALT]) {
 				freeMouse(instance);
 				BaseScene::CameraLock = true;
@@ -301,8 +301,8 @@ namespace vulpes {
 
 		pipelineStateInfo.RasterizationInfo.cullMode = VK_CULL_MODE_NONE;
 
-		pipelineStateInfo.MultisampleInfo.rasterizationSamples = Instance::VulpesInstanceConfig.MSAA_SampleCount;
-		pipelineStateInfo.MultisampleInfo.sampleShadingEnable = Instance::VulpesInstanceConfig.EnableMSAA;
+		pipelineStateInfo.MultisampleInfo.rasterizationSamples = BaseScene::SceneConfiguration.MSAA_SampleCount;
+		pipelineStateInfo.MultisampleInfo.sampleShadingEnable = BaseScene::SceneConfiguration.EnableMSAA;
 
 	}
 

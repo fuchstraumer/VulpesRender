@@ -19,7 +19,7 @@ namespace vulpes {
 
     void Window::createWindow() {
 
-        std::string window_title = Instance::VulpesInstanceConfig.ApplicationName;
+        std::string window_title = BaseScene::SceneConfiguration.ApplicationName;
         window = glfwCreateWindow(static_cast<int>(width), static_cast<int>(height), window_title.c_str(), nullptr, nullptr);
 
         ImGuiIO& io = ImGui::GetIO();

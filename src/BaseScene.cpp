@@ -19,7 +19,7 @@
 namespace vulpes {
 
     bool BaseScene::CameraLock = false;
-    vulpesSceneConfig BaseScene::SceneConfiguration = vulpesSceneConfig();
+
 
     Camera BaseScene::fpsCamera = Camera();
     Arcball BaseScene::arcballCamera = Arcball(1440, 900);
@@ -34,7 +34,7 @@ namespace vulpes {
         __wer.enable();
 #endif 
 
-		const bool verbose_logging = Instance::VulpesInstanceConfig.VerboseLogging;
+		const bool verbose_logging = BaseScene::SceneConfiguration.VerboseLogging;
 
 		VkInstanceCreateInfo create_info = vk_base_instance_info;
 		instance = std::make_unique<Instance>(create_info, false, _width, _height);
@@ -44,7 +44,7 @@ namespace vulpes {
 
 		LOG_IF(verbose_logging, INFO) << "VkInstance created.";
 
-		Multisampling::SampleCount = Instance::VulpesInstanceConfig.MSAA_SampleCount;
+		Multisampling::SampleCount = BaseScene::SceneConfiguration.MSAA_SampleCount;
         LOG_IF(verbose_logging, INFO) << "MSAA level set to " << std::to_string(Multisampling::SampleCount);
 
 		device = std::make_unique<Device>(instance.get(), instance->GetPhysicalDevice());
@@ -160,10 +160,10 @@ namespace vulpes {
 		if (!io.WantCaptureMouse) {
 
             if (!CameraLock) {
-				if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::FPS) {
+				if (BaseScene::SceneConfiguration.CameraType == cameraType::FPS) {
 						fpsCamera.UpdateMousePos(input_handler::MouseDx, input_handler::MouseDy);
 				}
-				else if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+				else if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
 						arcballCamera.UpdateMousePos(input_handler::MouseDx, input_handler::MouseDy);
 				}
             }
@@ -195,25 +195,25 @@ namespace vulpes {
 	}
 
     void BaseScene::mouseDrag(const int& button, const float & rot_x, const float & rot_y) {
-        if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
             arcballCamera.MouseDrag(button, rot_x, rot_y);
         }
     }
 
     void BaseScene::mouseScroll(const int& button, const float & zoom_delta) {
-        if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
             arcballCamera.MouseScroll(button, zoom_delta);
         }
     }
 
     void BaseScene::mouseDown(const int& button, const float& x, const float& y) {
-        if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
             arcballCamera.MouseDown(button, x, y);
         }
     }
 
     void BaseScene::mouseUp(const int& button, const float & x, const float & y) {
-        if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
             arcballCamera.MouseUp(button, x, y);
         }
     }
@@ -223,10 +223,10 @@ namespace vulpes {
 	}
 
     glm::mat4 BaseScene::GetViewMatrix() const noexcept {
-        if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
             return arcballCamera.GetViewMatrix();
         }
-        else if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::FPS) {
+        else if (BaseScene::SceneConfiguration.CameraType == cameraType::FPS) {
             return fpsCamera.GetViewMatrix();
         }
 		else {
@@ -239,10 +239,10 @@ namespace vulpes {
     }
 
     const glm::vec3 & BaseScene::CameraPosition() const noexcept {
-        if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
             return arcballCamera.Position;
         }
-        else if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::FPS) {
+        else if (BaseScene::SceneConfiguration.CameraType == cameraType::FPS) {
             return fpsCamera.Position;
         }
         else {
@@ -253,10 +253,10 @@ namespace vulpes {
     }
 
     void BaseScene::UpdateCameraPosition(const glm::vec3& new_position) noexcept {
-        if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::ARCBALL) {
+        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
             arcballCamera.Position = new_position;
         }
-        else if (Instance::VulpesInstanceConfig.CameraType == cfg::cameraType::FPS) {
+        else if (BaseScene::SceneConfiguration.CameraType == cameraType::FPS) {
             fpsCamera.Position = new_position;
         }
     }
@@ -291,7 +291,7 @@ namespace vulpes {
 
 		attachmentDescriptions[0] = vk_attachment_description_base;
 		attachmentDescriptions[0].format = swapchain->ColorFormat;
-		attachmentDescriptions[0].samples = Instance::VulpesInstanceConfig.MSAA_SampleCount;
+		attachmentDescriptions[0].samples = BaseScene::SceneConfiguration.MSAA_SampleCount;
 		attachmentDescriptions[0].loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
 		attachmentDescriptions[0].storeOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
 		attachmentDescriptions[0].stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
@@ -319,7 +319,7 @@ namespace vulpes {
 
 		attachmentDescriptions[2] = vk_attachment_description_base;
 		attachmentDescriptions[2].format = device->FindDepthFormat();
-		attachmentDescriptions[2].samples = Instance::VulpesInstanceConfig.MSAA_SampleCount;
+		attachmentDescriptions[2].samples = BaseScene::SceneConfiguration.MSAA_SampleCount;
 		attachmentDescriptions[2].loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
 		attachmentDescriptions[2].storeOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
 		attachmentDescriptions[2].stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
@@ -413,7 +413,7 @@ namespace vulpes {
 
 		renderPass = std::make_unique<Renderpass>(device.get(), renderpass_create_info);
 
-        LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "Renderpass created.";
+        LOG_IF(BaseScene::SceneConfiguration.VerboseLogging, INFO) << "Renderpass created.";
         
         static const std::vector<VkClearValue> clear_values {
             { 0.025f, 0.025f, 0.065f, 1.0f },
@@ -457,7 +457,7 @@ namespace vulpes {
 
 	void vulpes::BaseScene::RecreateSwapchain() {
 
-		LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "Began to recreate swapchain...";
+		LOG_IF(BaseScene::SceneConfiguration.VerboseLogging, INFO) << "Began to recreate swapchain...";
 
 		// First wait to make sure nothing is in use.
 		vkDeviceWaitIdle(device->vkHandle());
@@ -493,19 +493,19 @@ namespace vulpes {
 		input_handler::LastY = swapchain->Extent.height / 2.0f;
 		
 		CreateCommandPools();
-		SetupRenderpass(Instance::VulpesInstanceConfig.MSAA_SampleCount);
+		SetupRenderpass(BaseScene::SceneConfiguration.MSAA_SampleCount);
 		SetupDepthStencil();
 		SetupFramebuffers();
 		RecreateObjects();
 		vkDeviceWaitIdle(device->vkHandle());
 
-		LOG_IF(Instance::VulpesInstanceConfig.VerboseLogging, INFO) << "Swapchain recreation successful.";
+		LOG_IF(BaseScene::SceneConfiguration.VerboseLogging, INFO) << "Swapchain recreation successful.";
 
 	}
 
 	void BaseScene::RenderLoop() {
 
-		frameTime = static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs / 1000.0);
+		frameTime = static_cast<float>(BaseScene::SceneConfiguration.FrameTimeMs / 1000.0);
         LOG(INFO) << "Entering rendering loop.";
 
 		while(!glfwWindowShouldClose(instance->GetWindow()->glfwWindow())) {
@@ -517,7 +517,7 @@ namespace vulpes {
 			UpdateMouseActions();
 			gui->NewFrame(instance.get(), false);
 
-			UpdateMovement(static_cast<float>(Instance::VulpesInstanceConfig.FrameTimeMs));
+			UpdateMovement(static_cast<float>(BaseScene::SceneConfiguration.FrameTimeMs));
 			
 			RecordCommands();
 			auto idx = submitFrame();
@@ -572,15 +572,15 @@ namespace vulpes {
 
 	void BaseScene::limitFrame() {
 
-		if(!Instance::VulpesInstanceConfig.LimitFramerate) {
+		if(!BaseScene::SceneConfiguration.LimitFramerate) {
 			return;
 		}
 
 		limiter_a = std::chrono::system_clock::now();
 		std::chrono::duration<double, std::milli> work_time = limiter_a - limiter_b;
 		
-		if(work_time.count() < Instance::VulpesInstanceConfig.FrameTimeMs) {
-			std::chrono::duration<double, std::milli> delta_ms(Instance::VulpesInstanceConfig.FrameTimeMs - work_time.count());
+		if(work_time.count() < BaseScene::SceneConfiguration.FrameTimeMs) {
+			std::chrono::duration<double, std::milli> delta_ms(BaseScene::SceneConfiguration.FrameTimeMs - work_time.count());
 			auto delta_ms_dur = std::chrono::duration_cast<std::chrono::milliseconds>(delta_ms);
 			std::this_thread::sleep_for(std::chrono::milliseconds(delta_ms_dur.count()));
 		}

@@ -3,7 +3,13 @@
 #include <imgui.h>
 #include "core/PhysicalDevice.hpp"
 #include "common/VkDebug.hpp"
+
+#include "BaseSceneConfig.hpp"
+#include "BaseScene.hpp"
+
 namespace vulpes {
+
+    vulpesSceneConfig BaseScene::SceneConfiguration = vulpesSceneConfig();
 
     Instance::Instance(VkInstanceCreateInfo create_info, const bool & enable_validation, const uint32_t& _width, const uint32_t& _height) {
 

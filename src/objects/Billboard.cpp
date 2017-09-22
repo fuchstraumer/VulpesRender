@@ -3,7 +3,7 @@
 #include "core/Instance.hpp"
 #include "core/LogicalDevice.hpp"
 #include "command/TransferPool.hpp"
-
+#include "BaseScene.hpp"
 namespace vulpes {
 
     constexpr static std::array<float, 20> billboard_vertices {
@@ -53,8 +53,7 @@ namespace vulpes {
             vkCmdBindPipeline(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline->vkHandle());
             vkCmdSetViewport(cmd, 0, 1, &viewport);
             vkCmdSetScissor(cmd, 0, 1, &scissor);
-            vkCmdPushConstants(cmd, pipelineLayout->vkHandle(), VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(pushDataVS), &pushDataVS);
-            vkCmdPushConstants(cmd, pipelineLayout->vkHandle(), VK_SHADER_STAGE_FRAGMENT_BIT, sizeof(pushDataVS), sizeof(pushDataFS), &pushDataFS);
+            vkCmdPushConstants(cmd, pipelineLayout->vkHandle(), VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(uboData), &uboData);
             static const VkDeviceSize offsets[1]{ 0 };
             vkCmdBindVertexBuffers(cmd, 0, 1, &vbo->vkHandle(), offsets);
             vkCmdDraw(cmd, 4, 1, 0, 1);
@@ -119,9 +118,9 @@ namespace vulpes {
         pipelineStateInfo.DynamicStateInfo.dynamicStateCount = 2;
         pipelineStateInfo.DynamicStateInfo.pDynamicStates = dynamic_states;
 
-        pipelineStateInfo.MultisampleInfo.sampleShadingEnable = Instance::VulpesInstanceConfig.EnableMSAA;
+        pipelineStateInfo.MultisampleInfo.sampleShadingEnable = BaseScene::SceneConfiguration.EnableMSAA;
         if (pipelineStateInfo.MultisampleInfo.sampleShadingEnable) {
-            pipelineStateInfo.MultisampleInfo.rasterizationSamples = Instance::VulpesInstanceConfig.MSAA_SampleCount;
+            pipelineStateInfo.MultisampleInfo.rasterizationSamples = BaseScene::SceneConfiguration.MSAA_SampleCount;
         }
 
         

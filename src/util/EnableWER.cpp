@@ -1,6 +1,7 @@
 #include "vpr_stdafx.h"
 #include "util/EnableWER.hpp"
 #include "core/Instance.hpp"
+#include "BaseScene.hpp"
 namespace vulpes {
     namespace util {
 
@@ -41,9 +42,9 @@ namespace vulpes {
 
             std::string registry_key_name = "SOFTWARE\\Microsoft\\Windows\\Windows Error Reporting\\";
 
-            registry_key_name += Instance::VulpesInstanceConfig.ApplicationName;
+            registry_key_name += BaseScene::SceneConfiguration.ApplicationName;
 
-            if (Instance::VulpesInstanceConfig.ApplicationName == "VulpesRender") {
+            if (BaseScene::SceneConfiguration.ApplicationName == "VulpesRender") {
                 LOG(WARNING) << "ApplicationName in Config struct is still set to default value of VulpesRender: update this to ensure memory dump and error log is correctly setup.";
             }
 

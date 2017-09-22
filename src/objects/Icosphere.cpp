@@ -4,7 +4,7 @@
 #include "core/Instance.hpp"
 #include "core/LogicalDevice.hpp"
 #include "command/TransferPool.hpp"
-
+#include "BaseScene.hpp"
 namespace vulpes {
 
     constexpr float golden_ratio = 1.61803398875f;
@@ -186,9 +186,9 @@ namespace vulpes {
         pipelineStateInfo.DynamicStateInfo.dynamicStateCount = 2;
         pipelineStateInfo.DynamicStateInfo.pDynamicStates = dynamic_states;
 
-        pipelineStateInfo.MultisampleInfo.sampleShadingEnable = Instance::VulpesInstanceConfig.EnableMSAA;
+        pipelineStateInfo.MultisampleInfo.sampleShadingEnable = BaseScene::SceneConfiguration.EnableMSAA;
         if (pipelineStateInfo.MultisampleInfo.sampleShadingEnable) {
-            pipelineStateInfo.MultisampleInfo.rasterizationSamples = Instance::VulpesInstanceConfig.MSAA_SampleCount;
+            pipelineStateInfo.MultisampleInfo.rasterizationSamples = BaseScene::SceneConfiguration.MSAA_SampleCount;
         }
 
         pipelineStateInfo.VertexInfo.vertexBindingDescriptionCount = 1;

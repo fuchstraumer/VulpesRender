@@ -3,7 +3,7 @@
 #include "core/Instance.hpp"
 #include "core/LogicalDevice.hpp"
 #include "command/TransferPool.hpp"
-
+#include "BaseScene.hpp"
 namespace vulpes {
 
     static const std::array<glm::vec3, 8> positions {
@@ -113,7 +113,7 @@ namespace vulpes {
 
     void Skybox::createPipelineCache() {
 
-        pipelineCache = std::make_unique<PipelineCache>(device, typeid(Skybox).hash_code());
+        pipelineCache = std::make_unique<PipelineCache>(device, static_cast<uint16_t>(typeid(Skybox).hash_code()));
 
     }
 
@@ -140,9 +140,9 @@ namespace vulpes {
         graphicsPipelineStateInfo.DynamicStateInfo.dynamicStateCount = 2;
         graphicsPipelineStateInfo.DynamicStateInfo.pDynamicStates = dynamic_states;
 
-        graphicsPipelineStateInfo.MultisampleInfo.sampleShadingEnable = Instance::VulpesInstanceConfig.EnableMSAA;
-        if(Instance::VulpesInstanceConfig.EnableMSAA) {
-            graphicsPipelineStateInfo.MultisampleInfo.rasterizationSamples = Instance::VulpesInstanceConfig.MSAA_SampleCount;
+        graphicsPipelineStateInfo.MultisampleInfo.sampleShadingEnable = BaseScene::SceneConfiguration.EnableMSAA;
+        if(BaseScene::SceneConfiguration.EnableMSAA) {
+            graphicsPipelineStateInfo.MultisampleInfo.rasterizationSamples = BaseScene::SceneConfiguration.MSAA_SampleCount;
         }
 
         graphicsPipelineStateInfo.VertexInfo.vertexBindingDescriptionCount = 1;

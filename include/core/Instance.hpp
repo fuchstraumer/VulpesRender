@@ -26,7 +26,7 @@ namespace vulpes {
 		Instance& operator=(const Instance&) = delete;
 	public:
 		
-		Instance(VkInstanceCreateInfo create_info, const bool& enable_validation, const uint32_t& width = DEFAULT_WIDTH, const uint32_t& height = DEFAULT_HEIGHT);
+		Instance(VkInstanceCreateInfo create_info, const bool& enable_validation, const uint32_t& width, const uint32_t& height);
         ~Instance();
 
 		const VkInstance& vkHandle() const noexcept;
