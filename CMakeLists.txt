@@ -130,7 +130,7 @@ ENDIF()
 
 
 
-ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" "include/BaseScene.hpp" "src/BaseScene.cpp" ${OBJECTS} ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
+ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" "include/BaseScene.hpp" "src/BaseScene.cpp" "include/BaseSceneConfig.hpp" ${OBJECTS} ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
 ADD_DEPENDENCIES(VulpesRender update_imgui_submodule UPDATE_STB UPDATE_TINYOBJ) # make sure we update+init imgui before creating the project
 
 #IF(BUILD_EXAMPLE_SCENES) 
