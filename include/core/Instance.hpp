@@ -1,9 +1,9 @@
 #pragma once
 #ifndef VULPES_VK_INSTANCE_H
 #define VULPES_VK_INSTANCE_H
+
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.hpp"
-#include "InstanceConfig.hpp"
 #include "Window.hpp"
 
 namespace vulpes {
@@ -34,7 +34,6 @@ namespace vulpes {
         const PhysicalDevice* GetPhysicalDevice() const noexcept;
         const Window* GetWindow() const noexcept;
         Window* GetWindow() noexcept;
-        static cfg::vulpesInstanceInfo VulpesInstanceConfig;
 
     private:
 

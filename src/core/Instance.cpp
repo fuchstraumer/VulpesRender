@@ -5,8 +5,6 @@
 #include "common/VkDebug.hpp"
 namespace vulpes {
 
-	cfg::vulpesInstanceInfo Instance::VulpesInstanceConfig = cfg::vulpesInstanceInfo();
-
     Instance::Instance(VkInstanceCreateInfo create_info, const bool & enable_validation, const uint32_t& _width, const uint32_t& _height) {
 
         createInfo = create_info;

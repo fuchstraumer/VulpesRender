@@ -17,6 +17,7 @@
 #include "resource/PipelineCache.hpp"
 #include "util/Camera.hpp"
 #include "util/Arcball.hpp"
+#include "BaseSceneConfig.hpp"
 
 namespace vulpes {
 
@@ -53,6 +54,7 @@ namespace vulpes {
         void UpdateCameraPosition(const glm::vec3& new_position) noexcept;
         
         static bool CameraLock;
+        static vulpesSceneConfig SceneConfiguration;
 
 	protected:
 
