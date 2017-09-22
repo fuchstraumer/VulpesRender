@@ -438,7 +438,7 @@ namespace vulpes {
 		VK_NULL_HANDLE,
 		std::numeric_limits<uint32_t>::max(),
 		VK_NULL_HANDLE,
-		std::numeric_limits<uint32_t>::max(),
+		-1,
 	};
 
 	constexpr VkPipelineVertexInputStateCreateInfo vk_pipeline_vertex_input_state_create_info_base{
