@@ -8,6 +8,8 @@ namespace vulpes {
     *    hardware device in a user's system. This class stores the relevant VkPhysicalDeviceProperties, VkPhysicalDeviceFeatures, and 
     *    VkPhysicalDeviceMemoryProperties that can be freely queried from anywhere in the program. This can/should be used to check for
     *    limits on things like texture and buffer size, supported memory types, supported rendering modes, and supported texture types like cubemaps.
+    *
+    *    As each computer can have multiple physical devices, the class uses a simplistic scoring system to find the "best" hardware on the current system.
     *    \ingroup Core
     */
 	class PhysicalDevice {

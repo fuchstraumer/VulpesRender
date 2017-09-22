@@ -22,6 +22,7 @@ namespace vulpes {
     *   
     *   The vast majority of classes in this codebase contain a private const Device pointer, for use in their internal functions requiring this object's
     *   handle. 
+    *   \ingroup Core
     */
 	class Device {
 		Device(const Device&) = delete;
