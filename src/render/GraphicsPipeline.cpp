@@ -22,15 +22,33 @@ namespace vulpes {
 
 	GraphicsPipeline::GraphicsPipeline(const Device * _parent) : parent(_parent), createInfo(vk_graphics_pipeline_create_info_base) {}
 
+    GraphicsPipeline::GraphicsPipeline(GraphicsPipeline&& other) noexcept : parent(std::move(other.parent)), createInfo(std::move(other.createInfo)), handle(std::move(other.handle)) {
+        other.handle = VK_NULL_HANDLE;
+    }
+
+    GraphicsPipeline& GraphicsPipeline::operator=(GraphicsPipeline&& other) noexcept {
+        parent = std::move(other.parent);
+        createInfo = std::move(other.createInfo);
+        handle = std::move(other.handle);
+        other.handle = VK_NULL_HANDLE;
+        return *this;
+    }
+
 	GraphicsPipeline::~GraphicsPipeline(){
-		vkDestroyPipeline(parent->vkHandle(), handle, allocators);
-	}
+        Destroy();
+    }
 
 	void GraphicsPipeline::Init(VkGraphicsPipelineCreateInfo & create_info, const VkPipelineCache& cache){
 		VkResult result = vkCreateGraphicsPipelines(parent->vkHandle(), cache, 1, &create_info, nullptr, &handle);
 		VkAssert(result);
 		createInfo = std::move(create_info);
-	}
+    }
+    
+    void GraphicsPipeline::Destroy() {
+        if(handle != VK_NULL_HANDLE) {
+            vkDestroyPipeline(parent->vkHandle(), handle, allocators);
+        }
+    }
 
 	const VkPipeline & GraphicsPipeline::vkHandle() const noexcept {
 		return handle;

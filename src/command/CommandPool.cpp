@@ -18,9 +18,12 @@ namespace vulpes {
 		VkAssert(result);
 	}
 
-	void CommandPool::ResetCmdPool() {
-		assert(createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT);
-		vkResetCommandPool(parent->vkHandle(), handle, VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
+	void CommandPool::ResetCmdPool(const VkCommandPoolResetFlagBits& command_pool_reset_flags) {
+        assert(createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT);
+        if(!createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT) {
+            LOG(WARNING) << "Cannot reset command pools that were not created with VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT!";
+        }
+		vkResetCommandPool(parent->vkHandle(), handle, command_pool_reset_flags);
 	}
 
 	CommandPool::CommandPool(CommandPool && other) noexcept{
@@ -79,9 +82,12 @@ namespace vulpes {
 		cmdBuffers.shrink_to_fit();
 	}
 
-	void CommandPool::ResetCmdBuffer(const size_t & idx) {
-		assert(createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT);
-		vkResetCommandBuffer(cmdBuffers[idx], VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT);
+	void CommandPool::ResetCmdBuffer(const size_t & idx, const VkCommandBufferResetFlagBits& command_buffer_reset_flag_bits) {
+        assert(createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT);
+        if(!createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT) {
+            LOG(WARNING) << "Cannot reset command pools that were not created with VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT!";
+        }
+		vkResetCommandBuffer(cmdBuffers[idx], command_buffer_reset_flag_bits);
 	}
 	
 	const VkCommandPool & CommandPool::vkHandle() const noexcept{
@@ -89,7 +95,7 @@ namespace vulpes {
     }
     
     std::vector<VkCommandBuffer> CommandPool::GetCommandBuffers(const size_t& num, const size_t& offset) {
-        return std::vector<VkCommandBuffer>(cmdBuffers.begin() + offset, cmdBuffers.end() + num);
+        return std::vector<VkCommandBuffer>(cmdBuffers.begin() + offset, cmdBuffers.begin() + offset + num);
     }
 
 	VkCommandBuffer & vulpes::CommandPool::operator[](const size_t & idx) {

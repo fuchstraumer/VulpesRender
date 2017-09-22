@@ -79,18 +79,15 @@ namespace vulpes {
 	void Image::TransitionLayout(const VkImageLayout & initial, const VkImageLayout & final, CommandPool* pool, VkQueue & queue) {
 		VkImageMemoryBarrier barrier = vk_image_memory_barrier_base;
 		barrier = GetMemoryBarrier(handle, format, initial, final);
-		if (final == VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL) {
-			barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT;
-		}
 		VkCommandBuffer cmd = pool->StartSingleCmdBuffer();
-			vkCmdPipelineBarrier(cmd, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier);	
+			vkCmdPipelineBarrier(cmd, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier);	
 		pool->EndSingleCmdBuffer(cmd, queue);
 	}
 
 	VkImageMemoryBarrier Image::GetMemoryBarrier(const VkImage& image, const VkFormat& img_format, const VkImageLayout & prev, const VkImageLayout & next){
 
 		auto has_stencil = [&]()->bool {
-			return img_format == VK_FORMAT_D32_SFLOAT_S8_UINT || img_format == VK_FORMAT_D24_UNORM_S8_UINT;
+			return img_format == VK_FORMAT_D32_SFLOAT_S8_UINT || img_format == VK_FORMAT_D24_UNORM_S8_UINT || img_format == VK_FORMAT_D32_SFLOAT;
 		};
 
 		VkImageMemoryBarrier barrier = vk_image_memory_barrier_base;
@@ -102,12 +99,12 @@ namespace vulpes {
 		barrier.subresourceRange = { VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1 };
 
 		// Set right aspect mask.
-		/*if (next == VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL) {
+		if (next == VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL) {
 			barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT;
 			if (has_stencil()) {
 				barrier.subresourceRange.aspectMask |= VK_IMAGE_ASPECT_STENCIL_BIT;
 			}
-		}*/
+		}
 
 		switch (prev) {
 		case VK_IMAGE_LAYOUT_UNDEFINED:

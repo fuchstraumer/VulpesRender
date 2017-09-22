@@ -6,7 +6,7 @@ namespace vulpes {
 
 	DepthStencil::DepthStencil(const Device * _parent, const VkExtent3D& extents, CommandPool* cmd, VkQueue & queue) : Image(_parent) {
 		format = parent->FindDepthFormat();
-		Create(extents, format, VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, VK_IMAGE_LAYOUT_UNDEFINED);
+		Create(extents, format, VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT, VK_IMAGE_LAYOUT_UNDEFINED);
 		TransitionLayout(VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, cmd, queue);
 		CreateView(VK_IMAGE_ASPECT_DEPTH_BIT);
 	}

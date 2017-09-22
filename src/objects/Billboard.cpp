@@ -17,6 +17,16 @@ namespace vulpes {
         uboData.projection = projection_;
     }
 
+    Billboard::~Billboard() {
+        vbo.reset();
+        frag.reset();
+        vert.reset();
+        pipelineLayout.reset();
+        pipelineCache.reset();
+        pipeline.reset();
+        texture.reset();
+    }
+
     void Billboard::SetSurfaceTexture(const char* texture_filename) {
 
         texture = std::make_unique<Texture<texture_2d_t>>(device);
@@ -70,7 +80,7 @@ namespace vulpes {
 
     void Billboard::createPipelineCache() {
 
-        pipelineCache = std::unique_ptr<PipelineCache>(device, static_cast<uint16_t>(typeid(Billboard).hash_code()));
+        pipelineCache = std::make_unique<PipelineCache>(device, static_cast<uint16_t>(typeid(Billboard).hash_code()));
 
     }
 

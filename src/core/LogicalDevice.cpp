@@ -244,7 +244,7 @@ namespace vulpes {
 			}
 		}
         LOG(ERROR) << "Could not find texture format that supports requested tiling and feature flags: ( " << std::to_string(tiling) << " , " << std::to_string(flags) << " )";
-		return VK_FORMAT_UNDEFINED;
+		throw std::runtime_error("Could not find valid texture format.");
 	}
 
 	VkFormat Device::FindDepthFormat() const{

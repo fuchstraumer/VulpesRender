@@ -25,8 +25,8 @@ namespace vulpes {
         void Init(const Device* dvc, const glm::mat4& projection, const VkRenderPass& renderpass, TransferPool* transfer_pool);
         void CreateShaders(const std::string& vertex_shader_path, const std::string& fragment_shader_path);
         void UpdateUBO(const glm::mat4& view) noexcept;
-        void SetColor(const glm::vec3& new_color) noexcept;
-        const glm::vec3& GetColor() const noexcept;
+        void SetColor(const glm::vec4& new_color) noexcept;
+        const glm::vec4& GetColor() const noexcept;
 
     private:
 
@@ -47,7 +47,6 @@ namespace vulpes {
         constexpr static VkVertexInputBindingDescription bindingDescription{ 0, sizeof(vertex_t), VK_VERTEX_INPUT_RATE_VERTEX };
         constexpr static VkVertexInputAttributeDescription attributeDescription{ 0, 0, VK_FORMAT_R32G32B32_SFLOAT, 0 };
 
-        std::unique_ptr<Texture<gli::texture_cube>> texture;
         std::unique_ptr<ShaderModule> vert, frag;
         std::unique_ptr<DescriptorSet> descriptorSet;
         std::unique_ptr<PipelineCache> pipelineCache;

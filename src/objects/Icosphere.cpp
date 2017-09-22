@@ -54,6 +54,16 @@ namespace vulpes {
 
     Icosphere::Icosphere(const size_t& subdivision_level, const glm::vec3& pos, const glm::vec3& scale, const glm::vec3& rotation) : TriangleMesh(pos, scale, rotation), subdivisionLevel(subdivision_level) {}
 
+    Icosphere::~Icosphere() {
+        vbo.reset();
+        frag.reset();
+        vert.reset();
+        pipelineLayout.reset();
+        pipelineCache.reset();
+        descriptorSet.reset();
+        graphicsPipeline.reset();
+    }
+
     void Icosphere::Init(const Device* dvc, const glm::mat4& projection, const VkRenderPass& renderpass, TransferPool* transfer_pool) {
         
         device = dvc;
@@ -76,6 +86,18 @@ namespace vulpes {
         vert = std::make_unique<ShaderModule>(device, vertex_shader_path.c_str(), VK_SHADER_STAGE_VERTEX_BIT);
         frag = std::make_unique<ShaderModule>(device, fragment_shader_path.c_str(), VK_SHADER_STAGE_FRAGMENT_BIT);
     
+    }
+
+    void Icosphere::UpdateUBO(const glm::mat4 & view) noexcept {
+        uboData.view = view;
+    }
+
+    void Icosphere::SetColor(const glm::vec4 & new_color) noexcept {
+        uboData.color = new_color;
+    }
+
+    const glm::vec4& Icosphere::GetColor() const noexcept {
+        return uboData.color;
     }
 
     void Icosphere::createMesh(const size_t& subdivision_level) {
