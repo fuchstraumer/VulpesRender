@@ -1,6 +1,6 @@
 #pragma once
-#ifndef VULPES_VK_INSTANCE_CONFIGURATION_H
-#define VULPES_VK_INSTANCE_CONFIGURATION_H
+#ifndef VULPES_VK_SCENE_CONFIGURATION_H
+#define VULPES_VK_SCENE_CONFIGURATION_H
 
 #include "vpr_stdafx.h"
 
@@ -9,14 +9,12 @@ namespace vulpes {
 	// Default width/height of window. Should probably move this elsewhere and/or remove it entirely.
 	constexpr uint32_t DEFAULT_WIDTH = 1440, DEFAULT_HEIGHT = 900;
 
-    namespace cfg {
-
 	    enum class cameraType : int {
 		    FPS = 0,
 		    ARCBALL
         };
 
-        struct vulpesInstanceInfo {
+        struct vulpesSceneConfig {
 
             /*
                 These values don't affect engine behavior. ApplicationName sets
@@ -26,6 +24,13 @@ namespace vulpes {
             std::string EngineName = std::string("VulpesRender");
             uint32_t ApplicationVersion = VK_MAKE_VERSION(0,1,0);
             uint32_t EngineVersion = VK_MAKE_VERSION(0,1,0);
+
+            /*
+                Prepended to all internal resource paths used for the common objects,
+                so that the default shaders can be safely loaded. Default value might
+                fail, or cause a relatively expensive recursive search to trigger.
+            */
+            std::string ResourcePathStr = std::string("./");
 
             /*
                 EnableValidation enables the Vulkan validation layers, set as 
@@ -103,9 +108,9 @@ namespace vulpes {
 
 	    };
 
-    }
+    
 
 }
 
 
-#endif //!VULPES_VK_INSTANCE_CONFIGURATION_H
+#endif //!VULPES_VK_SCENE_CONFIGURATION_H

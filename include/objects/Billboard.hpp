@@ -23,7 +23,7 @@ namespace vulpes {
 
         void SetSurfaceTexture(const char* texture_filename);
         void Init(const Device* dvc, const VkRenderPass& renderpass, TransferPool* transfer_pool, DescriptorPool* descriptor_pool);
-        void Render(const VkCommandBuffer& cmd_, const VkCommandBufferBeginInfo& begin_info_);
+        void Render(const VkCommandBuffer& cmd_, const VkCommandBufferBeginInfo& begin_info_, const VkViewport& viewport, const VkRect2D& scissor);
         void UpdateUBO(const glm::mat4& view);
 
     protected:
@@ -35,7 +35,7 @@ namespace vulpes {
         void createPipelineLayout();
         void createPipelineCache();
         void setPipelineStateInfo();
-        void createGraphicsPipeline();
+        void createGraphicsPipeline(const VkRenderPass& renderpass);
 
         constexpr static VkVertexInputBindingDescription bindingDescription {
             0, sizeof(float) * 5, VK_VERTEX_INPUT_RATE_VERTEX

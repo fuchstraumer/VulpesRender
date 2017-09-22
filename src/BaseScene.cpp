@@ -19,6 +19,7 @@
 namespace vulpes {
 
     bool BaseScene::CameraLock = false;
+    vulpesSceneConfig BaseScene::SceneConfiguration = vulpesSceneConfig();
 
     Camera BaseScene::fpsCamera = Camera();
     Arcball BaseScene::arcballCamera = Arcball(1440, 900);

@@ -37,6 +37,35 @@ namespace vulpes {
     void Billboard::Init(const Device* dvc, const VkRenderPass& renderpass, TransferPool* transfer_pool, DescriptorPool* descriptor_pool) {
         device = dvc;
         createBuffers();
+        transferResources(transfer_pool);
+        createShaders();
+        createDescriptorSet(descriptor_pool);
+        createPipelineLayout();
+        createPipelineCache();
+        setPipelineStateInfo();
+        createGraphicsPipeline(renderpass);
+    }
+
+    void Billboard::Render(const VkCommandBuffer& cmd, const VkCommandBufferBeginInfo& begin_info, const VkViewport& viewport, const VkRect2D& scissor) {
+    
+        vkBeginCommandBuffer(cmd, &begin_info);
+        {
+            vkCmdBindPipeline(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline->vkHandle());
+            vkCmdSetViewport(cmd, 0, 1, &viewport);
+            vkCmdSetScissor(cmd, 0, 1, &scissor);
+            vkCmdPushConstants(cmd, pipelineLayout->vkHandle(), VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(pushDataVS), &pushDataVS);
+            vkCmdPushConstants(cmd, pipelineLayout->vkHandle(), VK_SHADER_STAGE_FRAGMENT_BIT, sizeof(pushDataVS), sizeof(pushDataFS), &pushDataFS);
+            static const VkDeviceSize offsets[1]{ 0 };
+            vkCmdBindVertexBuffers(cmd, 0, 1, &vbo->vkHandle(), offsets);
+            vkCmdDraw(cmd, 4, 1, 0, 1);
+        }
+        vkEndCommandBuffer(cmd);
+    }
+
+    void Billboard::UpdateUBO(const glm::mat4& view) {
+        uboData.view = view;
+        uboData.cameraUp = glm::vec4(view[0][1], view[1][1], view[2][1], 0.0f);
+        uboData.cameraRight = glm::vec4(view[0][0], view[1][0], view[2][0], 1.0f);
     }
 
     void Billboard::createBuffers() {
@@ -95,6 +124,11 @@ namespace vulpes {
             pipelineStateInfo.MultisampleInfo.rasterizationSamples = Instance::VulpesInstanceConfig.MSAA_SampleCount;
         }
 
+        
+        pipelineStateInfo.DepthStencilInfo.depthTestEnable = VK_TRUE;
+        pipelineStateInfo.DepthStencilInfo.depthCompareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
+        pipelineStateInfo.AssemblyInfo.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP;
+
         pipelineStateInfo.VertexInfo.vertexBindingDescriptionCount = 1;
         pipelineStateInfo.VertexInfo.pVertexBindingDescriptions = &bindingDescription;
         pipelineStateInfo.VertexInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescriptions.size());
@@ -102,7 +136,15 @@ namespace vulpes {
 
     }
 
-    void Billboard::createGraphicsPipeline() {
+    void Billboard::createGraphicsPipeline(const VkRenderPass& renderpass) {
+
+        const VkPipelineShaderStageCreateInfo shader_stages[2] { vert->PipelineInfo(), frag->PipelineInfo() };
+        pipelineCreateInfo = pipelineStateInfo.GetPipelineCreateInfo();
+        pipelineCreateInfo.stageCount = 2;
+        pipelineCreateInfo.pStages = shader_stages;
+        pipelineCreateInfo.subpass = 0;
+        pipelineCreateInfo.layout = pipelineLayout->vkHandle();
+
 
     }
 
