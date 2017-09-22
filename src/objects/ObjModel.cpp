@@ -57,7 +57,7 @@ namespace vulpes {
         LOG(INFO) << "Loaded mesh data from .obj file, uploading to device now...";
         auto& cmd = transfer_pool->Begin();
         RecordTransferCommands(cmd);
-        transfer_pool->End();
+        
         transfer_pool->Submit();
         LOG(INFO) << "Mesh data upload complete.";
 

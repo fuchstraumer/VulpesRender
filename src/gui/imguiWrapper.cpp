@@ -61,7 +61,7 @@ namespace vulpes {
 
 		texture->TransferToDevice(cmd);
 
-		transfer_pool->End();
+		
 		transfer_pool->Submit();
 
 	}

@@ -99,7 +99,7 @@ namespace vulpes {
         auto& cmd = transfer_pool->Begin();
         texture->TransferToDevice(cmd);
         RecordTransferCommands(cmd);
-        transfer_pool->End();
+        
         transfer_pool->Submit();
 
     }

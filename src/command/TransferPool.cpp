@@ -39,7 +39,7 @@ namespace vulpes {
 
 	VkCommandBuffer& TransferPool::Begin() {
 
-        LOG(INFO) << "Beginning transfer via transfer pool...";
+        transferMutex.lock();
 		VkCommandBufferBeginInfo beginInfo = {};
 		beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
 		beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT | VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT;
@@ -48,27 +48,25 @@ namespace vulpes {
 		vkBeginCommandBuffer(cmdBuffers.front(), &beginInfo);
 		if (parent->MarkersEnabled) {
 			parent->vkCmdBeginDebugMarkerRegion(cmdBuffers.front(), "Transfer data", glm::vec4(0.7f, 0.7f, 0.0f, 1.0f));
-		}
+        }
+        
 		return cmdBuffers.front();
-	}
+    }
+    
+	void TransferPool::Submit() {
 
-	void TransferPool::End() {
-		if (parent->MarkersEnabled) {
+        if (parent->MarkersEnabled) {
 			parent->vkCmdEndDebugMarkerRegion(cmdBuffers.front());
 		}
 		VkResult result = vkEndCommandBuffer(cmdBuffers.front());
 		VkAssert(result);
-	}
 
-	void TransferPool::Submit() {
-
-        LOG(INFO) << "Submitting a transfer via a transfer pool...";
 		VkSubmitInfo submitInfo = {};
 		submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 		submitInfo.commandBufferCount = 1;
 		submitInfo.pCommandBuffers = cmdBuffers.data();
 
-		VkResult result = vkQueueSubmit(queue, 1, &submitInfo, fence);
+		result = vkQueueSubmit(queue, 1, &submitInfo, fence);
 		VkAssert(result);
 
 		result = vkWaitForFences(parent->vkHandle(), 1, &fence, VK_TRUE, vk_default_fence_timeout);
@@ -77,12 +75,9 @@ namespace vulpes {
 		VkAssert(result);
 		
 		// Reset command buffer so we can re-record shortly.
-		result = vkResetCommandPool(parent->vkHandle(), handle, VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
-		VkAssert(result);
-	}
-
-	VkCommandBuffer& TransferPool::CmdBuffer() noexcept {
-		return cmdBuffers.front();
+		ResetCmdBuffer(0);
+        transferMutex.unlock();
+        
 	}
 
 }

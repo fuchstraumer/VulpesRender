@@ -8,16 +8,15 @@
 
 namespace vulpes {
 
-    /*
-        Transfer pool is just a specialized command pool 
-        with certain flags pre-set, along with a fence and easy
-        tie-ins to the submitter object.
-
-        This will be reset after each submission, and can be notified
-        when resources are transferred or when they need to be transferred.
+    /**!Transfer pool is just a specialized command pool 
+    *   with certain flags pre-set, along with a fence protecting
+    *  the transfer submission and a mutex for thread safety.
+    *
+    *   This will be reset after each submission.
+    *   \ingroup Command
     */
 
-	constexpr VkCommandPoolCreateInfo transfer_pool_info{
+	constexpr static VkCommandPoolCreateInfo transfer_pool_info{
 		VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO,
 		nullptr,
 		VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT,
@@ -33,15 +32,19 @@ namespace vulpes {
 
 		~TransferPool();
 
+        /**!Returns the command buffer associated with this pool, call VkBeginCommandBuffer
+        *   before doing so. Locks the mutex as well.
+        */
 		VkCommandBuffer& Begin();
 
-		void End();
-
+        /**!Calls VkEndCommandBuffer on this object's command buffer, then proceeds to submit it. This 
+        *   transfer will wait on the VkFence object attached to this pool, resetting the owned command 
+        *   buffer once done and unlocks the mutex.
+        */
 		void Submit();
 
-		VkCommandBuffer& CmdBuffer() noexcept;
-
-	protected:
+    protected:
+        std::mutex transferMutex;
 		VkFence fence;
 		VkQueue queue;
 	};

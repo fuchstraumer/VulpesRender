@@ -200,7 +200,7 @@ namespace vulpes {
             pbrTextures->ubo->CopyTo(&pbrTextures->uboData, cmd, sizeof(pbrTextures->uboData), 0);
         }
 
-        transfer_pool->End();
+        
         transfer_pool->Submit();
 
     }

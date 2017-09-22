@@ -39,9 +39,8 @@ namespace vulpes {
     void Billboard::transferResources(TransferPool* transfer_pool_) {
 
         auto& cmd = transfer_pool_->Begin();
-            vbo->CopyTo(billboard_vertices.data(), cmd, sizeof(float) * 15, 0);
+            vbo->CopyTo(const_cast<float*>(billboard_vertices.data()), cmd, sizeof(float) * 15, 0);
             texture->TransferToDevice(cmd);
-        transfer_pool_->End();
         transfer_pool_->Submit();
 
     }

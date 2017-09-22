@@ -144,7 +144,7 @@ namespace vulpes {
 
         auto& cmd = transfer_pool->Begin();
         RecordTransferCommands(cmd);
-        transfer_pool->End();
+        
         transfer_pool->Submit();
 
     }
