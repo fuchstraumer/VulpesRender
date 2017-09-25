@@ -7,6 +7,8 @@
 
 namespace vulpes {
 
+    /** \ingroup Objects
+    */
     struct vertex_t {
         vertex_t() = default;
         ~vertex_t() = default;
@@ -37,6 +39,7 @@ namespace vulpes {
 }
 
 namespace std {
+    /** Hash method ovverride so that we can use vulpes::vertex_t in standard library containers. Used with tinyobj to remove/avoid duplicated vertices. \ingroup Objects */
     template<>
     struct hash<vulpes::vertex_t> {
         size_t operator()(const vulpes::vertex_t& vert) const {

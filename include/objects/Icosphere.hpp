@@ -14,6 +14,11 @@
 
 namespace vulpes {
 
+    /** Defines an icosphere object that is subdivided from the base 12 vertices based on detail_level. Each additional level will double the triangle count,
+    *   but an attempt to use shared vertices is made and should reduce or avoid duplicated vertices. Unlike Billboard and Skybox, you must specify shaders to 
+    *   use on this boject as no defaults exist (and no suitable default came to mind).
+    *   \ingroup Objects
+    */
     class Icosphere : public TriangleMesh {
         Icosphere(const Icosphere&) = delete;
         Icosphere& operator=(const Icosphere&) = delete;

@@ -13,6 +13,13 @@
 
 namespace vulpes {
 
+    /** Does what it says on the tin and nothing more. The texture used must be of a format like DDS or KTX that supports having all size cubemap faces in
+    *   one file. Not only does this allow for high-resolution and performant textures, but its required for how the texture loading system for cubemaps currently
+    *   functions. Be sure to keep the UBO data updated: this is required to sustain the "skybox" illusion properly.
+    *   So long as the resource path is set in the vulpesSceneConfig struct, suitable default shaders are included with this project and will be loaded. 
+    *   \todo See if loading cubemaps or the six cube face images can be supported via STB to allow for uncompressed formats.
+    *   \ingroup Objects
+    */  
     class Skybox : public TriangleMesh {
         Skybox(const Skybox&) = delete;
         Skybox& operator=(const Skybox&) = delete;

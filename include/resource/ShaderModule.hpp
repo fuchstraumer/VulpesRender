@@ -6,6 +6,10 @@
 
 namespace vulpes {
 
+    /** A thoroughly thin wrapper around a VkShaderModule object, whose primary utility beyond RAII resource management is
+    *   setting up the VkPipelineShaderStageCreateInfo required when creating/setting up an objects graphics pipeline.
+    *   \ingroup Resources
+    */
 	class ShaderModule {
 		ShaderModule(const ShaderModule&) = delete;
 		ShaderModule& operator=(const ShaderModule&) = delete;

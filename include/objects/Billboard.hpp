@@ -12,7 +12,10 @@
 #include "render/GraphicsPipeline.hpp"
 
 namespace vulpes {
-
+    
+    /** Defines a billboard/sprite object that will always face the camera. Texture used for the sprite can be of any format.
+    *   \ingroup Objects
+    */
     class Billboard {
         Billboard(const Billboard&) = delete;
         Billboard& operator=(const Billboard&) = delete;

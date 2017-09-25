@@ -7,7 +7,7 @@
 #include "../resource/Image.hpp"
 namespace vulpes {
 
-    /**!MSAA in Vulkan requires manually creating, binding, and managing the images that will be multisampled from, along with 
+    /** MSAA in Vulkan requires manually creating, binding, and managing the images that will be multisampled from, along with 
     *   making sure to update them on swapchain recreation, setting the correct resolve images in the renderpass, and attaching
     *   them to the current renderpass (if enabled).
     *

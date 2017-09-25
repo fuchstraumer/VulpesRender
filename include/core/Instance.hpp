@@ -8,12 +8,12 @@
 
 namespace vulpes {
 
-    /*! The Core group handles the base Vulkan resources and objects: LogicalDevice, PhysicalDevice, Instance, and Window. It also 
+    /** The Core group handles the base Vulkan resources and objects: LogicalDevice, PhysicalDevice, Instance, and Window. It also 
     *   includes the InputHandler class, which is responsible for handling input events and updats from the Window class.
     * \defgroup Core
     */
 
-    /*! Instance is a wrapper around the base Vulkan object that must be initialized first. The VkInstanceCreateInfo struct passed to the constructor
+    /** Instance is a wrapper around the base Vulkan object that must be initialized first. The VkInstanceCreateInfo struct passed to the constructor
     *    contains information about the current layers enabled, and which Vulkan Instance extensions to enable. By default, this should/will contain
     *    extensions required to support the creation of a window surface (VkSurfaceKHR).
     *
