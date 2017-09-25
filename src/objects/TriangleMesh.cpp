@@ -34,16 +34,30 @@ namespace vulpes {
     }
 
     size_t TriangleMesh::NumVertices() const noexcept {
-        return vertices.size();
+        if(!vertices.empty()) {
+            return vertices.size();
+        }
+        else {
+            return numVertices;
+        }
     }
 
     size_t TriangleMesh::NumIndices() const noexcept {
-        return indices.size();
+        if(!indices.empty()) {
+            return indices.size();
+        }
+        else {
+            return numIndices;
+        }
     }
 
     void TriangleMesh::CreateBuffers(const Device* dvc) {
         
         device = dvc;
+
+        // Set these now, as they are "frozen" and might be zero if set after this point.
+        numVertices = static_cast<uint32_t>(vertices.size());
+        numIndices = static_cast<uint32_t>(indices.size());
 
         vbo = std::make_unique<Buffer>(device);
         ebo = std::make_unique<Buffer>(device);
