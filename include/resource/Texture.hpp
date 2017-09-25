@@ -17,6 +17,9 @@ namespace vulpes {
 	// TODO: 1D texture, 2D texture array.
 	using texture_1d_t = std::integral_constant<int, 0>;
     
+    /** An attempt at minimally wrapping loading image data from file, for use when we can't use GLI (i.e, the image is of a more conventional format than DDS/KTX/etc).
+    *   Primarily exists to make sure we don't have dangling pointers to image data, along with memory leaks from said image data.
+    */
     struct texture_2d_t {
         texture_2d_t(const texture_2d_t&) = delete;
         texture_2d_t& operator=(const texture_2d_t&) = delete;
@@ -57,6 +60,16 @@ namespace vulpes {
         stbi_uc* pixels;
     };
 
+    /** A templated wrapper around Vulkan texture objects, which require quite a bit of boilerplate code. The templated parameter decides the underlying type 
+    *   of the texture object, along with how we load it to file and how upload it ot the device. 
+    *   The template parameter can be the following GLI types, besides the texture_2d_t type specified by this library:
+    *   - gli::texture2d: 2D texture in a compressed data format that requires specialized loading.
+    *   - gli::texture_cube: same as above in terms of specialized image data, but specifies a cubemap with all 6 face images saved into one texture file.
+    *   - gli::texture2d_array: same as previous types in terms of image data, but specifies a 2D array of textures packed into one file. The layer count 
+    *                           is found during the loading process, but this is stored internally so the layer count must be known by other elements (e.g, shaders)
+    *                           that intend to index the texture object.
+    *   \ingroup Resources
+    */
 	template<typename texture_type>
 	class Texture : public Image {
 	public:
@@ -65,14 +78,21 @@ namespace vulpes {
 
 		~Texture();
 
-		// Having to use texture_format an unfortunate artifact of the range of formats supported by GLI and Vulkan, and the mismatch
-		// in specification, quantity, and naming between the two. When in doubt, set a breakpoint after loading the texture in question
-		// from file, and check the gli object's "Format" field.
+		/** Having to use texture_format an unfortunate artifact of the range of formats supported by GLI and Vulkan, and the mismatch
+		*   in specification, quantity, and naming between the two. When in doubt, set a breakpoint after loading the texture in question
+        *   from file, and check the gli object's "Format" field.
+        */
         void CreateFromFile(const char* filename, const VkFormat& texture_format);
-        // This particular method for loading from file uses STB, and attempts to find the correct texture format based on the given file.
-        // Usually just ends up being RGBA8: for compressed textures, use the other method as GLI is required for loading compressed images.
+        /** This particular method for loading from file uses STB, and attempts to find the correct texture format based on the given file.
+        *   Usually just ends up being RGBA8: for compressed textures, use the other method as GLI is required for loading compressed images.
+        */
         void CreateFromFile(const char* filename);
-		void CreateFromBuffer(VkBuffer&& staging_buffer, const VkFormat& texture_format, const std::vector<VkBufferImageCopy>& copy_info);
+        /** If the other file-based methods cannot work for an intended use case, use this method along with the specified buffer info to setup
+        *   a texture object appropriately. 
+        */
+        void CreateFromBuffer(VkBuffer&& staging_buffer, const VkFormat& texture_format, const std::vector<VkBufferImageCopy>& copy_info);
+        /** Creates an empty texture suitable for use as an object to write to in compute/graphics renderpasses.
+        */
 		void CreateEmptyTexture(const VkFormat& texture_format, const uint32_t& width, const uint32_t& height);
 
 		void TransferToDevice(VkCommandBuffer& transfer_cmd_buffer) const;

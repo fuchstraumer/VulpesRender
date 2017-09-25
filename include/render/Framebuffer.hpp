@@ -9,9 +9,10 @@
 
 
 namespace vulpes {
-    /**!The Framebuffer class merely handles constructing an appropriate framebuffer for the current rendering context. It is
+    /** The Framebuffer class merely handles constructing an appropriate framebuffer for the current rendering context. It is
     *   a relatively thin wrapper around a VkFramebuffer object, mostly just for the sake of RAII. Most important information on
     *   how to setup this class is provided by the VkFramebufferCreateInfo struct in the constructor.
+    *   \ingroup Rendering
     */
 	class Framebuffer {
 		Framebuffer(const Framebuffer&) = delete;

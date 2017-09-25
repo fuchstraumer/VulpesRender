@@ -14,6 +14,16 @@ namespace vulpes {
 	using g_buffer_t = std::integral_constant<int, 3>; // Dummy colorbuffer, Position, Normals, Tangents, Depth
 	using picking_framebuffer_t = std::integral_constant<int, 4>; // Write triangle index into this Framebuffer 
 
+    /** This is currently non-functional, but will eventually be an easier way of setting up the complicated subpasses, renderpasses,
+    *   and subpass dependencies required for offscreen rendering and advanced rendering. The template types are:"
+    *   - hdr_framebuffer_t: creates the attachments required for rendering an HDR pass
+    *   - bloom_framebuffer_t: creates attachments required for rendering a bloom pass
+    *   - ssao_framebuffer_t: creates attachments required for screen-space ambient occlusion 
+    *   - g_buffer_t: creates attachments required for a baseline deferred rendering setup
+    *   - picking_framebuffer_t: creates attachments required for doing mouse picking using exported colorbuffer data, thus giving increased accuracy.
+    *   \ingroup Rendering
+    *   \todo Finish implementing and testing these classes.
+    */
 	template<typename offscreen_framebuffer_type>
 	class OffscreenFramebuffers {
 	public:

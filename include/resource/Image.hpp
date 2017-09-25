@@ -6,14 +6,16 @@
 #include "../resource/Allocator.hpp"
 /*
 
-	Wraps the common image creation, transfer, and staging methods. 
 
-	Texture derives from this, and so does DepthStencil.
 	
 */
 
 namespace vulpes {
 
+    /** Wraps the common image creation, transfer, and staging methods. Texture derives from this, and so does DepthStencil.
+    *   \ingroup Resources
+    *   \todo Check validity of default parameters, consider folding/cleaning up the static CreateImage methods 
+    */
 	class Image {
 		Image(const Image&) = delete;
 		Image& operator=(const Image&) = delete;
@@ -38,10 +40,12 @@ namespace vulpes {
 
 		void TransitionLayout(const VkImageLayout& initial, const VkImageLayout& final, CommandPool* cmd, VkQueue& queue);
 
+        /** Returns an appropriate memory barrier for the given image, to transfer it between image layouts. */ 
 		static VkImageMemoryBarrier GetMemoryBarrier(const VkImage& image, const VkFormat& img_format, const VkImageLayout& prev, const VkImageLayout& next);
 
+        /** Creates an image using the latter 7 parameters. Stores the resulting image and it's corresponding Allocation in the first two parameters */
 		static void CreateImage(VkImage& dest_image, Allocation& dest_alloc, const Device* parent, const VkExtent3D& extents, const VkFormat& image_format, const VkMemoryPropertyFlags& memory_flags, const VkImageUsageFlags& usage_flags, const VkImageTiling& tiling = VK_IMAGE_TILING_OPTIMAL, const VkImageLayout& init_layout = VK_IMAGE_LAYOUT_PREINITIALIZED);
-
+        /** Simplified version of the other CreateImage method, that takes an already setup VkImageCreateInfo struct instead of creating one from the given parameters. */
 		static void CreateImage(VkImage& dest_image, Allocation& dest_alloc, const Device* parent, const VkImageCreateInfo& create_info, const VkMemoryPropertyFlags & memory_flags);
 
 		const VkImageCreateInfo& CreateInfo() const noexcept;

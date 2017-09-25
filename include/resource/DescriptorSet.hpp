@@ -7,28 +7,9 @@
 
 namespace vulpes {
 
-    struct descriptorLimits {
-        static constexpr size_t Samplers = 96;
-        static constexpr size_t UniformBuffers = 72;
-        static constexpr size_t UniformBuffersDynamic = 8;
-        static constexpr size_t StorageBuffers = 24;
-        static constexpr size_t StorageBuffersDynamic = 4;
-        static constexpr size_t SampledImages = 24;
-        static constexpr size_t InputAttachments = 4;
-    };
-
-    struct descriptorStageLimits {
-        static constexpr size_t Samplers = 16;
-        // Dynamic count as part of the per-stage uniform buffer limit.
-        static constexpr size_t UniformBuffers = 12;
-        // Storage count as part of the per-stage uniform buffer limit.
-        static constexpr size_t StorageBuffers = 4;
-        static constexpr size_t SampledImages = 16;
-        static constexpr size_t StorageImages = 4;
-        static constexpr size_t InputAttachments = 4;
-        static constexpr size_t Total = 128;
-    };
-
+    /** RAII wrapper around a descriptor set, simplifying adding individual descriptor bindings for whatever stage they're required at.
+    *   \ingroup Resources
+    */
     class DescriptorSet {
         DescriptorSet(const DescriptorSet&) = delete;
         DescriptorSet& operator=(const DescriptorSet&) = delete;
@@ -37,17 +18,22 @@ namespace vulpes {
         DescriptorSet(const Device* parent);
         ~DescriptorSet();
 
+        /** Specifies that a descriptor of the given type be accessible from the given stage, and sets the index it will be accessed at in the shader.
+        */
         void AddDescriptorBinding(const VkDescriptorType& descriptor_type, const VkShaderStageFlagBits& shader_stage, const uint32_t& descriptor_binding_loc);
+        /** Sets the required image info for the descriptor at the given index. Make sure this is called appropriately for each call to AddDescriptorBinding
+        */
         void AddDescriptorInfo(const VkDescriptorImageInfo& info, const size_t& item_binding_idx);
+        /** Functionally the same as AddDescriptorInfo with VkDescriptorImageInfo.  
+        */
         void AddDescriptorInfo(const VkDescriptorBufferInfo& info, const size_t& item_binding_idx);
 
+        /** Call after all descriptor bindings and infos required have been added, and make sure you have enough space in the given pool for all of these resources. */
 		void Init(const DescriptorPool* parent_pool);
 
         const VkDescriptorSet& vkHandle() const noexcept;
+        /** Returns the VkDescriptorSetLayout object attached to this class, which is required when creating a VkPipelineLayout that will utilize this DescriptorSet */
         const VkDescriptorSetLayout& vkLayout() const noexcept;
-
-        static descriptorLimits DescriptorLimits;
-        static descriptorStageLimits descriptorStageLimits;
 
         const std::map<size_t, VkDescriptorSetLayoutBinding>& GetBindings() const noexcept;
         

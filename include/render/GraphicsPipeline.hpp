@@ -7,14 +7,14 @@
 
 namespace vulpes {
 
-    /**!The rendering group is used for objects that are directly related to how things appear on screen, including those classes
+    /** The rendering group is used for objects that are directly related to how things appear on screen, including those classes
     *   that are minimum requirements for making things display like Framebuffer, Swapchain, Renderpass, and DepthStencil. Other classes
     *   exist to make using advanced features like MSAA (Multisampling) easier by handling setup, or by pre-defining advanced renderpass
     *   setups as OffscreenFramebuffers does.
     *   /defgroup Rendering
     */
 
-    /**!This struct is used to define most of the pipeline state for a Vulkan vkGraphicsPipeline object. All members have default
+    /** This struct is used to define most of the pipeline state for a Vulkan vkGraphicsPipeline object. All members have default
     *   values that are reasonable chosen with an eye towards stability, but make sure to update the following:
     *   - DynamicStateInfo
     *   - VertexInfo
@@ -35,7 +35,7 @@ namespace vulpes {
 		VkPipelineVertexInputStateCreateInfo VertexInfo = vk_pipeline_vertex_input_state_create_info_base;
 		GraphicsPipelineInfo() {}
 
-        /**!This method returns a VkGraphicsPipelineCreateInfo struct with its internal state object pointers set
+        /** This method returns a VkGraphicsPipelineCreateInfo struct with its internal state object pointers set
         *   to point to the members of this class. This is useful for short-cutting having to set them all yourself,
         *   but be aware of object lifetime and make sure the class instance being pointed to exists when using the
         *   returned VkGraphicsPipelineCreateInfo struct! Also, note that not all fields are filled: you MUST fill 
@@ -49,9 +49,10 @@ namespace vulpes {
 		VkGraphicsPipelineCreateInfo GetPipelineCreateInfo() const;
 	};
 
-    /**!The GraphicsPipeline object is an RAII wrapper around a vkGraphicsPipeline object, handling construction and destruction
+    /** The GraphicsPipeline object is an RAII wrapper around a vkGraphicsPipeline object, handling construction and destruction
     *   alone. Otherwise, the GraphicsPipelineInfo struct is the one worth the most attention due to how much it influences the 
     *   created pipeline, and due to how complex it is.
+    *   \ingroup Rendering
     */
 	class GraphicsPipeline {
 		GraphicsPipeline(const GraphicsPipeline&) = delete;

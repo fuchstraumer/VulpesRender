@@ -12,6 +12,15 @@ namespace vulpes {
 
     struct pbrTexturePack;
 
+    /** Hides away the tremendous amount of textures and data required to render more complicated .obj models.
+    *   Uses tinyobj to load the obj file, and enables all of the features it can. Can also be passed an mtl file path,
+    *   otherwise accepts a tinyobj::material_t reference that it will use for loading the textures.
+    *   
+    *   When available, it will also load and create the textures required for PBR rendering. Note that shaders must still
+    *   be setup to use the available textures, and a descriptor set with enough VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER objects
+    *   allocated must also exist (and be passed to the Create method).
+    *   \ingroup Objects
+    */
     class Material {
     
         struct material_ubo_t {
@@ -43,6 +52,9 @@ namespace vulpes {
         void Create(const tinyobj::material_t& tinyobj_imported_material, const Device* dvc, DescriptorPool* descriptor_pool);
         void UploadToDevice(TransferPool* transfer_pool);
 
+        /** Binds the descriptor set belonging to this object, to which all available textures will have been attached.
+        *   This is the only required command during rendering to use the Material class.
+        */
         void BindMaterial(const VkCommandBuffer& cmd, const VkPipelineLayout& pipeline_layout) const noexcept;
 
         VkDescriptorSetLayout GetSetLayout() const noexcept;

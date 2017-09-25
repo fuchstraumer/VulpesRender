@@ -8,7 +8,7 @@
 
 namespace vulpes {
 
-    /**!Transfer pool is just a specialized command pool 
+    /** Transfer pool is just a specialized command pool 
     *   with certain flags pre-set, along with a fence protecting
     *  the transfer submission and a mutex for thread safety.
     *
@@ -32,12 +32,12 @@ namespace vulpes {
 
 		~TransferPool();
 
-        /**!Returns the command buffer associated with this pool, call VkBeginCommandBuffer
+        /** Returns the command buffer associated with this pool, call VkBeginCommandBuffer
         *   before doing so. Locks the mutex as well.
         */
 		VkCommandBuffer& Begin();
 
-        /**!Calls VkEndCommandBuffer on this object's command buffer, then proceeds to submit it. This 
+        /** Calls VkEndCommandBuffer on this object's command buffer, then proceeds to submit it. This 
         *   transfer will wait on the VkFence object attached to this pool, resetting the owned command 
         *   buffer once done and unlocks the mutex.
         */
