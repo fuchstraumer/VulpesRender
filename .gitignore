@@ -10,3 +10,5 @@ ext/include/glm
 x64/RelWithDebInfo/glfw3/glfw3.log
 download/
 glfw/
+wsl_build/
+ext/include/vulkan/

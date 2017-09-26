@@ -11,7 +11,7 @@ namespace vulpes {
     *   that are minimum requirements for making things display like Framebuffer, Swapchain, Renderpass, and DepthStencil. Other classes
     *   exist to make using advanced features like MSAA (Multisampling) easier by handling setup, or by pre-defining advanced renderpass
     *   setups as OffscreenFramebuffers does.
-    *   /defgroup Rendering
+    *   \defgroup Rendering
     */
 
     /** This struct is used to define most of the pipeline state for a Vulkan vkGraphicsPipeline object. All members have default

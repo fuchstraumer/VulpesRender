@@ -530,7 +530,7 @@ namespace vulpes {
 		VkPipelineShaderStageCreateInfo{},
 		VK_NULL_HANDLE,
 		VK_NULL_HANDLE,
-		std::numeric_limits<uint32_t>::max(),
+		-1
 	};
 	
 	constexpr VkBufferMemoryBarrier vk_buffer_memory_barrier_info_base{

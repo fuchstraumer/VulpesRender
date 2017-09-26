@@ -14,6 +14,10 @@
 #include "tinyobj/tiny_obj_loader.h"
 #include "stb/stb_image.h"
 
+/** This serves as a super-simple example of how to derive from a vulpes::BaseScene object. It doesn't render a GUI, however, so another 
+ *  example is required to show how to use that.
+ *  \ingroup Scenes
+ */
 class HouseScene : public vulpes::BaseScene {
 public:  
 

@@ -15,7 +15,7 @@
 #include <iostream>
 #include <chrono>
 #include <future>
-#include <filesystem>
+#include <experimental/filesystem>
 #include <condition_variable>
 #include <regex>
 #include <limits>
@@ -36,9 +36,7 @@
 #define GLFW_INCLUDE_VULKAN
 #include "glfw/glfw3.h"
 
-#if defined(__linux__)
-#include <wayland-client.h>
-#elif defined(_WIN32) 
+#if defined(_WIN32) 
 #undef APIENTRY
 #define GLFW_EXPOSE_NATIVE_WIN32
 #define GLFW_EXPOSE_NATIVE_WGL

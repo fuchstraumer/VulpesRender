@@ -1,6 +1,6 @@
 #include "vpr_stdafx.h"
 #include "BaseScene.hpp"
-
+#include <memory>
 #include "core/Instance.hpp"
 #include "core/LogicalDevice.hpp"
 #include "core/PhysicalDevice.hpp"

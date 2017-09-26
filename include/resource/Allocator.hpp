@@ -3,20 +3,46 @@
 #define VULPES_VK_ALLOCATOR_H
 
 #include "vpr_stdafx.h"
+#include <list>
 #include "../ForwardDecl.hpp"
 /*
 	
 	TODO:
-	- Further dividing allocation among three size pools, and then still dividing among type in those pools
-	- Measure costliness of Validate(), possibly use return codes to fix errors when possible.
-	- Some kind of fragmentation check/routine: at least a check to make sure it isn't happening
-	- Possibly use above to remove MinSuballocationSizeToRegister, instead shuffling dest ranges up/down
-	  the needed amount to avoid gaps or fragmentation
-	- in turn, will buffer-image granularity + alignment increase fragmentation? Couldn't find data on this.
+
 
 */
 
 namespace vulpes {
+
+    /** The allocator module encompasses everything required for the operation/use of this project's rather
+     *  complex GPU memory management subsystem. In Vulkan, allocating VkDeviceMemory objects for every single 
+     *  individual resource requiring GPU memory is wasteful, and not practical: there is a limit in each Vulkan 
+     *  implementation to just how many allocations can exist at one time (sometimes as low as 1024). Thus, we will
+     *  instead allocate large chunks of memory when a previously unallocated memory type is requested: from there, 
+     *  resources (like buffers, images, etc) will bind to subregions of this larger memory object. Binding is much
+     *  faster than allocation, and it is also much quicker to de-allocate resources since this only involves registering
+     *  a newly freed location in this subsystem. 
+     * 
+     *  The allocator object is spawned as a member of the LogicalDevice class, but it can be accessed by anyone that can access
+     *  a logical device. Its relatively safe to access, and should be thread-safe. Utility methods exist to simplify the creation
+     *  and allocation of VkImage and VkBuffer objects as much as possible, as well.
+     *  
+     *  This module also is minimally complete, at best. It is robust enough to not fail in common usage, and currently has functioned 
+     *  wonderfully in most tasks thrown at it. However, the todo list details stuff that still needs to be done (e.g, further splitting pools and 
+     *  creating some kind of defragmentation system).
+     * 
+     *  Lastly, huge credit to GPU-Open as this is primarily just a slightly more object-oriented/"Modern C++" styled implementation of their *excellent*
+     *  memory allocator. This would not have been possible without their work: https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator
+     * 
+     *  \defgroup Allocator Memory Subsystem
+     *  \todo Further dividing allocation among three size pools, and then still dividing among type in those pools
+	 *  \todo Measure costliness of Validate(), possibly use return codes to fix errors when possible.
+     *  \todo Finish the defragmentation class, and find a way to check for fragmentation in the background. However, how to notify objects that they need to rebuild/refresh bound region, and re-upload resources?
+     *  \todo Possibly use above to remove MinSuballocationSizeToRegister, instead shuffling dest ranges up/down the needed amount to avoid gaps or fragmentation
+	 *  \todo in turn, will buffer-image granularity + alignment increase fragmentation? Couldn't find data on this.
+     *  \todo Private allocations are still nearly entirely unimplemented. Either remove these from the interface, or actually implement them properly.
+     *  \todo Cleanup now-unused structs and typedefs after upgrading to v2.0
+     */
 
 	/*
 	
@@ -55,19 +81,37 @@ namespace vulpes {
 		ImageOptimal,
 	};
 
+    /** These validation codes are returned by the memory validation routine, giving information on the error encountered. They will also
+     *  be printed to the console, if it is enabled, and logged to the log file as well. 
+     *  \ingroup Allocator
+     */
 	enum class ValidationCode : uint8_t {
-		VALIDATION_PASSED = 0,
-		NULL_MEMORY_HANDLE, // allocation's memory handle is invalid
-		ZERO_MEMORY_SIZE, // allocation's memory size is zero
-		INCORRECT_SUBALLOC_OFFSET, // Offset of suballocation is incorrect: it may overlap with another, or it may be placed beyond the range of the allocation
-		NEED_MERGE_SUBALLOCS, // two adjacent free suballoctions: merge them into one bigger suballocation
-		FREE_SUBALLOC_COUNT_MISMATCH, // we found more free suballocations while validating than there are in the free suballoc list
-		USED_SUBALLOC_IN_FREE_LIST, // non-free suballocation in free suballoc list
-		FREE_SUBALLOC_SORT_INCORRECT, // free suballocation list is sorted by size ascending: sorting is incorrect, re-sort
-		FINAL_SIZE_MISMATCH, // calculated offset as sum of all suballoc sizes is not equal to allocations total size
-		FINAL_FREE_SIZE_MISMATCH, // calculated total available size doesn't match stored available size
+        VALIDATION_PASSED = 0,
+        /** Suballocation's memory handle is invalid */
+        NULL_MEMORY_HANDLE, 
+        /** Suballocation's memory size is zero */
+        ZERO_MEMORY_SIZE, 
+        /** Offset of suballocation is incorrect: it may overlap with another, or it may be placed beyond the range of the allocation */
+        INCORRECT_SUBALLOC_OFFSET, 
+        /** Two adjacent free suballoctions: merge them into one bigger suballocation */
+        NEED_MERGE_SUBALLOCS, 
+        /** We found more free suballocations while validating than there are in the free suballocation list */
+        FREE_SUBALLOC_COUNT_MISMATCH, 
+        /** Non-free suballocation in free suballocation list */
+        USED_SUBALLOC_IN_FREE_LIST, 
+        /** Free suballocation list is sorted by available space descending: sorting is incorrect and smaller free region is before larger free region. */
+        FREE_SUBALLOC_SORT_INCORRECT, 
+        /** Calculated offset as sum of all suballoc sizes is not equal to allocations total size */
+        FINAL_SIZE_MISMATCH,
+        /** Calculated total available size doesn't match stored available size */
+		FINAL_FREE_SIZE_MISMATCH, 
 	};
 
+    /** This is a simple and common overload to print enum info to any stream (this also works, FYI, with easylogging++). A note to make, however,
+     *  is that compilers running at W4/Wall warning levels will warn that this method is unreferenced in release mode, if validation is not forced.
+     *  As the memory verification routine is not used in this case, much of that code will fold away but should still be left in for debug builds.
+     * \ingroup Allocator
+     */
 	static std::ostream& operator<<(std::ostream& os, const ValidationCode& code) {
 		switch (code) {
 		case ValidationCode::NULL_MEMORY_HANDLE:
@@ -114,12 +158,18 @@ namespace vulpes {
 		return (offset + alignment - 1) / alignment * alignment;
 	}
 
-	/*
-		taken from spec section 11.6
-		Essentially, we need to ensure that linear and non-linear resources are properly placed in adjacent memory so that
-		they avoid any accidental aliasing.
-
-		item_a = non-linaer object. item_b = linear object. page_size tends to be the bufferImageGranularity value retrieved by the allocators.
+	/**
+	*	Taken from the Vulkan specification, section 11.6
+	*	Essentially, we need to ensure that linear and non-linear resources are properly placed on separate memory pages so that
+    *	they avoid any accidental aliasing. Linear resources are just those that could be read like any other memory region, without
+    *   any particular optimization for size or access speed. Optimally tiled resources are those that are tiled either by the hardware drivers,
+    *   or the Vulkan implementation. Think of things like Z-Order curve encoding for texture data, or block-based compression for DDS/KTX texture formats.
+    *   \param item_a_offset: non-linear object's offset 
+    *   \param item_a_size: non-linear object's size
+    *   \param item_b_offset: linear object's offset 
+    *   \param item_b_size: linear object's size
+    *   \param page_size: almost universally tends to be the bufferImageGranularity value retrieved by the parent Allocator class.
+    *   \ingroup Allocator
 	*/
 	constexpr static inline bool CheckBlocksOnSamePage(const VkDeviceSize& item_a_offset, const VkDeviceSize& item_a_size, const VkDeviceSize& item_b_offset, const VkDeviceSize& page_size) {
 		assert(item_a_offset + item_a_size <= item_b_offset && item_a_size > 0 && page_size > 0);
@@ -129,11 +179,14 @@ namespace vulpes {
 		return item_a_end_page == item_b_start_Page;
 	}
 
-	/*
-		Checks to make sure the two objects of type "type_a" and "type_b" wouldn't cause a conflict with the buffer-image granularity values. Returns true if
-		conflict, false if no conflict.
-
-		BufferImageGranularity specifies interactions between linear and non-linear resources, so we check based on those.
+	/**
+	*	Checks to make sure the two objects of type "type_a" and "type_b" wouldn't cause a conflict with the buffer-image granularity values. Returns true if
+    *	conflict, false if no conflict. This is unlike the CheckBlocksOnSamePage method, in that it doesn't check memory location and alignment values, merely 
+    *   comparing the resource types for incompatabilities. This is used to avoid the more detailed checks like CheckBlocksOnSamePage (and the corrections required 
+    *   if this also fails)
+    *
+    *	BufferImageGranularity specifies interactions between linear and non-linear resources, so we check based on those.
+    *   \ingroup Allocator
 	*/
 	constexpr static inline bool CheckBufferImageGranularityConflict(SuballocationType type_a, SuballocationType type_b) {
 		if (type_a > type_b) {
@@ -147,7 +200,7 @@ namespace vulpes {
 			// best be conservative and play it safe: return true
 			return true;
 		case SuballocationType::Buffer:
-			// unkown return is playing it safe again, optimal return is because optimal tiling and linear buffers don't mix
+			// unknown return is playing it safe again, optimal return is because optimal tiling and linear buffers don't mix
 			return type_b == SuballocationType::ImageUnknown || type_b == SuballocationType::ImageOptimal;
 		case SuballocationType::ImageUnknown:
 			return type_b == SuballocationType::ImageUnknown || type_b == SuballocationType::ImageOptimal || type_b == SuballocationType::ImageLinear;
@@ -177,18 +230,24 @@ namespace vulpes {
 		
 	*/
 
+    /** This struct is the primary item submitted to allocator methods for resource creation.
+     *  \ingroup Allocator
+     */
 	struct AllocationRequirements {
-		// Defaults to false. If true, no new allocations are created beyond
-		// the set created upon initilization of the allocator system.
+		/** Defaults to false. If true, no new allocations are created beyond
+		* the set created upon initilization of the allocator system. */
 		static VkBool32 noNewAllocations;
 
-		// true if whatever allocation this belongs to should be in its own device memory object
+		/** True if whatever allocation this belongs to should be in its own device memory object. Don't use this too often, of course. */
 		VkBool32 privateMemory = false;
 
+        /** The memory properties that are absolutely required by the item you are allocating for. */
 		VkMemoryPropertyFlags requiredFlags;
-		// acts as additional flags over above.
+		/** Additional flags that would be nice/useful to have, but are not required. An attempt to meet these will be 
+         *  made, but not meeting them won't be considered a failure.*/
 		VkMemoryPropertyFlags preferredFlags = VkMemoryPropertyFlags(0);
 	};
+
 
 	struct AllocationInfo {
 		uint32_t memoryTypeIdx;
@@ -240,10 +299,10 @@ namespace vulpes {
 		}
 	};
 
-	typedef std::vector<suballocationList::iterator>::iterator avail_suballocation_iterator_t;
-	typedef std::vector<suballocationList::iterator>::const_iterator const_avail_suballocation_iterator_t;
-	typedef suballocationList::iterator suballocation_iterator_t;
-	typedef suballocationList::const_iterator const_suballocation_iterator_t;
+	using avail_suballocation_iterator_t = std::vector<suballocationList::iterator>::iterator;
+	using const_avail_suballocation_iterator_t = std::vector<suballocationList::iterator>::const_iterator;
+	using suballocation_iterator_t = suballocationList::iterator;
+	using const_suballocation_iterator_t = suballocationList::const_iterator;
 
 
 	/*
@@ -252,15 +311,16 @@ namespace vulpes {
 	
 	*/
 	
-	/*
-		
-		Allocation class represents a singular allocation: can be a private allocation (i.e, only user
-		of attached DeviceMemory) or a block allocation (bound to sub-region of device memory)
-
+	/**	
+	*	Allocation class represents a singular allocation: can be a private allocation (i.e, only user
+	*	of attached DeviceMemory) or a block allocation (bound to sub-region of device memory)
+    *   \ingroup Allocator
 	*/
-
 	struct Allocation {
 
+        /** If this is an allocation bound to a smaller region of a larger object, it is a block allocation. 
+         *  Otherwise, it has it's own VkDeviceMemory object and is a "PRIVATE_ALLOCATION" type.
+         */
 		enum class allocType {
 			BLOCK_ALLOCATION,
 			PRIVATE_ALLOCATION,
@@ -275,7 +335,8 @@ namespace vulpes {
 		Allocation& operator=(Allocation&& other) noexcept;
 
 		void Init(MemoryBlock* parent_block, const VkDeviceSize& offset, const VkDeviceSize& alignment, const VkDeviceSize& alloc_size, const SuballocationType& suballoc_type);
-		void Update(MemoryBlock* new_parent_block, const VkDeviceSize& new_offset);
+        void Update(MemoryBlock* new_parent_block, const VkDeviceSize& new_offset);
+        /** \param persistently_mapped: If set, this object will be considered to be always mapped. This will remove any worries about mapping/unmapping the object. */
 		void InitPrivate(const uint32_t& type_idx, VkDeviceMemory& dvc_memory, const SuballocationType& suballoc_type, bool persistently_mapped, void* mapped_data, const VkDeviceSize& data_size);
         void Map(const VkDeviceSize& size_to_map, const VkDeviceSize& offset_to_map_at, void* address_to_map_to) const;
         void Unmap() const noexcept;
@@ -306,21 +367,23 @@ namespace vulpes {
 
 	};
 
-	/*
-		MemoryBlock class contains singular VkDeviceMemory object.
-		Should only have a handful of these at any one time.
+	/**
+    *	A MemoryBlock is a large contiguous region of Vulkan memory of a uniform type (device local, host coherent, host visible, etc) that 
+    *   other objects bind to subregions of. This should never be directly accessed by any client code: it is managed and interfaced to by 
+    *   other objects, and several of these of each type can exist (occurs when a memory block is fully used, until no more memory available).
+    *   \ingroup Allocator
 	*/
-
 	class MemoryBlock {
 	public:
 
-		MemoryBlock(Allocator* alloc);
-		~MemoryBlock(); // just assert that memory has been free'd
+        MemoryBlock(Allocator* alloc);
+        /** The object should be destroyed via the Destroy method before the destructor is called, but this will call the Destroy method if it hasn't been, and will log a warning that this was done. */
+		~MemoryBlock(); 
 
-		// new_memory is a fresh device memory object, new_size is size of this device memory object.
+		/** \param new_memory: This is the handle that this block will take ownership of. \param new_size: total size of this memory block. */
 		void Init(VkDeviceMemory& new_memory, const VkDeviceSize& new_size);
 
-		// cleans up resources and prepares object to be safely destroyed.
+		/** Cleans up resources and prepares object to be safely destroyed. Should be called before the destructor is called, but for safety's sake the destructor will also call this. */
 		void Destroy(Allocator* alloc);
 
 		// Used when sorting AllocationCollection
@@ -329,24 +392,31 @@ namespace vulpes {
 		VkDeviceSize AvailableMemory() const noexcept;
 		const VkDeviceMemory& Memory() const noexcept;
 
-		// Verifies integrity of memory by checking all contained structs/objects.
+		/** Verifies integrity of memory by checking all contained suballocations for integrity and correctness */
 		ValidationCode Validate() const;
 
+        /** Fills the given SuballocationRequest struct with information about where to place the suballocation, and returns whether or not it succeeded in finding a spot to put the requested suballocation. Usually, a failure means we'll just try another memory block (and ultimately, consider creating a new one) */
 		bool RequestSuballocation(const VkDeviceSize& buffer_image_granularity, const VkDeviceSize& allocation_size, const VkDeviceSize& allocation_alignment, SuballocationType allocation_type, SuballocationRequest* dest_request);
 
-		// Verifies that requested suballocation can be added to this object, and sets dest_offset to reflect offset of this now-inserted suballocation.
+		/** Verifies that requested suballocation can be added to this object, and sets dest_offset to reflect offset of this now-inserted suballocation. */
 		bool VerifySuballocation(const VkDeviceSize& buffer_image_granularity, const VkDeviceSize& allocation_size, const VkDeviceSize& allocation_alignment,
 			SuballocationType allocation_type, const suballocationList::const_iterator & dest_suballocation_location, VkDeviceSize* dest_offset) const;
 
 		bool Empty() const;
 
-		// performs the actual allocation, once "request" has been checked and made valid.
+		/** Performs the actual allocation, once "request" has been checked and made valid. */
 		void Allocate(const SuballocationRequest& request, const SuballocationType& allocation_type, const VkDeviceSize& allocation_size);
 
-		// Frees memory in region specified (i.e frees/destroys a suballocation)
+		/** Frees memory in region specified (i.e frees/destroys a suballocation) */
         void Free(const Allocation* memory_to_free);
         
+        /** When we map a suballocation, we are mapping a sub-region of the larger memory object it is bound to. We cannot perform another map until this sub-region
+         *  is unmapped. Thus, suballocations actually call their parent's mapping method. This lets us use a mutex to lock off access to this block's VkDeviceMemory object until the memory is unmapped.
+         */
         void Map(const Allocation* alloc_being_mapped, const VkDeviceSize& size_of_map, const VkDeviceSize& offset_to_map_at, void* destination_address);
+        /** As mentioned for the Map method, due to VkMapMemory functions we must make sure only one sub-region of an object is unmapped at a time, thus requiring the 
+         *  parent block to oversee the mapping/unmapping + using a mutex for thread safety.
+        */
         void Unmap();
         
 		VkDeviceSize LargestAvailRegion() const noexcept;
@@ -376,22 +446,38 @@ namespace vulpes {
 
 	protected:
 
-        std::mutex memoryMutex; // protects access to VkDeviceMemory object
+        /** Used to protect access to the VkDeviceMemory handle, so that two threads don't attempt to map or use this handle at the same time. */
+        std::mutex memoryMutex; 
 		VkDeviceSize availSize;
 		uint32_t freeCount;
-		VkDeviceMemory memory;
+        VkDeviceMemory memory;
+        /** Changes the item pointed to by the iterator to be a free type, then adds the now-available size to availSize and increments freeCount. This method
+         *  may also call mergeFreeWithNext, insertFreeSuballocation, and removeFreeSuballocation if adjacent suballocations are free or can be merged with the 
+         *  now-free allocation passed in.
+         */
+        void freeSuballocation(const suballocationList::iterator& item_to_free);
 
-		void mergeFreeWithNext(const suballocationList::iterator& item_to_merge);
-		void freeSuballocation(const suballocationList::iterator& item_to_free);
-		void insertFreeSuballocation(const suballocationList::iterator& item_to_insert);
+        /** Effectively reduces fragmentation by merging two free allocations that are adjacent in memory into one larger allocation. */
+        void mergeFreeWithNext(const suballocationList::iterator& item_to_merge);
+        
+        /** Registers a free suballocation, inserting it into the proper location to keep the sorting intact (via std::lower_bound) */
+        void insertFreeSuballocation(const suballocationList::iterator& item_to_insert);
+        /** Removes a free suballocation, usually indicating that it is about to be made active and used by an object (or that it has been merged with another free suballocation) */
 		void removeFreeSuballocation(const suballocationList::iterator& item_to_remove);
 
+        /** This vector stores iterators that can be used to locate suballocations in this object's suballocationList. Using iterators avoids accidental duplication of objects,
+         *  (akin to a pointer), but with more safety and extra convienience when it comes to retrieving, modifying, or even removing the object "pointed" to by the iterator.
+        */
 		std::vector<suballocationList::iterator> availSuballocations;
 	};
 
 	typedef std::vector<MemoryBlock*>::iterator allocation_iterator_t;
 	typedef std::vector<MemoryBlock*>::const_iterator const_allocation_iterator_t;
 
+    /** An allocation collection is just a vector of MemoryBlocks of the same type. With commonly used memory types we wil quite easily fill one block up (e.g, device-local memory) 
+     *  so we will need to create a new block. In order to keep some organization among memory types, though, we store these similar memory blocks in this object.
+     *  \ingroup Allocator
+     */
 	struct AllocationCollection {
 		std::vector<std::unique_ptr<MemoryBlock>> allocations;
 
@@ -405,6 +491,7 @@ namespace vulpes {
 
 		bool Empty() const;
 
+        /** Removes only the particular memory block from the internal vector, and re-sorts the blocks once complete. */
 		void RemoveBlock(MemoryBlock * block_to_erase);
 
 		void SortAllocations();
@@ -414,6 +501,9 @@ namespace vulpes {
 		Allocator* allocator;
 	};
 
+    /** \todo Implement this, for christ's sake.
+     *  \ingroup Allocator
+     */
 	class Defragmenter {
 		const Device* parent;
 		VkDeviceSize BufferImageGranularity;
@@ -422,6 +512,10 @@ namespace vulpes {
 		uint32_t AllocationsMoved;
 	};
 
+    /** The primary interface and class of this subsystem. This object is responsible for creating resources when requested, managing memory,
+     *  checking integrity of memory, and cleaning up after itself and when deallocation has been requested.
+     *  \ingroup Allocator
+     */
 	class Allocator {
 		Allocator(const Allocator&) = delete;
 		Allocator(Allocator&&) = delete;
