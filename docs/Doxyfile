@@ -791,7 +791,8 @@ WARN_LOGFILE           =
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = C:\Users\kjones\Documents\SoftwareDev\OpenSWIFT\cpp\ext\VulpesRender\include \
-                         C:\Users\kjones\Documents\SoftwareDev\OpenSWIFT\cpp\ext\VulpesRender\src
+                         C:\Users\kjones\Documents\SoftwareDev\OpenSWIFT\cpp\ext\VulpesRender\src \
+                         ../scenes
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -2263,7 +2264,7 @@ UML_LIMIT_NUM_FIELDS   = 10
 # The default value is: NO.
 # This tag requires that the tag HAVE_DOT is set to YES.
 
-TEMPLATE_RELATIONS     = YES
+TEMPLATE_RELATIONS     = NO
 
 # If the INCLUDE_GRAPH, ENABLE_PREPROCESSING and SEARCH_INCLUDES tags are set to
 # YES then doxygen will generate a graph for each documented file showing the
