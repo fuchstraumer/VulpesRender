@@ -40,14 +40,16 @@ namespace vulpes {
     }
 
     void Window::setExtensions() {
-
+#ifndef __APPLE__
         uint32_t extension_count = 0;
         const char** extension_names;
         extension_names = glfwGetRequiredInstanceExtensions(&extension_count);
         for(uint32_t i = 0; i < extension_count; ++i) {
             extensions.emplace_back(extension_names[i]);
         }
-
+#else 
+        extensions.emplace_back(VK_MVK_MACOS_SURFACE_EXTENSION_NAME);
+#endif 
     }
 
     const std::vector<const char*>& Window::Extensions() const noexcept {
@@ -65,11 +67,19 @@ namespace vulpes {
     }
 
     void Window::CreateSurface() {
-
+#ifndef __APPLE__
         VkResult err = glfwCreateWindowSurface(parent->vkHandle(), window, nullptr, &surface);
         VkAssert(err);
         LOG(INFO) << "Created window surface.";
+#else 
+        VkMacOSSurfaceCreateInfoMVK surface;
+        surface.sType = VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK;
+        surface.pNext = nullptr;
+        surface.flags = 0;
+        surface.pView = demo->window;
 
+        VkResult err = vkCreateMacOSSurfaceMVK(demo->inst, &surface, NULL, &demo->surface);
+#endif 
     }
 
     void Window::createInputHandler() {

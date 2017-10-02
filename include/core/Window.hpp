@@ -5,6 +5,15 @@
 #include "InputHandler.hpp"
 #include "ForwardDecl.hpp"
 namespace vulpes {
+
+#if defined(_WIN32) || defined(__linux__) 
+typedef GLFWWindow vulpes_window_t;
+#elif defined(__APPLE__) 
+typedef void* vulpes_window_t;
+#else 
+#pragma message("No valid platform detected!")
+#endif
+
     /*! Window is a wrapper around the GLFW windowing system, and handles creating the underlying rendering
     *    window along with creating a suitable VkSurfaceKHR object. It is also responsible for signaling a
     *    window resizing event.
