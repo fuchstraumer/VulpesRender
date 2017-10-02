@@ -15,7 +15,7 @@
 #include <iostream>
 #include <chrono>
 #include <future>
-#include <experimental/filesystem>
+
 #include <condition_variable>
 #include <regex>
 #include <limits>
@@ -31,7 +31,13 @@
 #include "glm/gtc/quaternion.hpp"
 #include "gli/gli.hpp"
 
+#if defined(_WIN32) || defined(__linux__)
 #include "vulkan/vulkan.h"
+#elif defined (__APPLE__)
+#include "MoltenVK/mvk_vulkan.h"
+#else
+#pragma message("No valid platform detected for Vulkan!")
+#endif
 
 #define GLFW_INCLUDE_VULKAN
 #include "glfw/glfw3.h"

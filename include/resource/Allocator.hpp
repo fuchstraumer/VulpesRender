@@ -349,7 +349,7 @@ namespace vulpes {
 		SuballocationType SuballocType;
 		VkDeviceSize Size, Alignment;
 
-		union {
+		union allocTypeUnion {
 
 			struct BlockAllocation {
 				MemoryBlock* ParentBlock;
@@ -363,7 +363,7 @@ namespace vulpes {
 				void* MappedData;
 			} privateAllocation;
 
-		};
+		} typeData;
 
 	};
 

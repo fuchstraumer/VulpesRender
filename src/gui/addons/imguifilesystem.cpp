@@ -115,8 +115,8 @@ enum Sorting {
 #ifndef _WIN32
 #include <stdlib.h> // realpath getenv
 #endif //_WIN32
-#define VULPES_FILESYSTEM_USE_STD_EXPERIMENTAL_FILESYSTEM
-#ifdef VULPES_FILESYSTEM_USE_STD_EXPERIMENTAL_FILESYSTEM
+
+#ifdef USE_EXPERIMENTAL_FILESYSTEM
 #include <experimental\filesystem>
 #endif 
 

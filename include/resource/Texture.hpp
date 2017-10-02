@@ -14,8 +14,6 @@
 
 namespace vulpes {
 
-	// TODO: 1D texture, 2D texture array.
-	using texture_1d_t = std::integral_constant<int, 0>;
     
     /** An attempt at minimally wrapping loading image data from file, for use when we can't use GLI (i.e, the image is of a more conventional format than DDS/KTX/etc).
     *   Primarily exists to make sure we don't have dangling pointers to image data, along with memory leaks from said image data.
@@ -173,21 +171,6 @@ namespace vulpes {
 
 	}
 
-	template<>
-	inline void Texture<texture_1d_t>::CreateEmptyTexture(const VkFormat & texture_format, const uint32_t& width, const uint32_t& height) {
-
-		format = texture_format;
-		Width = width;
-		Height = height;
-		layerCount = 1;
-		mipLevels = 1;
-
-		createTexture();
-		createView();
-		createSampler();
-
-	}
-
 	template<typename texture_type>
 	inline void Texture<texture_type>::TransferToDevice(VkCommandBuffer & transfer_cmd_buffer) const {
 
@@ -240,37 +223,6 @@ namespace vulpes {
 	}
 
 	template<>
-	inline void Texture<texture_1d_t>::createTexture() {
-
-		createInfo.imageType = VK_IMAGE_TYPE_1D;
-		createInfo.format = format;
-		createInfo.extent = VkExtent3D{ Width, Height, 1 };
-		createInfo.mipLevels = mipLevels;
-		createInfo.arrayLayers = layerCount;
-		createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
-		createInfo.samples = VK_SAMPLE_COUNT_1_BIT;
-		createInfo.tiling = parent->GetFormatTiling(format, VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT);
-
-		Image::CreateImage(handle, memoryAllocation, parent, createInfo, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
-
-	}
-
-	template<>
-	inline void Texture<texture_1d_t>::createView() {
-
-		VkImageViewCreateInfo view_create_info = vk_image_view_create_info_base;
-		view_create_info.subresourceRange.layerCount = layerCount;
-		view_create_info.subresourceRange.levelCount = mipLevels;
-		view_create_info.image = handle;
-		view_create_info.format = format;
-		view_create_info.viewType = VK_IMAGE_VIEW_TYPE_1D;
-
-		VkResult result = vkCreateImageView(parent->vkHandle(), &view_create_info, nullptr, &view);
-		VkAssert(result);
-
-	}
-
-	template<>
 	inline void Texture<gli::texture2d>::createTexture() {
 
 		createInfo.imageType = VK_IMAGE_TYPE_2D;
@@ -308,11 +260,14 @@ namespace vulpes {
 		VkAssert(result);
 	}
 
+    template<>
+    inline void Texture<gli::texture2d>::createCopyInformation(const gli::texture2d& texture_data);
+    
 	template<>
 	inline gli::texture2d Texture<gli::texture2d>::loadTextureDataFromFile(const char* filename) {
 		gli::texture2d result = gli::texture2d(gli::load(filename));
 		updateTextureParameters(result);
-		createCopyInformation(result);
+        createCopyInformation(result);
 		return std::move(result);
     }
 
@@ -364,6 +319,30 @@ namespace vulpes {
 		VkAssert(result);
 
 	}
+    
+    template<>
+    inline void Texture<gli::texture_cube>::createCopyInformation(const gli::texture_cube& texture_data) {
+        // Texture cube case is complex: need to create copy info for all mips levels - of each of the six faces.
+        // Now set up buffer copy regions for each face and all of its mip levels.
+        size_t offset = 0;
+        
+        for (uint32_t face_idx = 0; face_idx < 6; ++face_idx) {
+            for (uint32_t mip_level = 0; mip_level < mipLevels; ++mip_level) {
+                VkBufferImageCopy copy{};
+                copy.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+                copy.imageSubresource.mipLevel = mip_level;
+                copy.imageSubresource.baseArrayLayer = face_idx;
+                copy.imageSubresource.layerCount = 1;
+                copy.imageExtent.width = static_cast<uint32_t>(texture_data[face_idx][mip_level].extent().x);
+                copy.imageExtent.height = static_cast<uint32_t>(texture_data[face_idx][mip_level].extent().y);
+                copy.imageExtent.depth = 1;
+                copy.bufferOffset = static_cast<uint32_t>(offset);
+                copyInfo.push_back(std::move(copy));
+                // Increment offset by datasize of last specified copy region
+                offset += texture_data[face_idx][mip_level].size();
+            }
+        }
+    }
 
 	template<>
 	inline gli::texture_cube Texture<gli::texture_cube>::loadTextureDataFromFile(const char* filename) {
@@ -371,30 +350,6 @@ namespace vulpes {
 		updateTextureParameters(result);
 		createCopyInformation(result);
 		return std::move(result);
-	}
-
-	template<>
-	inline void Texture<gli::texture_cube>::createCopyInformation(const gli::texture_cube& texture_data) {
-		// Texture cube case is complex: need to create copy info for all mips levels - of each of the six faces.
-		// Now set up buffer copy regions for each face and all of its mip levels.
-		size_t offset = 0;
-
-		for (uint32_t face_idx = 0; face_idx < 6; ++face_idx) {
-			for (uint32_t mip_level = 0; mip_level < mipLevels; ++mip_level) {
-				VkBufferImageCopy copy{};
-				copy.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-				copy.imageSubresource.mipLevel = mip_level;
-				copy.imageSubresource.baseArrayLayer = face_idx;
-				copy.imageSubresource.layerCount = 1;
-				copy.imageExtent.width = static_cast<uint32_t>(texture_data[face_idx][mip_level].extent().x);
-				copy.imageExtent.height = static_cast<uint32_t>(texture_data[face_idx][mip_level].extent().y);
-				copy.imageExtent.depth = 1;
-				copy.bufferOffset = static_cast<uint32_t>(offset);
-				copyInfo.push_back(std::move(copy));
-				// Increment offset by datasize of last specified copy region
-				offset += texture_data[face_idx][mip_level].size();
-			}
-		}
 	}
 
 	template<>
@@ -427,6 +382,30 @@ namespace vulpes {
 		VkAssert(result);
 
 	}
+    
+    template<>
+    inline void Texture<gli::texture2d_array>::createCopyInformation(const gli::texture2d_array& texture_data) {
+        // Texture cube case is complex: need to create copy info for all mips levels - of each of the six faces.
+        // Now set up buffer copy regions for each face and all of its mip levels.
+        size_t offset = 0;
+        
+        for (uint32_t layer = 0; layer < layerCount; ++layer) {
+            for (uint32_t mip_level = 0; mip_level < mipLevels; ++mip_level) {
+                VkBufferImageCopy copy{};
+                copy.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+                copy.imageSubresource.mipLevel = mip_level;
+                copy.imageSubresource.baseArrayLayer = layer;
+                copy.imageSubresource.layerCount = 1;
+                copy.imageExtent.width = static_cast<uint32_t>(texture_data[layer][mip_level].extent().x);
+                copy.imageExtent.height = static_cast<uint32_t>(texture_data[layer][mip_level].extent().y);
+                copy.imageExtent.depth = 1;
+                copy.bufferOffset = static_cast<uint32_t>(offset);
+                copyInfo.push_back(std::move(copy));
+                // Increment offset by datasize of last specified copy region
+                offset += texture_data[layer][mip_level].size();
+            }
+        }
+    }
 
 	template<>
 	inline gli::texture2d_array Texture<gli::texture2d_array>::loadTextureDataFromFile(const char* filename) {
@@ -435,30 +414,6 @@ namespace vulpes {
 		createCopyInformation(result);
 		return std::move(result);
 	}
-
-	template<>
-	inline void Texture<gli::texture2d_array>::createCopyInformation(const gli::texture2d_array& texture_data) {
-		// Texture cube case is complex: need to create copy info for all mips levels - of each of the six faces.
-		// Now set up buffer copy regions for each face and all of its mip levels.
-		size_t offset = 0;
-
-		for (uint32_t layer = 0; layer < layerCount; ++layer) {
-			for (uint32_t mip_level = 0; mip_level < mipLevels; ++mip_level) {
-				VkBufferImageCopy copy{};
-				copy.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-				copy.imageSubresource.mipLevel = mip_level;
-				copy.imageSubresource.baseArrayLayer = layer;
-				copy.imageSubresource.layerCount = 1;
-				copy.imageExtent.width = static_cast<uint32_t>(texture_data[layer][mip_level].extent().x);
-				copy.imageExtent.height = static_cast<uint32_t>(texture_data[layer][mip_level].extent().y);
-				copy.imageExtent.depth = 1;
-				copy.bufferOffset = static_cast<uint32_t>(offset);
-				copyInfo.push_back(std::move(copy));
-				// Increment offset by datasize of last specified copy region
-				offset += texture_data[layer][mip_level].size();
-			}
-		}
-    }
     
     template<>
     inline texture_2d_t Texture<texture_2d_t>::loadTextureDataFromFile(const char* filename) {

@@ -29,10 +29,11 @@ ENDIF()
 
 IF(MSVC)
   OPTION(USE_MSVC_RUNTIME_LIBRARY_DLL "Use MSVC runtime DLL" ON)
+  ADD_DEFINITIONS("-DUSE_EXPERIMENTAL_FILESYSTEM")
 ENDIF()
 
 IF(CLANG) 
- SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ")
+ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 ENDIF()
 
 OPTION(FORCE_ALLOCATOR_VALIDATION "Force validation of Vulkan memory even in Release builds." OFF)
@@ -56,10 +57,10 @@ ExternalProject_Add(glfw3
     "-DCMAKE_DEBUG_POSTFIX=-gd"
     "-DUSE_MSVC_RUNTIME_LIBRARY_DLL=ON")
 
-ExternalProject_Add(gli 
-    PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/gli"
-    GIT_REPOSITORY "https://github.com/g-truc/gli.git"
-    CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
+#ExternalProject_Add(gli 
+#    PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/gli"
+#    GIT_REPOSITORY "https://github.com/g-truc/gli.git"
+#    CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
 
 ExternalProject_Add(glm
     PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/glm"
