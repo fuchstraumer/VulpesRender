@@ -15,9 +15,9 @@
 #include "render/DepthStencil.hpp"
 #include "render/Multisampling.hpp"
 #include "resource/PipelineCache.hpp"
+#include "BaseSceneConfig.hpp"
 #include "util/Camera.hpp"
 #include "util/Arcball.hpp"
-#include "BaseSceneConfig.hpp"
 
 namespace vulpes {
 
@@ -72,7 +72,8 @@ namespace vulpes {
          *  in HouseScene for clarification. 
          */
 		virtual void RecordCommands() = 0;
-		virtual void RenderLoop();
+        void updateView();
+        virtual void RenderLoop();
 
         virtual void UpdateMovement(const float & delta_time);
 
@@ -151,6 +152,46 @@ namespace vulpes {
         static Arcball arcballCamera;
         
 	};
+
+
+    inline glm::mat4 BaseScene::GetViewMatrix() const noexcept {
+        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
+            return arcballCamera.GetViewMatrix();
+        }
+        else if (BaseScene::SceneConfiguration.CameraType == cameraType::FPS) {
+            return fpsCamera.GetViewMatrix();
+        }
+        else {
+            return glm::mat4(0.0f);
+        }
+    }
+
+    inline glm::mat4 BaseScene::GetProjectionMatrix() const noexcept {
+        return projection;
+    }
+
+    inline const glm::vec3 & BaseScene::CameraPosition() const noexcept {
+        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
+            return arcballCamera.Position;
+        }
+        else if (BaseScene::SceneConfiguration.CameraType == cameraType::FPS) {
+            return fpsCamera.Position;
+        }
+        else {
+            static const glm::vec3 zero_vec(0.0f);
+            LOG(ERROR) << "Camera Type not set correctly!";
+            return zero_vec;
+        }
+    }
+
+    inline void BaseScene::UpdateCameraPosition(const glm::vec3& new_position) noexcept {
+        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
+            arcballCamera.Position = new_position;
+        }
+        else if (BaseScene::SceneConfiguration.CameraType == cameraType::FPS) {
+            fpsCamera.Position = new_position;
+        }
+    }
 
 }
 

@@ -16,6 +16,7 @@
 #endif // _WIN32
 
 
+
 namespace vulpes {
 
     bool BaseScene::CameraLock = false;
@@ -221,45 +222,6 @@ namespace vulpes {
 	void BaseScene::PipelineCacheCreated(const uint16_t & cache_id) {
 		pipelineCacheHandles.push_back(cache_id);
 	}
-
-    glm::mat4 BaseScene::GetViewMatrix() const noexcept {
-        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
-            return arcballCamera.GetViewMatrix();
-        }
-        else if (BaseScene::SceneConfiguration.CameraType == cameraType::FPS) {
-            return fpsCamera.GetViewMatrix();
-        }
-		else {
-			return glm::mat4(0.0f);
-		}
-    }
-
-    glm::mat4 BaseScene::GetProjectionMatrix() const noexcept {
-        return projection;
-    }
-
-    const glm::vec3 & BaseScene::CameraPosition() const noexcept {
-        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
-            return arcballCamera.Position;
-        }
-        else if (BaseScene::SceneConfiguration.CameraType == cameraType::FPS) {
-            return fpsCamera.Position;
-        }
-        else {
-            static const glm::vec3 zero_vec(0.0f);
-            LOG(ERROR) << "Camera Type not set correctly!";
-            return zero_vec;
-        }
-    }
-
-    void BaseScene::UpdateCameraPosition(const glm::vec3& new_position) noexcept {
-        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
-            arcballCamera.Position = new_position;
-        }
-        else if (BaseScene::SceneConfiguration.CameraType == cameraType::FPS) {
-            fpsCamera.Position = new_position;
-        }
-    }
 
 	void vulpes::BaseScene::CreateCommandPools() {
 
@@ -502,6 +464,18 @@ namespace vulpes {
 		LOG_IF(BaseScene::SceneConfiguration.VerboseLogging, INFO) << "Swapchain recreation successful.";
 
 	}
+
+    void BaseScene::updateView() {
+        if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
+            view = BaseScene::arcballCamera.GetViewMatrix();
+        }
+        else if (SceneConfiguration.CameraType == cameraType::FPS) {
+            view = fpsCamera.GetViewMatrix();
+        }
+        else {
+            view = fpsCamera.GetViewMatrix();
+        }
+    }
 
 	void BaseScene::RenderLoop() {
 

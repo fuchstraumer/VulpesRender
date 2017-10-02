@@ -19,8 +19,8 @@ namespace vulpes {
 	}
 
 	void CommandPool::ResetCmdPool(const VkCommandPoolResetFlagBits& command_pool_reset_flags) {
-        assert(createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT);
-        if(!createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT) {
+        assert((createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT));
+        if(!(createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT)) {
             LOG(WARNING) << "Cannot reset command pools that were not created with VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT!";
         }
 		vkResetCommandPool(parent->vkHandle(), handle, command_pool_reset_flags);
@@ -84,7 +84,7 @@ namespace vulpes {
 
 	void CommandPool::ResetCmdBuffer(const size_t & idx, const VkCommandBufferResetFlagBits& command_buffer_reset_flag_bits) {
         assert(createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT);
-        if(!createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT) {
+        if(!(createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT)) {
             LOG(WARNING) << "Cannot reset command pools that were not created with VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT!";
         }
 		vkResetCommandBuffer(cmdBuffers[idx], command_buffer_reset_flag_bits);
