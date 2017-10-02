@@ -13,15 +13,15 @@
 namespace vulpes {
 	
 
-	constexpr char* standard_validation_layer = "VK_LAYER_LUNARG_standard_validation";
+	constexpr const char* standard_validation_layer = "VK_LAYER_LUNARG_standard_validation";
 
 	constexpr std::array<const char*, 1> validation_layers = {
 		"VK_LAYER_LUNARG_standard_validation"
 	};
 
 
-	constexpr char* debug_callback_extension = VK_EXT_DEBUG_REPORT_EXTENSION_NAME;
-	constexpr char* khr_swapchain_extension = VK_KHR_SWAPCHAIN_EXTENSION_NAME;
+	constexpr const char* debug_callback_extension = "VK_EXT_debug_report";
+	constexpr const char* khr_swapchain_extension = "VK_KHR_swapchain";
 
 	constexpr std::array<const char*, 2> instance_extensions = {
 		debug_callback_extension,
@@ -29,13 +29,13 @@ namespace vulpes {
 	};
 
 	constexpr std::array<const char*, 1> device_extensions = {
-		VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+		"VK_KHR_swapchain",
 		
 	};
 
 	constexpr std::array<const char*, 2> device_extensions_debug = {
-		VK_KHR_SWAPCHAIN_EXTENSION_NAME,
-		VK_EXT_DEBUG_MARKER_EXTENSION_NAME,
+		"VK_KHR_swapchain",
+		"VK_EXT_debug_marker",
 	};
 
 	constexpr uint64_t vk_default_fence_timeout = std::numeric_limits<uint64_t>::max();

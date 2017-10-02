@@ -329,7 +329,7 @@ namespace vulpes {
         std::lock_guard<std::mutex> suballoc_guard(memoryMutex);
 		for (auto iter = Suballocations.begin(); iter != Suballocations.end(); ++iter) {
 			auto& suballoc = *iter;
-			if (suballoc.offset == memory_to_free->blockAllocation.Offset) {
+			if (suballoc.offset == memory_to_free->Offset()) {
 				freeSuballocation(iter);
 				if (VALIDATE_MEMORY) {
 					auto vcode = Validate();
@@ -904,43 +904,42 @@ namespace vulpes {
 	}
 
 	Allocation::Allocation(Allocation && other) noexcept : Type(std::move(other.Type)), SuballocType(std::move(other.SuballocType)), Size(std::move(other.Size)), Alignment(std::move(other.Alignment)), 
-		blockAllocation(std::move(other.blockAllocation)), privateAllocation(std::move(other.privateAllocation)) {}
+		typeData(std::move(other.typeData)){}
 
 	Allocation & Allocation::operator=(Allocation && other) noexcept {
 		Type = std::move(other.Type);
 		SuballocType = std::move(other.SuballocType);
 		Size = std::move(other.Size);
 		Alignment = std::move(other.Alignment);
-		blockAllocation = std::move(other.blockAllocation);
-		privateAllocation = std::move(other.privateAllocation);
+        typeData = std::move(other.typeData);
 		return *this;
 	}
 
 	void Allocation::Init(MemoryBlock * parent_block, const VkDeviceSize & offset, const VkDeviceSize & alignment, const VkDeviceSize & alloc_size, const SuballocationType & suballoc_type) {
 		Type = allocType::BLOCK_ALLOCATION;
-		blockAllocation.ParentBlock = parent_block;
-		blockAllocation.Offset = offset;
+		typeData.blockAllocation.ParentBlock = parent_block;
+		typeData.blockAllocation.Offset = offset;
 		Size = alloc_size;
 		Alignment = alignment;
 	}
 
 	void Allocation::Update(MemoryBlock * new_parent_block, const VkDeviceSize & new_offset) {
-		blockAllocation.ParentBlock = new_parent_block;
-		blockAllocation.Offset = new_offset;
+		typeData.blockAllocation.ParentBlock = new_parent_block;
+		typeData.blockAllocation.Offset = new_offset;
 	}
 
 	void Allocation::InitPrivate(const uint32_t & type_idx, VkDeviceMemory & dvc_memory, const SuballocationType & suballoc_type, bool persistently_mapped, void * mapped_data, const VkDeviceSize & data_size) {
 		Size = data_size;
 		SuballocType = suballoc_type;
-		privateAllocation.DvcMemory = dvc_memory;
-		privateAllocation.MemoryTypeIdx = type_idx;
-		privateAllocation.PersistentlyMapped = persistently_mapped;
-		privateAllocation.MappedData = mapped_data;
+		typeData.privateAllocation.DvcMemory = dvc_memory;
+		typeData.privateAllocation.MemoryTypeIdx = type_idx;
+		typeData.privateAllocation.PersistentlyMapped = persistently_mapped;
+		typeData.privateAllocation.MappedData = mapped_data;
     }
     
     void Allocation::Map(const VkDeviceSize& size_to_map, const VkDeviceSize& offset_to_map_at, void* address_to_map_to) const {
         if(Type == allocType::BLOCK_ALLOCATION) {
-            blockAllocation.ParentBlock->Map(this, size_to_map, offset_to_map_at, address_to_map_to);
+            typeData.blockAllocation.ParentBlock->Map(this, size_to_map, offset_to_map_at, address_to_map_to);
         }
         else {
             LOG(ERROR) << "Attempted to map a private allocation: this is currently not supported.";
@@ -949,7 +948,7 @@ namespace vulpes {
 
     void Allocation::Unmap() const noexcept {
         if (Type == allocType::BLOCK_ALLOCATION) {
-            blockAllocation.ParentBlock->Unmap();
+            typeData.blockAllocation.ParentBlock->Unmap();
         }
         else {
             LOG(ERROR) << "Attempted to unmap a private allocation: this is currently not supported.";
@@ -958,16 +957,16 @@ namespace vulpes {
 
 	const VkDeviceMemory & Allocation::Memory() const {
 		if (Type == allocType::BLOCK_ALLOCATION) {
-			return blockAllocation.ParentBlock->Memory();
+			return typeData.blockAllocation.ParentBlock->Memory();
 		}
 		else {
-			return privateAllocation.DvcMemory;
+			return typeData.privateAllocation.DvcMemory;
 		}
 	}
 
 	VkDeviceSize Allocation::Offset() const noexcept {
 		if (Type == allocType::BLOCK_ALLOCATION) {
-			return blockAllocation.Offset;
+			return typeData.blockAllocation.Offset;
 		}
 		else {
 			return VkDeviceSize(0);
@@ -976,10 +975,10 @@ namespace vulpes {
 
 	uint32_t Allocation::MemoryTypeIdx() const noexcept {
 		if (Type == allocType::BLOCK_ALLOCATION) {
-			return blockAllocation.ParentBlock->MemoryTypeIdx;
+			return typeData.blockAllocation.ParentBlock->MemoryTypeIdx;
 		}
 		else {
-			return privateAllocation.MemoryTypeIdx;
+			return typeData.privateAllocation.MemoryTypeIdx;
 		}
 	}
 

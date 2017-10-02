@@ -92,7 +92,46 @@ namespace vulpes {
 		input_handler::LastY = swapchain->Extent.height / 2.0f;
 
 	}
-
+    
+#ifdef USE_EXPERIMENTAL_FILESYSTEM
+    inline void cleanupShaderCacheFiles() {
+        std::experimental::filesystem::path pipeline_cache_path("rsrc/shader_cache");
+        
+        if (std::experimental::filesystem::exists(pipeline_cache_path) && !pipelineCacheHandles.empty()) {
+            auto dir_iter = std::experimental::filesystem::directory_iterator(pipeline_cache_path);
+            for (auto& p : dir_iter) {
+                
+                bool id_used = false;
+                
+                if (p.path().extension().string() == ".vkdat") {
+                    
+                    std::string cache_name = p.path().filename().string();
+                    size_t idx = cache_name.find_last_of('.');
+                    cache_name = cache_name.substr(0, idx);
+                    
+                    uint16_t id = static_cast<uint16_t>(std::stoi(cache_name));
+                    
+                    for(uint16_t& curr : pipelineCacheHandles) {
+                        if (curr == id) {
+                            id_used = true;
+                            continue;
+                        }
+                    }
+                    
+                }
+                
+                if (!id_used) {
+                    bool erased = std::experimental::filesystem::remove(p.path());
+                    if (!erased) {
+                        LOG(WARNING) << "Failed to erase a pipeline cache with ID " << p.path().filename().string();
+                    }
+                }
+                
+            }
+        }
+    }
+#endif
+    
 	vulpes::BaseScene::~BaseScene() {
 
 		depthStencil.reset();
@@ -117,42 +156,13 @@ namespace vulpes {
 		vkDestroySemaphore(device->vkHandle(), semaphores[1], nullptr);
 		vkDestroySemaphore(device->vkHandle(), semaphores[0], nullptr);
 
-		std::experimental::filesystem::path pipeline_cache_path("rsrc/shader_cache");
-
-		if (std::experimental::filesystem::exists(pipeline_cache_path) && !pipelineCacheHandles.empty()) {
-			auto dir_iter = std::experimental::filesystem::directory_iterator(pipeline_cache_path);
-			for (auto& p : dir_iter) {
-
-				bool id_used = false;
-
-				if (p.path().extension().string() == ".vkdat") {
-
-					std::string cache_name = p.path().filename().string();
-					size_t idx = cache_name.find_last_of('.');
-					cache_name = cache_name.substr(0, idx);
-
-					uint16_t id = static_cast<uint16_t>(std::stoi(cache_name));
-
-					for(uint16_t& curr : pipelineCacheHandles) {
-						if (curr == id) {
-							id_used = true;
-							continue;
-						}
-					}
-
-				}
-
-				if (!id_used) {
-					bool erased = std::experimental::filesystem::remove(p.path());
-					if (!erased) {
-						LOG(WARNING) << "Failed to erase a pipeline cache with ID " << p.path().filename().string();
-					}
-				}
-
-			}
-		}
+#ifdef USE_EXPERIMENTAL_FILESYSTEM
+        cleanupShaderCacheFiles();
+#endif
 
 	}
+    
+    
 
 	void BaseScene::UpdateMouseActions() {
 

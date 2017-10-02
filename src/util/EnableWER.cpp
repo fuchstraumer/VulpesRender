@@ -4,9 +4,13 @@
 #include "BaseScene.hpp"
 namespace vulpes {
     namespace util {
+        
+#ifndef _WIN32
+        typedef int LSTATUS;
+#endif
 
         inline static void winErrorToLog(const LSTATUS& status) {
-            
+#ifdef _WIN32
             if (status == ERROR_ACCESS_DENIED) {
                 LOG(ERROR) << "Windows API call returned ERROR_ACCESS_DENIED:" << std::to_string(status);
             }
@@ -19,10 +23,11 @@ namespace vulpes {
             else {
                 LOG(ERROR) << "Windows API call returned:" << std::to_string(status);
             }
+#endif
         }
 
         void wer_enabler_t::enable() const {
-
+#ifdef _WIN32
             namespace fs = std::experimental::filesystem;
             fs::path curr_dir = fs::current_path();
 
@@ -103,6 +108,7 @@ namespace vulpes {
             else {
                 winErrorToLog(win_error);
             }
+#endif
         }
 
 
