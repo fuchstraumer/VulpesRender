@@ -451,6 +451,32 @@ namespace vulpes {
         });
     }
 
+    template<>
+    inline void Texture<texture_2d_t>::createTexture() {
+        createInfo.imageType = VK_IMAGE_TYPE_2D;
+        createInfo.format = format;
+        createInfo.extent = VkExtent3D{ Width, Height, 1 };
+        createInfo.mipLevels = mipLevels;
+        createInfo.arrayLayers = layerCount;
+        createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
+        createInfo.samples = VK_SAMPLE_COUNT_1_BIT;
+        createInfo.tiling = parent->GetFormatTiling(format, VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT);
+
+        Image::CreateImage(handle, memoryAllocation, parent, createInfo, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+    }
+
+    template<>
+    inline void Texture<texture_2d_t>::createView() {
+        VkImageViewCreateInfo view_create_info = vk_image_view_create_info_base;
+        view_create_info.subresourceRange.layerCount = layerCount;
+        view_create_info.subresourceRange.levelCount = mipLevels;
+        view_create_info.image = handle;
+        view_create_info.format = format;
+        view_create_info.viewType = VK_IMAGE_VIEW_TYPE_2D;
+
+        VkResult result = vkCreateImageView(parent->vkHandle(), &view_create_info, nullptr, &view);
+        VkAssert(result);
+    }
 }
 
 #endif // !VULPES_VK_TEXTURE_H
