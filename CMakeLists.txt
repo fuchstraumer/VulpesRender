@@ -85,6 +85,7 @@ FILE(GLOB GUI "src/gui/*.cpp" "include/gui/*.hpp")
 FILE(GLOB GUI_ADDONS "src/gui/addons/*.cpp" "include/gui/addons/*.h")
 FILE(GLOB IMGUI "imgui/imgui.cpp" "imgui/imgui.h" "imgui/imgui_draw.cpp" "imgui/imgui_internal.h" "imgui/imgui_demo.cpp")
 FILE(GLOB OBJECTS "src/objects/*.cpp" "include/objects/*.hpp")
+FILE(GLOB SCENES "scenes/*.cpp")
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
 INCLUDE_DIRECTORIES("imgui/")
@@ -135,8 +136,14 @@ ENDIF()
 
 
 
-ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" "include/BaseScene.hpp" "src/BaseScene.cpp" "include/BaseSceneConfig.hpp" ${OBJECTS} ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI})
+ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" "include/BaseScene.hpp" "src/BaseScene.cpp" "include/BaseSceneConfig.hpp" ${OBJECTS} ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI} )
 ADD_DEPENDENCIES(VulpesRender update_imgui_submodule UPDATE_STB UPDATE_TINYOBJ) # make sure we update+init imgui before creating the project
+
+ADD_EXECUTABLE(Triangle "scenes/Triangle.cpp")
+TARGET_LINK_LIBRARIES(Triangle VulpesRender "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
+
+ADD_EXECUTABLE(House "scenes/House.cpp")
+TARGET_LINK_LIBRARIES(House VulpesRender "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
 
 #IF(BUILD_EXAMPLE_SCENES) 
 #    ADD_CUSTOM_TARGET(EXAMPLE_SCENES

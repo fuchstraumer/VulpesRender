@@ -11,9 +11,13 @@
 #include "resource/Texture.hpp"
 #include "resource/Allocator.hpp"
 #include "resource/PipelineCache.hpp"
+#define TINYOBJLOADER_IMPLEMENTATION
 #include "tinyobj/tiny_obj_loader.h"
+#define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h"
-
+#include "glm/gtx/hash.hpp"
+#include <unordered_map>
+INITIALIZE_EASYLOGGINGPP
 /** This serves as a super-simple example of how to derive from a vulpes::BaseScene object. It doesn't render a GUI, however, so another 
  *  example is required to show how to use that.
  *  \ingroup Scenes
@@ -24,6 +28,9 @@ public:
     struct vertex_t {
         glm::vec3 pos;
         glm::vec2 uv;
+        bool operator==(const vertex_t& other) const noexcept {
+            return (pos == other.pos) && (uv == other.uv);
+        }
     };
 
 private:
@@ -82,7 +89,11 @@ private:
 };
 
 int main() {
-
+    vulpes::BaseScene::SceneConfiguration.ApplicationName = std::string("House DemoScene");
+    vulpes::BaseScene::SceneConfiguration.EnableGUI = false;
+    HouseScene scene;
+    scene.RenderLoop();
+    return 0;
 }
 
 // specialize hash() operator for vertex_t
@@ -94,7 +105,7 @@ namespace std {
     };
 }
 
-HouseScene::HouseScene() : BaseScene(1, 1440, 900) {
+HouseScene::HouseScene() : BaseScene(1, 1440, 900), viewport(vulpes::vk_default_viewport), scissor(vulpes::vk_default_viewport_scissor) {
     create();
 }
 
@@ -171,18 +182,19 @@ void HouseScene::RecordCommands() {
 }
 
 void HouseScene::endFrame(const size_t& idx) {
+    vkResetFences(device->vkHandle(), 1, &presentFences[idx]);
     secondaryPool->ResetCmdBuffer(idx);
     graphicsPool->ResetCmdBuffer(idx);
 }
 
 void HouseScene::updateUBO() {
 
-    uboData.view = GetViewMatrix();
+    uboData.view = glm::lookAt(glm::vec3(2.0f), glm::vec3(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
     uboData.projection = GetProjectionMatrix();
 
     static auto start_time = std::chrono::high_resolution_clock::now();
     auto curr_time = std::chrono::high_resolution_clock::now();
-    float diff = std::chrono::duration_cast<std::chrono::milliseconds>(curr_time - start_time).count() / 1000.0f;
+    float diff = std::chrono::duration_cast<std::chrono::milliseconds>(curr_time - start_time).count() / 10000.0f;
     uboData.model = glm::rotate(glm::mat4(1.0f), diff * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f)); // pivot house around center axis based on time.
 
 }
@@ -197,6 +209,8 @@ void HouseScene::create() {
     createShaders();
     createPipelineCache();
     setPipelineStateInfo();
+    SetupRenderpass(SceneConfiguration.MSAA_SampleCount);
+    SetupFramebuffers();
     createGraphicsPipeline();
 }
 
@@ -215,7 +229,7 @@ void HouseScene::destroy() {
 
 void HouseScene::loadMeshTexture()  { 
     int texture_width, texture_height, texture_channels;
-    stbi_uc* pixels = stbi_load("scene_resources/chalet.jpg", &texture_width, &texture_height, &texture_channels, STBI_rgb_alpha);
+    stbi_uc* pixels = stbi_load("../../scenes/scene_resources/chalet.jpg", &texture_width, &texture_height, &texture_channels, STBI_rgb_alpha);
     VkDeviceSize image_size = texture_width * texture_height * 4;
 
     VkBuffer image_staging_buffer;
@@ -223,8 +237,8 @@ void HouseScene::loadMeshTexture()  {
     vulpes::Buffer::CreateStagingBuffer(device.get(), image_size, image_staging_buffer, image_staging_alloc);
 
     void* mapped;
-    image_staging_alloc.Map(image_size, 0, mapped);
-        memcpy(mapped, pixels, image_size);
+    vkMapMemory(device->vkHandle(), image_staging_alloc.Memory(), 0, image_size, 0, &mapped);
+        memcpy(mapped, pixels, static_cast<size_t>(image_size));
     image_staging_alloc.Unmap();
 
     texture = std::make_unique<vulpes::Texture<vulpes::texture_2d_t>>(device.get());
@@ -233,7 +247,6 @@ void HouseScene::loadMeshTexture()  {
 
     auto& cmd = transferPool->Begin();
         texture->TransferToDevice(cmd);
-    transferPool->End();
     transferPool->Submit();
 }
     
@@ -244,7 +257,7 @@ void HouseScene::loadMeshData()  {
     std::vector<tinyobj::material_t> materials;
     std::string err;
 
-    if(!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, "scene_resources/Chalet.obj")){
+    if(!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, "../../scenes/scene_resources/Chalet.obj")){
         LOG(ERROR) << "Loading obj file failed: " << err;
         throw std::runtime_error(err.c_str());
     }
@@ -286,20 +299,20 @@ void HouseScene::createMeshBuffers()  {
     auto& cmd = transferPool->Begin();
         vbo->CopyTo(meshData.vertices.data(), cmd, sizeof(vertex_t) * meshData.vertices.size(), 0);
         ebo->CopyTo(meshData.indices.data(), cmd, sizeof(uint32_t) * meshData.indices.size(), 0);
-    transferPool->End();
     transferPool->Submit();
 }
 
 void HouseScene::createDescriptorPool()  {
     descriptorPool = std::make_unique<vulpes::DescriptorPool>(device.get(), 1);
+    descriptorPool->AddResourceType(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 4);
     descriptorPool->Create();
-    descriptorPool->AddResourceType(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1);
 }
 
 void HouseScene::createDescriptorSet()  {
     descriptorSet = std::make_unique<vulpes::DescriptorSet>(device.get());
     descriptorSet->AddDescriptorBinding(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT, 0);
-    descriptorSet->AddDescriptorInfo(texture->GetDescriptor(), 0);
+    const VkDescriptorImageInfo descriptor = texture->GetDescriptor();
+    descriptorSet->AddDescriptorInfo(descriptor, 0);
     descriptorSet->Init(descriptorPool.get());
 }
 
@@ -309,15 +322,20 @@ void HouseScene::createPipelineLayout()  {
 }
 
 void HouseScene::createShaders() {
-    vert = std::make_unique<vulpes::ShaderModule>(device.get(), "scene_resources/shaders/house.vert.spv", VK_SHADER_STAGE_VERTEX_BIT);
-    frag = std::make_unique<vulpes::ShaderModule>(device.get(), "scene_resources/shaders/house.frag.spv", VK_SHADER_STAGE_FRAGMENT_BIT);
+    vert = std::make_unique<vulpes::ShaderModule>(device.get(), "../../scenes/scene_resources/shaders/house.vert.spv", VK_SHADER_STAGE_VERTEX_BIT);
+    frag = std::make_unique<vulpes::ShaderModule>(device.get(), "../../scenes/scene_resources/shaders/house.frag.spv", VK_SHADER_STAGE_FRAGMENT_BIT);
+}
+
+void HouseScene::createPipelineCache() {
+
+    pipelineCache = std::make_unique<vulpes::PipelineCache>(device.get(), static_cast<uint16_t>(typeid(HouseScene).hash_code()));
 }
 
 void HouseScene::setPipelineStateInfo() {
 
     static const std::array<VkVertexInputAttributeDescription, 2> attr{
         VkVertexInputAttributeDescription{ 0, 0, VK_FORMAT_R32G32B32_SFLOAT, 0 },
-        VkVertexInputAttributeDescription{ 0, 1, VK_FORMAT_R32G32_SFLOAT, sizeof(glm::vec3) }
+        VkVertexInputAttributeDescription{ 1, 0, VK_FORMAT_R32G32_SFLOAT, sizeof(glm::vec3) }
     };
 
     static const VkVertexInputBindingDescription bind{ 0, sizeof(vertex_t), VK_VERTEX_INPUT_RATE_VERTEX };
@@ -327,7 +345,7 @@ void HouseScene::setPipelineStateInfo() {
     pipelineStateInfo.VertexInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attr.size());
     pipelineStateInfo.VertexInfo.pVertexAttributeDescriptions = attr.data();
 
-    pipelineStateInfo.MultisampleInfo.rasterizationSamples = vulpes::Instance::VulpesInstanceConfig.MSAA_SampleCount;
+    pipelineStateInfo.MultisampleInfo.rasterizationSamples = BaseScene::SceneConfiguration.MSAA_SampleCount;
     
     constexpr static VkDynamicState dynamic_states[2] { VK_DYNAMIC_STATE_VIEWPORT, VK_DYNAMIC_STATE_SCISSOR };
     pipelineStateInfo.DynamicStateInfo.dynamicStateCount = 2;
