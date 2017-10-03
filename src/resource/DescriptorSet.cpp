@@ -114,7 +114,15 @@ namespace vulpes {
 		for (const auto& entry : writeDescriptors) {
 			write_descriptors.push_back(entry.second);
 			write_descriptors.back().dstSet = descriptorSet;
-			write_descriptors.back().pBufferInfo = std::move(entry.second.pBufferInfo);
+            if (entry.second.pBufferInfo != nullptr) {
+                write_descriptors.back().pBufferInfo = entry.second.pBufferInfo;
+            }
+            if (entry.second.pImageInfo != nullptr) {
+                write_descriptors.back().pImageInfo = entry.second.pImageInfo;
+            }
+            if (entry.second.pTexelBufferView != nullptr) {
+                write_descriptors.back().pTexelBufferView = entry.second.pTexelBufferView;
+            }
 		}
 
 		vkUpdateDescriptorSets(device->vkHandle(), static_cast<uint32_t>(write_descriptors.size()), write_descriptors.data(), 0, nullptr);
