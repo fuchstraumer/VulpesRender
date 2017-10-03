@@ -88,14 +88,6 @@ private:
 
 };
 
-int main() {
-    vulpes::BaseScene::SceneConfiguration.ApplicationName = std::string("House DemoScene");
-    vulpes::BaseScene::SceneConfiguration.EnableGUI = false;
-    HouseScene scene;
-    scene.RenderLoop();
-    return 0;
-}
-
 // specialize hash() operator for vertex_t
 namespace std {
     template<> struct hash<HouseScene::vertex_t> {
@@ -118,6 +110,7 @@ void HouseScene::WindowResized() {
 }
 
 void HouseScene::RecreateObjects() {
+    LOG(INFO) << "Recreating HouseScene.";
     create();
 }
 
@@ -215,6 +208,7 @@ void HouseScene::create() {
 }
 
 void HouseScene::destroy() {
+    LOG(INFO) << "Destroying HouseScene objects...";
     graphicsPipeline.reset();
     texture.reset();
     vbo.reset();
@@ -229,25 +223,31 @@ void HouseScene::destroy() {
 
 void HouseScene::loadMeshTexture()  { 
     int texture_width, texture_height, texture_channels;
-    stbi_uc* pixels = stbi_load("../../scenes/scene_resources/chalet.jpg", &texture_width, &texture_height, &texture_channels, STBI_rgb_alpha);
+    stbi_uc* pixels = stbi_load("../scenes/scene_resources/chalet.jpg", &texture_width, &texture_height, &texture_channels, STBI_rgb_alpha);
+    LOG(INFO) << "Loaded Chalet object texture.";
     VkDeviceSize image_size = texture_width * texture_height * 4;
 
+    LOG(INFO) << "Creating Vulkan objects for Chalet texture...";
     VkBuffer image_staging_buffer;
     vulpes::Allocation image_staging_alloc;
     vulpes::Buffer::CreateStagingBuffer(device.get(), image_size, image_staging_buffer, image_staging_alloc);
 
     void* mapped;
     vkMapMemory(device->vkHandle(), image_staging_alloc.Memory(), 0, image_size, 0, &mapped);
+        LOG(INFO) << "Copying Chalet texture data to Vulkan mapped memory now.";
         memcpy(mapped, pixels, static_cast<size_t>(image_size));
     image_staging_alloc.Unmap();
+    LOG(INFO) << "Copied texture data successfully to Vulkan mapped memory, creating Texture object...";
 
     texture = std::make_unique<vulpes::Texture<vulpes::texture_2d_t>>(device.get());
     const VkBufferImageCopy staging_copy_info{ 0, 0, 0, VkImageSubresourceLayers{ VK_IMAGE_ASPECT_COLOR_BIT, 0, 0, 1}, VkOffset3D{ 0, 0, 0 }, VkExtent3D{ 4096, 4096, 1 } };
+    LOG(INFO) << "Creating texture backing objects from staging buffer...";
     texture->CreateFromBuffer(std::move(image_staging_buffer), VK_FORMAT_R8G8B8A8_UNORM, { staging_copy_info });
-
+    LOG(INFO) << "Uploading texture to device...";
     auto& cmd = transferPool->Begin();
         texture->TransferToDevice(cmd);
     transferPool->Submit();
+
 }
     
 
@@ -256,18 +256,19 @@ void HouseScene::loadMeshData()  {
     std::vector<tinyobj::shape_t> shapes;
     std::vector<tinyobj::material_t> materials;
     std::string err;
-
-    if(!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, "../../scenes/scene_resources/Chalet.obj")){
+    LOG(INFO) << "Importing .obj file.";
+    if(!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, "../scenes/scene_resources/Chalet.obj")){
         LOG(ERROR) << "Loading obj file failed: " << err;
         throw std::runtime_error(err.c_str());
     }
 
     std::unordered_map<vertex_t, uint32_t> unique_vertices{};
-
+    LOG(INFO) << "Post-processing of imported .obj: Collapse and remove shared vertices.";
+    size_t indices_initial_count = 0;
     for(const auto& shape : shapes) {
         for(const auto& idx : shape.mesh.indices) {
             vertex_t vert{};
-
+            indices_initial_count += shape.mesh.indices.size();
             vert.pos = {
                 attrib.vertices[3 * idx.vertex_index],
                 attrib.vertices[3 * idx.vertex_index + 1],
@@ -287,19 +288,23 @@ void HouseScene::loadMeshData()  {
             meshData.indices.push_back(unique_vertices[vert]);
         }
     }
+    size_t vertices_final_count = meshData.vertices.size();
+    LOG(INFO) << "Initial vertex count: " << std::to_string(indices_initial_count);
+    LOG(INFO) << "Final vertex count: " << std::to_string(vertices_final_count);
 }
     
 void HouseScene::createMeshBuffers()  { 
     vbo = std::make_unique<vulpes::Buffer>(device.get());
     ebo = std::make_unique<vulpes::Buffer>(device.get());
-
+    LOG(INFO) << "Creating Vulkan buffers for mesh...";
     vbo->CreateBuffer(VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, sizeof(vertex_t) * meshData.vertices.size());
     ebo->CreateBuffer(VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, sizeof(uint32_t) * meshData.indices.size());
-
+    LOG(INFO) << "Uploading mesh data to device...";
     auto& cmd = transferPool->Begin();
         vbo->CopyTo(meshData.vertices.data(), cmd, sizeof(vertex_t) * meshData.vertices.size(), 0);
         ebo->CopyTo(meshData.indices.data(), cmd, sizeof(uint32_t) * meshData.indices.size(), 0);
     transferPool->Submit();
+
 }
 
 void HouseScene::createDescriptorPool()  {
@@ -322,8 +327,8 @@ void HouseScene::createPipelineLayout()  {
 }
 
 void HouseScene::createShaders() {
-    vert = std::make_unique<vulpes::ShaderModule>(device.get(), "../../scenes/scene_resources/shaders/house.vert.spv", VK_SHADER_STAGE_VERTEX_BIT);
-    frag = std::make_unique<vulpes::ShaderModule>(device.get(), "../../scenes/scene_resources/shaders/house.frag.spv", VK_SHADER_STAGE_FRAGMENT_BIT);
+    vert = std::make_unique<vulpes::ShaderModule>(device.get(), "../scenes/scene_resources/shaders/house.vert.spv", VK_SHADER_STAGE_VERTEX_BIT);
+    frag = std::make_unique<vulpes::ShaderModule>(device.get(), "../scenes/scene_resources/shaders/house.frag.spv", VK_SHADER_STAGE_FRAGMENT_BIT);
 }
 
 void HouseScene::createPipelineCache() {
@@ -364,10 +369,24 @@ void HouseScene::createGraphicsPipeline() {
     pipelineCreateInfo.subpass = 0;
     pipelineCreateInfo.basePipelineIndex = -1;
     pipelineCreateInfo.basePipelineHandle = VK_NULL_HANDLE;
-
+    LOG(INFO) << "Creating graphics pipeline...";
     graphicsPipeline = std::make_unique<vulpes::GraphicsPipeline>(device.get());
     graphicsPipeline->Init(pipelineCreateInfo, pipelineCache->vkHandle());
 
 }
 
-    
+
+int main() {
+    vulpes::BaseScene::SceneConfiguration.ApplicationName = std::string("House DemoScene");
+    vulpes::BaseScene::SceneConfiguration.EnableGUI = false;
+    vulpes::BaseScene::SceneConfiguration.EnableMouseLocking = false;
+    try {
+        HouseScene scene;
+        scene.RenderLoop();
+    }
+    catch(const std::exception& e) {
+        LOG(ERROR) << "Exception encountered in HouseScene! Exception was: " << e.what();
+        throw e;
+    }
+    return 0;
+}

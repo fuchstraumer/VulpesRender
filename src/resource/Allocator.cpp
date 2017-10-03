@@ -846,13 +846,14 @@ namespace vulpes {
 	VkResult Allocator::CreateImage(VkImage * image_handle, const VkImageCreateInfo * img_create_info, const AllocationRequirements & alloc_reqs, Allocation& dest_allocation) {
 
 		// create image object first.
+		LOG(INFO) << "Creating new image handle.";
 		VkResult result = vkCreateImage(parent->vkHandle(), img_create_info, nullptr, image_handle);
 		VkAssert(result);
-
+		LOG(INFO) << "Allocating memory for image.";
 		SuballocationType image_type = img_create_info->tiling == VK_IMAGE_TILING_OPTIMAL ? SuballocationType::ImageOptimal : SuballocationType::ImageLinear;
 		result = AllocateForImage(*image_handle, alloc_reqs, image_type, dest_allocation);
 		VkAssert(result);
-
+		LOG(INFO) << "Binding image to memory.";
 		result = vkBindImageMemory(parent->vkHandle(), *image_handle, dest_allocation.Memory(), dest_allocation.Offset());
 		VkAssert(result);
 
@@ -942,16 +943,14 @@ namespace vulpes {
             typeData.blockAllocation.ParentBlock->Map(this, size_to_map, offset_to_map_at, address_to_map_to);
         }
         else {
-            LOG(ERROR) << "Attempted to map a private allocation: this is currently not supported.";
+			LOG(INFO) << "Attempted to map private allocation, setting given address_to_map_to to permanently mapped address.";
+			address_to_map_to = typeData.privateAllocation.MappedData;
         }
     }
 
     void Allocation::Unmap() const noexcept {
         if (Type == allocType::BLOCK_ALLOCATION) {
             typeData.blockAllocation.ParentBlock->Unmap();
-        }
-        else {
-            LOG(ERROR) << "Attempted to unmap a private allocation: this is currently not supported.";
         }
     }
 

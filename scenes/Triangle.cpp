@@ -127,8 +127,8 @@ namespace vulpes {
     }
 
     void TriangleScene::createShaders() {
-        vert = std::make_unique<ShaderModule>(device.get(), "../../scenes/scene_resources/shaders/triangle.vert.spv", VK_SHADER_STAGE_VERTEX_BIT);
-        frag = std::make_unique<ShaderModule>(device.get(), "../../scenes/scene_resources/shaders/triangle.frag.spv", VK_SHADER_STAGE_FRAGMENT_BIT);
+        vert = std::make_unique<ShaderModule>(device.get(), "../scenes/scene_resources/shaders/triangle.vert.spv", VK_SHADER_STAGE_VERTEX_BIT);
+        frag = std::make_unique<ShaderModule>(device.get(), "../scenes/scene_resources/shaders/triangle.frag.spv", VK_SHADER_STAGE_FRAGMENT_BIT);
     }
 
     void TriangleScene::setPipelineStateInfo() {
@@ -175,13 +175,14 @@ namespace vulpes {
     }
 
     void TriangleScene::endFrame(const size_t& idx) {
-
+        vkResetFences(device->vkHandle(), 1, &presentFences[idx]);
     }
 }
 
 int main() {
     vulpes::BaseScene::SceneConfiguration.ApplicationName = std::string("Triangle DemoScene");
     vulpes::BaseScene::SceneConfiguration.EnableGUI = false;
+    vulpes::BaseScene::SceneConfiguration.EnableMouseLocking = false;
     vulpes::TriangleScene scene;
     scene.RenderLoop();
     return 0;

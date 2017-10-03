@@ -36,6 +36,10 @@ IF(CLANG)
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 ENDIF()
 
+IF(APPLE)
+FIND_LIBRARY(MoltenVK NAMES "libMoltenVK.dylib" HINTS "${CMAKE_CURRENT_SOURCE_DIR}/ext/MoltenVK/macOS")
+ENDIF()
+
 OPTION(FORCE_ALLOCATOR_VALIDATION "Force validation of Vulkan memory even in Release builds." OFF)
 OPTION(BUILD_EXAMPLE_SCENES "Build example scene executables testing/demonstrating Vulkan features" OFF)
 
@@ -55,7 +59,9 @@ ExternalProject_Add(glfw3
     "-DGLFW_BUILD_DOCS=OFF"
     "-DGLFW_DOCUMENT_INTERNALS=OFF"
     "-DCMAKE_DEBUG_POSTFIX=-gd"
-    "-DUSE_MSVC_RUNTIME_LIBRARY_DLL=ON")
+    "-DUSE_MSVC_RUNTIME_LIBRARY_DLL=ON"
+    "-DVULKAN_LIBRARY=${MoltenVK}"
+    "-DVULKAN_INCLUDE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/ext/MoltenVk/include/vulkan")
 
 #ExternalProject_Add(gli 
 #    PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/gli"
@@ -90,7 +96,11 @@ FILE(GLOB SCENES "scenes/*.cpp")
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
 INCLUDE_DIRECTORIES("imgui/")
 INCLUDE_DIRECTORIES("ext/include")
+IF(NOT APPLE)
 INCLUDE_DIRECTORIES($ENV{VULKAN_SDK}/Include)
+ELSE()
+INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/ext/MoltenVK/include")
+ENDIF()
 
 FILE(GLOB PROJECT_SOURCES "src/util/*.cpp" "src/command/*.cpp" "src/core/*.cpp" "src/render/*.cpp" "src/resource/*.cpp" "src/gui/*.cpp" "src/objects/*.cpp" "src/BaseScene.cpp")
 ADD_MSVC_PRECOMPILED_HEADER("vpr_stdafx.h" "src/vpr_stdafx.cpp" ${PROJECT_SOURCES})
@@ -117,6 +127,7 @@ IF(MSVC) # enable multi-threaded compile for release builds, when its available
   SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /MP")
 ENDIF()
 
+# Blatantly stolen from GLFW
 IF (NOT USE_MSVC_RUNTIME_LIBRARY_DLL)
   FOREACH (flag CMAKE_C_FLAGS
                 CMAKE_CXX_FLAGS_DEBUG
@@ -134,20 +145,33 @@ IF (NOT USE_MSVC_RUNTIME_LIBRARY_DLL)
   ENDFOREACH()
 ENDIF()
 
-
-
 ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" "include/BaseScene.hpp" "src/BaseScene.cpp" "include/BaseSceneConfig.hpp" ${OBJECTS} ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI} )
 ADD_DEPENDENCIES(VulpesRender update_imgui_submodule UPDATE_STB UPDATE_TINYOBJ) # make sure we update+init imgui before creating the project
+IF(APPLE)
+ADD_DEPENDENCIES(VulpesRender glfw3)
+ENDIF()
+
+IF(BUILD_EXAMPLE_SCENES)
+
+IF(APPLE)
+FIND_LIBRARY(GLFW_3_LIB NAMES "libglfw3.a" HINTS "${PROJECT_SOURCE_DIR}/ext/lib")
+SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa -framework Metal -framework IOKit -framework CoreVideo")
+ENDIF()
 
 ADD_EXECUTABLE(Triangle "scenes/Triangle.cpp")
-TARGET_LINK_LIBRARIES(Triangle VulpesRender "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
+IF(NOT APPLE)
+TARGET_LINK_LIBRARIES(Triangle VulpesRender "$ENV{VULKAN_SDK}/Lib/vulkan-1" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3")
+ELSE()
+TARGET_LINK_LIBRARIES(Triangle VulpesRender "${GLFW_3_LIB}" "${MoltenVK}")
+ENDIF()
 
 ADD_EXECUTABLE(House "scenes/House.cpp")
-TARGET_LINK_LIBRARIES(House VulpesRender "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
 
-#IF(BUILD_EXAMPLE_SCENES) 
-#    ADD_CUSTOM_TARGET(EXAMPLE_SCENES
-#        COMMAND cmake  ${PROJECT_SOURCE_DIR}/scenes/CMakeLists.txt
-#        DEPENDS VulpesRender
-#        )
-#ENDIF()
+IF(NOT APPLE)
+TARGET_LINK_LIBRARIES(House VulpesRender "$ENV{VULKAN_SDK}/Lib/vulkan-1" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3")
+ELSE()
+TARGET_LINK_LIBRARIES(House VulpesRender "${GLFW_3_LIB}" "${MoltenVK}")
+ENDIF()
+
+ENDIF()
+

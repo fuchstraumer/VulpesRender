@@ -52,7 +52,7 @@ namespace vulpes {
         vkGetPhysicalDeviceProperties(dvc, &properties);
 
         if (!features.geometryShader || !features.tessellationShader) {
-            return 0;
+            score -= 500;
         }
 
         if (properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {

@@ -87,7 +87,7 @@ namespace vulpes {
 		}
 		else {
 			LOG(WARNING) << "Cache data was reported empty by Vulkan: errors possible.";
-			return VK_ERROR_VALIDATION_FAILED_EXT;
+			return VK_SUCCESS;
 		}
 		
 	}
