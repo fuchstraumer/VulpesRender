@@ -501,8 +501,10 @@ namespace vulpes {
 
 			glfwPollEvents();
 			
-			UpdateMouseActions();
-			gui->NewFrame(instance.get(), false);
+            UpdateMouseActions();
+            if(SceneConfiguration.EnableGUI) {
+                gui->NewFrame(instance.get(), false);
+            }
 
 			UpdateMovement(static_cast<float>(BaseScene::SceneConfiguration.FrameTimeMs));
 			
@@ -626,6 +628,12 @@ namespace vulpes {
 	}
 
 	void BaseScene::renderGUI(VkCommandBuffer& gui_buffer, const VkCommandBufferBeginInfo& begin_info, const size_t& frame_idx) const {
+
+        if(!SceneConfiguration.EnableGUI) {
+            LOG(ERROR) << "Tried to render the GUI, when the GUI is disabled in the SceneConfiguration!";
+            throw std::runtime_error("Tried to render the GUI, when the GUI is disabled in the SceneConfiguration!");
+        }
+
 		ImGui::Render();
 			
 		if (device->MarkersEnabled) {

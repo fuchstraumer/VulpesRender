@@ -77,7 +77,8 @@ namespace vulpes {
 
         virtual void UpdateMovement(const float & delta_time);
 
-		// updates mouse actions via ImGui.
+
+        // updates mouse actions via ImGui.
 		virtual void UpdateMouseActions();
 
 		static void PipelineCacheCreated(const uint16_t& cache_id);
@@ -93,6 +94,7 @@ namespace vulpes {
 
 	protected:
 
+        void cleanupShaderCacheFiles();
         virtual void mouseDown(const int& button, const float& x, const float& y);
         virtual void mouseUp(const int& button, const float& x, const float& y);
         virtual void mouseDrag(const int& button, const float& dx, const float& dy);

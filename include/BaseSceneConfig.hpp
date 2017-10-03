@@ -48,6 +48,12 @@ namespace vulpes {
             bool DefaultFullscreen = false;
 
             /*
+                Whether or not to enable the GUI. If disabled, it can't be added during runtime as this
+                relates to important background functionality required for the GUI to work properly. 
+            */
+            bool EnableGUI = true;
+            
+            /*
                 The window can be resized at runtime, but this sets the size of the initial window popup.
             */
             VkRect2D DefaultWindowSize = VkRect2D{ VkOffset2D{ 0, 0 }, VkExtent2D{ DEFAULT_WIDTH, DEFAULT_HEIGHT } };
