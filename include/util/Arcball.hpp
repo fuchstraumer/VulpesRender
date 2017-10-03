@@ -194,7 +194,7 @@ namespace vulpes {
             if (on_plane.z < 0.0f) {
                 on_plane *= -1.0f;
             }
-            return (on_plane * (1.0f / std::sqrtf(norm)));
+            return (on_plane * (1.0f / sqrtf(norm)));
         }
 
         if (glm::dot(constraintAxis, glm::vec3(0.0f, 0.0f, 1.0f)) < 1e-4f) {
