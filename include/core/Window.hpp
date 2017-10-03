@@ -7,7 +7,7 @@
 namespace vulpes {
 
 #if defined(_WIN32) || defined(__linux__) 
-typedef GLFWWindow vulpes_window_t;
+typedef GLFWwindow vulpes_window_t;
 #elif defined(__APPLE__) 
 typedef void* vulpes_window_t;
 #else 

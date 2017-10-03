@@ -4,6 +4,10 @@
 #include "core/PhysicalDevice.hpp"
 #include "BaseScene.hpp"
 
+#ifdef USE_EXPERIMENTAL_FILESYSTEM
+#include <experimental/filesystem>
+#endif
+
 namespace vulpes {
 
 	PipelineCache::PipelineCache(const Device* _parent, const uint16_t& hash_id) : parent(_parent), 

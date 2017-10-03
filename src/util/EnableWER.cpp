@@ -2,8 +2,15 @@
 #include "util/EnableWER.hpp"
 #include "core/Instance.hpp"
 #include "BaseScene.hpp"
+
+
+#ifdef USE_EXPERIMENTAL_FILESYSTEM
+#include <experimental/filesystem>
+#endif
+
 namespace vulpes {
     namespace util {
+
         
 #ifndef _WIN32
         typedef int LSTATUS;

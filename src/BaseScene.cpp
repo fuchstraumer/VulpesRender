@@ -15,6 +15,9 @@
 #include "util/EnableWER.hpp"
 #endif // _WIN32
 
+#ifdef USE_EXPERIMENTAL_FILESYSTEM
+#include <experimental/filesystem>
+#endif
 
 
 namespace vulpes {
@@ -94,7 +97,7 @@ namespace vulpes {
 	}
     
 #ifdef USE_EXPERIMENTAL_FILESYSTEM
-    inline void cleanupShaderCacheFiles() {
+    void BaseScene::cleanupShaderCacheFiles() {
         std::experimental::filesystem::path pipeline_cache_path("rsrc/shader_cache");
         
         if (std::experimental::filesystem::exists(pipeline_cache_path) && !pipelineCacheHandles.empty()) {
