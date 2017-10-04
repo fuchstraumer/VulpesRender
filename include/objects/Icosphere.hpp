@@ -13,12 +13,18 @@
 #include "render/GraphicsPipeline.hpp"
 #include "resource/Texture.hpp"
 #include "resource/DescriptorSet.hpp"
+#include "vertex_t.hpp"
 
 namespace vulpes {
 
     /** Defines an icosphere object that is subdivided from the base 12 vertices based on detail_level. Each additional level will double the triangle count,
     *   but an attempt to use shared vertices is made and should reduce or avoid duplicated vertices. Unlike Billboard and Skybox, you must specify shaders to 
     *   use on this boject as no defaults exist (and no suitable default came to mind).
+    *
+    *   UVs are dynamically generated after the mesh has been created, and normals are created per-vertex by normalizing the initial vertex positions (which 
+    *   should be positions on the unit sphere). This object can use compressed or uncompressed texture formats, so long as the format of the compressed texture
+    *   is given when calling the SetTexture method.
+    *
     *   \ingroup Objects
     */
     class Icosphere : public TriangleMesh {
@@ -33,6 +39,7 @@ namespace vulpes {
         void Render(const VkCommandBuffer& cmd_buffer, const VkCommandBufferBeginInfo& begin_info, const VkViewport& viewport, const VkRect2D& scissor);
         void CreateShaders(const std::string& vertex_shader_path, const std::string& fragment_shader_path);
         void SetTexture(const char* filename);
+        void SetTexture(const char* filename, const VkFormat& compressed_texture_format);
         void createShadersImpl();
         void UpdateUBO(const glm::mat4& view, const glm::vec3& viewer_position) noexcept;
         void UpdateLightPosition(const glm::vec3 & new_light_pos) noexcept;
@@ -75,6 +82,7 @@ namespace vulpes {
         VkGraphicsPipelineCreateInfo pipelineCreateInfo;
         size_t subdivisionLevel;
 
+        VkFormat textureFormat = VK_FORMAT_R8G8B8A8_UNORM;
         std::string vertPath, fragPath, texturePath;
 
     };

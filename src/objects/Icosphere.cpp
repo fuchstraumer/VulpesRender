@@ -73,6 +73,11 @@ namespace vulpes {
         texturePath = std::string(filename);
     }
 
+    void Icosphere::SetTexture(const char* filename, const VkFormat& compressed_texture_format) {
+        texturePath = std::string(filename);
+        textureFormat = compressed_texture_format;
+    }
+
     void Icosphere::Init(const Device* dvc, const glm::mat4& projection, const VkRenderPass& renderpass, TransferPool* transfer_pool, DescriptorPool* descriptor_pool) {
         
         device = dvc;
@@ -253,16 +258,10 @@ namespace vulpes {
             pipelineStateInfo.MultisampleInfo.rasterizationSamples = BaseScene::SceneConfiguration.MSAA_SampleCount;
         }
 
-        constexpr static std::array<VkVertexInputAttributeDescription, 3> attributeDescriptions{
-            VkVertexInputAttributeDescription{ 0, 0, VK_FORMAT_R32G32B32_SFLOAT, 0 },
-            VkVertexInputAttributeDescription{ 1, 0, VK_FORMAT_R32G32B32_SFLOAT, sizeof(glm::vec3) },
-            VkVertexInputAttributeDescription{ 2, 0, VK_FORMAT_R32G32_SFLOAT, sizeof(glm::vec3) * 2 }
-        };
-
         pipelineStateInfo.VertexInfo.vertexBindingDescriptionCount = 1;
         pipelineStateInfo.VertexInfo.pVertexBindingDescriptions = &vertex_t::bindingDescription;
-        pipelineStateInfo.VertexInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescriptions.size());
-        pipelineStateInfo.VertexInfo.pVertexAttributeDescriptions = attributeDescriptions.data();
+        pipelineStateInfo.VertexInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(vertex_t::attributeDescriptions.size());
+        pipelineStateInfo.VertexInfo.pVertexAttributeDescriptions = vertex_t::attributeDescriptions.data();
 
     }
 
@@ -294,8 +293,10 @@ namespace vulpes {
 
     void Icosphere::createTexture() {
 
-        texture = std::make_unique<Texture<texture_2d_t>>(device);
-        texture->CreateFromFile(texturePath.c_str());
+        if(textureFormat == VK_FORMAT_R8G8B8A8_UNORM) {
+            texture = std::make_unique<Texture<texture_2d_t>>(device);
+            texture->CreateFromFile(texturePath.c_str());
+        } 
 
     }
 
