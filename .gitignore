@@ -12,3 +12,4 @@ download/
 glfw/
 wsl_build/
 ext/include/vulkan/
+logs/

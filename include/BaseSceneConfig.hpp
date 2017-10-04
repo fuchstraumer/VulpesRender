@@ -30,7 +30,7 @@ namespace vulpes {
                 so that the default shaders can be safely loaded. Default value might
                 fail, or cause a relatively expensive recursive search to trigger.
             */
-            std::string ResourcePathStr = std::string("./");
+            std::string ResourcePathPrefixStr = std::string("./");
 
             /*
                 EnableValidation enables the Vulkan validation layers, set as 
