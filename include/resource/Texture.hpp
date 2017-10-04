@@ -53,6 +53,18 @@ namespace vulpes {
             return pixels;
         }
 
+        glm::vec2 extent() const noexcept {
+            return glm::vec2(x, y);
+        }
+
+        int levels() const noexcept {
+            return 1;
+        }
+
+        int layers() const noexcept {
+            return 1;
+        }
+
         int x, y;
         int channels;
         stbi_uc* pixels;
@@ -418,7 +430,7 @@ namespace vulpes {
     template<>
     inline texture_2d_t Texture<texture_2d_t>::loadTextureDataFromFile(const char* filename) {
         texture_2d_t result(filename);
-        
+
         if(result.channels == 1) {
             format = VK_FORMAT_R8_UNORM;
         }
@@ -435,6 +447,9 @@ namespace vulpes {
             LOG(ERROR) << "Couldn't interpet format of image data imported by STB.";
             throw std::runtime_error("Invalid or incorrect image format.");
         }
+
+        updateTextureParameters(result);
+        createCopyInformation(result);
 
         return std::move(result);
     }

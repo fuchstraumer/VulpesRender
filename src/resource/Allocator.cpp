@@ -827,7 +827,8 @@ namespace vulpes {
 	}
 
 	VkResult Allocator::AllocateForImage(VkImage & image_handle, const AllocationRequirements & details, const SuballocationType & alloc_type, Allocation& dest_allocation) {
-
+        std::mutex image_alloc_mutex;
+        std::lock_guard<std::mutex> image_alloc_guard(image_alloc_mutex);
 		// Get memory info.
 		VkMemoryRequirements memreqs;
 		vkGetImageMemoryRequirements(parent->vkHandle(), image_handle, &memreqs);

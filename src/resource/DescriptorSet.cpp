@@ -120,9 +120,6 @@ namespace vulpes {
             if (entry.second.pImageInfo != nullptr) {
                 write_descriptors.back().pImageInfo = entry.second.pImageInfo;
             }
-            if (entry.second.pTexelBufferView != nullptr) {
-                write_descriptors.back().pTexelBufferView = entry.second.pTexelBufferView;
-            }
 		}
 
 		vkUpdateDescriptorSets(device->vkHandle(), static_cast<uint32_t>(write_descriptors.size()), write_descriptors.data(), 0, nullptr);

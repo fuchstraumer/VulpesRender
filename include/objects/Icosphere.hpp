@@ -11,6 +11,8 @@
 #include "resource/PipelineLayout.hpp"
 #include "resource/PipelineCache.hpp"
 #include "render/GraphicsPipeline.hpp"
+#include "resource/Texture.hpp"
+#include "resource/DescriptorSet.hpp"
 
 namespace vulpes {
 
@@ -27,13 +29,17 @@ namespace vulpes {
         Icosphere(const size_t& detail_level, const glm::vec3& position, const glm::vec3& scale = glm::vec3(1.0f), const glm::vec3& rotation = glm::vec3(0.0f));
         ~Icosphere();
 
-        void Init(const Device* dvc, const glm::mat4& projection, const VkRenderPass& renderpass, TransferPool* transfer_pool);
+        void Init(const Device* dvc, const glm::mat4& projection, const VkRenderPass& renderpass, TransferPool* transfer_pool, DescriptorPool* descriptor_pool);
+        void Render(const VkCommandBuffer& cmd_buffer, const VkCommandBufferBeginInfo& begin_info, const VkViewport& viewport, const VkRect2D& scissor);
         void CreateShaders(const std::string& vertex_shader_path, const std::string& fragment_shader_path);
-        void UpdateUBO(const glm::mat4& view) noexcept;
-        void SetColor(const glm::vec4& new_color) noexcept;
-        const glm::vec4& GetColor() const noexcept;
-
+        void SetTexture(const char* filename);
+        void createShadersImpl();
+        void UpdateUBO(const glm::mat4& view, const glm::vec3& viewer_position) noexcept;
+        void UpdateLightPosition(const glm::vec3 & new_light_pos) noexcept;
+        void SetModelMatrix(const glm::mat4& model) override;
+        
     private:
+
 
         void createMesh(const size_t& subdivision_level);
         void uploadData(TransferPool* transfer_pool);
@@ -41,12 +47,18 @@ namespace vulpes {
         void createPipelineLayout();
         void setPipelineStateInfo();
         void createGraphicsPipeline(const VkRenderPass& render_pass);
+        void createTexture();
+        void createDescriptorSet(DescriptorPool* descriptor_pool);
+        void subdivide(const size_t& subdivision_level);
+        void calculateUVs();
 
         struct ubo_data_t {
             glm::mat4 model;
             glm::mat4 view;
             glm::mat4 projection;
-            glm::vec4 color;
+            glm::vec4 lightPosition = glm::vec4(0.0f, 300.0f, 0.0f, 1.0f);
+            glm::vec4 viewerPosition = glm::vec4(0.0f);
+            glm::vec4 lightColor = glm::vec4(1.0f);
         } uboData;
 
         constexpr static VkVertexInputBindingDescription bindingDescription{ 0, sizeof(vertex_t), VK_VERTEX_INPUT_RATE_VERTEX };
@@ -57,10 +69,14 @@ namespace vulpes {
         std::unique_ptr<PipelineCache> pipelineCache;
         std::unique_ptr<PipelineLayout> pipelineLayout;
         std::unique_ptr<GraphicsPipeline> graphicsPipeline;
+        std::unique_ptr<Texture<texture_2d_t>> texture;
 
         GraphicsPipelineInfo pipelineStateInfo;
         VkGraphicsPipelineCreateInfo pipelineCreateInfo;
         size_t subdivisionLevel;
+
+        std::string vertPath, fragPath, texturePath;
+
     };
 
 

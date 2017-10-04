@@ -30,7 +30,7 @@ namespace vulpes {
 
         void CreateTexture(const std::string& texture_filename, const VkFormat& texture_format);
         void Create(const glm::mat4& projection, const VkRenderPass& render_pass, TransferPool* transfer_pool, DescriptorPool* descriptor_pool);
-        void Render(const VkCommandBuffer& draw_cmd, const VkCommandBufferBeginInfo& begin_info);
+        void Render(const VkCommandBuffer& draw_cmd, const VkCommandBufferBeginInfo& begin_info, const VkViewport& viewport, const VkRect2D& scissor);
         void UpdateUBO(const glm::mat4& view_matrix) noexcept;
 
     private:

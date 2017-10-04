@@ -48,10 +48,12 @@ namespace vulpes {
 
     }
 
-    void Skybox::Render(const VkCommandBuffer& draw_cmd, const VkCommandBufferBeginInfo& begin_info) {
+    void Skybox::Render(const VkCommandBuffer& draw_cmd, const VkCommandBufferBeginInfo& begin_info, const VkViewport& viewport, const VkRect2D& scissor) {
         
         vkBeginCommandBuffer(draw_cmd, &begin_info);
             vkCmdBindPipeline(draw_cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline->vkHandle());
+            vkCmdSetViewport(draw_cmd, 0, 1, &viewport);
+            vkCmdSetScissor(draw_cmd, 0, 1, &scissor);
             vkCmdBindDescriptorSets(draw_cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout->vkHandle(), 0, 1, &descriptorSet->vkHandle(), 0, nullptr);
             vkCmdPushConstants(draw_cmd, pipelineLayout->vkHandle(), VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(ubo_data_t), &uboData);
             TriangleMesh::Render(draw_cmd);
@@ -106,8 +108,9 @@ namespace vulpes {
 
     void Skybox::createShaders() {
 
-        vert = std::make_unique<ShaderModule>(device, "rsrc/shaders/skybox/skybox.vert.spv", VK_SHADER_STAGE_VERTEX_BIT);
-        frag = std::make_unique<ShaderModule>(device, "rsrc/shaders/skybox/skybox.frag.spv", VK_SHADER_STAGE_FRAGMENT_BIT);
+
+        vert = std::make_unique<ShaderModule>(device, BaseScene::SceneConfiguration.ResourcePathPrefixStr + "rsrc/shaders/skybox/skybox.vert.spv", VK_SHADER_STAGE_VERTEX_BIT);
+        frag = std::make_unique<ShaderModule>(device, BaseScene::SceneConfiguration.ResourcePathPrefixStr + "rsrc/shaders/skybox/skybox.frag.spv", VK_SHADER_STAGE_FRAGMENT_BIT);
 
     }
 

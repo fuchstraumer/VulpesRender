@@ -69,7 +69,7 @@ namespace vulpes {
         void FreeCpuData();
 
         const glm::mat4& GetModelMatrix() const noexcept;
-        void SetModelMatrix(const glm::mat4& updated_model);
+        virtual void SetModelMatrix(const glm::mat4& updated_model);
 
         void UpdatePosition(const glm::vec3& new_position);
         void UpdateScale(const glm::vec3& new_scale);

@@ -2,6 +2,7 @@
 #include "resource/ShaderModule.hpp"
 #include "core/LogicalDevice.hpp"
 namespace vulpes {
+
 	ShaderModule::ShaderModule(const Device* device, const char * filename, const VkShaderStageFlagBits & _stages, const char * shader_name) : pipelineInfo(vk_pipeline_shader_stage_create_info_base), stages(_stages), createInfo(vk_shader_module_create_info_base), parent(device) {
 		
 		pipelineInfo.stage = stages;
@@ -22,6 +23,26 @@ namespace vulpes {
 		pipelineInfo.pSpecializationInfo = nullptr;
 
 	}
+
+    ShaderModule::ShaderModule(const Device * device, const std::string & filename, const VkShaderStageFlagBits & _stages, const char * shader_entry_point) : pipelineInfo(vk_pipeline_shader_stage_create_info_base), stages(_stages), createInfo(vk_shader_module_create_info_base), parent(device) {
+        
+        pipelineInfo.stage = stages;
+
+        if (shader_entry_point != nullptr) {
+            pipelineInfo.pName = shader_entry_point;
+        }
+        else {
+            pipelineInfo.pName = "main";
+        }
+
+        LoadCodeFromFile(filename.c_str());
+
+        VkResult result = vkCreateShaderModule(device->vkHandle(), &createInfo, allocators, &handle);
+        VkAssert(result);
+
+        pipelineInfo.module = handle;
+        pipelineInfo.pSpecializationInfo = nullptr;
+    }
 
 	ShaderModule::ShaderModule(const Device * device, const char * filename, VkPipelineShaderStageCreateInfo & create_info) : pipelineInfo(create_info), createInfo(vk_shader_module_create_info_base), parent(device) {
 
@@ -56,7 +77,7 @@ namespace vulpes {
 
 		}
 		catch (std::ifstream::failure&) {
-			LOG(ERROR) << "OBJECTS::RESOURCE::SHADER_MODULE: Failure opening or reading shader file." << std::endl;
+            LOG(ERROR) << "OBJECTS::RESOURCE::SHADER_MODULE: Failure opening or reading shader file: " << std::string(filename);
 			throw(std::runtime_error("OBJECTS::RESOURCE::SHADER_MODULE: Failure opening or reading shader file."));
 		}
 	}

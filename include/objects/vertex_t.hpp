@@ -35,6 +35,16 @@ namespace vulpes {
 		bool operator==(const vertex_t& other) const noexcept {
 			return (pos == other.pos) && (normal == other.normal) && (uv == other.uv);
 		}
+        
+        constexpr static VkVertexInputBindingDescription bindingDescription{
+            0, (sizeof(glm::vec3) * 2) + sizeof(glm::vec2), VK_VERTEX_INPUT_RATE_VERTEX
+        };
+
+        constexpr static std::array<VkVertexInputAttributeDescription, 3> attributeDescriptions{
+            VkVertexInputAttributeDescription{ 0, 0, VK_FORMAT_R32G32B32_SFLOAT, 0 },
+            VkVertexInputAttributeDescription{ 1, 0, VK_FORMAT_R32G32B32_SFLOAT, sizeof(glm::vec3) },
+            VkVertexInputAttributeDescription{ 2, 0, VK_FORMAT_R32G32_SFLOAT, sizeof(glm::vec3) * 2 }
+        };
     };
 }
 
