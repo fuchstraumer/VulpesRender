@@ -73,10 +73,8 @@ ExternalProject_Add(glm
     GIT_REPOSITORY "https://github.com/g-truc/glm.git"
     CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
 
-# Update and init imgui
-ADD_CUSTOM_TARGET(update_imgui_submodule
-    COMMAND git submodule update --init ${PROJECT_SOURCE_DIR}/imgui)
-
+# Update and init submodules.
+ADD_CUSTOM_TARGET(UPDATE_IMGUI_SUBMODULE COMMAND git submodule update --init ${PROJECT_SOURCE_DIR}/imgui)
 ADD_CUSTOM_TARGET(UPDATE_STB COMMAND git submodule update --init ${PROJECT_SOURCE_DIR}/ext/include/stb)
 ADD_CUSTOM_TARGET(UPDATE_TINYOBJ COMMAND git submodule update --init ${PROJECT_SOURCE_DIR}/ext/include/tinyobj)
 
@@ -92,6 +90,10 @@ FILE(GLOB GUI_ADDONS "src/gui/addons/*.cpp" "include/gui/addons/*.h")
 FILE(GLOB IMGUI "imgui/imgui.cpp" "imgui/imgui.h" "imgui/imgui_draw.cpp" "imgui/imgui_internal.h" "imgui/imgui_demo.cpp")
 FILE(GLOB OBJECTS "src/objects/*.cpp" "include/objects/*.hpp")
 FILE(GLOB SCENES "scenes/*.cpp")
+FILE(GLOB_RECURSE SHADERS 
+    "scenes/scene_resources/shaders/*.vert" "scenes/scene_resources/shaders/*.frag" "scenes/scene_resources/shaders/*.spv" 
+    "rsrc/shaders/*.vert" "rsrc/shaders/*.frag" "rsrc/shaders/*.spv"
+    )
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
 INCLUDE_DIRECTORIES("imgui/")
@@ -115,6 +117,7 @@ SOURCE_GROUP("gui" FILES ${GUI})
 SOURCE_GROUP("imgui addons" FILES ${GUI_ADDONS})
 SOURCE_GROUP("imgui" FILES ${IMGUI})
 SOURCE_GROUP("objects" FILES ${OBJECTS})
+SOURCE_GROUP("shaders" FILES ${SHADERS})
 
 SET(CMAKE_STATIC_LINKER_FLAGS_DEBUG "-NODEFAULTLIB 
   \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3-gd.lib")
@@ -145,11 +148,12 @@ IF (NOT USE_MSVC_RUNTIME_LIBRARY_DLL)
   ENDFOREACH()
 ENDIF()
 
-ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" "include/BaseScene.hpp" "src/BaseScene.cpp" "include/BaseSceneConfig.hpp" ${OBJECTS} ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} ${CORE} ${RESOURCES} ${RENDER} ${GUI} )
-ADD_DEPENDENCIES(VulpesRender update_imgui_submodule UPDATE_STB UPDATE_TINYOBJ) # make sure we update+init imgui before creating the project
-IF(APPLE)
-ADD_DEPENDENCIES(VulpesRender glfw3)
-ENDIF()
+ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" 
+                                "include/BaseScene.hpp" "src/BaseScene.cpp" "include/BaseSceneConfig.hpp" 
+                                ${OBJECTS} ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} 
+                                ${CORE} ${RESOURCES} ${RENDER} ${GUI} ${SHADERS}
+                                )
+ADD_DEPENDENCIES(VulpesRender UPDATE_IMGUI_SUBMODULE UPDATE_STB UPDATE_TINYOBJ glfw) # make sure we update+init imgui before creating the project
 
 IF(BUILD_EXAMPLE_SCENES)
 
@@ -159,6 +163,7 @@ SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa -framewor
 ENDIF()
 
 ADD_EXECUTABLE(Triangle "scenes/Triangle.cpp")
+
 IF(NOT APPLE)
 TARGET_LINK_LIBRARIES(Triangle VulpesRender "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
 ELSE()
@@ -174,6 +179,7 @@ TARGET_LINK_LIBRARIES(House VulpesRender "${GLFW_3_LIB}" "${MoltenVK}")
 ENDIF()
 
 ADD_EXECUTABLE(Arcball "scenes/Arcball.cpp")
+
 IF(NOT APPLE)
 TARGET_LINK_LIBRARIES(Arcball VulpesRender "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
 ELSE()
