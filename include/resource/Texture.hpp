@@ -14,9 +14,17 @@
 
 namespace vulpes {
 
+	enum class textureError {
+		INVALID_FILENAME = 1,
+		INVALID_FILE_DATA,
+		INVALID_TEXTURE_FORMAT,
+		ALLOCATION_FAILED,
+		TRANSFER_FAILED,
+	};
     
     /** An attempt at minimally wrapping loading image data from file, for use when we can't use GLI (i.e, the image is of a more conventional format than DDS/KTX/etc).
-    *   Primarily exists to make sure we don't have dangling pointers to image data, along with memory leaks from said image data.
+	*   Primarily exists to make sure we don't have dangling pointers to image data, along with memory leaks from said image data.
+	* \ingroup Resources
     */
     struct texture_2d_t {
         texture_2d_t(const texture_2d_t&) = delete;
@@ -211,7 +219,7 @@ namespace vulpes {
 
 	template<typename texture_type>
 	inline void Texture<texture_type>::copyFromFileToStaging(const char* filename) {
-
+		
 		texture_type texture_data = loadTextureDataFromFile(filename);
 
 		Buffer::CreateStagingBuffer(parent, texture_data.size(), stagingBuffer, stagingMemory);
@@ -358,10 +366,10 @@ namespace vulpes {
 
 	template<>
 	inline gli::texture_cube Texture<gli::texture_cube>::loadTextureDataFromFile(const char* filename) {
-		gli::texture_cube result = gli::texture_cube(gli::load(filename));
-		updateTextureParameters(result);
-		createCopyInformation(result);
-		return std::move(result);
+			gli::texture_cube result = gli::texture_cube(gli::load(filename));
+			updateTextureParameters(result);
+			createCopyInformation(result);
+			return std::move(result);
 	}
 
 	template<>
@@ -426,6 +434,18 @@ namespace vulpes {
 		createCopyInformation(result);
 		return std::move(result);
 	}
+
+    template<>
+    inline void Texture<texture_2d_t>::createCopyInformation(const texture_2d_t& texture) {
+        copyInfo.push_back(VkBufferImageCopy{
+            0,
+            0,
+            0,
+            VkImageSubresourceLayers{ VK_IMAGE_ASPECT_COLOR_BIT, 0, 0, 1 },
+            VkOffset3D{ 0, 0, 0 },
+            VkExtent3D{ static_cast<uint32_t>(texture.x), static_cast<uint32_t>(texture.y), 1 }
+        });
+    }
     
     template<>
     inline texture_2d_t Texture<texture_2d_t>::loadTextureDataFromFile(const char* filename) {
@@ -452,18 +472,6 @@ namespace vulpes {
         createCopyInformation(result);
 
         return std::move(result);
-    }
-
-    template<>
-    inline void Texture<texture_2d_t>::createCopyInformation(const texture_2d_t& texture) {
-        copyInfo.push_back(VkBufferImageCopy{
-            0,
-            0,
-            0,
-            VkImageSubresourceLayers{ VK_IMAGE_ASPECT_COLOR_BIT, 0, 0, 1 },
-            VkOffset3D{ 0, 0, 0 },
-            VkExtent3D{ static_cast<uint32_t>(texture.x), static_cast<uint32_t>(texture.y), 1 }
-        });
     }
 
     template<>
