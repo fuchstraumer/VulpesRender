@@ -60,6 +60,7 @@ namespace vulpes {
     }
 
     void ArcballScene::RecordCommands() {
+
         static VkCommandBufferBeginInfo primary_cmd_buffer_begin_info {
             VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO,
             nullptr,
@@ -128,13 +129,14 @@ namespace vulpes {
     }
 
     void ArcballScene::createSkybox() {
+        LOG(INFO) << "Creating skybox...";
         skybox = std::make_unique<Skybox>(device.get());
-        skybox->CreateTexture(BaseScene::SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/starbox2048.dds", VK_FORMAT_B8G8R8A8_UNORM);
+        skybox->CreateTexture(BaseScene::SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/starbox.dds", VK_FORMAT_B8G8R8A8_UNORM);
         skybox->Create(projection, renderPass->vkHandle(), transferPool.get(), descriptorPool.get());
     }
 
     void ArcballScene::createIcosphere() {
-        earthSphere = std::make_unique<Icosphere>(5, glm::vec3(0.0f), glm::vec3(1.0f));
+        earthSphere = std::make_unique<Icosphere>(4, glm::vec3(0.0f), glm::vec3(1.0f));
         earthSphere->CreateShaders(std::string(BaseScene::SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/shaders/earthsphere.vert.spv"), std::string(BaseScene::SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/shaders/earthsphere.frag.spv"));
         earthSphere->SetTexture(std::string(BaseScene::SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/earth.png").c_str());
         earthSphere->Init(device.get(), projection, renderPass->vkHandle(), transferPool.get(), descriptorPool.get());
@@ -163,7 +165,11 @@ namespace vulpes {
 int main() {
     vulpes::BaseScene::SceneConfiguration.EnableGUI = false;
     vulpes::BaseScene::SceneConfiguration.EnableMouseLocking = false;
+#ifdef _WIN32
     vulpes::BaseScene::SceneConfiguration.ResourcePathPrefixStr = std::string("../");
+#else
+    vulpes::BaseScene::SceneConfiguration.ResourcePathPrefixStr = std::string("../");
+#endif
     vulpes::ArcballScene scene;
     scene.RenderLoop();
     return 0;
