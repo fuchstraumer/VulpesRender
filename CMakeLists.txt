@@ -153,7 +153,11 @@ ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "inc
                                 ${OBJECTS} ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} 
                                 ${CORE} ${RESOURCES} ${RENDER} ${GUI} ${SHADERS}
                                 )
-ADD_DEPENDENCIES(VulpesRender UPDATE_IMGUI_SUBMODULE UPDATE_STB UPDATE_TINYOBJ glfw) # make sure we update+init imgui before creating the project
+ADD_DEPENDENCIES(VulpesRender UPDATE_IMGUI_SUBMODULE UPDATE_STB UPDATE_TINYOBJ) # make sure we update+init imgui before creating the project
+
+IF(APPLE)
+ADD_DEPENDENCIES(VulpesRender glfw)
+ENDIF()
 
 IF(BUILD_EXAMPLE_SCENES)
 
@@ -178,7 +182,7 @@ ELSE()
 TARGET_LINK_LIBRARIES(House VulpesRender "${GLFW_3_LIB}" "${MoltenVK}")
 ENDIF()
 
-ADD_EXECUTABLE(Arcball "scenes/Arcball.cpp")
+ADD_EXECUTABLE(Arcball "scenes/ArcballScene.cpp")
 
 IF(NOT APPLE)
 TARGET_LINK_LIBRARIES(Arcball VulpesRender "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
