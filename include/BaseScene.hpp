@@ -86,8 +86,6 @@ namespace vulpes {
         glm::mat4 GetViewMatrix() const noexcept;
         glm::mat4 GetProjectionMatrix() const noexcept;
         const glm::vec3& CameraPosition() const noexcept;
-
-        void UpdateCameraPosition(const glm::vec3& new_position) noexcept;
         
         static bool CameraLock;
         static vulpesSceneConfig SceneConfiguration;
@@ -150,22 +148,13 @@ namespace vulpes {
 
         glm::mat4 projection, view;
         
-        static Camera fpsCamera;
-        static Arcball arcballCamera;
+        static PerspectiveCamera fpsCamera;
         
 	};
 
 
     inline glm::mat4 BaseScene::GetViewMatrix() const noexcept {
-        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
-            return arcballCamera.GetViewMatrix();
-        }
-        else if (BaseScene::SceneConfiguration.CameraType == cameraType::FPS) {
-            return fpsCamera.GetViewMatrix();
-        }
-        else {
-            return glm::mat4(0.0f);
-        }
+        return fpsCamera.GetViewMatrix();
     }
 
     inline glm::mat4 BaseScene::GetProjectionMatrix() const noexcept {
@@ -173,26 +162,7 @@ namespace vulpes {
     }
 
     inline const glm::vec3 & BaseScene::CameraPosition() const noexcept {
-        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
-            return arcballCamera.Position;
-        }
-        else if (BaseScene::SceneConfiguration.CameraType == cameraType::FPS) {
-            return fpsCamera.Position;
-        }
-        else {
-            static const glm::vec3 zero_vec(0.0f);
-            LOG(ERROR) << "Camera Type not set correctly!";
-            return zero_vec;
-        }
-    }
-
-    inline void BaseScene::UpdateCameraPosition(const glm::vec3& new_position) noexcept {
-        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
-            arcballCamera.Position = new_position;
-        }
-        else if (BaseScene::SceneConfiguration.CameraType == cameraType::FPS) {
-            fpsCamera.Position = new_position;
-        }
+        return fpsCamera.GetEyeLocation();
     }
 
 }

@@ -25,8 +25,7 @@ namespace vulpes {
     bool BaseScene::CameraLock = false;
 
 
-    Camera BaseScene::fpsCamera = Camera();
-    Arcball BaseScene::arcballCamera = Arcball(1440, 900);
+    PerspectiveCamera BaseScene::fpsCamera = PerspectiveCamera(1440, 900, 70.0f);
 
 	std::vector<uint16_t> BaseScene::pipelineCacheHandles = std::vector<uint16_t>();
 
@@ -42,8 +41,7 @@ namespace vulpes {
 
 		VkInstanceCreateInfo create_info = vk_base_instance_info;
 		instance = std::make_unique<Instance>(create_info, false, _width, _height);
-        arcballCamera = Arcball(_width, _height);
-        view = arcballCamera.GetViewMatrix();
+        view = fpsCamera.GetViewMatrix();
         instance->GetWindow()->SetWindowUserPointer(this);
 
 		LOG_IF(verbose_logging, INFO) << "VkInstance created.";
@@ -173,15 +171,6 @@ namespace vulpes {
 
 		if (!io.WantCaptureMouse) {
 
-            if (!CameraLock) {
-				if (BaseScene::SceneConfiguration.CameraType == cameraType::FPS) {
-						fpsCamera.UpdateMousePos(input_handler::MouseDx, input_handler::MouseDy);
-				}
-				else if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
-						arcballCamera.UpdateMousePos(input_handler::MouseDx, input_handler::MouseDy);
-				}
-            }
-
 			if (ImGui::IsMouseDragging(0)) {
 				mouseDrag(0, io.MousePos.x, io.MousePos.y);
 			}
@@ -209,27 +198,19 @@ namespace vulpes {
 	}
 
     void BaseScene::mouseDrag(const int& button, const float & rot_x, const float & rot_y) {
-        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
-            arcballCamera.MouseDrag(button, rot_x, rot_y);
-        }
+        fpsCamera.MouseDrag(button, rot_x, rot_y);
     }
 
     void BaseScene::mouseScroll(const int& button, const float & zoom_delta) {
-        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
-            arcballCamera.MouseScroll(button, zoom_delta);
-        }
+        fpsCamera.MouseScroll(button, zoom_delta);
     }
 
     void BaseScene::mouseDown(const int& button, const float& x, const float& y) {
-        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
-            arcballCamera.MouseDown(button, x, y);
-        }
+        fpsCamera.MouseDown(button, x, y);
     }
 
     void BaseScene::mouseUp(const int& button, const float & x, const float & y) {
-        if (BaseScene::SceneConfiguration.CameraType == cameraType::ARCBALL) {
-            arcballCamera.MouseUp(button, x, y);
-        }
+        fpsCamera.MouseUp(button, x, y);
     }
 
 	void BaseScene::PipelineCacheCreated(const uint16_t & cache_id) {
@@ -463,7 +444,7 @@ namespace vulpes {
 		ImGuiIO& io = ImGui::GetIO();
 		io.DisplaySize.x = static_cast<float>(swapchain->Extent.width);
 		io.DisplaySize.y = static_cast<float>(swapchain->Extent.height);
-        arcballCamera = Arcball(swapchain->Extent.width, swapchain->Extent.height);
+        BaseScene::fpsCamera = PerspectiveCamera(swapchain->Extent.width, swapchain->Extent.height, 70.0f);
 		input_handler::LastX = swapchain->Extent.width / 2.0f;
 		input_handler::LastY = swapchain->Extent.height / 2.0f;
 		
@@ -479,15 +460,7 @@ namespace vulpes {
 	}
 
     void BaseScene::updateView() {
-        if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
-            view = BaseScene::arcballCamera.GetViewMatrix();
-        }
-        else if (SceneConfiguration.CameraType == cameraType::FPS) {
-            view = fpsCamera.GetViewMatrix();
-        }
-        else {
-            view = fpsCamera.GetViewMatrix();
-        }
+        view = fpsCamera.GetViewMatrix();
     }
 
 	void BaseScene::RenderLoop() {
@@ -531,32 +504,6 @@ namespace vulpes {
             return;
         }
 
-        if (input_handler::Keys[GLFW_KEY_W]) {
-            fpsCamera.ProcessKeyboard(Direction::FORWARD, delta_time);
-            arcballCamera.RotateUp(delta_time);
-        }
-        else if (input_handler::Keys[GLFW_KEY_S]) {
-            fpsCamera.ProcessKeyboard(Direction::BACKWARD, delta_time);
-            arcballCamera.RotateDown(delta_time);
-        }
-
-        if (input_handler::Keys[GLFW_KEY_D]) {
-            fpsCamera.ProcessKeyboard(Direction::RIGHT, delta_time);
-            arcballCamera.RotateRight(delta_time);
-        }
-        else if (input_handler::Keys[GLFW_KEY_A]) {
-            fpsCamera.ProcessKeyboard(Direction::LEFT, delta_time);
-            arcballCamera.RotateLeft(delta_time);
-        }
-
-        if (input_handler::Keys[GLFW_KEY_X]) {
-            fpsCamera.ProcessKeyboard(Direction::DOWN, delta_time);
-            arcballCamera.TranslateDown(delta_time);
-        }
-        else if (input_handler::Keys[GLFW_KEY_C]) {
-            fpsCamera.ProcessKeyboard(Direction::UP, delta_time);
-            arcballCamera.TranslateUp(delta_time);
-        }
     }
 
 	void BaseScene::limitFrame() {
