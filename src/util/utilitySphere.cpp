@@ -7,7 +7,7 @@ namespace vulpes {
 
     UtilitySphere::UtilitySphere(const glm::vec3 & _center, const float & _radius) : Center(_center), Radius(_radius) {}
 
-    bool UtilitySphere::CheckRayIntersection(const Ray & _ray) const noexcept {
+    bool UtilitySphere::CheckRayIntersection(const Ray & _ray, float* intersection) const noexcept {
         const glm::vec3 dir_to_ray = _ray.GetOrigin() - Center;
         const float a = glm::dot(_ray.GetDirection(), _ray.GetDirection());
         const float b = 2.0f * glm::dot(dir_to_ray, _ray.GetDirection());
@@ -23,11 +23,13 @@ namespace vulpes {
             float t = ((-1.0f * b) - e) / denom;
 
             if (t > 1e-4f) {
+                *intersection = t;
                 return true;
             }
 
             t = ((-1.0f * b) + e) / denom;
             if (t > 1e-4f) {
+                *intersection = t;
                 return true;
             }
         }
