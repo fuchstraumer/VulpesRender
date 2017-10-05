@@ -5,7 +5,7 @@ namespace vulpes {
 
 
 
-    Ray::Ray(const glm::vec3 & _origin, const glm::vec3& _dir) : direction(_dir), origin(_origin), invDirection(1.0f / _dir), signX((_dir.x < 0.0f) ? 1 : 0)), signY((_dir.y < 0.0f) ? 1 : 0), signZ((_dir.z < 0.0f) ? 1 : 0) {}
+    Ray::Ray(const glm::vec3 & _origin, const glm::vec3& _dir) : direction(_dir), origin(_origin), invDirection(1.0f / _dir), signX((_dir.x < 0.0f) ? 1 : 0), signY((_dir.y < 0.0f) ? 1 : 0), signZ((_dir.z < 0.0f) ? 1 : 0) {}
 
     const glm::vec3 & Ray::GetOrigin() const noexcept {
         return origin;
