@@ -11,10 +11,6 @@
 #include "render/DepthStencil.hpp"
 #include "util/AABB.hpp"
 
-#ifdef _WIN32
-#include "util/EnableWER.hpp"
-#endif // _WIN32
-
 #ifdef USE_EXPERIMENTAL_FILESYSTEM
 #include <experimental/filesystem>
 #endif
@@ -23,25 +19,17 @@
 namespace vulpes {
 
     bool BaseScene::CameraLock = false;
-
-
     PerspectiveCamera BaseScene::fpsCamera = PerspectiveCamera(1440, 900, 70.0f);
+    ArcballCamera BaseScene::arcballCamera = ArcballCamera(1440, 900, 70.9f, UtilitySphere(glm::vec3(0.0f), 7.0f));
 
 	std::vector<uint16_t> BaseScene::pipelineCacheHandles = std::vector<uint16_t>();
 
 	vulpes::BaseScene::BaseScene(const size_t& num_secondary_buffers, const uint32_t& _width, const uint32_t& _height) : width(_width), height(_height), numSecondaryBuffers(num_secondary_buffers) {
 
-#ifdef _WIN32
-        LOG(INFO) << "Attempting to enable Windows Error Reporting (WER) subsystem...";
-        util::wer_enabler_t __wer;
-        __wer.enable();
-#endif 
-
 		const bool verbose_logging = BaseScene::SceneConfiguration.VerboseLogging;
 
 		VkInstanceCreateInfo create_info = vk_base_instance_info;
 		instance = std::make_unique<Instance>(create_info, false, _width, _height);
-        view = fpsCamera.GetViewMatrix();
         instance->GetWindow()->SetWindowUserPointer(this);
 
 		LOG_IF(verbose_logging, INFO) << "VkInstance created.";
@@ -54,8 +42,6 @@ namespace vulpes {
 		swapchain = std::make_unique<Swapchain>();
 		swapchain->Init(instance.get(), instance->GetPhysicalDevice(), device.get());
 
-        projection = glm::perspective(glm::radians(75.0f), static_cast<float>(_width) / static_cast<float>(_height), 0.1f, 30000.0f);
-        projection[1][1] *= -1.0f;
 
 		LOG_IF(verbose_logging, INFO) << "Swapchain created.";
 
@@ -87,13 +73,50 @@ namespace vulpes {
 		limiter_a = std::chrono::system_clock::now();
 		limiter_b = std::chrono::system_clock::now();
 
-		LOG_IF(verbose_logging, INFO) << "BaseScene setup complete.";
+        SetupRenderpass(SceneConfiguration.MSAA_SampleCount);
+        SetupFramebuffers();
 
 		input_handler::LastX = swapchain->Extent.width / 2.0f;
 		input_handler::LastY = swapchain->Extent.height / 2.0f;
 
+        if (SceneConfiguration.CameraType == cameraType::FPS) {
+            fpsCamera.SetNearClipPlaneDistance(0.1f);
+            fpsCamera.SetFarClipPlaneDistance(2000.0f);
+        }
+        else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
+            arcballCamera.SetNearClipPlaneDistance(0.1f);
+            arcballCamera.SetFarClipPlaneDistance(2000.0f);
+        }
+
+        setupGUI();
+
+        LOG_IF(verbose_logging, INFO) << "BaseScene setup complete.";
+
+
 	}
+
+    void BaseScene::setupGUI() {
+
+        if (!SceneConfiguration.EnableGUI) {
+            return;
+        }
+
+        gui = std::make_unique<imguiWrapper>();
+        gui->Init(device.get(), renderPass->vkHandle());
+        gui->UploadTextureData(transferPool.get());
+
+    }
     
+    void BaseScene::destroyGUI() {
+
+        if (!SceneConfiguration.EnableGUI) {
+            return;
+        }
+
+        gui.reset();
+
+    }
+
 #ifdef USE_EXPERIMENTAL_FILESYSTEM
     void BaseScene::cleanupShaderCacheFiles() {
         std::experimental::filesystem::path pipeline_cache_path("rsrc/shader_cache");
@@ -135,13 +158,14 @@ namespace vulpes {
     
 	vulpes::BaseScene::~BaseScene() {
 
+        destroyGUI();
 		depthStencil.reset();
 		graphicsPool.reset();
 		transferPool.reset();
 		secondaryPool.reset();
 		swapchain.reset();
 		msaa.reset();
-
+        
 		for (const auto& fbuf : framebuffers) {
 			vkDestroyFramebuffer(device->vkHandle(), fbuf, nullptr);
 		}
@@ -198,19 +222,41 @@ namespace vulpes {
 	}
 
     void BaseScene::mouseDrag(const int& button, const float & rot_x, const float & rot_y) {
-        fpsCamera.MouseDrag(button, rot_x, rot_y);
+        if (SceneConfiguration.CameraType == cameraType::FPS) {
+            fpsCamera.MouseDrag(button, rot_x, rot_y);
+        }
+        else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
+            arcballCamera.MouseDrag(button, rot_x, rot_y);
+        }
+
+        ImGui::ResetMouseDragDelta();
     }
 
     void BaseScene::mouseScroll(const int& button, const float & zoom_delta) {
-        fpsCamera.MouseScroll(button, zoom_delta);
+        if (SceneConfiguration.CameraType == cameraType::FPS) {
+            fpsCamera.MouseScroll(button, zoom_delta);
+        }
+        else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
+            arcballCamera.MouseScroll(button, zoom_delta);
+        }
     }
 
     void BaseScene::mouseDown(const int& button, const float& x, const float& y) {
-        fpsCamera.MouseDown(button, x, y);
+        if (SceneConfiguration.CameraType == cameraType::FPS) {
+            fpsCamera.MouseDown(button, x, y);
+        }
+        else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
+            arcballCamera.MouseDown(button, x, y);
+        }
     }
 
     void BaseScene::mouseUp(const int& button, const float & x, const float & y) {
-        fpsCamera.MouseUp(button, x, y);
+        if (SceneConfiguration.CameraType == cameraType::FPS) {
+            fpsCamera.MouseUp(button, x, y);
+        }
+        else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
+            arcballCamera.MouseUp(button, x, y);
+        }
     }
 
 	void BaseScene::PipelineCacheCreated(const uint16_t & cache_id) {
@@ -418,6 +464,7 @@ namespace vulpes {
 		// First wait to make sure nothing is in use.
 		vkDeviceWaitIdle(device->vkHandle());
 
+        destroyGUI();
 		depthStencil.reset();
 		framebuffers.clear();
 		framebuffers.shrink_to_fit();
@@ -433,9 +480,7 @@ namespace vulpes {
 		device->vkAllocator->Recreate();
 
 		swapchain->Recreate();
-
-		projection = glm::perspective(glm::radians(75.0f), static_cast<float>(swapchain->Extent.width) / static_cast<float>(swapchain->Extent.height), 0.1f, 30000.0f);
-		projection[1][1] *= -1.0f;
+        
 
 		/*
 			Done destroying resources, recreate resources and objects now
@@ -445,11 +490,21 @@ namespace vulpes {
 		io.DisplaySize.x = static_cast<float>(swapchain->Extent.width);
 		io.DisplaySize.y = static_cast<float>(swapchain->Extent.height);
         BaseScene::fpsCamera = PerspectiveCamera(swapchain->Extent.width, swapchain->Extent.height, 70.0f);
+        BaseScene::arcballCamera = ArcballCamera(swapchain->Extent.width, swapchain->Extent.height, 70.0f, UtilitySphere(glm::vec3(0.0f), 7.0f));
 		input_handler::LastX = swapchain->Extent.width / 2.0f;
 		input_handler::LastY = swapchain->Extent.height / 2.0f;
-		
+        if (SceneConfiguration.CameraType == cameraType::FPS) {
+            fpsCamera.SetNearClipPlaneDistance(0.1f);
+            fpsCamera.SetFarClipPlaneDistance(2000.0f);
+        }
+        else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
+            arcballCamera.SetNearClipPlaneDistance(0.1f);
+            arcballCamera.SetFarClipPlaneDistance(2000.0f);
+        }
+
 		CreateCommandPools();
 		SetupRenderpass(BaseScene::SceneConfiguration.MSAA_SampleCount);
+        setupGUI();
 		SetupDepthStencil();
 		SetupFramebuffers();
 		RecreateObjects();
@@ -458,10 +513,6 @@ namespace vulpes {
 		LOG_IF(BaseScene::SceneConfiguration.VerboseLogging, INFO) << "Swapchain recreation successful.";
 
 	}
-
-    void BaseScene::updateView() {
-        view = fpsCamera.GetViewMatrix();
-    }
 
 	void BaseScene::RenderLoop() {
 

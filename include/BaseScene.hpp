@@ -72,11 +72,11 @@ namespace vulpes {
          *  in HouseScene for clarification. 
          */
 		virtual void RecordCommands() = 0;
-        void updateView();
         virtual void RenderLoop();
 
         virtual void UpdateMovement(const float & delta_time);
 
+        void SetCameraTarget(const glm::vec3& target_pos);
 
         // updates mouse actions via ImGui.
 		virtual void UpdateMouseActions();
@@ -85,12 +85,17 @@ namespace vulpes {
 
         glm::mat4 GetViewMatrix() const noexcept;
         glm::mat4 GetProjectionMatrix() const noexcept;
-        const glm::vec3& CameraPosition() const noexcept;
+        const glm::vec3& GetCameraPosition() const noexcept;
         
+        void SetCameraPosition(const glm::vec3& new_position) noexcept;
+
         static bool CameraLock;
         static vulpesSceneConfig SceneConfiguration;
 
 	protected:
+
+        void setupGUI();
+        void destroyGUI();
 
         void cleanupShaderCacheFiles();
         virtual void mouseDown(const int& button, const float& x, const float& y);
@@ -145,24 +150,55 @@ namespace vulpes {
 
 		static std::vector<uint16_t> pipelineCacheHandles;
 		size_t numSecondaryBuffers;
-
-        glm::mat4 projection, view;
         
         static PerspectiveCamera fpsCamera;
-        
+        static ArcballCamera arcballCamera;
 	};
 
 
     inline glm::mat4 BaseScene::GetViewMatrix() const noexcept {
-        return fpsCamera.GetViewMatrix();
+        if (SceneConfiguration.CameraType == cameraType::FPS) {
+            return fpsCamera.GetViewMatrix();
+        }
+        else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
+            return arcballCamera.GetViewMatrix();
+        }
     }
 
     inline glm::mat4 BaseScene::GetProjectionMatrix() const noexcept {
-        return projection;
+        if (SceneConfiguration.CameraType == cameraType::FPS) {
+            return fpsCamera.GetProjectionMatrix();
+        }
+        else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
+            return arcballCamera.GetProjectionMatrix();
+        }
     }
 
-    inline const glm::vec3 & BaseScene::CameraPosition() const noexcept {
-        return fpsCamera.GetEyeLocation();
+    inline const glm::vec3 & BaseScene::GetCameraPosition() const noexcept {
+        if (SceneConfiguration.CameraType == cameraType::FPS) {
+            return fpsCamera.GetEyeLocation();
+        }
+        else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
+            return arcballCamera.GetEyeLocation();
+        }
+    }
+
+    inline void BaseScene::SetCameraPosition(const glm::vec3& new_camera_pos) noexcept {
+        if (SceneConfiguration.CameraType == cameraType::FPS) {
+            fpsCamera.SetEyeLocation(new_camera_pos);
+        }
+        else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
+            arcballCamera.SetEyeLocation(new_camera_pos);
+        }
+    }
+
+    inline void BaseScene::SetCameraTarget(const glm::vec3& target_pos) {
+        if (SceneConfiguration.CameraType == cameraType::FPS) {
+            fpsCamera.LookAtTarget(target_pos);
+        }
+        else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
+            arcballCamera.LookAtTarget(target_pos);
+        }
     }
 
 }
