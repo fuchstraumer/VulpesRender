@@ -84,9 +84,8 @@ namespace vulpes {
         ImGuiIO& io = ImGui::GetIO();
         if(width == 0 || height == 0) {
             LOG(WARNING) << "Resize callback called with zero width or height for window. Attempting to fall back on last stored value...";
-            width = io.DisplaySize.x;
-            height = io.DisplaySize.y;
-            
+            width = static_cast<int>(io.DisplaySize.x);
+            height = static_cast<int>(io.DisplaySize.y);        
         }
         else {
             io.DisplaySize = ImVec2(static_cast<float>(width), static_cast<float>(height));
