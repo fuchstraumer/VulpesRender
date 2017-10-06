@@ -120,8 +120,6 @@ namespace vulpes {
     void TriangleScene::create() {
         createShaders();
         setPipelineStateInfo();
-        SetupRenderpass(SceneConfiguration.MSAA_SampleCount);
-        SetupFramebuffers();
         createPipelineLayout();
         createGraphicsPipeline();
     }

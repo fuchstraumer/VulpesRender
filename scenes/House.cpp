@@ -193,6 +193,7 @@ void HouseScene::updateUBO() {
 }
 
 void HouseScene::create() {
+    SetCameraTarget(glm::vec3(0.0f));
     loadMeshTexture();
     loadMeshData();
     createMeshBuffers();
@@ -202,8 +203,6 @@ void HouseScene::create() {
     createShaders();
     createPipelineCache();
     setPipelineStateInfo();
-    SetupRenderpass(SceneConfiguration.MSAA_SampleCount);
-    SetupFramebuffers();
     createGraphicsPipeline();
 }
 

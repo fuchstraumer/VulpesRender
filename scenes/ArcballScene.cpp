@@ -44,14 +44,10 @@ namespace vulpes {
         std::unique_ptr<Icosphere> earthSphere;
         VkViewport viewport = vk_default_viewport;
         VkRect2D scissor = vk_default_viewport_scissor;
-        PerspectiveCamera camera;
-        std::unique_ptr<Arcball> arcball;
-        UtilitySphere sphere;
+
     };
 
-    ArcballScene::ArcballScene() : BaseScene(2, 1440, 900), camera(1440, 900, 70.0f), sphere(glm::vec3(0.0f), 1.0f) {
-        arcball = std::make_unique<Arcball>(&camera, sphere);
-        fpsCamera.SetController(arcball.get());
+    ArcballScene::ArcballScene() : BaseScene(3, 1440, 900) {
         create();
     }
 
@@ -86,11 +82,11 @@ namespace vulpes {
             VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT | VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT | VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT,
             &secondary_cmd_buffer_inheritance_info
         };
-
-        fpsCamera.SetOrientation(arcball->GetOrientation());
-        view = fpsCamera.GetViewMatrix();
     
         updateUBOs();
+
+        ImGui::BeginMainMenuBar();
+        ImGui::EndMainMenuBar();
     
         for(size_t i = 0; i < graphicsPool->size(); ++i) {
     
@@ -107,10 +103,11 @@ namespace vulpes {
             VkAssert(err);
     
                 vkCmdBeginRenderPass(graphicsPool->GetCmdBuffer(i), &renderPass->BeginInfo(), VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS);
-                    skybox->Render(secondaryPool->GetCmdBuffer(i * 2), secondary_cmd_buffer_begin_info, viewport, scissor);
-                    earthSphere->Render(secondaryPool->GetCmdBuffer((i * 2) + 1), secondary_cmd_buffer_begin_info, viewport, scissor);
-                VkCommandBuffer secondary_buffers[2]{ secondaryPool->GetCmdBuffer(i *2), secondaryPool->GetCmdBuffer((i * 2) + 1)};
-                vkCmdExecuteCommands(graphicsPool->GetCmdBuffer(i), 2, secondary_buffers);
+                    skybox->Render(secondaryPool->GetCmdBuffer(i * 3), secondary_cmd_buffer_begin_info, viewport, scissor);
+                    earthSphere->Render(secondaryPool->GetCmdBuffer((i * 3) + 1), secondary_cmd_buffer_begin_info, viewport, scissor);
+                    renderGUI(secondaryPool->GetCmdBuffer((i * 3) + 2), secondary_cmd_buffer_begin_info, i);
+                VkCommandBuffer secondary_buffers[3]{ secondaryPool->GetCmdBuffer(i *3), secondaryPool->GetCmdBuffer((i * 3) + 1), secondaryPool->GetCmdBuffer((i * 3) + 2) };
+                vkCmdExecuteCommands(graphicsPool->GetCmdBuffer(i), 3, secondary_buffers);
                 vkCmdEndRenderPass(graphicsPool->GetCmdBuffer(i));
             
             err = vkEndCommandBuffer(graphicsPool->GetCmdBuffer(i));
@@ -124,9 +121,10 @@ namespace vulpes {
     }
 
     void ArcballScene::create() {
+        SetCameraPosition(glm::vec3(0.0f, 1.0f, 3.0f));
+        SetCameraTarget(glm::vec3(0.0f));
+        arcballCamera.SetArcballSphere(UtilitySphere(glm::vec3(0.0f), 1.0f));
         createDescriptorPool();
-        SetupRenderpass(BaseScene::SceneConfiguration.MSAA_SampleCount);
-        SetupFramebuffers();
         createSkybox();
         createIcosphere();
     }
@@ -141,14 +139,14 @@ namespace vulpes {
         LOG(INFO) << "Creating skybox...";
         skybox = std::make_unique<Skybox>(device.get());
         skybox->CreateTexture(BaseScene::SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/starbox.dds", VK_FORMAT_B8G8R8A8_UNORM);
-        skybox->Create(projection, renderPass->vkHandle(), transferPool.get(), descriptorPool.get());
+        skybox->Create(GetProjectionMatrix(), renderPass->vkHandle(), transferPool.get(), descriptorPool.get());
     }
 
     void ArcballScene::createIcosphere() {
         earthSphere = std::make_unique<Icosphere>(4, glm::vec3(0.0f), glm::vec3(1.0f));
         earthSphere->CreateShaders(std::string(BaseScene::SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/shaders/earthsphere.vert.spv"), std::string(BaseScene::SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/shaders/earthsphere.frag.spv"));
         earthSphere->SetTexture(std::string(BaseScene::SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/earth.png").c_str());
-        earthSphere->Init(device.get(), projection, renderPass->vkHandle(), transferPool.get(), descriptorPool.get());
+        earthSphere->Init(device.get(), GetProjectionMatrix(), renderPass->vkHandle(), transferPool.get(), descriptorPool.get());
     }
 
     void ArcballScene::createDescriptorPool() {
@@ -158,8 +156,8 @@ namespace vulpes {
     }
 
     void ArcballScene::updateUBOs() {
-        skybox->UpdateUBO(view);
-        earthSphere->UpdateUBO(view, glm::vec3(0.0f, 1.0f, -3.0f));
+        skybox->UpdateUBO(GetViewMatrix());
+        earthSphere->UpdateUBO(GetViewMatrix(), GetCameraPosition());
 
         static auto start_time = std::chrono::high_resolution_clock::now();
         auto curr_time = std::chrono::high_resolution_clock::now();
@@ -172,8 +170,9 @@ namespace vulpes {
 }
 
 int main() {
-    vulpes::BaseScene::SceneConfiguration.EnableGUI = false;
+    vulpes::BaseScene::SceneConfiguration.EnableGUI = true;
     vulpes::BaseScene::SceneConfiguration.EnableMouseLocking = false;
+    vulpes::BaseScene::SceneConfiguration.CameraType = vulpes::cameraType::ARCBALL;
 #ifdef _WIN32
     vulpes::BaseScene::SceneConfiguration.ResourcePathPrefixStr = std::string("../");
 #else
