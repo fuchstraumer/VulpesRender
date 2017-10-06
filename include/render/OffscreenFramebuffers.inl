@@ -152,11 +152,11 @@ namespace vulpes {
 		size_t idx = createAttachment(VK_FORMAT_R8G8B8A8_UNORM, VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT);
 		createAttachmentView(idx);
 
-		idx = createAttachment(VK_FORMAT_R32G32_UINT, static_cast<VkImageUsageFlagBits>(VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT));
-		createAttachmentView(idx);
-
 		idx = createAttachment(device->FindDepthFormat(), VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
 		createAttachmentView(idx);
+
+        idx = createAttachment(VK_FORMAT_R16_UINT, VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT);
+        createAttachmentView(idx);
 
 	}
 
@@ -208,15 +208,22 @@ namespace vulpes {
 
 	}
 
-	template<>
-	inline void OffscreenFramebuffers<picking_framebuffer_t>::createAttachmentDescriptions() {
+    template<>
+    inline void OffscreenFramebuffers<picking_framebuffer_t>::createAttachmentDescriptions() {
+        createAttachmentDescription(0, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR, VK_ATTACHMENT_STORE_OP_DONT_CARE);
+        createAttachmentDescription(1, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR, VK_ATTACHMENT_STORE_OP_DONT_CARE);
+        createAttachmentDescription(2, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, VK_ATTACHMENT_LOAD_OP_DONT_CARE, VK_ATTACHMENT_STORE_OP_STORE);
+    }
 
-		createAttachmentDescription(0, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR, VK_ATTACHMENT_STORE_OP_DONT_CARE);
-		createAttachmentDescription(1, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, VK_ATTACHMENT_LOAD_OP_DONT_CARE, VK_ATTACHMENT_STORE_OP_STORE);
-		createAttachmentDescription(2, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR, VK_ATTACHMENT_STORE_OP_DONT_CARE);
-		// just need to copy to buffer before end of renderpass (so in same series of rendering commands, using pipeline barriers)
+	//template<>
+	//inline void OffscreenFramebuffers<picking_framebuffer_t>::createAttachmentDescriptions() {
 
-	}
+	//	createAttachmentDescription(0, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR, VK_ATTACHMENT_STORE_OP_DONT_CARE);
+	//	createAttachmentDescription(1, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, VK_ATTACHMENT_LOAD_OP_DONT_CARE, VK_ATTACHMENT_STORE_OP_STORE);
+	//	createAttachmentDescription(2, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR, VK_ATTACHMENT_STORE_OP_DONT_CARE);
+	//	// just need to copy to buffer before end of renderpass (so in same series of rendering commands, using pipeline barriers)
+
+	//}
 
 	template<typename offscreen_framebuffer_type>
 	inline void OffscreenFramebuffers<offscreen_framebuffer_type>::createAttachmentReference(const size_t & attachment_idx, const VkImageLayout & final_attachment_layout) {
@@ -266,8 +273,8 @@ namespace vulpes {
 	inline void OffscreenFramebuffers<picking_framebuffer_t>::createAttachmentReferences() {
 
 		attachmentReferences.push_back(VkAttachmentReference{ 0, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL });
-		attachmentReferences.push_back(VkAttachmentReference{ 1, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL });
-		attachmentReferences.push_back(VkAttachmentReference{ 2, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL });
+		attachmentReferences.push_back(VkAttachmentReference{ 2, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL });
+		attachmentReferences.push_back(VkAttachmentReference{ 1, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL });
 
 	}
 
