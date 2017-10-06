@@ -1,5 +1,4 @@
 #include "util/Camera.hpp"
-#include "util/CameraController.hpp"
 #include "util/MatrixUtils.hpp"
 #include "glm/gtx/rotate_vector.hpp"
 #include "glm/gtx/rotate_normalized_axis.hpp"
@@ -14,22 +13,6 @@ namespace vulpes {
 
     constexpr float lerp(const float& s, const float& e, const float& t) {
         return s + (e - s) * t;
-    }
-
-    void cameraBase::MouseDrag(const int & button, const float & x_offset, const float & y_offset) {
-        controller->MouseDrag(button, x_offset, y_offset);
-    }
-
-    void cameraBase::MouseScroll(const int & button, const float & y_scroll) {
-        controller->MouseScroll(button, y_scroll);
-    }
-
-    void cameraBase::MouseDown(const int & button, const float & x, const float & y) {
-        controller->MouseDown(button, x, y);
-    }
-
-    void cameraBase::MouseUp(const int & button, const float & x, const float & y) {
-        controller->MouseUp(button, x, y);
     }
 
     glm::vec3 cameraBase::GetEyeLocation() const noexcept {
@@ -54,7 +37,7 @@ namespace vulpes {
 
     void cameraBase::LookAtTarget(const glm::vec3 & target_position) {
         viewDirection = glm::normalize(target_position - eyePosition);
-        orientation = glm::toQuat(AlignZAxisWithTarget(-viewDirection, worldUp));
+        orientation = glm::toQuat(AlignZAxisWithTarget(viewDirection, worldUp));
         pivotDistance = glm::distance(target_position, eyePosition);
         viewCached = false;
     }
@@ -275,14 +258,8 @@ namespace vulpes {
         negViewDirection = -1.0f * glm::normalize(viewDirection);
         right = glm::rotate(orientation, glm::vec3(1.0f, 0.0f, 0.0f));
         up = glm::rotate(orientation, glm::vec3(0.0f, 1.0f, 0.0f));
-
-        const glm::vec3 dot_product(-1.0f * glm::dot(eyePosition, right), -1.0f * glm::dot(eyePosition, up), -1.0f * glm::dot(eyePosition, negViewDirection));
-
-        glm::mat4& m = view;
-        m[0][0] = right.x; m[1][0] = right.y; m[2][0] = right.z; m[3][0] = dot_product.x;
-        m[0][1] = up.x; m[1][1] = up.y; m[2][1] = up.z; m[3][1] = dot_product.y;
-        m[0][2] = negViewDirection.x; m[1][2] = negViewDirection.y; m[2][2] = negViewDirection.z; m[3][2] = dot_product.z;
-        m[0][3] = 0.0f; m[1][3] = 0.0f; m[2][3] = 0.0f; m[3][3] = 1.0f;
+        view = glm::lookAt(eyePosition, eyePosition + viewDirection, up);
+        //view = glm::lookAt(negViewDirection, eyePosition, up);
 
         viewCached = true;
         invViewCached = false;
@@ -304,47 +281,9 @@ namespace vulpes {
             frustumLeft = lerp(0.0f, 2.0f * frustumLeft, 0.5f - 0.5f * lensShift.x);
         }
 
-        glm::mat4& p = projection;
-        p[0][0] = 2.0f * nearClip / (frustumRight - frustumLeft);
-        p[1][0] = 0.0f;
-        p[2][0] = (frustumRight + frustumLeft) / (frustumRight - frustumLeft);
-        p[3][0] = 0.0f;
-
-        p[0][1] = 0.0f;
-        p[1][1] = 2.0f * nearClip / (frustumTop - frustumBottom);
-        p[2][1] = (frustumTop + frustumBottom) / (frustumTop - frustumBottom);
-        p[3][1] = 0.0f;
-
-        p[0][2] = 0.0f;
-        p[1][2] = 0.0f;
-        p[2][2] = -(farClip + nearClip) / (farClip - nearClip);
-        p[3][2] = -2.0f * farClip * nearClip / (farClip - nearClip);
-
-        p[0][3] = 0.0f;
-        p[1][3] = 0.0f;
-        p[2][3] =-1.0f;
-        p[3][3] = 0.0f;
-
-        glm::mat4& invP = invProjection;
-        invP[0][0] = (frustumRight - frustumLeft) / (2.0f * nearClip);
-        invP[1][0] = 0.0f;
-        invP[2][0] = 0.0f;
-        invP[3][0] = (frustumRight - frustumLeft) / (2.0f * nearClip);
-
-        invP[0][1] = 0.0f;
-        invP[1][1] = (frustumTop - frustumBottom) / (2.0f * nearClip);
-        invP[2][1] = 0.0f;
-        invP[3][1] = (frustumTop + frustumBottom) / (2.0f * nearClip);
-
-        invP[0][2] = 0.0f;
-        invP[1][2] = 0.0f;
-        invP[2][2] = 0.0f;
-        invP[3][2] =-1.0f;
-        
-        invP[0][3] = 0.0f;
-        invP[1][3] = 0.0f;
-        invP[2][3] =-(farClip - nearClip) / (2.0f * farClip * nearClip);
-        invP[3][3] = (farClip - nearClip) / (2.0f * farClip * nearClip);
+        projection = glm::perspective(fieldOfView, aspectRatio, nearClip, farClip);
+        projection[1][1] *= -1.0f;
+        invProjection = glm::inverse(projection);
 
         projectionCached = true;
 
@@ -363,11 +302,11 @@ namespace vulpes {
         float half_fov = CAMERA_FLOAT_PI * (field_of_view / 360.0f);
         float tan_fov = std::tan(half_fov);
         float dist = eye_xy.y / tan_fov;
-        float near_dist = dist / 100.0f;
-        float far_dist = dist * 1000.0f;
+        float near_dist = 0.1f;
+        float far_dist = 4000.0f;
         float aspect = static_cast<float>(pixel_width) / static_cast<float>(pixel_height);
         SetPerspective(field_of_view, aspect, near_dist, far_dist);
-        LookTowardsTarget(glm::vec3(eye_xy.x, eye_xy.y, -dist), glm::vec3(0.0f));
+        LookTowardsTarget(glm::vec3(0.0f, 10.0f, 20.0f), glm::vec3(0.0f));
     }
 
     void PerspectiveCamera::SetPerspective(const float & vertical_fov_in_degrees, const float & aspect_ratio, const float & near_plane, const float & far_plane) {
@@ -376,6 +315,22 @@ namespace vulpes {
         nearClip = near_plane;
         farClip = far_plane;
         projectionCached = false;
+    }
+
+    void PerspectiveCamera::MouseDrag(const int & button, const float & x_offset, const float & y_offset)
+    {
+    }
+
+    void PerspectiveCamera::MouseScroll(const int & button, const float & y_scroll)
+    {
+    }
+
+    void PerspectiveCamera::MouseDown(const int & button, const float & x, const float & y)
+    {
+    }
+
+    void PerspectiveCamera::MouseUp(const int & button, const float & x, const float & y)
+    {
     }
 
     bool PerspectiveCamera::IsPerspective() const noexcept {

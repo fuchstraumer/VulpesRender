@@ -9,10 +9,10 @@
 
 namespace vulpes {
 
-    class Arcball : public PerspectiveCamera {
+    class ArcballCamera : public PerspectiveCamera {
     public:
 
-        Arcball(const size_t& pixel_width, const size_t& pixel_height, const float& field_of_view, const UtilitySphere& _sphere);
+        ArcballCamera(const size_t& pixel_width, const size_t& pixel_height, const float& field_of_view, const UtilitySphere& _sphere);
 
         void MouseDown(const int& button, const float& x, const float& y) override;
         void MouseUp(const int& button, const float& x, const float& y) override;
@@ -20,15 +20,14 @@ namespace vulpes {
         void MouseScroll(const int& button, const float& delta);
 
         void ResetOrientation();
-        const glm::quat& GetOrientation() const noexcept;
-        void SetOrientation(const glm::quat& new_orientation);
 
+        void SetArcballSphere(const UtilitySphere& new_arcball_sphere);
 
     private:
 
         void mouseToSphere(const glm::ivec2& pos, const glm::ivec2& window_size, glm::vec3& result_vec, float& angle_addition);
         UtilitySphere sphere;
-        glm::quat initialOrientation, currOrientation;
+        glm::quat initialOrientation;
         glm::ivec2 initialMousePos;
         glm::vec3 fromVector, toVector, constraintAxis;
         bool axisConstrained = false;

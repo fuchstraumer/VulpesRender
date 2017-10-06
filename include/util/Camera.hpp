@@ -106,6 +106,12 @@ namespace vulpes {
         void SetPerspective(const float& vertical_fov_in_degrees, const float& aspect_ratio, const float& near_plane, const float& far_plane);
         virtual bool IsPerspective() const noexcept override;
 
+        // Perspective camera doesn't do anything for mouse button input.
+        void MouseDrag(const int& button, const float& x_offset, const float& y_offset);
+        void MouseScroll(const int& button, const float& y_scroll);
+        void MouseDown(const int& button, const float& x, const float& y);
+        void MouseUp(const int& button, const float& x, const float& y);
+
     };
 
 }

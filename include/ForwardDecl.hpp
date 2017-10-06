@@ -26,7 +26,7 @@ namespace vulpes {
 	class DescriptorPool;
     class PipelineLayout;
     class Camera;
-    class Arcball;
+    class ArcballCamera;
 	namespace util {
         class TransferTaskPool;
         class TaskPool;
