@@ -153,6 +153,8 @@ namespace vulpes {
         graphicsPipelineStateInfo.VertexInfo.pVertexBindingDescriptions = &bind_descr;
         graphicsPipelineStateInfo.VertexInfo.pVertexAttributeDescriptions = &attr_descr;
 
+		graphicsPipelineStateInfo.DepthStencilInfo.depthCompareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
+
     }
 
     void Skybox::createGraphicsPipeline(const VkRenderPass& render_pass) {
