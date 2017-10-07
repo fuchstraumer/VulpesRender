@@ -96,6 +96,9 @@ namespace vulpes {
 
         void setupGUI();
         void destroyGUI();
+        virtual void createGraphicsCmdPool();
+        virtual void createTransferCmdPool();
+        virtual void createSecondaryCmdPool();
 
         void cleanupShaderCacheFiles();
         virtual void mouseDown(const int& button, const float& x, const float& y);

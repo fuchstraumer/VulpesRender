@@ -261,30 +261,48 @@ namespace vulpes {
 
 	void BaseScene::PipelineCacheCreated(const uint16_t & cache_id) {
 		pipelineCacheHandles.push_back(cache_id);
-	}
+    }
+    
+    void BaseScene::createGraphicsCmdPool() {
 
-	void vulpes::BaseScene::CreateCommandPools() {
-
-        LOG(INFO) << "Creating primary graphics and transfer command pools...";
-
-		VkCommandPoolCreateInfo pool_info = vk_command_pool_info_base;
+        VkCommandPoolCreateInfo pool_info = vk_command_pool_info_base;
 		pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
 		pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
 		graphicsPool = std::make_unique<CommandPool>(device.get(), pool_info, true);
 
 		VkCommandBufferAllocateInfo alloc_info = vk_command_buffer_allocate_info_base;
 		graphicsPool->AllocateCmdBuffers(swapchain->ImageCount, alloc_info);
-		assert(swapchain->ImageCount < 10);
+        
+    }
 
-		pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
-		transferPool = std::make_unique<TransferPool>(device.get());
-		transferPool->AllocateCmdBuffers(1);
+    void BaseScene::createTransferCmdPool() {
+        VkCommandPoolCreateInfo pool_info = vk_command_pool_info_base;
+        pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+        pool_info.flags = device->QueueFamilyIndices.Transfer;
+        transferPool = std::make_unique<TransferPool>(device.get());
+        transferPool->AllocateCmdBuffers(1);
+    }
+
+    void BaseScene::createSecondaryCmdPool() {
 
         LOG(INFO) << "Creating command pool for secondary command buffers. " << std::to_string(swapchain->ImageCount * static_cast<uint32_t>(numSecondaryBuffers)) << " buffers requested.";
+        VkCommandPoolCreateInfo pool_info = vk_command_pool_info_base;
+		pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
 		pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
 		secondaryPool = std::make_unique<CommandPool>(device.get(), pool_info, false);
+        VkCommandBufferAllocateInfo alloc_info = vk_command_buffer_allocate_info_base;
 		alloc_info.level = VK_COMMAND_BUFFER_LEVEL_SECONDARY;
-		secondaryPool->AllocateCmdBuffers(swapchain->ImageCount * static_cast<uint32_t>(numSecondaryBuffers), alloc_info);
+        secondaryPool->AllocateCmdBuffers(swapchain->ImageCount * static_cast<uint32_t>(numSecondaryBuffers), alloc_info);
+        
+    }
+
+	void vulpes::BaseScene::CreateCommandPools() {
+
+        LOG(INFO) << "Creating primary graphics and transfer command pools...";
+
+        createGraphicsCmdPool();
+        createTransferCmdPool();
+		createSecondaryCmdPool();
 
 	}
 
