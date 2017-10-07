@@ -31,11 +31,17 @@ namespace vulpes {
 
 	template<typename offscreen_framebuffer_type>
 	inline const VkRenderPass & OffscreenFramebuffers<offscreen_framebuffer_type>::GetRenderpass() const noexcept {
-		return renderpass;
-	}
+		return renderpass->vkHandle();
+    }
+    
+    template<typename offscreen_framebuffer_type>
+    inline const VkRenderPassBeginInfo& OffscreenFramebuffers<offscreen_framebuffer_type>::GetRenderpassBeginInfo() const noexcept {
+        return renderpass->BeginInfo();
+    }
 
 	template<typename offscreen_framebuffer_type>
 	inline const VkFramebuffer & OffscreenFramebuffers<offscreen_framebuffer_type>::GetFramebuffer(const size_t & idx) const noexcept {
+        renderpass->UpdateBeginInfo(framebuffers[idx]);
 		return framebuffers[idx];
 	}
 
@@ -476,8 +482,8 @@ namespace vulpes {
 		subpassDependencies.push_back(std::move(first_dependency));
 		subpassDependencies.push_back(std::move(second_dependency));
 
-	}
-
+    }
+ 
 	template<typename offscreen_framebuffer_type>
 	inline void OffscreenFramebuffers<offscreen_framebuffer_type>::createRenderpass() {
 
@@ -489,10 +495,19 @@ namespace vulpes {
 		renderpass_info.dependencyCount = static_cast<uint32_t>(subpassDependencies.size());
 		renderpass_info.pDependencies = subpassDependencies.data();
 
-		VkResult result = vkCreateRenderPass(device->vkHandle(), &renderpass_info, nullptr, &renderpass);
-		VkAssert(result);
+        renderpass = std::make_unique<Renderpass>(device, renderpass_info);
 
-	}
+    }
+
+    template<>
+    inline void OffscreenFramebuffers<picking_framebuffer_t>::setupRenderpassBeginInfo() {
+        const std::vector<VkClearValue> clear_values {
+            VkClearValue{ 0.0f, 0.0f, 0.0f, 0.0f },
+            VkClearValue{ 0.0f, 0.0f, 0.0f, 0.0f},
+            VkClearValue{ 1.0f, 0 }
+        };
+        renderpass->SetupBeginInfo(clear_values, swapchain->Extent);
+    }
 
 	template<typename offscreen_framebuffer_type>
 	inline void OffscreenFramebuffers<offscreen_framebuffer_type>::createFramebuffers() {
@@ -505,7 +520,7 @@ namespace vulpes {
 
         framebufferCreateInfo.attachmentCount = static_cast<uint32_t>(attachment_views.size());
         framebufferCreateInfo.pAttachments = attachment_views.data();
-		framebufferCreateInfo.renderPass = renderpass;
+		framebufferCreateInfo.renderPass = renderpass->vkHandle();
 
 		for(size_t i = 0; i < framebuffers.size(); ++i) {
             VkResult result = vkCreateFramebuffer(device->vkHandle(), &framebufferCreateInfo, nullptr, &framebuffers[i]);
@@ -524,7 +539,7 @@ namespace vulpes {
 		attachment_views[4] = attachments[4].View();
 
         //framebufferCreateInfo.extent = extents;
-        framebufferCreateInfo.renderPass = renderpass;
+        framebufferCreateInfo.renderPass = renderpass->vkHandle();
 
 		for (size_t i = 0; i < framebuffers.size(); ++i) {
 			attachment_views[0] = swapchain->ImageViews[i];

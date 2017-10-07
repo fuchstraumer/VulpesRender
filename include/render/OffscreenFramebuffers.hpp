@@ -5,6 +5,7 @@
 #include "vpr_stdafx.h"
 #include "Framebuffer.hpp"
 #include "Swapchain.hpp"
+#include "Renderpass.hpp"
 
 namespace vulpes {
     
@@ -35,7 +36,8 @@ namespace vulpes {
 		
 		bool Created = false;
 
-		const VkRenderPass& GetRenderpass() const noexcept;
+        const VkRenderPass& GetRenderpass() const noexcept;
+        const VkRenderPassBeginInfo& GetRenderpassBeginInfo() const noexcept;
 		const VkFramebuffer& GetFramebuffer(const size_t& idx) const noexcept;
 		const Image& GetAttachment(const size_t& idx) const noexcept;
 
@@ -52,7 +54,8 @@ namespace vulpes {
 		void setupSubpassDescriptions();
 		void setupSubpassDependencies();
 
-		void createRenderpass();
+        void createRenderpass();
+        void setupRenderpassBeginInfo();
 		virtual void createFramebuffers();
 		void createSampler();
 
@@ -61,7 +64,7 @@ namespace vulpes {
 		std::vector<VkAttachmentReference> attachmentReferences;
 		std::vector<VkSubpassDependency> subpassDependencies;
 
-		VkRenderPass renderpass;
+		std::unique_ptr<Renderpass> renderpass;
 		VkSampler sampler;
 		VkExtent3D extents;
 		std::vector<VkSubpassDescription> subpassDescriptions;
