@@ -68,7 +68,7 @@ namespace vulpes {
         /** Calls clear() + shrink_to_fit() on vertex and index containers to free their memory. */
         void FreeCpuData();
 
-        const glm::mat4& GetModelMatrix() const noexcept;
+        const glm::mat4& GetModelMatrix() noexcept;
         virtual void SetModelMatrix(const glm::mat4& updated_model);
 
         void UpdatePosition(const glm::vec3& new_position);
@@ -92,7 +92,7 @@ namespace vulpes {
 
         glm::mat4 model;
         glm::vec3 position, scale, rotation;
-
+        bool modelMatrixCached = false;
         std::vector<vertex_t> vertices;
         std::vector<uint32_t> indices;
 

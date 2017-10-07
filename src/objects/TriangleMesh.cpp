@@ -97,7 +97,10 @@ namespace vulpes {
 
     }
 
-    const glm::mat4& TriangleMesh::GetModelMatrix() const noexcept {
+    const glm::mat4& TriangleMesh::GetModelMatrix() noexcept {
+        if (!modelMatrixCached) {
+            updateModelMatrix();
+        }
         return model;
     }
 
@@ -107,17 +110,17 @@ namespace vulpes {
 
     void TriangleMesh::UpdatePosition(const glm::vec3& new_position) {
         position = new_position;
-        updateModelMatrix();
+        modelMatrixCached = false;
     }
 
     void TriangleMesh::UpdateScale(const glm::vec3& new_scale) {
         scale = new_scale;
-        updateModelMatrix();
+        modelMatrixCached = false;
     }
 
     void TriangleMesh::UpdateRotation(const glm::vec3& new_rotation) {
         rotation = new_rotation;
-        updateModelMatrix();
+        modelMatrixCached = false;
     }
 
     const glm::vec3& TriangleMesh::GetPosition() const noexcept {
@@ -139,6 +142,7 @@ namespace vulpes {
         glm::mat4 rotation_y_matrix = glm::rotate(glm::mat4(1.0f), rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
         glm::mat4 rotation_z_matrix = glm::rotate(glm::mat4(1.0f), rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
         model = translation_matrix * rotation_x_matrix * rotation_y_matrix * rotation_z_matrix * scale_matrix;
+        modelMatrixCached = true;
     }
 
     void TriangleMesh::bindBuffers(const VkCommandBuffer& draw_cmd) const noexcept {
