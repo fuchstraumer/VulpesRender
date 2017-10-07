@@ -60,16 +60,17 @@ namespace vulpes {
 		}
 	}
 
-	void CommandPool::AllocateCmdBuffers(const uint32_t & num_buffers, const VkCommandBufferAllocateInfo& _alloc_info){
+	void CommandPool::AllocateCmdBuffers(const uint32_t & num_buffers, const VkCommandBufferLevel& cmd_buffer_level){
 
 		if (!cmdBuffers.empty()) {
 			return;
 		}
 
 		cmdBuffers.resize(num_buffers);
-		auto alloc_info = _alloc_info;
+		VkCommandBufferAllocateInfo alloc_info = vk_command_buffer_allocate_info_base;
 		alloc_info.commandPool = handle;
-		alloc_info.commandBufferCount = num_buffers;
+        alloc_info.commandBufferCount = num_buffers;
+        alloc_info.level = cmd_buffer_level;
 		VkResult result = vkAllocateCommandBuffers(parent->vkHandle(), &alloc_info, cmdBuffers.data());
 		LOG_IF(BaseScene::SceneConfiguration.VerboseLogging, INFO) << std::to_string(num_buffers) << " command buffers allocated for command pool " << handle;
 		VkAssert(result);

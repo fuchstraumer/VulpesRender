@@ -33,7 +33,7 @@ namespace vulpes {
 		void Destroy();
 		void Create();
 
-        void AllocateCmdBuffers(const uint32_t& num_buffers, const VkCommandBufferAllocateInfo& alloc_info = vk_command_buffer_allocate_info_base);
+        void AllocateCmdBuffers(const uint32_t& num_buffers, const VkCommandBufferLevel& cmd_buffer_level);
         
         /** Resets the entire command pool via a call to VkResetCommandPool. Uses VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT by default, which releases
         *   all resources that the Vulkan implementation internally allocates. This may take time, and may require re-allocation upon reinitialization
