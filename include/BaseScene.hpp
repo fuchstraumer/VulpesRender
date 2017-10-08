@@ -166,6 +166,10 @@ namespace vulpes {
         else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
             return arcballCamera.GetViewMatrix();
         }
+        else {
+            LOG(ERROR) << "Invalid camera type detected: defaulting to FPS camera.";
+            return fpsCamera.GetViewMatrix();
+        }
     }
 
     inline glm::mat4 BaseScene::GetProjectionMatrix() const noexcept {
@@ -174,6 +178,10 @@ namespace vulpes {
         }
         else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
             return arcballCamera.GetProjectionMatrix();
+        }
+        else {
+            LOG(ERROR) << "Invalid camera type detected: defaulting to FPS camera.";
+            return fpsCamera.GetProjectionMatrix();
         }
     }
 
@@ -184,6 +192,10 @@ namespace vulpes {
         else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
             return arcballCamera.GetEyeLocation();
         }
+        else {
+            LOG(ERROR) << "Invalid camera type detected: defaulting to FPS camera.";
+            return fpsCamera.GetEyeLocation();
+        }
     }
 
     inline void BaseScene::SetCameraPosition(const glm::vec3& new_camera_pos) noexcept {
@@ -193,6 +205,10 @@ namespace vulpes {
         else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
             arcballCamera.SetEyeLocation(new_camera_pos);
         }
+        else {
+            LOG(ERROR) << "Invalid camera type detected: defaulting to FPS camera.";
+            fpsCamera.SetEyeLocation(new_camera_pos);
+        }
     }
 
     inline void BaseScene::SetCameraTarget(const glm::vec3& target_pos) {
@@ -201,6 +217,10 @@ namespace vulpes {
         }
         else if (SceneConfiguration.CameraType == cameraType::ARCBALL) {
             arcballCamera.LookAtTarget(target_pos);
+        }
+        else {
+            LOG(ERROR) << "Invalid camera type detected: defaulting to FPS camera.";
+            fpsCamera.LookAtTarget(target_pos);
         }
     }
 
