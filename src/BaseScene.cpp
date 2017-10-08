@@ -269,9 +269,7 @@ namespace vulpes {
 		pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
 		pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
 		graphicsPool = std::make_unique<CommandPool>(device.get(), pool_info, true);
-
-		VkCommandBufferAllocateInfo alloc_info = vk_command_buffer_allocate_info_base;
-		graphicsPool->AllocateCmdBuffers(swapchain->ImageCount, alloc_info);
+		graphicsPool->AllocateCmdBuffers(swapchain->ImageCount, VK_COMMAND_BUFFER_LEVEL_PRIMARY);
         
     }
 
@@ -280,7 +278,7 @@ namespace vulpes {
         pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
         pool_info.flags = device->QueueFamilyIndices.Transfer;
         transferPool = std::make_unique<TransferPool>(device.get());
-        transferPool->AllocateCmdBuffers(1);
+        transferPool->AllocateCmdBuffers(1, VK_COMMAND_BUFFER_LEVEL_PRIMARY);
     }
 
     void BaseScene::createSecondaryCmdPool() {
@@ -290,9 +288,7 @@ namespace vulpes {
 		pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
 		pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
 		secondaryPool = std::make_unique<CommandPool>(device.get(), pool_info, false);
-        VkCommandBufferAllocateInfo alloc_info = vk_command_buffer_allocate_info_base;
-		alloc_info.level = VK_COMMAND_BUFFER_LEVEL_SECONDARY;
-        secondaryPool->AllocateCmdBuffers(swapchain->ImageCount * static_cast<uint32_t>(numSecondaryBuffers), alloc_info);
+        secondaryPool->AllocateCmdBuffers(swapchain->ImageCount * static_cast<uint32_t>(numSecondaryBuffers), VK_COMMAND_BUFFER_LEVEL_SECONDARY);
         
     }
 

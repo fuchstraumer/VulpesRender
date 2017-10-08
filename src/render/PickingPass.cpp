@@ -1,5 +1,5 @@
 #include "vpr_stdafx.h"
-#include "objects/PickingPass.hpp"
+#include "render/PickingPass.hpp"
 #include "objects/vertex_t.hpp"
 #include "BaseScene.hpp"
 

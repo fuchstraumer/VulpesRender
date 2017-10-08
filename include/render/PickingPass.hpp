@@ -33,7 +33,7 @@ namespace vulpes {
         template<typename T>
         uint32_t AddObjectForPicking(T* triangle_mesh) {
             static_assert(is_triangle_mesh<T>::value, "Can't add object that doesn't inherit from TriangleMesh to picking objects.");
-            auto inserted = pickingObjects.insert(std::make_pair(static_cast<uint32_t>(std::hash(reinterpret_cast<void*>(triangle_mesh)), reinterpret_cast<void*>(triangle_mesh))));
+            auto inserted = pickingObjects.insert(std::make_pair(static_cast<uint32_t>(std::hash<void*>(reinterpret_cast<void*>(triangle_mesh)), reinterpret_cast<void*>(triangle_mesh))));
             if(!inserted.second) {
                 LOG(ERROR) << "Tried to insert an object twice into the picking pass.";
                 throw std::runtime_error("Tried to insert object twice into picking pass.");
