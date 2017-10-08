@@ -15,7 +15,7 @@ namespace vulpes {
         return s + (e - s) * t;
     }
 
-    glm::vec3 cameraBase::GetEyeLocation() const noexcept {
+    const glm::vec3& cameraBase::GetEyeLocation() const noexcept {
         return eyePosition;
     }
 
@@ -24,7 +24,7 @@ namespace vulpes {
         eyePosition = new_eye_position;
     }
 
-    glm::vec3 cameraBase::GetViewDirection() const noexcept {
+    const glm::vec3& cameraBase::GetViewDirection() const noexcept {
         return viewDirection;
     }
 
@@ -82,7 +82,7 @@ namespace vulpes {
     }
 
     float cameraBase::GetFocalLength() const noexcept {
-        return 1.0f / (std::tanf(glm::radians(fieldOfView)*0.50f) * 2.0f);
+        return 1.0f / (std::tan(glm::radians(fieldOfView)*0.50f) * 2.0f);
     }
 
     float cameraBase::GetPivotDistance() const noexcept {
@@ -164,7 +164,7 @@ namespace vulpes {
         updateMatrices();
         const float s = (u_pos - 0.50f) * image_plane_aspect_ratio;
         const float t = (v_pos - 0.50f);
-        const float view_distance = image_plane_aspect_ratio / std::fabsf(frustumRight - frustumLeft) * nearClip;
+        const float view_distance = image_plane_aspect_ratio / fabsf(frustumRight - frustumLeft) * nearClip;
         return Ray(eyePosition, glm::normalize(right * s + up * t - (negViewDirection * view_distance)));
     }
 
