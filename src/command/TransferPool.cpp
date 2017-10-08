@@ -17,7 +17,7 @@ namespace vulpes {
 		allocInfo.commandPool = handle;
 		allocInfo.commandBufferCount = 1;
 
-		AllocateCmdBuffers(1);
+		AllocateCmdBuffers(1, VK_COMMAND_BUFFER_LEVEL_PRIMARY);
 
 		result = vkCreateFence(parent->vkHandle(), &vk_fence_create_info_base, allocators, &fence);
 		VkAssert(result);
