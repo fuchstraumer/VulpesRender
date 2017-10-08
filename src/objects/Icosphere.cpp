@@ -1,7 +1,6 @@
 #include "vpr_stdafx.h"
 #include <unordered_map>
 #include "objects/Icosphere.hpp"
-#include "core/Instance.hpp"
 #include "core/LogicalDevice.hpp"
 #include "command/TransferPool.hpp"
 #include "core/PhysicalDevice.hpp"
