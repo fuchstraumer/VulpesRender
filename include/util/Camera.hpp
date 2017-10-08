@@ -1,9 +1,9 @@
 #pragma once
 #ifndef VULPES_CAMERA_H
 #define VULPES_CAMERA_H
+
 #include "vpr_stdafx.h"
 #include "util/Ray.hpp"
-#include "util/ViewFrustum.hpp"
 #include "glm/gtc/quaternion.hpp"
 
 namespace vulpes {
@@ -32,9 +32,9 @@ namespace vulpes {
 		virtual void MouseDown(const int& button, const float& x, const float& y) = 0;
 		virtual void MouseUp(const int& button, const float& x, const float& y)= 0;
 
-        glm::vec3 GetEyeLocation() const noexcept;
+        const glm::vec3& GetEyeLocation() const noexcept;
         void SetEyeLocation(const glm::vec3& new_eye_position);
-        glm::vec3 GetViewDirection() const noexcept;
+        const glm::vec3& GetViewDirection() const noexcept;
         void SetViewDirection(const glm::vec3& new_view_dir);
         void LookAtTarget(const glm::vec3& target_position);
         void LookTowardsTarget(const glm::vec3& viewer_position, const glm::vec3& target_position, const glm::vec3& new_up_vec = glm::vec3(0.0f));
@@ -107,10 +107,10 @@ namespace vulpes {
         virtual bool IsPerspective() const noexcept override;
 
         // Perspective camera doesn't do anything for mouse button input.
-        void MouseDrag(const int& button, const float& x_offset, const float& y_offset);
-        void MouseScroll(const int& button, const float& y_scroll);
-        void MouseDown(const int& button, const float& x, const float& y);
-        void MouseUp(const int& button, const float& x, const float& y);
+        void MouseDrag(const int& button, const float& x_offset, const float& y_offset) override;
+        void MouseScroll(const int& button, const float& y_scroll) override;
+        void MouseDown(const int& button, const float& x, const float& y) override;
+        void MouseUp(const int& button, const float& x, const float& y) override;
 
     };
 

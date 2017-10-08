@@ -17,7 +17,7 @@ namespace vulpes {
         void MouseDown(const int& button, const float& x, const float& y) override;
         void MouseUp(const int& button, const float& x, const float& y) override;
         void MouseDrag(const int& button, const float& x, const float& y) override;
-        void MouseScroll(const int& button, const float& delta);
+        void MouseScroll(const int& button, const float& delta) override;
 
         void ResetOrientation();
 
