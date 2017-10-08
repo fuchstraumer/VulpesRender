@@ -222,7 +222,8 @@ void HouseScene::destroy() {
 
 void HouseScene::loadMeshTexture()  { 
     int texture_width, texture_height, texture_channels;
-    stbi_uc* pixels = stbi_load("../scenes/scene_resources/chalet.jpg", &texture_width, &texture_height, &texture_channels, STBI_rgb_alpha);
+    std::string texture_path = SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/chalet.jpg";
+    stbi_uc* pixels = stbi_load(texture_path.c_str(), &texture_width, &texture_height, &texture_channels, STBI_rgb_alpha);
     LOG(INFO) << "Loaded Chalet object texture.";
     VkDeviceSize image_size = texture_width * texture_height * 4;
 
@@ -232,7 +233,8 @@ void HouseScene::loadMeshTexture()  {
     vulpes::Buffer::CreateStagingBuffer(device.get(), image_size, image_staging_buffer, image_staging_alloc);
 
     void* mapped;
-    vkMapMemory(device->vkHandle(), image_staging_alloc.Memory(), 0, image_size, 0, &mapped);
+    VkResult err = vkMapMemory(device->vkHandle(), image_staging_alloc.Memory(), 0, image_size, 0, &mapped);
+    VkAssert(err);
         LOG(INFO) << "Copying Chalet texture data to Vulkan mapped memory now.";
         memcpy(mapped, pixels, static_cast<size_t>(image_size));
     image_staging_alloc.Unmap();
@@ -247,6 +249,7 @@ void HouseScene::loadMeshTexture()  {
         texture->TransferToDevice(cmd);
     transferPool->Submit();
 
+    stbi_image_free(pixels);
 }
     
 
@@ -256,7 +259,8 @@ void HouseScene::loadMeshData()  {
     std::vector<tinyobj::material_t> materials;
     std::string err;
     LOG(INFO) << "Importing .obj file.";
-    if(!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, "../scenes/scene_resources/Chalet.obj")){
+    std::string obj_path = SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/Chalet.obj";
+    if(!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, obj_path.c_str())){
         LOG(ERROR) << "Loading obj file failed: " << err;
         throw std::runtime_error(err.c_str());
     }
@@ -326,8 +330,8 @@ void HouseScene::createPipelineLayout()  {
 }
 
 void HouseScene::createShaders() {
-    vert = std::make_unique<vulpes::ShaderModule>(device.get(), "../scenes/scene_resources/shaders/house.vert.spv", VK_SHADER_STAGE_VERTEX_BIT);
-    frag = std::make_unique<vulpes::ShaderModule>(device.get(), "../scenes/scene_resources/shaders/house.frag.spv", VK_SHADER_STAGE_FRAGMENT_BIT);
+    vert = std::make_unique<vulpes::ShaderModule>(device.get(), SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/shaders/house.vert.spv", VK_SHADER_STAGE_VERTEX_BIT);
+    frag = std::make_unique<vulpes::ShaderModule>(device.get(), SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/shaders/house.frag.spv", VK_SHADER_STAGE_FRAGMENT_BIT);
 }
 
 void HouseScene::createPipelineCache() {
@@ -376,6 +380,9 @@ void HouseScene::createGraphicsPipeline() {
 
 
 int main() {
+    #ifdef __linux__
+    vulpes::BaseScene::SceneConfiguration.ResourcePathPrefixStr = std::string("../../");
+    #endif
     vulpes::BaseScene::SceneConfiguration.ApplicationName = std::string("House DemoScene");
     vulpes::BaseScene::SceneConfiguration.EnableGUI = false;
     vulpes::BaseScene::SceneConfiguration.EnableMouseLocking = false;

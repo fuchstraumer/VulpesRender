@@ -2,7 +2,7 @@
 #define PICKING_OBJECT_HPP
 
 #include "vpr_stdafx.h"
-#include "TriangleMesh.hpp"
+#include "objects/TriangleMesh.hpp"
 #include "resource/Image.hpp"
 #include "render/OffscreenFramebuffers.hpp"
 #include "command/CommandPool.hpp"
@@ -33,7 +33,8 @@ namespace vulpes {
         template<typename T>
         uint32_t AddObjectForPicking(T* triangle_mesh) {
             static_assert(is_triangle_mesh<T>::value, "Can't add object that doesn't inherit from TriangleMesh to picking objects.");
-            auto inserted = pickingObjects.insert(std::make_pair(static_cast<uint32_t>(std::hash<void*>(reinterpret_cast<void*>(triangle_mesh)), reinterpret_cast<void*>(triangle_mesh))));
+            uint32_t object_idx = static_cast<uint32_t>(pickingObjects.size());
+            auto inserted = pickingObjects.insert(std::make_pair(triangle_mesh, object_idx));
             if(!inserted.second) {
                 LOG(ERROR) << "Tried to insert an object twice into the picking pass.";
                 throw std::runtime_error("Tried to insert object twice into picking pass.");
@@ -42,7 +43,7 @@ namespace vulpes {
 
         bool WasObjectPicked(const size_t& mouse_x, const size_t& mouse_y, const uint32_t& uuid) {
             readbackFuture.get();
-
+            return false;
         }
 
         void RenderPickingPass(const size_t& frame_idx, const VkViewport& viewport, const VkRect2D& scissor, const glm::mat4& view);
@@ -70,7 +71,7 @@ namespace vulpes {
         std::unique_ptr<GraphicsPipeline> graphicsPipeline;
         std::unique_ptr<PipelineLayout> pipelineLayout;
         std::unique_ptr<ShaderModule> vert, frag;
-        std::unordered_map<void*, uint32_t> pickingObjects;
+        std::unordered_map<TriangleMesh*, uint32_t> pickingObjects;
         std::unique_ptr<CommandPool> primaryPool, secondaryPool;
         std::unique_ptr<OffscreenFramebuffers<picking_framebuffer_t>> destFramebuffers;
         std::unique_ptr<Image> destImage;

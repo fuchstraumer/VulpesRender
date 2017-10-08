@@ -170,7 +170,7 @@ namespace vulpes {
                 vkCmdBindPipeline(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline->vkHandle());
                 vkCmdSetViewport(cmd, 0, 1, &viewport);
                 vkCmdSetScissor(cmd, 0, 1, &scissor);
-                TriangleMesh* mesh = (TriangleMesh*)_object.second;
+                TriangleMesh* mesh = _object.first;
                 uboData.model = mesh->GetModelMatrix();
                 vkCmdPushConstants(cmd, pipelineLayout->vkHandle(), VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(glm::mat4) * 3, &uboData);
                 vkCmdPushConstants(cmd, pipelineLayout->vkHandle(), VK_SHADER_STAGE_FRAGMENT_BIT, sizeof(glm::mat4) * 3, sizeof(uint32_t), &_object.first);
@@ -257,12 +257,10 @@ namespace vulpes {
 		pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
 		primaryPool = std::make_unique<CommandPool>(device, pool_info, true);
 
-		VkCommandBufferAllocateInfo alloc_info = vk_command_buffer_allocate_info_base;
-		primaryPool->AllocateCmdBuffers(swapchain->ImageCount, alloc_info);
+		primaryPool->AllocateCmdBuffers(swapchain->ImageCount, VK_COMMAND_BUFFER_LEVEL_PRIMARY);
 
 		secondaryPool = std::make_unique<CommandPool>(device, pool_info, false);
-		alloc_info.level = VK_COMMAND_BUFFER_LEVEL_SECONDARY;
-        secondaryPool->AllocateCmdBuffers(swapchain->ImageCount, alloc_info);
+        secondaryPool->AllocateCmdBuffers(swapchain->ImageCount, VK_COMMAND_BUFFER_LEVEL_SECONDARY);
 
     }
 
