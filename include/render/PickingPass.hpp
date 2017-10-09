@@ -29,16 +29,12 @@ namespace vulpes {
 
         PickingPass(const Device* _device, const Swapchain* _swapchain, const glm::mat4& projection);
         ~PickingPass();
-        
-        template<typename T>
-        uint32_t AddObjectForPicking(T* triangle_mesh) {
-            static_assert(is_triangle_mesh<T>::value, "Can't add object that doesn't inherit from TriangleMesh to picking objects.");
+
+        uint32_t AddObjectForPicking(TriangleMesh* triangle_mesh) {
+           
             uint32_t object_idx = static_cast<uint32_t>(pickingObjects.size());
             auto inserted = pickingObjects.insert(std::make_pair(triangle_mesh, object_idx));
-            if(!inserted.second) {
-                LOG(ERROR) << "Tried to insert an object twice into the picking pass.";
-                throw std::runtime_error("Tried to insert object twice into picking pass.");
-            }
+
         }
 
         bool WasObjectPicked(const size_t& mouse_x, const size_t& mouse_y, const uint32_t& uuid) {
