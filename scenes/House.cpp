@@ -17,7 +17,11 @@
 #include "stb/stb_image.h"
 #include "glm/gtx/hash.hpp"
 #include <unordered_map>
+#include <string>
+#include <typeinfo>
+
 INITIALIZE_EASYLOGGINGPP
+
 /** This serves as a super-simple example of how to derive from a vulpes::BaseScene object. It doesn't render a GUI, however, so another 
  *  example is required to show how to use that.
  *  \ingroup Scenes
@@ -222,8 +226,10 @@ void HouseScene::destroy() {
 
 void HouseScene::loadMeshTexture()  { 
     int texture_width, texture_height, texture_channels;
-    std::string texture_path = SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/chalet.jpg";
+    std::string texture_path = SceneConfiguration.ResourcePathPrefixStr + std::string("scenes/scene_resources/chalet.jpg");
+    std::cerr << texture_path << "\n";
     stbi_uc* pixels = stbi_load(texture_path.c_str(), &texture_width, &texture_height, &texture_channels, STBI_rgb_alpha);
+    assert(pixels != nullptr);
     LOG(INFO) << "Loaded Chalet object texture.";
     VkDeviceSize image_size = texture_width * texture_height * 4;
 
@@ -259,7 +265,7 @@ void HouseScene::loadMeshData()  {
     std::vector<tinyobj::material_t> materials;
     std::string err;
     LOG(INFO) << "Importing .obj file.";
-    std::string obj_path = SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/Chalet.obj";
+    std::string obj_path = SceneConfiguration.ResourcePathPrefixStr + "scenes/scene_resources/chalet.obj";
     if(!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, obj_path.c_str())){
         LOG(ERROR) << "Loading obj file failed: " << err;
         throw std::runtime_error(err.c_str());
@@ -381,7 +387,7 @@ void HouseScene::createGraphicsPipeline() {
 
 int main() {
     #ifdef __linux__
-    vulpes::BaseScene::SceneConfiguration.ResourcePathPrefixStr = std::string("../../");
+    vulpes::BaseScene::SceneConfiguration.ResourcePathPrefixStr = std::string("../");
     #endif
     vulpes::BaseScene::SceneConfiguration.ApplicationName = std::string("House DemoScene");
     vulpes::BaseScene::SceneConfiguration.EnableGUI = false;
