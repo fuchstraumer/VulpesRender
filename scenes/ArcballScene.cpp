@@ -8,6 +8,7 @@
 #include "util/Ray.hpp"
 #include "objects/Icosphere.hpp"
 #include "objects/Skybox.hpp"
+#include "render/PickingPass.hpp"
 #include "util/Camera.hpp"
 #include "util/Arcball.hpp"
 #define STB_IMAGE_IMPLEMENTATION
@@ -37,11 +38,13 @@ namespace vulpes {
         void createSkybox();
         void createIcosphere();
         void createDescriptorPool();
+        void createPickingPass();
         void updateUBOs();
 
         std::unique_ptr<DescriptorPool> descriptorPool;
         std::unique_ptr<Skybox> skybox;
         std::unique_ptr<Icosphere> earthSphere;
+        std::unique_ptr<PickingPass> pickingPass;
         VkViewport viewport = vk_default_viewport;
         VkRect2D scissor = vk_default_viewport_scissor;
 
@@ -112,6 +115,8 @@ namespace vulpes {
             
             err = vkEndCommandBuffer(graphicsPool->GetCmdBuffer(i));
             VkAssert(err);
+
+            //pickingPass->RenderPickingPass(i, viewport, scissor, GetViewMatrix());
             
         }
     }
@@ -127,6 +132,7 @@ namespace vulpes {
         createDescriptorPool();
         createSkybox();
         createIcosphere();
+        //createPickingPass();
     }
 
     void ArcballScene::destroy() {
@@ -155,6 +161,11 @@ namespace vulpes {
         descriptorPool->Create();
     }
 
+    void ArcballScene::createPickingPass() {
+        pickingPass = std::make_unique<PickingPass>(device.get(), swapchain.get(), GetProjectionMatrix());
+        pickingPass->AddObjectForPicking(dynamic_cast<TriangleMesh*>(earthSphere.get()));
+    }
+
     void ArcballScene::updateUBOs() {
         skybox->UpdateUBO(GetViewMatrix());
         earthSphere->UpdateUBO(GetViewMatrix(), GetCameraPosition());
@@ -173,6 +184,7 @@ int main() {
     vulpes::BaseScene::SceneConfiguration.EnableGUI = true;
     vulpes::BaseScene::SceneConfiguration.EnableMouseLocking = false;
     vulpes::BaseScene::SceneConfiguration.CameraType = vulpes::cameraType::ARCBALL;
+    vulpes::BaseScene::SceneConfiguration.ApplicationName = "Arcball DemoScene";
 #ifdef _WIN32
     vulpes::BaseScene::SceneConfiguration.ResourcePathPrefixStr = std::string("../");
 #else
