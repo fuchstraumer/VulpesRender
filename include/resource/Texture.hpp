@@ -10,6 +10,7 @@
 #include "../render/Multisampling.hpp"
 #include "Image.hpp"
 
+#include "gli/gli.hpp"
 #include "stb/stb_image.h"
 
 namespace vulpes {
