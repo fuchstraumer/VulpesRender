@@ -22,6 +22,7 @@ namespace vulpes {
 		setupSubpassDescriptions();
 		setupSubpassDependencies();
 		createRenderpass();
+        setupRenderpassBeginInfo();
 		createFramebuffers();
 		createSampler();
 
@@ -30,8 +31,8 @@ namespace vulpes {
 	}
 
 	template<typename offscreen_framebuffer_type>
-	inline const VkRenderPass & OffscreenFramebuffers<offscreen_framebuffer_type>::GetRenderpass() const noexcept {
-		return renderpass->vkHandle();
+    inline const VkRenderPass & OffscreenFramebuffers<offscreen_framebuffer_type>::GetRenderpass() const noexcept {
+        return renderpass->vkHandle();
     }
     
     template<typename offscreen_framebuffer_type>
