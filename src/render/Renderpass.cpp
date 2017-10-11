@@ -2,18 +2,19 @@
 #include "render/Renderpass.hpp"
 #include "core/LogicalDevice.hpp"
 namespace vulpes {
-	Renderpass::Renderpass(const Device* dvc, const VkRenderPassCreateInfo & create_info) : parent(dvc), createInfo(create_info) {
+	Renderpass::Renderpass(const Device* dvc, const VkRenderPassCreateInfo & create_info) : parent(dvc), createInfo(create_info), beginInfo(vk_renderpass_begin_info_base) {
 		VkResult result = vkCreateRenderPass(dvc->vkHandle(), &create_info, allocators, &handle);
 		VkAssert(result);
 	}
 
-	Renderpass::Renderpass(Renderpass && other) noexcept : createInfo(std::move(other.createInfo)), handle(std::move(other.handle)), parent(other.parent), allocators(other.allocators) {
+	Renderpass::Renderpass(Renderpass && other) noexcept : beginInfo(std::move(other.beginInfo)), createInfo(std::move(other.createInfo)), handle(std::move(other.handle)), parent(other.parent), allocators(other.allocators) {
 		other.handle = VK_NULL_HANDLE;
 	}
 
 	Renderpass & Renderpass::operator=(Renderpass && other) noexcept {
 		handle = std::move(other.handle);
 		createInfo = std::move(other.createInfo);
+        beginInfo = std::move(other.beginInfo);
 		parent = other.parent;
 		allocators = other.allocators;
 		other.handle = VK_NULL_HANDLE;
