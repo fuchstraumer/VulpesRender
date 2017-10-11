@@ -116,13 +116,14 @@ namespace vulpes {
             err = vkEndCommandBuffer(graphicsPool->GetCmdBuffer(i));
             VkAssert(err);
 
-            //pickingPass->RenderPickingPass(i, viewport, scissor, GetViewMatrix());
+            pickingPass->RenderPickingPass(i, viewport, scissor, GetViewMatrix());
             
         }
     }
 
     void ArcballScene::endFrame(const size_t & idx) {
         vkResetFences(device->vkHandle(), 1, &presentFences[idx]);
+        pickingPass->submitGraphicsCmds();
     }
 
     void ArcballScene::create() {
@@ -132,7 +133,7 @@ namespace vulpes {
         createDescriptorPool();
         createSkybox();
         createIcosphere();
-        //createPickingPass();
+        createPickingPass();
     }
 
     void ArcballScene::destroy() {
@@ -164,6 +165,7 @@ namespace vulpes {
     void ArcballScene::createPickingPass() {
         pickingPass = std::make_unique<PickingPass>(device.get(), swapchain.get(), GetProjectionMatrix());
         pickingPass->AddObjectForPicking(dynamic_cast<TriangleMesh*>(earthSphere.get()));
+        pickingPass->AddObjectForPicking(dynamic_cast<TriangleMesh*>(skybox.get()));
     }
 
     void ArcballScene::updateUBOs() {
