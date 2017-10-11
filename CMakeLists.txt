@@ -120,14 +120,15 @@ SOURCE_GROUP("imgui" FILES ${IMGUI})
 SOURCE_GROUP("objects" FILES ${OBJECTS})
 SOURCE_GROUP("shaders" FILES ${SHADERS})
 
-IF(WIN32)
-SET(CMAKE_STATIC_LINKER_FLAGS_DEBUG "-NODEFAULTLIB 
-  \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3-gd.lib")
-SET(CMAKE_STATIC_LINKER_FLAGS_RELEASE "-NODEFAULTLIB 
-  \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib\"")
-ENDIF()
+#IF(WIN32)
+#SET(CMAKE_STATIC_LINKER_FLAGS_DEBUG "-NODEFAULTLIB 
+#  \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3-gd.lib")
+#SET(CMAKE_STATIC_LINKER_FLAGS_RELEASE "-NODEFAULTLIB 
+#  \"${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib\"")
+#ENDIF()
 
 IF(MSVC) # enable multi-threaded compile for release builds, when its available
+  SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Gm")
   SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MP")
   SET(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_MINSIZEREL} /MP")
   SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /MP")
@@ -156,11 +157,7 @@ ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "inc
                                 ${OBJECTS} ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} 
                                 ${CORE} ${RESOURCES} ${RENDER} ${GUI} ${SHADERS}
                                 )
-ADD_DEPENDENCIES(VulpesRender UPDATE_IMGUI_SUBMODULE UPDATE_STB UPDATE_TINYOBJ) # make sure we update+init imgui before creating the project
-
-IF(NOT WIN32)
-ADD_DEPENDENCIES(VulpesRender glfw3)
-ENDIF()
+#ADD_DEPENDENCIES(VulpesRender UPDATE_IMGUI_SUBMODULE UPDATE_STB UPDATE_TINYOBJ glfw3) # make sure we update+init imgui before creating the project
 
 IF(BUILD_EXAMPLE_SCENES)
 
@@ -172,16 +169,18 @@ FIND_LIBRARY(GLFW_3_LIB NAMES "libglfw3.a" HINTS "${PROJECT_SOURCE_DIR}/ext/lib"
 ENDIF()
 
 ADD_EXECUTABLE(Triangle "scenes/Triangle.cpp")
+#ADD_DEPENDENCIES(Triangle VulpesRender)
 
 IF(APPLE)
 TARGET_LINK_LIBRARIES(Triangle VulpesRender "${GLFW_3_LIB}" "${MoltenVK}")
 ELSEIF(UNIX)
 TARGET_LINK_LIBRARIES(Triangle VulpesRender "$ENV{VULKAN_SDK}/lib/libvulkan.so" "${GLFW_3_LIB}" "dl" "pthread" "X11" "Xi" "Xrandr")
 ELSEIF(WIN32)
-TARGET_LINK_LIBRARIES(House VulpesRender "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
+TARGET_LINK_LIBRARIES(Triangle VulpesRender "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
 ENDIF()
 
 ADD_EXECUTABLE(House "scenes/House.cpp")
+#ADD_DEPENDENCIES(House VulpesRender)
 
 IF(APPLE)
 TARGET_LINK_LIBRARIES(House VulpesRender "${GLFW_3_LIB}" "${MoltenVK}")
@@ -192,6 +191,7 @@ TARGET_LINK_LIBRARIES(House VulpesRender "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${
 ENDIF()
 
 ADD_EXECUTABLE(Arcball "scenes/ArcballScene.cpp")
+#ADD_DEPENDENCIES(Arcball VulpesRender)
 
 IF(APPLE)
 TARGET_LINK_LIBRARIES(Arcball VulpesRender "${GLFW_3_LIB}" "${MoltenVK}")
