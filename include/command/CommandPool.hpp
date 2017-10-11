@@ -70,6 +70,8 @@ namespace vulpes {
 
 		const size_t size() const noexcept;
 
+        const VkCommandBuffer* Data() const noexcept;
+
 	protected:
 
 		std::vector<VkCommandBuffer> cmdBuffers;

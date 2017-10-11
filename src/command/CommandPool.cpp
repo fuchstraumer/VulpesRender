@@ -148,4 +148,8 @@ namespace vulpes {
 		return cmdBuffers.size();
 	}
 
+    const VkCommandBuffer * CommandPool::Data() const noexcept {
+        return cmdBuffers.data();
+    }
+
 }
