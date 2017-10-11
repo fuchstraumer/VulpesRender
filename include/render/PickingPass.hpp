@@ -34,7 +34,7 @@ namespace vulpes {
            
             uint32_t object_idx = static_cast<uint32_t>(pickingObjects.size());
             auto inserted = pickingObjects.insert(std::make_pair(triangle_mesh, object_idx));
-
+            return object_idx;
         }
 
         bool WasObjectPicked(const size_t& mouse_x, const size_t& mouse_y, const uint32_t& uuid) {
@@ -43,6 +43,8 @@ namespace vulpes {
         }
 
         void RenderPickingPass(const size_t& frame_idx, const VkViewport& viewport, const VkRect2D& scissor, const glm::mat4& view);
+
+        void submitGraphicsCmds();
 
     private:
 
@@ -74,6 +76,9 @@ namespace vulpes {
         std::future<void> readbackFuture;
         GraphicsPipelineInfo pipelineStateInfo;
         VkGraphicsPipelineCreateInfo pipelineCreateInfo;
+        std::array<VkFence, 3> submitFences;
+        std::vector<VkCommandBuffer> secondaryBuffers;
+
     };
 
 }

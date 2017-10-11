@@ -18,6 +18,11 @@ namespace vulpes {
         createOutputAttachment();
         setPipelineStateInfo();
         createGraphicsPipeline();
+
+        for (auto& fence_handle : submitFences) {
+            vkCreateFence(device->vkHandle(), &vk_fence_create_info_base, nullptr, &fence_handle);
+        }
+
     }
 
     PickingPass::~PickingPass() {
@@ -29,6 +34,10 @@ namespace vulpes {
         pipelineLayout.reset();
         destFramebuffers.reset();
         destImage.reset();
+
+        for (auto& fence_handle : submitFences) {
+            vkDestroyFence(device->vkHandle(), fence_handle, nullptr);
+        }
     }
 
     std::future<void> PickingPass::readbackAttachment(const size_t& curr_frame_idx) {
@@ -137,6 +146,7 @@ namespace vulpes {
         vkQueueSubmit(dvc->GraphicsQueue(), 1, &submission_info, fence);
         vkWaitForFences(dvc->vkHandle(), 1, &fence, VK_TRUE, vk_default_fence_timeout);
         vkResetFences(dvc->vkHandle(), 1, &fence);
+        vkDestroyFence(dvc->vkHandle(), fence, nullptr);
 
         command_pool->ResetCmdBuffer(0);
         return;
@@ -179,24 +189,44 @@ namespace vulpes {
         };
 
         size_t num_objects = pickingObjects.size();
-        if(num_objects != secondaryPool->size()) {
+        if(num_objects * swapchain->ImageCount != secondaryPool->size()) {
             secondaryPool->FreeCommandBuffers();
-            secondaryPool->AllocateCmdBuffers(num_objects, VK_COMMAND_BUFFER_LEVEL_SECONDARY);
+            secondaryPool->AllocateCmdBuffers(num_objects * swapchain->ImageCount, VK_COMMAND_BUFFER_LEVEL_SECONDARY);
         }
-
-        std::vector<VkCommandBuffer> secondary_buffers;
 
         vkBeginCommandBuffer(primaryPool->GetCmdBuffer(frame_idx), &primary_cmd_buffer_begin_info);
             vkCmdBeginRenderPass(primaryPool->GetCmdBuffer(frame_idx), &destFramebuffers->GetRenderpassBeginInfo(), VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS);
             size_t curr_idx = 0;          
             for(auto& obj : pickingObjects) {
-                render_object(secondaryPool->GetCmdBuffer(curr_idx), secondary_cmd_buffer_begin_info, obj);
-                secondary_buffers.push_back(secondaryPool->GetCmdBuffer(curr_idx));
+                render_object(secondaryPool->GetCmdBuffer(curr_idx + frame_idx), secondary_cmd_buffer_begin_info, obj);
+                secondaryBuffers.push_back(secondaryPool->GetCmdBuffer(curr_idx + frame_idx));
                 ++curr_idx;
             }
-            vkCmdExecuteCommands(primaryPool->GetCmdBuffer(frame_idx), static_cast<uint32_t>(secondary_buffers.size()), secondary_buffers.data());
+            if (num_objects > 1) {
+                vkCmdExecuteCommands(primaryPool->GetCmdBuffer(frame_idx), static_cast<uint32_t>(curr_idx), &secondaryBuffers[frame_idx]);
+            }
+            else {
+                vkCmdExecuteCommands(primaryPool->GetCmdBuffer(frame_idx), static_cast<uint32_t>(1), &secondaryPool->GetCmdBuffer(frame_idx));
+            }
             vkCmdEndRenderPass(primaryPool->GetCmdBuffer(frame_idx));
         vkEndCommandBuffer(primaryPool->GetCmdBuffer(frame_idx));
+    }
+
+    void PickingPass::submitGraphicsCmds() {
+
+        VkSubmitInfo submit_info = vk_submit_info_base;
+        submit_info.commandBufferCount = static_cast<uint32_t>(primaryPool->size());
+        submit_info.pCommandBuffers = primaryPool->Data();
+        
+        VkResult result = vkQueueSubmit(device->GraphicsQueue(0), 1, &submit_info, submitFences.front());
+        vkWaitForFences(device->vkHandle(), 1, &submitFences.front(), VK_TRUE, vk_default_fence_timeout);
+        vkResetFences(device->vkHandle(), 1, &submitFences.front());
+
+        secondaryBuffers.clear();
+        secondaryBuffers.shrink_to_fit();
+        secondaryPool->ResetCmdPool();
+        primaryPool->ResetCmdPool();
+
     }
 
     void PickingPass::createPipelineCache() {
@@ -209,10 +239,8 @@ namespace vulpes {
         pipelineStateInfo.DynamicStateInfo.dynamicStateCount = 2;
         pipelineStateInfo.DynamicStateInfo.pDynamicStates = dynamic_states;
 
-        pipelineStateInfo.MultisampleInfo.sampleShadingEnable = BaseScene::SceneConfiguration.EnableMSAA;
-        if (pipelineStateInfo.MultisampleInfo.sampleShadingEnable) {
-            pipelineStateInfo.MultisampleInfo.rasterizationSamples = BaseScene::SceneConfiguration.MSAA_SampleCount;
-        }
+        pipelineStateInfo.MultisampleInfo.sampleShadingEnable = VK_FALSE;
+        pipelineStateInfo.MultisampleInfo.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
 
         pipelineStateInfo.VertexInfo.vertexBindingDescriptionCount = 1;
         pipelineStateInfo.VertexInfo.pVertexBindingDescriptions = &vertex_t::bindingDescription;
