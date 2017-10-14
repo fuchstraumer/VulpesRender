@@ -157,7 +157,7 @@ ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "inc
                                 ${OBJECTS} ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} 
                                 ${CORE} ${RESOURCES} ${RENDER} ${GUI} ${SHADERS}
                                 )
-#ADD_DEPENDENCIES(VulpesRender UPDATE_IMGUI_SUBMODULE UPDATE_STB UPDATE_TINYOBJ glfw3) # make sure we update+init imgui before creating the project
+ADD_DEPENDENCIES(VulpesRender UPDATE_IMGUI_SUBMODULE UPDATE_STB UPDATE_TINYOBJ glfw3) # make sure we update+init imgui before creating the project
 
 IF(BUILD_EXAMPLE_SCENES)
 
