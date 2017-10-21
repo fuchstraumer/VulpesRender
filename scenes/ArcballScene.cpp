@@ -192,6 +192,7 @@ int main() {
 #else
     vulpes::BaseScene::SceneConfiguration.ResourcePathPrefixStr = std::string("../");
 #endif
+	vulpes::BaseScene::SceneConfiguration.EnableFullscreen = false;
     vulpes::ArcballScene scene;
     scene.RenderLoop();
     return 0;

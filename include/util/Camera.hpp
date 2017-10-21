@@ -93,7 +93,7 @@ namespace vulpes {
         float frustumTop, frustumBottom, frustumLeft, frustumRight;
         float pivotDistance;
         glm::mat4 projection, invProjection, view, invView;
-        glm::vec3 right, up, viewDirection, negViewDirection;
+        glm::vec3 right, up, viewDirection;
         cameraController* controller;
         bool viewCached, projectionCached, invViewCached, invProjectionCached;
 

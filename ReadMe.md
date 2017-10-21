@@ -29,9 +29,8 @@ loop and Vulkan command buffer submission. The following methods must be overrid
 
 There are a considerable amount of items on my TODO list. The list below may be inaccurate or out of date, but reflects priorities:
 
-- [ ] Get threaded transfer task pool functioning - DELAYED. MSVC std::promised_task broken, needs fix
 - [x] In line with above, make Allocator subsystem and Buffer objects thread-safe. Synchronize mapping of VkDeviceMemory objects. (requires testing)
-- [ ] Build a demo suite capable of testing most library items, and for demonstrating usage of the library
+- [x] Build a demo suite capable of testing most library items (sorta)
 - [ ] Read/Write configuration values to a file and use the VulpesConfig struct more often (possibly make "SceneConfig", not "InstanceConfig")
 - [ ] Improve how descriptor pools are handled: currently have to guess max sets and required resource count upon first init call. Maybe build "requests"?
 - [ ] Recover from ValidateMemory() errors

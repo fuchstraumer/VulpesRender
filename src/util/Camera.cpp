@@ -30,7 +30,6 @@ namespace vulpes {
 
     void cameraBase::SetViewDirection(const glm::vec3 & new_view_dir) {
         viewDirection = glm::normalize(new_view_dir);
-        negViewDirection = -viewDirection;
         orientation = glm::rotation(viewDirection, glm::vec3(0.0f, 0.0f, -1.0f));
         viewCached = false;
     }
@@ -255,7 +254,6 @@ namespace vulpes {
     }
 
     void cameraBase::updateView() {
-        negViewDirection = -1.0f * glm::normalize(viewDirection);
         right = glm::rotate(orientation, glm::vec3(1.0f, 0.0f, 0.0f));
         up = glm::rotate(orientation, glm::vec3(0.0f, 1.0f, 0.0f));
         view = glm::lookAt(eyePosition, eyePosition + viewDirection, up);
