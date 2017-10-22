@@ -43,7 +43,7 @@ namespace vulpes {
     public:
 
         Material() = default;
-        ~Material();
+        ~Material() = default;
 
         Material(Material&&) noexcept;
         Material& operator=(Material&&) noexcept;
@@ -101,7 +101,7 @@ namespace vulpes {
         };
 
         pbrTexturePack() = default;
-        ~pbrTexturePack();
+        ~pbrTexturePack() = default;
 
         std::unique_ptr<Texture<texture_2d_t>> Roughness;
         std::unique_ptr<Texture<texture_2d_t>> Metallic;
