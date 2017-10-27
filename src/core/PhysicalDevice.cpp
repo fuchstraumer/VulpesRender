@@ -3,7 +3,7 @@
 
 namespace vulpes {
 
-	PhysicalDevice::PhysicalDevice(const VkInstance& instance_handle) {
+    PhysicalDevice::PhysicalDevice(const VkInstance& instance_handle) {
 
         handle = std::move(getBestDevice(instance_handle));
 
@@ -11,7 +11,7 @@ namespace vulpes {
         retrieveQueueFamilyProperties();
         retrieveExtensionProperties();
 
-	}
+    }
 
     void PhysicalDevice::getAttributes() noexcept {
 
@@ -104,55 +104,55 @@ namespace vulpes {
 
     }
 
-	uint32_t PhysicalDevice::GetMemoryTypeIdx(const uint32_t & type_bitfield, const VkMemoryPropertyFlags & property_flags, VkBool32 * memory_type_found) const noexcept {
-		auto bitfield = type_bitfield;
+    uint32_t PhysicalDevice::GetMemoryTypeIdx(const uint32_t & type_bitfield, const VkMemoryPropertyFlags & property_flags, VkBool32 * memory_type_found) const noexcept {
+        auto bitfield = type_bitfield;
 
-		for (uint32_t i = 0; i < MemoryProperties.memoryTypeCount; ++i) {
-			if (bitfield & 1) {
-				// check if property flags match
-				if ((MemoryProperties.memoryTypes[i].propertyFlags & property_flags) == property_flags) {
-					if (memory_type_found) {
-						*memory_type_found = true;
-					}
-					return i;
-				}
-			}
-			bitfield >>= 1;
-		}
+        for (uint32_t i = 0; i < MemoryProperties.memoryTypeCount; ++i) {
+            if (bitfield & 1) {
+                // check if property flags match
+                if ((MemoryProperties.memoryTypes[i].propertyFlags & property_flags) == property_flags) {
+                    if (memory_type_found) {
+                        *memory_type_found = true;
+                    }
+                    return i;
+                }
+            }
+            bitfield >>= 1;
+        }
 
         LOG(WARNING) << "Failed to find suitable memory type index.";
-		return std::numeric_limits<uint32_t>::max();
+        return std::numeric_limits<uint32_t>::max();
 
-	}
+    }
 
-	uint32_t PhysicalDevice::GetQueueFamilyIndex(const VkQueueFlagBits & bitfield) const noexcept {
-		if (bitfield & VK_QUEUE_COMPUTE_BIT) {
-			for (uint32_t i = 0; i < static_cast<uint32_t>(queueFamilyProperties.size()); ++i) {
-				if ((queueFamilyProperties[i].queueFlags & bitfield) && ((queueFamilyProperties[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) == 0)) {
-					return i;
-				}
-			}
-		}
+    uint32_t PhysicalDevice::GetQueueFamilyIndex(const VkQueueFlagBits & bitfield) const noexcept {
+        if (bitfield & VK_QUEUE_COMPUTE_BIT) {
+            for (uint32_t i = 0; i < static_cast<uint32_t>(queueFamilyProperties.size()); ++i) {
+                if ((queueFamilyProperties[i].queueFlags & bitfield) && ((queueFamilyProperties[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) == 0)) {
+                    return i;
+                }
+            }
+        }
 
-		if (bitfield & VK_QUEUE_TRANSFER_BIT) {
-			for (uint32_t i = 0; i < static_cast<uint32_t>(queueFamilyProperties.size()); ++i) {
-				if ((queueFamilyProperties[i].queueFlags & bitfield) && ((queueFamilyProperties[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) == 0) && ((queueFamilyProperties[i].queueFlags & VK_QUEUE_COMPUTE_BIT) == 0)) {
-					return i;
-				}
-			}
-		}
+        if (bitfield & VK_QUEUE_TRANSFER_BIT) {
+            for (uint32_t i = 0; i < static_cast<uint32_t>(queueFamilyProperties.size()); ++i) {
+                if ((queueFamilyProperties[i].queueFlags & bitfield) && ((queueFamilyProperties[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) == 0) && ((queueFamilyProperties[i].queueFlags & VK_QUEUE_COMPUTE_BIT) == 0)) {
+                    return i;
+                }
+            }
+        }
 
-		for (uint32_t i = 0; i < static_cast<uint32_t>(queueFamilyProperties.size()); ++i) {
-			if (queueFamilyProperties[i].queueFlags & bitfield) {
-				return i;
-			}
-		}
+        for (uint32_t i = 0; i < static_cast<uint32_t>(queueFamilyProperties.size()); ++i) {
+            if (queueFamilyProperties[i].queueFlags & bitfield) {
+                return i;
+            }
+        }
 
         LOG(WARNING) << "Failed to find desired queue family with given flags.";
-		return std::numeric_limits<uint32_t>::max();
-	}
+        return std::numeric_limits<uint32_t>::max();
+    }
 
-	VkQueueFamilyProperties PhysicalDevice::GetQueueFamilyProperties(const VkQueueFlagBits & bitfield) const{
+    VkQueueFamilyProperties PhysicalDevice::GetQueueFamilyProperties(const VkQueueFlagBits & bitfield) const{
 
         uint32_t idx = GetQueueFamilyIndex(bitfield);
         if (idx == std::numeric_limits<uint32_t>::max()) {
@@ -162,11 +162,11 @@ namespace vulpes {
         else {
             return queueFamilyProperties[idx];
         }
-		
-	}
+        
+    }
 
-	const VkPhysicalDevice & PhysicalDevice::vkHandle() const noexcept{
-		return handle;
-	}
+    const VkPhysicalDevice & PhysicalDevice::vkHandle() const noexcept{
+        return handle;
+    }
 
 }

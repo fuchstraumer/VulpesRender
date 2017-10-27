@@ -6,13 +6,13 @@
 layout(location = 0) in vec3 position;
 
 layout(push_constant) uniform _ubo {
-	mat4 model;
-	mat4 view;
-	mat4 projection;
+    mat4 model;
+    mat4 view;
+    mat4 projection;
 } ubo;
 
 out gl_PerVertex {
-	vec4 gl_Position;
+    vec4 gl_Position;
 };
 
 void main() {

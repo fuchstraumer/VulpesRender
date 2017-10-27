@@ -6,25 +6,25 @@
 
 namespace vulpes {
 
-	namespace util {
+    namespace util {
 
-		struct AABB {
+        struct AABB {
 
-			glm::vec3 Min, Max;
-			
-			glm::vec3 Extents() const;
+            glm::vec3 Min, Max;
+            
+            glm::vec3 Extents() const;
 
-			glm::vec3 Center() const;
+            glm::vec3 Center() const;
 
-			void UpdateMinMax(const float& y_min, const float& y_max);
+            void UpdateMinMax(const float& y_min, const float& y_max);
 
-			bool Intersection(const glm::vec3& origin, const glm::vec3& ray) const;
+            bool Intersection(const glm::vec3& origin, const glm::vec3& ray) const;
 
-		};
+        };
 
-		
+        
 
-	}
+    }
 
 }
 

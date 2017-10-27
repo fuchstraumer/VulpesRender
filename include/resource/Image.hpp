@@ -7,7 +7,7 @@
 /*
 
 
-	
+    
 */
 
 namespace vulpes {
@@ -16,66 +16,66 @@ namespace vulpes {
     *   \ingroup Resources
     *   \todo Check validity of default parameters, consider folding/cleaning up the static CreateImage methods 
     */
-	class Image {
-		Image(const Image&) = delete;
-		Image& operator=(const Image&) = delete;
-	public:
+    class Image {
+        Image(const Image&) = delete;
+        Image& operator=(const Image&) = delete;
+    public:
 
-		Image(const Device* parent);
+        Image(const Device* parent);
 
-		Image(Image&& other) noexcept;
-		Image& operator=(Image&& other) noexcept;
+        Image(Image&& other) noexcept;
+        Image& operator=(Image&& other) noexcept;
 
-		virtual ~Image();
+        virtual ~Image();
 
-		void Destroy();
+        void Destroy();
 
-		void Create(const VkImageCreateInfo& create_info, const VkMemoryPropertyFlagBits& memory_flags = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+        void Create(const VkImageCreateInfo& create_info, const VkMemoryPropertyFlagBits& memory_flags = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
 
-		void Create(const VkExtent3D& extents, const VkFormat& format, const VkImageUsageFlags& usage_flags, const VkImageLayout& init_layout = VK_IMAGE_LAYOUT_PREINITIALIZED);
-		
-		void CreateView(const VkImageViewCreateInfo& info);
-		
-		void CreateView(const VkImageAspectFlags& aspect_flags);
+        void Create(const VkExtent3D& extents, const VkFormat& format, const VkImageUsageFlags& usage_flags, const VkImageLayout& init_layout = VK_IMAGE_LAYOUT_PREINITIALIZED);
+        
+        void CreateView(const VkImageViewCreateInfo& info);
+        
+        void CreateView(const VkImageAspectFlags& aspect_flags);
 
-		void TransitionLayout(const VkImageLayout& initial, const VkImageLayout& final, CommandPool* cmd, VkQueue& queue);
+        void TransitionLayout(const VkImageLayout& initial, const VkImageLayout& final, CommandPool* cmd, VkQueue& queue);
 
         /** Returns an appropriate memory barrier for the given image, to transfer it between image layouts. */ 
-		static VkImageMemoryBarrier GetMemoryBarrier(const VkImage& image, const VkFormat& img_format, const VkImageLayout& prev, const VkImageLayout& next);
+        static VkImageMemoryBarrier GetMemoryBarrier(const VkImage& image, const VkFormat& img_format, const VkImageLayout& prev, const VkImageLayout& next);
 
         /** Creates an image using the latter 7 parameters. Stores the resulting image and it's corresponding Allocation in the first two parameters */
-		static void CreateImage(VkImage& dest_image, Allocation& dest_alloc, const Device* parent, const VkExtent3D& extents, const VkFormat& image_format, const VkMemoryPropertyFlags& memory_flags, const VkImageUsageFlags& usage_flags, const VkImageTiling& tiling = VK_IMAGE_TILING_OPTIMAL, const VkImageLayout& init_layout = VK_IMAGE_LAYOUT_PREINITIALIZED);
+        static void CreateImage(VkImage& dest_image, Allocation& dest_alloc, const Device* parent, const VkExtent3D& extents, const VkFormat& image_format, const VkMemoryPropertyFlags& memory_flags, const VkImageUsageFlags& usage_flags, const VkImageTiling& tiling = VK_IMAGE_TILING_OPTIMAL, const VkImageLayout& init_layout = VK_IMAGE_LAYOUT_PREINITIALIZED);
         /** Simplified version of the other CreateImage method, that takes an already setup VkImageCreateInfo struct instead of creating one from the given parameters. */
-		static void CreateImage(VkImage& dest_image, Allocation& dest_alloc, const Device* parent, const VkImageCreateInfo& create_info, const VkMemoryPropertyFlags & memory_flags);
+        static void CreateImage(VkImage& dest_image, Allocation& dest_alloc, const Device* parent, const VkImageCreateInfo& create_info, const VkMemoryPropertyFlags & memory_flags);
 
-		const VkImageCreateInfo& CreateInfo() const noexcept;
-		const VkImage& vkHandle() const noexcept;
-		const VkImageView& View() const noexcept;
-		VkMappedMemoryRange Memory() const noexcept;
-		virtual VkExtent3D GetExtents() const noexcept;
+        const VkImageCreateInfo& CreateInfo() const noexcept;
+        const VkImage& vkHandle() const noexcept;
+        const VkImageView& View() const noexcept;
+        VkMappedMemoryRange Memory() const noexcept;
+        virtual VkExtent3D GetExtents() const noexcept;
 
-		VkFormat Format() const noexcept;
-		void SetFormat(const VkFormat& format) noexcept;
+        VkFormat Format() const noexcept;
+        void SetFormat(const VkFormat& format) noexcept;
 
-	protected:
+    protected:
 
-		const Device* parent;
-		const VkAllocationCallbacks* allocators = nullptr;
+        const Device* parent;
+        const VkAllocationCallbacks* allocators = nullptr;
 
-		VkImageCreateInfo createInfo;
-		VkImageSubresource subresource;
-		VkSubresourceLayout subresourceLayout;
+        VkImageCreateInfo createInfo;
+        VkImageSubresource subresource;
+        VkSubresourceLayout subresourceLayout;
 
-		VkImage handle;
-		VkImageView view;
-		Allocation memoryAllocation;
+        VkImage handle;
+        VkImageView view;
+        Allocation memoryAllocation;
 
-		VkImageLayout finalLayout;
-		VkExtent3D extents;
-		VkFormat format;
-		VkImageUsageFlags usageFlags;
-		VkDeviceSize imageDataSize;
-	};
+        VkImageLayout finalLayout;
+        VkExtent3D extents;
+        VkFormat format;
+        VkImageUsageFlags usageFlags;
+        VkDeviceSize imageDataSize;
+    };
 
 }
 

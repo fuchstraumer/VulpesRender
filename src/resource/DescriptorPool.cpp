@@ -5,40 +5,40 @@
 
 namespace vulpes {
 
-	constexpr static std::array<VkDescriptorType, 11> descriptor_types{
-		VK_DESCRIPTOR_TYPE_SAMPLER,
-		VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-		VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
-		VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,
-		VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER,
-		VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER,
-		VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
-		VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-		VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC,
-		VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC,
-		VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT
-	};
+    constexpr static std::array<VkDescriptorType, 11> descriptor_types{
+        VK_DESCRIPTOR_TYPE_SAMPLER,
+        VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+        VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+        VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,
+        VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER,
+        VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER,
+        VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+        VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+        VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC,
+        VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC,
+        VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT
+    };
 
-	DescriptorPool::DescriptorPool(const Device * _device, const size_t & max_sets) : device(_device), maxSets(max_sets) {
-		for (const auto& type : descriptor_types) {
-			resourceTypes[type] = 0;
-		}
-	}
+    DescriptorPool::DescriptorPool(const Device * _device, const size_t & max_sets) : device(_device), maxSets(max_sets) {
+        for (const auto& type : descriptor_types) {
+            resourceTypes[type] = 0;
+        }
+    }
 
-	DescriptorPool::~DescriptorPool() {
-		vkDestroyDescriptorPool(device->vkHandle(), handle, nullptr);
-	}
+    DescriptorPool::~DescriptorPool() {
+        vkDestroyDescriptorPool(device->vkHandle(), handle, nullptr);
+    }
 
-	void DescriptorPool::AddDescriptorSet(const DescriptorSet* descriptor_set) {
+    void DescriptorPool::AddDescriptorSet(const DescriptorSet* descriptor_set) {
         auto descriptor_bindings = descriptor_set->GetBindings();
         for(const auto& entry : descriptor_bindings) {
             resourceTypes[entry.second.descriptorType] += entry.second.descriptorCount;
         }
     }
 
-	void DescriptorPool::AddResourceType(const VkDescriptorType & descriptor_type, const uint32_t & descriptor_count) {
-		resourceTypes[descriptor_type] += descriptor_count;
-	}
+    void DescriptorPool::AddResourceType(const VkDescriptorType & descriptor_type, const uint32_t & descriptor_count) {
+        resourceTypes[descriptor_type] += descriptor_count;
+    }
 
     void DescriptorPool::Create() {
 

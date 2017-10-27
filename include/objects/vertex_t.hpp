@@ -24,7 +24,7 @@ namespace vulpes {
         glm::vec3 normal = glm::vec3(0.0f);
         glm::vec2 uv = glm::vec2(0.0f);
 
-		bool operator==(const vertex_t& other) const noexcept;
+        bool operator==(const vertex_t& other) const noexcept;
         
         static const VkVertexInputBindingDescription bindingDescription;
 

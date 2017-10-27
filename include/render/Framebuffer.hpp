@@ -14,26 +14,26 @@ namespace vulpes {
     *   how to setup this class is provided by the VkFramebufferCreateInfo struct in the constructor.
     *   \ingroup Rendering
     */
-	class Framebuffer {
-		Framebuffer(const Framebuffer&) = delete;
-		Framebuffer& operator=(const Framebuffer&) = delete;
-	public:
+    class Framebuffer {
+        Framebuffer(const Framebuffer&) = delete;
+        Framebuffer& operator=(const Framebuffer&) = delete;
+    public:
 
-		virtual ~Framebuffer();
+        virtual ~Framebuffer();
 
-		Framebuffer(const Device* parent, const VkFramebufferCreateInfo& create_info);
-		Framebuffer& operator=(Framebuffer&& other) noexcept;
-		Framebuffer(Framebuffer&& other) noexcept;
-		const VkFramebuffer& vkHandle() const noexcept;
-		
-		void Destroy();
+        Framebuffer(const Device* parent, const VkFramebufferCreateInfo& create_info);
+        Framebuffer& operator=(Framebuffer&& other) noexcept;
+        Framebuffer(Framebuffer&& other) noexcept;
+        const VkFramebuffer& vkHandle() const noexcept;
+        
+        void Destroy();
 
-	protected:
+    protected:
 
-		const Device* parent;
-		const VkAllocationCallbacks* allocators = nullptr;
-		VkFramebuffer handle;
-	};
+        const Device* parent;
+        const VkAllocationCallbacks* allocators = nullptr;
+        VkFramebuffer handle;
+    };
 
 
 }

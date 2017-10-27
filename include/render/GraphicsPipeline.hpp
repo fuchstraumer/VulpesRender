@@ -24,16 +24,16 @@ namespace vulpes {
     *   - RasterizationInfo: Set culling mode, winding direction, and polygon rendering mode.
     *   \ingroup Rendering
     */
-	struct GraphicsPipelineInfo {
-		VkPipelineInputAssemblyStateCreateInfo AssemblyInfo = vk_pipeline_input_assembly_create_info_base;
-		VkPipelineRasterizationStateCreateInfo RasterizationInfo = vk_pipeline_rasterization_create_info_base;
-		VkPipelineColorBlendStateCreateInfo ColorBlendInfo = vk_pipeline_color_blend_create_info_base;
-		VkPipelineDepthStencilStateCreateInfo DepthStencilInfo = vk_pipeline_depth_stencil_create_info_base;
-		VkPipelineViewportStateCreateInfo ViewportInfo = vk_pipeline_viewport_create_info_base;
-		VkPipelineMultisampleStateCreateInfo MultisampleInfo = vk_pipeline_multisample_create_info_base;
-		VkPipelineDynamicStateCreateInfo DynamicStateInfo = vk_pipeline_dynamic_state_create_info_base;
-		VkPipelineVertexInputStateCreateInfo VertexInfo = vk_pipeline_vertex_input_state_create_info_base;
-		GraphicsPipelineInfo() {}
+    struct GraphicsPipelineInfo {
+        VkPipelineInputAssemblyStateCreateInfo AssemblyInfo = vk_pipeline_input_assembly_create_info_base;
+        VkPipelineRasterizationStateCreateInfo RasterizationInfo = vk_pipeline_rasterization_create_info_base;
+        VkPipelineColorBlendStateCreateInfo ColorBlendInfo = vk_pipeline_color_blend_create_info_base;
+        VkPipelineDepthStencilStateCreateInfo DepthStencilInfo = vk_pipeline_depth_stencil_create_info_base;
+        VkPipelineViewportStateCreateInfo ViewportInfo = vk_pipeline_viewport_create_info_base;
+        VkPipelineMultisampleStateCreateInfo MultisampleInfo = vk_pipeline_multisample_create_info_base;
+        VkPipelineDynamicStateCreateInfo DynamicStateInfo = vk_pipeline_dynamic_state_create_info_base;
+        VkPipelineVertexInputStateCreateInfo VertexInfo = vk_pipeline_vertex_input_state_create_info_base;
+        GraphicsPipelineInfo() {}
 
         /** This method returns a VkGraphicsPipelineCreateInfo struct with its internal state object pointers set
         *   to point to the members of this class. This is useful for short-cutting having to set them all yourself,
@@ -46,37 +46,37 @@ namespace vulpes {
         *   - stageCount
         *   - pStages
         */
-		VkGraphicsPipelineCreateInfo GetPipelineCreateInfo() const;
-	};
+        VkGraphicsPipelineCreateInfo GetPipelineCreateInfo() const;
+    };
 
     /** The GraphicsPipeline object is an RAII wrapper around a vkGraphicsPipeline object, handling construction and destruction
     *   alone. Otherwise, the GraphicsPipelineInfo struct is the one worth the most attention due to how much it influences the 
     *   created pipeline, and due to how complex it is.
     *   \ingroup Rendering
     */
-	class GraphicsPipeline {
-		GraphicsPipeline(const GraphicsPipeline&) = delete;
-		GraphicsPipeline& operator=(const GraphicsPipeline&) = delete;
-	public:
+    class GraphicsPipeline {
+        GraphicsPipeline(const GraphicsPipeline&) = delete;
+        GraphicsPipeline& operator=(const GraphicsPipeline&) = delete;
+    public:
 
-		GraphicsPipeline(const Device* parent);
+        GraphicsPipeline(const Device* parent);
         ~GraphicsPipeline();
         
         GraphicsPipeline(GraphicsPipeline&& other) noexcept;
         GraphicsPipeline& operator=(GraphicsPipeline&& other) noexcept;
 
-		void Init(VkGraphicsPipelineCreateInfo& create_info, const VkPipelineCache& cache = VK_NULL_HANDLE);
+        void Init(VkGraphicsPipelineCreateInfo& create_info, const VkPipelineCache& cache = VK_NULL_HANDLE);
         void Destroy();
-		const VkPipeline& vkHandle() const noexcept;
+        const VkPipeline& vkHandle() const noexcept;
 
-	private:
+    private:
 
-		const VkAllocationCallbacks* allocators = nullptr;
-		const Device* parent;
-		VkPipeline handle;
-		VkGraphicsPipelineCreateInfo createInfo;
+        const VkAllocationCallbacks* allocators = nullptr;
+        const Device* parent;
+        VkPipeline handle;
+        VkGraphicsPipelineCreateInfo createInfo;
 
-	};
+    };
 
 }
 #endif // !VULPES_VK_GRAPHICS_PIPELINE_H

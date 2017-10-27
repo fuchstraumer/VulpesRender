@@ -8,29 +8,29 @@
 
 namespace vulpes {
 
-	// Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
-	enum class Direction : uint8_t {
-		FORWARD,
-		BACKWARD,
-		LEFT,
-		RIGHT,
-		UP,
-		DOWN,
-	};
+    // Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
+    enum class Direction : uint8_t {
+        FORWARD,
+        BACKWARD,
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN,
+    };
 
     class cameraController;
 
 
-	class cameraBase {
-	public:
+    class cameraBase {
+    public:
 
         virtual ~cameraBase() = default;
 
         //virtual void ProcessKeyboard(const Direction& dir, const float& delta_time);
-		virtual void MouseDrag(const int& button, const float& x_offset, const float& y_offset) = 0;
-		virtual void MouseScroll(const int& button, const float& y_scroll) = 0;
-		virtual void MouseDown(const int& button, const float& x, const float& y) = 0;
-		virtual void MouseUp(const int& button, const float& x, const float& y)= 0;
+        virtual void MouseDrag(const int& button, const float& x_offset, const float& y_offset) = 0;
+        virtual void MouseScroll(const int& button, const float& y_scroll) = 0;
+        virtual void MouseDown(const int& button, const float& x, const float& y) = 0;
+        virtual void MouseUp(const int& button, const float& x, const float& y)= 0;
 
         const glm::vec3& GetEyeLocation() const noexcept;
         void SetEyeLocation(const glm::vec3& new_eye_position);
@@ -97,7 +97,7 @@ namespace vulpes {
         cameraController* controller;
         bool viewCached, projectionCached, invViewCached, invProjectionCached;
 
-	};
+    };
 
     class PerspectiveCamera : public cameraBase {
     public:

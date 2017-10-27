@@ -6,8 +6,8 @@
 #include <list>
 #include "../ForwardDecl.hpp"
 /*
-	
-	TODO:
+    
+    TODO:
 
 
 */
@@ -36,56 +36,56 @@ namespace vulpes {
      * 
      *  \defgroup Allocator Memory Subsystem
      *  \todo Further dividing allocation among three size pools, and then still dividing among type in those pools
-	 *  \todo Measure costliness of Validate(), possibly use return codes to fix errors when possible.
+     *  \todo Measure costliness of Validate(), possibly use return codes to fix errors when possible.
      *  \todo Finish the defragmentation class, and find a way to check for fragmentation in the background. However, how to notify objects that they need to rebuild/refresh bound region, and re-upload resources?
      *  \todo Possibly use above to remove MinSuballocationSizeToRegister, instead shuffling dest ranges up/down the needed amount to avoid gaps or fragmentation
-	 *  \todo in turn, will buffer-image granularity + alignment increase fragmentation? Couldn't find data on this.
+     *  \todo in turn, will buffer-image granularity + alignment increase fragmentation? Couldn't find data on this.
      *  \todo Private allocations are still nearly entirely unimplemented. Either remove these from the interface, or actually implement them properly.
      *  \todo Cleanup now-unused structs and typedefs after upgrading to v2.0
      */
 
-	/*
-	
-		Constants and enums used by allocation system
-	
-	*/
+    /*
+    
+        Constants and enums used by allocation system
+    
+    */
 
 
-	/*
-		This sets the calling/usage of the memory validation routine.
-		This can be costly, but it also returns the error present
-		and could be used  (in some cases) to fix the error instead 
-		of reporting a likely critical failure
-	*/
+    /*
+        This sets the calling/usage of the memory validation routine.
+        This can be costly, but it also returns the error present
+        and could be used  (in some cases) to fix the error instead 
+        of reporting a likely critical failure
+    */
 
 #if !defined NDEBUG || defined FORCE_ALLOCATOR_VALIDATION
-	constexpr bool VALIDATE_MEMORY = true;
+    constexpr bool VALIDATE_MEMORY = true;
 #else 
-	constexpr bool VALIDATE_MEMORY = false;
+    constexpr bool VALIDATE_MEMORY = false;
 #endif // !NDEBUG
 
-	constexpr static size_t vkMaxMemoryTypes = 32;
-	// mininum size of suballoction objects to bother registering in our allocation's list's
-	constexpr static VkDeviceSize MinSuballocationSizeToRegister = 16;
+    constexpr static size_t vkMaxMemoryTypes = 32;
+    // mininum size of suballoction objects to bother registering in our allocation's list's
+    constexpr static VkDeviceSize MinSuballocationSizeToRegister = 16;
 
-	constexpr static VkDeviceSize SmallHeapMaxSize = 512 * 1024 * 1024;
-	constexpr static VkDeviceSize DefaultLargeHeapBlockSize = 256 * 1024 * 1024;
-	constexpr static VkDeviceSize DefaultSmallHeapBlockSize = 64 * 1024 * 1024;
+    constexpr static VkDeviceSize SmallHeapMaxSize = 512 * 1024 * 1024;
+    constexpr static VkDeviceSize DefaultLargeHeapBlockSize = 256 * 1024 * 1024;
+    constexpr static VkDeviceSize DefaultSmallHeapBlockSize = 64 * 1024 * 1024;
 
-	enum class SuballocationType : uint8_t {
-		Free = 0, // unused entry
-		Unknown, // could be various cpu storage objects, or extension objects
-		Buffer,
-		ImageUnknown, // image memory without defined tiling - possibly related to extensions
-		ImageLinear,
-		ImageOptimal,
-	};
+    enum class SuballocationType : uint8_t {
+        Free = 0, // unused entry
+        Unknown, // could be various cpu storage objects, or extension objects
+        Buffer,
+        ImageUnknown, // image memory without defined tiling - possibly related to extensions
+        ImageLinear,
+        ImageOptimal,
+    };
 
     /** These validation codes are returned by the memory validation routine, giving information on the error encountered. They will also
      *  be printed to the console, if it is enabled, and logged to the log file as well. 
      *  \ingroup Allocator
      */
-	enum class ValidationCode : uint8_t {
+    enum class ValidationCode : uint8_t {
         VALIDATION_PASSED = 0,
         /** Suballocation's memory handle is invalid */
         NULL_MEMORY_HANDLE, 
@@ -104,64 +104,64 @@ namespace vulpes {
         /** Calculated offset as sum of all suballoc sizes is not equal to allocations total size */
         FINAL_SIZE_MISMATCH,
         /** Calculated total available size doesn't match stored available size */
-		FINAL_FREE_SIZE_MISMATCH, 
-	};
+        FINAL_FREE_SIZE_MISMATCH, 
+    };
 
     /** This is a simple and common overload to print enum info to any stream (this also works, FYI, with easylogging++). A note to make, however,
      *  is that compilers running at W4/Wall warning levels will warn that this method is unreferenced in release mode, if validation is not forced.
      *  As the memory verification routine is not used in this case, much of that code will fold away but should still be left in for debug builds.
      * \ingroup Allocator
      */
-	static std::ostream& operator<<(std::ostream& os, const ValidationCode& code) {
-		switch (code) {
-		case ValidationCode::NULL_MEMORY_HANDLE:
-			os << "Null memory handle.";
-			break;
-		case ValidationCode::ZERO_MEMORY_SIZE:
-			os << "Zero memory size.";
-			break;
-		case ValidationCode::INCORRECT_SUBALLOC_OFFSET:
-			os << "Incorrect suballocation offset.";
-			break;
-		case ValidationCode::NEED_MERGE_SUBALLOCS:
-			os << "Adjacent free suballocations not merged.";
-			break;
-		case ValidationCode::FREE_SUBALLOC_COUNT_MISMATCH:
-			os << "Mismatch between counted and caculated quantity of free suballocations.";
-			break;
-		case ValidationCode::USED_SUBALLOC_IN_FREE_LIST:
-			os << "Used suballocation in free/available suballocation list.";
-			break;
-		case ValidationCode::FREE_SUBALLOC_SORT_INCORRECT:
-			os << "Sorting of available suballocations not correct.";
-			break;
-		case ValidationCode::FINAL_SIZE_MISMATCH:
-			os << "Declared total size of allocation doesn't match calculated total size.";
-			break;
-		case ValidationCode::FINAL_FREE_SIZE_MISMATCH:
-			os << "Declared total free size doesn't match caculated total free size.";
-			break;
-		default:
-			break;
-		}
-		return os;
-	}
+    static std::ostream& operator<<(std::ostream& os, const ValidationCode& code) {
+        switch (code) {
+        case ValidationCode::NULL_MEMORY_HANDLE:
+            os << "Null memory handle.";
+            break;
+        case ValidationCode::ZERO_MEMORY_SIZE:
+            os << "Zero memory size.";
+            break;
+        case ValidationCode::INCORRECT_SUBALLOC_OFFSET:
+            os << "Incorrect suballocation offset.";
+            break;
+        case ValidationCode::NEED_MERGE_SUBALLOCS:
+            os << "Adjacent free suballocations not merged.";
+            break;
+        case ValidationCode::FREE_SUBALLOC_COUNT_MISMATCH:
+            os << "Mismatch between counted and caculated quantity of free suballocations.";
+            break;
+        case ValidationCode::USED_SUBALLOC_IN_FREE_LIST:
+            os << "Used suballocation in free/available suballocation list.";
+            break;
+        case ValidationCode::FREE_SUBALLOC_SORT_INCORRECT:
+            os << "Sorting of available suballocations not correct.";
+            break;
+        case ValidationCode::FINAL_SIZE_MISMATCH:
+            os << "Declared total size of allocation doesn't match calculated total size.";
+            break;
+        case ValidationCode::FINAL_FREE_SIZE_MISMATCH:
+            os << "Declared total free size doesn't match caculated total free size.";
+            break;
+        default:
+            break;
+        }
+        return os;
+    }
 
-	/*
-	
-		Utility functions for performing various allocation tasks.
-		
-	*/
+    /*
+    
+        Utility functions for performing various allocation tasks.
+        
+    */
 
-	template<typename T>
-	constexpr static T AlignUp(const T& offset, const T& alignment) {
-		return (offset + alignment - 1) / alignment * alignment;
-	}
+    template<typename T>
+    constexpr static T AlignUp(const T& offset, const T& alignment) {
+        return (offset + alignment - 1) / alignment * alignment;
+    }
 
-	/**
-	*	Taken from the Vulkan specification, section 11.6
-	*	Essentially, we need to ensure that linear and non-linear resources are properly placed on separate memory pages so that
-    *	they avoid any accidental aliasing. Linear resources are just those that could be read like any other memory region, without
+    /**
+    *    Taken from the Vulkan specification, section 11.6
+    *    Essentially, we need to ensure that linear and non-linear resources are properly placed on separate memory pages so that
+    *    they avoid any accidental aliasing. Linear resources are just those that could be read like any other memory region, without
     *   any particular optimization for size or access speed. Optimally tiled resources are those that are tiled either by the hardware drivers,
     *   or the Vulkan implementation. Think of things like Z-Order curve encoding for texture data, or block-based compression for DDS/KTX texture formats.
     *   \param item_a_offset: non-linear object's offset 
@@ -170,244 +170,244 @@ namespace vulpes {
     *   \param item_b_size: linear object's size
     *   \param page_size: almost universally tends to be the bufferImageGranularity value retrieved by the parent Allocator class.
     *   \ingroup Allocator
-	*/
-	constexpr static inline bool CheckBlocksOnSamePage(const VkDeviceSize& item_a_offset, const VkDeviceSize& item_a_size, const VkDeviceSize& item_b_offset, const VkDeviceSize& page_size) {
-		assert(item_a_offset + item_a_size <= item_b_offset && item_a_size > 0 && page_size > 0);
-		VkDeviceSize item_a_end = item_a_offset + item_a_size - 1;
-		VkDeviceSize item_a_end_page = item_a_end & ~(page_size - 1);
-		VkDeviceSize item_b_start_Page = item_b_offset & ~(page_size - 1);
-		return item_a_end_page == item_b_start_Page;
-	}
+    */
+    constexpr static inline bool CheckBlocksOnSamePage(const VkDeviceSize& item_a_offset, const VkDeviceSize& item_a_size, const VkDeviceSize& item_b_offset, const VkDeviceSize& page_size) {
+        assert(item_a_offset + item_a_size <= item_b_offset && item_a_size > 0 && page_size > 0);
+        VkDeviceSize item_a_end = item_a_offset + item_a_size - 1;
+        VkDeviceSize item_a_end_page = item_a_end & ~(page_size - 1);
+        VkDeviceSize item_b_start_Page = item_b_offset & ~(page_size - 1);
+        return item_a_end_page == item_b_start_Page;
+    }
 
-	/**
-	*	Checks to make sure the two objects of type "type_a" and "type_b" wouldn't cause a conflict with the buffer-image granularity values. Returns true if
-    *	conflict, false if no conflict. This is unlike the CheckBlocksOnSamePage method, in that it doesn't check memory location and alignment values, merely 
+    /**
+    *    Checks to make sure the two objects of type "type_a" and "type_b" wouldn't cause a conflict with the buffer-image granularity values. Returns true if
+    *    conflict, false if no conflict. This is unlike the CheckBlocksOnSamePage method, in that it doesn't check memory location and alignment values, merely 
     *   comparing the resource types for incompatabilities. This is used to avoid the more detailed checks like CheckBlocksOnSamePage (and the corrections required 
     *   if this also fails)
     *
-    *	BufferImageGranularity specifies interactions between linear and non-linear resources, so we check based on those.
+    *    BufferImageGranularity specifies interactions between linear and non-linear resources, so we check based on those.
     *   \ingroup Allocator
-	*/
-	constexpr static inline bool CheckBufferImageGranularityConflict(SuballocationType type_a, SuballocationType type_b) {
-		if (type_a > type_b) {
-			std::swap(type_a, type_b);
-		}
+    */
+    constexpr static inline bool CheckBufferImageGranularityConflict(SuballocationType type_a, SuballocationType type_b) {
+        if (type_a > type_b) {
+            std::swap(type_a, type_b);
+        }
 
-		switch (type_a) {
-		case SuballocationType::Free:
-			return false;
-		case SuballocationType::Unknown:
-			// best be conservative and play it safe: return true
-			return true;
-		case SuballocationType::Buffer:
-			// unknown return is playing it safe again, optimal return is because optimal tiling and linear buffers don't mix
-			return type_b == SuballocationType::ImageUnknown || type_b == SuballocationType::ImageOptimal;
-		case SuballocationType::ImageUnknown:
-			return type_b == SuballocationType::ImageUnknown || type_b == SuballocationType::ImageOptimal || type_b == SuballocationType::ImageLinear;
-		case SuballocationType::ImageLinear:
-			return type_b == SuballocationType::ImageOptimal;
-		case SuballocationType::ImageOptimal:
-			return false;
-		default:
-			LOG(WARNING) << "Reached default case in CheckBufferImageGranularity switch statement: this should NOT occur";
-			return true;
-		}
-	}
+        switch (type_a) {
+        case SuballocationType::Free:
+            return false;
+        case SuballocationType::Unknown:
+            // best be conservative and play it safe: return true
+            return true;
+        case SuballocationType::Buffer:
+            // unknown return is playing it safe again, optimal return is because optimal tiling and linear buffers don't mix
+            return type_b == SuballocationType::ImageUnknown || type_b == SuballocationType::ImageOptimal;
+        case SuballocationType::ImageUnknown:
+            return type_b == SuballocationType::ImageUnknown || type_b == SuballocationType::ImageOptimal || type_b == SuballocationType::ImageLinear;
+        case SuballocationType::ImageLinear:
+            return type_b == SuballocationType::ImageOptimal;
+        case SuballocationType::ImageOptimal:
+            return false;
+        default:
+            LOG(WARNING) << "Reached default case in CheckBufferImageGranularity switch statement: this should NOT occur";
+            return true;
+        }
+    }
 
-	constexpr static inline uint32_t countBitsSet(const uint32_t& val) {
-		uint32_t count = val - ((val >> 1) & 0x55555555);
-		count = ((count >> 2) & 0x33333333) + (count & 0x33333333);
-		count = ((count >> 4) + count) & 0x0F0F0F0F;
-		count = ((count >> 8) + count) & 0x00FF00FF;
-		count = ((count >> 16) + count) & 0x0000FFFF;
-		return count;
-	}
+    constexpr static inline uint32_t countBitsSet(const uint32_t& val) {
+        uint32_t count = val - ((val >> 1) & 0x55555555);
+        count = ((count >> 2) & 0x33333333) + (count & 0x33333333);
+        count = ((count >> 4) + count) & 0x0F0F0F0F;
+        count = ((count >> 8) + count) & 0x00FF00FF;
+        count = ((count >> 16) + count) & 0x0000FFFF;
+        return count;
+    }
 
 
-	/*
-	
-		Small mostly POD-like structs used in allocation
-		
-	*/
+    /*
+    
+        Small mostly POD-like structs used in allocation
+        
+    */
 
     /** This struct is the primary item submitted to allocator methods for resource creation.
      *  \ingroup Allocator
      */
-	struct AllocationRequirements {
-		/** Defaults to false. If true, no new allocations are created beyond
-		* the set created upon initilization of the allocator system. */
-		static VkBool32 noNewAllocations;
+    struct AllocationRequirements {
+        /** Defaults to false. If true, no new allocations are created beyond
+        * the set created upon initilization of the allocator system. */
+        static VkBool32 noNewAllocations;
 
-		/** True if whatever allocation this belongs to should be in its own device memory object. Don't use this too often, of course. */
-		VkBool32 privateMemory = false;
+        /** True if whatever allocation this belongs to should be in its own device memory object. Don't use this too often, of course. */
+        VkBool32 privateMemory = false;
 
         /** The memory properties that are absolutely required by the item you are allocating for. */
-		VkMemoryPropertyFlags requiredFlags;
-		/** Additional flags that would be nice/useful to have, but are not required. An attempt to meet these will be 
+        VkMemoryPropertyFlags requiredFlags;
+        /** Additional flags that would be nice/useful to have, but are not required. An attempt to meet these will be 
          *  made, but not meeting them won't be considered a failure.*/
-		VkMemoryPropertyFlags preferredFlags = VkMemoryPropertyFlags(0);
-	};
+        VkMemoryPropertyFlags preferredFlags = VkMemoryPropertyFlags(0);
+    };
 
 
-	struct AllocationInfo {
-		uint32_t memoryTypeIdx;
-		VkDeviceMemory memory;
-		VkDeviceSize offset;
-		VkDeviceSize size;
-		void* mappedData;
-	};
+    struct AllocationInfo {
+        uint32_t memoryTypeIdx;
+        VkDeviceMemory memory;
+        VkDeviceSize offset;
+        VkDeviceSize size;
+        void* mappedData;
+    };
 
-	struct DefragInfo {
-		VkDeviceSize maxSizeToMove;
-		VkDeviceSize maxSuballocationsToMove;
-	};
+    struct DefragInfo {
+        VkDeviceSize maxSizeToMove;
+        VkDeviceSize maxSuballocationsToMove;
+    };
 
-	struct Suballocation {
-		bool operator<(const Suballocation& other) {
-			return offset < other.offset;
-		}
-		VkDeviceSize offset, size;
-		SuballocationType type;
-	};
+    struct Suballocation {
+        bool operator<(const Suballocation& other) {
+            return offset < other.offset;
+        }
+        VkDeviceSize offset, size;
+        SuballocationType type;
+    };
 
-	struct suballocOffsetCompare {
-		bool operator()(const Suballocation& s0, const Suballocation& s1) const {
-			return s0.offset < s1.offset; // true when s0 is before s1
-		}
-	};
+    struct suballocOffsetCompare {
+        bool operator()(const Suballocation& s0, const Suballocation& s1) const {
+            return s0.offset < s1.offset; // true when s0 is before s1
+        }
+    };
 
-	struct privateSuballocation {
-		VkDeviceMemory memory;
-		VkDeviceSize size;
-		SuballocationType type;
-		bool operator==(const privateSuballocation& other) {
-			return (memory == other.memory) && (size == other.size) && (type == other.type);
-		}
-	};
+    struct privateSuballocation {
+        VkDeviceMemory memory;
+        VkDeviceSize size;
+        SuballocationType type;
+        bool operator==(const privateSuballocation& other) {
+            return (memory == other.memory) && (size == other.size) && (type == other.type);
+        }
+    };
 
-	using suballocationList = std::list<Suballocation>;
+    using suballocationList = std::list<Suballocation>;
 
-	struct SuballocationRequest {
-		suballocationList::iterator freeSuballocation; // location of suballoc this request can use.
-		VkDeviceSize offset;
-	};
-
-
-	struct suballocIterCompare {
-		bool operator()(const suballocationList::iterator& iter0, const suballocationList::iterator& iter1) const {
-			return iter0->size < iter1->size;
-		}
-	};
-
-	using avail_suballocation_iterator_t = std::vector<suballocationList::iterator>::iterator;
-	using const_avail_suballocation_iterator_t = std::vector<suballocationList::iterator>::const_iterator;
-	using suballocation_iterator_t = suballocationList::iterator;
-	using const_suballocation_iterator_t = suballocationList::const_iterator;
+    struct SuballocationRequest {
+        suballocationList::iterator freeSuballocation; // location of suballoc this request can use.
+        VkDeviceSize offset;
+    };
 
 
-	/*
-	
-		Main allocation classes and objects
-	
-	*/
-	
-	/**	
-	*	Allocation class represents a singular allocation: can be a private allocation (i.e, only user
-	*	of attached DeviceMemory) or a block allocation (bound to sub-region of device memory)
+    struct suballocIterCompare {
+        bool operator()(const suballocationList::iterator& iter0, const suballocationList::iterator& iter1) const {
+            return iter0->size < iter1->size;
+        }
+    };
+
+    using avail_suballocation_iterator_t = std::vector<suballocationList::iterator>::iterator;
+    using const_avail_suballocation_iterator_t = std::vector<suballocationList::iterator>::const_iterator;
+    using suballocation_iterator_t = suballocationList::iterator;
+    using const_suballocation_iterator_t = suballocationList::const_iterator;
+
+
+    /*
+    
+        Main allocation classes and objects
+    
+    */
+    
+    /**    
+    *    Allocation class represents a singular allocation: can be a private allocation (i.e, only user
+    *    of attached DeviceMemory) or a block allocation (bound to sub-region of device memory)
     *   \ingroup Allocator
-	*/
-	struct Allocation {
+    */
+    struct Allocation {
 
         /** If this is an allocation bound to a smaller region of a larger object, it is a block allocation. 
          *  Otherwise, it has it's own VkDeviceMemory object and is a "PRIVATE_ALLOCATION" type.
          */
-		enum class allocType {
-			BLOCK_ALLOCATION,
-			PRIVATE_ALLOCATION,
-		};
+        enum class allocType {
+            BLOCK_ALLOCATION,
+            PRIVATE_ALLOCATION,
+        };
 
 
-		Allocation() = default;
-		~Allocation() = default;
-		Allocation(const Allocation&) = default;
-		Allocation& operator=(const Allocation&) = default;
-		Allocation(Allocation&& other) noexcept;
-		Allocation& operator=(Allocation&& other) noexcept;
+        Allocation() = default;
+        ~Allocation() = default;
+        Allocation(const Allocation&) = default;
+        Allocation& operator=(const Allocation&) = default;
+        Allocation(Allocation&& other) noexcept;
+        Allocation& operator=(Allocation&& other) noexcept;
 
-		void Init(MemoryBlock* parent_block, const VkDeviceSize& offset, const VkDeviceSize& alignment, const VkDeviceSize& alloc_size, const SuballocationType& suballoc_type);
+        void Init(MemoryBlock* parent_block, const VkDeviceSize& offset, const VkDeviceSize& alignment, const VkDeviceSize& alloc_size, const SuballocationType& suballoc_type);
         void Update(MemoryBlock* new_parent_block, const VkDeviceSize& new_offset);
         /** \param persistently_mapped: If set, this object will be considered to be always mapped. This will remove any worries about mapping/unmapping the object. */
-		void InitPrivate(const uint32_t& type_idx, VkDeviceMemory& dvc_memory, const SuballocationType& suballoc_type, bool persistently_mapped, void* mapped_data, const VkDeviceSize& data_size);
+        void InitPrivate(const uint32_t& type_idx, VkDeviceMemory& dvc_memory, const SuballocationType& suballoc_type, bool persistently_mapped, void* mapped_data, const VkDeviceSize& data_size);
         void Map(const VkDeviceSize& size_to_map, const VkDeviceSize& offset_to_map_at, void* address_to_map_to) const;
         void Unmap() const noexcept;
 
-		const VkDeviceMemory& Memory() const;
-		VkDeviceSize Offset() const noexcept;
-		uint32_t MemoryTypeIdx() const noexcept;
+        const VkDeviceMemory& Memory() const;
+        VkDeviceSize Offset() const noexcept;
+        uint32_t MemoryTypeIdx() const noexcept;
 
-		allocType Type;
-		SuballocationType SuballocType;
-		VkDeviceSize Size, Alignment;
+        allocType Type;
+        SuballocationType SuballocType;
+        VkDeviceSize Size, Alignment;
 
-		union allocTypeUnion {
+        union allocTypeUnion {
 
-			struct BlockAllocation {
-				MemoryBlock* ParentBlock;
-				VkDeviceSize Offset;
-			} blockAllocation;
+            struct BlockAllocation {
+                MemoryBlock* ParentBlock;
+                VkDeviceSize Offset;
+            } blockAllocation;
 
-			struct PrivateAllocation {
-				uint32_t MemoryTypeIdx;
-				VkDeviceMemory DvcMemory;
-				bool PersistentlyMapped;
-				void* MappedData;
-			} privateAllocation;
+            struct PrivateAllocation {
+                uint32_t MemoryTypeIdx;
+                VkDeviceMemory DvcMemory;
+                bool PersistentlyMapped;
+                void* MappedData;
+            } privateAllocation;
 
-		} typeData;
+        } typeData;
 
-	};
+    };
 
-	/**
-    *	A MemoryBlock is a large contiguous region of Vulkan memory of a uniform type (device local, host coherent, host visible, etc) that 
+    /**
+    *    A MemoryBlock is a large contiguous region of Vulkan memory of a uniform type (device local, host coherent, host visible, etc) that 
     *   other objects bind to subregions of. This should never be directly accessed by any client code: it is managed and interfaced to by 
     *   other objects, and several of these of each type can exist (occurs when a memory block is fully used, until no more memory available).
     *   \ingroup Allocator
-	*/
-	class MemoryBlock {
-	public:
+    */
+    class MemoryBlock {
+    public:
 
         MemoryBlock(Allocator* alloc);
         /** The object should be destroyed via the Destroy method before the destructor is called, but this will call the Destroy method if it hasn't been, and will log a warning that this was done. */
-		~MemoryBlock(); 
+        ~MemoryBlock(); 
 
-		/** \param new_memory: This is the handle that this block will take ownership of. \param new_size: total size of this memory block. */
-		void Init(VkDeviceMemory& new_memory, const VkDeviceSize& new_size);
+        /** \param new_memory: This is the handle that this block will take ownership of. \param new_size: total size of this memory block. */
+        void Init(VkDeviceMemory& new_memory, const VkDeviceSize& new_size);
 
-		/** Cleans up resources and prepares object to be safely destroyed. Should be called before the destructor is called, but for safety's sake the destructor will also call this. */
-		void Destroy(Allocator* alloc);
+        /** Cleans up resources and prepares object to be safely destroyed. Should be called before the destructor is called, but for safety's sake the destructor will also call this. */
+        void Destroy(Allocator* alloc);
 
-		// Used when sorting AllocationCollection
-		bool operator<(const MemoryBlock& other);
+        // Used when sorting AllocationCollection
+        bool operator<(const MemoryBlock& other);
 
-		VkDeviceSize AvailableMemory() const noexcept;
-		const VkDeviceMemory& Memory() const noexcept;
+        VkDeviceSize AvailableMemory() const noexcept;
+        const VkDeviceMemory& Memory() const noexcept;
 
-		/** Verifies integrity of memory by checking all contained suballocations for integrity and correctness */
-		ValidationCode Validate() const;
+        /** Verifies integrity of memory by checking all contained suballocations for integrity and correctness */
+        ValidationCode Validate() const;
 
         /** Fills the given SuballocationRequest struct with information about where to place the suballocation, and returns whether or not it succeeded in finding a spot to put the requested suballocation. Usually, a failure means we'll just try another memory block (and ultimately, consider creating a new one) */
-		bool RequestSuballocation(const VkDeviceSize& buffer_image_granularity, const VkDeviceSize& allocation_size, const VkDeviceSize& allocation_alignment, SuballocationType allocation_type, SuballocationRequest* dest_request);
+        bool RequestSuballocation(const VkDeviceSize& buffer_image_granularity, const VkDeviceSize& allocation_size, const VkDeviceSize& allocation_alignment, SuballocationType allocation_type, SuballocationRequest* dest_request);
 
-		/** Verifies that requested suballocation can be added to this object, and sets dest_offset to reflect offset of this now-inserted suballocation. */
-		bool VerifySuballocation(const VkDeviceSize& buffer_image_granularity, const VkDeviceSize& allocation_size, const VkDeviceSize& allocation_alignment,
-			SuballocationType allocation_type, const suballocationList::const_iterator & dest_suballocation_location, VkDeviceSize* dest_offset) const;
+        /** Verifies that requested suballocation can be added to this object, and sets dest_offset to reflect offset of this now-inserted suballocation. */
+        bool VerifySuballocation(const VkDeviceSize& buffer_image_granularity, const VkDeviceSize& allocation_size, const VkDeviceSize& allocation_alignment,
+            SuballocationType allocation_type, const suballocationList::const_iterator & dest_suballocation_location, VkDeviceSize* dest_offset) const;
 
-		bool Empty() const;
+        bool Empty() const;
 
-		/** Performs the actual allocation, once "request" has been checked and made valid. */
-		void Allocate(const SuballocationRequest& request, const SuballocationType& allocation_type, const VkDeviceSize& allocation_size);
+        /** Performs the actual allocation, once "request" has been checked and made valid. */
+        void Allocate(const SuballocationRequest& request, const SuballocationType& allocation_type, const VkDeviceSize& allocation_size);
 
-		/** Frees memory in region specified (i.e frees/destroys a suballocation) */
+        /** Frees memory in region specified (i.e frees/destroys a suballocation) */
         void Free(const Allocation* memory_to_free);
         
         /** When we map a suballocation, we are mapping a sub-region of the larger memory object it is bound to. We cannot perform another map until this sub-region
@@ -419,37 +419,37 @@ namespace vulpes {
         */
         void Unmap();
         
-		VkDeviceSize LargestAvailRegion() const noexcept;
+        VkDeviceSize LargestAvailRegion() const noexcept;
 
-		suballocation_iterator_t begin();
-		suballocation_iterator_t end();
+        suballocation_iterator_t begin();
+        suballocation_iterator_t end();
 
-		const_suballocation_iterator_t begin() const;
-		const_suballocation_iterator_t end() const;
+        const_suballocation_iterator_t begin() const;
+        const_suballocation_iterator_t end() const;
 
-		const_suballocation_iterator_t cbegin() const;
-		const_suballocation_iterator_t cend() const;
+        const_suballocation_iterator_t cbegin() const;
+        const_suballocation_iterator_t cend() const;
 
-		avail_suballocation_iterator_t avail_begin();
-		avail_suballocation_iterator_t avail_end();
+        avail_suballocation_iterator_t avail_begin();
+        avail_suballocation_iterator_t avail_end();
 
-		const_avail_suballocation_iterator_t avail_begin() const;
-		const_avail_suballocation_iterator_t avail_end() const;
+        const_avail_suballocation_iterator_t avail_begin() const;
+        const_avail_suballocation_iterator_t avail_end() const;
 
-		const_avail_suballocation_iterator_t avail_cbegin() const;
-		const_avail_suballocation_iterator_t avail_cend() const;
+        const_avail_suballocation_iterator_t avail_cbegin() const;
+        const_avail_suballocation_iterator_t avail_cend() const;
 
-		VkDeviceSize Size;
-		suballocationList Suballocations;
-		Allocator* allocator;
-		uint32_t MemoryTypeIdx;
+        VkDeviceSize Size;
+        suballocationList Suballocations;
+        Allocator* allocator;
+        uint32_t MemoryTypeIdx;
 
-	protected:
+    protected:
 
         /** Used to protect access to the VkDeviceMemory handle, so that two threads don't attempt to map or use this handle at the same time. */
         std::mutex memoryMutex; 
-		VkDeviceSize availSize;
-		uint32_t freeCount;
+        VkDeviceSize availSize;
+        uint32_t freeCount;
         VkDeviceMemory memory;
         /** Changes the item pointed to by the iterator to be a free type, then adds the now-available size to availSize and increments freeCount. This method
          *  may also call mergeFreeWithNext, insertFreeSuballocation, and removeFreeSuballocation if adjacent suballocations are free or can be merged with the 
@@ -463,129 +463,129 @@ namespace vulpes {
         /** Registers a free suballocation, inserting it into the proper location to keep the sorting intact (via std::lower_bound) */
         void insertFreeSuballocation(const suballocationList::iterator& item_to_insert);
         /** Removes a free suballocation, usually indicating that it is about to be made active and used by an object (or that it has been merged with another free suballocation) */
-		void removeFreeSuballocation(const suballocationList::iterator& item_to_remove);
+        void removeFreeSuballocation(const suballocationList::iterator& item_to_remove);
 
         /** This vector stores iterators that can be used to locate suballocations in this object's suballocationList. Using iterators avoids accidental duplication of objects,
          *  (akin to a pointer), but with more safety and extra convienience when it comes to retrieving, modifying, or even removing the object "pointed" to by the iterator.
         */
-		std::vector<suballocationList::iterator> availSuballocations;
-	};
+        std::vector<suballocationList::iterator> availSuballocations;
+    };
 
-	typedef std::vector<MemoryBlock*>::iterator allocation_iterator_t;
-	typedef std::vector<MemoryBlock*>::const_iterator const_allocation_iterator_t;
+    typedef std::vector<MemoryBlock*>::iterator allocation_iterator_t;
+    typedef std::vector<MemoryBlock*>::const_iterator const_allocation_iterator_t;
 
     /** An allocation collection is just a vector of MemoryBlocks of the same type. With commonly used memory types we wil quite easily fill one block up (e.g, device-local memory) 
      *  so we will need to create a new block. In order to keep some organization among memory types, though, we store these similar memory blocks in this object.
      *  \ingroup Allocator
      */
-	struct AllocationCollection {
-		std::vector<std::unique_ptr<MemoryBlock>> allocations;
+    struct AllocationCollection {
+        std::vector<std::unique_ptr<MemoryBlock>> allocations;
 
-		AllocationCollection() = default;
-		AllocationCollection(Allocator* allocator);
+        AllocationCollection() = default;
+        AllocationCollection(Allocator* allocator);
 
-		~AllocationCollection();
+        ~AllocationCollection();
 
-		MemoryBlock* operator[](const size_t& idx);
-		const MemoryBlock* operator[](const size_t& idx) const;
+        MemoryBlock* operator[](const size_t& idx);
+        const MemoryBlock* operator[](const size_t& idx) const;
 
-		bool Empty() const;
+        bool Empty() const;
 
         /** Removes only the particular memory block from the internal vector, and re-sorts the blocks once complete. */
-		void RemoveBlock(MemoryBlock * block_to_erase);
+        void RemoveBlock(MemoryBlock * block_to_erase);
 
-		void SortAllocations();
+        void SortAllocations();
 
-		
-	private:
-		Allocator* allocator;
-	};
+        
+    private:
+        Allocator* allocator;
+    };
 
     /** \todo Implement this, for christ's sake.
      *  \ingroup Allocator
      */
-	class Defragmenter {
-		const Device* parent;
-		VkDeviceSize BufferImageGranularity;
-		uint32_t MemoryTypeIdx;
-		VkDeviceSize BytesMoved;
-		uint32_t AllocationsMoved;
-	};
+    class Defragmenter {
+        const Device* parent;
+        VkDeviceSize BufferImageGranularity;
+        uint32_t MemoryTypeIdx;
+        VkDeviceSize BytesMoved;
+        uint32_t AllocationsMoved;
+    };
 
     /** The primary interface and class of this subsystem. This object is responsible for creating resources when requested, managing memory,
      *  checking integrity of memory, and cleaning up after itself and when deallocation has been requested.
      *  \ingroup Allocator
      */
-	class Allocator {
-		Allocator(const Allocator&) = delete;
-		Allocator(Allocator&&) = delete;
-		Allocator& operator=(const Allocator&) = delete;
-		Allocator& operator=(Allocator&&) = delete;
-	public:
+    class Allocator {
+        Allocator(const Allocator&) = delete;
+        Allocator(Allocator&&) = delete;
+        Allocator& operator=(const Allocator&) = delete;
+        Allocator& operator=(Allocator&&) = delete;
+    public:
 
-		Allocator(const Device* parent_dvc);
-		~Allocator();
+        Allocator(const Device* parent_dvc);
+        ~Allocator();
 
-		void Recreate();
+        void Recreate();
 
-		VkDeviceSize GetPreferredBlockSize(const uint32_t& memory_type_idx) const noexcept;
-		VkDeviceSize GetBufferImageGranularity() const noexcept;
+        VkDeviceSize GetPreferredBlockSize(const uint32_t& memory_type_idx) const noexcept;
+        VkDeviceSize GetBufferImageGranularity() const noexcept;
 
-		uint32_t GetMemoryHeapCount() const noexcept;
-		uint32_t GetMemoryTypeCount() const noexcept;
+        uint32_t GetMemoryHeapCount() const noexcept;
+        uint32_t GetMemoryTypeCount() const noexcept;
 
-		const VkDevice& DeviceHandle() const noexcept;
+        const VkDevice& DeviceHandle() const noexcept;
 
-		VkResult AllocateMemory(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const SuballocationType& suballoc_type, Allocation& dest_allocation);
+        VkResult AllocateMemory(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const SuballocationType& suballoc_type, Allocation& dest_allocation);
 
-		void FreeMemory(const Allocation* memory_to_free);
+        void FreeMemory(const Allocation* memory_to_free);
 
-		// Allocates memory for an image, using given handle to get requirements. Allocation information is written to dest_memory_range, so it can then be used to bind the resources together.
-		VkResult AllocateForImage(VkImage& image_handle, const AllocationRequirements& details, const SuballocationType& alloc_type, Allocation& dest_allocation);
+        // Allocates memory for an image, using given handle to get requirements. Allocation information is written to dest_memory_range, so it can then be used to bind the resources together.
+        VkResult AllocateForImage(VkImage& image_handle, const AllocationRequirements& details, const SuballocationType& alloc_type, Allocation& dest_allocation);
 
-		// Much like AllocateForImage: uses given handle to get requirements, writes details of allocation ot given range, making memory valid for binding.
-		VkResult AllocateForBuffer(VkBuffer& buffer_handle, const AllocationRequirements& details, const SuballocationType& alloc_type, Allocation& dest_allocation);
+        // Much like AllocateForImage: uses given handle to get requirements, writes details of allocation ot given range, making memory valid for binding.
+        VkResult AllocateForBuffer(VkBuffer& buffer_handle, const AllocationRequirements& details, const SuballocationType& alloc_type, Allocation& dest_allocation);
 
-		// Creates an image object using given info. When finished, given handle is a valid image object (so long as the result value is VkSuccess). Also writes details to 
-		// dest_memory_range, but this method will try to bind the memory and image together too
-		VkResult CreateImage(VkImage* image_handle, const VkImageCreateInfo* img_create_info, const AllocationRequirements& alloc_reqs, Allocation& dest_allocation);
+        // Creates an image object using given info. When finished, given handle is a valid image object (so long as the result value is VkSuccess). Also writes details to 
+        // dest_memory_range, but this method will try to bind the memory and image together too
+        VkResult CreateImage(VkImage* image_handle, const VkImageCreateInfo* img_create_info, const AllocationRequirements& alloc_reqs, Allocation& dest_allocation);
 
-		// Creates a buffer object using given info. Given handle is valid for use if method returns VK_SUCCESS, and memory will also have been bound to the object. Details of the 
-		// memory used for this particular object are also written to dest_memory_range, however.
-		VkResult CreateBuffer(VkBuffer* buffer_handle, const VkBufferCreateInfo* buffer_create_info, const AllocationRequirements& alloc_reqs, Allocation& dest_allocation);
+        // Creates a buffer object using given info. Given handle is valid for use if method returns VK_SUCCESS, and memory will also have been bound to the object. Details of the 
+        // memory used for this particular object are also written to dest_memory_range, however.
+        VkResult CreateBuffer(VkBuffer* buffer_handle, const VkBufferCreateInfo* buffer_create_info, const AllocationRequirements& alloc_reqs, Allocation& dest_allocation);
 
-		// Destroys image/buffer specified by given handle.
-		void DestroyImage(const VkImage& image_handle, Allocation& allocation_to_free);
-		void DestroyBuffer(const VkBuffer& buffer_handle, Allocation& allocation_to_free);
+        // Destroys image/buffer specified by given handle.
+        void DestroyImage(const VkImage& image_handle, Allocation& allocation_to_free);
+        void DestroyBuffer(const VkBuffer& buffer_handle, Allocation& allocation_to_free);
 
-	private:
+    private:
 
-		// Won't throw: but can return invalid indices. Make sure to handle this.
-		uint32_t findMemoryTypeIdx(const VkMemoryRequirements& mem_reqs, const AllocationRequirements& details) const noexcept;
+        // Won't throw: but can return invalid indices. Make sure to handle this.
+        uint32_t findMemoryTypeIdx(const VkMemoryRequirements& mem_reqs, const AllocationRequirements& details) const noexcept;
 
-		// These allocation methods return VkResult's so that we can try different parameters (based partially on return code) in main allocation method.
-		VkResult allocateMemoryType(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const uint32_t& memory_type_idx, const SuballocationType& type, Allocation& dest_allocation);
-		VkResult allocatePrivateMemory(const VkDeviceSize& size, const SuballocationType& type, const uint32_t& memory_type_idx, Allocation& dest_allocation);
+        // These allocation methods return VkResult's so that we can try different parameters (based partially on return code) in main allocation method.
+        VkResult allocateMemoryType(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const uint32_t& memory_type_idx, const SuballocationType& type, Allocation& dest_allocation);
+        VkResult allocatePrivateMemory(const VkDeviceSize& size, const SuballocationType& type, const uint32_t& memory_type_idx, Allocation& dest_allocation);
 
-		// called from "FreeMemory" if memory to free isn't found in the allocation vectors for any of our active memory types.
-		bool freePrivateMemory(const Allocation* memory_to_free);
+        // called from "FreeMemory" if memory to free isn't found in the allocation vectors for any of our active memory types.
+        bool freePrivateMemory(const Allocation* memory_to_free);
 
-		std::vector<std::unique_ptr<AllocationCollection>> allocations;
-		std::vector<std::unique_ptr<AllocationCollection>> privateAllocations;
-		std::vector<bool> emptyAllocations;
+        std::vector<std::unique_ptr<AllocationCollection>> allocations;
+        std::vector<std::unique_ptr<AllocationCollection>> privateAllocations;
+        std::vector<bool> emptyAllocations;
 
-		const Device* parent;
+        const Device* parent;
 
-		VkPhysicalDeviceProperties deviceProperties;
-		VkPhysicalDeviceMemoryProperties deviceMemoryProperties;
+        VkPhysicalDeviceProperties deviceProperties;
+        VkPhysicalDeviceMemoryProperties deviceMemoryProperties;
 
-		VkDeviceSize preferredLargeHeapBlockSize;
-		VkDeviceSize preferredSmallHeapBlockSize;
-		const VkAllocationCallbacks* pAllocationCallbacks = nullptr;
-		
-	};
+        VkDeviceSize preferredLargeHeapBlockSize;
+        VkDeviceSize preferredSmallHeapBlockSize;
+        const VkAllocationCallbacks* pAllocationCallbacks = nullptr;
+        
+    };
 
-	
+    
 
 }
 

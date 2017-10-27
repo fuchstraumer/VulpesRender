@@ -17,7 +17,7 @@ namespace vulpes {
         glm::vec3(+1.0f, +1.0f, -1.0f),
     };
 
-	Skybox::Skybox(const Device* dvc) { device = dvc; }
+    Skybox::Skybox(const Device* dvc) { device = dvc; }
 
     Skybox::~Skybox() {
         texture.reset();
@@ -79,10 +79,10 @@ namespace vulpes {
         };
 
         build_face(positions[0], positions[1], positions[2], positions[3]);
-		build_face(positions[1], positions[4], positions[7], positions[2]);
-		build_face(positions[3], positions[2], positions[7], positions[6]);
-		build_face(positions[5], positions[0], positions[3], positions[6]);
-		build_face(positions[5], positions[4], positions[1], positions[0]);
+        build_face(positions[1], positions[4], positions[7], positions[2]);
+        build_face(positions[3], positions[2], positions[7], positions[6]);
+        build_face(positions[5], positions[0], positions[3], positions[6]);
+        build_face(positions[5], positions[4], positions[1], positions[0]);
         build_face(positions[4], positions[5], positions[6], positions[7]);
         
         CreateBuffers(device);
@@ -153,7 +153,7 @@ namespace vulpes {
         graphicsPipelineStateInfo.VertexInfo.pVertexBindingDescriptions = &bind_descr;
         graphicsPipelineStateInfo.VertexInfo.pVertexAttributeDescriptions = &attr_descr;
 
-		graphicsPipelineStateInfo.DepthStencilInfo.depthCompareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
+        graphicsPipelineStateInfo.DepthStencilInfo.depthCompareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
 
     }
 

@@ -5,206 +5,206 @@
 
 namespace vulpes {
 
-	std::vector<std::pair<VkBuffer, Allocation>> Buffer::stagingBuffers = std::vector<std::pair<VkBuffer, Allocation>>();
+    std::vector<std::pair<VkBuffer, Allocation>> Buffer::stagingBuffers = std::vector<std::pair<VkBuffer, Allocation>>();
 
-	Buffer::Buffer(const Device * _parent) : parent(_parent), createInfo(vk_buffer_create_info_base), handle(VK_NULL_HANDLE) {}
+    Buffer::Buffer(const Device * _parent) : parent(_parent), createInfo(vk_buffer_create_info_base), handle(VK_NULL_HANDLE) {}
 
-	Buffer::~Buffer(){
-		Destroy();
-	}
+    Buffer::~Buffer(){
+        Destroy();
+    }
 
-	Buffer::Buffer(Buffer && other) noexcept : allocators(std::move(other.allocators)), size(std::move(other.size)), createInfo(std::move(other.createInfo)), handle(std::move(other.handle)), memoryAllocation(std::move(other.memoryAllocation)), parent(std::move(other.parent)), MappedMemory(std::move(other.MappedMemory)), view(std::move(other.view)) {
-		// Make sure to nullify so destructor checks safer/more likely to succeed.
-		other.handle = VK_NULL_HANDLE;
-		other.MappedMemory = nullptr;
-	}
+    Buffer::Buffer(Buffer && other) noexcept : allocators(std::move(other.allocators)), size(std::move(other.size)), createInfo(std::move(other.createInfo)), handle(std::move(other.handle)), memoryAllocation(std::move(other.memoryAllocation)), parent(std::move(other.parent)), MappedMemory(std::move(other.MappedMemory)), view(std::move(other.view)) {
+        // Make sure to nullify so destructor checks safer/more likely to succeed.
+        other.handle = VK_NULL_HANDLE;
+        other.MappedMemory = nullptr;
+    }
 
-	Buffer & Buffer::operator=(Buffer && other) noexcept {
-		allocators = std::move(other.allocators);
-		size = std::move(other.size);
-		createInfo = std::move(other.createInfo);
-		handle = std::move(other.handle);
-		memoryAllocation = std::move(other.memoryAllocation);
-		parent = std::move(other.parent);
-		MappedMemory = std::move(other.MappedMemory);
-		view = std::move(other.view);
-		other.handle = VK_NULL_HANDLE;
-		other.MappedMemory = nullptr;
-		return *this;
-	}
+    Buffer & Buffer::operator=(Buffer && other) noexcept {
+        allocators = std::move(other.allocators);
+        size = std::move(other.size);
+        createInfo = std::move(other.createInfo);
+        handle = std::move(other.handle);
+        memoryAllocation = std::move(other.memoryAllocation);
+        parent = std::move(other.parent);
+        MappedMemory = std::move(other.MappedMemory);
+        view = std::move(other.view);
+        other.handle = VK_NULL_HANDLE;
+        other.MappedMemory = nullptr;
+        return *this;
+    }
 
-	void Buffer::CreateBuffer(const VkBufferUsageFlags & usage_flags, const VkMemoryPropertyFlags & memory_flags, const VkDeviceSize & _size) {
-		
-		if (parent == nullptr) {
+    void Buffer::CreateBuffer(const VkBufferUsageFlags & usage_flags, const VkMemoryPropertyFlags & memory_flags, const VkDeviceSize & _size) {
+        
+        if (parent == nullptr) {
             LOG(ERROR) << "Tried to create a buffer without a parent device object.";
-			throw(std::runtime_error("Set the parent of a buffer before trying to populate it, you dolt."));
-		}
+            throw(std::runtime_error("Set the parent of a buffer before trying to populate it, you dolt."));
+        }
 
-		createInfo.usage = usage_flags;
-		createInfo.size = _size;
-		dataSize = _size;
-		createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-		AllocationRequirements reqs;
-		reqs.preferredFlags = 0;
-		reqs.privateMemory = false;
-		reqs.requiredFlags = memory_flags;
-		VkResult result = parent->vkAllocator->CreateBuffer(&handle, &createInfo, reqs, memoryAllocation);
-		VkAssert(result);
-		size = memoryAllocation.Size;
+        createInfo.usage = usage_flags;
+        createInfo.size = _size;
+        dataSize = _size;
+        createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+        AllocationRequirements reqs;
+        reqs.preferredFlags = 0;
+        reqs.privateMemory = false;
+        reqs.requiredFlags = memory_flags;
+        VkResult result = parent->vkAllocator->CreateBuffer(&handle, &createInfo, reqs, memoryAllocation);
+        VkAssert(result);
+        size = memoryAllocation.Size;
 
-	}
+    }
 
-	void Buffer::Destroy(){
-		if (handle != VK_NULL_HANDLE) {
-			parent->vkAllocator->DestroyBuffer(handle, memoryAllocation);
-			handle = VK_NULL_HANDLE;
-		}
-	}
+    void Buffer::Destroy(){
+        if (handle != VK_NULL_HANDLE) {
+            parent->vkAllocator->DestroyBuffer(handle, memoryAllocation);
+            handle = VK_NULL_HANDLE;
+        }
+    }
 
-	void Buffer::CopyToMapped(void * data, const VkDeviceSize & copy_size, const VkDeviceSize& offset){
+    void Buffer::CopyToMapped(void * data, const VkDeviceSize & copy_size, const VkDeviceSize& offset){
 
-		Map(offset);
+        Map(offset);
 
-		if (size == 0) {
-			memcpy(MappedMemory, data, Size());
-		}
-		else {
-			memcpy(MappedMemory, data, copy_size);
-		}
+        if (size == 0) {
+            memcpy(MappedMemory, data, Size());
+        }
+        else {
+            memcpy(MappedMemory, data, copy_size);
+        }
 
-		Unmap();
-	}
+        Unmap();
+    }
 
-	void Buffer::CopyTo(void* data, const VkCommandBuffer& transfer_cmd, const VkDeviceSize& copy_size, const VkDeviceSize& copy_offset) {
+    void Buffer::CopyTo(void* data, const VkCommandBuffer& transfer_cmd, const VkDeviceSize& copy_size, const VkDeviceSize& copy_offset) {
 
-		VkBuffer staging_buffer;
-		Allocation staging_alloc;
-		createStagingBuffer(copy_size, 0, staging_buffer, staging_alloc);
+        VkBuffer staging_buffer;
+        Allocation staging_alloc;
+        createStagingBuffer(copy_size, 0, staging_buffer, staging_alloc);
 
-		void* mapped;
-		VkResult result = vkMapMemory(parent->vkHandle(), staging_alloc.Memory(), staging_alloc.Offset(), copy_size, 0, &mapped);
-		VkAssert(result);
-		memcpy(mapped, data, copy_size);
-		vkUnmapMemory(parent->vkHandle(), staging_alloc.Memory());
+        void* mapped;
+        VkResult result = vkMapMemory(parent->vkHandle(), staging_alloc.Memory(), staging_alloc.Offset(), copy_size, 0, &mapped);
+        VkAssert(result);
+        memcpy(mapped, data, copy_size);
+        vkUnmapMemory(parent->vkHandle(), staging_alloc.Memory());
 
-		VkBufferCopy copy{};
-		copy.size = copy_size;
-		copy.dstOffset = copy_offset;
-		vkCmdCopyBuffer(transfer_cmd, staging_buffer, handle, 1, &copy);
+        VkBufferCopy copy{};
+        copy.size = copy_size;
+        copy.dstOffset = copy_offset;
+        vkCmdCopyBuffer(transfer_cmd, staging_buffer, handle, 1, &copy);
 
-		auto pair = std::make_pair(std::move(staging_buffer), std::move(staging_alloc));
-		stagingBuffers.push_back(std::move(pair));
+        auto pair = std::make_pair(std::move(staging_buffer), std::move(staging_alloc));
+        stagingBuffers.push_back(std::move(pair));
 
-	}
+    }
 
-	void Buffer::CopyTo(void * data, CommandPool* cmd_pool, const VkQueue & transfer_queue, const VkDeviceSize & copy_size, const VkDeviceSize & copy_offset){
-		
-		VkBuffer staging_buffer;
-		Allocation staging_alloc;
-		createStagingBuffer(copy_size, 0, staging_buffer, staging_alloc);
+    void Buffer::CopyTo(void * data, CommandPool* cmd_pool, const VkQueue & transfer_queue, const VkDeviceSize & copy_size, const VkDeviceSize & copy_offset){
+        
+        VkBuffer staging_buffer;
+        Allocation staging_alloc;
+        createStagingBuffer(copy_size, 0, staging_buffer, staging_alloc);
 
-		void* mapped;
-		VkResult result = vkMapMemory(parent->vkHandle(), staging_alloc.Memory(), staging_alloc.Offset(), copy_size, 0, &mapped);
-		VkAssert(result);
-		memcpy(mapped, data, copy_size);
-		vkUnmapMemory(parent->vkHandle(), staging_alloc.Memory());
+        void* mapped;
+        VkResult result = vkMapMemory(parent->vkHandle(), staging_alloc.Memory(), staging_alloc.Offset(), copy_size, 0, &mapped);
+        VkAssert(result);
+        memcpy(mapped, data, copy_size);
+        vkUnmapMemory(parent->vkHandle(), staging_alloc.Memory());
 
-		VkCommandBuffer copy_cmd = cmd_pool->StartSingleCmdBuffer();
-			VkBufferCopy copy{};
-			copy.size = copy_size;
-			copy.dstOffset = copy_offset;
-			vkCmdCopyBuffer(copy_cmd, staging_buffer, handle, 1, &copy);
-		cmd_pool->EndSingleCmdBuffer(copy_cmd, transfer_queue);
+        VkCommandBuffer copy_cmd = cmd_pool->StartSingleCmdBuffer();
+            VkBufferCopy copy{};
+            copy.size = copy_size;
+            copy.dstOffset = copy_offset;
+            vkCmdCopyBuffer(copy_cmd, staging_buffer, handle, 1, &copy);
+        cmd_pool->EndSingleCmdBuffer(copy_cmd, transfer_queue);
 
-		auto pair = std::make_pair(std::move(staging_buffer), std::move(staging_alloc));
-		stagingBuffers.push_back(std::move(pair));
+        auto pair = std::make_pair(std::move(staging_buffer), std::move(staging_alloc));
+        stagingBuffers.push_back(std::move(pair));
 
-	}
+    }
 
-	void Buffer::Update(VkCommandBuffer & cmd, const VkDeviceSize & data_sz, const VkDeviceSize & offset, const void * data) {
-		vkCmdUpdateBuffer(cmd, handle, memoryAllocation.Offset() + offset, data_sz, data);
-	}
+    void Buffer::Update(VkCommandBuffer & cmd, const VkDeviceSize & data_sz, const VkDeviceSize & offset, const void * data) {
+        vkCmdUpdateBuffer(cmd, handle, memoryAllocation.Offset() + offset, data_sz, data);
+    }
 
-	void Buffer::Map(const VkDeviceSize& offset){
-		assert(offset < memoryAllocation.Size);
-		VkResult result = vkMapMemory(parent->vkHandle(), memoryAllocation.Memory(), memoryAllocation.Offset() + offset, memoryAllocation.Size, 0, &MappedMemory);
-		VkAssert(result);
-	}
+    void Buffer::Map(const VkDeviceSize& offset){
+        assert(offset < memoryAllocation.Size);
+        VkResult result = vkMapMemory(parent->vkHandle(), memoryAllocation.Memory(), memoryAllocation.Offset() + offset, memoryAllocation.Size, 0, &MappedMemory);
+        VkAssert(result);
+    }
 
-	void Buffer::Unmap(){
-		vkUnmapMemory(parent->vkHandle(), memoryAllocation.Memory());
-	}
+    void Buffer::Unmap(){
+        vkUnmapMemory(parent->vkHandle(), memoryAllocation.Memory());
+    }
 
-	const VkBuffer & Buffer::vkHandle() const noexcept{
-		return handle;
-	}
+    const VkBuffer & Buffer::vkHandle() const noexcept{
+        return handle;
+    }
 
-	VkBuffer & Buffer::vkHandle() noexcept{
-		return handle;
-	}
+    VkBuffer & Buffer::vkHandle() noexcept{
+        return handle;
+    }
 
-	VkDescriptorBufferInfo Buffer::GetDescriptor() const noexcept{
-		return VkDescriptorBufferInfo{ handle, 0, dataSize };
-	}
+    VkDescriptorBufferInfo Buffer::GetDescriptor() const noexcept{
+        return VkDescriptorBufferInfo{ handle, 0, dataSize };
+    }
 
-	VkDeviceSize Buffer::Size() const noexcept{
-		return size;
-	}
+    VkDeviceSize Buffer::Size() const noexcept{
+        return size;
+    }
 
-	VkDeviceSize Buffer::InitDataSize() const noexcept {
-		return dataSize;
-	}
+    VkDeviceSize Buffer::InitDataSize() const noexcept {
+        return dataSize;
+    }
 
-	void Buffer::CreateStagingBuffer(const Device * dvc, const VkDeviceSize & size, VkBuffer & dest, Allocation& dest_memory_alloc){
-		
-		VkBufferCreateInfo create_info = vk_buffer_create_info_base;
-		create_info.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
-		create_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-		create_info.size = size;
+    void Buffer::CreateStagingBuffer(const Device * dvc, const VkDeviceSize & size, VkBuffer & dest, Allocation& dest_memory_alloc){
+        
+        VkBufferCreateInfo create_info = vk_buffer_create_info_base;
+        create_info.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
+        create_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+        create_info.size = size;
 
-		AllocationRequirements alloc_reqs;
-		alloc_reqs.privateMemory = false;
-		alloc_reqs.requiredFlags = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
+        AllocationRequirements alloc_reqs;
+        alloc_reqs.privateMemory = false;
+        alloc_reqs.requiredFlags = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
 
-		VkResult result = dvc->vkAllocator->CreateBuffer(&dest, &create_info, alloc_reqs, dest_memory_alloc);
-		VkAssert(result);
+        VkResult result = dvc->vkAllocator->CreateBuffer(&dest, &create_info, alloc_reqs, dest_memory_alloc);
+        VkAssert(result);
 
-		auto pair = std::make_pair(std::move(dest), dest_memory_alloc);
+        auto pair = std::make_pair(std::move(dest), dest_memory_alloc);
         stagingBuffers.push_back(std::move(pair));
         
         LOG(INFO) << "Created a staging buffer. Currently have " << std::to_string(stagingBuffers.size()) << " staging buffers in the pool.";
-	}
+    }
 
-	void Buffer::DestroyStagingResources(const Device* device){
+    void Buffer::DestroyStagingResources(const Device* device){
 
-		if (stagingBuffers.empty()) {
-			return;
-		}
+        if (stagingBuffers.empty()) {
+            return;
+        }
 
-		for (auto& buff : stagingBuffers) {
-			device->vkAllocator->DestroyBuffer(buff.first, buff.second);
-		}
+        for (auto& buff : stagingBuffers) {
+            device->vkAllocator->DestroyBuffer(buff.first, buff.second);
+        }
 
-		stagingBuffers.clear(); 
-		stagingBuffers.shrink_to_fit();
-	}
+        stagingBuffers.clear(); 
+        stagingBuffers.shrink_to_fit();
+    }
 
-	void Buffer::createStagingBuffer(const VkDeviceSize & staging_size, const VkDeviceSize & offset, VkBuffer & staging_buffer, Allocation& dest_memory_alloc){
-		
-		VkBufferCreateInfo create_info = vk_buffer_create_info_base;
-		create_info.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
-		create_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-		create_info.size = staging_size;
-		size = staging_size;
+    void Buffer::createStagingBuffer(const VkDeviceSize & staging_size, const VkDeviceSize & offset, VkBuffer & staging_buffer, Allocation& dest_memory_alloc){
+        
+        VkBufferCreateInfo create_info = vk_buffer_create_info_base;
+        create_info.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
+        create_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+        create_info.size = staging_size;
+        size = staging_size;
 
-		AllocationRequirements alloc_reqs;
-		alloc_reqs.privateMemory = false;
-		alloc_reqs.requiredFlags = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
+        AllocationRequirements alloc_reqs;
+        alloc_reqs.privateMemory = false;
+        alloc_reqs.requiredFlags = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
 
-		VkResult result = parent->vkAllocator->CreateBuffer(&staging_buffer, &create_info, alloc_reqs, dest_memory_alloc);
+        VkResult result = parent->vkAllocator->CreateBuffer(&staging_buffer, &create_info, alloc_reqs, dest_memory_alloc);
         VkAssert(result);
-		LOG_IF(stagingBuffers.size() > 100, WARNING) << "Warning! More than 100 staging buffers currently in the staging buffer pool!";
+        LOG_IF(stagingBuffers.size() > 100, WARNING) << "Warning! More than 100 staging buffers currently in the staging buffer pool!";
 
-	}
+    }
 
 }

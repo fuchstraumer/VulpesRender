@@ -12,10 +12,10 @@ namespace vulpes {
     *    As each computer can have multiple physical devices, the class uses a simplistic scoring system to find the "best" hardware on the current system.
     *    \ingroup Core
     */
-	class PhysicalDevice {
+    class PhysicalDevice {
         PhysicalDevice(const PhysicalDevice& other) = delete;
         PhysicalDevice& operator=(const PhysicalDevice& other) = delete;
-	public:
+    public:
 
         PhysicalDevice(const VkInstance& instance_handle);
         const VkPhysicalDevice& vkHandle() const noexcept;
@@ -32,15 +32,15 @@ namespace vulpes {
         *    bitfields can be passed to the method.
             \return Index of the queue meeting all of the flags specified, or std::numeric_limits<uint32_t>::max() on failure.
         */
-		uint32_t GetQueueFamilyIndex(const VkQueueFlagBits& bitfield) const noexcept ;
+        uint32_t GetQueueFamilyIndex(const VkQueueFlagBits& bitfield) const noexcept ;
         VkQueueFamilyProperties GetQueueFamilyProperties(const VkQueueFlagBits& bitfield) const;
 
-		VkPhysicalDeviceProperties Properties;
-		VkPhysicalDeviceFeatures Features;
-		VkPhysicalDeviceMemoryProperties MemoryProperties;
+        VkPhysicalDeviceProperties Properties;
+        VkPhysicalDeviceFeatures Features;
+        VkPhysicalDeviceMemoryProperties MemoryProperties;
         std::vector<VkExtensionProperties> ExtensionProperties;
 
-	private:
+    private:
 
         void getAttributes() noexcept;
         void retrieveQueueFamilyProperties() noexcept;
@@ -48,9 +48,9 @@ namespace vulpes {
         VkPhysicalDevice getBestDevice(const VkInstance & parent_instance);
 
         std::vector<VkQueueFamilyProperties> queueFamilyProperties;
-		VkPhysicalDevice handle;
-		
-	};
+        VkPhysicalDevice handle;
+        
+    };
 
 }
 #endif // !VULPES_VK_PHYSICAL_DEVICE_H

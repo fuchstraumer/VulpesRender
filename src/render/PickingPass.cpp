@@ -281,13 +281,13 @@ namespace vulpes {
     void PickingPass::createGraphicsCmdPools() {
         
         VkCommandPoolCreateInfo pool_info = vk_command_pool_info_base;
-		pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
-		pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
-		primaryPool = std::make_unique<CommandPool>(device, pool_info, true);
+        pool_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+        pool_info.queueFamilyIndex = device->QueueFamilyIndices.Graphics;
+        primaryPool = std::make_unique<CommandPool>(device, pool_info, true);
 
-		primaryPool->AllocateCmdBuffers(swapchain->ImageCount, VK_COMMAND_BUFFER_LEVEL_PRIMARY);
+        primaryPool->AllocateCmdBuffers(swapchain->ImageCount, VK_COMMAND_BUFFER_LEVEL_PRIMARY);
 
-		secondaryPool = std::make_unique<CommandPool>(device, pool_info, false);
+        secondaryPool = std::make_unique<CommandPool>(device, pool_info, false);
         secondaryPool->AllocateCmdBuffers(swapchain->ImageCount, VK_COMMAND_BUFFER_LEVEL_SECONDARY);
 
     }

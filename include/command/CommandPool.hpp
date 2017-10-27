@@ -18,20 +18,20 @@ namespace vulpes {
     *    \todo Remove redundant num_buffers parameter from AllocateCmdBuffers, make the primary/secondary level selected upon alloc not construction.
     *    \ingroup Command
     */
-	class CommandPool {
-		CommandPool(const CommandPool&) = delete;
-		CommandPool& operator=(const CommandPool&) = delete;
-	public:
+    class CommandPool {
+        CommandPool(const CommandPool&) = delete;
+        CommandPool& operator=(const CommandPool&) = delete;
+    public:
 
-		CommandPool(const Device* parent, const VkCommandPoolCreateInfo& create_info, bool primary);
-		CommandPool(const Device* parent, bool primary);
-		CommandPool(CommandPool&& other) noexcept;
-		CommandPool& operator=(CommandPool&& other) noexcept;
+        CommandPool(const Device* parent, const VkCommandPoolCreateInfo& create_info, bool primary);
+        CommandPool(const Device* parent, bool primary);
+        CommandPool(CommandPool&& other) noexcept;
+        CommandPool& operator=(CommandPool&& other) noexcept;
 
-		virtual ~CommandPool();
+        virtual ~CommandPool();
 
-		void Destroy();
-		void Create();
+        void Destroy();
+        void Create();
 
         void AllocateCmdBuffers(const uint32_t& num_buffers, const VkCommandBufferLevel& cmd_buffer_level);
         
@@ -48,16 +48,16 @@ namespace vulpes {
         *   the Vulkan implementation to find a suitable memory location to use (or it will have to allocate more memory).
         *   \param command_buffer_reset_flag_bits - Only current options are VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT, the default, or no flags (thus, no resources released)
         */
-		void ResetCmdBuffer(const size_t& idx, const VkCommandBufferResetFlagBits& command_buffer_reset_flag_bits = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT);
+        void ResetCmdBuffer(const size_t& idx, const VkCommandBufferResetFlagBits& command_buffer_reset_flag_bits = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT);
         
         /** Frees the memory used for all command buffers in this pool, which effectively "deletes" them, unlike resetting a single command buffer or even resetting
         *   the entire pool. This will require calling AllocateCmdBuffers again, as it ultimately resets the object into its base state.
         */
         void FreeCommandBuffers();
     
-		const VkCommandPool& vkHandle() const noexcept;
+        const VkCommandPool& vkHandle() const noexcept;
 
-		VkCommandBuffer& operator[](const size_t& idx);
+        VkCommandBuffer& operator[](const size_t& idx);
         VkCommandBuffer& GetCmdBuffer(const size_t& idx);
 
         /** Gets a range of command buffers, starting at the given offset and extending "num" command buffers beyond it.
@@ -65,26 +65,26 @@ namespace vulpes {
         */
         std::vector<VkCommandBuffer> GetCommandBuffers(const size_t& num, const size_t& offset);
 
-		VkCommandBuffer StartSingleCmdBuffer();
-		void EndSingleCmdBuffer(VkCommandBuffer& cmd_buffer, const VkQueue & queue);
+        VkCommandBuffer StartSingleCmdBuffer();
+        void EndSingleCmdBuffer(VkCommandBuffer& cmd_buffer, const VkQueue & queue);
 
-		const size_t size() const noexcept;
+        const size_t size() const noexcept;
 
         const VkCommandBuffer* Data() const noexcept;
 
-	protected:
+    protected:
 
-		std::vector<VkCommandBuffer> cmdBuffers;
-		std::vector<bool> bufferInUse;
-		VkCommandPool handle;
-		VkCommandPoolCreateInfo createInfo;
-		const Device* parent;
-		const VkAllocationCallbacks* allocators = nullptr;
-		bool primary;
+        std::vector<VkCommandBuffer> cmdBuffers;
+        std::vector<bool> bufferInUse;
+        VkCommandPool handle;
+        VkCommandPoolCreateInfo createInfo;
+        const Device* parent;
+        const VkAllocationCallbacks* allocators = nullptr;
+        bool primary;
 
-	};
+    };
 
 
-	
+    
 }
 #endif // !VULPES_VK_COMMAND_POOL_H

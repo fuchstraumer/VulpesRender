@@ -12,15 +12,15 @@ namespace vulpes {
     *   \todo Update the latter two parameters of the constructor to use a transfer pool (reducing to one parameter)
     *   \ingroup Rendering
     */
-	class DepthStencil : public Image {
-	public:
+    class DepthStencil : public Image {
+    public:
 
-		DepthStencil(const Device* _parent, const VkExtent3D& extents, CommandPool* cmd, VkQueue & queue);
+        DepthStencil(const Device* _parent, const VkExtent3D& extents, CommandPool* cmd, VkQueue & queue);
 
-		~DepthStencil() = default;
+        ~DepthStencil() = default;
 
-		VkAttachmentDescription DepthAttachment() const noexcept;
-	};
+        VkAttachmentDescription DepthAttachment() const noexcept;
+    };
 
 }
 #endif // !VULPES_VK_DEPTH_STENCIL_H

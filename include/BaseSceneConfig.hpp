@@ -6,12 +6,12 @@
 
 namespace vulpes {
 
-	// Default width/height of window. Should probably move this elsewhere and/or remove it entirely.
-	constexpr uint32_t DEFAULT_WIDTH = 1440, DEFAULT_HEIGHT = 900;
+    // Default width/height of window. Should probably move this elsewhere and/or remove it entirely.
+    constexpr uint32_t DEFAULT_WIDTH = 1440, DEFAULT_HEIGHT = 900;
 
-	    enum class cameraType : int {
-		    FPS = 0,
-		    ARCBALL
+        enum class cameraType : int {
+            FPS = 0,
+            ARCBALL
         };
 
         struct vulpesSceneConfig {
@@ -101,18 +101,18 @@ namespace vulpes {
             */
             bool Enable3DMousePicking = true;
 
-			bool RequestRefresh = false;
+            bool RequestRefresh = false;
 
-			/*
-			
-				Verbose logging includes several extra info log calls at various locations. This is useful 
-				for tracking where crashes occur in release builds. 
+            /*
+            
+                Verbose logging includes several extra info log calls at various locations. This is useful 
+                for tracking where crashes occur in release builds. 
 
-			*/
+            */
 
-			bool VerboseLogging = true;
+            bool VerboseLogging = true;
 
-	    };
+        };
 
     
 

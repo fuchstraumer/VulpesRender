@@ -50,29 +50,29 @@ namespace vulpes {
 
     }
 
-	void Instance::setupPhysicalDevice(){
-		physicalDevice = std::make_unique<PhysicalDevice>(vkHandle());
-	}
+    void Instance::setupPhysicalDevice(){
+        physicalDevice = std::make_unique<PhysicalDevice>(vkHandle());
+    }
 
-	Instance::~Instance(){
+    Instance::~Instance(){
         window.reset();
         if (validationEnabled) {
             destroyDebugCallbacks();
         }
-		vkDestroyInstance(handle, nullptr);
-	}
+        vkDestroyInstance(handle, nullptr);
+    }
 
-	const VkInstance& Instance::vkHandle() const noexcept {
-		return handle;
-	}
+    const VkInstance& Instance::vkHandle() const noexcept {
+        return handle;
+    }
 
-	const VkSurfaceKHR Instance::vkSurface() const noexcept {
-		return window->vkSurface();
-	}
+    const VkSurfaceKHR Instance::vkSurface() const noexcept {
+        return window->vkSurface();
+    }
 
-	const PhysicalDevice* Instance::GetPhysicalDevice() const noexcept{
-		return physicalDevice.get();
-	}
+    const PhysicalDevice* Instance::GetPhysicalDevice() const noexcept{
+        return physicalDevice.get();
+    }
 
     const Window* Instance::GetWindow() const noexcept {
         return window.get();
@@ -103,12 +103,12 @@ namespace vulpes {
 
     }
 
-	void Instance::createWindow(const uint32_t& _width, const uint32_t& _height) {
+    void Instance::createWindow(const uint32_t& _width, const uint32_t& _height) {
         
         window = std::make_unique<Window>(this, _width, _height);
         LOG(INFO) << "Created a GLFW window object.";
 
-	}
+    }
 
 
 

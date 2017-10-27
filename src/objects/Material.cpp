@@ -5,26 +5,26 @@
 
 namespace vulpes {
 
-	Material::Material(Material&& other) noexcept : ambient(std::move(other.ambient)), diffuse(std::move(other.diffuse)), specular(std::move(other.specular)), specularHighlight(std::move(other.specularHighlight)), bumpMap(std::move(other.bumpMap)), displacementMap(std::move(other.displacementMap)),
-		alpha(std::move(other.alpha)), reflection(std::move(other.reflection)), ubo(std::move(other.ubo)), uboData(std::move(other.uboData)), descriptorSet(std::move(other.descriptorSet)), pbrTextures(std::move(other.pbrTextures)), activeTextures(std::move(other.activeTextures)) {}
+    Material::Material(Material&& other) noexcept : ambient(std::move(other.ambient)), diffuse(std::move(other.diffuse)), specular(std::move(other.specular)), specularHighlight(std::move(other.specularHighlight)), bumpMap(std::move(other.bumpMap)), displacementMap(std::move(other.displacementMap)),
+        alpha(std::move(other.alpha)), reflection(std::move(other.reflection)), ubo(std::move(other.ubo)), uboData(std::move(other.uboData)), descriptorSet(std::move(other.descriptorSet)), pbrTextures(std::move(other.pbrTextures)), activeTextures(std::move(other.activeTextures)) {}
 
-	Material & Material::operator=(Material && other) noexcept {
-		ambient = std::move(other.ambient);
-		diffuse = std::move(other.diffuse);
-		specular = std::move(other.specular);
-		specularHighlight = std::move(other.specularHighlight);
-		bumpMap = std::move(other.bumpMap);
-		displacementMap = std::move(other.displacementMap);
-		alpha = std::move(other.alpha);
-		reflection = std::move(other.reflection);
-		ubo = std::move(other.ubo);
-		uboData = std::move(other.uboData);
-		descriptorSet = std::move(other.descriptorSet);
-		pbrTextures = std::move(other.pbrTextures);
-		activeTextures = std::move(other.activeTextures);
-		return *this;
-	}
-	void Material::Create(const tinyobj::material_t& material_, const Device* device, DescriptorPool* descriptor_pool) {
+    Material & Material::operator=(Material && other) noexcept {
+        ambient = std::move(other.ambient);
+        diffuse = std::move(other.diffuse);
+        specular = std::move(other.specular);
+        specularHighlight = std::move(other.specularHighlight);
+        bumpMap = std::move(other.bumpMap);
+        displacementMap = std::move(other.displacementMap);
+        alpha = std::move(other.alpha);
+        reflection = std::move(other.reflection);
+        ubo = std::move(other.ubo);
+        uboData = std::move(other.uboData);
+        descriptorSet = std::move(other.descriptorSet);
+        pbrTextures = std::move(other.pbrTextures);
+        activeTextures = std::move(other.activeTextures);
+        return *this;
+    }
+    void Material::Create(const tinyobj::material_t& material_, const Device* device, DescriptorPool* descriptor_pool) {
 
         createUBO(material_);
         createTextures(material_);

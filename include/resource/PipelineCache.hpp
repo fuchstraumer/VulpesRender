@@ -17,36 +17,36 @@ namespace vulpes {
     *   - for use with dynamic shader editing and recompiliation, which requires a pipeline recreation to propagate changes
     *   \ingroup Resources 
     */
-	class PipelineCache {
-		PipelineCache(const PipelineCache& other) = delete;
-		PipelineCache& operator=(const PipelineCache& other) = delete;
-	public:
+    class PipelineCache {
+        PipelineCache(const PipelineCache& other) = delete;
+        PipelineCache& operator=(const PipelineCache& other) = delete;
+    public:
 
         /** Creates a pipeline cache, or loads a pre-existing one from file.
         *   \param hash_id: This can be nicely setting by using typeid(owning_type).hash_code(), so that types all share a pipline cache and there is still a unique identifier per type.  */
-		PipelineCache(const Device* parent, const uint16_t& hash_id);
+        PipelineCache(const Device* parent, const uint16_t& hash_id);
 
-		~PipelineCache();
+        ~PipelineCache();
 
         /** Takes a pipeline cache header and checks it for validity.
         *
         */
-		bool Verify(const std::vector<int8_t>& cache_header) const;
+        bool Verify(const std::vector<int8_t>& cache_header) const;
 
-		void LoadCacheFromFile(const char * filename);
+        void LoadCacheFromFile(const char * filename);
 
-		const VkPipelineCache& vkHandle() const;
+        const VkPipelineCache& vkHandle() const;
 
-	private:
+    private:
 
-		std::string filename;
-		VkResult saveToFile() const;
-		uint16_t hashID;
-		const Device* parent;
-		VkPipelineCache handle;
-		VkPipelineCacheCreateInfo createInfo;
+        std::string filename;
+        VkResult saveToFile() const;
+        uint16_t hashID;
+        const Device* parent;
+        VkPipelineCache handle;
+        VkPipelineCacheCreateInfo createInfo;
 
-	};
+    };
 
 }
 

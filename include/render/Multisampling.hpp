@@ -15,22 +15,22 @@ namespace vulpes {
     *   set based on the MSAA_SampleCount member of the VulpesInstanceConfig struct.
     *   \ingroup Rendering
     */
-	class Multisampling {
-		Multisampling(const Multisampling&) = delete;
-		Multisampling& operator=(const Multisampling&) = delete;
-	public:
+    class Multisampling {
+        Multisampling(const Multisampling&) = delete;
+        Multisampling& operator=(const Multisampling&) = delete;
+    public:
 
-		Multisampling(const Device* dvc, const Swapchain* swapchain, const VkSampleCountFlagBits& sample_count, const uint32_t& width, const uint32_t& height);
-		~Multisampling();
+        Multisampling(const Device* dvc, const Swapchain* swapchain, const VkSampleCountFlagBits& sample_count, const uint32_t& width, const uint32_t& height);
+        ~Multisampling();
 
-		// Objects we sample from
+        // Objects we sample from
         std::unique_ptr<Image> ColorBufferMS, DepthBufferMS;
         static VkSampleCountFlagBits SampleCount;
     private:
 
-		VkSampleCountFlagBits sampleCount;
-		const Device* device;
-	};
+        VkSampleCountFlagBits sampleCount;
+        const Device* device;
+    };
 
 }
 

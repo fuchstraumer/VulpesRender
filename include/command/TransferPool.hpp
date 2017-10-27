@@ -16,38 +16,38 @@ namespace vulpes {
     *   \ingroup Command
     */
 
-	constexpr static VkCommandPoolCreateInfo transfer_pool_info{
-		VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO,
-		nullptr,
-		VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT,
-		0,
-	};
+    constexpr static VkCommandPoolCreateInfo transfer_pool_info{
+        VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO,
+        nullptr,
+        VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT,
+        0,
+    };
 
     class TransferPool : public CommandPool {
-		TransferPool(TransferPool&& other) = delete;
-		TransferPool& operator=(TransferPool&& other) = delete;
-	public:
+        TransferPool(TransferPool&& other) = delete;
+        TransferPool& operator=(TransferPool&& other) = delete;
+    public:
 
-		TransferPool(const Device* _parent);
+        TransferPool(const Device* _parent);
 
-		~TransferPool();
+        ~TransferPool();
 
         /** Returns the command buffer associated with this pool, call VkBeginCommandBuffer
         *   before doing so. Locks the mutex as well.
         */
-		VkCommandBuffer& Begin();
+        VkCommandBuffer& Begin();
 
         /** Calls VkEndCommandBuffer on this object's command buffer, then proceeds to submit it. This 
         *   transfer will wait on the VkFence object attached to this pool, resetting the owned command 
         *   buffer once done and unlocks the mutex.
         */
-		void Submit();
+        void Submit();
 
     protected:
         std::mutex transferMutex;
-		VkFence fence;
-		VkQueue queue;
-	};
+        VkFence fence;
+        VkQueue queue;
+    };
 
 }
 

@@ -4,11 +4,11 @@
 #include "resource/DescriptorPool.hpp"
 namespace vulpes {
 
-	DescriptorSet::DescriptorSet(const Device * parent) : device(parent) { }
+    DescriptorSet::DescriptorSet(const Device * parent) : device(parent) { }
 
-	DescriptorSet::~DescriptorSet() {
+    DescriptorSet::~DescriptorSet() {
         vkFreeDescriptorSets(device->vkHandle(), descriptorPool->vkHandle(), 1, &descriptorSet);
-		vkDestroyDescriptorSetLayout(device->vkHandle(), descriptorSetLayout, nullptr);
+        vkDestroyDescriptorSetLayout(device->vkHandle(), descriptorSetLayout, nullptr);
     }
 
     void DescriptorSet::AddDescriptorBinding(const VkDescriptorType& descriptor_type, const VkShaderStageFlagBits& shader_stage, const uint32_t& descriptor_binding_loc){
@@ -46,7 +46,7 @@ namespace vulpes {
 
     void DescriptorSet::AddDescriptorInfo(const VkDescriptorBufferInfo& info, const size_t& item_binding_idx) {
         
-		bufferInfos.insert(std::make_pair(item_binding_idx, info));
+        bufferInfos.insert(std::make_pair(item_binding_idx, info));
 
         VkWriteDescriptorSet write_descriptor {
             VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
@@ -65,13 +65,13 @@ namespace vulpes {
 
     }
 
-	void DescriptorSet::Init(const DescriptorPool * parent_pool) {
+    void DescriptorSet::Init(const DescriptorPool * parent_pool) {
 
-		createLayout();
-		allocate(parent_pool);
-		update();
+        createLayout();
+        allocate(parent_pool);
+        update();
 
-	}
+    }
 
     void DescriptorSet::createLayout() {
        
@@ -109,32 +109,32 @@ namespace vulpes {
 
         assert(descriptorPool && allocated && !writeDescriptors.empty());
 
-		std::vector<VkWriteDescriptorSet> write_descriptors;
+        std::vector<VkWriteDescriptorSet> write_descriptors;
 
-		for (const auto& entry : writeDescriptors) {
-			write_descriptors.push_back(entry.second);
-			write_descriptors.back().dstSet = descriptorSet;
+        for (const auto& entry : writeDescriptors) {
+            write_descriptors.push_back(entry.second);
+            write_descriptors.back().dstSet = descriptorSet;
             if (entry.second.pBufferInfo != nullptr) {
                 write_descriptors.back().pBufferInfo = entry.second.pBufferInfo;
             }
             if (entry.second.pImageInfo != nullptr) {
                 write_descriptors.back().pImageInfo = entry.second.pImageInfo;
             }
-		}
+        }
 
-		vkUpdateDescriptorSets(device->vkHandle(), static_cast<uint32_t>(write_descriptors.size()), write_descriptors.data(), 0, nullptr);
+        vkUpdateDescriptorSets(device->vkHandle(), static_cast<uint32_t>(write_descriptors.size()), write_descriptors.data(), 0, nullptr);
 
-		updated = true;
+        updated = true;
         
     }
 
-	const VkDescriptorSet & DescriptorSet::vkHandle() const noexcept {
-		return descriptorSet;
-	}
+    const VkDescriptorSet & DescriptorSet::vkHandle() const noexcept {
+        return descriptorSet;
+    }
 
-	const VkDescriptorSetLayout & DescriptorSet::vkLayout() const noexcept {
-		return descriptorSetLayout;
-	}
+    const VkDescriptorSetLayout & DescriptorSet::vkLayout() const noexcept {
+        return descriptorSetLayout;
+    }
 
      const std::map<size_t, VkDescriptorSetLayoutBinding>& DescriptorSet::GetBindings() const noexcept {
          return bindings;

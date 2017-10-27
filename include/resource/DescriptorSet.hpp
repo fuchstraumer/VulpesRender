@@ -29,7 +29,7 @@ namespace vulpes {
         void AddDescriptorInfo(const VkDescriptorBufferInfo& info, const size_t& item_binding_idx);
 
         /** Call after all descriptor bindings and infos required have been added, and make sure you have enough space in the given pool for all of these resources. */
-		void Init(const DescriptorPool* parent_pool);
+        void Init(const DescriptorPool* parent_pool);
 
         const VkDescriptorSet& vkHandle() const noexcept;
         /** Returns the VkDescriptorSetLayout object attached to this class, which is required when creating a VkPipelineLayout that will utilize this DescriptorSet */
@@ -39,9 +39,9 @@ namespace vulpes {
         
     private:
 
-		void createLayout();
-		void allocate(const DescriptorPool* parent_pool);
-		void update();
+        void createLayout();
+        void allocate(const DescriptorPool* parent_pool);
+        void update();
 
         const Device* device;
         const DescriptorPool* descriptorPool;
@@ -51,7 +51,7 @@ namespace vulpes {
         bool allocated = false;
         std::map<size_t, VkWriteDescriptorSet> writeDescriptors;
         std::map<size_t, VkDescriptorSetLayoutBinding> bindings;
-		std::map<size_t, VkDescriptorBufferInfo> bufferInfos;
+        std::map<size_t, VkDescriptorBufferInfo> bufferInfos;
     };
 
 }

@@ -15,7 +15,7 @@
 #pragma warning(push, 0) // ridiculous quantity of warnings abour deprecated functions and such.
 
 #ifdef _WIN32
-#	include <windows.h>
+#    include <windows.h>
 #endif //_WIN32
 
 
@@ -83,8 +83,8 @@ const int MAX_PATH_BYTES = DIRENT_MAX_PATH+1;
 typedef char FilenameString[MAX_FILENAME_BYTES];
 typedef char PathString[MAX_PATH_BYTES];
 // Handy typedefs:
-typedef ImVector<FilenameString>	FilenameStringVector;
-typedef ImVector<PathString>		PathStringVector;
+typedef ImVector<FilenameString>    FilenameStringVector;
+typedef ImVector<PathString>        PathStringVector;
 
 enum Sorting {
     SORT_ORDER_ALPHABETIC=0,
@@ -157,8 +157,8 @@ class String    {
 protected:
     String() {}
 public:
-    inline static void PushBack(FilenameStringVector& rv,const char* s)    {	
-        if (rv.Size == rv.Capacity) rv.reserve(rv._grow_capacity(rv.Size+1));	// optional optimization from ImVector<>::push_back()
+    inline static void PushBack(FilenameStringVector& rv,const char* s)    {    
+        if (rv.Size == rv.Capacity) rv.reserve(rv._grow_capacity(rv.Size+1));    // optional optimization from ImVector<>::push_back()
         const size_t sz = rv.size();
         rv.resize(sz+1);
         strcpy(&rv[sz][0], s ? s : "\0");
@@ -260,7 +260,7 @@ public:
     }
 #   endif // _WIN32
 };
-class Path	{
+class Path    {
 protected:
     Path() {}
 public:
@@ -356,7 +356,7 @@ public:
         int beg=String::FindLastOf(filePath,'.');
         int beg2=String::FindLastOf(filePath,'/');
         int beg3=String::FindLastOf(filePath,'\\');
-        if (beg2!=-1)	{
+        if (beg2!=-1)    {
             if (beg3!=-1) beg2 = beg3;
             else beg2 = beg2 > beg3 ? beg2 : beg3;
         }
@@ -383,7 +383,7 @@ public:
         int beg=String::FindLastOf(rv,'.');
         int beg2=String::FindLastOf(rv,'/');
         int beg3=String::FindLastOf(rv,'\\');
-        if (beg2!=-1)	{
+        if (beg2!=-1)    {
             if (beg3!=-1) beg2 = beg3;
             else beg2 = beg2 > beg3 ? beg2 : beg3;
         }
@@ -469,7 +469,7 @@ public:
         return;
     }
     /*
-    inline static bool Exists(const char* path) 	{
+    inline static bool Exists(const char* path)     {
         struct stat statbuf;
         return (stat(path, &statbuf) != -1);
     }
@@ -569,7 +569,7 @@ public:
         if (sz>0 && directoryName[sz-1]==':') {directoryName2[sz]='\\';directoryName2[sz+1]='\0';}
 #       endif //_WIN32
 #ifndef VULPES_FILESYSTEM_USE_STD_EXPERIMENTAL_FILESYSTEM
-		struct dirent **eps = NULL;
+        struct dirent **eps = NULL;
         const int n = scandir (directoryName2, &eps, DirentGetDirectories, SortingHelper::SetSorter(sorting));
 
         static char directoryNameWithoutSlash[MAX_PATH_BYTES];
@@ -582,7 +582,7 @@ public:
             for (int cnt = 0; cnt < n; ++cnt)    {
                 const char* pName = &eps[cnt]->d_name[0];
                 sz = strlen(pName);
-		if (sz>0) {
+        if (sz>0) {
             if (strcmp(pName,".")!=0 && strcmp(pName,"..")!=0 && pName[0]!='.' && pName[sz-1]!='~'
 #               ifdef __EMSCRIPTEN__
                 && (!(
@@ -590,32 +590,32 @@ public:
                 ))
 #               endif //__EMSCRIPTEN__
             )    {
-			strcpy(tempString,directoryNameWithoutSlash);
-			strcat(tempString,"/");
-			strcat(tempString,pName);
-			String::PushBack(result,tempString);
-			if (pOptionalNamesOut) String::PushBack(*pOptionalNamesOut,pName);
-		    }
-		}
-		free(eps[cnt]);
+            strcpy(tempString,directoryNameWithoutSlash);
+            strcat(tempString,"/");
+            strcat(tempString,pName);
+            String::PushBack(result,tempString);
+            if (pOptionalNamesOut) String::PushBack(*pOptionalNamesOut,pName);
+            }
+        }
+        free(eps[cnt]);
             }
         }
         if (eps) {free(eps);eps=NULL;}
 #else 
-		std::experimental::filesystem::path directory(directoryName);
-		assert(std::experimental::filesystem::exists(directory));
+        std::experimental::filesystem::path directory(directoryName);
+        assert(std::experimental::filesystem::exists(directory));
 
-		for (auto& p : std::experimental::filesystem::directory_iterator(directory)) {
-			if (std::experimental::filesystem::is_directory(p.status())) {
-				auto str = p.path().string();
-				String::PushBack(result, str.c_str());
-				auto fname = p.path().filename().string();
-				if (pOptionalNamesOut) {
-					String::PushBack(*pOptionalNamesOut, fname.c_str());
-				}
-			}
-		}
-		return;
+        for (auto& p : std::experimental::filesystem::directory_iterator(directory)) {
+            if (std::experimental::filesystem::is_directory(p.status())) {
+                auto str = p.path().string();
+                String::PushBack(result, str.c_str());
+                auto fname = p.path().filename().string();
+                if (pOptionalNamesOut) {
+                    String::PushBack(*pOptionalNamesOut, fname.c_str());
+                }
+            }
+        }
+        return;
 #endif // !VULPES_FILESYSTEM_USE_STD_EXPERIMENTAL_FILESYSTEM
     }
 
@@ -623,9 +623,9 @@ public:
 
     static void GetFiles(const char* directoryName,PathStringVector& result,FilenameStringVector* pOptionalNamesOut=NULL, Sorting sorting= SORT_ORDER_ALPHABETIC)    {
         result.clear();
-		if (pOptionalNamesOut) {
-			pOptionalNamesOut->clear();
-		}
+        if (pOptionalNamesOut) {
+            pOptionalNamesOut->clear();
+        }
 
         static char tempString[MAX_PATH_BYTES];size_t sz;
         sz = strlen(directoryName);
@@ -634,17 +634,17 @@ public:
 
 #       ifdef _WIN32
         if (sz>0 && directoryName[sz-1]==':') {
-			directoryName2[sz]='\\';
-			directoryName2[sz+1]='\0';
-		}
+            directoryName2[sz]='\\';
+            directoryName2[sz+1]='\0';
+        }
 #       endif //_WIN32
 
-		static char directoryNameWithoutSlash[MAX_PATH_BYTES];
-		if (sz>0 && directoryName[sz - 1] == '/') String::Substr(directoryName, directoryNameWithoutSlash, 0, sz - 1);
-		else strcpy(directoryNameWithoutSlash, directoryName);
+        static char directoryNameWithoutSlash[MAX_PATH_BYTES];
+        if (sz>0 && directoryName[sz - 1] == '/') String::Substr(directoryName, directoryNameWithoutSlash, 0, sz - 1);
+        else strcpy(directoryNameWithoutSlash, directoryName);
 
 #ifndef VULPES_FILESYSTEM_USE_STD_EXPERIMENTAL_FILESYSTEM
-		struct dirent **eps = NULL;
+        struct dirent **eps = NULL;
         const int n = scandir (directoryName2, &eps, DirentGetFiles, SortingHelper::SetSorter(sorting));
 
         if (n >= 0) {
@@ -652,36 +652,36 @@ public:
         if (pOptionalNamesOut) pOptionalNamesOut->reserve((size_t)n);
             for (int cnt = 0; cnt < n; ++cnt)    {
                 const char* pName = &eps[cnt]->d_name[0];
-		sz = strlen(pName);
-		if (sz>0) {
-		    if (pName[0]!='.' && pName[sz-1]!='~')    {
-			strcpy(tempString,directoryNameWithoutSlash);
-			strcat(tempString,"/");
-			strcat(tempString,pName);
-			String::PushBack(result,tempString);
-			if (pOptionalNamesOut) String::PushBack(*pOptionalNamesOut,pName);
-		    }
-		}
-		free(eps[cnt]);
+        sz = strlen(pName);
+        if (sz>0) {
+            if (pName[0]!='.' && pName[sz-1]!='~')    {
+            strcpy(tempString,directoryNameWithoutSlash);
+            strcat(tempString,"/");
+            strcat(tempString,pName);
+            String::PushBack(result,tempString);
+            if (pOptionalNamesOut) String::PushBack(*pOptionalNamesOut,pName);
+            }
+        }
+        free(eps[cnt]);
             }
         }
         if (eps) {free(eps);eps=NULL;}
 
 #else 
-		std::experimental::filesystem::path directory(directoryName);
-		assert(std::experimental::filesystem::exists(directory));
+        std::experimental::filesystem::path directory(directoryName);
+        assert(std::experimental::filesystem::exists(directory));
 
-		for (auto& p : std::experimental::filesystem::directory_iterator(directory)) {
-			if (std::experimental::filesystem::is_regular_file(p.status())) {
-				auto str = p.path().string();
-				String::PushBack(result, str.c_str());
-				auto fname = p.path().filename().string();
-				if (pOptionalNamesOut) {
-					String::PushBack(*pOptionalNamesOut, fname.c_str());
-				}
-			}
-		}
-		return;
+        for (auto& p : std::experimental::filesystem::directory_iterator(directory)) {
+            if (std::experimental::filesystem::is_regular_file(p.status())) {
+                auto str = p.path().string();
+                String::PushBack(result, str.c_str());
+                auto fname = p.path().filename().string();
+                if (pOptionalNamesOut) {
+                    String::PushBack(*pOptionalNamesOut, fname.c_str());
+                }
+            }
+        }
+        return;
 
 #endif // !VULPES_FILESYSTEM_USE_STD_EXPERIMENTAL_FILESYSTEM
     }
@@ -689,7 +689,7 @@ public:
     // e.g. ".txt;.jpg;.png". To use unwantedExtensions, set wantedExtensions="".
     static void GetFiles(const char* path,PathStringVector& files,const char* wantedExtensions,const char* unwantedExtensions=NULL,FilenameStringVector* pOptionalNamesOut=NULL,Sorting sorting= SORT_ORDER_ALPHABETIC)    {
     PathStringVector filesIn;
-	FilenameStringVector namesIn;
+    FilenameStringVector namesIn;
         GetFiles(path,filesIn,&namesIn,sorting);
         if ((wantedExtensions==0 || strlen(wantedExtensions)==0) && (unwantedExtensions==0 || strlen(unwantedExtensions)==0)) {files = filesIn;return;}
         files.clear();if (pOptionalNamesOut) pOptionalNamesOut->clear();
@@ -698,15 +698,15 @@ public:
         char woext[MAX_PATH_BYTES];String::ToLower(unwantedExtensions,woext);
 
         char ext[MAX_PATH_BYTES];
-        if (wantedExtensions && strlen(wantedExtensions)>0)	{
+        if (wantedExtensions && strlen(wantedExtensions)>0)    {
         files.reserve(filesIn.size());
         if (pOptionalNamesOut) pOptionalNamesOut->reserve(namesIn.size());
-	    FilenameStringVector wExts;String::Split(wext,wExts,';');
+        FilenameStringVector wExts;String::Split(wext,wExts,';');
             const size_t wExtsSize = wExts.size();
-            if (wExtsSize>0)	{
-                for (size_t i = 0,sz = filesIn.size();i<sz;i++)	{
+            if (wExtsSize>0)    {
+                for (size_t i = 0,sz = filesIn.size();i<sz;i++)    {
                     Path::GetExtension(filesIn[i],ext);
-                    for (size_t e=0;e<wExtsSize;e++)	{
+                    for (size_t e=0;e<wExtsSize;e++)    {
                         if (strcmp(ext,wExts[e])==0) {
                             String::PushBack(files,filesIn[i]);
                             if (pOptionalNamesOut) String::PushBack(*pOptionalNamesOut,namesIn[i]);
@@ -717,15 +717,15 @@ public:
             else return;
         }
         else if (unwantedExtensions && strlen(unwantedExtensions)>0) {
-	    //files.reserve(filesIn.size());if (pOptionalNamesOut) pOptionalNamesOut->reserve(namesIn.size());
-	    FilenameStringVector woExts;String::Split(woext,woExts,';');
+        //files.reserve(filesIn.size());if (pOptionalNamesOut) pOptionalNamesOut->reserve(namesIn.size());
+        FilenameStringVector woExts;String::Split(woext,woExts,';');
             const size_t woExtsSize = woExts.size();
             if (woExts.size()==0) {files = filesIn;return;}
             bool match;
-            for (size_t i = 0,sz = filesIn.size();i<sz;i++)	{
+            for (size_t i = 0,sz = filesIn.size();i<sz;i++)    {
                 Path::GetExtension(filesIn[i],ext);
                 match = false;
-                for (size_t e=0;e<woExtsSize;e++)	{
+                for (size_t e=0;e<woExtsSize;e++)    {
                     if (strcmp(ext,woExts[e])==0) {
                         match = true;
                         break;
@@ -760,9 +760,9 @@ public:
     }
     inline static const PathStringVector &GetUserKnownDirectories(const FilenameStringVector **pOptionalUserKnownDirectoryDisplayNamesOut,const int** pOptionalNumberKnownUserDirectoriesExceptDrives=NULL,bool forceUpdate=false)  {
         static bool init = false;
-	static PathStringVector rv;
-	static FilenameStringVector dn;
-	static PathStringVector mediaFolders;
+    static PathStringVector rv;
+    static FilenameStringVector dn;
+    static PathStringVector mediaFolders;
         static int numberKnownUserDirectoriesExceptDrives = 0;
         if (pOptionalUserKnownDirectoryDisplayNamesOut) *pOptionalUserKnownDirectoryDisplayNamesOut = &dn;
         if (pOptionalNumberKnownUserDirectoriesExceptDrives) *pOptionalNumberKnownUserDirectoriesExceptDrives = &numberKnownUserDirectoriesExceptDrives;
@@ -892,13 +892,13 @@ protected:
 
 #   ifdef _WIN32
     static bool GetSpecialFolderPathW(int specialFolderCSIDL,WCHAR* pathOutWithSizeMaxPathPlusOne,HWND parent)  {
-        //	CSIDL_DESKTOP,CSIDL_BITBUCKET,CSIDL_CONTROLS,CSIDL_DESKTOP,CSIDL_DESKTOPDIRECTORY,
-        //	CSIDL_DRIVES,CSIDL_FONTS,CSIDL_NETHOOD,CSIDL_NETWORK,CSIDL_PERSONAL (Documents)
-        //	CSIDL_PRINTERS,CSIDL_PROGRAMS,CSIDL_RECENT,CSIDL_SENDTO,CSIDL_STARTMENU,
-        //	CSIDL_STARTUP,CSIDL_TEMPLATES
+        //    CSIDL_DESKTOP,CSIDL_BITBUCKET,CSIDL_CONTROLS,CSIDL_DESKTOP,CSIDL_DESKTOPDIRECTORY,
+        //    CSIDL_DRIVES,CSIDL_FONTS,CSIDL_NETHOOD,CSIDL_NETWORK,CSIDL_PERSONAL (Documents)
+        //    CSIDL_PRINTERS,CSIDL_PROGRAMS,CSIDL_RECENT,CSIDL_SENDTO,CSIDL_STARTMENU,
+        //    CSIDL_STARTUP,CSIDL_TEMPLATES
 
-        //	CSIDL_INTERNET_CACHE,CSIDL_COOKIES,CSIDL_HISTORY,CSIDL_COMMON_APPDATA,
-        //	CSIDL_WINDOWS,CSIDL_SYSTEM,CSIDL_PROGRAM_FILES,CSIDL_MYPICTURES,...
+        //    CSIDL_INTERNET_CACHE,CSIDL_COOKIES,CSIDL_HISTORY,CSIDL_COMMON_APPDATA,
+        //    CSIDL_WINDOWS,CSIDL_SYSTEM,CSIDL_PROGRAM_FILES,CSIDL_MYPICTURES,...
 
         WCHAR* temp_path = pathOutWithSizeMaxPathPlusOne;//[MAX_PATH+1];
         temp_path[0]=L'\0';
@@ -910,7 +910,7 @@ protected:
         bool ok=SUCCEEDED(::SHGetPathFromIDListW(pidl,&temp_path[0]));
 
         LPMALLOC mal = NULL;
-        if ( ::SHGetMalloc( & mal ) == E_FAIL || !mal )	::free( pidl );
+        if ( ::SHGetMalloc( & mal ) == E_FAIL || !mal )    ::free( pidl );
         else
         {
             mal->Free( pidl );
@@ -1038,7 +1038,7 @@ struct UnZipFileImpl {
             return false;
         }
 
-        for (i=0;i<gi.number_entry;i++)	{
+        for (i=0;i<gi.number_entry;i++)    {
             err = unzGetCurrentFileInfo64(uf,&file_info,filename_inzip,sizeof(filename_inzip),NULL,0,NULL,0);
             if (err!=UNZ_OK) {
                 fprintf(stderr,"Error %d with zipfile in unzGetCurrentFileInfo\n",err);
@@ -1696,7 +1696,7 @@ public:
         if (currentInfoIndex<0) {
             ++currentInfoIndex;
         info.resize(currentInfoIndex+1);
-	    FolderInfo& fi = info[currentInfoIndex];
+        FolderInfo& fi = info[currentInfoIndex];
             fi.fromCurrentFolder(currentFolder);
             //fprintf(stderr,"switchTo 1 %d\n",fi.splitPathIndexOfZipFile);
             return true;
@@ -1707,13 +1707,13 @@ public:
             const int splitPathIndexInsideLastInfo = lastInfo.getSplitPathIndexFor(currentFolder);
             ++currentInfoIndex;
             info.resize(currentInfoIndex+1);
-	    FolderInfo& fi = info[currentInfoIndex];
+        FolderInfo& fi = info[currentInfoIndex];
             if (splitPathIndexInsideLastInfo==-1)   {
                 fi.fromCurrentFolder(currentFolder);
                 //fprintf(stderr,"switchTo 2a: %d (%s)\n",fi.splitPathIndexOfZipFile,currentFolder);
             }
             else {
-		fi = lastInfo;
+        fi = lastInfo;
                 fi.splitPathIndex = splitPathIndexInsideLastInfo;
                 strcpy(fi.currentFolder,currentFolder);
 
@@ -1730,7 +1730,7 @@ public:
         }
         ++currentInfoIndex;
         info.resize(currentInfoIndex+1);
-	info[currentInfoIndex] = fi;
+    info[currentInfoIndex] = fi;
         //fprintf(stderr,"switchTo 3 %d\n",fi.splitPathIndexOfZipFile);
         return true;
     }
@@ -1799,9 +1799,9 @@ struct Internal {
 
 
     ~Internal() {
-	dirs.clear();files.clear();
-	dirNames.clear();fileNames.clear();
-	currentSplitPath.clear();
+    dirs.clear();files.clear();
+    dirNames.clear();fileNames.clear();
+    currentSplitPath.clear();
     }
 
     inline static void FreeMemory(PathStringVector& v) {PathStringVector o;v.swap(o);}
@@ -1937,9 +1937,9 @@ Dialog::Dialog(bool noKnownDirectoriesSection,bool noCreateDirectorySection,bool
 }
 Dialog::~Dialog()   {
     if (internal) {
-	internal->~Internal();
-	ImGui::MemFree(internal);
-	internal = NULL;
+    internal->~Internal();
+    ImGui::MemFree(internal);
+    internal = NULL;
     }
 }
 const char* Dialog::getChosenPath() const {return internal->chosenPath;}
@@ -2046,14 +2046,14 @@ const char* ChooseFileMainMethod(Dialog& ist,const char* directory,const bool _i
             else                        strcpy(I.wndTitle,"Please choose a file");
         }
         else                            strcpy(I.wndTitle,windowTitle);
-	strcat(I.wndTitle,"##");
+    strcat(I.wndTitle,"##");
         char tmpWndTitleNumber[12];
         ImFormatString(tmpWndTitleNumber,11,"%d",I.uniqueNumber);
-	strcat(I.wndTitle,tmpWndTitleNumber);
+    strcat(I.wndTitle,tmpWndTitleNumber);
         I.wndPos = windowPos;
         I.wndSize = windowSize;
-	if (I.wndSize.x<=0) I.wndSize.x = Dialog::WindowSize.x;
-	if (I.wndSize.y<=0) I.wndSize.y = Dialog::WindowSize.y;
+    if (I.wndSize.x<=0) I.wndSize.x = Dialog::WindowSize.x;
+    if (I.wndSize.y<=0) I.wndSize.y = Dialog::WindowSize.y;
         const ImVec2 mousePos = ImGui::GetMousePos();//
         ImGui::GetCursorPos();
         if (I.wndPos.x<=0)  I.wndPos.x = mousePos.x - I.wndSize.x*0.5f;
@@ -2061,8 +2061,8 @@ const char* ChooseFileMainMethod(Dialog& ist,const char* directory,const bool _i
         const ImVec2 screenSize = ImGui::GetIO().DisplaySize;
     if (I.wndPos.x>screenSize.x-I.wndSize.x-Dialog::WindowLTRBOffsets.z) I.wndPos.x = screenSize.x-I.wndSize.x-Dialog::WindowLTRBOffsets.z;
     if (I.wndPos.y>screenSize.y-I.wndSize.y-Dialog::WindowLTRBOffsets.w) I.wndPos.y = screenSize.y-I.wndSize.y-Dialog::WindowLTRBOffsets.w;
-	if (I.wndPos.x < Dialog::WindowLTRBOffsets.x) I.wndPos.x = Dialog::WindowLTRBOffsets.x;
-	if (I.wndPos.y < Dialog::WindowLTRBOffsets.y) I.wndPos.y = Dialog::WindowLTRBOffsets.y;
+    if (I.wndPos.x < Dialog::WindowLTRBOffsets.x) I.wndPos.x = Dialog::WindowLTRBOffsets.x;
+    if (I.wndPos.y < Dialog::WindowLTRBOffsets.y) I.wndPos.y = Dialog::WindowLTRBOffsets.y;
         //fprintf(stderr,"screenSize = %f,%f mousePos = %f,%f wndPos = %f,%f wndSize = %f,%f\n",screenSize.x,screenSize.y,mousePos.x,mousePos.y,wndPos.x,wndPos.y,wndSize.x,wndSize.y);
         if (I.detectKnownDirectoriesAtEveryOpening) pUserKnownDirectories = &Directory::GetUserKnownDirectories(&pUserKnownDirectoryDisplayNames,&pNumberKnownUserDirectoriesExceptDrives,true);
 
@@ -2328,13 +2328,13 @@ const char* ChooseFileMainMethod(Dialog& ist,const char* directory,const bool _i
                     else   fprintf(stderr,"%d\n",fi.splitPathIndexOfZipFile);
                 }*/
                 //-------------------
-		const bool wrapMode = Dialog::WrapMode;
+        const bool wrapMode = Dialog::WrapMode;
                 float windowWidth = -1;float sumX = 0;
                 if (wrapMode) {
                     sumX+=ImGui::GetCursorPosX();
                     windowWidth=ImGui::GetWindowWidth()-ImGui::GetStyle().WindowPadding.x;
                 }
-                for (int t=0;t<numTabs;t++)	{
+                for (int t=0;t<numTabs;t++)    {
                     if (t==fi.splitPathIndex) {
                         const ImVec4* pDummyButtonColor = &dummyButtonColor;
 #                       ifdef IMGUI_USE_MINIZIP
@@ -2384,7 +2384,7 @@ const char* ChooseFileMainMethod(Dialog& ist,const char* directory,const bool _i
 #                   endif // IMGUI_USE_MINIZIP
                 }
                 if (mustSwitchSplitPath) {
-		    FolderInfo mfi;
+            FolderInfo mfi;
                     fi.getFolderInfoForSplitPathIndex(newSelectedTab,mfi);
                     I.history.switchTo(mfi);
                     I.forceRescan = true;
@@ -2503,7 +2503,7 @@ const char* ChooseFileMainMethod(Dialog& ist,const char* directory,const bool _i
             int newSortingMode = oldSortingMode;
             static const char* names[numTabs] = {"Name","Modified","Size","Type"};
             const int numUsedTabs = isSelectFolderDialog ? 2 : numTabs;
-            for (int t=0;t<numUsedTabs;t++)	{
+            for (int t=0;t<numUsedTabs;t++)    {
                 if (t>0) ImGui::SameLine();
                 if (t==oldSelectedTab) {
                     ImGui::PushStyleColor(ImGuiCol_Button,dummyButtonColor);
@@ -2615,7 +2615,7 @@ const char* ChooseFileMainMethod(Dialog& ist,const char* directory,const bool _i
                 old = acceptZipFilesForBrowsing;
                 fprintf(stderr,"acceptZipFilesForBrowsing=%s %d %d\n",acceptZipFilesForBrowsing?"true":"false",fi->splitPathIndexOfZipFile,fi->splitPathIndex);
             }*/        
-#           endif //IMGUI_USE_MINIZIP	    
+#           endif //IMGUI_USE_MINIZIP        
 
             for (int i=0,sz=(int)I.files.size();i<sz;i++) {
                 const char* fileName = &I.fileNames[i][0];
@@ -2748,7 +2748,7 @@ const char* ChooseFileMainMethod(Dialog& ist,const char* directory,const bool _i
             Internal::ColorCombine(c,r,sf);
             ImGui::TextColored(ColorSet[Internal::ImGuiCol_Dialog_SelectedFolder_Text],"Folder:");
 
-            //ImGui::Text("Folder:");	// Faster alternative to the 5 lines above
+            //ImGui::Text("Folder:");    // Faster alternative to the 5 lines above
 
             ImGui::SameLine();
             lastTwoButtonsWidth = ImGui::CalcTextSize("Select Cancel").x+2.0f*(style.FramePadding.x+style.ItemSpacing.x)+style.WindowPadding.x;
@@ -2788,7 +2788,7 @@ const char* ChooseFileMainMethod(Dialog& ist,const char* directory,const bool _i
                         }
                         else    {
                             // saveFileNameHasExtension
-                            for (size_t i = 0;i<wExtsSize;i++)	{
+                            for (size_t i = 0;i<wExtsSize;i++)    {
                                 const char* ext = wExts[i];
                                 if (strcmp(ext,saveFileNameExtension)==0)   {
                                     pathOk = true;
@@ -2835,7 +2835,7 @@ const char* ChooseFileMainMethod(Dialog& ist,const char* directory,const bool _i
 const char* Dialog::chooseFileDialog(bool dialogTriggerButton,const char* directory,const char* fileFilterExtensionString,const char* windowTitle,const ImVec2& windowSize,const ImVec2& windowPos,const float windowAlpha) {
     if (dialogTriggerButton)    {internal->open = internal->rescan = internal->forceSetWindowPositionAndSize = true;internal->chosenPath[0]='\0';internal->userHasJustCancelledDialog = false;}
     if (dialogTriggerButton || (!internal->rescan && internal->open && strlen(getChosenPath())==0)) {
-	if (this->internal->open) ImGui::SetNextWindowFocus();  // Not too sure about this line (it seems to just keep the window on the top, but it does not prevent other windows to be used...)
+    if (this->internal->open) ImGui::SetNextWindowFocus();  // Not too sure about this line (it seems to just keep the window on the top, but it does not prevent other windows to be used...)
         const char* cp = ChooseFileMainMethod(*this,directory,false,false,"",fileFilterExtensionString,windowTitle,windowSize,windowPos,windowAlpha);
         if (!internal->open) {  // AFAIK this should happen only when user clicks the close button (but not when he clicks cancel)
             internal->userHasJustCancelledDialog = true;
@@ -2851,7 +2851,7 @@ const char* Dialog::chooseFileDialog(bool dialogTriggerButton,const char* direct
 const char* Dialog::chooseFolderDialog(bool dialogTriggerButton,const char* directory,const char* windowTitle,const ImVec2& windowSize,const ImVec2& windowPos,const float windowAlpha)  {
     if (dialogTriggerButton) {internal->open = internal->rescan = internal->forceSetWindowPositionAndSize = true;internal->chosenPath[0]='\0';internal->userHasJustCancelledDialog = false;}
     if (dialogTriggerButton || (!internal->rescan && internal->open && strlen(getChosenPath())==0)) {
-	if (this->internal->open) ImGui::SetNextWindowFocus();  // Not too sure about this line (it seems to just keep the window on the top, but it does not prevent other windows to be used...)
+    if (this->internal->open) ImGui::SetNextWindowFocus();  // Not too sure about this line (it seems to just keep the window on the top, but it does not prevent other windows to be used...)
         const char* cp = ChooseFileMainMethod(*this,directory,true,false,"","",windowTitle,windowSize,windowPos,windowAlpha);
         if (!internal->open) {
             internal->userHasJustCancelledDialog = true;
@@ -2867,7 +2867,7 @@ const char* Dialog::chooseFolderDialog(bool dialogTriggerButton,const char* dire
 const char* Dialog::saveFileDialog(bool dialogTriggerButton,const char* directory,const char* startingFileNameEntry,const char* fileFilterExtensionString,const char* windowTitle,const ImVec2& windowSize,const ImVec2& windowPos,const float windowAlpha)    {
     if (dialogTriggerButton) {internal->open = internal->rescan = internal->forceSetWindowPositionAndSize = true;internal->chosenPath[0]='\0';internal->userHasJustCancelledDialog = false;}
     if (dialogTriggerButton || (!internal->rescan && internal->open && strlen(getChosenPath())==0)) {
-	if (this->internal->open) ImGui::SetNextWindowFocus();  // Not too sure about this line (it seems to just keep the window on the top, but it does not prevent other windows to be used...)
+    if (this->internal->open) ImGui::SetNextWindowFocus();  // Not too sure about this line (it seems to just keep the window on the top, but it does not prevent other windows to be used...)
         const char* cp = ChooseFileMainMethod(*this,directory,false,true,startingFileNameEntry,fileFilterExtensionString,windowTitle,windowSize,windowPos,windowAlpha);
         if (!internal->open) {
             internal->userHasJustCancelledDialog = true;

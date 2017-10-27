@@ -21,9 +21,9 @@ namespace vulpes {
         public:
 
             aabbRenderer(const Device* dvc);
-			~aabbRenderer();
+            ~aabbRenderer();
 
-			void Clear();
+            void Clear();
             void Init(const VkRenderPass& renderpass, const glm::mat4& projection, const GraphicsPipelineInfo& pipeline_info = GraphicsPipelineInfo());
             void RecordCommands(const VkCommandBuffer& cmd, const VkCommandBufferBeginInfo& begin_info, const glm::mat4& view, const VkViewport& viewport, const VkRect2D& scissor);
             void AddAABB(const AABB& aabb);
@@ -44,7 +44,7 @@ namespace vulpes {
             void updateVBO(const VkCommandBuffer& cmd);
             bool updateRequired = false;
             std::vector<glm::vec3> vertices;
-			std::vector<uint16_t> indices;
+            std::vector<uint16_t> indices;
 
             const Device* device;
 
@@ -56,7 +56,7 @@ namespace vulpes {
 
             VkBufferMemoryBarrier updateBarrier;
             GraphicsPipelineInfo pipelineStateInfo;
-		    VkGraphicsPipelineCreateInfo pipelineCreateInfo;
+            VkGraphicsPipelineCreateInfo pipelineCreateInfo;
 
         };
 

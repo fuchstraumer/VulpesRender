@@ -21,15 +21,15 @@ namespace vulpes {
     *    These can both be retrieved through the relevant methods.
     *    \ingroup Core
     */
-	class Instance {
-		Instance(const Instance&) = delete;
-		Instance& operator=(const Instance&) = delete;
-	public:
-		
-		Instance(VkInstanceCreateInfo create_info, const bool& enable_validation, const uint32_t& width, const uint32_t& height);
+    class Instance {
+        Instance(const Instance&) = delete;
+        Instance& operator=(const Instance&) = delete;
+    public:
+        
+        Instance(VkInstanceCreateInfo create_info, const bool& enable_validation, const uint32_t& width, const uint32_t& height);
         ~Instance();
 
-		const VkInstance& vkHandle() const noexcept;
+        const VkInstance& vkHandle() const noexcept;
         const VkSurfaceKHR vkSurface() const noexcept;
         const PhysicalDevice* GetPhysicalDevice() const noexcept;
         const Window* GetWindow() const noexcept;
@@ -42,17 +42,17 @@ namespace vulpes {
         void createDebugCallbacks() noexcept;
         void destroyDebugCallbacks() noexcept;
 
-		std::unique_ptr<PhysicalDevice> physicalDevice;        
+        std::unique_ptr<PhysicalDevice> physicalDevice;        
         VkDebugReportCallbackEXT errorCallback;
         VkDebugReportCallbackEXT warningCallback;
         VkDebugReportCallbackEXT perfCallback;
         VkDebugReportCallbackEXT infoCallback; 
         VkDebugReportCallbackEXT vkCallback;
         std::unique_ptr<Window> window;
-		VkInstance handle;
+        VkInstance handle;
         VkInstanceCreateInfo createInfo;
         bool validationEnabled{ false };
-	};
+    };
 
 }
 

@@ -9,25 +9,25 @@ namespace vulpes {
 
         aabbRenderer::aabbRenderer(const Device* dvc) : device(dvc), updateBarrier(vk_buffer_memory_barrier_info_base) {}
 
-		aabbRenderer::~aabbRenderer() {
-			Clear();
-		}
+        aabbRenderer::~aabbRenderer() {
+            Clear();
+        }
 
-		void aabbRenderer::Clear() {
-			vbo.reset();
-			ebo.reset();
-			vertices.clear();
-			vertices.shrink_to_fit();
-			indices.clear();
-			indices.shrink_to_fit();
-			vert.reset();
-			frag.reset();
-			pipelineLayout.reset();
-			pipeline.reset();
-			pipelineCache.reset();
-		}
+        void aabbRenderer::Clear() {
+            vbo.reset();
+            ebo.reset();
+            vertices.clear();
+            vertices.shrink_to_fit();
+            indices.clear();
+            indices.shrink_to_fit();
+            vert.reset();
+            frag.reset();
+            pipelineLayout.reset();
+            pipeline.reset();
+            pipelineCache.reset();
+        }
 
-		void aabbRenderer::Init(const VkRenderPass& renderpass, const glm::mat4& projection, const GraphicsPipelineInfo& pipeline_info) {
+        void aabbRenderer::Init(const VkRenderPass& renderpass, const glm::mat4& projection, const GraphicsPipelineInfo& pipeline_info) {
 
             pushData.projection = projection;
 
@@ -62,7 +62,7 @@ namespace vulpes {
         void aabbRenderer::createBuffers() {
 
             vbo = std::make_unique<Buffer>(device);
-			ebo = std::make_unique<Buffer>(device);
+            ebo = std::make_unique<Buffer>(device);
 
             if(!vertices.empty()) {
                 rebuildBuffers();
@@ -72,7 +72,7 @@ namespace vulpes {
 
         void aabbRenderer::setupGraphicsPipelineInfo(const GraphicsPipelineInfo& pipeline_info = GraphicsPipelineInfo()) {
 
-			pipelineStateInfo = pipeline_info;
+            pipelineStateInfo = pipeline_info;
 
             static const VkVertexInputBindingDescription bind_descr{ 0, sizeof(glm::vec3), VK_VERTEX_INPUT_RATE_VERTEX };
 
@@ -80,8 +80,8 @@ namespace vulpes {
                 VkVertexInputAttributeDescription{ 0, 0, VK_FORMAT_R32G32B32_SFLOAT, 0 },
             };
 
-			pipelineStateInfo.AssemblyInfo.topology = VK_PRIMITIVE_TOPOLOGY_LINE_LIST;
-			pipelineStateInfo.RasterizationInfo.polygonMode = VK_POLYGON_MODE_LINE;
+            pipelineStateInfo.AssemblyInfo.topology = VK_PRIMITIVE_TOPOLOGY_LINE_LIST;
+            pipelineStateInfo.RasterizationInfo.polygonMode = VK_POLYGON_MODE_LINE;
 
             pipelineStateInfo.VertexInfo.vertexBindingDescriptionCount = 1;
             pipelineStateInfo.VertexInfo.pVertexBindingDescriptions = &bind_descr;
@@ -104,11 +104,11 @@ namespace vulpes {
             pipelineCreateInfo = pipelineStateInfo.GetPipelineCreateInfo();
             pipelineCreateInfo.renderPass = renderpass;
             pipelineCreateInfo.layout = pipelineLayout->vkHandle();
-			pipelineCreateInfo.subpass = 0;
+            pipelineCreateInfo.subpass = 0;
 
-			std::array<VkPipelineShaderStageCreateInfo, 2> shader_stages{ vert->PipelineInfo(), frag->PipelineInfo() };
-			pipelineCreateInfo.stageCount = static_cast<uint32_t>(shader_stages.size());
-			pipelineCreateInfo.pStages = shader_stages.data();
+            std::array<VkPipelineShaderStageCreateInfo, 2> shader_stages{ vert->PipelineInfo(), frag->PipelineInfo() };
+            pipelineCreateInfo.stageCount = static_cast<uint32_t>(shader_stages.size());
+            pipelineCreateInfo.pStages = shader_stages.data();
 
             pipeline = std::make_unique<GraphicsPipeline>(device);
             pipelineCache = std::make_unique<PipelineCache>(device, static_cast<uint16_t>(typeid(aabbRenderer).hash_code()));
@@ -134,10 +134,10 @@ namespace vulpes {
             vkCmdSetViewport(cmd, 0, 1, &viewport);
             vkCmdSetScissor(cmd, 0, 1, &scissor);
             vkCmdPushConstants(cmd, pipelineLayout->vkHandle(), VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(pushData), &pushData);
-			VkDeviceSize offsets[1]{ 0 };
-			vkCmdBindVertexBuffers(cmd, 0, 1, &vbo->vkHandle(), offsets);
-			vkCmdBindIndexBuffer(cmd, ebo->vkHandle(), 0, VK_INDEX_TYPE_UINT16);
-			vkCmdDrawIndexed(cmd, static_cast<uint32_t>(indices.size()), 1, 0, 0, 0);
+            VkDeviceSize offsets[1]{ 0 };
+            vkCmdBindVertexBuffers(cmd, 0, 1, &vbo->vkHandle(), offsets);
+            vkCmdBindIndexBuffer(cmd, ebo->vkHandle(), 0, VK_INDEX_TYPE_UINT16);
+            vkCmdDrawIndexed(cmd, static_cast<uint32_t>(indices.size()), 1, 0, 0, 0);
 
             result = vkEndCommandBuffer(cmd);
             VkAssert(result);
@@ -150,9 +150,9 @@ namespace vulpes {
             vbo->CreateBuffer(VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, sizeof(glm::vec3) * vertices.size());
             vbo->CopyToMapped(vertices.data(), vbo->Size(), 0);
 
-			ebo->Destroy();
-			ebo->CreateBuffer(VK_BUFFER_USAGE_INDEX_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, sizeof(uint16_t) * indices.size());
-			ebo->CopyToMapped(indices.data(), ebo->Size(), 0);
+            ebo->Destroy();
+            ebo->CreateBuffer(VK_BUFFER_USAGE_INDEX_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, sizeof(uint16_t) * indices.size());
+            ebo->CopyToMapped(indices.data(), ebo->Size(), 0);
 
         }
 
@@ -171,15 +171,15 @@ namespace vulpes {
                 glm::vec3(aabb.Min.x, aabb.Max.y, aabb.Max.z)
             };
 
-			std::initializer_list<uint16_t> new_indices = {
-				0, 1, 1, 3, 3, 2, 2, 0,
-				0, 5, 1, 6, 2, 7, 3, 4, 
-				5, 6, 6, 4, 4, 7, 7, 5,
-			};
+            std::initializer_list<uint16_t> new_indices = {
+                0, 1, 1, 3, 3, 2, 2, 0,
+                0, 5, 1, 6, 2, 7, 3, 4, 
+                5, 6, 6, 4, 4, 7, 7, 5,
+            };
 
             vertices.insert(vertices.end(), new_vertices);
-			indices.insert(indices.end(), new_indices);
-			
+            indices.insert(indices.end(), new_indices);
+            
             rebuildBuffers();
 
         }

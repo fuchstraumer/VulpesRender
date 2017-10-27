@@ -12,32 +12,32 @@ namespace vulpes {
     *   \ingroup Resources
     */
     class PipelineLayout {
-		PipelineLayout(const PipelineLayout&) = delete;
-		PipelineLayout& operator=(const PipelineLayout&) = delete;
-	public:
+        PipelineLayout(const PipelineLayout&) = delete;
+        PipelineLayout& operator=(const PipelineLayout&) = delete;
+    public:
 
-		PipelineLayout(const Device* device);
-		~PipelineLayout();
-		
-		PipelineLayout(PipelineLayout&& other) noexcept;
-		PipelineLayout& operator=(PipelineLayout&& other) noexcept;
+        PipelineLayout(const Device* device);
+        ~PipelineLayout();
+        
+        PipelineLayout(PipelineLayout&& other) noexcept;
+        PipelineLayout& operator=(PipelineLayout&& other) noexcept;
 
-		void Destroy();
+        void Destroy();
 
         /** Creates a pipeline layout that will only use push constants for setting data in shaders */
         void Create(const std::vector<VkPushConstantRange>& push_constants);
         /** Creates a pipeline layout that will only use descriptors (of whatever type is in the layout) for data reads/writes in shaders */
         void Create(const std::vector<VkDescriptorSetLayout>& set_layouts);
         /** Creates a pipeline layout that will utilize both push constants and descriptors in the shaders. */
-		void Create(const std::vector<VkDescriptorSetLayout>& set_layouts, const std::vector<VkPushConstantRange>& push_constants);
+        void Create(const std::vector<VkDescriptorSetLayout>& set_layouts, const std::vector<VkPushConstantRange>& push_constants);
 
-		const VkPipelineLayout& vkHandle() const noexcept;
+        const VkPipelineLayout& vkHandle() const noexcept;
 
-	private:
+    private:
 
-		const Device* device;
-		VkPipelineLayoutCreateInfo createInfo;
-		VkPipelineLayout handle;
+        const Device* device;
+        VkPipelineLayoutCreateInfo createInfo;
+        VkPipelineLayout handle;
     };
 
 }

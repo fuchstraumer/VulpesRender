@@ -4,9 +4,9 @@
 
 namespace vulpes {
 
-	VkGraphicsPipelineCreateInfo GraphicsPipelineInfo::GetPipelineCreateInfo() const {
-			
-			VkGraphicsPipelineCreateInfo create_info = vk_graphics_pipeline_create_info_base;
+    VkGraphicsPipelineCreateInfo GraphicsPipelineInfo::GetPipelineCreateInfo() const {
+            
+            VkGraphicsPipelineCreateInfo create_info = vk_graphics_pipeline_create_info_base;
             create_info.pVertexInputState = &VertexInfo;
             create_info.pInputAssemblyState = &AssemblyInfo;
             create_info.pTessellationState = nullptr;
@@ -16,11 +16,11 @@ namespace vulpes {
             create_info.pDepthStencilState = &DepthStencilInfo;
             create_info.pColorBlendState = &ColorBlendInfo;
             create_info.pDynamicState = &DynamicStateInfo;
-			return create_info;
-			
-	}
+            return create_info;
+            
+    }
 
-	GraphicsPipeline::GraphicsPipeline(const Device * _parent) : parent(_parent), createInfo(vk_graphics_pipeline_create_info_base) {}
+    GraphicsPipeline::GraphicsPipeline(const Device * _parent) : parent(_parent), createInfo(vk_graphics_pipeline_create_info_base) {}
 
     GraphicsPipeline::GraphicsPipeline(GraphicsPipeline&& other) noexcept : parent(std::move(other.parent)), createInfo(std::move(other.createInfo)), handle(std::move(other.handle)) {
         other.handle = VK_NULL_HANDLE;
@@ -34,14 +34,14 @@ namespace vulpes {
         return *this;
     }
 
-	GraphicsPipeline::~GraphicsPipeline(){
+    GraphicsPipeline::~GraphicsPipeline(){
         Destroy();
     }
 
-	void GraphicsPipeline::Init(VkGraphicsPipelineCreateInfo & create_info, const VkPipelineCache& cache){
-		VkResult result = vkCreateGraphicsPipelines(parent->vkHandle(), cache, 1, &create_info, nullptr, &handle);
-		VkAssert(result);
-		createInfo = std::move(create_info);
+    void GraphicsPipeline::Init(VkGraphicsPipelineCreateInfo & create_info, const VkPipelineCache& cache){
+        VkResult result = vkCreateGraphicsPipelines(parent->vkHandle(), cache, 1, &create_info, nullptr, &handle);
+        VkAssert(result);
+        createInfo = std::move(create_info);
     }
     
     void GraphicsPipeline::Destroy() {
@@ -50,8 +50,8 @@ namespace vulpes {
         }
     }
 
-	const VkPipeline & GraphicsPipeline::vkHandle() const noexcept {
-		return handle;
-	}
+    const VkPipeline & GraphicsPipeline::vkHandle() const noexcept {
+        return handle;
+    }
 
 }

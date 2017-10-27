@@ -6,8 +6,8 @@
 layout(location = 0) in vec3 position;
 
 layout(push_constant) uniform UBO {
-	mat4 view;
-	mat4 projection;
+    mat4 view;
+    mat4 projection;
 } ubo;
 
 out gl_PerVertex {
