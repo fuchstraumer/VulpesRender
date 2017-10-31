@@ -14,16 +14,12 @@ namespace vulpes {
         ~Queue();
 
         const VkQueue& vkHandle() const noexcept;
-        void AddSubmission(const VkSubmitInfo& submit_info);
-        void Submit(const uint64_t& fence_timeout = vk_default_fence_timeout);
 
     private:
 
-        VkFence submitFence;
         std::mutex queueMutex;
-        VkQueue& handle;
+        const VkQueue& handle;
         const Device* parent;
-        std::vector<VkSubmitInfo> submissions;
 
     };
 
