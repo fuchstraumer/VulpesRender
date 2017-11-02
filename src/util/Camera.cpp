@@ -164,7 +164,7 @@ namespace vulpes {
         const float s = (u_pos - 0.50f) * image_plane_aspect_ratio;
         const float t = (v_pos - 0.50f);
         const float view_distance = image_plane_aspect_ratio / fabsf(frustumRight - frustumLeft) * nearClip;
-        return Ray(eyePosition, glm::normalize(right * s + up * t - (negViewDirection * view_distance)));
+        return Ray(eyePosition, glm::normalize(right * s + up * t - (viewDirection * view_distance)));
     }
 
     Ray cameraBase::GetCameraRay(const glm::ivec2 & point, const glm::ivec2 & window_size) noexcept {
