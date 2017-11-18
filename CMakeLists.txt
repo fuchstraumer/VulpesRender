@@ -172,7 +172,8 @@ ENDIF()
 # Easier to gather headers this way, so we can more cleanly set where they end up.
 INSTALL(DIRECTORY "include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/VulpesRender/")
 INSTALL(TARGETS VulpesRender LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib")
-INSTALL(FILES "include/vpr_stdafx.h" "include/BaseScene.hpp" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/VulpesRender")
+INSTALL(FILES "include/vpr_stdafx.h" "include/BaseScene.hpp" "include/ForwardDecl.hpp" "include/BaseSceneConfig.hpp" 
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/VulpesRender")
 
 IF(BUILD_EXAMPLE_SCENES)
 
