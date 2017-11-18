@@ -155,7 +155,7 @@ ADD_DEPENDENCIES(VulpesRender glm glfw3) # make sure we update+init imgui before
 
 # Specify install rules.
 INSTALL(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include" DESTINATION "include")
-INSTALL(TARGETS VulpesRender LIBRARY DESTINATION "lib")
+INSTALL(TARGETS VulpesRender LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib")
 
 IF(BUILD_EXAMPLE_SCENES)
 
