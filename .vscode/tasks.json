@@ -11,7 +11,7 @@
         {
             "label" : "cmake_debug",
             "type" : "shell",
-            "command" : "cd build && cmake -DCMAKE_BUILD_TYPE=DEBUG ../"
+            "command" : "cd build && cmake -DCMAKE_BUILD_TYPE=DEBUG -DBUILD_EXAMPLE_SCENES=ON ../"
         },
         {
             "label" : "cmake_rel_with_deb_info",

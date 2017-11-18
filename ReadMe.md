@@ -33,5 +33,6 @@ There are a considerable amount of items on my TODO list. The list below may be 
 - [ ] Improve how descriptor pools are handled: currently have to guess max sets and required resource count upon first init call. Maybe build "requests"?
 - [ ] Update ImGuiFilesystem (in gui/addons). Currently uses a lot of deprecated and insecure C/C++03 stuff. Since I'm using the wonderful std::filesystem, might as well update it.
 - [ ] Expand Vulkan features used: indirect drawing, dynamic uniform buffers, subpasses, etc.
+- [ ] Finish the transition to modern CMake: I want this to be easily used and installed, with solid dependency management.
 
 Example code of this library in use can be found in my other projects, in their respective "scenes" folders.
