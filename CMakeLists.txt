@@ -153,6 +153,10 @@ ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "inc
                                 )
 ADD_DEPENDENCIES(VulpesRender glm glfw3) # make sure we update+init imgui before creating the project
 
+# Specify install rules.
+INSTALL(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include" DESTINATION "include")
+INSTALL(TARGETS VulpesRender LIBRARY DESTINATION "lib")
+
 IF(BUILD_EXAMPLE_SCENES)
 
 IF(APPLE OR UNIX)
@@ -194,6 +198,5 @@ TARGET_LINK_LIBRARIES(Arcball VulpesRender "${GLFW_3_LIB}" "$ENV{VULKAN_SDK}/lib
 ELSEIF(WIN32)
 TARGET_LINK_LIBRARIES(Arcball VulpesRender "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
 ENDIF()
-
 ENDIF()
 
