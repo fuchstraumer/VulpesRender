@@ -90,16 +90,6 @@ FILE(GLOB_RECURSE SHADERS
     "rsrc/shaders/*.vert" "rsrc/shaders/*.frag" "rsrc/shaders/*.spv"
     )
 
-TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
-        $<BUILD_INTERFACE:"${CMAKE_CURRENT_SOURCE_DIR}/include">
-        $<INSTALL_INTERFACE:"include/">)
-TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
-        $<BUILD_INTERFACE:"${CMAKE_CURRENT_SOURCE_DIR}/imgui/":"${CMAKE_CURRENT_SOURCE_DIR}/ext/include">)
-IF(APPLE)
-TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC $<"${PROJECT_SOURCE_DIR}/ext/MoltenVK/include">)
-ELSE()
-TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC $<"$ENV{VULKAN_SDK}/include">)
-ENDIF()
 
 FILE(GLOB PROJECT_SOURCES "src/util/*.cpp" "src/command/*.cpp" "src/core/*.cpp" "src/render/*.cpp" "src/resource/*.cpp" "src/gui/*.cpp" "src/objects/*.cpp" "src/BaseScene.cpp")
 ADD_MSVC_PRECOMPILED_HEADER("vpr_stdafx.h" "src/vpr_stdafx.cpp" ${PROJECT_SOURCES})
@@ -154,6 +144,17 @@ ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "inc
                                 ${CORE} ${RESOURCES} ${RENDER} ${GUI} ${SHADERS}
                                 )
 ADD_DEPENDENCIES(VulpesRender glm glfw3) # make sure we update+init imgui before creating the project
+
+TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
+$<BUILD_INTERFACE:"${CMAKE_CURRENT_SOURCE_DIR}/include">
+$<INSTALL_INTERFACE:"include/">)
+TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
+$<BUILD_INTERFACE:"${CMAKE_CURRENT_SOURCE_DIR}/imgui/":"${CMAKE_CURRENT_SOURCE_DIR}/ext/include">)
+IF(APPLE)
+TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC $<"${PROJECT_SOURCE_DIR}/ext/MoltenVK/include">)
+ELSE()
+TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC $<"$ENV{VULKAN_SDK}/include">)
+ENDIF()
 
 # Easier to gather headers this way, so we can more cleanly set where they end up.
 INSTALL(DIRECTORY "include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
