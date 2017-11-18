@@ -77,10 +77,6 @@ ExternalProject_Add(glm
 # Update and init submodules.
 #ADD_SUBDIRECTORY("${CMAKE_CURRENT_SOURCE_DIR}/imgui")
 ADD_CUSTOM_TARGET(UPDATE_IMGUI_SUBMODULE COMMAND git submodule update --init ${PROJECT_SOURCE_DIR}/imgui)
-#ADD_SUBDIRECTORY("${CMAKE_CURRENT_SOURCE_DIR}/ext/include/stb")
-ADD_CUSTOM_TARGET(UPDATE_STB COMMAND git submodule update --init ${PROJECT_SOURCE_DIR}/ext/include/stb)
-#ADD_SUBDIRECTORY("${CMAKE_CURRENT_SOURCE_DIR}/ext/include/tinyobj")
-ADD_CUSTOM_TARGET(UPDATE_TINYOBJ COMMAND git submodule update --init ${PROJECT_SOURCE_DIR}/ext/include/tinyobj)
 
 
 FILE(GLOB UTIL "src/util/*.cc" "src/util/*.cpp" "include/util/*.h" "include/util/*.hpp")
@@ -160,7 +156,7 @@ ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "inc
                                 ${OBJECTS} ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} 
                                 ${CORE} ${RESOURCES} ${RENDER} ${GUI} ${SHADERS}
                                 )
-ADD_DEPENDENCIES(VulpesRender UPDATE_IMGUI_SUBMODULE UPDATE_STB UPDATE_TINYOBJ glfw3) # make sure we update+init imgui before creating the project
+ADD_DEPENDENCIES(VulpesRender UPDATE_IMGUI_SUBMODULE glfw3) # make sure we update+init imgui before creating the project
 
 IF(BUILD_EXAMPLE_SCENES)
 
