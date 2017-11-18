@@ -1,0 +1,18 @@
+Checks:          'clang-analyzer-*,cert-*,modernize-use-nullptr,modernize-use-override,modernize-use-default-member-init,
+                  modernize-shrink-to-fit,modernize-pass-by-value,misc-unused-paremeters,cppcoreguidelines-pro-type-cstyle-cast,
+                  performance-for-range-copy,performance-implicit-conversion-in-loop,performance-unnecessary-copy-initialization,
+                  performance-unnecessary-value-param,bugprone-integer-division,cppcoreguidelines-special-member-functions,llvm-header-guard,
+                  llvm-include-order,misc-dangling-handle,misc-incorrect-roundings,misc-unused-parameters,misc-virtual-near-miss,
+                  google-explicit-constructor,modernize-raw-string-literal,google-readability-function-size,cppcoreguidelines-pro-type-const-cast,
+                  cppcoreguidelines-pro-type-cstyle-cast,cppcoreguidelines-pro-type-reinterpret-cast,cppcoreguidelines-pro-type-union-access,
+                  llvm-header-guard,llvm-include-order,misc-noexcept-move-constructor,misc-non-copyable-objects,misc-string-compare,
+                  misc-string-constructor,misc-uniqueptr-reset-release,modernize-loop-convert,modernize-deprecated-headers,modernize-use-emplace,
+                  modernize-use-equals-*,modernize-use-equals-delete,modernize-use-override'
+CheckOptions:
+    -key: llvm-header-guard.HeaderFileExtensions
+     value: ".hpp"
+WarningsAsErrors: ''
+HeaderFilterRegex: 'include/*.hpp'
+AnalyzeTemporaryDtors: false
+FormatStyle:     file
+User:            kjones

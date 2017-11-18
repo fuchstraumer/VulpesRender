@@ -3,7 +3,6 @@ x64/
 build/
 VulpesRender.dir/ 
 ext/lib/
-.vscode/
 ext/include/glfw
 ext/include/gli
 ext/include/glm
@@ -13,3 +12,5 @@ glfw/
 wsl_build/
 ext/include/vulkan/
 logs/
+
+fixes\.yaml

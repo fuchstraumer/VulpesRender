@@ -29,11 +29,9 @@ loop and Vulkan command buffer submission. The following methods must be overrid
 
 There are a considerable amount of items on my TODO list. The list below may be inaccurate or out of date, but reflects priorities:
 
-- [x] In line with above, make Allocator subsystem and Buffer objects thread-safe. Synchronize mapping of VkDeviceMemory objects. (requires testing)
-- [x] Build a demo suite capable of testing most library items (sorta)
 - [ ] Read/Write configuration values to a file and use the VulpesConfig struct more often (possibly make "SceneConfig", not "InstanceConfig")
 - [ ] Improve how descriptor pools are handled: currently have to guess max sets and required resource count upon first init call. Maybe build "requests"?
-- [ ] Recover from ValidateMemory() errors
-- [x] BIG TODO: Un-FUBAR the spacing due to files not completely converted from tabs to spaces! This is really gross right now!
+- [ ] Update ImGuiFilesystem (in gui/addons). Currently uses a lot of deprecated and insecure C/C++03 stuff. Since I'm using the wonderful std::filesystem, might as well update it.
+- [ ] Expand Vulkan features used: indirect drawing, dynamic uniform buffers, subpasses, etc.
 
 Example code of this library in use can be found in my other projects, in their respective "scenes" folders.
