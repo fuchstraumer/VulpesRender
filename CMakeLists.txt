@@ -34,7 +34,7 @@ ENDIF()
 
 IF(UNIX)
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse3 -mavx2 -m64")
-  ADD_DEFINITIONS("-DGLM_LANG_STL11_FORCED")
+  ADD_DEFINITIONS(PUBLIC "-DGLM_LANG_STL11_FORCED")
 ENDIF()
 
 IF(APPLE)
@@ -90,13 +90,13 @@ FILE(GLOB_RECURSE SHADERS
     "rsrc/shaders/*.vert" "rsrc/shaders/*.frag" "rsrc/shaders/*.spv"
     )
 
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
-INCLUDE_DIRECTORIES("imgui/")
-INCLUDE_DIRECTORIES("ext/include")
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}/include")
+INCLUDE_DIRECTORIES(PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/imgui/")
+INCLUDE_DIRECTORIES(PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/ext/include")
 IF(APPLE)
-INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/ext/MoltenVK/include")
+INCLUDE_DIRECTORIES(PUBLIC "${PROJECT_SOURCE_DIR}/ext/MoltenVK/include")
 ELSE()
-INCLUDE_DIRECTORIES($ENV{VULKAN_SDK}/include)
+INCLUDE_DIRECTORIES(PUBLIC "$ENV{VULKAN_SDK}/include")
 ENDIF()
 
 FILE(GLOB PROJECT_SOURCES "src/util/*.cpp" "src/command/*.cpp" "src/core/*.cpp" "src/render/*.cpp" "src/resource/*.cpp" "src/gui/*.cpp" "src/objects/*.cpp" "src/BaseScene.cpp")
@@ -154,8 +154,7 @@ ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "inc
 ADD_DEPENDENCIES(VulpesRender glm glfw3) # make sure we update+init imgui before creating the project
 
 # Easier to gather headers this way, so we can more cleanly set where they end up.
-FILE(GLOB_RECURSE PROJECT_HEADERS "include/*.hpp")
-INSTALL(FILES "${PROJECT_HEADERS}" DESTINATION "include")
+INSTALL(DIRECTORY "include/" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 INSTALL(TARGETS VulpesRender LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib")
 
 IF(BUILD_EXAMPLE_SCENES)
