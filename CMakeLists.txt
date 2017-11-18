@@ -134,11 +134,14 @@ ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "inc
                                 ${OBJECTS} ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} 
                                 ${CORE} ${RESOURCES} ${RENDER} ${GUI} ${SHADERS}
                                 )
-ADD_DEPENDENCIES(VulpesRender glm glfw3) # make sure we update+init imgui before creating the project
+                                
+ADD_DEPENDENCIES(VulpesRender glm glfw3)
+
+# GLM doesn't detect our compiler version correctly, somehow.
+TARGET_COMPILE_DEFINITIONS(VulpesRender PRIVATE -DGLM_LANG_STL11_FORCED)
 
 IF(UNIX)
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64")
-  TARGET_COMPILE_DEFINITIONS(VulpesRender PRIVATE -DGLM_LANG_STL11_FORCED)
 ENDIF()
 
 IF(MSVC) 
@@ -151,7 +154,7 @@ ENDIF()
 
 TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>)
+    $<INSTALL_INTERFACE:VulpesRender>)
 TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/ext/include>)
 TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC
@@ -192,6 +195,7 @@ ENDIF()
 
 ADD_EXECUTABLE(House "scenes/House.cpp")
 ADD_DEPENDENCIES(House VulpesRender)
+TARGET_COMPILE_DEFINITIONS(House PRIVATE -DGLM_LANG_STL11_FORCED)
 
 IF(APPLE)
 TARGET_LINK_LIBRARIES(House VulpesRender "${GLFW_3_LIB}" "${MoltenVK}")

@@ -2,32 +2,25 @@
 #ifndef VK_ASSERT_H
 #define VK_ASSERT_H
 #include <iostream>
+#include <string>
 #include "vulkan/vulkan.h"
-#ifdef VK_FORCE_ASSERT
-#define VkAssert(expression) { vkErrCheck((expression), __FILE__, __LINE__); }
-inline void vkErrCheck(VkResult res, const char* file, unsigned line, bool abort = true) {
-	if (res != VK_SUCCESS) {
-		fprintf(stderr, "VkAssert: error %i at %s line %d \n", res, file, line);
-		if (abort) {
-			throw(res);
-		}
-	}
-}
-#else 
-#ifdef NDEBUG 
-#define VkAssert(expression) ((void)(0))
-#else 
-#define VkAssert(expression) { vkErrCheck((expression), __FILE__, __LINE__); }
-inline void vkErrCheck(VkResult res, const char* file, unsigned line, bool abort = true) {
-	if (res != VK_SUCCESS) {
-		fprintf(stderr, "VkAssert: error %i at %s line %d \n", res, file, line);
-		if (abort) {
-			throw(res);
-		}
-	}
-}
-#endif 
-#endif // VK_FORCE_ASSERT
+#if !defined NDEBUG || defined VK_FORCE_ASSERT
 
+#define VkAssert(expression) { vkErrCheck((expression), __FILE__, __LINE__); }
+
+inline void vkErrCheck(VkResult res, const char* file, unsigned line, bool abort = true) {
+	if (res != VK_SUCCESS) {
+		std::cerr << "VkAssert: error " << std::to_string(res) << " at " << file << " line " << std::to_string(line) << "\n";
+		if (abort) {
+			throw std::runtime_error(std::to_string(res));
+		}
+	}
+}
+
+#else 
+
+#define VkAssert(expression) ((void)(0))
+
+#endif // ndef NDEBUG || defined VK_FORCE_ASSERT
 
 #endif // !VK_ASSERT_H
