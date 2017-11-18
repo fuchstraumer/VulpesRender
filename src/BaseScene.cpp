@@ -540,7 +540,7 @@ namespace vulpes {
             
             UpdateMouseActions();
             if(SceneConfiguration.EnableGUI) {
-                gui->NewFrame(instance.get(), false);
+                gui->NewFrame(instance.get());
             }
 
             UpdateMovement(static_cast<float>(BaseScene::SceneConfiguration.FrameTimeMs));
