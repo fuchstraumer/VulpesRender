@@ -31,7 +31,7 @@ namespace vulpes {
 
         void UploadTextureData(TransferPool* transfer_pool);
 
-        void NewFrame(Instance* instance, bool update_framegraph = true);
+        void NewFrame(Instance* instance);
 
         void UpdateBuffers();
 

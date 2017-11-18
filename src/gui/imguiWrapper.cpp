@@ -66,7 +66,7 @@ namespace vulpes {
 
     }
 
-    void imguiWrapper::NewFrame(Instance* instance, bool update_framegraph) {
+    void imguiWrapper::NewFrame(Instance* instance) {
 
         auto* window_ptr = instance->GetWindow();
         updateImguiSpecialKeys();

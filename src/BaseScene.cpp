@@ -1,16 +1,15 @@
 #include "vpr_stdafx.h"
 #include "BaseScene.hpp"
-#include <memory>
 #include "core/Instance.hpp"
 #include "core/LogicalDevice.hpp"
 #include "core/PhysicalDevice.hpp"
-#include "render/Swapchain.hpp"
-#include "render/Renderpass.hpp"
-#include "render/Framebuffer.hpp"
 #include "command/CommandPool.hpp"
+#include "render/Framebuffer.hpp"
+#include "render/Renderpass.hpp"
+#include "render/Swapchain.hpp"
 #include "render/DepthStencil.hpp"
 #include "util/AABB.hpp"
-
+#include <memory>
 #ifdef USE_EXPERIMENTAL_FILESYSTEM
 #include <experimental/filesystem>
 #endif
@@ -61,8 +60,8 @@ namespace vulpes {
         presentFences.resize(swapchain->ImageCount);
     
         VkFenceCreateInfo fence_info = vk_fence_create_info_base;
-        for (size_t i = 0; i < presentFences.size(); ++i) {
-            result = vkCreateFence(device->vkHandle(), &fence_info, nullptr, &presentFences[i]);
+        for (auto& fence : presentFences) {
+            result = vkCreateFence(device->vkHandle(), &fence_info, nullptr, &fence);
             VkAssert(result);
         }
 
