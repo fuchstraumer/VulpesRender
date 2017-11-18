@@ -153,8 +153,9 @@ ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "inc
                                 )
 ADD_DEPENDENCIES(VulpesRender glm glfw3) # make sure we update+init imgui before creating the project
 
-# Specify install rules.
-INSTALL(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include" DESTINATION "VulpesRender")
+# Easier to gather headers this way, so we can more cleanly set where they end up.
+FILE(GLOB_RECURSE PROJECT_HEADERS "include/*.hpp")
+INSTALL(FILES "${PROJECT_HEADERS}" DESTINATION "include")
 INSTALL(TARGETS VulpesRender LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib")
 
 IF(BUILD_EXAMPLE_SCENES)
