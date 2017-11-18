@@ -90,13 +90,15 @@ FILE(GLOB_RECURSE SHADERS
     "rsrc/shaders/*.vert" "rsrc/shaders/*.frag" "rsrc/shaders/*.spv"
     )
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}/include")
-INCLUDE_DIRECTORIES(PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/imgui/")
-INCLUDE_DIRECTORIES(PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/ext/include")
+TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
+        $<BUILD_INTERFACE:"${CMAKE_CURRENT_SOURCE_DIR}/include">
+        $<INSTALL_INTERFACE:"include/">)
+TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
+        $<BUILD_INTERFACE:"${CMAKE_CURRENT_SOURCE_DIR}/imgui/":"${CMAKE_CURRENT_SOURCE_DIR}/ext/include">)
 IF(APPLE)
-INCLUDE_DIRECTORIES(PUBLIC "${PROJECT_SOURCE_DIR}/ext/MoltenVK/include")
+TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC $<"${PROJECT_SOURCE_DIR}/ext/MoltenVK/include">)
 ELSE()
-INCLUDE_DIRECTORIES(PUBLIC "$ENV{VULKAN_SDK}/include")
+TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC $<"$ENV{VULKAN_SDK}/include">)
 ENDIF()
 
 FILE(GLOB PROJECT_SOURCES "src/util/*.cpp" "src/command/*.cpp" "src/core/*.cpp" "src/render/*.cpp" "src/resource/*.cpp" "src/gui/*.cpp" "src/objects/*.cpp" "src/BaseScene.cpp")
