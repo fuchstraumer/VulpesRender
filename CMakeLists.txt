@@ -64,11 +64,6 @@ ExternalProject_Add(glfw3
     "-DVULKAN_LIBRARY=${MoltenVK}"
     "-DVULKAN_INCLUDE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/ext/MoltenVk/include/vulkan")
 
-ExternalProject_Add(gli 
-    PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/gli"
-    GIT_REPOSITORY "https://github.com/fuchstraumer/gli.git"
-    CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
-
 ExternalProject_Add(glm
     PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/glm"
     GIT_REPOSITORY "https://github.com/g-truc/glm.git"

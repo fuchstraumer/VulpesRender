@@ -4,7 +4,6 @@ build/
 VulpesRender.dir/ 
 ext/lib/
 ext/include/glfw
-ext/include/gli
 ext/include/glm
 x64/RelWithDebInfo/glfw3/glfw3.log
 download/
@@ -14,3 +13,5 @@ ext/include/vulkan/
 logs/
 
 fixes\.yaml
+
+\.vscode/settings\.json

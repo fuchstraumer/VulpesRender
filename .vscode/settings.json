@@ -1,5 +1,24 @@
 {
     "files.associations": {
-        "queue": "cpp"
+        "queue": "cpp",
+        "__bit_reference": "cpp",
+        "__hash_table": "cpp",
+        "__split_buffer": "cpp",
+        "__tree": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "filesystem": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "ios": "cpp",
+        "iterator": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "regex": "cpp",
+        "set": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp"
     }
 }
