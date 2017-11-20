@@ -39,6 +39,7 @@
 #pragma message("No valid platform detected for Vulkan!")
 #endif
 
+#define GLFW_DLL
 #define GLFW_INCLUDE_VULKAN
 #include "GLFW/glfw3.h"
 

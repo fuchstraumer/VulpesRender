@@ -39,6 +39,11 @@ ENDIF()
 OPTION(FORCE_ALLOCATOR_VALIDATION "Force validation of Vulkan memory even in Release builds." OFF)
 OPTION(BUILD_EXAMPLE_SCENES "Build example scene executables testing/demonstrating Vulkan features" OFF)
 
+IF(APPLE) 
+SET(APPLE_VK_INCL "-DVULKAN_INCLUDE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/ext/MoltenVk/include/vulkan")
+SET(APPLE_VK_LIB "-DVULKAN_LIBRARY=${MoltenVK}")
+ENDIF()
+
 ExternalProject_Add(glfw3
   PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/glfw"
   GIT_REPOSITORY "https://github.com/glfw/glfw.git"
@@ -46,14 +51,14 @@ ExternalProject_Add(glfw3
   BUILD_IN_SOURCE 1
   CMAKE_ARGS 
     "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext/"
+    "-DGLFW_BUILD_SHARED_LIBS=ON"
     "-DGLFW_BUILD_EXAMPLES=OFF"
     "-DGLFW_BUILD_TESTS=OFF"
     "-DGLFW_BUILD_DOCS=OFF"
     "-DGLFW_DOCUMENT_INTERNALS=OFF"
-    "-DCMAKE_DEBUG_POSTFIX=-gd"
     "-DUSE_MSVC_RUNTIME_LIBRARY_DLL=ON"
-    "-DVULKAN_LIBRARY=${MoltenVK}"
-    "-DVULKAN_INCLUDE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/ext/MoltenVk/include/vulkan")
+    "${APPLE_VK_LIB}"
+    "${APPLE_VK_INCLUDE}")
 
 ExternalProject_Add(glm
     PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/glm"
