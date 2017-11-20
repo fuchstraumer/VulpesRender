@@ -3,8 +3,9 @@
 #define VULPES_VK_ALLOCATOR_H
 
 #include "vpr_stdafx.h"
-#include <list>
 #include "../ForwardDecl.hpp"
+#include <list>
+
 /*
     
     TODO:
@@ -112,40 +113,7 @@ namespace vulpes {
      *  As the memory verification routine is not used in this case, much of that code will fold away but should still be left in for debug builds.
      * \ingroup Allocator
      */
-    static std::ostream& operator<<(std::ostream& os, const ValidationCode& code) {
-        switch (code) {
-        case ValidationCode::NULL_MEMORY_HANDLE:
-            os << "Null memory handle.";
-            break;
-        case ValidationCode::ZERO_MEMORY_SIZE:
-            os << "Zero memory size.";
-            break;
-        case ValidationCode::INCORRECT_SUBALLOC_OFFSET:
-            os << "Incorrect suballocation offset.";
-            break;
-        case ValidationCode::NEED_MERGE_SUBALLOCS:
-            os << "Adjacent free suballocations not merged.";
-            break;
-        case ValidationCode::FREE_SUBALLOC_COUNT_MISMATCH:
-            os << "Mismatch between counted and caculated quantity of free suballocations.";
-            break;
-        case ValidationCode::USED_SUBALLOC_IN_FREE_LIST:
-            os << "Used suballocation in free/available suballocation list.";
-            break;
-        case ValidationCode::FREE_SUBALLOC_SORT_INCORRECT:
-            os << "Sorting of available suballocations not correct.";
-            break;
-        case ValidationCode::FINAL_SIZE_MISMATCH:
-            os << "Declared total size of allocation doesn't match calculated total size.";
-            break;
-        case ValidationCode::FINAL_FREE_SIZE_MISMATCH:
-            os << "Declared total free size doesn't match caculated total free size.";
-            break;
-        default:
-            break;
-        }
-        return os;
-    }
+    std::ostream& operator<<(std::ostream& os, const ValidationCode& code);
 
     /*
     
@@ -246,20 +214,6 @@ namespace vulpes {
         /** Additional flags that would be nice/useful to have, but are not required. An attempt to meet these will be 
          *  made, but not meeting them won't be considered a failure.*/
         VkMemoryPropertyFlags preferredFlags = VkMemoryPropertyFlags(0);
-    };
-
-
-    struct AllocationInfo {
-        uint32_t memoryTypeIdx;
-        VkDeviceMemory memory;
-        VkDeviceSize offset;
-        VkDeviceSize size;
-        void* mappedData;
-    };
-
-    struct DefragInfo {
-        VkDeviceSize maxSizeToMove;
-        VkDeviceSize maxSuballocationsToMove;
     };
 
     struct Suballocation {
@@ -499,17 +453,6 @@ namespace vulpes {
         
     private:
         Allocator* allocator;
-    };
-
-    /** \todo Implement this, for christ's sake.
-     *  \ingroup Allocator
-     */
-    class Defragmenter {
-        const Device* parent;
-        VkDeviceSize BufferImageGranularity;
-        uint32_t MemoryTypeIdx;
-        VkDeviceSize BytesMoved;
-        uint32_t AllocationsMoved;
     };
 
     /** The primary interface and class of this subsystem. This object is responsible for creating resources when requested, managing memory,

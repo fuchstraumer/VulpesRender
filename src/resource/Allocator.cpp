@@ -11,6 +11,41 @@ namespace vulpes {
     // padding to inject at end of allocations ot test allocation system
     static constexpr size_t DEBUG_PADDING = 0;
 
+    std::ostream& operator<<(std::ostream& os, const ValidationCode& code)  {
+        switch (code) {
+        case ValidationCode::NULL_MEMORY_HANDLE:
+            os << "Null memory handle.";
+            break;
+        case ValidationCode::ZERO_MEMORY_SIZE:
+            os << "Zero memory size.";
+            break;
+        case ValidationCode::INCORRECT_SUBALLOC_OFFSET:
+            os << "Incorrect suballocation offset.";
+            break;
+        case ValidationCode::NEED_MERGE_SUBALLOCS:
+            os << "Adjacent free suballocations not merged.";
+            break;
+        case ValidationCode::FREE_SUBALLOC_COUNT_MISMATCH:
+            os << "Mismatch between counted and caculated quantity of free suballocations.";
+            break;
+        case ValidationCode::USED_SUBALLOC_IN_FREE_LIST:
+            os << "Used suballocation in free/available suballocation list.";
+            break;
+        case ValidationCode::FREE_SUBALLOC_SORT_INCORRECT:
+            os << "Sorting of available suballocations not correct.";
+            break;
+        case ValidationCode::FINAL_SIZE_MISMATCH:
+            os << "Declared total size of allocation doesn't match calculated total size.";
+            break;
+        case ValidationCode::FINAL_FREE_SIZE_MISMATCH:
+            os << "Declared total free size doesn't match caculated total free size.";
+            break;
+        default:
+            break;
+        }
+        return os;
+    }
+
     MemoryBlock::MemoryBlock(Allocator * alloc) : allocator(alloc), availSize(0), freeCount(0), memory(VK_NULL_HANDLE), Size(0) {}
 
     MemoryBlock::~MemoryBlock() {
