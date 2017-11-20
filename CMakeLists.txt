@@ -134,7 +134,15 @@ ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "inc
                                 ${OBJECTS} ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} 
                                 ${CORE} ${RESOURCES} ${RENDER} ${GUI} ${SHADERS}
                                 )
-                                
+
+IF(APPLE)
+TARGET_LINK_LIBRARIES(VulpesRender PUBLIC "${GLFW_3_LIB}" "${MoltenVK}")
+ELSEIF(UNIX)
+TARGET_LINK_LIBRARIES(VulpesRender PUBLIC "${GLFW_3_LIB}" "$ENV{VULKAN_SDK}/lib/libvulkan.so" "dl" "pthread" "X11" "Xi" "Xrandr")
+ELSEIF(WIN32)
+TARGET_LINK_LIBRARIES(VulpesRender PUBLIC "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
+ENDIF()
+                        
 ADD_DEPENDENCIES(VulpesRender glm glfw3)
 
 # GLM doesn't detect our compiler version correctly, somehow.
@@ -166,8 +174,10 @@ TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/ext/MoltenVK/include>)
 ELSE()
 TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
-    $<BUILD_INTERFACE:$ENV{VULKAN_SDK}/include>)
+    $<BUILD_INTERFACE:$ENV{VULKAN_SDK}/include>
+    $<INSTALL_INTERFACE:$ENV{VULKAN_SDK}/include>)
 ENDIF()
+
 
 # Easier to gather headers this way, so we can more cleanly set where they end up.
 INSTALL(DIRECTORY "include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/VulpesRender/")
@@ -186,6 +196,7 @@ ENDIF()
 
 ADD_EXECUTABLE(Triangle "scenes/Triangle.cpp")
 ADD_DEPENDENCIES(Triangle VulpesRender)
+
 
 IF(APPLE)
 TARGET_LINK_LIBRARIES(Triangle VulpesRender "${GLFW_3_LIB}" "${MoltenVK}")
