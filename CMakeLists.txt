@@ -1,17 +1,31 @@
-MACRO(ADD_MSVC_PRECOMPILED_HEADER PrecompiledHeader PrecompiledSource SourcesVar)
+MACRO(ADD_PRECOMPILED_HEADER PrecompiledHeader PrecompiledSource SourcesVar)
+  GET_FILENAME_COMPONENT(PrecompiledBasename ${PrecompiledHeader} NAME_WE)
+  SET(PrecompiledBinary "${CMAKE_CURRENT_BINARY_DIR}/${PrecompiledBasename}.pch")
+  SET(Sources ${${SourcesVar}})
   IF(MSVC)
-    GET_FILENAME_COMPONENT(PrecompiledBasename ${PrecompiledHeader} NAME_WE)
-    SET(PrecompiledBinary "${CMAKE_CURRENT_BINARY_DIR}/${PrecompiledBasename}.pch")
-    SET(Sources ${${SourcesVar}})
+    SET_SOURCE_FILES_PROPERTIES(
+      ${PrecompiledSource}	PROPERTIES
+      COMPILE_FLAGS "/Yc\"${PrecompiledHeader}\" /Fp\"${PrecompiledBinary}\""
+      OBJECT_OUTPUTS "${PrecompiledBinary}"
+    )
 
-    SET_SOURCE_FILES_PROPERTIES(${PrecompiledSource}
-                                PROPERTIES COMPILE_FLAGS "/Yc\"${PrecompiledHeader}\" /Fp\"${PrecompiledBinary}\""
-                                           OBJECT_OUTPUTS "${PrecompiledBinary}")
-    SET_SOURCE_FILES_PROPERTIES(${Sources}
-                                PROPERTIES COMPILE_FLAGS "/Yu\"${PrecompiledHeader}\" /FI\"${PrecompiledHeader}\" /Fp\"${PrecompiledBinary}\""
-                                           OBJECT_DEPENDS "${PrecompiledBinary}")  
-    # Add precompiled header to SourcesVar
-    LIST(APPEND ${SourcesVar} ${PrecompiledSource})
+    SET_SOURCE_FILES_PROPERTIES(
+      ${Sources} PROPERTIES
+      COMPILE_FLAGS "/Yu\"${PrecompiledBinary}\" /FI\"${PrecompiledBinary}\" /Fp\"${PrecompiledBinary}\""
+      OBJECT_DEPENDS "${PrecompiledBinary}"
+    )
+  ELSEIF(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU" OR ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
+    ADD_CUSTOM_COMMAND(
+      OUTPUT ${PrecompiledBinary}
+      COMMAND "${CMAKE_CXX_COMPILER} -x c++-header -o ${PrecompiledBinary}"
+      COMMENT "Precompiling vpr_stdafx.h..."
+    )
+
+    SET_SOURCE_FILES_PROPERTIES(
+      ${Sources} PROPERTIES
+      COMPILE_FLAGS "-include ${PrecompiledHeader}"
+      OBJECT_DEPENDS "${PrecompiledBinary}"
+    )
   ENDIF(MSVC)
 ENDMACRO(ADD_MSVC_PRECOMPILED_HEADER)
 
@@ -20,17 +34,13 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.3)
 PROJECT(VulpesRender)
 
 SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON) 
+
 SET(CMAKE_CXX_STANDARD 14)
 SET(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 IF(NOT MSVC) # compile commands used for clang-format and clang-tidy
     SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 ENDIF()
-
-IF(MSVC)
-  OPTION(USE_MSVC_RUNTIME_LIBRARY_DLL "Use MSVC runtime DLL" ON)
-ENDIF()
-
 
 IF(APPLE)
   FIND_LIBRARY(MoltenVK NAMES "libMoltenVK.dylib" HINTS "${CMAKE_CURRENT_SOURCE_DIR}/ext/MoltenVK/macOS")
@@ -65,11 +75,6 @@ ExternalProject_Add(glm
     GIT_REPOSITORY "https://github.com/g-truc/glm.git"
     CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
 
-# Update and init submodules.
-#ADD_SUBDIRECTORY("${CMAKE_CURRENT_SOURCE_DIR}/imgui")
-ADD_CUSTOM_TARGET(UPDATE_IMGUI_SUBMODULE COMMAND git submodule update --init ${PROJECT_SOURCE_DIR}/imgui)
-
-
 FILE(GLOB UTIL "src/util/*.cc" "src/util/*.cpp" "include/util/*.h" "include/util/*.hpp")
 FILE(GLOB COMMON "src/common/*.h" "src/common/*.hpp")
 FILE(GLOB COMMAND_FILES "src/command/*.cpp" "include/command/*.hpp")
@@ -87,7 +92,7 @@ FILE(GLOB_RECURSE SHADERS
     )
 
 FILE(GLOB PROJECT_SOURCES "src/util/*.cpp" "src/command/*.cpp" "src/core/*.cpp" "src/render/*.cpp" "src/resource/*.cpp" "src/gui/*.cpp" "src/objects/*.cpp" "src/BaseScene.cpp")
-ADD_MSVC_PRECOMPILED_HEADER("vpr_stdafx.h" "src/vpr_stdafx.cpp" ${PROJECT_SOURCES})
+ADD_PRECOMPILED_HEADER("vpr_stdafx.h" "src/vpr_stdafx.cpp" ${PROJECT_SOURCES})
 
 SOURCE_GROUP("util" FILES ${UTIL})
 SOURCE_GROUP("common" FILES ${COMMON})
@@ -101,29 +106,13 @@ SOURCE_GROUP("imgui" FILES ${IMGUI})
 SOURCE_GROUP("objects" FILES ${OBJECTS})
 SOURCE_GROUP("shaders" FILES ${SHADERS})
 
-IF(MSVC) # enable multi-threaded compile for release builds, when its available
+# enable multi-threaded compile for release builds, when its available. Enable minimal rebuild for debug
+# as it's seemingly disabled by default, for some reason.
+IF(MSVC) 
   SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Gm")
   SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MP")
   SET(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_MINSIZEREL} /MP")
   SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /MP")
-ENDIF()
-
-# Blatantly stolen from GLFW
-IF (NOT USE_MSVC_RUNTIME_LIBRARY_DLL)
-  FOREACH (flag CMAKE_C_FLAGS
-                CMAKE_CXX_FLAGS_DEBUG
-                CMAKE_CXX_FLAGS_RELEASE
-                CMAKE_CXX_FLAGS_MINSIZEREL
-                CMAKE_CXX_FLAGS_RELWITHDEBINFO)
-
-    IF(${flag} MATCHES "/MD")
-        string(REGEX REPLACE "/MD" "/MT" ${flag} "${${flag}}")
-    ENDIF()
-    IF (${flag} MATCHES "/MDd")
-        string(REGEX REPLACE "/MDd" "/MTd" ${flag} "${${flag}}")
-    ENDIF()
-
-  ENDFOREACH()
 ENDIF()
 
 ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" 
@@ -132,10 +121,17 @@ ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "inc
                                 ${CORE} ${RESOURCES} ${RENDER} ${GUI} ${SHADERS}
                                 )
 
+IF(APPLE OR UNIX)
+FIND_LIBRARY(GLFW_3_LIB NAMES "libglfw3.a" HINTS "${PROJECT_SOURCE_DIR}/ext/lib")
+  IF(APPLE)
+  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa -framework Metal -framework IOKit -framework CoreVideo")
+  ENDIF()
+ENDIF()                          
+
 IF(APPLE)
-TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "${GLFW_3_LIB}" "${MoltenVK}")
+  TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "${GLFW_3_LIB}" "${MoltenVK}")
 ELSEIF(UNIX)
-    TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "${GLFW_3_LIB}" "$ENV{VULKAN_SDK}/lib/libvulkan.so" "dl" "pthread" "X11" "Xi" "Xrandr")
+  TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "${GLFW_3_LIB}" "$ENV{VULKAN_SDK}/lib/libvulkan.so" "dl" "pthread" "X11" "Xi" "Xrandr")
 ELSEIF(WIN32)
   TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
 ENDIF()
@@ -168,12 +164,12 @@ TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC
     $<INSTALL_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/imgui>)
 
 IF(APPLE)
-TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
-    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/ext/MoltenVK/include>)
+  TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
+      $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/ext/MoltenVK/include>)
 ELSE()
-TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
-    $<BUILD_INTERFACE:$ENV{VULKAN_SDK}/include>
-    $<INSTALL_INTERFACE:$ENV{VULKAN_SDK}/include>)
+  TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
+      $<BUILD_INTERFACE:$ENV{VULKAN_SDK}/include>
+      $<INSTALL_INTERFACE:$ENV{VULKAN_SDK}/include>)
 ENDIF()
 
 
@@ -187,13 +183,6 @@ INSTALL(FILES "include/vpr_stdafx.h" "include/BaseScene.hpp" "include/ForwardDec
 
 IF(BUILD_EXAMPLE_SCENES)
 
-IF(APPLE OR UNIX)
-FIND_LIBRARY(GLFW_3_LIB NAMES "libglfw3.a" HINTS "${PROJECT_SOURCE_DIR}/ext/lib")
-  IF(APPLE)
-  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa -framework Metal -framework IOKit -framework CoreVideo")
-  ENDIF()
-ENDIF()
-
 ADD_EXECUTABLE(Triangle "scenes/Triangle.cpp")
 TARGET_LINK_LIBRARIES(Triangle VulpesRender)
 
@@ -203,4 +192,4 @@ TARGET_LINK_LIBRARIES(House VulpesRender)
 ADD_EXECUTABLE(Arcball "scenes/ArcballScene.cpp")
 TARGET_LINK_LIBRARIES(Arcball VulpesRender)
 
-
+ENDIF()
