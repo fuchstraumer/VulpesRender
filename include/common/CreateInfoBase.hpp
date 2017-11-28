@@ -550,6 +550,15 @@ namespace vulpes {
 		nullptr,
 	};
 
+	constexpr VkQueryPoolCreateInfo vk_query_pool_create_info_base {
+		VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO,
+		nullptr,
+		0,
+		VK_QUERY_TYPE_MAX_ENUM,
+		0,
+		0,
+	};
+
 }
 
 #endif // !VULPES_VK_CREATE_INFO_BASE_H
