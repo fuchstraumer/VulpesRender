@@ -47,7 +47,6 @@ IF(APPLE)
 ENDIF()
 
 OPTION(FORCE_ALLOCATOR_VALIDATION "Force validation of Vulkan memory even in Release builds." OFF)
-OPTION(BUILD_EXAMPLE_SCENES "Build example scene executables testing/demonstrating Vulkan features" OFF)
 
 IF(APPLE) 
   SET(APPLE_VK_INCL "-DVULKAN_INCLUDE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/ext/MoltenVk/include/vulkan")
@@ -181,15 +180,3 @@ INSTALL(TARGETS VulpesRender LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib"
 INSTALL(FILES "include/vpr_stdafx.h" "include/BaseScene.hpp" "include/ForwardDecl.hpp" "include/BaseSceneConfig.hpp" 
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/VulpesRender")
 
-IF(BUILD_EXAMPLE_SCENES)
-
-ADD_EXECUTABLE(Triangle "scenes/Triangle.cpp")
-TARGET_LINK_LIBRARIES(Triangle VulpesRender)
-
-ADD_EXECUTABLE(House "scenes/House.cpp")
-TARGET_LINK_LIBRARIES(House VulpesRender)
-
-ADD_EXECUTABLE(Arcball "scenes/ArcballScene.cpp")
-TARGET_LINK_LIBRARIES(Arcball VulpesRender)
-
-ENDIF()
