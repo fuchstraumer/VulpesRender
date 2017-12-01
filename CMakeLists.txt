@@ -125,11 +125,11 @@ FIND_LIBRARY(GLFW_3_LIB NAMES "libglfw3.a" HINTS "${PROJECT_SOURCE_DIR}/ext/lib"
 ENDIF()                          
 
 IF(APPLE)
-  TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "${GLFW_3_LIB}" "${MoltenVK}")
+  TARGET_LINK_LIBRARIES(VulpesRender PUBLIC "${GLFW_3_LIB}" "${MoltenVK}")
 ELSEIF(UNIX)
-  TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "${GLFW_3_LIB}" "$ENV{VULKAN_SDK}/lib/libvulkan.so" "dl" "pthread" "X11" "Xi" "Xrandr")
+  TARGET_LINK_LIBRARIES(VulpesRender PUBLIC "${GLFW_3_LIB}" "$ENV{VULKAN_SDK}/lib/libvulkan.so" "dl" "pthread" "X11" "Xi" "Xrandr")
 ELSEIF(WIN32)
-  TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
+  TARGET_LINK_LIBRARIES(VulpesRender PUBLIC "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
 ENDIF()
                         
 ADD_DEPENDENCIES(VulpesRender glm glfw3)
