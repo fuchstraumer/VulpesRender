@@ -2,7 +2,7 @@
 #include "command/CommandPool.hpp"
 #include "core/Instance.hpp"
 #include "core/LogicalDevice.hpp"
-#include "BaseScene.hpp"
+
 namespace vulpes {
 
     CommandPool::CommandPool(const Device * _parent, const VkCommandPoolCreateInfo & create_info, bool _primary) : parent(_parent), createInfo(create_info), primary(_primary) {
@@ -55,7 +55,7 @@ namespace vulpes {
         }
         if (handle != VK_NULL_HANDLE) {
             vkDestroyCommandPool(parent->vkHandle(), handle, allocators);
-            LOG_IF(BaseScene::SceneConfiguration.VerboseLogging, INFO) << "Command Pool " << handle << " destroyed.";
+            LOG(INFO) << "Command Pool " << handle << " destroyed.";
             handle = VK_NULL_HANDLE;
         }
     }
@@ -72,13 +72,13 @@ namespace vulpes {
         alloc_info.commandBufferCount = num_buffers;
         alloc_info.level = cmd_buffer_level;
         VkResult result = vkAllocateCommandBuffers(parent->vkHandle(), &alloc_info, cmdBuffers.data());
-        LOG_IF(BaseScene::SceneConfiguration.VerboseLogging, INFO) << std::to_string(num_buffers) << " command buffers allocated for command pool " << handle;
+        LOG(INFO) << std::to_string(num_buffers) << " command buffers allocated for command pool " << handle;
         VkAssert(result);
     }
 
     void CommandPool::FreeCommandBuffers(){
         vkFreeCommandBuffers(parent->vkHandle(), handle, static_cast<uint32_t>(cmdBuffers.size()), cmdBuffers.data());
-        LOG_IF(BaseScene::SceneConfiguration.VerboseLogging, INFO) << std::to_string(cmdBuffers.size()) << " command buffers freed.";
+        LOG(INFO) << std::to_string(cmdBuffers.size()) << " command buffers freed.";
         cmdBuffers.clear();
         cmdBuffers.shrink_to_fit();
     }

@@ -3,7 +3,7 @@
 #include "core/Instance.hpp"
 #include "core/LogicalDevice.hpp"
 #include "core/PhysicalDevice.hpp"
-#include "BaseScene.hpp"
+
 namespace vulpes {
 
     VkBool32 AllocationRequirements::noNewAllocations = false;
@@ -257,7 +257,7 @@ namespace vulpes {
                 if (on_same_page) {
                     conflict_found = CheckBufferImageGranularityConflict(prev_suballoc.type, allocation_type);
                     if (conflict_found) {
-                        LOG_IF(BaseScene::SceneConfiguration.VerboseLogging, INFO) << "A buffer-image granularity conflict was identified in suballocation " << std::to_string(reinterpret_cast<size_t>(&prev_suballoc));
+                        LOG(INFO) << "A buffer-image granularity conflict was identified in suballocation " << std::to_string(reinterpret_cast<size_t>(&prev_suballoc));
                         break;
                     }
                 }
@@ -281,7 +281,7 @@ namespace vulpes {
 
         // Can't allocate if padding at begin and end is greater than requested size.
         if (padding_begin + padding_end + allocation_size > suballoc.size) {
-            LOG_IF(BaseScene::SceneConfiguration.VerboseLogging, INFO) << "Suballocation verification failed as required padding for alignment + required size is greater than available space.";
+            LOG(INFO) << "Suballocation verification failed as required padding for alignment + required size is greater than available space.";
             return false;
         }
 
@@ -294,7 +294,7 @@ namespace vulpes {
                 bool on_same_page = CheckBlocksOnSamePage(*dest_offset, allocation_size, next_suballoc.offset, buffer_image_granularity);
                 if (on_same_page) {
                     if (CheckBufferImageGranularityConflict(allocation_type, next_suballoc.type)) {
-                        LOG_IF(BaseScene::SceneConfiguration.VerboseLogging, INFO) << "Suballocation verification failed as there were too many buffer-image granularity conflicts.";
+                        LOG(INFO) << "Suballocation verification failed as there were too many buffer-image granularity conflicts.";
                         return false;
                     }
                 }
@@ -544,7 +544,7 @@ namespace vulpes {
     void AllocationCollection::RemoveBlock(MemoryBlock* block_to_erase) {
         for (auto iter = allocations.begin(); iter != allocations.end(); ++iter) {
             if ((*iter).get() == block_to_erase) {
-                LOG_IF(BaseScene::SceneConfiguration.VerboseLogging, INFO) << "Removed memory block " << (*iter).get() << " from allocation collection.";
+                LOG(INFO) << "Removed memory block " << (*iter).get() << " from allocation collection.";
                 allocations.erase(iter);
                 return;
             }

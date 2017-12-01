@@ -3,8 +3,9 @@
 #define VULPES_VK_INSTANCE_H
 
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.hpp"
+#include "ForwardDecl.hpp"
 #include "Window.hpp"
+#include "common/GraphicsSettings.hpp"
 
 namespace vulpes {
 
@@ -35,6 +36,8 @@ namespace vulpes {
         const Window* GetWindow() const noexcept;
         Window* GetWindow() noexcept;
 
+        static vulpes_graphics_options_t GraphicsSettings;
+        static vulpes_state_t VulpesState;
     private:
 
         void setupPhysicalDevice();

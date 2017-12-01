@@ -1,16 +1,15 @@
 #include "vpr_stdafx.h"
 #include "core/Instance.hpp"
-#include <imgui.h>
 #include "core/PhysicalDevice.hpp"
 #include "common/VkDebug.hpp"
 
-#include "BaseSceneConfig.hpp"
-#include "BaseScene.hpp"
+#include <imgui.h>
 
 namespace vulpes {
 
-    vulpesSceneConfig BaseScene::SceneConfiguration = vulpesSceneConfig();
-
+    vulpes_graphics_options_t Instance::GraphicsSettings = vulpes_graphics_options_t();
+    vulpes_state_t Instance::VulpesState = vulpes_state_t();
+    
     Instance::Instance(VkInstanceCreateInfo create_info, const bool & enable_validation, const uint32_t& _width, const uint32_t& _height) {
 
         createInfo = create_info;

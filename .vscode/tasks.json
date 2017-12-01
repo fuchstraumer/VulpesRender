@@ -6,27 +6,31 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "cd build && make VulpesRender"
+            "command": "cd build && make VulpesRender",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
-            "label" : "cmake_debug",
-            "type" : "shell",
-            "command" : "cd build && cmake -DCMAKE_BUILD_TYPE=DEBUG -DBUILD_EXAMPLE_SCENES=ON ../"
+            "label": "cmake_debug",
+            "type": "shell",
+            "command": "cd build && cmake -DCMAKE_BUILD_TYPE=DEBUG -DBUILD_EXAMPLE_SCENES=ON ../"
         },
         {
-            "label" : "cmake_rel_with_deb_info",
-            "type" : "shell",
-            "command" : "cd build && cmake -DCMAKE_BUILD_TYPE=RELWITHDEBINFO ../"
+            "label": "cmake_rel_with_deb_info",
+            "type": "shell",
+            "command": "cd build && cmake -DCMAKE_BUILD_TYPE=RELWITHDEBINFO ../"
         },
         {
-            "label" : "cmake_release",
-            "type" : "shell",
-            "command" : "cd build && cmake -DCMAKE_BUILD_TYPE=RELEASE ../"
+            "label": "cmake_release",
+            "type": "shell",
+            "command": "cd build && cmake -DCMAKE_BUILD_TYPE=RELEASE ../"
         },
         {
-            "label" : "run-clang-tidy",
-            "type" : "shell",
-            "command" : "python run-clang-tidy.py -p build -export-fixes fixes.yaml"
+            "label": "run-clang-tidy",
+            "type": "shell",
+            "command": "python run-clang-tidy.py -p build -export-fixes fixes.yaml"
         }
     ]
 }

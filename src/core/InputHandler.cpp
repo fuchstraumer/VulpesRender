@@ -1,9 +1,9 @@
 #include "vpr_stdafx.h"
 #include "core/InputHandler.hpp"
 #include "core/Window.hpp"
-#include <imgui.h>
 #include "core/Instance.hpp"
-#include "BaseScene.hpp"
+#include <imgui.h>
+
 namespace vulpes {
 
     std::array<bool, 1024> input_handler::Keys = std::array<bool, 1024>();
@@ -26,7 +26,7 @@ namespace vulpes {
         glfwSetMouseButtonCallback(parent->glfwWindow(), MouseButtonCallback);
         glfwSetScrollCallback(parent->glfwWindow(), MouseScrollCallback);
         glfwSetCharCallback(parent->glfwWindow(), CharCallback);
-        if (BaseScene::SceneConfiguration.EnableMouseLocking) {
+        if (Instance::GraphicsSettings.EnableMouseLocking) {
             glfwSetInputMode(parent->glfwWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         }
         else {

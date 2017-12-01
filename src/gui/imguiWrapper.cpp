@@ -3,7 +3,6 @@
 #include "command/TransferPool.hpp"
 #include "core/Instance.hpp"
 #include "resource/ShaderModule.hpp"
-#include "BaseScene.hpp"
 
 namespace vulpes {
 
@@ -75,14 +74,14 @@ namespace vulpes {
         io.ClipboardUserData = reinterpret_cast<void*>(window_ptr); // required for clipboard funcs to work.
         static double curr_time = 0.0;
 
-        if (BaseScene::SceneConfiguration.EnableMouseLocking) {
+        if (Instance::GraphicsSettings.EnableMouseLocking) {
             if (input_handler::Keys[GLFW_KEY_LEFT_ALT]) {
                 freeMouse(instance);
-                BaseScene::CameraLock = true;
+                Instance::VulpesState.ShouldMouseLock = true;
             }
             else {
                 captureMouse(instance);
-                BaseScene::CameraLock = false;
+                Instance::VulpesState.ShouldMouseLock = false;
             }
         }
 
@@ -301,8 +300,8 @@ namespace vulpes {
 
         pipelineStateInfo.RasterizationInfo.cullMode = VK_CULL_MODE_NONE;
 
-        pipelineStateInfo.MultisampleInfo.rasterizationSamples = BaseScene::SceneConfiguration.MSAA_SampleCount;
-        pipelineStateInfo.MultisampleInfo.sampleShadingEnable = BaseScene::SceneConfiguration.EnableMSAA;
+        pipelineStateInfo.MultisampleInfo.rasterizationSamples = Instance::GraphicsSettings.MSAA_SampleCount;
+        pipelineStateInfo.MultisampleInfo.sampleShadingEnable = Instance::GraphicsSettings.EnableMSAA;
 
     }
 
@@ -436,7 +435,7 @@ namespace vulpes {
         double mouse_x, mouse_y;
         glfwGetCursorPos(window_ptr->glfwWindow(), &mouse_x, &mouse_y);
         io.MousePos = ImVec2(float(mouse_x), float(mouse_y));
-        BaseScene::CameraLock = true;
+        Instance::VulpesState.ShouldMouseLock = true;
         glfwSetInputMode(window_ptr->glfwWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
     }
@@ -446,7 +445,7 @@ namespace vulpes {
         auto& io = ImGui::GetIO();
         auto* window_ptr = instance->GetWindow();
         io.MousePos = ImVec2(-1, -1);
-        BaseScene::CameraLock = false;
+        Instance::VulpesState.ShouldMouseLock = false;
         glfwSetInputMode(window_ptr->glfwWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     }

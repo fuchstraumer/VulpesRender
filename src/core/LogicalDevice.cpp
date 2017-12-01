@@ -2,7 +2,7 @@
 #include "core/LogicalDevice.hpp"
 #include "core/PhysicalDevice.hpp"
 #include "core/Instance.hpp"
-#include "BaseScene.hpp"
+
 namespace vulpes {
 
     Device::Device(const Instance* instance, const PhysicalDevice * device) : parent(device), parentInstance(instance) {
@@ -26,7 +26,7 @@ namespace vulpes {
         createInfo.pQueueCreateInfos = queue_infos.data();
         createInfo.pEnabledFeatures = &device->Features;
 
-        if (BaseScene::SceneConfiguration.EnableValidation) {
+        if (Instance::GraphicsSettings.EnableValidation) {
             EnableValidation();
         }
         else {
@@ -39,7 +39,7 @@ namespace vulpes {
             createInfo.enabledExtensionCount = static_cast<uint32_t>(device_extensions_debug.size());
             createInfo.ppEnabledExtensionNames = device_extensions_debug.data();
         }
-        else if (BaseScene::SceneConfiguration.EnableValidation) {
+        else if (Instance::GraphicsSettings.EnableValidation) {
             createInfo.enabledExtensionCount = static_cast<uint32_t>(device_extensions.size());
             createInfo.ppEnabledExtensionNames = device_extensions.data();
             createInfo.enabledLayerCount = 1;
@@ -293,7 +293,6 @@ namespace vulpes {
     }
 
     void Device::GetMarkerFuncPtrs() {
-
         pfnDebugMarkerSetObjectTag = reinterpret_cast<PFN_vkDebugMarkerSetObjectTagEXT>(vkGetDeviceProcAddr(handle, "vkDebugMarkerSetObjectTagEXT"));
         pfnDebugMarkerSetObjectName = reinterpret_cast<PFN_vkDebugMarkerSetObjectNameEXT>(vkGetDeviceProcAddr(handle, "vkDebugMarkerSetObjectNameEXT"));
         pfnCmdDebugMarkerBegin = reinterpret_cast<PFN_vkCmdDebugMarkerBeginEXT>(vkGetDeviceProcAddr(handle, "vkCmdDebugMarkerBeginEXT"));

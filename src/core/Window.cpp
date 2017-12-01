@@ -2,7 +2,7 @@
 #include "core/Window.hpp"
 #include <imgui.h>
 #include "core/Instance.hpp"
-#include "BaseScene.hpp"
+
 
 namespace vulpes {
 
@@ -19,8 +19,8 @@ namespace vulpes {
 
     void Window::createWindow() {
 
-        std::string window_title = BaseScene::SceneConfiguration.ApplicationName;
-        if (!BaseScene::SceneConfiguration.EnableFullscreen) {
+        std::string window_title = Instance::GraphicsSettings.ApplicationName;
+        if (!Instance::GraphicsSettings.EnableFullscreen) {
             window = glfwCreateWindow(static_cast<int>(width), static_cast<int>(height), window_title.c_str(), nullptr, nullptr);
         }
         else {
@@ -89,22 +89,21 @@ namespace vulpes {
         InputHandler = std::make_unique<input_handler>(this);
     }
 
-    void Window::ResizeCallback(GLFWwindow* window, int width, int height) {
+void Window::ResizeCallback(GLFWwindow* window, int width, int height) {
 
-        ImGuiIO& io = ImGui::GetIO();
-        if(width == 0 || height == 0) {
-            LOG(WARNING) << "Resize callback called with zero width or height for window. Attempting to fall back on last stored value...";
-            width = static_cast<int>(io.DisplaySize.x);
-            height = static_cast<int>(io.DisplaySize.y);        
-        }
-        else {
-            io.DisplaySize = ImVec2(static_cast<float>(width), static_cast<float>(height));
-        }
-
-        BaseScene* scene = reinterpret_cast<BaseScene*>(glfwGetWindowUserPointer(window));
-        scene->RecreateSwapchain();
-
+    ImGuiIO& io = ImGui::GetIO();
+    if(width == 0 || height == 0) {
+        LOG(WARNING) << "Resize callback called with zero width or height for window. Attempting to fall back on last stored value...";
+        width = static_cast<int>(io.DisplaySize.x);
+        height = static_cast<int>(io.DisplaySize.y);        
     }
+    else {
+        io.DisplaySize = ImVec2(static_cast<float>(width), static_cast<float>(height));
+    }
+
+    Instance::VulpesState.NeedWindowResize = true;
+
+}
 
     void Window::SetWindowUserPointer(void* user_ptr) {
         glfwSetWindowUserPointer(window, user_ptr);

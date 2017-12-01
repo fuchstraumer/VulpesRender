@@ -2,7 +2,7 @@
 #include "resource/PipelineCache.hpp"
 #include "core/LogicalDevice.hpp"
 #include "core/PhysicalDevice.hpp"
-#include "BaseScene.hpp"
+
 
 #ifdef USE_EXPERIMENTAL_FILESYSTEM
 #include <experimental/filesystem>
@@ -33,7 +33,6 @@ namespace vulpes {
         VkResult result = vkCreatePipelineCache(parent->vkHandle(), &createInfo, nullptr, &handle);
         VkAssert(result);
 
-        BaseScene::PipelineCacheCreated(hash_id);
     }
 
     PipelineCache::~PipelineCache() {

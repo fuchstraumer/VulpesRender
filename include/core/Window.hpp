@@ -4,6 +4,7 @@
 #include "vpr_stdafx.h"
 #include "InputHandler.hpp"
 #include "ForwardDecl.hpp"
+
 namespace vulpes {
 
 #if defined(_WIN32) || defined(__linux__) 
@@ -42,7 +43,7 @@ typedef void* vulpes_window_t;
         *    \todo This method really needs to be generalized, or somehow overridable so that it doesn't call the BaseScene class in case this class is not being used.
         */
         static void ResizeCallback(GLFWwindow* window, int width, int height);
-        
+
         std::unique_ptr<input_handler> InputHandler;
     private:
 
