@@ -83,14 +83,13 @@ FILE(GLOB RENDER "src/render/*.cpp" "include/render/*.hpp" "include/render/*.inl
 FILE(GLOB GUI "src/gui/*.cpp" "include/gui/*.hpp")
 FILE(GLOB GUI_ADDONS "src/gui/addons/*.cpp" "include/gui/addons/*.h")
 FILE(GLOB IMGUI "imgui/imgui.cpp" "imgui/imgui.h" "imgui/imgui_draw.cpp" "imgui/imgui_internal.h" "imgui/imgui_demo.cpp")
-FILE(GLOB OBJECTS "src/objects/*.cpp" "include/objects/*.hpp")
 FILE(GLOB SCENES "scenes/*.cpp")
 FILE(GLOB_RECURSE SHADERS 
     "scenes/scene_resources/shaders/*.vert" "scenes/scene_resources/shaders/*.frag" "scenes/scene_resources/shaders/*.spv" 
     "rsrc/shaders/*.vert" "rsrc/shaders/*.frag" "rsrc/shaders/*.spv"
     )
 
-FILE(GLOB PROJECT_SOURCES "src/util/*.cpp" "src/command/*.cpp" "src/core/*.cpp" "src/render/*.cpp" "src/resource/*.cpp" "src/gui/*.cpp" "src/objects/*.cpp" "src/BaseScene.cpp")
+FILE(GLOB PROJECT_SOURCES "src/util/*.cpp" "src/command/*.cpp" "src/core/*.cpp" "src/render/*.cpp" "src/resource/*.cpp" "src/gui/*.cpp")
 ADD_PRECOMPILED_HEADER("vpr_stdafx.h" "src/vpr_stdafx.cpp" ${PROJECT_SOURCES})
 
 SOURCE_GROUP("util" FILES ${UTIL})
@@ -102,7 +101,6 @@ SOURCE_GROUP("render" FILES ${RENDER})
 SOURCE_GROUP("gui" FILES ${GUI})
 SOURCE_GROUP("imgui addons" FILES ${GUI_ADDONS})
 SOURCE_GROUP("imgui" FILES ${IMGUI})
-SOURCE_GROUP("objects" FILES ${OBJECTS})
 SOURCE_GROUP("shaders" FILES ${SHADERS})
 
 # enable multi-threaded compile for release builds, when its available. Enable minimal rebuild for debug
@@ -115,8 +113,7 @@ IF(MSVC)
 ENDIF()
 
 ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" 
-                                "include/BaseScene.hpp" "src/BaseScene.cpp" "include/BaseSceneConfig.hpp" 
-                                ${OBJECTS} ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} 
+                                ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} 
                                 ${CORE} ${RESOURCES} ${RENDER} ${GUI} ${SHADERS}
                                 )
 
@@ -177,6 +174,6 @@ INSTALL(DIRECTORY "include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/VulpesRend
 INSTALL(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ext/include/GLFW" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/GLFW")
 INSTALL(TARGETS VulpesRender LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib")
 
-INSTALL(FILES "include/vpr_stdafx.h" "include/BaseScene.hpp" "include/ForwardDecl.hpp" "include/BaseSceneConfig.hpp" 
+INSTALL(FILES "include/vpr_stdafx.h" "include/ForwardDecl.hpp" 
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/VulpesRender")
 
