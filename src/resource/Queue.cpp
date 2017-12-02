@@ -1,7 +1,7 @@
 #include "vpr_stdafx.h"
 #include "resource/Queue.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     Queue::Queue(const VkQueue& _handle, const Device* dvc) : handle(_handle), parent(dvc) {
         queueMutex.lock();

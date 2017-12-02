@@ -1,11 +1,11 @@
 #pragma once
 #ifndef VULPES_VK_MULTISAMPLING_H
 #define VULPES_VK_MULTISAMPLING_H
-
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.hpp"
-#include "../resource/Image.hpp"
-namespace vulpes {
+#include "ForwardDecl.hpp"
+#include "resource/Image.hpp"
+
+namespace vpr {
 
     /** MSAA in Vulkan requires manually creating, binding, and managing the images that will be multisampled from, along with 
     *   making sure to update them on swapchain recreation, setting the correct resolve images in the renderpass, and attaching

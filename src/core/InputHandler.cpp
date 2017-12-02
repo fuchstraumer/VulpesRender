@@ -4,7 +4,7 @@
 #include "core/Instance.hpp"
 #include <imgui.h>
 
-namespace vulpes {
+namespace vpr {
 
     std::array<bool, 1024> input_handler::Keys = std::array<bool, 1024>();
     std::array<bool, 3> input_handler::MouseButtons = std::array<bool, 3>();

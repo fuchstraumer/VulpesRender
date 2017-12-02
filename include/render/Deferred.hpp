@@ -3,10 +3,10 @@
 #define VULPES_VK_DEFERRED_H
 
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.h"
+#include "ForwardDecl.h"
 #include "OffscreenFramebuffers.h"
 
-namespace vulpes {
+namespace vpr {
 
     class DeferredPass {
         DeferredPass(const DeferredPass&) = delete;

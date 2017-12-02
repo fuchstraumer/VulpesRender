@@ -3,17 +3,17 @@
 #define VULPES_VK_TEXTURE_H
 
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.hpp"
-#include "../resource/Allocator.hpp"
-#include "../resource/Buffer.hpp"
-#include "../core/LogicalDevice.hpp"
-#include "../render/Multisampling.hpp"
+#include "ForwardDecl.hpp"
+#include "resource/Allocator.hpp"
+#include "resource/Buffer.hpp"
+#include "core/LogicalDevice.hpp"
+#include "render/Multisampling.hpp"
 #include "Image.hpp"
 
 #include "gli/gli.hpp"
 #include "stb/stb_image.h"
 
-namespace vulpes {
+namespace vpr {
 
     enum class textureError {
         INVALID_FILENAME = 1,

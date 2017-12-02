@@ -2,7 +2,8 @@
 #include "resource/DescriptorSet.hpp"
 #include "core/LogicalDevice.hpp"
 #include "resource/DescriptorPool.hpp"
-namespace vulpes {
+
+namespace vpr {
 
     DescriptorSet::DescriptorSet(const Device * parent) : device(parent) { }
 

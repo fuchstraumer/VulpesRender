@@ -4,7 +4,7 @@
 #include "core/Instance.hpp"
 
 
-namespace vulpes {
+namespace vpr {
 
     Window::Window(const Instance* instance, const uint32_t& _width, const uint32_t& _height) : parent(instance), width(_width), height(_height) {
 

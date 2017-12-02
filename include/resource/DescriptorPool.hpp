@@ -1,11 +1,10 @@
 #pragma once
 #ifndef VULPES_VK_DESCRIPTOR_POOL_H
 #define VULPES_VK_DESCRIPTOR_POOL_H
-
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     /** RAII wrapper around a VkDescriptorPool intended to facilitate sharing of descriptor pools between disparate objects,
     *   thus increasing resource sharing and avoiding allocating single-use descriptor pools (as this is an expensive operation).

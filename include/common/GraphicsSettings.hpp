@@ -3,7 +3,7 @@
 #define VULPESRENDER_GRAPHICS_SETTINGS_HPP
 #include <vulkan/vulkan.h>
 
-namespace vulpes {
+namespace vpr {
 
     struct vulpes_graphics_options_t {
 

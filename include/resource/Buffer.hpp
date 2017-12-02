@@ -2,9 +2,10 @@
 #ifndef VULPES_VK_BUFFER_H
 #define VULPES_VK_BUFFER_H
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.hpp"
-#include "../resource/Allocator.hpp"
-namespace vulpes {
+#include "ForwardDecl.hpp"
+#include "resource/Allocator.hpp"
+
+namespace vpr {
 
     /** The resources group/module encompasses objects that especially require Vulkan/GPU resource allocation, lifetime management, and objects
     *   that most benefit from C++ abstraction to remove boilerplate code. It also relates most to the allocator module: this was separated, however,

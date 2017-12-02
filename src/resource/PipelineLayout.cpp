@@ -2,7 +2,7 @@
 #include "resource/PipelineLayout.hpp"
 #include "core/LogicalDevice.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     PipelineLayout::PipelineLayout(const Device * _device) : device(_device), handle(VK_NULL_HANDLE) { }
 

@@ -3,7 +3,7 @@
 #include "core/Instance.hpp"
 #include "core/LogicalDevice.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     CommandPool::CommandPool(const Device * _parent, const VkCommandPoolCreateInfo & create_info, bool _primary) : parent(_parent), createInfo(create_info), primary(_primary) {
         handle = VK_NULL_HANDLE;

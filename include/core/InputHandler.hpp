@@ -4,7 +4,7 @@
 
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
-namespace vulpes {
+namespace vpr {
 
     class Window;
     /**  The input_handler class "contains" the static callback functions that glfw updates during each frame. It also (truly) contains

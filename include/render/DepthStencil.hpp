@@ -2,9 +2,9 @@
 #ifndef VULPES_VK_DEPTH_STENCIL_H
 #define VULPES_VK_DEPTH_STENCIL_H
 #include "vpr_stdafx.h"
-#include "../resource/Image.hpp"
+#include "resource/Image.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     /** The DepthStencil class is exactly what it says on the tin: it creates the depth-stencil image, 
     *   finding the appropriate format for the current system, and then transitions the layout into a

@@ -2,13 +2,11 @@
 #include "resource/PipelineCache.hpp"
 #include "core/LogicalDevice.hpp"
 #include "core/PhysicalDevice.hpp"
-
-
 #ifdef USE_EXPERIMENTAL_FILESYSTEM
 #include <experimental/filesystem>
 #endif
 
-namespace vulpes {
+namespace vpr {
 
     PipelineCache::PipelineCache(const Device* _parent, const uint16_t& hash_id) : parent(_parent), 
         createInfo(VkPipelineCacheCreateInfo{ VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO, nullptr, 0, 0, nullptr }), hashID(hash_id) {

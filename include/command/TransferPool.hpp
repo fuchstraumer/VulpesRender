@@ -6,7 +6,7 @@
 #include "../ForwardDecl.hpp"
 #include "CommandPool.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     /** Transfer pool is just a specialized command pool 
     *   with certain flags pre-set, along with a fence protecting

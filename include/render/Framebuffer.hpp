@@ -3,12 +3,12 @@
 #define VULPES_VK_FRAMEBUFFER_H
 
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.hpp"
-#include "../resource/Image.hpp"
-#include "../core/LogicalDevice.hpp"
+#include "ForwardDecl.hpp"
+#include "resource/Image.hpp"
+#include "core/LogicalDevice.hpp"
 
 
-namespace vulpes {
+namespace vpr {
     /** The Framebuffer class merely handles constructing an appropriate framebuffer for the current rendering context. It is
     *   a relatively thin wrapper around a VkFramebuffer object, mostly just for the sake of RAII. Most important information on
     *   how to setup this class is provided by the VkFramebufferCreateInfo struct in the constructor.

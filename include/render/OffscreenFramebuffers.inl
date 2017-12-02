@@ -1,6 +1,6 @@
 #include "OffscreenFramebuffers.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     template<typename offscreen_framebuffer_type>
     inline OffscreenFramebuffers<offscreen_framebuffer_type>::OffscreenFramebuffers(const Device * _device, const Swapchain* _swapchain) : framebufferCreateInfo(vk_framebuffer_create_info_base), device(_device), swapchain(_swapchain) {

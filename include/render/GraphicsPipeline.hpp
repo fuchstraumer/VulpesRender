@@ -3,9 +3,9 @@
 #define VULPES_VK_GRAPHICS_PIPELINE_H
 
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.hpp"
+#include "ForwardDecl.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     /** The rendering group is used for objects that are directly related to how things appear on screen, including those classes
     *   that are minimum requirements for making things display like Framebuffer, Swapchain, Renderpass, and DepthStencil. Other classes

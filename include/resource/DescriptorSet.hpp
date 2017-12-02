@@ -1,11 +1,10 @@
 #pragma once
 #ifndef VULPES_VK_DESCRIPTOR_SET_H
 #define VULPES_VK_DESCRIPTOR_SET_H
-
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     /** RAII wrapper around a descriptor set, simplifying adding individual descriptor bindings for whatever stage they're required at.
     *   \ingroup Resources

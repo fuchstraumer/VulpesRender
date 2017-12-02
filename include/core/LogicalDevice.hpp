@@ -1,11 +1,11 @@
 #pragma once
 #ifndef VULPES_VK_LOGICAL_DEVICE_H
 #define VULPES_VK_LOGICAL_DEVICE_H
-
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.hpp"
-#include "../resource/Allocator.hpp"
-namespace vulpes {
+#include "ForwardDecl.hpp"
+#include "resource/Allocator.hpp"
+
+namespace vpr {
 
     struct vkQueueFamilyIndices {
         // indices into queue families.

@@ -3,9 +3,9 @@
 #define VULPES_VK_RENDER_PASS_H
 
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.hpp"
+#include "ForwardDecl.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     /** RAII wrapper around a Vulkan object, with a few utility methods to avoid redundancy and clutter in command-recording methods
     *   for various scenes. 

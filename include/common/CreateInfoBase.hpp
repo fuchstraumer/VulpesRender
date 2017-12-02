@@ -12,7 +12,7 @@
 
 */
 
-namespace vulpes {
+namespace vpr {
 
 	// base application info struct
 	constexpr VkApplicationInfo vk_base_application_info{

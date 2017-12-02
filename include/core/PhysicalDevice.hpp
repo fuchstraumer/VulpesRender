@@ -2,7 +2,8 @@
 #ifndef VULPES_VK_PHYSICAL_DEVICE_H
 #define VULPES_VK_PHYSICAL_DEVICE_H
 #include "vpr_stdafx.h"
-namespace vulpes {
+
+namespace vpr {
 
     /**! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle representing a Vulkan-compatible
     *    hardware device in a user's system. This class stores the relevant VkPhysicalDeviceProperties, VkPhysicalDeviceFeatures, and 

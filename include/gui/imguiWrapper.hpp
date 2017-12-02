@@ -10,7 +10,7 @@
 #include "../resource/PipelineCache.hpp"
 #include "../resource/ShaderModule.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     struct imguiSettings {
         bool displayMeshes = true;

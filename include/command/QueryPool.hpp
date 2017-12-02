@@ -6,7 +6,7 @@
 #include "ForwardDecl.hpp"
 #include "core/LogicalDevice.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     using occlusion_query_t = std::integral_constant<VkQueryType, VK_QUERY_TYPE_OCCLUSION>;
     using pipeline_stats_query_t = std::integral_constant<VkQueryType, VK_QUERY_TYPE_PIPELINE_STATISTICS>;

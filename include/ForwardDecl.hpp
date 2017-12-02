@@ -1,7 +1,7 @@
 #pragma once
 #ifndef VULPES_VK_FORWARD_DECL_H
 #define VULPES_VK_FORWARD_DECL_H
-namespace vulpes {
+namespace vpr {
     class Allocator;
     class MemoryBlock;
     struct Suballocation;

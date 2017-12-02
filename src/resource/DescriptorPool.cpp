@@ -3,7 +3,7 @@
 #include "core/LogicalDevice.hpp"
 #include "resource/DescriptorSet.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     constexpr static std::array<VkDescriptorType, 11> descriptor_types{
         VK_DESCRIPTOR_TYPE_SAMPLER,

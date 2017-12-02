@@ -2,9 +2,9 @@
 #ifndef VULPES_VK_COMMAND_POOL_H
 #define VULPES_VK_COMMAND_POOL_H
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.hpp"
+#include "ForwardDecl.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     /** The Command group encompasses classes related to recording commands, submitting commands, and allocating/freeing/resetting VkCommandBuffer objects.
     *   \defgroup Command

@@ -10,7 +10,7 @@
 	Debug callback stuff.
 
 */
-namespace vulpes {
+namespace vpr {
 	
 
 	constexpr const char* standard_validation_layer = "VK_LAYER_LUNARG_standard_validation";

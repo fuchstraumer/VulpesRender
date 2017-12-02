@@ -3,7 +3,7 @@
 #include "core/LogicalDevice.hpp"
 #include "command/CommandPool.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     std::vector<std::pair<VkBuffer, Allocation>> Buffer::stagingBuffers = std::vector<std::pair<VkBuffer, Allocation>>();
 

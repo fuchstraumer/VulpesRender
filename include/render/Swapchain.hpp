@@ -2,9 +2,9 @@
 #ifndef VULPES_VK_SWAPCHAIN_H
 #define VULPES_VK_SWAPCHAIN_H
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.hpp"
+#include "ForwardDecl.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     /** SwapchainInfo takes care of hiding away much of the setup work required to create a swapchain. However, it does contain some data
     *   that may be useful, like the presentation mode being used or the color format of the surface object being used.

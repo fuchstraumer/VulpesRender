@@ -3,8 +3,7 @@
 #include "core/LogicalDevice.hpp"
 #include "command/CommandPool.hpp"
 
-
-namespace vulpes {
+namespace vpr {
 
     Image::Image(const Device * _parent) : parent(_parent) {}
 

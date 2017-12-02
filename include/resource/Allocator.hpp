@@ -1,19 +1,11 @@
 #pragma once
 #ifndef VULPES_VK_ALLOCATOR_H
 #define VULPES_VK_ALLOCATOR_H
-
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.hpp"
+#include "ForwardDecl.hpp"
 #include <list>
 
-/*
-    
-    TODO:
-
-
-*/
-
-namespace vulpes {
+namespace vpr {
 
     /** The allocator module encompasses everything required for the operation/use of this project's rather
      *  complex GPU memory management subsystem. In Vulkan, allocating VkDeviceMemory objects for every single 

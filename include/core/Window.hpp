@@ -5,7 +5,7 @@
 #include "InputHandler.hpp"
 #include "ForwardDecl.hpp"
 
-namespace vulpes {
+namespace vpr {
 
 #if defined(_WIN32) || defined(__linux__) 
 typedef GLFWwindow vulpes_window_t;

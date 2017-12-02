@@ -5,7 +5,7 @@
 #include "vpr_stdafx.h"
 #include "../ForwardDecl.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     /** A PipelineCache is a wrapper around a VkPipelineCache that takes care of several important details that are otherwise
     *   difficult to handle: saving and loading pipeline cache data from a file, verifying integrity of pipeline cache files,

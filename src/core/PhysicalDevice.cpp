@@ -1,7 +1,7 @@
 #include "vpr_stdafx.h"
 #include "core/PhysicalDevice.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     PhysicalDevice::PhysicalDevice(const VkInstance& instance_handle) {
 

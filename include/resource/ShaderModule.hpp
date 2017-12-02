@@ -2,9 +2,9 @@
 #ifndef VULPES_VK_SHADER_MODULE_H
 #define VULPES_VK_SHADER_MODULE_H
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.hpp"
+#include "ForwardDecl.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     /** A thoroughly thin wrapper around a VkShaderModule object, whose primary utility beyond RAII resource management is
     *   setting up the VkPipelineShaderStageCreateInfo required when creating/setting up an objects graphics pipeline.

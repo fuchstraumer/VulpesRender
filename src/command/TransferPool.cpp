@@ -2,7 +2,7 @@
 #include "command/TransferPool.hpp"
 #include "core/LogicalDevice.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     TransferPool::TransferPool(const Device * _parent) : CommandPool(_parent, true) {
         

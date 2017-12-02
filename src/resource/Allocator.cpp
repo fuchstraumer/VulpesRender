@@ -4,7 +4,7 @@
 #include "core/LogicalDevice.hpp"
 #include "core/PhysicalDevice.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     VkBool32 AllocationRequirements::noNewAllocations = false;
 

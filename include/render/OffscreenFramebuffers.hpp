@@ -7,7 +7,7 @@
 #include "Swapchain.hpp"
 #include "Renderpass.hpp"
 
-namespace vulpes {
+namespace vpr {
     
     using hdr_framebuffer_t = std::integral_constant<int, 0>;
     using bloom_framebuffer_t = std::integral_constant<int, 1>;

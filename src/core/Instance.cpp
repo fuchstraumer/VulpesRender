@@ -5,7 +5,7 @@
 
 #include <imgui.h>
 
-namespace vulpes {
+namespace vpr {
 
     vulpes_graphics_options_t Instance::GraphicsSettings = vulpes_graphics_options_t();
     vulpes_state_t Instance::VulpesState = vulpes_state_t();

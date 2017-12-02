@@ -5,7 +5,7 @@
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 
-namespace vulpes {
+namespace vpr {
     
     class Queue {
     public:

@@ -4,7 +4,7 @@
 #include "core/Instance.hpp"
 #include "resource/ShaderModule.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     static std::array<bool, 3> mouse_pressed{ false, false, false };
 

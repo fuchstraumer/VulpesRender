@@ -3,7 +3,7 @@
 #include "core/PhysicalDevice.hpp"
 #include "core/Instance.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     Device::Device(const Instance* instance, const PhysicalDevice * device) : parent(device), parentInstance(instance) {
 

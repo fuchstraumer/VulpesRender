@@ -7,7 +7,7 @@
 #include "Window.hpp"
 #include "common/GraphicsSettings.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     /** The Core group handles the base Vulkan resources and objects: LogicalDevice, PhysicalDevice, Instance, and Window. It also 
     *   includes the InputHandler class, which is responsible for handling input events and updats from the Window class.
