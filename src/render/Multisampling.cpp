@@ -3,9 +3,9 @@
 #include "core/LogicalDevice.hpp"
 #include "render/Swapchain.hpp"
 
-VkSampleCountFlagBits vulpes::Multisampling::SampleCount = VK_SAMPLE_COUNT_8_BIT;
+VkSampleCountFlagBits vpr::Multisampling::SampleCount = VK_SAMPLE_COUNT_8_BIT;
 
-vulpes::Multisampling::Multisampling(const Device * dvc, const Swapchain * swapchain, const VkSampleCountFlagBits & sample_count, const uint32_t & width, const uint32_t & height) : device(dvc), sampleCount(sample_count) {
+vpr::Multisampling::Multisampling(const Device * dvc, const Swapchain * swapchain, const VkSampleCountFlagBits & sample_count, const uint32_t & width, const uint32_t & height) : device(dvc), sampleCount(sample_count) {
 
     /*
         Setup attachments to render into
@@ -49,7 +49,7 @@ vulpes::Multisampling::Multisampling(const Device * dvc, const Swapchain * swapc
 
 }
 
-vulpes::Multisampling::~Multisampling() {
+vpr::Multisampling::~Multisampling() {
     ColorBufferMS.reset();
     DepthBufferMS.reset();
 }

@@ -2,7 +2,7 @@
 #include "render/DepthStencil.hpp"
 #include "core/LogicalDevice.hpp"
 
-namespace vulpes {
+namespace vpr {
 
     DepthStencil::DepthStencil(const Device * _parent, const VkExtent3D& extents, CommandPool* cmd, VkQueue & queue) : Image(_parent) {
         format = parent->FindDepthFormat();

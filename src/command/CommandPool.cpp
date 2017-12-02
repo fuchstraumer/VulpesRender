@@ -99,7 +99,7 @@ namespace vpr {
         return std::vector<VkCommandBuffer>(cmdBuffers.begin() + offset, cmdBuffers.begin() + offset + num);
     }
 
-    VkCommandBuffer & vulpes::CommandPool::operator[](const size_t & idx) {
+    VkCommandBuffer & CommandPool::operator[](const size_t & idx) {
         return cmdBuffers[idx];
     }
 

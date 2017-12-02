@@ -1,7 +1,8 @@
 #include "vpr_stdafx.h"
 #include "render/Framebuffer.hpp"
 #include "core/LogicalDevice.hpp"
-namespace vulpes {
+
+namespace vpr {
 
     Framebuffer::~Framebuffer() {
         Destroy();

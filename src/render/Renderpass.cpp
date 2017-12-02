@@ -1,7 +1,9 @@
 #include "vpr_stdafx.h"
 #include "render/Renderpass.hpp"
 #include "core/LogicalDevice.hpp"
-namespace vulpes {
+
+namespace vpr {
+
     Renderpass::Renderpass(const Device* dvc, const VkRenderPassCreateInfo & create_info) : parent(dvc), createInfo(create_info), beginInfo(vk_renderpass_begin_info_base) {
         VkResult result = vkCreateRenderPass(dvc->vkHandle(), &create_info, allocators, &handle);
         VkAssert(result);
