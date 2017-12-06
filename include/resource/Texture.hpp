@@ -1,15 +1,12 @@
 #pragma once
 #ifndef VULPES_VK_TEXTURE_H
 #define VULPES_VK_TEXTURE_H
-
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 #include "resource/Allocator.hpp"
 #include "resource/Buffer.hpp"
 #include "core/LogicalDevice.hpp"
-#include "render/Multisampling.hpp"
 #include "Image.hpp"
-
 #include "gli/gli.hpp"
 #include "stb/stb_image.h"
 
@@ -465,7 +462,6 @@ namespace vpr {
             format = VK_FORMAT_R8G8B8A8_UNORM;
         }
         else {
-            LOG(ERROR) << "Couldn't interpet format of image data imported by STB.";
             throw std::runtime_error("Invalid or incorrect image format.");
         }
 
