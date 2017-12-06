@@ -85,6 +85,7 @@ FILE(GLOB_RECURSE SHADERS
     "scenes/scene_resources/shaders/*.vert" "scenes/scene_resources/shaders/*.frag" "scenes/scene_resources/shaders/*.spv" 
     "rsrc/shaders/*.vert" "rsrc/shaders/*.frag" "rsrc/shaders/*.spv"
     )
+FILE(GLOB IMGUI "${CMAKE_CURRENT_SOURCE_DIR}/imgui/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/imgui/*.cpp")
 
 FILE(GLOB PROJECT_SOURCES "src/util/*.cpp" "src/command/*.cpp" "src/core/*.cpp" "src/render/*.cpp" "src/resource/*.cpp")
 ADD_PRECOMPILED_HEADER("vpr_stdafx.h" "src/vpr_stdafx.cpp" ${PROJECT_SOURCES})
@@ -96,6 +97,7 @@ SOURCE_GROUP("core" FILES ${CORE})
 SOURCE_GROUP("resource" FILES ${RESOURCES})
 SOURCE_GROUP("render" FILES ${RENDER})
 SOURCE_GROUP("shaders" FILES ${SHADERS})
+SOURCE_GROUP("imgui" FILES ${IMGUI})
 
 # enable multi-threaded compile for release builds, when its available. Enable minimal rebuild for debug
 # as it's seemingly disabled by default, for some reason.
@@ -107,7 +109,7 @@ IF(MSVC)
 ENDIF()
 
 ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" 
-                                ${UTIL} ${COMMON} ${COMMAND_FILES} 
+                                ${UTIL} ${COMMON} ${COMMAND_FILES} ${IMGUI}
                                 ${CORE} ${RESOURCES} ${RENDER} ${SHADERS}
                                 )
 
