@@ -1,8 +1,8 @@
 #include "vpr_stdafx.h"
 #include "core/Window.hpp"
-#include <imgui.h>
 #include "core/Instance.hpp"
-
+#include "util/easylogging++.h"
+#include <imgui.h>
 
 namespace vpr {
 

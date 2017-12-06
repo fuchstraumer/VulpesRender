@@ -2,6 +2,7 @@
 #include "resource/PipelineCache.hpp"
 #include "core/LogicalDevice.hpp"
 #include "core/PhysicalDevice.hpp"
+#include "util/easylogging++.h"
 #ifdef USE_EXPERIMENTAL_FILESYSTEM
 #include <experimental/filesystem>
 #endif

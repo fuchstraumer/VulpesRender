@@ -2,6 +2,7 @@
 #include "core/LogicalDevice.hpp"
 #include "core/PhysicalDevice.hpp"
 #include "core/Instance.hpp"
+#include "util/easylogging++.h"
 
 namespace vpr {
 

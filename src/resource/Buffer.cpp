@@ -2,6 +2,7 @@
 #include "resource/Buffer.hpp"
 #include "core/LogicalDevice.hpp"
 #include "command/CommandPool.hpp"
+#include "util/easylogging++.h"
 
 namespace vpr {
 
@@ -13,7 +14,8 @@ namespace vpr {
         Destroy();
     }
 
-    Buffer::Buffer(Buffer && other) noexcept : allocators(std::move(other.allocators)), size(std::move(other.size)), createInfo(std::move(other.createInfo)), handle(std::move(other.handle)), memoryAllocation(std::move(other.memoryAllocation)), parent(std::move(other.parent)), MappedMemory(std::move(other.MappedMemory)), view(std::move(other.view)) {
+    Buffer::Buffer(Buffer && other) noexcept : allocators(std::move(other.allocators)), size(std::move(other.size)), createInfo(std::move(other.createInfo)), 
+        handle(std::move(other.handle)), memoryAllocation(std::move(other.memoryAllocation)), parent(std::move(other.parent)), MappedMemory(std::move(other.MappedMemory)) {
         // Make sure to nullify so destructor checks safer/more likely to succeed.
         other.handle = VK_NULL_HANDLE;
         other.MappedMemory = nullptr;
@@ -27,7 +29,6 @@ namespace vpr {
         memoryAllocation = std::move(other.memoryAllocation);
         parent = std::move(other.parent);
         MappedMemory = std::move(other.MappedMemory);
-        view = std::move(other.view);
         other.handle = VK_NULL_HANDLE;
         other.MappedMemory = nullptr;
         return *this;

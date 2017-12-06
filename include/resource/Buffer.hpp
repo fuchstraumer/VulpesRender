@@ -24,7 +24,6 @@ namespace vpr {
     public:
 
         Buffer(const Device* parent);
-
         ~Buffer();
 
         Buffer(Buffer&& other) noexcept;
@@ -94,10 +93,10 @@ namespace vpr {
         const VkAllocationCallbacks* allocators = nullptr;
         VkBuffer handle;
         VkBufferCreateInfo createInfo;
-        VkBufferView view;
         Allocation memoryAllocation;
         VkDeviceSize size;
         VkDeviceSize dataSize;
+
     };
     
 }

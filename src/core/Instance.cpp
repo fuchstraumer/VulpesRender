@@ -1,8 +1,7 @@
 #include "vpr_stdafx.h"
 #include "core/Instance.hpp"
 #include "core/PhysicalDevice.hpp"
-#include "common/VkDebug.hpp"
-
+#include "util/easylogging++.h"
 #include <imgui.h>
 
 namespace vpr {
@@ -26,13 +25,8 @@ namespace vpr {
         }
         createInfo.enabledExtensionCount = static_cast<uint32_t>(window->Extensions().size());
 
-        if (validationEnabled) {
-            std::vector<const char*> layers(1);
-            layers[0] = "VK_LAYER_LUNARG_standard_validation";
-            createInfo.ppEnabledLayerNames = layers.data();
-            createInfo.enabledLayerCount = 1;
-        }
-        else {
+        // Note: this will be fixed in a future version.
+        {
             createInfo.ppEnabledLayerNames = nullptr;
             createInfo.enabledLayerCount = 0;
         }
@@ -77,28 +71,15 @@ namespace vpr {
         return window.get();
     }
 
-
-
-    Window * Instance::GetWindow() noexcept {
+    Window* Instance::GetWindow() noexcept {
         return window.get();
     }
 
     void Instance::createDebugCallbacks() noexcept {
-
-        LOG(INFO) << "Validation layers enabled, creating debug callbacks.";
-        CreateDebugCallback(vkHandle(), VK_DEBUG_REPORT_WARNING_BIT_EXT, &warningCallback, nullptr);
-        CreateDebugCallback(vkHandle(), VK_DEBUG_REPORT_ERROR_BIT_EXT, &errorCallback, nullptr);
-        CreateDebugCallback(vkHandle(), VK_DEBUG_REPORT_INFORMATION_BIT_EXT, &infoCallback, nullptr);
-        CreateDebugCallback(vkHandle(), VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT, &perfCallback, nullptr);
-
+        LOG(WARNING) << "Validation layers enabled, but aren't currently supported. Use the relevant environment variables if you still wish to use them.";
     }
 
     void Instance::destroyDebugCallbacks() noexcept {
-
-        DestroyDebugCallback(handle, errorCallback, nullptr);
-        DestroyDebugCallback(handle, warningCallback, nullptr);
-        DestroyDebugCallback(handle, infoCallback, nullptr);
-        DestroyDebugCallback(handle, perfCallback, nullptr);
 
     }
 
@@ -108,10 +89,5 @@ namespace vpr {
         LOG(INFO) << "Created a GLFW window object.";
 
     }
-
-
-
-
-
 
 }

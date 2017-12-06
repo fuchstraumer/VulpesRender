@@ -1,7 +1,6 @@
 #pragma once
 #ifndef VULPESRENDER_QUEUE_HPP
 #define VULPESRENDER_QUEUE_HPP
-
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 

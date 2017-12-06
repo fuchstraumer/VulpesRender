@@ -1,9 +1,9 @@
 #pragma once
 #ifndef VULPES_VK_INPUT_HANDLER_HPP
 #define VULPES_VK_INPUT_HANDLER_HPP
-
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
+
 namespace vpr {
 
     class Window;

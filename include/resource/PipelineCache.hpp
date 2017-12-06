@@ -1,9 +1,8 @@
 #pragma once
 #ifndef VULPES_VK_PIPELINE_CACHE_H
 #define VULPES_VK_PIPELINE_CACHE_H
-
 #include "vpr_stdafx.h"
-#include "../ForwardDecl.hpp"
+#include "ForwardDecl.hpp"
 
 namespace vpr {
 
