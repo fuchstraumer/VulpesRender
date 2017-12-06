@@ -28,9 +28,6 @@ namespace vpr {
     class PipelineLayout;
     class Camera;
     class ArcballCamera;
-    namespace util {
-        class TransferTaskPool;
-        class TaskPool;
-    }
+    class DepthStencil;
 }
 #endif // !VULPES_VK_FORWARD_DECL_H
