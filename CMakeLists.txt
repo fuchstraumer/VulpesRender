@@ -80,16 +80,13 @@ FILE(GLOB COMMAND_FILES "src/command/*.cpp" "include/command/*.hpp")
 FILE(GLOB CORE "src/core/*.cpp" "include/core/*.hpp")
 FILE(GLOB RESOURCES "src/resource/*.cpp" "include/resource/*.hpp")
 FILE(GLOB RENDER "src/render/*.cpp" "include/render/*.hpp" "include/render/*.inl")
-FILE(GLOB GUI "src/gui/*.cpp" "include/gui/*.hpp")
-FILE(GLOB GUI_ADDONS "src/gui/addons/*.cpp" "include/gui/addons/*.h")
-FILE(GLOB IMGUI "imgui/imgui.cpp" "imgui/imgui.h" "imgui/imgui_draw.cpp" "imgui/imgui_internal.h" "imgui/imgui_demo.cpp")
 FILE(GLOB SCENES "scenes/*.cpp")
 FILE(GLOB_RECURSE SHADERS 
     "scenes/scene_resources/shaders/*.vert" "scenes/scene_resources/shaders/*.frag" "scenes/scene_resources/shaders/*.spv" 
     "rsrc/shaders/*.vert" "rsrc/shaders/*.frag" "rsrc/shaders/*.spv"
     )
 
-FILE(GLOB PROJECT_SOURCES "src/util/*.cpp" "src/command/*.cpp" "src/core/*.cpp" "src/render/*.cpp" "src/resource/*.cpp" "src/gui/*.cpp")
+FILE(GLOB PROJECT_SOURCES "src/util/*.cpp" "src/command/*.cpp" "src/core/*.cpp" "src/render/*.cpp" "src/resource/*.cpp")
 ADD_PRECOMPILED_HEADER("vpr_stdafx.h" "src/vpr_stdafx.cpp" ${PROJECT_SOURCES})
 
 SOURCE_GROUP("util" FILES ${UTIL})
@@ -98,9 +95,6 @@ SOURCE_GROUP("command" FILES ${COMMAND_FILES})
 SOURCE_GROUP("core" FILES ${CORE})
 SOURCE_GROUP("resource" FILES ${RESOURCES})
 SOURCE_GROUP("render" FILES ${RENDER})
-SOURCE_GROUP("gui" FILES ${GUI})
-SOURCE_GROUP("imgui addons" FILES ${GUI_ADDONS})
-SOURCE_GROUP("imgui" FILES ${IMGUI})
 SOURCE_GROUP("shaders" FILES ${SHADERS})
 
 # enable multi-threaded compile for release builds, when its available. Enable minimal rebuild for debug
@@ -113,8 +107,8 @@ IF(MSVC)
 ENDIF()
 
 ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" 
-                                ${IMGUI} ${GUI_ADDONS} ${UTIL} ${COMMON} ${COMMAND_FILES} 
-                                ${CORE} ${RESOURCES} ${RENDER} ${GUI} ${SHADERS}
+                                ${UTIL} ${COMMON} ${COMMAND_FILES} 
+                                ${CORE} ${RESOURCES} ${RENDER} ${SHADERS}
                                 )
 
 IF(APPLE)
