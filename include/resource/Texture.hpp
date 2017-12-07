@@ -113,13 +113,14 @@ namespace vpr {
 
         void TransferToDevice(VkCommandBuffer& transfer_cmd_buffer) const;
 
-        VkDescriptorImageInfo GetDescriptor() const noexcept;
+        const VkDescriptorImageInfo& GetDescriptor() const noexcept;
         const VkSampler& Sampler() const noexcept;
 
         uint32_t Width = 0, Height = 0, Depth = 0;
 
     private:
 
+        void setDescriptorInfo() const;
         // creates backing handle and gets memory for the texture proper
         void createTexture();
         void createView();
@@ -135,7 +136,8 @@ namespace vpr {
         Allocation stagingMemory;
 
         uint32_t mipLevels = 0, layerCount = 0;
-
+        mutable bool descriptorInfoSet = false;
+        mutable VkDescriptorImageInfo texDescriptor;
         std::vector<VkBufferImageCopy> copyInfo;
     };
 
@@ -206,8 +208,17 @@ namespace vpr {
     }
 
     template<typename texture_type>
-    inline VkDescriptorImageInfo Texture<texture_type>::GetDescriptor() const noexcept {
-        return VkDescriptorImageInfo{ sampler, view, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL };
+    inline void Texture<texture_type>::setDescriptorInfo() const {
+        texDescriptor = VkDescriptorImageInfo{ Sampler(), View(), VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL };
+        descriptorInfoSet = true;
+    }
+
+    template<typename texture_type>
+    inline const VkDescriptorImageInfo& Texture<texture_type>::GetDescriptor() const noexcept {
+        if(!descriptorInfoSet) {
+            setDescriptorInfo();
+        }
+        return texDescriptor;
     }
 
     template<typename texture_type>
