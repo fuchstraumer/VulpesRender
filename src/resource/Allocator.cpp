@@ -1124,7 +1124,7 @@ namespace vpr {
         if (Type == allocType::BLOCK_ALLOCATION) {
             return typeData.blockAllocation.ParentBlock->MemoryTypeIdx;
         }
-        else if (type == allocType::PRIVATE_ALLOCATION) {
+        else if (Type == allocType::PRIVATE_ALLOCATION) {
             return typeData.privateAllocation.MemoryTypeIdx;
         }
         else {
