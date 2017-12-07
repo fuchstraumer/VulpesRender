@@ -96,8 +96,12 @@ namespace vpr {
         return handle;
     }
     
-    std::vector<VkCommandBuffer> CommandPool::GetCommandBuffers(const size_t& num, const size_t& offset) {
+    std::vector<VkCommandBuffer> CommandPool::GetCommandBuffers(const size_t& num, const size_t& offset) const {
         return std::vector<VkCommandBuffer>(cmdBuffers.begin() + offset, cmdBuffers.begin() + offset + num);
+    }
+
+    const VkCommandBuffer* CommandPool::GetCommandBuffers(const size_t& num, const size_t& offset) const {
+        return &cmdBuffers[offset];
     }
 
     VkCommandBuffer & CommandPool::operator[](const size_t & idx) {

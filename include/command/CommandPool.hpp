@@ -63,7 +63,8 @@ namespace vpr {
         /** Gets a range of command buffers, starting at the given offset and extending "num" command buffers beyond it.
         *
         */
-        std::vector<VkCommandBuffer> GetCommandBuffers(const size_t& num, const size_t& offset);
+        std::vector<VkCommandBuffer> GetCommandBuffers(const size_t& num, const size_t& offset) const;
+        const VkCommandBuffer* GetCommandBuffers(const size_t& num, const size_t& offset) const;
 
         VkCommandBuffer StartSingleCmdBuffer();
         void EndSingleCmdBuffer(VkCommandBuffer& cmd_buffer, const VkQueue & queue);
