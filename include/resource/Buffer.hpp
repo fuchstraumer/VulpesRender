@@ -64,7 +64,7 @@ namespace vpr {
         const VkBuffer& vkHandle() const noexcept;
         VkBuffer& vkHandle() noexcept;
 
-        VkDescriptorBufferInfo GetDescriptor() const noexcept;
+        const VkDescriptorBufferInfo& GetDescriptor() const noexcept;
 
         VkDeviceSize Size() const noexcept;
 
@@ -96,6 +96,10 @@ namespace vpr {
         Allocation memoryAllocation;
         VkDeviceSize size;
         VkDeviceSize dataSize;
+
+        void setDescriptorInfo() const noexcept;
+        mutable bool descriptorInfoSet = false;
+        mutable VkDescriptorBufferInfo descriptor;
 
     };
     

@@ -144,8 +144,16 @@ namespace vpr {
         return handle;
     }
 
-    VkDescriptorBufferInfo Buffer::GetDescriptor() const noexcept{
-        return VkDescriptorBufferInfo{ handle, 0, dataSize };
+    void Buffer::setDescriptorInfo() const noexcept {
+        descriptor = VkDescriptorBufferInfo{ handle, 0, dataSize };
+        descriptorInfoSet = true;
+    }
+
+    const VkDescriptorBufferInfo& Buffer::GetDescriptor() const noexcept{
+        if (!descriptorInfoSet) {
+            setDescriptorInfo();
+        }
+        return descriptor;
     }
 
     VkDeviceSize Buffer::Size() const noexcept{
