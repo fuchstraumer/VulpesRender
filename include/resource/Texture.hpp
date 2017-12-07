@@ -112,6 +112,7 @@ namespace vpr {
         void CreateEmptyTexture(const VkFormat& texture_format, const uint32_t& width, const uint32_t& height);
 
         void TransferToDevice(VkCommandBuffer& transfer_cmd_buffer) const;
+        void CreateSampler(const VkSamplerCreateInfo& create_info);
 
         const VkDescriptorImageInfo& GetDescriptor() const noexcept;
         const VkSampler& Sampler() const noexcept;
@@ -286,6 +287,15 @@ namespace vpr {
     inline void Texture<texture_type>::createSampler() {
         VkSamplerCreateInfo sampler_create_info = vk_sampler_create_info_base;
         VkResult result = vkCreateSampler(parent->vkHandle(), &sampler_create_info, nullptr, &sampler);
+        VkAssert(result);
+    }
+
+    template<typename texture_type>
+    inline void Texture<texture_type>::CreateSampler(const VkSamplerCreateInfo& create_info) {
+        if(sampler != VK_NULL_HANDLE) {
+            vkDestroySampler(parent->vkHandle(), sampler, nullptr);
+        }
+        VkResult result = vkCreateSampler(parent->vkHandle(), &create_info, nullptr, &sampler);
         VkAssert(result);
     }
 
