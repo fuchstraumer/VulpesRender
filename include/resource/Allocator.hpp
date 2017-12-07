@@ -148,6 +148,7 @@ namespace vpr {
         enum class allocType {
             BLOCK_ALLOCATION,
             PRIVATE_ALLOCATION,
+            INVALID_TYPE,
         };
 
 
@@ -167,9 +168,9 @@ namespace vpr {
 
         const VkDeviceMemory& Memory() const;
         VkDeviceSize Offset() const noexcept;
-        uint32_t MemoryTypeIdx() const noexcept;
+        uint32_t MemoryTypeIdx() const;
 
-        allocType Type;
+        allocType Type = allocType::INVALID_TYPE;
         SuballocationType SuballocType;
         VkDeviceSize Size, Alignment;
 

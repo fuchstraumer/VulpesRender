@@ -1071,6 +1071,7 @@ namespace vpr {
     }
 
     void Allocation::InitPrivate(const uint32_t & type_idx, VkDeviceMemory & dvc_memory, const SuballocationType & suballoc_type, bool persistently_mapped, void * mapped_data, const VkDeviceSize & data_size) {
+        Type = allocType::PRIVATE_ALLOCATION;
         Size = data_size;
         SuballocType = suballoc_type;
         typeData.privateAllocation.DvcMemory = dvc_memory;
@@ -1083,9 +1084,12 @@ namespace vpr {
         if(Type == allocType::BLOCK_ALLOCATION) {
             typeData.blockAllocation.ParentBlock->Map(this, size_to_map, offset_to_map_at, address_to_map_to);
         }
-        else {
+        else if (Type == allocType::PRIVATE_ALLOCATION) {
             LOG(INFO) << "Attempted to map private allocation, setting given address_to_map_to to permanently mapped address.";
             address_to_map_to = typeData.privateAllocation.MappedData;
+        }
+        else {
+            throw std::runtime_error("Allocation object has invalid type!");
         }
     }
 
@@ -1099,8 +1103,11 @@ namespace vpr {
         if (Type == allocType::BLOCK_ALLOCATION) {
             return typeData.blockAllocation.ParentBlock->Memory();
         }
-        else {
+        else if (Type == allocType::PRIVATE_ALLOCATION) {
             return typeData.privateAllocation.DvcMemory;
+        }
+        else {
+            throw std::runtime_error("Allocation has invalid type!");
         }
     }
 
@@ -1113,12 +1120,15 @@ namespace vpr {
         }
     }
 
-    uint32_t Allocation::MemoryTypeIdx() const noexcept {
+    uint32_t Allocation::MemoryTypeIdx() const {
         if (Type == allocType::BLOCK_ALLOCATION) {
             return typeData.blockAllocation.ParentBlock->MemoryTypeIdx;
         }
-        else {
+        else if (type == allocType::PRIVATE_ALLOCATION) {
             return typeData.privateAllocation.MemoryTypeIdx;
+        }
+        else {
+            throw std::runtime_error("Allocation has invalid type!");
         }
     }
 
