@@ -145,12 +145,6 @@ namespace vpr {
         /** If this is an allocation bound to a smaller region of a larger object, it is a block allocation. 
          *  Otherwise, it has it's own VkDeviceMemory object and is a "PRIVATE_ALLOCATION" type.
          */
-        enum class allocType {
-            BLOCK_ALLOCATION,
-            PRIVATE_ALLOCATION,
-            INVALID_TYPE,
-        };
-
 
         Allocation() = default;
         ~Allocation() = default;
@@ -170,7 +164,6 @@ namespace vpr {
         VkDeviceSize Offset() const noexcept;
         uint32_t MemoryTypeIdx() const;
 
-        allocType Type = allocType::INVALID_TYPE;
         SuballocationType SuballocType;
         VkDeviceSize Size, Alignment;
 

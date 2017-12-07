@@ -752,7 +752,7 @@ namespace vpr {
     void Allocator::FreeMemory(const Allocation* memory_to_free) {
         uint32_t type_idx = 0;
 
-        if (memory_to_free->Type == Allocation::allocType::BLOCK_ALLOCATION) {
+        if (std::holds_alternative<Allocation::blockAllocation>(memory_to_free->typeData)) {
 
             type_idx = memory_to_free->MemoryTypeIdx();
             auto& allocation_collection = allocations[type_idx];
@@ -1045,11 +1045,10 @@ namespace vpr {
 
     }
 
-    Allocation::Allocation(Allocation && other) noexcept : Type(std::move(other.Type)), SuballocType(std::move(other.SuballocType)), Size(std::move(other.Size)), Alignment(std::move(other.Alignment)), 
+    Allocation::Allocation(Allocation && other) noexcept : SuballocType(std::move(other.SuballocType)), Size(std::move(other.Size)), Alignment(std::move(other.Alignment)), 
         typeData(std::move(other.typeData)){}
 
     Allocation & Allocation::operator=(Allocation && other) noexcept {
-        Type = std::move(other.Type);
         SuballocType = std::move(other.SuballocType);
         Size = std::move(other.Size);
         Alignment = std::move(other.Alignment);
@@ -1058,7 +1057,6 @@ namespace vpr {
     }
 
     void Allocation::Init(MemoryBlock * parent_block, const VkDeviceSize & offset, const VkDeviceSize & alignment, const VkDeviceSize & alloc_size, const SuballocationType & suballoc_type) {
-        Type = allocType::BLOCK_ALLOCATION;
         blockAllocation alloc;
         alloc.ParentBlock = parent_block;
         alloc.Offset = offset;
@@ -1074,7 +1072,6 @@ namespace vpr {
     }
 
     void Allocation::InitPrivate(const uint32_t & type_idx, VkDeviceMemory & dvc_memory, const SuballocationType & suballoc_type, bool persistently_mapped, void * mapped_data, const VkDeviceSize & data_size) {
-        Type = allocType::PRIVATE_ALLOCATION;
         Size = data_size;
         SuballocType = suballoc_type;
         privateAllocation p_alloc;
@@ -1105,8 +1102,11 @@ namespace vpr {
         if (std::holds_alternative<blockAllocation>(typeData)) {
             return std::get<blockAllocation>(typeData).ParentBlock->Memory();
         }
-        else if (Type == allocType::PRIVATE_ALLOCATION) {
+        else if (std::holds_alternative<privateAllocation>(typeData)) {
             return std::get<privateAllocation>(typeData).DvcMemory;
+        }
+        else {
+            throw std::runtime_error("Allocation had invalid type or was improperly initialized!");
         }
     }
 
@@ -1120,11 +1120,14 @@ namespace vpr {
     }
 
     uint32_t Allocation::MemoryTypeIdx() const {
-        if (Type == allocType::BLOCK_ALLOCATION) {
+        if (std::holds_alternative<blockAllocation>(typeData)) {
             return std::get<blockAllocation>(typeData).ParentBlock->MemoryTypeIdx;
         }
-        else if (Type == allocType::PRIVATE_ALLOCATION) {
+        else if (std::holds_alternative<privateAllocation>(typeData)) {
             return std::get<privateAllocation>(typeData).MemoryTypeIdx;
+        }
+        else {
+            throw std::runtime_error("Allocation had invalid type, or was improperly initialized!");
         }
     }
 
