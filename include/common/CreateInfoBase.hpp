@@ -350,7 +350,7 @@ namespace vpr {
 		VK_LOGIC_OP_COPY,
 		1,
 		&vk_pipeline_color_blend_attachment_info_base,
-		{0.0f, 0.0f, 0.0f, 0.0f},
+		{1.0f, 1.0f, 1.0f, 1.0f},
 	};
 
 	constexpr VkPipelineDepthStencilStateCreateInfo vk_pipeline_depth_stencil_create_info_base{
