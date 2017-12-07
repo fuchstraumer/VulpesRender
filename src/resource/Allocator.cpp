@@ -1061,7 +1061,7 @@ namespace vpr {
         Type = allocType::BLOCK_ALLOCATION;
         blockAllocation alloc;
         alloc.ParentBlock = parent_block;
-        talloc.Offset = offset;
+        alloc.Offset = offset;
         Size = alloc_size;
         Alignment = alignment;
         typeData = alloc;
