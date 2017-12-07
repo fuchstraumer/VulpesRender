@@ -35,7 +35,7 @@ PROJECT(VulpesRender)
 
 SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON) 
 
-SET(CMAKE_CXX_STANDARD 14)
+SET(CMAKE_CXX_STANDARD 17)
 SET(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 IF(NOT MSVC) # compile commands used for clang-format and clang-tidy
@@ -100,13 +100,9 @@ SOURCE_GROUP("render" FILES ${RENDER})
 SOURCE_GROUP("shaders" FILES ${SHADERS})
 SOURCE_GROUP("imgui" FILES ${IMGUI})
 
-# enable multi-threaded compile for release builds, when its available. Enable minimal rebuild for debug
-# as it's seemingly disabled by default, for some reason.
+#Enable minimal rebuild, and manually set c++17 standard since it doesn't get set right otherwise.
 IF(MSVC) 
-  SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Gm")
-  SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MP")
-  SET(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_MINSIZEREL} /MP")
-  SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /MP")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++17 /Gm")
 ENDIF()
 
 ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" 

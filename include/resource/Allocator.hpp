@@ -3,7 +3,7 @@
 #define VULPES_VK_ALLOCATOR_H
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
-
+#include <variant>
 #include <list>
 
 namespace vpr {
@@ -174,22 +174,19 @@ namespace vpr {
         SuballocationType SuballocType;
         VkDeviceSize Size, Alignment;
 
-        union allocTypeUnion {
+        struct blockAllocation {
+            MemoryBlock* ParentBlock;
+            VkDeviceSize Offset;
+        };
 
-            struct BlockAllocation {
-                MemoryBlock* ParentBlock;
-                VkDeviceSize Offset;
-            } blockAllocation;
+        struct privateAllocation {
+            uint32_t MemoryTypeIdx;
+            VkDeviceMemory DvcMemory;
+            bool PersistentlyMapped;
+            void* MappedData;
+        };
 
-            struct PrivateAllocation {
-                uint32_t MemoryTypeIdx;
-                VkDeviceMemory DvcMemory;
-                bool PersistentlyMapped;
-                void* MappedData;
-            } privateAllocation;
-
-        } typeData;
-
+        std::variant<blockAllocation, privateAllocation> typeData;
     };
 
     /**
