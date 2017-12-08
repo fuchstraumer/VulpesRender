@@ -30,5 +30,6 @@ namespace vpr {
     class ArcballCamera;
     class DepthStencil;
     class Multisampling;
+    class SurfaceKHR;
 }
 #endif // !VULPES_VK_FORWARD_DECL_H

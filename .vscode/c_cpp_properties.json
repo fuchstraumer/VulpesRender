@@ -63,7 +63,10 @@
             "name": "Win32",
             "includePath": [
                 "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include",
-                "${workspaceRoot}"
+                "${workspaceRoot}",
+                "${workspaceRoot}/include",
+                "${workspaceRoot}/ext/include",
+                "${env:VULKAN_SDK}/include"
             ],
             "defines": [
                 "_DEBUG",
