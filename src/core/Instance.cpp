@@ -6,9 +6,6 @@
 #include <imgui.h>
 
 namespace vpr {
-
-    vulpes_graphics_options_t Instance::GraphicsSettings = vulpes_graphics_options_t();
-    vulpes_state_t Instance::VulpesState = vulpes_state_t();
     
     Instance::Instance(VkInstanceCreateInfo create_info, GLFWwindow* _window, const uint32_t& _width, const uint32_t& _height) : window(_window) {
 

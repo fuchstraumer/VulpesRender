@@ -4,7 +4,6 @@
 
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
-#include "common/GraphicsSettings.hpp"
 
 namespace vpr {
 
@@ -33,8 +32,7 @@ namespace vpr {
         const VkSurfaceKHR& vkSurface() const noexcept;
         const PhysicalDevice* GetPhysicalDevice() const noexcept;
         GLFWwindow* GetGLFWwindow() const noexcept;
-        static vulpes_graphics_options_t GraphicsSettings;
-        static vulpes_state_t VulpesState;
+        
     private:
 
         void setupPhysicalDevice();
