@@ -1,4 +1,4 @@
-#include "render/Surface.hpp"
+#include "render/SurfaceKHR.hpp"
 #include "core/Instance.hpp"
 
 namespace vpr {
