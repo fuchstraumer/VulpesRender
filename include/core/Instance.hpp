@@ -38,8 +38,10 @@ namespace vpr {
     private:
 
         void setupPhysicalDevice();
+        void createSurfaceKHR();
         mutable GLFWwindow* window;
-        std::unique_ptr<PhysicalDevice> physicalDevice;        
+        std::unique_ptr<PhysicalDevice> physicalDevice;
+        std::unique_ptr<SurfaceKHR> surface;     
         VkDebugReportCallbackEXT errorCallback;
         VkDebugReportCallbackEXT warningCallback;
         VkDebugReportCallbackEXT perfCallback;

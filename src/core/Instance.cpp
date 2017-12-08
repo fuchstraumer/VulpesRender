@@ -1,6 +1,7 @@
 #include "vpr_stdafx.h"
 #include "core/Instance.hpp"
 #include "core/PhysicalDevice.hpp"
+#include "render/SurfaceKHR.hpp"
 #include "util/easylogging++.h"
 #include <imgui.h>
 
@@ -29,11 +30,16 @@ namespace vpr {
         VkAssert(err);
 
         setupPhysicalDevice();
+        createSurfaceKHR();
 
     }
 
     void Instance::setupPhysicalDevice(){
         physicalDevice = std::make_unique<PhysicalDevice>(vkHandle());
+    }
+
+    void Instance::createSurfaceKHR() {
+        surface = std::make_unique<SurfaceKHR>(this, window);
     }
 
     Instance::~Instance(){
@@ -42,6 +48,10 @@ namespace vpr {
 
     const VkInstance& Instance::vkHandle() const noexcept {
         return handle;
+    }
+
+    const VkSurfaceKHR& Instance::vkSurface() const noexcept {
+        return surface->vkHandle();
     }
 
     const PhysicalDevice* Instance::GetPhysicalDevice() const noexcept{
