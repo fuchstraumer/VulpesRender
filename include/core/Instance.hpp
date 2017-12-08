@@ -4,7 +4,6 @@
 
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
-#include "Window.hpp"
 #include "common/GraphicsSettings.hpp"
 
 namespace vpr {
@@ -22,36 +21,30 @@ namespace vpr {
     *    These can both be retrieved through the relevant methods.
     *    \ingroup Core
     */
-    class Instance {
-        Instance(const Instance&) = delete;
-        Instance& operator=(const Instance&) = delete;
+    class Instance  {
+        Instance(const Instance &) = delete;
+        Instance& operator=(const Instance &) = delete;
     public:
         
-        Instance(VkInstanceCreateInfo create_info, const bool& enable_validation, const uint32_t& width, const uint32_t& height);
+        Instance(VkInstanceCreateInfo create_info, GLFWwindow* window, const uint32_t& width, const uint32_t& height);
         ~Instance();
 
         const VkInstance& vkHandle() const noexcept;
-        const VkSurfaceKHR vkSurface() const noexcept;
+        const VkSurfaceKHR& vkSurface() const noexcept;
         const PhysicalDevice* GetPhysicalDevice() const noexcept;
-        const Window* GetWindow() const noexcept;
-        Window* GetWindow() noexcept;
-
+        GLFWwindow* GetGLFWwindow() const noexcept;
         static vulpes_graphics_options_t GraphicsSettings;
         static vulpes_state_t VulpesState;
     private:
 
         void setupPhysicalDevice();
-        void createWindow(const uint32_t& width, const uint32_t& height);
-        void createDebugCallbacks() noexcept;
-        void destroyDebugCallbacks() noexcept;
-
+        mutable GLFWwindow* window;
         std::unique_ptr<PhysicalDevice> physicalDevice;        
         VkDebugReportCallbackEXT errorCallback;
         VkDebugReportCallbackEXT warningCallback;
         VkDebugReportCallbackEXT perfCallback;
         VkDebugReportCallbackEXT infoCallback; 
         VkDebugReportCallbackEXT vkCallback;
-        std::unique_ptr<Window> window;
         VkInstance handle;
         VkInstanceCreateInfo createInfo;
         bool validationEnabled{ false };

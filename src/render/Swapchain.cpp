@@ -61,14 +61,15 @@ namespace vpr {
 
     }
 
-    VkExtent2D SwapchainInfo::ChooseSwapchainExtent(const Instance* instance) const{
+    VkExtent2D SwapchainInfo::ChooseSwapchainExtent(const Instance* instance, GLFWwindow* window) const{
         
         if (Capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max()) {
             return Capabilities.currentExtent;
         }
         else {
-            auto window_size = instance->GetWindow()->GetWindowSize();
-            VkExtent2D actual_extent = { static_cast<uint32_t>(window_size.x), static_cast<uint32_t>(window_size.y) };
+            int wx, wy;
+            glfwGetWindowSize(window, &wx, &wy);
+            VkExtent2D actual_extent = { static_cast<uint32_t>(wx), static_cast<uint32_t>(wy) };
             actual_extent.width = std::max(Capabilities.minImageExtent.width, std::min(Capabilities.maxImageExtent.width, actual_extent.width));
             actual_extent.height = std::max(Capabilities.minImageExtent.height, std::min(Capabilities.maxImageExtent.height, actual_extent.height));
             return actual_extent;
@@ -123,7 +124,7 @@ namespace vpr {
         surfaceFormat = Info->GetBestFormat();
         ColorFormat = surfaceFormat.format;
         presentMode = Info->GetBestPresentMode();
-        Extent = Info->ChooseSwapchainExtent(instance);
+        Extent = Info->ChooseSwapchainExtent(instance, instance->GetGLFWwindow());
 
         // Create one more image than minspec to implement triple buffering (in hope we got mailbox present mode)
         ImageCount = Info->Capabilities.minImageCount + 1;
