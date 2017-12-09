@@ -3,7 +3,6 @@
 #include "core/PhysicalDevice.hpp"
 #include "render/SurfaceKHR.hpp"
 #include "util/easylogging++.h"
-#include <imgui.h>
 
 namespace vpr {
     

@@ -26,33 +26,11 @@ namespace vpr {
         createInfo.queueCreateInfoCount = static_cast<uint32_t>(queue_infos.size());
         createInfo.pQueueCreateInfos = queue_infos.data();
         createInfo.pEnabledFeatures = &device->Features;
-
-        if (Instance::GraphicsSettings.EnableValidation) {
-            EnableValidation();
-        }
-        else {
-            MarkersEnabled = false;
-        }
-
-        if (MarkersEnabled) {
-            createInfo.enabledLayerCount = 1;
-            createInfo.ppEnabledLayerNames = validation_layers.data();
-            createInfo.enabledExtensionCount = static_cast<uint32_t>(device_extensions_debug.size());
-            createInfo.ppEnabledExtensionNames = device_extensions_debug.data();
-        }
-        else if (Instance::GraphicsSettings.EnableValidation) {
-            createInfo.enabledExtensionCount = static_cast<uint32_t>(device_extensions.size());
-            createInfo.ppEnabledExtensionNames = device_extensions.data();
-            createInfo.enabledLayerCount = 1;
-            createInfo.ppEnabledLayerNames = validation_layers.data();
-        }
-        else {
-            createInfo.enabledExtensionCount = static_cast<uint32_t>(device_extensions.size());
-            createInfo.ppEnabledExtensionNames = device_extensions.data();
-            createInfo.enabledLayerCount = 0;
-            createInfo.ppEnabledLayerNames = nullptr;
-        }
-
+        createInfo.enabledExtensionCount = static_cast<uint32_t>(device_extensions.size());
+        createInfo.ppEnabledExtensionNames = device_extensions.data();
+        createInfo.enabledLayerCount = 0;
+        createInfo.ppEnabledLayerNames = nullptr;
+        
         VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, AllocCallbacks, &handle);
         VkAssert(result);
 
