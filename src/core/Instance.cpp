@@ -39,6 +39,7 @@ namespace vpr {
     }
 
     Instance::~Instance(){
+        surface.reset();
         vkDestroyInstance(handle, nullptr);
     }
 
