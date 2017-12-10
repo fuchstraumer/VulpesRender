@@ -10,6 +10,8 @@
 #include <memory>
 #include <mutex>
 #include <map>
+#include <iostream>
+#include <fstream>
 
 #if defined(_WIN32) || defined(__linux__)
 #include "vulkan/vulkan.h"

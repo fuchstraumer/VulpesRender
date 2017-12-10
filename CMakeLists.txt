@@ -100,15 +100,15 @@ SOURCE_GROUP("render" FILES ${RENDER})
 SOURCE_GROUP("shaders" FILES ${SHADERS})
 SOURCE_GROUP("imgui" FILES ${IMGUI})
 
-#Enable minimal rebuild, and manually set c++17 standard since it doesn't get set right otherwise.
-IF(MSVC) 
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++17 /Gm")
-ENDIF()
-
 ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" 
                                 ${UTIL} ${COMMON} ${COMMAND_FILES} ${IMGUI}
                                 ${CORE} ${RESOURCES} ${RENDER} ${SHADERS}
                                 )
+
+#Enable minimal rebuild, and manually set c++17 standard since it doesn't get set right otherwise.
+IF(MSVC)
+TARGET_COMPILE_OPTIONS(VulpesRender PUBLIC "/std:c++17" "/Gm")
+ENDIF()
 
 IF(APPLE)
 FIND_LIBRARY(GLFW_3_LIB NAMES "libglfw3.a" HINTS "${PROJECT_SOURCE_DIR}/ext/lib")
@@ -116,8 +116,6 @@ FIND_LIBRARY(GLFW_3_LIB NAMES "libglfw3.a" HINTS "${PROJECT_SOURCE_DIR}/ext/lib"
   SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa -framework Metal -framework IOKit -framework CoreVideo")
   ENDIF()
 ENDIF() 
-
-TARGET_COMPILE_OPTIONS(VulpesRender PRIVATE "-fPIC")
 
 IF(APPLE)
   TARGET_LINK_LIBRARIES(VulpesRender PUBLIC "${GLFW_3_LIB}" "${MoltenVK}")
@@ -133,7 +131,8 @@ TARGET_COMPILE_DEFINITIONS(VulpesRender PUBLIC -DGLM_LANG_STL11_FORCED)
 
 # Temporary: need help to fix this one. Vulpes builds as 32-bit, somehow, but glfw builds as 64 bit?
 IF(UNIX)
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64")
+TARGET_COMPILE_OPTIONS(VulpesRender PUBLIC "-m64")
+#TARGET_COMPILE_OPTIONS(VulpesRender PRIVATE "-fPIC")
 ENDIF()
 
 IF(MSVC) 
