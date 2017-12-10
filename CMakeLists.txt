@@ -115,7 +115,9 @@ FIND_LIBRARY(GLFW_3_LIB NAMES "libglfw3.a" HINTS "${PROJECT_SOURCE_DIR}/ext/lib"
   IF(APPLE)
   SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa -framework Metal -framework IOKit -framework CoreVideo")
   ENDIF()
-ENDIF()                          
+ENDIF() 
+
+TARGET_COMPILE_OPTIONS(VulpesRender PRIVATE "-fPIC")
 
 IF(APPLE)
   TARGET_LINK_LIBRARIES(VulpesRender PUBLIC "${GLFW_3_LIB}" "${MoltenVK}")
