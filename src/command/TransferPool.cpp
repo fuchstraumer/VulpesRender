@@ -24,10 +24,6 @@ namespace vpr {
 
         queue = parent->TransferQueue(0);
 
-        if (parent->MarkersEnabled) {
-            parent->vkSetObjectDebugMarkerName((uint64_t)handle, VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT, "TransferPool");
-        }
-
     }
 
     TransferPool::~TransferPool() {
@@ -37,7 +33,7 @@ namespace vpr {
         }
     }
 
-    VkCommandBuffer& TransferPool::Begin() {
+    const VkCommandBuffer& TransferPool::Begin() const {
 
         transferMutex.lock();
         VkCommandBufferBeginInfo beginInfo = {};
@@ -46,18 +42,12 @@ namespace vpr {
         beginInfo.pInheritanceInfo = nullptr;
 
         vkBeginCommandBuffer(cmdBuffers.front(), &beginInfo);
-        if (parent->MarkersEnabled) {
-            parent->vkCmdBeginDebugMarkerRegion(cmdBuffers.front(), "Transfer data", glm::vec4(0.7f, 0.7f, 0.0f, 1.0f));
-        }
         
         return cmdBuffers.front();
     }
     
-    void TransferPool::Submit() {
+    void TransferPool::Submit() const {
 
-        if (parent->MarkersEnabled) {
-            parent->vkCmdEndDebugMarkerRegion(cmdBuffers.front());
-        }
         VkResult result = vkEndCommandBuffer(cmdBuffers.front());
         VkAssert(result);
 
