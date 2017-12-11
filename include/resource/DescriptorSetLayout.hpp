@@ -21,7 +21,7 @@ namespace vpr {
     private:
         mutable bool ready = false;
         void create() const;
-        const Device* dvc;
+        const Device* device;
         mutable VkDescriptorSetLayout handle;
         std::map<size_t, VkDescriptorSetLayoutBinding> bindings;
     };

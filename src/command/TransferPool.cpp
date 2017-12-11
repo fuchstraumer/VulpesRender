@@ -65,7 +65,7 @@ namespace vpr {
         VkAssert(result);
         
         // Reset command buffer so we can re-record shortly.
-        ResetCmdBuffer(0);
+        vkResetCommandBuffer(cmdBuffers[0], VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT);
         transferMutex.unlock();
         
     }

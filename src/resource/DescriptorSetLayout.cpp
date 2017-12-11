@@ -42,7 +42,7 @@ namespace vpr {
         set_layout_create_info.bindingCount = static_cast<uint32_t>(num_bindings);
         set_layout_create_info.pBindings = bindings_vec.data();
 
-        VkResult result = vkCreateDescriptorSetLayout(device->vkHandle(), &set_layout_create_info, nullptr, &descriptorSetLayout);
+        VkResult result = vkCreateDescriptorSetLayout(device->vkHandle(), &set_layout_create_info, nullptr, &handle);
         VkAssert(result);
         ready = true;
     }

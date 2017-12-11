@@ -9,10 +9,9 @@ namespace vpr {
 
     DescriptorSet::~DescriptorSet() {
         vkFreeDescriptorSets(device->vkHandle(), descriptorPool->vkHandle(), 1, &descriptorSet);
-        vkDestroyDescriptorSetLayout(device->vkHandle(), descriptorSetLayout, nullptr);
     }
 
-    void DescriptorSet::AddDescriptorInfo(const VkDescriptorImageInfo& info, const size_t& item_binding_idx) {
+    void DescriptorSet::AddDescriptorInfo(const VkDescriptorImageInfo& info, const VkDescriptorType& type, const size_t& item_binding_idx) {
 
         VkWriteDescriptorSet write_descriptor {
             VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
@@ -21,7 +20,7 @@ namespace vpr {
             static_cast<uint32_t>(item_binding_idx),
             0,
             1,
-            bindings.at(item_binding_idx).descriptorType,
+            type,
             &info,
             nullptr,
             nullptr,
@@ -31,7 +30,7 @@ namespace vpr {
 
     }
 
-    void DescriptorSet::AddDescriptorInfo(const VkDescriptorBufferInfo& info, const size_t& item_binding_idx) {
+    void DescriptorSet::AddDescriptorInfo(const VkDescriptorBufferInfo& info, const VkDescriptorType& descr_type, const size_t& item_binding_idx) {
         
         bufferInfos.insert(std::make_pair(item_binding_idx, info));
 
@@ -42,7 +41,7 @@ namespace vpr {
             static_cast<uint32_t>(item_binding_idx),
             0,
             1,
-            bindings.at(item_binding_idx).descriptorType,
+            descr_type,
             nullptr,
             &bufferInfos.at(item_binding_idx),
             nullptr,
@@ -54,7 +53,7 @@ namespace vpr {
 
     void DescriptorSet::Init(const DescriptorPool * parent_pool, const DescriptorSetLayout* set_layout) {
 
-        allocate(parent_pool);
+        allocate(parent_pool, set_layout);
         update();
 
     }
@@ -99,13 +98,5 @@ namespace vpr {
     const VkDescriptorSet & DescriptorSet::vkHandle() const noexcept {
         return descriptorSet;
     }
-
-    const VkDescriptorSetLayout & DescriptorSet::vkLayout() const noexcept {
-        return descriptorSetLayout;
-    }
-
-     const std::map<size_t, VkDescriptorSetLayoutBinding>& DescriptorSet::GetBindings() const noexcept {
-         return bindings;
-     }
 
 }
