@@ -24,12 +24,12 @@ namespace vpr {
         */
         void AddDescriptorInfo(const VkDescriptorBufferInfo& info, const size_t& item_binding_idx);
         /** Call after all descriptor bindings and infos required have been added, and make sure you have enough space in the given pool for all of these resources. */
-        void Init(const DescriptorPool* parent_pool);
+        void Init(const DescriptorPool* parent_pool, const DescriptorSetLayout* set_layout);
         const VkDescriptorSet& vkHandle() const noexcept;
         
     private:
 
-        void allocate(const DescriptorPool* parent_pool);
+        void allocate(const DescriptorPool* parent_pool, const DescriptorSetLayout* set_layout);
         void update();
 
         const Device* device;

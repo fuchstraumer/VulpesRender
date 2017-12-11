@@ -26,10 +26,9 @@ namespace vpr {
     class DescriptorSet;
     class DescriptorPool;
     class PipelineLayout;
-    class Camera;
-    class ArcballCamera;
     class DepthStencil;
     class Multisampling;
     class SurfaceKHR;
+    class DescriptorSetLayout;
 }
 #endif // !VULPES_VK_FORWARD_DECL_H

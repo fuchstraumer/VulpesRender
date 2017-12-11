@@ -2,7 +2,7 @@
 #include "resource/DescriptorSet.hpp"
 #include "core/LogicalDevice.hpp"
 #include "resource/DescriptorPool.hpp"
-
+#include "resource/DescriptorSetLayout.hpp"
 namespace vpr {
 
     DescriptorSet::DescriptorSet(const Device * parent) : device(parent) { }
@@ -52,22 +52,21 @@ namespace vpr {
 
     }
 
-    void DescriptorSet::Init(const DescriptorPool * parent_pool) {
+    void DescriptorSet::Init(const DescriptorPool * parent_pool, const DescriptorSetLayout* set_layout) {
 
-        createLayout();
         allocate(parent_pool);
         update();
 
     }
 
-    void DescriptorSet::allocate(const DescriptorPool* parent_pool) {
+    void DescriptorSet::allocate(const DescriptorPool* parent_pool, const DescriptorSetLayout* set_layout) {
         
         descriptorPool = parent_pool;
 
         VkDescriptorSetAllocateInfo alloc_info = vk_descriptor_set_alloc_info_base;
         alloc_info.descriptorPool = descriptorPool->vkHandle();
         alloc_info.descriptorSetCount = 1;
-        alloc_info.pSetLayouts = &descriptorSetLayout;
+        alloc_info.pSetLayouts = &set_layout->vkHandle();
 
         VkResult result = vkAllocateDescriptorSets(device->vkHandle(), &alloc_info, &descriptorSet);
         allocated = true;
