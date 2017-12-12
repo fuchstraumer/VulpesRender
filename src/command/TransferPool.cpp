@@ -45,6 +45,21 @@ namespace vpr {
         
         return cmdBuffers.front();
     }
+
+    const std::vector<VkCommandBuffer>& TransferPool::BeginAll() const {
+        assert(cmdBuffers.size() > 1);
+        constexpr static VkCommandBufferBeginInfo begin_info{
+            VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO, 
+            VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT | VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT,
+            nullptr
+        };
+
+        for(auto& buff : cmdBuffers) {
+            vkBeginCommandBuffer(buff, &begin_info);
+        }
+
+        return cmdBuffers;
+    }
     
     void TransferPool::Submit() const {
 
@@ -66,6 +81,37 @@ namespace vpr {
         
         // Reset command buffer so we can re-record shortly.
         vkResetCommandBuffer(cmdBuffers[0], VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT);
+        transferMutex.unlock();
+        
+    }
+
+    void TransferPool::SubmitAll() const {
+
+        // Unlike the other singular submit technique, we expect
+        // that other threads have been accessing members of this
+        // class (the retrieved buffers) up to this point, so we
+        // delay locking the mutex until before we submit.
+
+        transferMutex.lock();
+
+        for(auto& buff : cmdBuffers) {
+            vkEndCommandBuffer(buff);
+        }
+
+        const VkSubmitInfo submit_info{
+            VK_STRUCTURE_TYPE_SUBMIT_INFO,
+            static_cast<uint32_t>(cmdBuffers.size()),
+            cmdBuffers.data()
+        };
+
+        VkResult result = vkQueueSubmit(queue, 1, &submit_info, fence);
+        VkAssert(result);
+
+        result = vkWaitForFences(parent->vkHandle(), 1, &fence, VK_TRUE, vk_default_fence_timeout);
+        VkAssert(result);
+        result = vkResetFences(parent->vkHandle(), 1, &fence);
+
+        vkResetCommandPool(parent->vkHandle(), handle, VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
         transferMutex.unlock();
         
     }
