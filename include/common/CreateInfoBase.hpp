@@ -559,6 +559,12 @@ namespace vpr {
 		0,
 	};
 
+    constexpr VkSemaphoreCreateInfo vk_semaphore_create_info_base {
+        VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO,
+        nullptr,
+        0
+    };
+
 }
 
 #endif // !VULPES_VK_CREATE_INFO_BASE_H
