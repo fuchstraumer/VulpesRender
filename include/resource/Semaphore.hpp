@@ -7,9 +7,13 @@
 namespace vpr {
 
     class Semaphore {
+        Semaphore(const Semaphore&) = delete;
+        Semaphore& operator=(const Semaphore&) = delete;
     public:
         Semaphore(const Device* dvc);
         ~Semaphore();
+        Semaphore(Semaphore&& other) noexcept;
+        Semaphore& operator=(Semaphore&& other) noexcept;
 
         const VkSemaphore& vkHandle() const noexcept;
 
