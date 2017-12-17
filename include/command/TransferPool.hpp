@@ -28,22 +28,34 @@ namespace vpr {
     public:
 
         TransferPool(const Device* _parent);
+        TransferPool(const Device* _parent, const size_t& num_buffers);
 
         ~TransferPool();
 
         /** Returns the command buffer associated with this pool, call VkBeginCommandBuffer
         *   before doing so. Locks the mutex as well.
         */
-        VkCommandBuffer& Begin();
+        const VkCommandBuffer& Begin() const;
+
+        /** Begins all command buffers attached to this object. Intended for use when one plans
+         *  to record transfer commands until multiple buffers in parallel, then submit all these
+         *  transfers at once.
+         */
+        const std::vector<VkCommandBuffer>& BeginAll() const;
 
         /** Calls VkEndCommandBuffer on this object's command buffer, then proceeds to submit it. This 
         *   transfer will wait on the VkFence object attached to this pool, resetting the owned command 
         *   buffer once done and unlocks the mutex.
         */
-        void Submit();
+        void Submit() const;
+
+        /** Submits all command buffers contained by this transfer pool. Waits on a fence and uses a mutex,
+         *  just like the method for singular command buffers.
+         */
+        void SubmitAll() const;
 
     protected:
-        std::mutex transferMutex;
+        mutable std::mutex transferMutex;
         VkFence fence;
         VkQueue queue;
     };

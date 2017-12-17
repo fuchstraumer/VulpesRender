@@ -29,13 +29,6 @@ namespace vpr {
         vkDestroyDescriptorPool(device->vkHandle(), handle, nullptr);
     }
 
-    void DescriptorPool::AddDescriptorSet(const DescriptorSet* descriptor_set) {
-        auto descriptor_bindings = descriptor_set->GetBindings();
-        for(const auto& entry : descriptor_bindings) {
-            resourceTypes[entry.second.descriptorType] += entry.second.descriptorCount;
-        }
-    }
-
     void DescriptorPool::AddResourceType(const VkDescriptorType & descriptor_type, const uint32_t & descriptor_count) {
         resourceTypes[descriptor_type] += descriptor_count;
     }
