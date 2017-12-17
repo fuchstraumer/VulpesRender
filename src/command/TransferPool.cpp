@@ -50,6 +50,7 @@ namespace vpr {
         assert(cmdBuffers.size() > 1);
         constexpr static VkCommandBufferBeginInfo begin_info{
             VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO, 
+            nullptr,
             VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT | VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT,
             nullptr
         };
@@ -100,8 +101,14 @@ namespace vpr {
 
         const VkSubmitInfo submit_info{
             VK_STRUCTURE_TYPE_SUBMIT_INFO,
+            nullptr,
+            0,
+            nullptr,
+            nullptr,
             static_cast<uint32_t>(cmdBuffers.size()),
-            cmdBuffers.data()
+            cmdBuffers.data(),
+            0,
+            nullptr
         };
 
         VkResult result = vkQueueSubmit(queue, 1, &submit_info, fence);
