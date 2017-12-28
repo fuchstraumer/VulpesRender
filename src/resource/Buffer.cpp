@@ -216,4 +216,7 @@ namespace vpr {
 
     }
 
+    VkBufferUsageFlags Buffer::Usage() const noexcept {
+        return createInfo.usage;
+    }
 }

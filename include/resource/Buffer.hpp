@@ -25,7 +25,6 @@ namespace vpr {
 
         Buffer(const Device* parent);
         ~Buffer();
-
         Buffer(Buffer&& other) noexcept;
         Buffer& operator=(Buffer&& other) noexcept;
 
@@ -38,7 +37,6 @@ namespace vpr {
         *                       updated like UBOs.
         */
         void CreateBuffer(const VkBufferUsageFlags& usage_flags, const VkMemoryPropertyFlags& memory_flags, const VkDeviceSize& size);
-
         void Destroy();
 
         /** Maps this object, copies data to this object, then ensures to unmap this object.
@@ -63,11 +61,9 @@ namespace vpr {
 
         const VkBuffer& vkHandle() const noexcept;
         VkBuffer& vkHandle() noexcept;
-
         const VkDescriptorBufferInfo& GetDescriptor() const noexcept;
 
         VkDeviceSize Size() const noexcept;
-
         // Due to alignment requirements, the size reported by Size() might not reflect the size of the data uploaded.
         // Use this when we are checking against data uploaded (for changes)
         VkDeviceSize InitDataSize() const noexcept;
@@ -83,6 +79,7 @@ namespace vpr {
         */
         static void DestroyStagingResources(const Device* device);
 
+        VkBufferUsageFlags Usage() const noexcept;
     protected:
 
         static std::vector<std::pair<VkBuffer, Allocation>> stagingBuffers;
