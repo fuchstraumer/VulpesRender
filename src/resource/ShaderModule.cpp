@@ -46,6 +46,21 @@ namespace vpr {
         pipelineInfo.pSpecializationInfo = nullptr;
     }
 
+    ShaderModule::ShaderModule(const Device* device, const VkShaderStageFlagBits& stages, const uint32_t* binary_source, const uint32_t& len) {
+
+        createInfo = vk_shader_module_create_info_base;
+        createInfo.codeSize = len;
+        createInfo.pCode = binary_source;
+
+        VkResult result = vkCreateShaderModule(device->vkHandle(), &createInfo, allocators, &handle);
+        VkAssert(result);
+
+        pipelineInfo.module = handle;
+        pipelineInfo.pName = "main";
+        pipelineInfo.stage = stages;
+
+    }
+
     ShaderModule::ShaderModule(const Device * device, const char * filename, VkPipelineShaderStageCreateInfo & create_info) : pipelineInfo(create_info), createInfo(vk_shader_module_create_info_base), parent(device) {
 
         LoadCodeFromFile(filename);

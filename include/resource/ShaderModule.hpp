@@ -17,6 +17,7 @@ namespace vpr {
     
         ShaderModule(const Device* device, const char* filename, const VkShaderStageFlagBits& stages, const char* shader_name = nullptr);
         ShaderModule(const Device* device, const std::string& filename, const VkShaderStageFlagBits& stages, const char* shader_entry_point = nullptr);
+        ShaderModule(const Device* device, const VkShaderStageFlagBits& stages, const uint32_t* binary_source, const uint32_t& binary_source_length);
         ShaderModule(const Device* device, const char* filename, VkPipelineShaderStageCreateInfo& create_info);
         ~ShaderModule();
 
