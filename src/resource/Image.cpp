@@ -209,12 +209,20 @@ namespace vpr {
         return extents;
     }
 
-    VkFormat Image::Format() const noexcept{
+    VkFormat Image::Format() const noexcept {
         return format;
     }
 
     void Image::SetFormat(const VkFormat & _format) noexcept {
         format = _format;
+    }
+
+    VkImageLayout Image::Layout() const noexcept {
+        return finalLayout;
+    }
+
+    void Image::SetFinalLayout(VkImageLayout _layout) {
+        finalLayout = _layout;
     }
 
 
