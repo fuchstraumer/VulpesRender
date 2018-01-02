@@ -52,6 +52,8 @@ namespace vpr {
         VkFormat Format() const noexcept;
         void SetFormat(const VkFormat& format) noexcept;
 
+        VkImageLayout Layout() const noexcept;
+        void SetFinalLayout(VkImageLayout new_layout);
     protected:
 
         const Device* parent;
