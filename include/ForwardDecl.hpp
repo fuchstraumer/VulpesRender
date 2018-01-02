@@ -32,5 +32,6 @@ namespace vpr {
     class DescriptorSetLayout;
     template<typename texture_type>
     class Texture;
+    struct GraphicsPipelineInfo;
 }
 #endif // !VULPES_VK_FORWARD_DECL_H
