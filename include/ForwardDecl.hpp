@@ -30,5 +30,7 @@ namespace vpr {
     class Multisampling;
     class SurfaceKHR;
     class DescriptorSetLayout;
+    template<typename texture_type>
+    class Texture;
 }
 #endif // !VULPES_VK_FORWARD_DECL_H
