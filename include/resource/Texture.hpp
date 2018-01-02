@@ -111,7 +111,7 @@ namespace vpr {
         */
         void CreateEmptyTexture(const VkFormat& texture_format, const uint32_t& width, const uint32_t& height);
 
-        void TransferToDevice(VkCommandBuffer& transfer_cmd_buffer) const;
+        void TransferToDevice(const VkCommandBuffer& transfer_cmd_buffer) const;
         void CreateSampler(const VkSamplerCreateInfo& create_info);
 
         const VkDescriptorImageInfo& GetDescriptor() const noexcept;
@@ -193,7 +193,7 @@ namespace vpr {
     }
 
     template<typename texture_type>
-    inline void Texture<texture_type>::TransferToDevice(VkCommandBuffer & transfer_cmd_buffer) const {
+    inline void Texture<texture_type>::TransferToDevice(const VkCommandBuffer & transfer_cmd_buffer) const {
 
         // Need barriers to transition layout from initial undefined/uninitialized layout to what we'll use in the shader this is for.
         auto barrier0 = Image::GetMemoryBarrier(handle, format, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
