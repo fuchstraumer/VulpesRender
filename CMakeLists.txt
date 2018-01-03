@@ -85,7 +85,7 @@ ELSEIF(WIN32)
   TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
 ENDIF()
                         
-ADD_DEPENDENCIES(VulpesRender glfw3)
+ADD_DEPENDENCIES(VulpesRender glfw3 glm)
 # GLM doesn't detect the compiler version correctly: defined as public since it will occur in files using this library if undefined.
 TARGET_COMPILE_DEFINITIONS(VulpesRender PUBLIC -DGLM_LANG_STL11_FORCED)
 
