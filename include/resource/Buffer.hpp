@@ -44,13 +44,13 @@ namespace vpr {
         *   \param size: size of data being copied, which can be much smaller than the total size
         *   \param offset: destination offset, but can be set to 0 if copying to the front of the buffer or if the copy size is equivalent to the buffer's total size.
         */
-        void CopyToMapped(void* data, const VkDeviceSize& size, const VkDeviceSize& offset);
-        void CopyTo(void * data, const VkCommandBuffer & transfer_cmd, const VkDeviceSize& copy_size, const VkDeviceSize& copy_offset);
+        void CopyToMapped(const void* data, const VkDeviceSize& size, const VkDeviceSize& offset);
+        void CopyTo(const void* data, const VkCommandBuffer & transfer_cmd, const VkDeviceSize& copy_size, const VkDeviceSize& copy_offset);
         /** Copies data using a single command buffer submission form the given pool to the given queue. Attempt to use a transfer-specialized queue when available.
         *   \deprecated Use the other CopyTo method that accepts a command buffer instead of this one: using a single command buffer submission like this method does
         *               is wasteful, and is not as safe as the other method: if that method is used with a TransferPool, the transfer is guarded with a VkFence (and this method is not). Additionally, the TransferPool class is thread-safe and protects access to its queue and command pool.
         */
-        void CopyTo(void* data, CommandPool* cmd_pool, const VkQueue & transfer_queue, const VkDeviceSize& size, const VkDeviceSize& offset);
+        void CopyTo(const void* data, CommandPool* cmd_pool, const VkQueue & transfer_queue, const VkDeviceSize& size, const VkDeviceSize& offset);
 
         /** Updates the buffer, as it says on the tin. An important note, however, is that this can NOT be called in an active renderpass (part of the Vulkan spec, unfortunately).
         */
