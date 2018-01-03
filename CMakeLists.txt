@@ -75,21 +75,18 @@ ExternalProject_Add(glm
     GIT_REPOSITORY "https://github.com/g-truc/glm.git"
     CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
 
-FILE(GLOB UTIL "src/util/*.cc" "src/util/*.cpp" "include/util/*.h" "include/util/*.hpp")
-FILE(GLOB COMMON "src/common/*.h" "src/common/*.hpp")
-FILE(GLOB COMMAND_FILES "src/command/*.cpp" "include/command/*.hpp")
-FILE(GLOB CORE "src/core/*.cpp" "include/core/*.hpp")
-FILE(GLOB RESOURCES "src/resource/*.cpp" "include/resource/*.hpp")
-FILE(GLOB RENDER "src/render/*.cpp" "include/render/*.hpp" "include/render/*.inl")
-FILE(GLOB SCENES "scenes/*.cpp")
-FILE(GLOB_RECURSE SHADERS 
-    "scenes/scene_resources/shaders/*.vert" "scenes/scene_resources/shaders/*.frag" "scenes/scene_resources/shaders/*.spv" 
-    "rsrc/shaders/*.vert" "rsrc/shaders/*.frag" "rsrc/shaders/*.spv"
-    )
-FILE(GLOB IMGUI "${CMAKE_CURRENT_SOURCE_DIR}/imgui/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/imgui/*.cpp")
+FILE(GLOB UTIL "${CMAKE_CURRENT_SOURCE_DIR}/src/util/*.cc" "${CMAKE_CURRENT_SOURCE_DIR}/src/util/*.cpp" 
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/util/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/include/util/*.hpp")
+FILE(GLOB COMMON "${CMAKE_CURRENT_SOURCE_DIR}/src/common/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/common/*.hpp")
+FILE(GLOB COMMAND_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/command/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/command/*.hpp")
+FILE(GLOB CORE "${CMAKE_CURRENT_SOURCE_DIR}/src/core/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/core/*.hpp")
+FILE(GLOB RESOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/resource/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/resource/*.hpp")
+FILE(GLOB RENDER "${CMAKE_CURRENT_SOURCE_DIR}/src/render/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/render/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/render/*.inl")
 
-FILE(GLOB PROJECT_SOURCES "src/util/*.cpp" "src/command/*.cpp" "src/core/*.cpp" "src/render/*.cpp" "src/resource/*.cpp")
-ADD_PRECOMPILED_HEADER("vpr_stdafx.h" "src/vpr_stdafx.cpp" ${PROJECT_SOURCES})
+FILE(GLOB PROJECT_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/util/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/command/*.cpp" 
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/core/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/render/*.cpp" 
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/resource/*.cpp")
+ADD_PRECOMPILED_HEADER("vpr_stdafx.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/vpr_stdafx.cpp" ${PROJECT_SOURCES})
 
 SOURCE_GROUP("util" FILES ${UTIL})
 SOURCE_GROUP("common" FILES ${COMMON})
@@ -100,10 +97,9 @@ SOURCE_GROUP("render" FILES ${RENDER})
 SOURCE_GROUP("shaders" FILES ${SHADERS})
 SOURCE_GROUP("imgui" FILES ${IMGUI})
 
-ADD_LIBRARY(VulpesRender STATIC "include/vpr_stdafx.h" "src/vpr_stdafx.cpp" "include/ForwardDecl.hpp" 
-                                ${UTIL} ${COMMON} ${COMMAND_FILES} ${IMGUI}
-                                ${CORE} ${RESOURCES} ${RENDER} ${SHADERS}
-                                )
+ADD_LIBRARY(VulpesRender STATIC "${CMAKE_CURRENT_SOURCE_DIR}/include/vpr_stdafx.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/vpr_stdafx.cpp" 
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/ForwardDecl.hpp" ${UTIL} ${COMMON} ${COMMAND_FILES} ${IMGUI}
+    ${CORE} ${RESOURCES} ${RENDER} ${SHADERS})
 
 #Enable minimal rebuild, and manually set c++17 standard since it doesn't get set right otherwise.
 IF(MSVC)
