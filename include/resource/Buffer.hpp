@@ -54,7 +54,7 @@ namespace vpr {
 
         /** Updates the buffer, as it says on the tin. An important note, however, is that this can NOT be called in an active renderpass (part of the Vulkan spec, unfortunately).
         */
-        void Update(VkCommandBuffer& cmd, const VkDeviceSize& data_sz, const VkDeviceSize& offset, const void* data);
+        void Update(const VkCommandBuffer& cmd, const VkDeviceSize& data_sz, const VkDeviceSize& offset, const void* data);
 
         void Map(const VkDeviceSize& offset = 0);
         void Unmap();
