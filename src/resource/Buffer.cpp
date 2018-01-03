@@ -126,6 +126,11 @@ namespace vpr {
         vkCmdUpdateBuffer(cmd, handle, memoryAllocation.Offset() + offset, data_sz, data);
     }
 
+    VkBufferMemoryBarrier Buffer::CreateMemoryBarrier(VkAccessFlags src, VkAccessFlags dst, uint32_t src_idx, uint32_t dst_idx, VkDeviceSize sz) const {
+        return VkBufferMemoryBarrier{ VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER, nullptr, src, dst, src_idx, dst_idx, 
+            handle, memoryAllocation.Offset(), sz };
+    }
+
     void Buffer::Map(const VkDeviceSize& offset){
         assert(offset < memoryAllocation.Size);
         VkResult result = vkMapMemory(parent->vkHandle(), memoryAllocation.Memory(), memoryAllocation.Offset() + offset, memoryAllocation.Size, 0, &MappedMemory);

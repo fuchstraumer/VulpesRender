@@ -56,6 +56,8 @@ namespace vpr {
         */
         void Update(const VkCommandBuffer& cmd, const VkDeviceSize& data_sz, const VkDeviceSize& offset, const void* data);
 
+        VkBufferMemoryBarrier CreateMemoryBarrier(VkAccessFlags src, VkAccessFlags dst, uint32_t src_idx, uint32_t dst_idx, VkDeviceSize sz) const;
+
         void Map(const VkDeviceSize& offset = 0);
         void Unmap();
 
