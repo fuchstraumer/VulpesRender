@@ -75,15 +75,25 @@ namespace vpr {
         result = vkQueueSubmit(queue, 1, &submitInfo, fence);
         VkAssert(result);
 
-        result = vkWaitForFences(parent->vkHandle(), 1, &fence, VK_TRUE, vk_default_fence_timeout);
-        VkAssert(result);
-        result = vkResetFences(parent->vkHandle(), 1, &fence);
-        VkAssert(result);
+        completeTransfer();
         
-        // Reset command buffer so we can re-record shortly.
-        vkResetCommandBuffer(cmdBuffers[0], VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT);
-        transferMutex.unlock();
-        
+    }
+
+    void TransferPool::SubmitWait(const VkSemaphore semaphore, const VkPipelineStageFlags wait_flags) const {
+
+        VkResult result = vkEndCommandBuffer(cmdBuffers.front());
+        VkAssert(result);
+
+        VkSubmitInfo submit_info{ 
+            VK_STRUCTURE_TYPE_SUBMIT_INFO, nullptr, 
+            1, &semaphore, &wait_flags,  
+            1, &cmdBuffers.front(), 
+            0, nullptr };
+
+        result = vkQueueSubmit(queue, 1, &submit_info, fence);
+        VkAssert(result);
+
+        completeTransfer();
     }
 
     void TransferPool::SubmitAll() const {
@@ -114,13 +124,16 @@ namespace vpr {
         VkResult result = vkQueueSubmit(queue, 1, &submit_info, fence);
         VkAssert(result);
 
-        result = vkWaitForFences(parent->vkHandle(), 1, &fence, VK_TRUE, vk_default_fence_timeout);
+        completeTransfer();
+        
+    }
+
+    void TransferPool::completeTransfer() const {   
+        VkResult result = vkWaitForFences(parent->vkHandle(), 1, &fence, VK_TRUE, vk_default_fence_timeout);
         VkAssert(result);
         result = vkResetFences(parent->vkHandle(), 1, &fence);
-
         vkResetCommandPool(parent->vkHandle(), handle, VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
         transferMutex.unlock();
-        
     }
 
 }

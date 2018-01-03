@@ -49,12 +49,21 @@ namespace vpr {
         */
         void Submit() const;
 
+        /** Submits but waits for the given semaphore to be signalled
+         */
+        void SubmitWait(const VkSemaphore wait_semaphore, const VkPipelineStageFlags wait_flags) const;
+
         /** Submits all command buffers contained by this transfer pool. Waits on a fence and uses a mutex,
          *  just like the method for singular command buffers.
          */
         void SubmitAll() const;
 
     protected:
+        
+        /** Just a convienience method wrapping the command code required to reset the fence, reset the 
+         *  command buffer(s), and make sure to unlock the transfer mutex.
+         */
+        void completeTransfer() const;
         mutable std::mutex transferMutex;
         VkFence fence;
         VkQueue queue;
