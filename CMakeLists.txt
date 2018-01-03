@@ -1,36 +1,5 @@
-MACRO(ADD_PRECOMPILED_HEADER PrecompiledHeader PrecompiledSource SourcesVar)
-  GET_FILENAME_COMPONENT(PrecompiledBasename ${PrecompiledHeader} NAME_WE)
-  SET(PrecompiledBinary "${CMAKE_CURRENT_BINARY_DIR}/${PrecompiledBasename}.pch")
-  SET(Sources ${${SourcesVar}})
-  IF(MSVC)
-    SET_SOURCE_FILES_PROPERTIES(
-      ${PrecompiledSource}	PROPERTIES
-      COMPILE_FLAGS "/Yc\"${PrecompiledHeader}\" /Fp\"${PrecompiledBinary}\""
-      OBJECT_OUTPUTS "${PrecompiledBinary}"
-    )
-
-    SET_SOURCE_FILES_PROPERTIES(
-      ${Sources} PROPERTIES
-      COMPILE_FLAGS "/Yu\"${PrecompiledBinary}\" /FI\"${PrecompiledBinary}\" /Fp\"${PrecompiledBinary}\""
-      OBJECT_DEPENDS "${PrecompiledBinary}"
-    )
-  ELSEIF(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU" OR ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
-    ADD_CUSTOM_COMMAND(
-      OUTPUT ${PrecompiledBinary}
-      COMMAND "${CMAKE_CXX_COMPILER} -x c++-header -o ${PrecompiledBinary}"
-      COMMENT "Precompiling vpr_stdafx.h..."
-    )
-
-    SET_SOURCE_FILES_PROPERTIES(
-      ${Sources} PROPERTIES
-      COMPILE_FLAGS "-include ${PrecompiledHeader}"
-      OBJECT_DEPENDS "${PrecompiledBinary}"
-    )
-  ENDIF(MSVC)
-ENDMACRO(ADD_PRECOMPILED_HEADER)
-
 INCLUDE(ExternalProject)
-CMAKE_MINIMUM_REQUIRED(VERSION 3.3)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
 PROJECT(VulpesRender)
 
 SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON) 
@@ -82,11 +51,6 @@ FILE(GLOB COMMAND_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/command/*.cpp" "${CMAKE
 FILE(GLOB CORE "${CMAKE_CURRENT_SOURCE_DIR}/src/core/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/core/*.hpp")
 FILE(GLOB RESOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/resource/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/resource/*.hpp")
 FILE(GLOB RENDER "${CMAKE_CURRENT_SOURCE_DIR}/src/render/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/render/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/render/*.inl")
-
-FILE(GLOB PROJECT_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/util/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/command/*.cpp" 
-        "${CMAKE_CURRENT_SOURCE_DIR}/src/core/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/render/*.cpp" 
-        "${CMAKE_CURRENT_SOURCE_DIR}/src/resource/*.cpp")
-ADD_PRECOMPILED_HEADER("vpr_stdafx.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/vpr_stdafx.cpp" ${PROJECT_SOURCES})
 
 SOURCE_GROUP("util" FILES ${UTIL})
 SOURCE_GROUP("common" FILES ${COMMON})
