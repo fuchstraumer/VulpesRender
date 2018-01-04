@@ -35,11 +35,8 @@ namespace vpr {
     }
 
     void Instance::RecreateSurface() {
-        createSurfaceKHR();
-    }
-
-    void Instance::ResetSurface() {
         surface.reset();
+        createSurfaceKHR();
     }
 
     void Instance::createSurfaceKHR() {
