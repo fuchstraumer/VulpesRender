@@ -33,6 +33,9 @@ namespace vpr {
         const PhysicalDevice* GetPhysicalDevice() const noexcept;
         GLFWwindow* GetGLFWwindow() const noexcept;
         
+        void ResetSurface();
+        void RecreateSurface();
+        
     private:
 
         void setupPhysicalDevice();

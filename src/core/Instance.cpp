@@ -34,6 +34,14 @@ namespace vpr {
         physicalDevice = std::make_unique<PhysicalDevice>(vkHandle());
     }
 
+    void Instance::RecreateSurface() {
+        createSurfaceKHR();
+    }
+
+    void Instance::ResetSurface() {
+        surface.reset();
+    }
+
     void Instance::createSurfaceKHR() {
         surface = std::make_unique<SurfaceKHR>(this, window);
     }
