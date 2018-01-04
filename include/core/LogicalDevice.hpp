@@ -50,10 +50,6 @@ namespace vpr {
         /**! Returns whether or not the currently active physical device, along with the logical device, supports/has queues dedicated compute operations */
         bool HasDedicatedComputeQueues() const;
 
-        void EnableValidation();
-
-        void GetMarkerFuncPtrs();
-
         /**! Returns queue that has support for most operation types. First checks for graphics, compute, and transfer. 
         *    Then proceeds to graphics and compute. Lastly, it will just return a graphics-only queue and log a warning.
         *   \param idx - in the case of a device with several "generalized" queues, selects which queue to return.
@@ -93,13 +89,6 @@ namespace vpr {
         uint32_t GetPhysicalDeviceID() const noexcept;
         const PhysicalDevice& GetPhysicalDevice() const noexcept;
 
-        void vkSetObjectDebugMarkerName(const uint64_t& object_handle, const VkDebugReportObjectTypeEXT& object_type, const char* name) const;
-        void vkSetObjectDebugMarkerTag(const uint64_t& object_handle, const VkDebugReportObjectTypeEXT& object_type, uint64_t name, size_t tagSize, const void* tag) const;
-        void vkCmdBeginDebugMarkerRegion(VkCommandBuffer& cmd, const char* region_name, const glm::vec4& region_color) const;
-        void vkCmdInsertDebugMarker(VkCommandBuffer& cmd, const char* marker_name, const glm::vec4& marker_color) const;
-        void vkCmdEndDebugMarkerRegion(VkCommandBuffer& cmd) const;
-        bool MarkersEnabled;
-
         uint32_t NumGraphicsQueues = 0, NumComputeQueues = 0, NumTransferQueues = 0, NumSparseBindingQueues = 0;
         vkQueueFamilyIndices QueueFamilyIndices;
         std::vector<const char*> Extensions;
@@ -118,71 +107,8 @@ namespace vpr {
 
         std::map<VkQueueFlags, VkDeviceQueueCreateInfo> queueInfos;
 
-        PFN_vkDebugMarkerSetObjectTagEXT pfnDebugMarkerSetObjectTag;
-        PFN_vkDebugMarkerSetObjectNameEXT pfnDebugMarkerSetObjectName;
-        PFN_vkCmdDebugMarkerBeginEXT pfnCmdDebugMarkerBegin;
-        PFN_vkCmdDebugMarkerEndEXT pfnCmdDebugMarkerEnd;
-        PFN_vkCmdDebugMarkerInsertEXT pfnCmdDebugMarkerInsert;
     };
 
-
-    inline void Device::vkSetObjectDebugMarkerName(const uint64_t & object_handle, const VkDebugReportObjectTypeEXT & object_type, const char * name) const {
-
-        if (pfnDebugMarkerSetObjectName) {
-            VkDebugMarkerObjectNameInfoEXT name_info = vk_debug_marker_object_name_info_base;
-            name_info.objectType = object_type;
-            name_info.object = object_handle;
-            name_info.pObjectName = name;
-            VkResult result = pfnDebugMarkerSetObjectName(handle, &name_info);
-            VkAssert(result);
-        }
-
-    }
-
-    inline void Device::vkSetObjectDebugMarkerTag(const uint64_t & object_handle, const VkDebugReportObjectTypeEXT & object_type, uint64_t name, size_t tag_size, const void * tag) const {
-
-        if (pfnDebugMarkerSetObjectTag) {
-            VkDebugMarkerObjectTagInfoEXT tag_info{ VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT, nullptr };
-            tag_info.objectType = object_type;
-            tag_info.object = object_handle;
-            tag_info.tagName = name;
-            tag_info.tagSize = tag_size;
-            tag_info.pTag = tag;
-            pfnDebugMarkerSetObjectTag(handle, &tag_info);
-        }
-
-    }
-
-
-    inline void Device::vkCmdBeginDebugMarkerRegion(VkCommandBuffer & cmd, const char * region_name, const glm::vec4 & region_color) const {
-
-        if (pfnCmdDebugMarkerBegin) {
-            VkDebugMarkerMarkerInfoEXT marker_info{ VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT };
-            memcpy(marker_info.color, glm::value_ptr(region_color), sizeof(float) * 4);
-            marker_info.pMarkerName = region_name;
-            pfnCmdDebugMarkerBegin(cmd, &marker_info);
-        }
-
-    }
-
-    inline void Device::vkCmdInsertDebugMarker(VkCommandBuffer & cmd, const char * marker_name, const glm::vec4 & marker_color) const {
-
-        if (pfnCmdDebugMarkerInsert) {
-            VkDebugMarkerMarkerInfoEXT marker_info{ VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT };
-            memcpy(marker_info.color, glm::value_ptr(marker_color), sizeof(float) * 4);
-            marker_info.pMarkerName = marker_name;
-            pfnCmdDebugMarkerInsert(cmd, &marker_info);
-        }
-
-    }
-
-    inline void Device::vkCmdEndDebugMarkerRegion(VkCommandBuffer & cmd) const {
-
-        if (pfnCmdDebugMarkerEnd) {
-            pfnCmdDebugMarkerEnd(cmd);
-        }
-
-    }
 
 
 }

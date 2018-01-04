@@ -34,10 +34,6 @@ namespace vpr {
         VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, AllocCallbacks, &handle);
         VkAssert(result);
 
-        if (MarkersEnabled) {
-            GetMarkerFuncPtrs();
-        }
-
         vkAllocator = std::make_unique<Allocator>(this);
 
     }
@@ -251,33 +247,6 @@ namespace vpr {
             return true;
         }
         return false;
-    }
-
-    void Device::EnableValidation() {
-
-        std::vector<VkExtensionProperties> extensions;
-        uint32_t cnt = 0;
-        vkEnumerateDeviceExtensionProperties(parent->vkHandle(), nullptr, &cnt, nullptr);
-        extensions.resize(cnt);
-        vkEnumerateDeviceExtensionProperties(parent->vkHandle(), nullptr, &cnt, extensions.data());
-        for (auto& ext : extensions) {
-            if (!strcmp(ext.extensionName, VK_EXT_DEBUG_MARKER_EXTENSION_NAME)) {
-                MarkersEnabled = true;
-            }
-            else {
-                MarkersEnabled = false;
-            }
-        }
-
-    }
-
-    void Device::GetMarkerFuncPtrs() {
-        pfnDebugMarkerSetObjectTag = reinterpret_cast<PFN_vkDebugMarkerSetObjectTagEXT>(vkGetDeviceProcAddr(handle, "vkDebugMarkerSetObjectTagEXT"));
-        pfnDebugMarkerSetObjectName = reinterpret_cast<PFN_vkDebugMarkerSetObjectNameEXT>(vkGetDeviceProcAddr(handle, "vkDebugMarkerSetObjectNameEXT"));
-        pfnCmdDebugMarkerBegin = reinterpret_cast<PFN_vkCmdDebugMarkerBeginEXT>(vkGetDeviceProcAddr(handle, "vkCmdDebugMarkerBeginEXT"));
-        pfnCmdDebugMarkerEnd = reinterpret_cast<PFN_vkCmdDebugMarkerEndEXT>(vkGetDeviceProcAddr(handle, "vkCmdDebugMarkerEndEXT"));
-        pfnCmdDebugMarkerInsert = reinterpret_cast<PFN_vkCmdDebugMarkerInsertEXT>(vkGetDeviceProcAddr(handle, "vkCmdDebugMarkerInsertEXT"));
-    
     }
 
     VkQueue Device::GeneralQueue(const uint32_t & desired_idx) const {
