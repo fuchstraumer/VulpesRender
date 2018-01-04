@@ -39,7 +39,9 @@ namespace vpr {
         std::vector<VkDescriptorPoolSize> pool_sizes;
         
         for(const auto& entry : resourceTypes) {
-            pool_sizes.push_back(VkDescriptorPoolSize{ entry.first, static_cast<uint32_t>(entry.second) });
+            if (entry.second > 0) {
+                pool_sizes.push_back(VkDescriptorPoolSize{ entry.first, static_cast<uint32_t>(entry.second) });
+            }
         }
 
         VkDescriptorPoolCreateInfo pool_create_info = vk_descriptor_pool_create_info_base;
