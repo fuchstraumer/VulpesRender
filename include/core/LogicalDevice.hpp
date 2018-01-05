@@ -32,7 +32,6 @@ namespace vpr {
     public:
         
         Device(const Instance* instance, const PhysicalDevice* device);
-
         void SetupGraphicsQueues();
         void SetupComputeQueues();
         void SetupTransferQueues();
