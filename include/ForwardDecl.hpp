@@ -1,6 +1,8 @@
 #pragma once
 #ifndef VULPES_VK_FORWARD_DECL_H
 #define VULPES_VK_FORWARD_DECL_H
+
+struct GLFWwindow;
 namespace vpr {
     struct Allocation;
     class Allocator;

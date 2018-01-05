@@ -25,7 +25,8 @@ namespace vpr {
         Instance& operator=(const Instance &) = delete;
     public:
         
-        Instance(VkInstanceCreateInfo create_info, GLFWwindow* window, const uint32_t& width, const uint32_t& height);
+        Instance(const VkApplicationInfo* info, GLFWwindow* window, const uint32_t& width, const uint32_t& height);
+        Instance(const VkApplicationInfo* info, const char** extensions, const size_t extension_count, GLFWwindow* window, const uint32_t width, const uint32_t height);
         ~Instance();
 
         const VkInstance& vkHandle() const noexcept;

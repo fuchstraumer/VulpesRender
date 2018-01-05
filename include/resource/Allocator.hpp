@@ -261,8 +261,6 @@ namespace vpr {
 
     protected:
 
-        /** Used to protect access to the VkDeviceMemory handle, so that two threads don't attempt to map or use this handle at the same time. */
-        std::mutex memoryMutex; 
         VkDeviceSize availSize;
         uint32_t freeCount;
         VkDeviceMemory memory;

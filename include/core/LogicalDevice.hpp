@@ -4,6 +4,7 @@
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 #include "resource/Allocator.hpp"
+#include <map>
 
 namespace vpr {
 
@@ -90,8 +91,6 @@ namespace vpr {
 
         uint32_t NumGraphicsQueues = 0, NumComputeQueues = 0, NumTransferQueues = 0, NumSparseBindingQueues = 0;
         vkQueueFamilyIndices QueueFamilyIndices;
-        std::vector<const char*> Extensions;
-
         std::unique_ptr<Allocator> vkAllocator;
 
     private:

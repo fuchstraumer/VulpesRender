@@ -4,6 +4,7 @@
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 #include "CommandPool.hpp"
+#include <mutex>
 
 namespace vpr {
 

@@ -4,8 +4,10 @@
 #include "core/LogicalDevice.hpp"
 #include "core/PhysicalDevice.hpp"
 #include "util/easylogging++.h"
-
+#include <mutex>
 namespace vpr {
+
+    static std::mutex memoryMutex;
 
     VkBool32 AllocationRequirements::noNewAllocations = false;
 
