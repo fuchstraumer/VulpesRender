@@ -42,11 +42,6 @@ namespace vpr {
         mutable GLFWwindow* window;
         std::unique_ptr<PhysicalDevice> physicalDevice;
         std::unique_ptr<SurfaceKHR> surface;     
-        VkDebugReportCallbackEXT errorCallback;
-        VkDebugReportCallbackEXT warningCallback;
-        VkDebugReportCallbackEXT perfCallback;
-        VkDebugReportCallbackEXT infoCallback; 
-        VkDebugReportCallbackEXT vkCallback;
         VkInstance handle;
         VkInstanceCreateInfo createInfo;
         bool validationEnabled{ false };
