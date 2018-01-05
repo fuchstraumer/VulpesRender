@@ -75,12 +75,15 @@ FIND_LIBRARY(GLFW_3_LIB NAMES "libglfw3.a" HINTS "${PROJECT_SOURCE_DIR}/ext/lib"
   IF(APPLE)
   SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa -framework Metal -framework IOKit -framework CoreVideo")
   ENDIF()
+ELSEIF(UNIX)
+FIND_LIBRARY(GLFW_3_LIB NAMES "libglfw3.a" HINTS "${PROJECT_SOURCE_DIR}/ext/lib")
 ENDIF() 
 
 IF(APPLE)
   TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "${GLFW_3_LIB}" "${MoltenVK}")
 ELSEIF(UNIX)
-  TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "ext/lib/libglfw3.a" "$ENV{VULKAN_SDK}/lib/libvulkan.so" "dl" "pthread" "X11" "Xi" "Xrandr")  
+  TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "${GLFW_3_LIB}" "$ENV{VULKAN_SDK}/lib/libvulkan.so" "dl" "pthread" "X11" "Xi" "Xrandr") 
+  TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "-lstdc++fs")
 ELSEIF(WIN32)
   TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
 ENDIF()
@@ -133,7 +136,7 @@ INSTALL(DIRECTORY "ext/include/glm" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 INSTALL(DIRECTORY "ext/include/gli" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 INSTALL(DIRECTORY "ext/include/stb" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 INSTALL(TARGETS VulpesRender LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib")
-
+INSTALL(FILES "ext/lib/libglfw3.a" DESTINATION "${CMAKE_INSTALL_PREFIX}/lib")
 INSTALL(FILES "include/vpr_stdafx.h" "include/ForwardDecl.hpp" 
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/VulpesRender")
 
