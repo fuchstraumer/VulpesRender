@@ -89,8 +89,6 @@ ELSEIF(WIN32)
 ENDIF()
                         
 ADD_DEPENDENCIES(VulpesRender glfw3 glm)
-# GLM doesn't detect the compiler version correctly: defined as public since it will occur in files using this library if undefined.
-TARGET_COMPILE_DEFINITIONS(VulpesRender PUBLIC -DGLM_LANG_STL11_FORCED)
 
 # Temporary: need help to fix this one. Vulpes builds as 32-bit, somehow, but glfw builds as 64 bit?
 IF(UNIX)
