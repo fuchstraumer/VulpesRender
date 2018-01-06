@@ -10,7 +10,7 @@ namespace vpr {
     *   setting up the VkPipelineShaderStageCreateInfo required when creating/setting up an objects graphics pipeline.
     *   \ingroup Resources
     */
-    class ShaderModule {
+    class VPR_API ShaderModule {
         ShaderModule(const ShaderModule&) = delete;
         ShaderModule& operator=(const ShaderModule&) = delete;
     public:

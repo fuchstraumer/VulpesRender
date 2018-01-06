@@ -6,7 +6,7 @@
 
 namespace vpr {
 
-    class Semaphore {
+    class VPR_API Semaphore {
         Semaphore(const Semaphore&) = delete;
         Semaphore& operator=(const Semaphore&) = delete;
     public:

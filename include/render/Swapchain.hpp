@@ -25,7 +25,7 @@ namespace vpr {
     *   \todo Clean this up, update it for new coding standards/styles, and make more members private + add const access methods.
     *   \ingroup Rendering.
     */
-    class Swapchain {
+    class VPR_API Swapchain {
         Swapchain(const Swapchain&) = delete;
         Swapchain& operator=(const Swapchain&) = delete;
     public:
@@ -39,7 +39,6 @@ namespace vpr {
 
         void Destroy();
 
-        std::unique_ptr<SwapchainInfo> Info;
 
         const VkSwapchainKHR& vkHandle() const;
         operator VkSwapchainKHR() const;
@@ -54,6 +53,7 @@ namespace vpr {
 
     private:
 
+        std::unique_ptr<SwapchainInfo> Info;
         void setParameters();
         void setupCreateInfo();
         void setupSwapImages();

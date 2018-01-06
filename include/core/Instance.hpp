@@ -20,7 +20,7 @@ namespace vpr {
     *    These can both be retrieved through the relevant methods.
     *    \ingroup Core
     */
-    class Instance  {
+    class VPR_API Instance  {
         Instance(const Instance &) = delete;
         Instance& operator=(const Instance &) = delete;
     public:

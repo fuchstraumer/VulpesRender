@@ -8,7 +8,7 @@
 
 namespace vpr {
 
-    struct vkQueueFamilyIndices {
+    struct VPR_API vkQueueFamilyIndices {
         // indices into queue families.
         uint32_t Graphics = std::numeric_limits<uint32_t>::max(), 
                  Compute = std::numeric_limits<uint32_t>::max(), 
@@ -25,7 +25,7 @@ namespace vpr {
     *   handle. 
     *   \ingroup Core
     */
-    class Device {
+    class VPR_API Device {
         Device(const Device&) = delete;
         Device(Device&&) = delete;
         Device& operator=(const Device&) = delete;

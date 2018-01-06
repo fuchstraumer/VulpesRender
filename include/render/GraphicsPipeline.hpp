@@ -24,7 +24,7 @@ namespace vpr {
     *   - RasterizationInfo: Set culling mode, winding direction, and polygon rendering mode.
     *   \ingroup Rendering
     */
-    struct GraphicsPipelineInfo {
+    struct VPR_API GraphicsPipelineInfo {
         VkPipelineInputAssemblyStateCreateInfo AssemblyInfo = vk_pipeline_input_assembly_create_info_base;
         VkPipelineRasterizationStateCreateInfo RasterizationInfo = vk_pipeline_rasterization_create_info_base;
         VkPipelineColorBlendStateCreateInfo ColorBlendInfo = vk_pipeline_color_blend_create_info_base;
@@ -54,7 +54,7 @@ namespace vpr {
     *   created pipeline, and due to how complex it is.
     *   \ingroup Rendering
     */
-    class GraphicsPipeline {
+    class VPR_API GraphicsPipeline {
         GraphicsPipeline(const GraphicsPipeline&) = delete;
         GraphicsPipeline& operator=(const GraphicsPipeline&) = delete;
     public:

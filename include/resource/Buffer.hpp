@@ -18,7 +18,7 @@ namespace vpr {
     *   after creating the VkBuffer object.
     *   \ingroup Resources
     */
-    class Buffer {
+    class VPR_API Buffer {
         Buffer(const Buffer&) = delete;
         Buffer& operator=(const Buffer&) = delete;
     public:

@@ -6,7 +6,7 @@
 
 namespace vpr {
 
-    class Fence {
+    class VPR_API Fence {
         Fence(const Fence&) = delete;
         Fence& operator=(const Fence&) = delete;
     public:

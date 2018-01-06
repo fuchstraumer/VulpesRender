@@ -18,7 +18,7 @@ namespace vpr {
     *    \todo Remove redundant num_buffers parameter from AllocateCmdBuffers, make the primary/secondary level selected upon alloc not construction.
     *    \ingroup Command
     */
-    class CommandPool {
+    class VPR_API CommandPool {
         CommandPool(const CommandPool&) = delete;
         CommandPool& operator=(const CommandPool&) = delete;
     public:

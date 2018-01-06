@@ -31,3 +31,11 @@
 #include "common/vkAssert.hpp"
 #include "common/vk_constants.hpp"
 
+#ifdef VPR_DLL
+#define VPR_API __declspec(dllimport)
+#elif defined(VPR_BUILD_DLL)
+#define VPR_API __declspec(dllexport)
+#else
+#define VPR_API
+#endif
+

@@ -11,7 +11,7 @@ namespace vpr {
     *   for various scenes. 
     *   \ingroup Rendering
     */
-    class Renderpass {
+    class VPR_API Renderpass {
         Renderpass(const Renderpass&) = delete;
         Renderpass& operator=(const Renderpass&) = delete;
     public:

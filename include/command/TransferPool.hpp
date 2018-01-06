@@ -23,7 +23,7 @@ namespace vpr {
         0,
     };
 
-    class TransferPool : public CommandPool {
+    class VPR_API TransferPool : public CommandPool {
         TransferPool(TransferPool&& other) = delete;
         TransferPool& operator=(TransferPool&& other) = delete;
     public:

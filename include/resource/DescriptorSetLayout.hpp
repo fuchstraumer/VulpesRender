@@ -7,7 +7,7 @@
 
 namespace vpr {
 
-    class DescriptorSetLayout {
+    class VPR_API DescriptorSetLayout {
     public:
 
         DescriptorSetLayout(const Device* _dvc);

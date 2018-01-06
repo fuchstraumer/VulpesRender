@@ -12,7 +12,7 @@ namespace vpr {
     *   \todo Update the latter two parameters of the constructor to use a transfer pool (reducing to one parameter)
     *   \ingroup Rendering
     */
-    class DepthStencil : public Image {
+    class VPR_API DepthStencil : public Image {
     public:
 
         DepthStencil(const Device* _parent, const VkExtent3D& extents, CommandPool* cmd, VkQueue & queue);

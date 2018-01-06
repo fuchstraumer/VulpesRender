@@ -11,7 +11,7 @@ namespace vpr {
     *   \ingroup Resources
     *   \todo Check validity of default parameters, consider folding/cleaning up the static CreateImage methods 
     */
-    class Image {
+    class VPR_API Image {
         Image(const Image&) = delete;
         Image& operator=(const Image&) = delete;
     public:

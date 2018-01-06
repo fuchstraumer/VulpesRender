@@ -10,7 +10,7 @@ namespace vpr {
     *   will have bound to it. 
     *   \ingroup Resources
     */
-    class PipelineLayout {
+    class VPR_API PipelineLayout {
         PipelineLayout(const PipelineLayout&) = delete;
         PipelineLayout& operator=(const PipelineLayout&) = delete;
     public:
