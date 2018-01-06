@@ -17,6 +17,23 @@
 #pragma message("No valid platform detected for Vulkan!")
 #endif
 
+
+#if defined(__GNUC__)
+    #define EXPORT __attribute__((visibility("default")))
+    #define IMPORT
+#else
+    #define EXPORT __declspec(dllexport)
+    #define IMPORT __declspec(dllimport)
+#endif
+
+#ifdef VPR_DLL
+#define VPR_API EXPORT
+#elif defined(VPR_BUILD_DLL)
+#define VPR_API IMPORT
+#else
+#define VPR_API
+#endif
+
 #define GLFW_INCLUDE_VULKAN
 
 #define GLM_FORCE_RADIANS
@@ -31,11 +48,4 @@
 #include "common/vkAssert.hpp"
 #include "common/vk_constants.hpp"
 
-#ifdef VPR_DLL
-#define VPR_API __declspec(dllimport)
-#elif defined(VPR_BUILD_DLL)
-#define VPR_API __declspec(dllexport)
-#else
-#define VPR_API
-#endif
 

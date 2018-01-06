@@ -23,6 +23,9 @@ IF(APPLE)
   SET(APPLE_VK_LIB "-DVULKAN_LIBRARY=${MoltenVK}")
 ENDIF()
 
+OPTION(BUILD_DYNAMIC_LIBRARY "Build VPR as a dynamic library" OFF)
+
+
 ExternalProject_Add(glfw3
   PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/glfw"
   GIT_REPOSITORY "https://github.com/glfw/glfw.git"
@@ -49,7 +52,7 @@ FILE(GLOB UTIL "${CMAKE_CURRENT_SOURCE_DIR}/src/util/*.cc" "${CMAKE_CURRENT_SOUR
 FILE(GLOB COMMON "${CMAKE_CURRENT_SOURCE_DIR}/src/common/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/common/*.hpp")
 FILE(GLOB COMMAND_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/command/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/command/*.hpp")
 FILE(GLOB CORE "${CMAKE_CURRENT_SOURCE_DIR}/src/core/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/core/*.hpp")
-FILE(GLOB RESOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/resource/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/resource/*.hpp")
+FILE(GLOB RESOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/resource/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/resource/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/resource/*.inl")
 FILE(GLOB RENDER "${CMAKE_CURRENT_SOURCE_DIR}/src/render/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/render/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/render/*.inl")
 
 SOURCE_GROUP("util" FILES ${UTIL})
@@ -61,7 +64,7 @@ SOURCE_GROUP("render" FILES ${RENDER})
 SOURCE_GROUP("shaders" FILES ${SHADERS})
 SOURCE_GROUP("imgui" FILES ${IMGUI})
 
-ADD_LIBRARY(VulpesRender STATIC "${CMAKE_CURRENT_SOURCE_DIR}/include/vpr_stdafx.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/vpr_stdafx.cpp" 
+ADD_LIBRARY(VulpesRender STATIC "${CMAKE_CURRENT_SOURCE_DIR}/include/vpr_stdafx.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/ForwardDecl.hpp" ${UTIL} ${COMMON} ${COMMAND_FILES} ${IMGUI}
     ${CORE} ${RESOURCES} ${RENDER} ${SHADERS})
 
@@ -69,7 +72,9 @@ ADD_LIBRARY(VulpesRender STATIC "${CMAKE_CURRENT_SOURCE_DIR}/include/vpr_stdafx.
 IF(MSVC)
 TARGET_COMPILE_OPTIONS(VulpesRender PUBLIC "/std:c++17" "/Gm")
 ENDIF()
-
+IF (BUILD_DYNAMIC_LIBRARY) 
+  TARGET_COMPILE_DEFINITIONS(VulpesRender PRIVATE -DVPR_BUILD_DLL)
+ENDIF()
 IF(APPLE)
 FIND_LIBRARY(GLFW_3_LIB NAMES "libglfw3.a" HINTS "${PROJECT_SOURCE_DIR}/ext/lib")
   IF(APPLE)
