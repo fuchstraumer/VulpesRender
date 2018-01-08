@@ -1,4 +1,7 @@
 namespace vpr {
+
+    template<>
+    inline void Texture<texture_2d_t>::updateTextureParameters(const texture_2d_t& txdata);
     
     template<typename texture_type>
     inline Texture<texture_type>::Texture(const Device * _parent, const VkImageUsageFlags & flags) : Image(_parent) {
@@ -108,6 +111,15 @@ namespace vpr {
         Depth = 1;
         mipLevels = static_cast<uint32_t>(texture_data.levels());
         layerCount = static_cast<uint32_t>(texture_data.layers());
+    }
+
+    template<>
+    inline void Texture<texture_2d_t>::updateTextureParameters(const texture_2d_t& txdata) {
+        Width = static_cast<uint32_t>(txdata.extent().width);
+        Height = static_cast<uint32_t>(txdata.extent().height);
+        Depth = 1;
+        mipLevels = static_cast<uint32_t>(txdata.levels());
+        layerCount = static_cast<uint32_t>(txdata.layers());
     }
 
     template<>
