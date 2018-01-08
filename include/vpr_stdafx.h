@@ -36,12 +36,6 @@
 
 #define GLFW_INCLUDE_VULKAN
 
-#define GLM_FORCE_RADIANS
-#define GLM_FORCE_DEPTH_ZERO_TO_ONE
-#define GLM_ENABLE_EXPERIMENTAL
-#define GLM_LANG_STL11_FORCED
-#include "glm/glm.hpp"
-
 #pragma warning(pop)
 
 #include "common/CreateInfoBase.hpp"

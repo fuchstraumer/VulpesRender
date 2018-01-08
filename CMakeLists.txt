@@ -42,11 +42,6 @@ ExternalProject_Add(glfw3
     "${APPLE_VK_LIB}"
     "${APPLE_VK_INCLUDE}")
 
-ExternalProject_Add(glm
-    PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/glm"
-    GIT_REPOSITORY "https://github.com/g-truc/glm.git"
-    CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
-
 FILE(GLOB UTIL "${CMAKE_CURRENT_SOURCE_DIR}/src/util/*.cc" "${CMAKE_CURRENT_SOURCE_DIR}/src/util/*.cpp" 
     "${CMAKE_CURRENT_SOURCE_DIR}/include/util/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/include/util/*.hpp")
 FILE(GLOB COMMON "${CMAKE_CURRENT_SOURCE_DIR}/src/common/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/common/*.hpp")
@@ -93,7 +88,7 @@ ELSEIF(WIN32)
   TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
 ENDIF()
                         
-ADD_DEPENDENCIES(VulpesRender glfw3 glm)
+ADD_DEPENDENCIES(VulpesRender glfw3)
 
 # Temporary: need help to fix this one. Vulpes builds as 32-bit, somehow, but glfw builds as 64 bit?
 IF(UNIX)
@@ -135,7 +130,6 @@ ENDIF()
 # Easier to gather headers this way, so we can more cleanly set where they end up.
 INSTALL(DIRECTORY "include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/VulpesRender/")
 INSTALL(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ext/include/GLFW" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
-INSTALL(DIRECTORY "ext/include/glm" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 INSTALL(DIRECTORY "ext/include/gli" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 INSTALL(DIRECTORY "ext/include/stb" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 INSTALL(TARGETS VulpesRender LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib")

@@ -59,8 +59,8 @@ namespace vpr {
             return pixels;
         }
 
-        glm::vec2 extent() const noexcept {
-            return glm::vec2(x, y);
+        VkExtent2D extent() const noexcept {
+            return VkExtent2D{ static_cast<uint32_t>(x), static_cast<uint32_t>(y) };
         }
 
         int levels() const noexcept {
