@@ -20,12 +20,13 @@ namespace vpr {
     *    These can both be retrieved through the relevant methods.
     *    \ingroup Core
     */
-    class Instance  {
+    class VPR_API Instance  {
         Instance(const Instance &) = delete;
         Instance& operator=(const Instance &) = delete;
     public:
         
-        Instance(VkInstanceCreateInfo create_info, GLFWwindow* window, const uint32_t& width, const uint32_t& height);
+        Instance(const VkApplicationInfo* info, GLFWwindow* window, const uint32_t& width, const uint32_t& height);
+        Instance(const VkApplicationInfo* info, const char** extensions, const size_t extension_count, GLFWwindow* window, const uint32_t width, const uint32_t height);
         ~Instance();
 
         const VkInstance& vkHandle() const noexcept;
@@ -42,11 +43,6 @@ namespace vpr {
         mutable GLFWwindow* window;
         std::unique_ptr<PhysicalDevice> physicalDevice;
         std::unique_ptr<SurfaceKHR> surface;     
-        VkDebugReportCallbackEXT errorCallback;
-        VkDebugReportCallbackEXT warningCallback;
-        VkDebugReportCallbackEXT perfCallback;
-        VkDebugReportCallbackEXT infoCallback; 
-        VkDebugReportCallbackEXT vkCallback;
         VkInstance handle;
         VkInstanceCreateInfo createInfo;
         bool validationEnabled{ false };

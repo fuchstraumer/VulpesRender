@@ -15,7 +15,7 @@ namespace vpr {
     *   set based on the MSAA_SampleCount member of the VulpesInstanceConfig struct.
     *   \ingroup Rendering
     */
-    class Multisampling {
+    class VPR_API Multisampling {
         Multisampling(const Multisampling&) = delete;
         Multisampling& operator=(const Multisampling&) = delete;
     public:

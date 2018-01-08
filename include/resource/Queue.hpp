@@ -3,10 +3,10 @@
 #define VULPESRENDER_QUEUE_HPP
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
-
+#include <mutex>
 namespace vpr {
     
-    class Queue {
+    class VPR_API Queue {
     public:
 
         Queue(const VkQueue& handle, const Device* dvc);

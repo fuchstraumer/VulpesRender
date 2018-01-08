@@ -4,10 +4,11 @@
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 #include "resource/Allocator.hpp"
+#include <map>
 
 namespace vpr {
 
-    struct vkQueueFamilyIndices {
+    struct VPR_API vkQueueFamilyIndices {
         // indices into queue families.
         uint32_t Graphics = std::numeric_limits<uint32_t>::max(), 
                  Compute = std::numeric_limits<uint32_t>::max(), 
@@ -24,7 +25,7 @@ namespace vpr {
     *   handle. 
     *   \ingroup Core
     */
-    class Device {
+    class VPR_API Device {
         Device(const Device&) = delete;
         Device(Device&&) = delete;
         Device& operator=(const Device&) = delete;
@@ -32,7 +33,6 @@ namespace vpr {
     public:
         
         Device(const Instance* instance, const PhysicalDevice* device);
-
         void SetupGraphicsQueues();
         void SetupComputeQueues();
         void SetupTransferQueues();
@@ -91,8 +91,6 @@ namespace vpr {
 
         uint32_t NumGraphicsQueues = 0, NumComputeQueues = 0, NumTransferQueues = 0, NumSparseBindingQueues = 0;
         vkQueueFamilyIndices QueueFamilyIndices;
-        std::vector<const char*> Extensions;
-
         std::unique_ptr<Allocator> vkAllocator;
 
     private:

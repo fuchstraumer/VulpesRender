@@ -6,6 +6,11 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 
 SET(CMAKE_CXX_STANDARD 17)
 SET(CMAKE_CXX_STANDARD_REQUIRED ON)
+OPTION(BUILD_DYNAMIC_LIBRARY "Build VPR as a dynamic library" OFF)
+
+IF(BUILD_DYNAMIC_LIBRARY)
+    SET(BUILD_SHARED_LIBS ON)
+ENDIF()
 
 IF(NOT MSVC) # compile commands used for clang-format and clang-tidy
     SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -23,6 +28,7 @@ IF(APPLE)
   SET(APPLE_VK_LIB "-DVULKAN_LIBRARY=${MoltenVK}")
 ENDIF()
 
+
 ExternalProject_Add(glfw3
   PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/glfw"
   GIT_REPOSITORY "https://github.com/glfw/glfw.git"
@@ -30,26 +36,21 @@ ExternalProject_Add(glfw3
   BUILD_IN_SOURCE 1
   CMAKE_ARGS 
     "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext/"
-    "-DGLFW_BUILD_SHARED_LIBS=ON"
     "-DGLFW_BUILD_EXAMPLES=OFF"
     "-DGLFW_BUILD_TESTS=OFF"
     "-DGLFW_BUILD_DOCS=OFF"
     "-DGLFW_DOCUMENT_INTERNALS=OFF"
     "-DUSE_MSVC_RUNTIME_LIBRARY_DLL=ON"
+    "-DGLFW_USE_RETINA=ON"
     "${APPLE_VK_LIB}"
     "${APPLE_VK_INCLUDE}")
-
-ExternalProject_Add(glm
-    PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/download/glm"
-    GIT_REPOSITORY "https://github.com/g-truc/glm.git"
-    CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_SOURCE_DIR}/ext")
 
 FILE(GLOB UTIL "${CMAKE_CURRENT_SOURCE_DIR}/src/util/*.cc" "${CMAKE_CURRENT_SOURCE_DIR}/src/util/*.cpp" 
     "${CMAKE_CURRENT_SOURCE_DIR}/include/util/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/include/util/*.hpp")
 FILE(GLOB COMMON "${CMAKE_CURRENT_SOURCE_DIR}/src/common/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/common/*.hpp")
 FILE(GLOB COMMAND_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/command/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/command/*.hpp")
 FILE(GLOB CORE "${CMAKE_CURRENT_SOURCE_DIR}/src/core/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/core/*.hpp")
-FILE(GLOB RESOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/resource/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/resource/*.hpp")
+FILE(GLOB RESOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/resource/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/resource/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/resource/*.inl")
 FILE(GLOB RENDER "${CMAKE_CURRENT_SOURCE_DIR}/src/render/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/render/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/render/*.inl")
 
 SOURCE_GROUP("util" FILES ${UTIL})
@@ -60,23 +61,36 @@ SOURCE_GROUP("resource" FILES ${RESOURCES})
 SOURCE_GROUP("render" FILES ${RENDER})
 SOURCE_GROUP("shaders" FILES ${SHADERS})
 SOURCE_GROUP("imgui" FILES ${IMGUI})
-
-ADD_LIBRARY(VulpesRender STATIC "${CMAKE_CURRENT_SOURCE_DIR}/include/vpr_stdafx.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/vpr_stdafx.cpp" 
+IF(BUILD_DYNAMIC_LIBRARY) 
+ADD_LIBRARY(VulpesRender SHARED "${CMAKE_CURRENT_SOURCE_DIR}/include/vpr_stdafx.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/ForwardDecl.hpp" ${UTIL} ${COMMON} ${COMMAND_FILES} ${IMGUI}
     ${CORE} ${RESOURCES} ${RENDER} ${SHADERS})
+ELSE()
+ADD_LIBRARY(VulpesRender STATIC "${CMAKE_CURRENT_SOURCE_DIR}/include/vpr_stdafx.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/ForwardDecl.hpp" ${UTIL} ${COMMON} ${COMMAND_FILES} ${IMGUI}
+    ${CORE} ${RESOURCES} ${RENDER} ${SHADERS})
+ENDIF()
 
 #Enable minimal rebuild, and manually set c++17 standard since it doesn't get set right otherwise.
 IF(MSVC)
-TARGET_COMPILE_OPTIONS(VulpesRender PUBLIC "/std:c++17" "/Gm")
+    TARGET_COMPILE_OPTIONS(VulpesRender PUBLIC "/std:c++17" "/Gm")
 ENDIF()
 
-IF(APPLE)
-FIND_LIBRARY(GLFW_3_LIB NAMES "libglfw3.a" HINTS "${PROJECT_SOURCE_DIR}/ext/lib")
-  IF(APPLE)
-  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa -framework Metal -framework IOKit -framework CoreVideo")
-  ENDIF()
-ELSEIF(UNIX)
-FIND_LIBRARY(GLFW_3_LIB NAMES "libglfw3.a" HINTS "${PROJECT_SOURCE_DIR}/ext/lib")
+IF (BUILD_DYNAMIC_LIBRARY) 
+  TARGET_COMPILE_DEFINITIONS(VulpesRender PRIVATE -DVPR_BUILD_DLL)
+ENDIF()
+
+IF(BUILD_DYNAMIC_LIBRARY) 
+    SET(LIB_GLFW_NAME "libglfw3dll.a")
+ELSE()
+    SET(LIB_GLFW_NAME "libglfw3dll.a")
+ENDIF()
+
+IF(NOT WIN32)
+    FIND_LIBRARY(GLFW_3_LIB NAMES ${LIB_GLFW_NAME} HINTS "${PROJECT_SOURCE_DIR}/ext/lib")
+    IF(APPLE)
+        SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa -framework Metal -framework IOKit -framework CoreVideo")
+    ENDIF()
 ENDIF() 
 
 IF(APPLE)
@@ -85,17 +99,20 @@ ELSEIF(UNIX)
   TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "${GLFW_3_LIB}" "$ENV{VULKAN_SDK}/lib/libvulkan.so" "dl" "pthread" "X11" "Xi" "Xrandr") 
   TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "-lstdc++fs")
 ELSEIF(WIN32)
-  TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib" "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
+    IF(BUILD_DYNAMIC_LIBRARY)
+        TARGET_LINK_LIBRARIES(VulpesRender PUBLIC "${PROJECT_SOURCE_DIR}/ext/lib/glfw3dll.lib")
+        TARGET_LINK_LIBRARIES(VulpesRender PUBLIC "${PROJECT_SOURCE_DIR}/ext/lib/vulkan-1.lib")
+    ELSE()
+        TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "${PROJECT_SOURCE_DIR}/ext/lib/glfw3.lib")
+        TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib")
+    ENDIF()
 ENDIF()
                         
-ADD_DEPENDENCIES(VulpesRender glfw3 glm)
-# GLM doesn't detect the compiler version correctly: defined as public since it will occur in files using this library if undefined.
-TARGET_COMPILE_DEFINITIONS(VulpesRender PUBLIC -DGLM_LANG_STL11_FORCED)
+ADD_DEPENDENCIES(VulpesRender glfw3)
 
 # Temporary: need help to fix this one. Vulpes builds as 32-bit, somehow, but glfw builds as 64 bit?
 IF(UNIX)
-TARGET_COMPILE_OPTIONS(VulpesRender PUBLIC "-m64")
-#TARGET_COMPILE_OPTIONS(VulpesRender PRIVATE "-fPIC")
+    TARGET_COMPILE_OPTIONS(VulpesRender PUBLIC "-m64")
 ENDIF()
 
 IF(MSVC) 
@@ -132,7 +149,6 @@ ENDIF()
 # Easier to gather headers this way, so we can more cleanly set where they end up.
 INSTALL(DIRECTORY "include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/VulpesRender/")
 INSTALL(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ext/include/GLFW" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
-INSTALL(DIRECTORY "ext/include/glm" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 INSTALL(DIRECTORY "ext/include/gli" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 INSTALL(DIRECTORY "ext/include/stb" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 INSTALL(TARGETS VulpesRender LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib")

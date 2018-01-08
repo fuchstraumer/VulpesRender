@@ -3,6 +3,7 @@
 #define VULPES_VK_DESCRIPTOR_POOL_H
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
+#include <map>
 
 namespace vpr {
 
@@ -11,7 +12,7 @@ namespace vpr {
     *   \todo Try to set up a better request-based system for deciding how many descriptors of which types to allocate.
     *   \ingroup Resources
     */
-    class DescriptorPool {
+    class VPR_API DescriptorPool {
         DescriptorPool(const DescriptorPool&) = delete;
         DescriptorPool& operator=(const DescriptorPool&) = delete;
     public:

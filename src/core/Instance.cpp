@@ -3,12 +3,20 @@
 #include "core/PhysicalDevice.hpp"
 #include "render/SurfaceKHR.hpp"
 #include "util/easylogging++.h"
-
+#include "GLFW/glfw3.h"
+#if defined(_WIN32) 
+#undef APIENTRY
+#define GLFW_EXPOSE_NATIVE_WIN32
+#define GLFW_EXPOSE_NATIVE_WGL
+#include "GLFW/glfw3native.h"
+#endif
 namespace vpr {
     
-    Instance::Instance(VkInstanceCreateInfo create_info, GLFWwindow* _window, const uint32_t& _width, const uint32_t& _height) : window(_window) {
+    Instance::Instance(const VkApplicationInfo*info, GLFWwindow* _window, const uint32_t& _width, const uint32_t& _height) : window(_window) {
 
-        createInfo = create_info;
+        createInfo = VkInstanceCreateInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0,
+            info, 0, nullptr
+        };
         uint32_t ext_cnt = 0;
         const char** ext_names;
         ext_names = glfwGetRequiredInstanceExtensions(&ext_cnt);
@@ -28,6 +36,9 @@ namespace vpr {
         setupPhysicalDevice();
         createSurfaceKHR();
 
+    }
+
+    Instance::Instance(const VkApplicationInfo * info, const char ** extensions, const size_t extension_count, GLFWwindow * window, const uint32_t width, const uint32_t height) {
     }
 
     void Instance::setupPhysicalDevice(){

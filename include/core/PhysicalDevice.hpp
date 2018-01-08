@@ -13,7 +13,7 @@ namespace vpr {
     *    As each computer can have multiple physical devices, the class uses a simplistic scoring system to find the "best" hardware on the current system.
     *    \ingroup Core
     */
-    class PhysicalDevice {
+    class VPR_API PhysicalDevice {
         PhysicalDevice(const PhysicalDevice& other) = delete;
         PhysicalDevice& operator=(const PhysicalDevice& other) = delete;
     public:

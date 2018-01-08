@@ -16,7 +16,7 @@ namespace vpr {
     *   - for use with dynamic shader editing and recompiliation, which requires a pipeline recreation to propagate changes
     *   \ingroup Resources 
     */
-    class PipelineCache {
+    class VPR_API PipelineCache {
         PipelineCache(const PipelineCache& other) = delete;
         PipelineCache& operator=(const PipelineCache& other) = delete;
     public:

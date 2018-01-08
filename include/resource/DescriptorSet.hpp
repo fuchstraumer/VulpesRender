@@ -9,7 +9,7 @@ namespace vpr {
     /** RAII wrapper around a descriptor set, simplifying adding individual descriptor bindings for whatever stage they're required at.
     *   \ingroup Resources
     */
-    class DescriptorSet {
+    class VPR_API DescriptorSet {
         DescriptorSet(const DescriptorSet&) = delete;
         DescriptorSet& operator=(const DescriptorSet&) = delete;
     public:

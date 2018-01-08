@@ -1,13 +1,14 @@
 #pragma once
 #ifndef VPR_DESCRIPTOR_SET_LAYOUT_HPP
 #define VPR_DESCRIPTOR_SET_LAYOUT_HPP
+#include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 #include <vulkan/vulkan.h>
 #include <map>
 
 namespace vpr {
 
-    class DescriptorSetLayout {
+    class VPR_API DescriptorSetLayout {
     public:
 
         DescriptorSetLayout(const Device* _dvc);

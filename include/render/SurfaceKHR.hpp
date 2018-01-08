@@ -6,7 +6,7 @@
 
 namespace vpr {
 
-    class SurfaceKHR {
+    class VPR_API SurfaceKHR {
     public:
 
         SurfaceKHR(const Instance* _parent, GLFWwindow* window);

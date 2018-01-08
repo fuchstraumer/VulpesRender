@@ -14,7 +14,7 @@ namespace vpr {
     *   how to setup this class is provided by the VkFramebufferCreateInfo struct in the constructor.
     *   \ingroup Rendering
     */
-    class Framebuffer {
+    class VPR_API Framebuffer {
         Framebuffer(const Framebuffer&) = delete;
         Framebuffer& operator=(const Framebuffer&) = delete;
     public:

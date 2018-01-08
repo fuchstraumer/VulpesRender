@@ -3,7 +3,13 @@
 #include "core/Instance.hpp"
 #include "core/PhysicalDevice.hpp"
 #include "core/LogicalDevice.hpp"
-
+#include "GLFW/glfw3.h"
+#if defined(_WIN32) 
+#undef APIENTRY
+#define GLFW_EXPOSE_NATIVE_WIN32
+#define GLFW_EXPOSE_NATIVE_WGL
+#include "GLFW/glfw3native.h"
+#endif
 namespace vpr {
 
     SwapchainInfo::SwapchainInfo(const VkPhysicalDevice & dvc, const VkSurfaceKHR& sfc){

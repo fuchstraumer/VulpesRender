@@ -71,7 +71,7 @@ namespace vpr {
     /** This struct is the primary item submitted to allocator methods for resource creation.
      *  \ingroup Allocator
      */
-    struct AllocationRequirements {
+    struct VPR_API AllocationRequirements {
         /** Defaults to false. If true, no new allocations are created beyond
         * the set created upon initilization of the allocator system. */
         static VkBool32 noNewAllocations;
@@ -140,7 +140,7 @@ namespace vpr {
     *    of attached DeviceMemory) or a block allocation (bound to sub-region of device memory)
     *   \ingroup Allocator
     */
-    struct Allocation {
+    struct VPR_API Allocation {
 
         /** If this is an allocation bound to a smaller region of a larger object, it is a block allocation. 
          *  Otherwise, it has it's own VkDeviceMemory object and is a "PRIVATE_ALLOCATION" type.
@@ -188,7 +188,7 @@ namespace vpr {
     *   other objects, and several of these of each type can exist (occurs when a memory block is fully used, until no more memory available).
     *   \ingroup Allocator
     */
-    class MemoryBlock {
+    class VPR_API MemoryBlock {
     public:
 
         MemoryBlock(Allocator* alloc);
@@ -261,8 +261,6 @@ namespace vpr {
 
     protected:
 
-        /** Used to protect access to the VkDeviceMemory handle, so that two threads don't attempt to map or use this handle at the same time. */
-        std::mutex memoryMutex; 
         VkDeviceSize availSize;
         uint32_t freeCount;
         VkDeviceMemory memory;
@@ -320,7 +318,7 @@ namespace vpr {
      *  checking integrity of memory, and cleaning up after itself and when deallocation has been requested.
      *  \ingroup Allocator
      */
-    class Allocator {
+    class VPR_API Allocator {
         Allocator(const Allocator&) = delete;
         Allocator(Allocator&&) = delete;
         Allocator& operator=(const Allocator&) = delete;
