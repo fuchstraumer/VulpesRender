@@ -8,6 +8,7 @@
 #include <vector>
 #include <array>
 #include <memory>
+#include <cassert>
 
 #if defined(_WIN32) || defined(__linux__)
 #include "vulkan/vulkan.h"
@@ -16,7 +17,6 @@
 #else
 #pragma message("No valid platform detected for Vulkan!")
 #endif
-
 
 #if defined(__GNUC__)
     #define EXPORT __attribute__((visibility("default")))
@@ -27,11 +27,15 @@
 #endif
 
 #ifdef VPR_DLL
-#define VPR_API EXPORT
-#elif defined(VPR_BUILD_DLL)
 #define VPR_API IMPORT
+#elif defined(VPR_BUILD_DLL)
+#define VPR_API EXPORT
 #else
 #define VPR_API
+#endif
+
+#if defined (VPR_DLL) || defined (VPR_BUILD_DLL)
+#define GLFW_DLL
 #endif
 
 #define GLFW_INCLUDE_VULKAN
