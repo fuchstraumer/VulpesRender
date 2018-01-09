@@ -7,7 +7,13 @@
 #include "resource/Buffer.hpp"
 #include "core/LogicalDevice.hpp"
 #include "Image.hpp"
+#ifdef GLM_ENABLE_EXPERIMENTAL
+#undef GLM_ENABLE_EXPERIMENTAL
 #include "gli/gli.hpp"
+#define GLM_ENABLE_EXPERIMENTAL
+#else
+#include "gli/hli.hpp"
+#endif
 #include "stb/stb_image.h"
 
 namespace vpr {
