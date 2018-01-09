@@ -975,7 +975,6 @@ namespace vpr {
         // Get memory info.
         VkMemoryRequirements memreqs;
         vkGetImageMemoryRequirements(parent->vkHandle(), image_handle, &memreqs);
-        size_t mem_sz = memreqs.size;
         return AllocateMemory(memreqs, details, alloc_type, dest_allocation);
     }
 

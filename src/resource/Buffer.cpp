@@ -203,7 +203,7 @@ namespace vpr {
         stagingBuffers.shrink_to_fit();
     }
 
-    void Buffer::createStagingBuffer(const VkDeviceSize & staging_size, const VkDeviceSize & offset, VkBuffer & staging_buffer, Allocation& dest_memory_alloc){
+    void Buffer::createStagingBuffer(const VkDeviceSize & staging_size, VkBuffer & staging_buffer, Allocation& dest_memory_alloc){
         
         VkBufferCreateInfo create_info = vk_buffer_create_info_base;
         create_info.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;

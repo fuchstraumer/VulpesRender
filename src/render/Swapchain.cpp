@@ -62,7 +62,7 @@ namespace vpr {
 
     }
 
-    VkExtent2D SwapchainInfo::ChooseSwapchainExtent(const Instance* instance, GLFWwindow* window) const{
+    VkExtent2D SwapchainInfo::ChooseSwapchainExtent(GLFWwindow* window) const{
         
         if (Capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max()) {
             return Capabilities.currentExtent;
