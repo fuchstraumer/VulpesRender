@@ -3,7 +3,7 @@
 #define VULPES_VK_IMAGE_H
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
-#include "resource/Allocator.hpp"
+#include "alloc/Allocation.hpp"
 
 namespace vpr {
 

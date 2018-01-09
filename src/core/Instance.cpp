@@ -169,7 +169,7 @@ namespace vpr {
         };
 
         auto func = (PFN_vkCreateDebugReportCallbackEXT)vkGetInstanceProcAddr(handle, "vkCreateDebugReportCallbackEXT");
-        assert(createDebugCallbackPfn);
+        assert(func);
         VkResult result = func(handle, &create_info, nullptr, &debugCallback);
         VkAssert(result);
     }

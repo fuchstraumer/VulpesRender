@@ -2,7 +2,7 @@
 #include "resource/Image.hpp"
 #include "core/LogicalDevice.hpp"
 #include "command/CommandPool.hpp"
-
+#include "alloc/Allocator.hpp"
 namespace vpr {
 
     Image::Image(const Device * _parent) : parent(_parent) {}

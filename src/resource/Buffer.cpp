@@ -3,6 +3,7 @@
 #include "core/LogicalDevice.hpp"
 #include "command/CommandPool.hpp"
 #include "util/easylogging++.h"
+#include "alloc/Allocator.hpp"
 
 namespace vpr {
 

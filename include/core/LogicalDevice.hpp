@@ -3,7 +3,6 @@
 #define VULPES_VK_LOGICAL_DEVICE_H
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
-#include "resource/Allocator.hpp"
 #include <map>
 
 namespace vpr {
@@ -86,7 +85,9 @@ namespace vpr {
         uint32_t GetMemoryTypeIdx(const uint32_t& type_bitfield, const VkMemoryPropertyFlags& property_flags, VkBool32* memory_type_found = nullptr) const;
         uint32_t GetPhysicalDeviceID() const noexcept;
         const PhysicalDevice& GetPhysicalDevice() const noexcept;
-
+        VkPhysicalDeviceProperties GetPhysicalDeviceProperties() const noexcept;
+        VkPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties() const noexcept;
+        
         uint32_t NumGraphicsQueues = 0, NumComputeQueues = 0, NumTransferQueues = 0, NumSparseBindingQueues = 0;
         vkQueueFamilyIndices QueueFamilyIndices;
         std::unique_ptr<Allocator> vkAllocator;
