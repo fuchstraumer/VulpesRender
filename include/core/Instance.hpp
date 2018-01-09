@@ -34,20 +34,25 @@ namespace vpr {
         const PhysicalDevice* GetPhysicalDevice() const noexcept;
         GLFWwindow* GetGLFWwindow() const noexcept;
 
-        void RecreateSurface();
-
+        void CreateSurfaceKHR();
+        void DestroySurfaceKHR();
     private:
 
         void setupPhysicalDevice();
-        void createSurfaceKHR();
+        
         mutable GLFWwindow* window;
         std::unique_ptr<PhysicalDevice> physicalDevice;
         std::unique_ptr<SurfaceKHR> surface;     
         VkInstance handle;
         VkInstanceCreateInfo createInfo;
-        bool validationEnabled{ false };
+
     };
 
+    /** Pass a swapchain and instance pointer to this to have the swapchain and surface destroyed and recreated
+    *   in the proper order. If done incorrectly, the validation layers will give you errors about a surface being 
+    *   destroyed before it's swapchain is (in the best case), or crash in the worst case
+    */
+    void RecreateSwapchainAndSurface(Instance* instance, Swapchain* swap);
 }
 
 #endif // !INSTANCE_H

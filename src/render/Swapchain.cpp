@@ -107,10 +107,6 @@ namespace vpr {
     void Swapchain::Recreate() {
         
         Info.reset();
-
-        if (handle != VK_NULL_HANDLE) {
-            vkDestroySwapchainKHR(device->vkHandle(), handle, nullptr);
-        }
         
         ImageCount = 0;
         setParameters();

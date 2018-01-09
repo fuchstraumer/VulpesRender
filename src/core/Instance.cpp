@@ -2,6 +2,7 @@
 #include "core/Instance.hpp"
 #include "core/PhysicalDevice.hpp"
 #include "render/SurfaceKHR.hpp"
+#include "render/Swapchain.hpp"
 #include "util/easylogging++.h"
 #include "GLFW/glfw3.h"
 #if defined(_WIN32) 
@@ -34,7 +35,7 @@ namespace vpr {
         VkAssert(err);
 
         setupPhysicalDevice();
-        createSurfaceKHR();
+        CreateSurfaceKHR();
 
     }
 
@@ -45,17 +46,17 @@ namespace vpr {
         physicalDevice = std::make_unique<PhysicalDevice>(vkHandle());
     }
 
-    void Instance::RecreateSurface() {
-        surface.reset();
-        createSurfaceKHR();
-    }
-
-    void Instance::createSurfaceKHR() {
+    void Instance::CreateSurfaceKHR() {
+        LOG_IF(surface, WARNING) << "Attempting to create a SurfaceKHR when one might already exist: if it does, this will probably cause swapchain errors!";
         surface = std::make_unique<SurfaceKHR>(this, window);
     }
 
-    Instance::~Instance(){
+    void Instance::DestroySurfaceKHR() {
         surface.reset();
+    }
+
+    Instance::~Instance(){
+        DestroySurfaceKHR();
         vkDestroyInstance(handle, nullptr);
     }
 
@@ -73,6 +74,13 @@ namespace vpr {
 
     GLFWwindow * Instance::GetGLFWwindow() const noexcept {
         return window;
+    }
+
+    void RecreateSwapchainAndSurface(Instance * instance, Swapchain * swap) {
+        swap->Destroy();
+        instance->DestroySurfaceKHR();
+        instance->CreateSurfaceKHR();
+        swap->Recreate();
     }
 
 }
