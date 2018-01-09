@@ -244,6 +244,14 @@ namespace vpr {
         return *parent;
     }
 
+    VkPhysicalDeviceProperties Device::GetPhysicalDeviceProperties() const noexcept {
+        return parent->Properties;
+    }
+
+    VkPhysicalDeviceMemoryProperties Device::GetPhysicalDeviceMemoryProperties() const noexcept {
+        return parent->MemoryProperties;
+    }
+
     bool Device::HasDedicatedComputeQueues() const {
         if (QueueFamilyIndices.Compute != QueueFamilyIndices.Graphics) {
             return true;
