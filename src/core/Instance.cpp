@@ -21,11 +21,18 @@ namespace vpr {
             createInfo.enabledLayerCount = 0;
         }
         else {
-            if (!checkValidationSupport(layers, layer_count)) {
-                throw std::runtime_error("Tried to enable Vulkan validation layers, but they're unsupported on the current system!");
+            if (layers && (layer_count != 0)) {
+                if (!checkValidationSupport(layers, layer_count)) {
+                    throw std::runtime_error("Tried to enable Vulkan validation layers, but they're unsupported on the current system!");
+                }
+                createInfo.ppEnabledLayerNames = layers;
+                createInfo.enabledLayerCount = layer_count;
             }
-            createInfo.ppEnabledLayerNames = layers;
-            createInfo.enabledLayerCount = layer_count;
+            else {
+                constexpr static const char* const default_layer = "VK_LAYER_LUNARG_standard_validation";
+                createInfo.ppEnabledLayerNames = &default_layer;
+                createInfo.enabledLayerCount = 1;
+            }
         }
 
         // Get required extensions, then add on the requested ones.
