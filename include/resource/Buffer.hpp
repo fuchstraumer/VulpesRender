@@ -86,7 +86,7 @@ namespace vpr {
 
         static std::vector<std::pair<VkBuffer, Allocation>> stagingBuffers;
 
-        void createStagingBuffer(const VkDeviceSize& size, const VkDeviceSize& offset, VkBuffer& staging_buffer, Allocation& dest_memory_range);
+        void createStagingBuffer(const VkDeviceSize& size, VkBuffer& staging_buffer, Allocation& dest_memory_range);
 
         const Device* parent;
         const VkAllocationCallbacks* allocators = nullptr;

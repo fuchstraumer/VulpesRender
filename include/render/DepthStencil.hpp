@@ -15,7 +15,7 @@ namespace vpr {
     class VPR_API DepthStencil : public Image {
     public:
 
-        DepthStencil(const Device* _parent, const VkExtent3D& extents, CommandPool* cmd, VkQueue & queue);
+        DepthStencil(const Device* _parent, const VkExtent3D& extents);
 
         ~DepthStencil() = default;
 

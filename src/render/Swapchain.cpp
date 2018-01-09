@@ -121,7 +121,7 @@ namespace vpr {
         surfaceFormat = Info->GetBestFormat();
         ColorFormat = surfaceFormat.format;
         presentMode = Info->GetBestPresentMode();
-        Extent = Info->ChooseSwapchainExtent(instance, instance->GetGLFWwindow());
+        Extent = Info->ChooseSwapchainExtent(instance->GetGLFWwindow());
 
         // Create one more image than minspec to implement triple buffering (in hope we got mailbox present mode)
         ImageCount = Info->Capabilities.minImageCount + 1;

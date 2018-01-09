@@ -17,7 +17,7 @@ namespace vpr {
         std::vector<VkPresentModeKHR> PresentModes;
         VkSurfaceFormatKHR GetBestFormat() const;
         VkPresentModeKHR GetBestPresentMode() const;
-        VkExtent2D ChooseSwapchainExtent(const Instance* _instance, GLFWwindow* win) const;
+        VkExtent2D ChooseSwapchainExtent(GLFWwindow* win) const;
     };
 
     /** This class abstracts away much of the detailed work and boilerplate code required to setup a swapchain in Vulkan. Init() only needs to be called once 

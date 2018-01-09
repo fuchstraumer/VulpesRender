@@ -80,7 +80,7 @@ namespace vpr {
 
         VkBuffer staging_buffer;
         Allocation staging_alloc;
-        createStagingBuffer(copy_size, 0, staging_buffer, staging_alloc);
+        createStagingBuffer(copy_size, staging_buffer, staging_alloc);
 
         void* mapped;
         VkResult result = vkMapMemory(parent->vkHandle(), staging_alloc.Memory(), staging_alloc.Offset(), copy_size, 0, &mapped);
@@ -102,7 +102,7 @@ namespace vpr {
         
         VkBuffer staging_buffer;
         Allocation staging_alloc;
-        createStagingBuffer(copy_size, 0, staging_buffer, staging_alloc);
+        createStagingBuffer(copy_size, staging_buffer, staging_alloc);
 
         void* mapped;
         VkResult result = vkMapMemory(parent->vkHandle(), staging_alloc.Memory(), staging_alloc.Offset(), copy_size, 0, &mapped);

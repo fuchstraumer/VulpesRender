@@ -353,6 +353,7 @@ namespace vpr {
         // Apply alignment
         *dest_offset = AlignUp<VkDeviceSize>(*dest_offset, allocation_alignment);
 
+        
         // check previous suballocations for conflicts with buffer-image granularity, change alignment as needed
         if (buffer_image_granularity > 1) {
             bool conflict_found = false;
@@ -471,6 +472,7 @@ namespace vpr {
     void MemoryBlock::Free(const Allocation* memory_to_free) {
         std::lock_guard<std::mutex> suballoc_guard(memoryMutex);
         for (auto iter = Suballocations.begin(); iter != Suballocations.end(); ++iter) {
+            
             auto& suballoc = *iter;
             if (suballoc.offset == memory_to_free->Offset()) {
                 freeSuballocation(iter);
@@ -869,7 +871,7 @@ namespace vpr {
                     }
 
                     block->Allocate(request, type, memory_reqs.size);
-                    dest_allocation.Init(block.get(), request.offset, memory_reqs.alignment, memory_reqs.size, type);
+                    dest_allocation.Init(block.get(), request.offset, memory_reqs.alignment, memory_reqs.size);
 
                     if (VALIDATE_MEMORY) {
                         ValidationCode result_code = block->Validate();
@@ -932,7 +934,7 @@ namespace vpr {
                 SuballocationRequest request{ *new_block_ptr->avail_begin(), 0 };
                 new_block_ptr->Allocate(request, type, memory_reqs.size);
                 
-                dest_allocation.Init(new_block_ptr, request.offset, memory_reqs.alignment, memory_reqs.size, type);
+                dest_allocation.Init(new_block_ptr, request.offset, memory_reqs.alignment, memory_reqs.size);
 
                 if (VALIDATE_MEMORY) {
                     ValidationCode result_code = new_block_ptr->Validate();
@@ -966,6 +968,7 @@ namespace vpr {
     bool Allocator::freePrivateMemory(const Allocation * alloc_to_free) {
         uint32_t type_idx = alloc_to_free->MemoryTypeIdx();
         auto& private_allocation = privateAllocations[type_idx];
+        throw std::runtime_error("I should not be here. Oops.");
         return false;
     }
 
@@ -1058,7 +1061,7 @@ namespace vpr {
         return *this;
     }
 
-    void Allocation::Init(MemoryBlock * parent_block, const VkDeviceSize & offset, const VkDeviceSize & alignment, const VkDeviceSize & alloc_size, const SuballocationType & suballoc_type) {
+    void Allocation::Init(MemoryBlock * parent_block, const VkDeviceSize & offset, const VkDeviceSize & alignment, const VkDeviceSize & alloc_size) {
         blockAllocation alloc;
         alloc.ParentBlock = parent_block;
         alloc.Offset = offset;
