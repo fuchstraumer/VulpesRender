@@ -8,13 +8,14 @@ namespace vpr {
 
     Device::Device(const Instance* instance, const PhysicalDevice * device) : parent(device), parentInstance(instance) {
 
-        SetupGraphicsQueues();
-        SetupComputeQueues();
-        SetupTransferQueues();
-        SetupSparseBindingQueues();
+        setupGraphicsQueues();
+        setupComputeQueues();
+        setupTransferQueues();
+        setupSparseBindingQueues();
 
         // Local vector copy of QueueCreateInfos: need raw data ptr for createInfo,
         // and easier to insert/include the presentation queues this way.
+        // also this way it's stored linearly as Vulkan expects it to be
         std::vector<VkDeviceQueueCreateInfo> queue_infos;
         for (const auto& queue_info_entry : queueInfos) {
             queue_infos.push_back(queue_info_entry.second);
@@ -38,7 +39,7 @@ namespace vpr {
 
     }
 
-    void Device::SetupGraphicsQueues() {
+    void Device::setupGraphicsQueues() {
         QueueFamilyIndices.Graphics = parent->GetQueueFamilyIndex(VK_QUEUE_GRAPHICS_BIT);
         auto create_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_GRAPHICS_BIT));
         create_info.queueFamilyIndex = QueueFamilyIndices.Graphics;
@@ -49,7 +50,7 @@ namespace vpr {
         queueInfos.insert(std::make_pair(VK_QUEUE_GRAPHICS_BIT, create_info));
     }
 
-    void Device::SetupComputeQueues() {
+    void Device::setupComputeQueues() {
         QueueFamilyIndices.Compute = parent->GetQueueFamilyIndex(VK_QUEUE_COMPUTE_BIT);
         if (QueueFamilyIndices.Compute != QueueFamilyIndices.Graphics) {
             auto compute_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_COMPUTE_BIT));
@@ -70,7 +71,7 @@ namespace vpr {
         }
     }
 
-    void Device::SetupTransferQueues() {
+    void Device::setupTransferQueues() {
         QueueFamilyIndices.Transfer = parent->GetQueueFamilyIndex(VK_QUEUE_TRANSFER_BIT);
         if (QueueFamilyIndices.Transfer != QueueFamilyIndices.Graphics) {
             auto transfer_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_TRANSFER_BIT));
@@ -90,7 +91,7 @@ namespace vpr {
         }
     }
 
-    void Device::SetupSparseBindingQueues() {
+    void Device::setupSparseBindingQueues() {
         QueueFamilyIndices.SparseBinding = parent->GetQueueFamilyIndex(VK_QUEUE_SPARSE_BINDING_BIT);
         if (QueueFamilyIndices.SparseBinding != QueueFamilyIndices.Graphics) {
             auto sparse_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT));

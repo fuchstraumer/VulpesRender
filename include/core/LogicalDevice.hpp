@@ -17,9 +17,10 @@ namespace vpr {
                  Present = std::numeric_limits<uint32_t>::max();
     };
 
-    /**! The Device class is a wrapper around the vkLogicalDevice object. This object is what most Vulkan resources and objects are spawned from,
-    *    and is then responsible for managing these resources. Most Vulkan functions relating to resource creation, binding, or updating will take
-    *    a vkLogicalDevice reference as a parameter.
+    /**!The Device class is a wrapper around the vkLogicalDevice object. This object is what most Vulkan resources and objects are spawned from,
+    *   and is then responsible for managing these resources. Most Vulkan functions relating to resource creation, binding, or updating will take
+    *   a VkDevice reference as a parameter. This is considered to be a "Logical Device" as it represents a non-physical device and each physical
+    *   device can actually store and handle multiple logical devices.
     *   
     *   The vast majority of classes in this codebase contain a private const Device pointer, for use in their internal functions requiring this object's
     *   handle. 
@@ -33,10 +34,7 @@ namespace vpr {
     public:
         
         Device(const Instance* instance, const PhysicalDevice* device);
-        void SetupGraphicsQueues();
-        void SetupComputeQueues();
-        void SetupTransferQueues();
-        void SetupSparseBindingQueues();
+
         void VerifyPresentationSupport();
 
         VkDeviceQueueCreateInfo SetupQueueFamily(const VkQueueFamilyProperties& family_properties);
@@ -95,6 +93,10 @@ namespace vpr {
 
     private:
 
+        void setupGraphicsQueues();
+        void setupComputeQueues();
+        void setupTransferQueues();
+        void setupSparseBindingQueues();
         const VkAllocationCallbacks* AllocCallbacks = nullptr;
 
         VkDevice handle;
