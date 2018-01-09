@@ -4,7 +4,7 @@
 
 struct GLFWwindow;
 namespace vpr {
-    struct Allocation;
+    class Allocation;
     class Allocator;
     class MemoryBlock;
     struct Suballocation;

@@ -52,7 +52,9 @@ FILE(GLOB COMMAND_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/command/*.cpp" "${CMAKE
 FILE(GLOB CORE "${CMAKE_CURRENT_SOURCE_DIR}/src/core/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/core/*.hpp")
 FILE(GLOB RESOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/resource/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/resource/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/resource/*.inl")
 FILE(GLOB RENDER "${CMAKE_CURRENT_SOURCE_DIR}/src/render/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/render/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/render/*.inl")
+FILE(GLOB ALLOC "${CMAKE_CURRENT_SOURCE_DIR}/src/alloc/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/alloc/*.hpp")
 
+SOURCE_GROUP("alloc" FILES ${ALLOC})
 SOURCE_GROUP("util" FILES ${UTIL})
 SOURCE_GROUP("common" FILES ${COMMON})
 SOURCE_GROUP("command" FILES ${COMMAND_FILES})
@@ -64,11 +66,11 @@ SOURCE_GROUP("imgui" FILES ${IMGUI})
 IF(BUILD_DYNAMIC_LIBRARY) 
 ADD_LIBRARY(VulpesRender SHARED "${CMAKE_CURRENT_SOURCE_DIR}/include/vpr_stdafx.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/ForwardDecl.hpp" ${UTIL} ${COMMON} ${COMMAND_FILES} ${IMGUI}
-    ${CORE} ${RESOURCES} ${RENDER} ${SHADERS})
+    ${CORE} ${RESOURCES} ${RENDER} ${SHADERS} ${ALLOC})
 ELSE()
 ADD_LIBRARY(VulpesRender STATIC "${CMAKE_CURRENT_SOURCE_DIR}/include/vpr_stdafx.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/ForwardDecl.hpp" ${UTIL} ${COMMON} ${COMMAND_FILES} ${IMGUI}
-    ${CORE} ${RESOURCES} ${RENDER} ${SHADERS})
+    ${CORE} ${RESOURCES} ${RENDER} ${SHADERS} ${ALLOC})
 ENDIF()
 
 #Enable minimal rebuild, and manually set c++17 standard since it doesn't get set right otherwise.
