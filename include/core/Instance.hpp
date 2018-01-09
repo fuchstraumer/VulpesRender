@@ -25,8 +25,9 @@ namespace vpr {
         Instance& operator=(const Instance &) = delete;
     public:
         
-        Instance(const VkApplicationInfo* info, GLFWwindow* window, const uint32_t& width, const uint32_t& height);
-        Instance(const VkApplicationInfo* info, const char** extensions, const size_t extension_count, GLFWwindow* window, const uint32_t width, const uint32_t height);
+        Instance(bool enable_validation, const VkApplicationInfo* info, GLFWwindow* window);
+        Instance(bool enable_validation, const VkApplicationInfo* info, GLFWwindow* window, const char** extensions, const uint32_t extension_count, const char** layers = nullptr, const uint32_t layer_count = 0);
+
         ~Instance();
 
         const VkInstance& vkHandle() const noexcept;
@@ -36,8 +37,12 @@ namespace vpr {
 
         void CreateSurfaceKHR();
         void DestroySurfaceKHR();
+
+        const bool& ValidationEnabled() const noexcept;
+
     private:
 
+        void checkExtensions(std::vector<const char*>& requested_extensions);
         void setupPhysicalDevice();
         
         mutable GLFWwindow* window;
@@ -45,6 +50,12 @@ namespace vpr {
         std::unique_ptr<SurfaceKHR> surface;     
         VkInstance handle;
         VkInstanceCreateInfo createInfo;
+        bool validationEnabled; 
+
+        bool checkValidationSupport(const char** layer_names, const uint32_t layer_count);
+        void prepareValidation();
+
+        VkDebugReportCallbackEXT debugCallback;
 
     };
 
@@ -53,6 +64,9 @@ namespace vpr {
     *   destroyed before it's swapchain is (in the best case), or crash in the worst case
     */
     void RecreateSwapchainAndSurface(Instance* instance, Swapchain* swap);
+
+    VKAPI_ATTR VkBool32 VKAPI_CALL VkDebugCallbackFn(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT type, uint64_t object_handle, size_t location, int32_t message_code, const char* layer_prefix,
+        const char* message, void* user_data);
 }
 
 #endif // !INSTANCE_H
