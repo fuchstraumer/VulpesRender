@@ -68,8 +68,7 @@ namespace vpr {
     }
 
     Instance::~Instance() {
-        if (debugCallback) {
-            assert(validationEnabled);
+        if (debugCallback && validationEnabled) {
             auto func = (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(handle, "vkDestroyDebugReportCallbackEXT");
             func(handle, debugCallback, nullptr);
         }
