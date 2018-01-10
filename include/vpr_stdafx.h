@@ -9,6 +9,7 @@
 #include <array>
 #include <memory>
 #include <cassert>
+#include <mutex>
 
 #if defined(_WIN32) || defined(__linux__)
 #include "vulkan/vulkan.h"
