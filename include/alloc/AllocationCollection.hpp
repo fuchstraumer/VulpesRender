@@ -17,7 +17,6 @@ namespace vpr {
 
         AllocationCollection() = default;
         AllocationCollection(Allocator* allocator);
-
         AllocationCollection(AllocationCollection&& other) noexcept;
         AllocationCollection& operator=(AllocationCollection&& other) noexcept;
 
@@ -26,14 +25,25 @@ namespace vpr {
         MemoryBlock* operator[](const size_t& idx);
         const MemoryBlock* operator[](const size_t& idx) const;
 
+        size_t AddMemoryBlock(std::unique_ptr<MemoryBlock>&& new_block) noexcept;
         bool Empty() const;
 
         /** Removes only the particular memory block from the internal vector, and re-sorts the blocks once complete. */
         void RemoveBlock(MemoryBlock * block_to_erase);
-
         void SortAllocations();
+
+        typedef std::vector<std::unique_ptr<MemoryBlock>>::iterator iterator;
+        typedef std::vector<std::unique_ptr<MemoryBlock>>::const_iterator const_iterator;
+
+        iterator begin() noexcept;
+        iterator end() noexcept;
+        const_iterator begin() const noexcept;
+        const_iterator end() const noexcept;
+        const_iterator cbegin() const noexcept;
+        const_iterator cend() const noexcept;
         
     private:  
+        std::mutex containerMutex;
         std::vector<std::unique_ptr<MemoryBlock>> allocations;
         Allocator* allocator;
     };
