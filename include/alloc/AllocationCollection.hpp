@@ -10,11 +10,16 @@ namespace vpr {
      *  so we will need to create a new block. In order to keep some organization among memory types, though, we store these similar memory blocks in this object.
      *  \ingroup Allocation
      */
-    struct AllocationCollection {
-        std::vector<std::unique_ptr<MemoryBlock>> allocations;
+    class AllocationCollection {
+        AllocationCollection(const AllocationCollection&) = delete;
+        AllocationCollection& operator=(const AllocationCollection&) = delete;
+    public:
 
         AllocationCollection() = default;
         AllocationCollection(Allocator* allocator);
+
+        AllocationCollection(AllocationCollection&& other) noexcept;
+        AllocationCollection& operator=(AllocationCollection&& other) noexcept;
 
         ~AllocationCollection();
 
@@ -27,9 +32,9 @@ namespace vpr {
         void RemoveBlock(MemoryBlock * block_to_erase);
 
         void SortAllocations();
-
         
-    private:
+    private:  
+        std::vector<std::unique_ptr<MemoryBlock>> allocations;
         Allocator* allocator;
     };
 
