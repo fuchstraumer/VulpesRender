@@ -4,6 +4,7 @@
 #include "alloc/Allocation.hpp"
 #include "alloc/MemoryBlock.hpp"
 #include "util/easylogging++.h"
+#include <sstream>
 
 namespace vpr {
 
@@ -11,12 +12,10 @@ namespace vpr {
         deviceProperties = parent->GetPhysicalDeviceProperties();
         deviceMemoryProperties = parent->GetPhysicalDeviceMemoryProperties();
         allocations.resize(GetMemoryTypeCount());
-        privateAllocations.resize(GetMemoryTypeCount());
         emptyAllocations.resize(GetMemoryTypeCount());
         // initialize base pools, one per memory type.
         for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
             allocations[i] = std::make_unique<AllocationCollection>(this);
-            privateAllocations[i] = std::make_unique<AllocationCollection>(this);
             emptyAllocations[i] = true;
         }
     }
@@ -31,7 +30,6 @@ namespace vpr {
         privateAllocations.clear();
         emptyAllocations.clear();
         allocations.shrink_to_fit();
-        privateAllocations.shrink_to_fit();
         emptyAllocations.shrink_to_fit();
 
     }
@@ -42,16 +40,13 @@ namespace vpr {
         privateAllocations.clear();
         emptyAllocations.clear();
         allocations.shrink_to_fit();
-        privateAllocations.shrink_to_fit();
         emptyAllocations.shrink_to_fit();
 
         allocations.resize(GetMemoryTypeCount());
-        privateAllocations.resize(GetMemoryTypeCount());
         emptyAllocations.resize(GetMemoryTypeCount());
         // initialize base pools, one per memory type.
         for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
             allocations[i] = std::make_unique<AllocationCollection>(this);
-            privateAllocations[i] = std::make_unique<AllocationCollection>(this);
             emptyAllocations[i] = true;
         }
 
@@ -99,22 +94,25 @@ namespace vpr {
             type_idx = memory_to_free->MemoryTypeIdx();
             auto& allocation_collection = allocations[type_idx];
             
-            auto& block = allocation_collection->allocations.front();
+            auto* block = (*allocation_collection)[0];
             auto free_size = memory_to_free->Size;
             block->Free(memory_to_free);
             LOG_IF((static_cast<float>(free_size) / 1.0e6f) > 0.5f, INFO) << "Freed a memory allocation with size " << std::to_string(free_size / 1e6) << "mb";
             if (VALIDATE_MEMORY) {
                 auto err = block->Validate();
                 if (err != ValidationCode::VALIDATION_PASSED) {
-                    LOG(ERROR) << "Validation of memory failed: " << err;
-                    throw std::runtime_error("Validation of memory failed");
+                    std::stringstream ss;
+                    ss << "Validtion of memory failed with error: " << err;
+                    const std::string err_str = ss.str();
+                    LOG(ERROR) << err_str.c_str();
+                    throw std::runtime_error(err_str.c_str());
                 }
             }
 
             if (block->Empty()) {
                 if (emptyAllocations[type_idx]) {
                     block->Destroy(this);
-                    allocation_collection->RemoveBlock(block.get());
+                    allocation_collection->RemoveBlock(block);
                 }
                 else {
                     emptyAllocations[type_idx] = true;
@@ -135,6 +133,9 @@ namespace vpr {
             return;
         }
 
+        // Should never reach this point.
+        LOG(ERROR) << "Failed to free a memory allocation!";
+        throw std::runtime_error("Failed to free a memory allocation.");
     }
 
     uint32_t Allocator::findMemoryTypeIdx(const VkMemoryRequirements& mem_reqs, const AllocationRequirements & details) const noexcept {
@@ -199,7 +200,7 @@ namespace vpr {
             auto& alloc_collection = allocations[memory_type_idx];
 
             // first, check existing allocations
-            for (auto iter = alloc_collection->allocations.cbegin(); iter != alloc_collection->allocations.cend(); ++iter) {
+            for (auto iter = alloc_collection->cbegin(); iter != alloc_collection->cend(); ++iter) {
                 SuballocationRequest request;
                 const auto& block = *iter;
                 if (block->RequestSuballocation(GetBufferImageGranularity(), memory_reqs.size, memory_reqs.alignment, type, &request)) {
@@ -213,8 +214,11 @@ namespace vpr {
                     if (VALIDATE_MEMORY) {
                         ValidationCode result_code = block->Validate();
                         if (result_code != ValidationCode::VALIDATION_PASSED) {
-                            LOG(ERROR) << "Validation of new allocation failed with reason: " << result_code;
-                            throw std::runtime_error("");
+                            std::stringstream ss;
+                            ss << "Validation of new allocation failed with reason: " << result_code;
+                            const std::string fail_str{ ss.str() }; 
+                            LOG(ERROR) << fail_str.c_str();
+                            throw std::runtime_error(fail_str.c_str());
                         }
                     }
                     // only log for larger allocations of at least half a mb: otherwise, log gets clogged with updates
@@ -261,9 +265,9 @@ namespace vpr {
 
                 std::unique_ptr<MemoryBlock> new_block = std::make_unique<MemoryBlock>(this);
                 // need pointer to initialize child objects, but need to move unique_ptr into container.
-                alloc_collection->allocations.push_back(std::move(new_block));
+                size_t new_block_idx = alloc_collection->AddMemoryBlock(std::move(new_block));
 
-                auto new_block_ptr = alloc_collection->allocations.back().get();
+                auto* new_block_ptr = (*alloc_collection)[new_block_idx];
                 // allocation size is more up-to-date than mem reqs size
                 new_block_ptr->Init(new_memory, alloc_info.allocationSize);
                 new_block_ptr->MemoryTypeIdx = memory_type_idx;
@@ -276,7 +280,11 @@ namespace vpr {
                 if (VALIDATE_MEMORY) {
                     ValidationCode result_code = new_block_ptr->Validate();
                     if (result_code != ValidationCode::VALIDATION_PASSED) {
-                        LOG(ERROR) << "Validation of new allocation failed with reason: " << result_code;
+                        std::stringstream ss;
+                        ss << "Validation of new allocation failed with reason: " << result_code;
+                        const std::string err_str{ ss.str() };
+                        LOG(ERROR) << err_str.c_str();
+                        throw std::runtime_error(err_str.c_str());
                     }
                 }
 
@@ -295,14 +303,43 @@ namespace vpr {
         VkAssert(result);
         
         dest_allocation.InitPrivate(memory_type_idx, private_memory_handle, false, nullptr, size);
-
+        {
+            std::lock_guard<std::mutex> private_guard(privateMutex);
+            privateAllocations.insert(std::unique_ptr<Allocation>(&dest_allocation));
+        }
+        
         return VK_SUCCESS;
     }
 
+    struct raw_equal_comparator {
+        raw_equal_comparator(const Allocation* _ptr) : ptr(ptr) {};
+        bool operator()(const Allocation* other) const {
+            return ptr == other;
+        }
+        bool operator()(const std::unique_ptr<Allocation>& unique_other) const {
+            return ptr == unique_other.get();
+        }
+        const Allocation* ptr;
+    };
+
     bool Allocator::freePrivateMemory(const Allocation * alloc_to_free) {
-        uint32_t type_idx = alloc_to_free->MemoryTypeIdx();
-        auto& private_allocation = privateAllocations[type_idx];
-        throw std::runtime_error("I should not be here. Oops.");
+
+        assert(alloc_to_free->IsPrivateAllocation());
+        auto iter = std::find_if(privateAllocations.begin(), privateAllocations.end(), raw_equal_comparator(alloc_to_free));
+        if (iter == privateAllocations.end()) {
+            LOG(ERROR) << "Couldn't find alloc_to_free in privateAllocations container!";
+            return false;
+        }
+        else {
+            std::lock_guard<std::mutex> private_guard(privateMutex);
+            VkDeviceMemory private_handle = (*iter).get()->Memory();
+            (*iter).get()->Unmap();
+            vkFreeMemory(parent->vkHandle(), private_handle, nullptr);
+            privateAllocations.erase(iter);
+            LOG(INFO) << "Freed a private memory allocation.";
+            return true;
+        }
+
         return false;
     }
 

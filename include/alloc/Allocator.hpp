@@ -5,6 +5,7 @@
 #include "ForwardDecl.hpp"
 #include "AllocCommon.hpp"
 #include "AllocationCollection.hpp"
+#include <unordered_set>
 
 namespace vpr {
 
@@ -92,9 +93,11 @@ namespace vpr {
         bool freePrivateMemory(const Allocation* memory_to_free);
 
         std::vector<std::unique_ptr<AllocationCollection>> allocations;
-        std::vector<std::unique_ptr<AllocationCollection>> privateAllocations;
+        std::unordered_set<std::unique_ptr<Allocation>> privateAllocations;
         std::vector<bool> emptyAllocations;
-
+        /**Guards the private allocations set, since it's a different object entirely than the main one.
+        */
+        std::mutex privateMutex;
         const Device* parent;
 
         VkPhysicalDeviceProperties deviceProperties;
