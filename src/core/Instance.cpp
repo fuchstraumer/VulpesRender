@@ -11,9 +11,8 @@ namespace vpr {
     Instance::Instance(bool enable_validation, const VkApplicationInfo*info, GLFWwindow* _window) : Instance(enable_validation, info, _window, nullptr, 0, nullptr, 0) {}
 
     Instance::Instance(bool enable_validation, const VkApplicationInfo * info, GLFWwindow * _window, const char ** extensions, const uint32_t extension_count, const char ** layers, const uint32_t layer_count) :
-        window(_window), validationEnabled(enable_validation) {
+        window(_window), validationEnabled(enable_validation), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0 } {
         createInfo.pApplicationInfo = info;
-
         // Check for validation enabled first, since it adds a requirement for an extension.
         if (!validationEnabled) {
             assert(!layers && (layer_count == 0));
@@ -114,6 +113,7 @@ namespace vpr {
         uint32_t queried_extension_count = 0;
         vkEnumerateInstanceExtensionProperties(nullptr, &queried_extension_count, nullptr);
         std::vector<VkExtensionProperties> queried_extensions(queried_extension_count);
+        vkEnumerateInstanceExtensionProperties(nullptr, &queried_extension_count, queried_extensions.data());
 
         const auto has_extension = [queried_extensions](const char* name) {
             auto req_found = std::find_if(queried_extensions.cbegin(), queried_extensions.cend(), [name](const VkExtensionProperties& properties) {
@@ -126,8 +126,12 @@ namespace vpr {
         while (iter != requested_extensions.end()) {
             if (!has_extension(*iter)) {
                 LOG(WARNING) << "Extension with name \"" << *iter << "\" requested but isn't supported. Removing from list attached to Instance's creation info.";
-                requested_extensions.erase(iter);
+                requested_extensions.erase(iter++);
             }
+            else {
+                ++iter;
+            }
+            
         }
 
     }
