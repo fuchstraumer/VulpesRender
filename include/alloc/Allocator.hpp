@@ -45,7 +45,7 @@ namespace vpr {
         Allocator& operator=(Allocator&&) = delete;
     public:
 
-        Allocator(const Device* parent_dvc);
+        Allocator(const Device* parent_dvc, bool dedicated_alloc_enabled);
         ~Allocator();
 
         void Recreate();
@@ -106,7 +106,18 @@ namespace vpr {
         VkDeviceSize preferredLargeHeapBlockSize;
         VkDeviceSize preferredSmallHeapBlockSize;
         const VkAllocationCallbacks* pAllocationCallbacks = nullptr;
+        bool usingAllocationKHR;
+
+        /*
+            Used GPU Open allocator impl. hints and this:
+            http://asawicki.info/articles/VK_KHR_dedicated_allocation.php5
+            blogpost to implement support for this extension.
+        */
+        void fetchAllocFunctionPointersKHR();
         
+        PFN_vkGetBufferMemoryRequirements2KHR pVkGetBufferMemoryRequirements2KHR;
+        PFN_vkGetImageMemoryRequirements2KHR pVkGetImageMemoryRequirements2KHR;
+        PFN_vkGetImageSparseMemoryRequirements2KHR pVkGetImageSparseMemoryRequirements2KHR;
     };
 
     

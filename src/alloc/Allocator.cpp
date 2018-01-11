@@ -8,7 +8,8 @@
 
 namespace vpr {
 
-    Allocator::Allocator(const Device * parent_dvc) : parent(parent_dvc), preferredSmallHeapBlockSize(DefaultSmallHeapBlockSize), preferredLargeHeapBlockSize(DefaultLargeHeapBlockSize) {
+    Allocator::Allocator(const Device * parent_dvc, bool dedicated_alloc_enabled) : parent(parent_dvc), usingAllocationKHR(dedicated_alloc_enabled), 
+        preferredSmallHeapBlockSize(DefaultSmallHeapBlockSize), preferredLargeHeapBlockSize(DefaultLargeHeapBlockSize) {
         deviceProperties = parent->GetPhysicalDeviceProperties();
         deviceMemoryProperties = parent->GetPhysicalDeviceMemoryProperties();
         allocations.resize(GetMemoryTypeCount());
@@ -17,6 +18,10 @@ namespace vpr {
         for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
             allocations[i] = std::make_unique<AllocationCollection>(this);
             emptyAllocations[i] = true;
+        }
+
+        if (usingAllocationKHR) {
+            fetchAllocFunctionPointersKHR();
         }
     }
 
@@ -419,6 +424,32 @@ namespace vpr {
 
         FreeMemory(&allocation_to_free);
 
+    }
+
+    void Allocator::fetchAllocFunctionPointersKHR() {
+        
+        pVkGetBufferMemoryRequirements2KHR = reinterpret_cast<PFN_vkGetBufferMemoryRequirements2KHR>(vkGetDeviceProcAddr(parent->vkHandle(), 
+            "vkGetBufferMemoryRequirements2KHR"));
+        if (!pVkGetBufferMemoryRequirements2KHR) {
+            usingAllocationKHR = false;
+            return;
+        }
+
+        pVkGetImageMemoryRequirements2KHR = reinterpret_cast<PFN_vkGetImageMemoryRequirements2KHR>(vkGetDeviceProcAddr(parent->vkHandle(), 
+            "vkGetImageMemoryRequirements2KHR"));
+        if (!pVkGetImageMemoryRequirements2KHR) {
+            usingAllocationKHR = false;
+            return;
+        }
+
+        pVkGetImageSparseMemoryRequirements2KHR = reinterpret_cast<PFN_vkGetImageSparseMemoryRequirements2KHR>(vkGetDeviceProcAddr(parent->vkHandle(),
+            "vkGetImageSparseMemoryRequirements2KHR"));
+
+        if (!pVkGetImageMemoryRequirements2KHR) {
+            usingAllocationKHR = false;
+            return;
+        }
+    
     }
 
 }
