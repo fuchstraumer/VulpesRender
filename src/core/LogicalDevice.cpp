@@ -8,12 +8,27 @@
 namespace vpr {
 
     constexpr const char* const SWAPCHAIN_EXTENSION_NAME = "VK_KHR_swapchain";
+    constexpr std::array<const char*, 3> recommended_extensions {
+        VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+        VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME,
+        VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME
+    };
 
-    Device::Device(const Instance* instance, const PhysicalDevice * device) : Device(instance, device, 1, &SWAPCHAIN_EXTENSION_NAME) {}
+    Device::Device(const Instance* instance, const PhysicalDevice * device, bool use_recommended_extensions) : parent(device), parentInstance(instance) {
+        if (use_recommended_extensions) {
+            create(static_cast<uint32_t>(recommended_extensions.size()), recommended_extensions.data(), 0, nullptr);
+        }
+        else {
+            create(0, nullptr, 0, nullptr);
+        }
+    }
 
     Device::Device(const Instance* instance, const PhysicalDevice* dvc, const uint32_t extension_count, const char* const* extension_names,
         const uint32_t layer_count, const char* const* layer_names) : parent(dvc), parentInstance(instance) {
+        create(extension_count, extension_names, layer_count, layer_names);
+    }
 
+    void Device::create(const uint32_t ext_count, const char* const* exts, const uint32_t layer_coutn, const char* const* layers) {
         setupGraphicsQueues();
         setupComputeQueues();
         setupTransferQueues();
@@ -52,12 +67,15 @@ namespace vpr {
             if (iter == req_extensions.cend()) {
                 LOG(WARNING) << SWAPCHAIN_EXTENSION_NAME << " not requested as a device extension. Cannot render or create a swapchain object!";
             }
+
+            checkDedicatedAllocExtensions(req_extensions);
             createInfo.enabledExtensionCount = req_extensions.size();
             createInfo.ppEnabledExtensionNames = req_extensions.data();
         }
         else {
             createInfo.enabledExtensionCount = 0;
             createInfo.ppEnabledExtensionNames = nullptr;
+            enableDedicatedAllocations = false;
         }
 
         VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, nullptr, &handle);
@@ -326,6 +344,25 @@ namespace vpr {
             else {
                 ++iter;
             }
+        }
+    }
+    
+    void Device::checkDedicatedAllocExtensions(const std::vector<const char*>& exts) {
+        constexpr std::array<const char*, 2> mem_extensions{ VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME, VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME };
+        iter = std::find(req_extensions.cbegin(), req_extensions.cend(), mem_extensions[0]);
+        if (iter != req_extensions.cend()) {
+            iter = std::find(req_extensions.cbegin(), req_extensions.cend(), mem_extensions[1]);
+            if (iter != req_extensions.cend()) {
+                LOG(INFO) << "Both extensions required to enable better dedicated allocations have been enabled/found.";
+                enableDedicatedAllocations = true;
+            }    
+            else {
+                LOG(WARNING) << "Only one of the extensions required for better allocations was found - cannot enable/use.";
+                enableDedicatedAllocations = false;
+            }
+        }
+        else {
+            enableDedicatedAllocations = false;
         }
     }
 
