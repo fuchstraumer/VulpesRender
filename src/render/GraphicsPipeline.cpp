@@ -49,6 +49,11 @@ namespace vpr {
             vkDestroyPipeline(parent->vkHandle(), handle, allocators);
         }
     }
+    
+    void GraphicsPipeline::CreateMultiple(std::vector<GraphicsPipeline&>& pipelines, const std::vector<VkGraphicsPipelineCreateInfo>& infos, VkPipelineCache cache) {
+        std::vector<VkGraphicsPipeline> handles(pipelines.size());
+        vkCreateGraphicsPipelines(pipelines.front().device, cache, infos.size(), infos.data(), nullptr, handles.data());
+    }
 
     const VkPipeline & GraphicsPipeline::vkHandle() const noexcept {
         return handle;

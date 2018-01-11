@@ -69,6 +69,7 @@ namespace vpr {
         void Destroy();
         const VkPipeline& vkHandle() const noexcept;
 
+        static void CreateMultiple(std::vector<GraphicsPipeline&>& pipelines, const std::vector<VkGraphicsPipelineCreateInfo>& infos, VkPipelineCache cache);
     private:
 
         const VkAllocationCallbacks* allocators = nullptr;
