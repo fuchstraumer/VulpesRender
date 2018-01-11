@@ -20,7 +20,7 @@ namespace vpr {
         Multisampling& operator=(const Multisampling&) = delete;
     public:
 
-        Multisampling(const Device* dvc, const Swapchain* swapchain, const VkSampleCountFlagBits& sample_count, const uint32_t& width, const uint32_t& height);
+        Multisampling(const Device* dvc, const Swapchain* swapchain, const VkSampleCountFlagBits& sample_count);
         ~Multisampling();
 
         // Objects we sample from
