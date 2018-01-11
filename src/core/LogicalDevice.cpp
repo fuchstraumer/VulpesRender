@@ -7,7 +7,12 @@
 
 namespace vpr {
 
-    Device::Device(const Instance* instance, const PhysicalDevice * device) : parent(device), parentInstance(instance) {
+    constexpr const char* const SWAPCHAIN_EXTENSION_NAME = "VK_KHR_swapchain";
+
+    Device::Device(const Instance* instance, const PhysicalDevice * device) : Device(instance, device, 1, &SWAPCHAIN_EXTENSION_NAME) {}
+
+    Device::Device(const Instance* instance, const PhysicalDevice* dvc, const uint32_t extension_count, const char* const* extension_names,
+        const uint32_t layer_count, const char* const* layer_names) : parent(dvc), parentInstance(instance) {
 
         setupGraphicsQueues();
         setupComputeQueues();
@@ -23,17 +28,39 @@ namespace vpr {
         }
 
         VerifyPresentationSupport();
-        
+
         createInfo = vk_device_create_info_base;
         createInfo.queueCreateInfoCount = static_cast<uint32_t>(queue_infos.size());
         createInfo.pQueueCreateInfos = queue_infos.data();
-        createInfo.pEnabledFeatures = &device->Features;
-        createInfo.enabledExtensionCount = static_cast<uint32_t>(device_extensions.size());
-        createInfo.ppEnabledExtensionNames = device_extensions.data();
-        createInfo.enabledLayerCount = 0;
-        createInfo.ppEnabledLayerNames = nullptr;
-        
-        VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, AllocCallbacks, &handle);
+
+        if (instance->ValidationEnabled()) {
+            if ((layer_count == 0) && (layer_names == nullptr)) {
+                constexpr static const char* const default_layer = "VK_LAYER_LUNARG_standard_validation";
+                createInfo.enabledLayerCount = 1;
+                createInfo.ppEnabledLayerNames = &default_layer;
+            }
+            else {
+                createInfo.enabledLayerCount = layer_count;
+                createInfo.ppEnabledLayerNames = layer_names;
+            }
+        }
+
+        if ((extension_count != 0) && (extension_names != nullptr)) {
+            std::vector<const char*> req_extensions{ extension_names, extension_names + extension_count };
+            checkRequestedExtensions(req_extensions);
+            auto iter = std::find(req_extensions.cbegin(), req_extensions.cend(), SWAPCHAIN_EXTENSION_NAME);
+            if (iter == req_extensions.cend()) {
+                LOG(WARNING) << SWAPCHAIN_EXTENSION_NAME << " not requested as a device extension. Cannot render or create a swapchain object!";
+            }
+            createInfo.enabledExtensionCount = req_extensions.size();
+            createInfo.ppEnabledExtensionNames = req_extensions.data();
+        }
+        else {
+            createInfo.enabledExtensionCount = 0;
+            createInfo.ppEnabledExtensionNames = nullptr;
+        }
+
+        VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, nullptr, &handle);
         VkAssert(result);
 
         vkAllocator = std::make_unique<Allocator>(this);
@@ -45,8 +72,7 @@ namespace vpr {
         auto create_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_GRAPHICS_BIT));
         create_info.queueFamilyIndex = QueueFamilyIndices.Graphics;
         NumGraphicsQueues = create_info.queueCount;
-        static std::vector<float> priorities;
-        priorities.assign(NumGraphicsQueues, 1.0f);
+        const std::vector<float> priorities(NumGraphicsQueues, 1.0f);
         create_info.pQueuePriorities = priorities.data();
         queueInfos.insert(std::make_pair(VK_QUEUE_GRAPHICS_BIT, create_info));
     }
@@ -57,8 +83,7 @@ namespace vpr {
             auto compute_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_COMPUTE_BIT));
             compute_info.queueFamilyIndex = QueueFamilyIndices.Compute;
             NumComputeQueues = compute_info.queueCount;
-            static std::vector<float> priorities;
-            priorities.assign(NumComputeQueues, 1.0f);
+            const std::vector<float> priorities(NumComputeQueues, 1.0f);
             compute_info.pQueuePriorities = priorities.data();
             queueInfos.insert(std::make_pair(VK_QUEUE_COMPUTE_BIT, compute_info));
         }
@@ -78,8 +103,7 @@ namespace vpr {
             auto transfer_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_TRANSFER_BIT));
             transfer_info.queueFamilyIndex = QueueFamilyIndices.Transfer;
             NumTransferQueues = transfer_info.queueCount;
-            static std::vector<float> priorities;
-            priorities.assign(NumTransferQueues, 1.0f);
+            const std::vector<float> priorities(NumTransferQueues, 1.0f);
             transfer_info.pQueuePriorities = priorities.data();
             queueInfos.insert(std::make_pair(VK_QUEUE_TRANSFER_BIT, transfer_info));
         }
@@ -98,6 +122,9 @@ namespace vpr {
             auto sparse_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT));
             sparse_info.queueFamilyIndex = QueueFamilyIndices.SparseBinding;
             NumSparseBindingQueues = sparse_info.queueCount;
+            const std::vector<float> priorities(NumSparseBindingQueues, 1.0f);
+            sparse_info.pQueuePriorities = priorities.data();
+            queueInfos.insert(std::make_pair(VK_QUEUE_SPARSE_BINDING_BIT, sparse_info));
         }
         else {
             auto queue_properties = parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT);
@@ -138,7 +165,7 @@ namespace vpr {
 
     Device::~Device(){
         vkAllocator.reset();
-        vkDestroyDevice(handle, AllocCallbacks);
+        vkDestroyDevice(handle, nullptr);
     }
 
     const VkDevice & Device::vkHandle() const{
@@ -275,6 +302,31 @@ namespace vpr {
         vkGetDeviceQueue(vkHandle(), idx, desired_idx, &result);
         return result;
 
+    }
+
+    void Device::checkRequestedExtensions(std::vector<const char*>& extensions) {
+        uint32_t queried_count = 0;
+        vkEnumerateDeviceExtensionProperties(parent->vkHandle(), nullptr, &queried_count, nullptr);
+        std::vector<VkExtensionProperties> queried_extensions(queried_count);
+        vkEnumerateDeviceExtensionProperties(parent->vkHandle(), nullptr, &queried_count, queried_extensions.data());
+
+        const auto has_extension = [queried_extensions](const char* name) {
+            const auto req_found = std::find_if(queried_extensions.cbegin(), queried_extensions.cend(), [name](const VkExtensionProperties& p) {
+                return strcmp(p.extensionName, name) == 0;
+            });
+            return req_found != queried_extensions.end();
+        };
+
+        auto iter = extensions.begin();
+        while (iter != extensions.end()) {
+            if (!has_extension(*iter)) {
+                LOG(WARNING) << "Requested device extension with name \"" << *iter << "\" is not available, removing from list.";
+                extensions.erase(iter++);
+            }
+            else {
+                ++iter;
+            }
+        }
     }
 
 

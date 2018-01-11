@@ -33,6 +33,8 @@ namespace vpr {
     public:
         
         Device(const Instance* instance, const PhysicalDevice* device);
+        Device(const Instance* instance, const PhysicalDevice* p_device, const uint32_t extension_count, const char* const* extension_names,
+            const uint32_t layer_count = std::numeric_limits<uint32_t>::max(), const char* const* layer_names = nullptr);
 
         void VerifyPresentationSupport();
 
@@ -98,8 +100,8 @@ namespace vpr {
         void setupComputeQueues();
         void setupTransferQueues();
         void setupSparseBindingQueues();
-        const VkAllocationCallbacks* AllocCallbacks = nullptr;
-
+        
+        void checkRequestedExtensions(std::vector<const char*>& requested_extensions);
         VkDevice handle;
         VkDeviceCreateInfo createInfo;
 
