@@ -254,15 +254,15 @@ namespace vpr {
         }
     }
 
-    VkFormat Device::FindSupportedFormat(const std::vector<VkFormat>& options, const VkImageTiling & tiling, const VkFormatFeatureFlags & flags) const {
-        for (const auto& fmt : options) {
+    VkFormat Device::FindSupportedFormat(const VkFormat* formats, const size_t num_formats, const VkImageTiling & tiling, const VkFormatFeatureFlags & flags) const {
+        for (size_t i = 0; i < num_formats; ++i) {
             VkFormatProperties properties;
-            vkGetPhysicalDeviceFormatProperties(parent->vkHandle(), fmt, &properties);
+            vkGetPhysicalDeviceFormatProperties(parent->vkHandle(), formats[i], &properties);
             if (tiling == VK_IMAGE_TILING_LINEAR && (properties.linearTilingFeatures & flags) == flags) {
-                return fmt;
+                return formats[i];
             }
             else if (tiling == VK_IMAGE_TILING_OPTIMAL && (properties.optimalTilingFeatures & flags) == flags) {
-                return fmt;
+                return formats[i];
             }
         }
         LOG(ERROR) << "Could not find texture format that supports requested tiling and feature flags: ( " << std::to_string(tiling) << " , " << std::to_string(flags) << " )";
@@ -270,7 +270,8 @@ namespace vpr {
     }
 
     VkFormat Device::FindDepthFormat() const{
-        return FindSupportedFormat({ VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT }, VK_IMAGE_TILING_OPTIMAL, VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
+        static const std::vector<VkFormat> format_options{ VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT };
+        return FindSupportedFormat(format_options.data(), format_options.size(), VK_IMAGE_TILING_OPTIMAL, VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
     }
 
     VkFormat Device::GetSwapchainColorFormat() const {

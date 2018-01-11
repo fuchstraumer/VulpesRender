@@ -45,7 +45,7 @@ namespace vpr {
         return cmdBuffers.front();
     }
 
-    const std::vector<VkCommandBuffer>& TransferPool::BeginAll() const {
+    const VkCommandBuffer* TransferPool::BeginAll() const {
         assert(cmdBuffers.size() > 1);
         constexpr static VkCommandBufferBeginInfo begin_info{
             VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO, 
@@ -58,7 +58,7 @@ namespace vpr {
             vkBeginCommandBuffer(buff, &begin_info);
         }
 
-        return cmdBuffers;
+        return cmdBuffers.data();
     }
     
     void TransferPool::Submit() const {

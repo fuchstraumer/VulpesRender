@@ -73,7 +73,7 @@ namespace vpr {
         *   \param flags - features required, commonly related to intended use for the image.
         *   \return Returns found format if successful, otherwise returns VK_FORMAT_UNDEFINED and logs a detailed error.
         */
-        VkFormat FindSupportedFormat(const std::vector<VkFormat>& options, const VkImageTiling& tiling, const VkFormatFeatureFlags& flags) const;
+        VkFormat FindSupportedFormat(const VkFormat* formats, const size_t num_formats, const VkImageTiling& tiling, const VkFormatFeatureFlags& flags) const;
         
         /**! Finds a Vulkan image format suitable for use in the depth buffer
 

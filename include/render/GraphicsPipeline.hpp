@@ -79,7 +79,7 @@ namespace vpr {
 
     };
 
-    void CreateMultiple(const Device* dvc, const std::vector<VkGraphicsPipelineCreateInfo>& infos, VkPipelineCache cache, GraphicsPipeline** dest_pipelines_array);
+    void CreateMultiple(const Device* dvc, const VkGraphicsPipelineCreateInfo* infos, const size_t  num_infos, VkPipelineCache cache, GraphicsPipeline** dest_pipelines_array);
 
 }
 #endif // !VULPES_VK_GRAPHICS_PIPELINE_H

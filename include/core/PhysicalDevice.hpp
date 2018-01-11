@@ -39,7 +39,6 @@ namespace vpr {
         VkPhysicalDeviceProperties Properties;
         VkPhysicalDeviceFeatures Features;
         VkPhysicalDeviceMemoryProperties MemoryProperties;
-        std::vector<VkExtensionProperties> ExtensionProperties;
 
     private:
 
