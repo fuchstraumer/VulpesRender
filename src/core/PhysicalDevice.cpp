@@ -10,7 +10,6 @@ namespace vpr {
 
         getAttributes();
         retrieveQueueFamilyProperties();
-        retrieveExtensionProperties();
 
     }
 
