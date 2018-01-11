@@ -18,7 +18,7 @@ namespace vpr {
 	constexpr VkApplicationInfo vk_base_application_info{
 		VK_STRUCTURE_TYPE_APPLICATION_INFO,
 		nullptr,
-		"Slice Engine",
+		"!!(Update Application Info pApplicationName field)!!",
 		VK_MAKE_VERSION(0, 1, 0),
 		"VulpesRender",
 		VK_MAKE_VERSION(0, 1, 0),
@@ -527,7 +527,7 @@ namespace vpr {
 		VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO,
 		nullptr,
 		0,
-		VkPipelineShaderStageCreateInfo{},
+		vk_pipeline_shader_stage_create_info_base,
 		VK_NULL_HANDLE,
 		VK_NULL_HANDLE,
 		-1
@@ -563,6 +563,56 @@ namespace vpr {
         VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO,
         nullptr,
         0
+    };
+
+    constexpr VkEventCreateInfo vk_event_create_info_base {
+        VK_STRUCTURE_TYPE_EVENT_CREATE_INFO,
+        nullptr,
+        0
+    };
+
+    constexpr VkMemoryDedicatedRequirementsKHR vk_dedicated_memory_requirements_khr_base {
+        VK_STRUCTURE_TYPE_DEDICATED_MEMORY_REQUIREMENTS_KHR,
+        nullptr,
+        VK_FALSE,
+        VK_FALSE
+    };
+
+    constexpr VkMemoryDedicatedAllocateInfoKHR vk_dedicated_allocate_info_khr_base {
+        VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO_KHR,
+        nullptr,
+        VK_NULL_HANDLE,
+        VK_NULL_HANDLE
+    };
+
+    constexpr VkBufferMemoryRequirementsInfoKHR vk_buffer_memory_requirements_info_khr_base {
+        VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_KHR,
+        nullptr,
+        VK_NULL_HANDLE
+    };
+
+    constexpr VkImageMemoryRequirementsInfoKHR vk_image_memory_requirements_info_khr_base {
+        VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR,
+        nullptr,
+        VK_NULL_HANDLE
+    };
+
+    constexpr VkImageSparseMemoryRequirementsInfoKHR vk_image_sparse_memory_requirements_info_khr_base {
+        VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2_KHR
+        nullptr,
+        VK_NULL_HANDLE
+    };
+
+    constexpr VkMemoryRequirements2KHR vk_memory_requirements_2_khr_base {
+        VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2_KHR,
+        nullptr,
+        VkMemoryRequirements{}
+    };
+
+    constexpr VkSparseImageMemoryRequirements2KHR {
+        VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2_KHR,
+        nullptr,
+        VkMemoryRequirements{}
     };
 
 }
