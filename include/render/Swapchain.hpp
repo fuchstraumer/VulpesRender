@@ -25,6 +25,7 @@ namespace vpr {
         const VkExtent2D& Extent() const noexcept;
         const uint32_t& ImageCount() const noexcept;
         const VkColorSpaceKHR& ColorSpace() const noexcept;
+        const VkFormat& ColorFormat() const noexcept;
         const VkImage& Image(const size_t& idx) const;
         const VkImageView& ImageView(const size_t& idx) const;
 

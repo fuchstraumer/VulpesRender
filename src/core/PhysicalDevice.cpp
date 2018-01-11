@@ -31,19 +31,6 @@ namespace vpr {
 
     }
 
-    void PhysicalDevice::retrieveExtensionProperties() noexcept {
-
-        uint32_t ext_cnt = 0;
-        vkEnumerateDeviceExtensionProperties(handle, nullptr, &ext_cnt, nullptr);
-        if (ext_cnt > 0) {
-            std::vector<VkExtensionProperties> extensions(ext_cnt);
-            if (vkEnumerateDeviceExtensionProperties(handle, nullptr, &ext_cnt, extensions.data()) == VK_SUCCESS) {
-                ExtensionProperties.assign(extensions.begin(), extensions.end());
-            }
-        }
-
-    }
-
     static inline uint32_t ScoreDevice(const VkPhysicalDevice& dvc) {
 
         uint32_t score = 0;

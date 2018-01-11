@@ -44,7 +44,6 @@ namespace vpr {
 
         void getAttributes() noexcept;
         void retrieveQueueFamilyProperties() noexcept;
-        void retrieveExtensionProperties() noexcept;
         VkPhysicalDevice getBestDevice(const VkInstance & parent_instance);
 
         std::vector<VkQueueFamilyProperties> queueFamilyProperties;

@@ -179,7 +179,7 @@ namespace vpr {
         }
     }
 
-    const VkSwapchainKHR& Swapchain::vkHandle() const{
+    const VkSwapchainKHR& Swapchain::vkHandle() const noexcept {
         return handle;
     }
 
@@ -193,6 +193,10 @@ namespace vpr {
 
     const VkColorSpaceKHR & Swapchain::ColorSpace() const noexcept {
         return colorSpace;
+    }
+
+    const VkFormat & Swapchain::ColorFormat() const noexcept {
+        return colorFormat;
     }
 
     const VkImage & Swapchain::Image(const size_t & idx) const {
