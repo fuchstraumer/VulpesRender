@@ -23,3 +23,7 @@ There are a few big things on my to-do list, yet:
 
 Dependencies are handled in CMakeLists - GLFW will download and install
 appropriately (including installing for projects that depend on this one). GLI is packaged in, as that has tests set on the global level by a CMake toggle and these tests break or act weirdly on newer versions of C++. If this is fixed, I'll add it back in as an ExternalProject in CMake or as a git submodule.
+
+#### Recent Tags
+
+I've begun tagging, mostly as an indicator of what I consider important milestones. Tag v0.8 was set shortly after I found out a few people might use this - and I made a number of API-breaking changes after this when I tagged v0.8.1. v0.8.1 is just to indicate that I didn't add any major features or make huge changes, but that it mostly contains QOL stuff, minor improvements, fixes, and a few small API changes. So expect major version changes for significant updates probably worth using/upgrading to, and minor version changes as things to consider eventually if the changes included seem worth it
