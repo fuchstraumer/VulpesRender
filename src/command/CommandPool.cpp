@@ -6,12 +6,10 @@
 
 namespace vpr {
 
-    CommandPool::CommandPool(const Device * _parent, const VkCommandPoolCreateInfo & create_info, bool _primary) : parent(_parent), createInfo(create_info), primary(_primary) {
+    CommandPool::CommandPool(const Device * _parent, const VkCommandPoolCreateInfo & create_info) : parent(_parent), createInfo(create_info) {
         handle = VK_NULL_HANDLE;
         Create();
     }
-
-    CommandPool::CommandPool(const Device * _parent, bool _primary) : parent(_parent), primary(_primary) {}
 
     void CommandPool::Create() {
         assert(handle == VK_NULL_HANDLE);

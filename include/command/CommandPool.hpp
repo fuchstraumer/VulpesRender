@@ -23,8 +23,7 @@ namespace vpr {
         CommandPool& operator=(const CommandPool&) = delete;
     public:
 
-        CommandPool(const Device* parent, const VkCommandPoolCreateInfo& create_info, bool primary);
-        CommandPool(const Device* parent, bool primary);
+        CommandPool(const Device* parent, const VkCommandPoolCreateInfo& create_info);
         CommandPool(CommandPool&& other) noexcept;
         CommandPool& operator=(CommandPool&& other) noexcept;
 
@@ -81,7 +80,6 @@ namespace vpr {
         VkCommandPoolCreateInfo createInfo;
         const Device* parent;
         const VkAllocationCallbacks* allocators = nullptr;
-        bool primary;
 
     };
 
