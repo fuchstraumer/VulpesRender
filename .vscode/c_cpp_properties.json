@@ -69,7 +69,8 @@
                     "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/ucrt",
                     "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/shared",
                     "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/winrt",
-                    "${workspaceRoot}"
+                    "${workspaceRoot}",
+                    "${env:VULKAN_SDK}/include"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
