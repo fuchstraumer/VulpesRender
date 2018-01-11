@@ -59,6 +59,7 @@ namespace vpr {
         GraphicsPipeline& operator=(const GraphicsPipeline&) = delete;
     public:
 
+        GraphicsPipeline(const Device* parent, VkGraphicsPipelineCreateInfo create_info, VkPipeline handle);
         GraphicsPipeline(const Device* parent);
         ~GraphicsPipeline();
         
@@ -77,6 +78,8 @@ namespace vpr {
         VkGraphicsPipelineCreateInfo createInfo;
 
     };
+
+    void CreateMultiple(const Device* dvc, const VkGraphicsPipelineCreateInfo* infos, const size_t  num_infos, VkPipelineCache cache, GraphicsPipeline** dest_pipelines_array);
 
 }
 #endif // !VULPES_VK_GRAPHICS_PIPELINE_H

@@ -8,6 +8,7 @@ namespace vpr {
     class Allocator;
     class MemoryBlock;
     struct Suballocation;
+    class AllocationCollection;
     class Instance;
     class InstanceGLFW;
     class PhysicalDevice;

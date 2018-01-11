@@ -9,9 +9,10 @@
 #include <array>
 #include <memory>
 #include <cassert>
+#include <mutex>
 
 #if defined(_WIN32) || defined(__linux__)
-#include "vulkan/vulkan.h"
+#include <vulkan/vulkan.h>
 #elif defined (__APPLE__)
 #include "MoltenVK/mvk_vulkan.h"
 #else
@@ -44,6 +45,5 @@
 
 #include "common/CreateInfoBase.hpp"
 #include "common/vkAssert.hpp"
-#include "common/vk_constants.hpp"
 
 

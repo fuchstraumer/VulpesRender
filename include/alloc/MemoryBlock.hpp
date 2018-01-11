@@ -16,6 +16,8 @@ namespace vpr {
     *   \ingroup Allocation
     */
     class VPR_API MemoryBlock {
+        MemoryBlock(const MemoryBlock&) = delete;
+        MemoryBlock& operator=(const MemoryBlock&) = delete;
     public:
 
         MemoryBlock(Allocator* alloc = nullptr);

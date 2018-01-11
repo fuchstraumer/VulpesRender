@@ -10,7 +10,6 @@ namespace vpr {
 
         getAttributes();
         retrieveQueueFamilyProperties();
-        retrieveExtensionProperties();
 
     }
 
@@ -28,19 +27,6 @@ namespace vpr {
         vkGetPhysicalDeviceQueueFamilyProperties(handle, &queue_family_cnt, nullptr);
         queueFamilyProperties.resize(queue_family_cnt);
         vkGetPhysicalDeviceQueueFamilyProperties(handle, &queue_family_cnt, queueFamilyProperties.data());
-
-    }
-
-    void PhysicalDevice::retrieveExtensionProperties() noexcept {
-
-        uint32_t ext_cnt = 0;
-        vkEnumerateDeviceExtensionProperties(handle, nullptr, &ext_cnt, nullptr);
-        if (ext_cnt > 0) {
-            std::vector<VkExtensionProperties> extensions(ext_cnt);
-            if (vkEnumerateDeviceExtensionProperties(handle, nullptr, &ext_cnt, extensions.data()) == VK_SUCCESS) {
-                ExtensionProperties.assign(extensions.begin(), extensions.end());
-            }
-        }
 
     }
 

@@ -5,6 +5,7 @@
 #include "ForwardDecl.hpp"
 #include "AllocCommon.hpp"
 #include "AllocationCollection.hpp"
+#include <unordered_set>
 
 namespace vpr {
 
@@ -44,7 +45,7 @@ namespace vpr {
         Allocator& operator=(Allocator&&) = delete;
     public:
 
-        Allocator(const Device* parent_dvc);
+        Allocator(const Device* parent_dvc, bool dedicated_alloc_enabled);
         ~Allocator();
 
         void Recreate();
@@ -92,9 +93,11 @@ namespace vpr {
         bool freePrivateMemory(const Allocation* memory_to_free);
 
         std::vector<std::unique_ptr<AllocationCollection>> allocations;
-        std::vector<std::unique_ptr<AllocationCollection>> privateAllocations;
+        std::unordered_set<std::unique_ptr<Allocation>> privateAllocations;
         std::vector<bool> emptyAllocations;
-
+        /**Guards the private allocations set, since it's a different object entirely than the main one.
+        */
+        std::mutex privateMutex;
         const Device* parent;
 
         VkPhysicalDeviceProperties deviceProperties;
@@ -103,7 +106,18 @@ namespace vpr {
         VkDeviceSize preferredLargeHeapBlockSize;
         VkDeviceSize preferredSmallHeapBlockSize;
         const VkAllocationCallbacks* pAllocationCallbacks = nullptr;
+        bool usingAllocationKHR;
+
+        /*
+            Used GPU Open allocator impl. hints and this:
+            http://asawicki.info/articles/VK_KHR_dedicated_allocation.php5
+            blogpost to implement support for this extension.
+        */
+        void fetchAllocFunctionPointersKHR();
         
+        PFN_vkGetBufferMemoryRequirements2KHR pVkGetBufferMemoryRequirements2KHR;
+        PFN_vkGetImageMemoryRequirements2KHR pVkGetImageMemoryRequirements2KHR;
+        PFN_vkGetImageSparseMemoryRequirements2KHR pVkGetImageSparseMemoryRequirements2KHR;
     };
 
     

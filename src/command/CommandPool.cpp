@@ -6,24 +6,16 @@
 
 namespace vpr {
 
-    CommandPool::CommandPool(const Device * _parent, const VkCommandPoolCreateInfo & create_info, bool _primary) : parent(_parent), createInfo(create_info), primary(_primary) {
-        handle = VK_NULL_HANDLE;
+    CommandPool::CommandPool(const Device * _parent, const VkCommandPoolCreateInfo & create_info) : parent(_parent), createInfo(create_info), handle(VK_NULL_HANDLE) {
         Create();
     }
 
-    CommandPool::CommandPool(const Device * _parent, bool _primary) : parent(_parent), primary(_primary) {}
-
     void CommandPool::Create() {
-        assert(handle == VK_NULL_HANDLE);
         VkResult result = vkCreateCommandPool(parent->vkHandle(), &createInfo, allocators, &handle);
         VkAssert(result);
     }
 
     void CommandPool::ResetCmdPool(const VkCommandPoolResetFlagBits& command_pool_reset_flags) {
-        assert((createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT));
-        if(!(createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT)) {
-            LOG(WARNING) << "Cannot reset command pools that were not created with VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT!";
-        }
         vkResetCommandPool(parent->vkHandle(), handle, command_pool_reset_flags);
     }
 
@@ -85,19 +77,11 @@ namespace vpr {
     }
 
     void CommandPool::ResetCmdBuffer(const size_t & idx, const VkCommandBufferResetFlagBits& command_buffer_reset_flag_bits) {
-        assert(createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT);
-        if(!(createInfo.flags & VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT)) {
-            LOG(WARNING) << "Cannot reset command pools that were not created with VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT!";
-        }
         vkResetCommandBuffer(cmdBuffers[idx], command_buffer_reset_flag_bits);
     }
     
     const VkCommandPool & CommandPool::vkHandle() const noexcept{
         return handle;
-    }
-    
-    std::vector<VkCommandBuffer> CommandPool::GetCommandBuffers(const size_t& num, const size_t& offset) const {
-        return std::vector<VkCommandBuffer>(cmdBuffers.begin() + offset, cmdBuffers.begin() + offset + num);
     }
 
     const VkCommandBuffer* CommandPool::GetCommandBuffers(const size_t& offset) const {

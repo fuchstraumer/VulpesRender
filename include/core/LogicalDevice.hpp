@@ -32,7 +32,9 @@ namespace vpr {
         Device& operator=(Device&&) = delete;
     public:
         
-        Device(const Instance* instance, const PhysicalDevice* device);
+        Device(const Instance* instance, const PhysicalDevice* device, bool use_recommended_extensions);
+        Device(const Instance* instance, const PhysicalDevice* p_device, const uint32_t extension_count, const char* const* extension_names,
+            const uint32_t layer_count = std::numeric_limits<uint32_t>::max(), const char* const* layer_names = nullptr);
 
         void VerifyPresentationSupport();
 
@@ -71,7 +73,7 @@ namespace vpr {
         *   \param flags - features required, commonly related to intended use for the image.
         *   \return Returns found format if successful, otherwise returns VK_FORMAT_UNDEFINED and logs a detailed error.
         */
-        VkFormat FindSupportedFormat(const std::vector<VkFormat>& options, const VkImageTiling& tiling, const VkFormatFeatureFlags& flags) const;
+        VkFormat FindSupportedFormat(const VkFormat* formats, const size_t num_formats, const VkImageTiling& tiling, const VkFormatFeatureFlags& flags) const;
         
         /**! Finds a Vulkan image format suitable for use in the depth buffer
 
@@ -94,17 +96,21 @@ namespace vpr {
 
     private:
 
+        void create(const uint32_t ext_count, const char* const* exts, const uint32_t layer_count, const char* const* layers);
         void setupGraphicsQueues();
         void setupComputeQueues();
         void setupTransferQueues();
         void setupSparseBindingQueues();
-        const VkAllocationCallbacks* AllocCallbacks = nullptr;
-
+        
+        void checkRequestedExtensions(std::vector<const char*>& requested_extensions);
+        void checkDedicatedAllocExtensions(const std::vector<const char*>& exts);
         VkDevice handle;
         VkDeviceCreateInfo createInfo;
 
         const PhysicalDevice* parent;
         const Instance* parentInstance;
+
+        bool enableDedicatedAllocations;
 
         std::map<VkQueueFlags, VkDeviceQueueCreateInfo> queueInfos;
 

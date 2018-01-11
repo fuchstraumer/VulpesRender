@@ -7,7 +7,7 @@
 
 namespace vpr {
 
-    SwapchainInfo::SwapchainInfo(const VkPhysicalDevice & dvc, const VkSurfaceKHR& sfc){
+    Swapchain::SwapchainInfo::SwapchainInfo(const VkPhysicalDevice & dvc, const VkSurfaceKHR& sfc){
         
         vkGetPhysicalDeviceSurfaceCapabilitiesKHR(dvc, sfc, &Capabilities);
         uint32_t fmt_cnt = 0;
@@ -28,7 +28,7 @@ namespace vpr {
 
     }
 
-    VkSurfaceFormatKHR SwapchainInfo::GetBestFormat() const{
+    VkSurfaceFormatKHR Swapchain::SwapchainInfo::GetBestFormat() const{
         
         if (Formats.size() == 1 && Formats.front().format == VK_FORMAT_UNDEFINED) {
             return { VK_FORMAT_B8G8R8A8_UNORM, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR };
@@ -44,7 +44,7 @@ namespace vpr {
 
     }
 
-    VkPresentModeKHR SwapchainInfo::GetBestPresentMode() const{
+    VkPresentModeKHR Swapchain::SwapchainInfo::GetBestPresentMode() const{
         
         VkPresentModeKHR result = VK_PRESENT_MODE_FIFO_KHR;
         for (const auto& mode : PresentModes) {
@@ -62,7 +62,7 @@ namespace vpr {
 
     }
 
-    VkExtent2D SwapchainInfo::ChooseSwapchainExtent(GLFWwindow* window) const{
+    VkExtent2D Swapchain::SwapchainInfo::ChooseSwapchainExtent(GLFWwindow* window) const{
         
         if (Capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max()) {
             return Capabilities.currentExtent;
@@ -78,55 +78,31 @@ namespace vpr {
 
     }
 
+    Swapchain::Swapchain(const Instance * _instance, const Device * _device) : instance(_instance), device(_device), info(_device->GetPhysicalDevice().vkHandle(), _instance->vkSurface()) {
+        create();
+    }
+
     Swapchain::~Swapchain(){
         Destroy();
     }
 
-    void Swapchain::Init(const Instance * _instance, const PhysicalDevice * _phys_device, const Device * _device) {
-        
-        instance = _instance;
-        device = _device;
-        phys_device = _phys_device;
-
-        setParameters();
-        setupCreateInfo();
-
-        VkResult result = vkCreateSwapchainKHR(device->vkHandle(), &createInfo, AllocCallbacks, &handle);
-        VkAssert(result);
-
-        setupSwapImages();
-        setupImageViews();
-
-    }
-
-    void Swapchain::Recreate() {
-        
-        Info.reset();
-        
-        ImageCount = 0;
-        setParameters();
-        setupCreateInfo();
-
-        VkResult result = vkCreateSwapchainKHR(device->vkHandle(), &createInfo, AllocCallbacks, &handle);
-        VkAssert(result);
-
-        setupSwapImages();
-        setupImageViews();
-
+    void Swapchain::Recreate() {    
+        imageCount = 0;
+        info = SwapchainInfo(device->GetPhysicalDevice().vkHandle(), instance->vkSurface());
+        create();
     }
 
     void Swapchain::setParameters() {
 
-        Info = std::make_unique<SwapchainInfo>(phys_device->vkHandle(), instance->vkSurface());
-        surfaceFormat = Info->GetBestFormat();
-        ColorFormat = surfaceFormat.format;
-        presentMode = Info->GetBestPresentMode();
-        Extent = Info->ChooseSwapchainExtent(instance->GetGLFWwindow());
+        surfaceFormat = info.GetBestFormat();
+        colorFormat = surfaceFormat.format;
+        presentMode = info.GetBestPresentMode();
+        extent = info.ChooseSwapchainExtent(instance->GetGLFWwindow());
 
         // Create one more image than minspec to implement triple buffering (in hope we got mailbox present mode)
-        ImageCount = Info->Capabilities.minImageCount + 1;
-        if (Info->Capabilities.maxImageCount > 0 && ImageCount > Info->Capabilities.maxImageCount) {
-            ImageCount = Info->Capabilities.maxImageCount;
+        imageCount = info.Capabilities.minImageCount + 1;
+        if (info.Capabilities.maxImageCount > 0 && imageCount > info.Capabilities.maxImageCount) {
+            imageCount = info.Capabilities.maxImageCount;
         }
 
     }
@@ -137,12 +113,12 @@ namespace vpr {
         createInfo.surface = instance->vkSurface();
         createInfo.imageFormat = surfaceFormat.format;
         createInfo.imageColorSpace = surfaceFormat.colorSpace;
-        createInfo.imageExtent = Extent;
+        createInfo.imageExtent = extent;
         createInfo.imageArrayLayers = 1;
-        createInfo.minImageCount = ImageCount;
+        createInfo.minImageCount = imageCount;
         createInfo.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
 
-        uint32_t indices[2] = { static_cast<uint32_t>(device->QueueFamilyIndices.Present), static_cast<uint32_t>(device->QueueFamilyIndices.Graphics) };
+        const uint32_t indices[2] = { static_cast<uint32_t>(device->QueueFamilyIndices.Present), static_cast<uint32_t>(device->QueueFamilyIndices.Graphics) };
         if (device->QueueFamilyIndices.Present != device->QueueFamilyIndices.Graphics) {
             createInfo.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
             createInfo.queueFamilyIndexCount = 2;
@@ -154,7 +130,7 @@ namespace vpr {
             createInfo.pQueueFamilyIndices = nullptr;
         }
 
-        createInfo.preTransform = Info->Capabilities.currentTransform;
+        createInfo.preTransform = info.Capabilities.currentTransform;
         createInfo.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
         createInfo.presentMode = presentMode;
         createInfo.clipped = VK_TRUE;
@@ -165,50 +141,81 @@ namespace vpr {
     void Swapchain::setupSwapImages() {
 
         // Setup swap images
-        vkGetSwapchainImagesKHR(device->vkHandle(), handle, &ImageCount, nullptr);
-        Images.resize(ImageCount);
-        vkGetSwapchainImagesKHR(device->vkHandle(), handle, &ImageCount, Images.data());
+        vkGetSwapchainImagesKHR(device->vkHandle(), handle, &imageCount, nullptr);
+        images.resize(imageCount);
+        vkGetSwapchainImagesKHR(device->vkHandle(), handle, &imageCount, images.data());
 
     }
 
     void Swapchain::setupImageViews() {
 
         // Setup image views
-        ImageViews.resize(ImageCount);
-        for (uint32_t i = 0; i < ImageCount; ++i) {
+        imageViews.resize(imageCount);
+        for (uint32_t i = 0; i < imageCount; ++i) {
             VkImageViewCreateInfo iv_info = vk_image_view_create_info_base;
-            iv_info.image = Images[i];
+            iv_info.image = images[i];
             iv_info.viewType = VK_IMAGE_VIEW_TYPE_2D;
-            iv_info.format = ColorFormat;
+            iv_info.format = colorFormat;
             iv_info.components = { VK_COMPONENT_SWIZZLE_IDENTITY, VK_COMPONENT_SWIZZLE_IDENTITY, VK_COMPONENT_SWIZZLE_IDENTITY, VK_COMPONENT_SWIZZLE_IDENTITY };
             iv_info.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
             iv_info.subresourceRange.baseMipLevel = 0;
             iv_info.subresourceRange.levelCount = 1;
             iv_info.subresourceRange.baseArrayLayer = 0;
             iv_info.subresourceRange.layerCount = 1;
-            VkResult result = vkCreateImageView(device->vkHandle(), &iv_info, AllocCallbacks, &ImageViews[i]);
+            VkResult result = vkCreateImageView(device->vkHandle(), &iv_info, nullptr, &imageViews[i]);
             VkAssert(result);
         }
 
     }
 
     void Swapchain::Destroy(){
-        for (const auto& view : ImageViews) {
+        for (const auto& view : imageViews) {
             if (view != VK_NULL_HANDLE) {
-                vkDestroyImageView(device->vkHandle(), view, AllocCallbacks);
+                vkDestroyImageView(device->vkHandle(), view, nullptr);
             }
         }
         if (handle != VK_NULL_HANDLE) {
-            vkDestroySwapchainKHR(device->vkHandle(), handle, AllocCallbacks);
+            vkDestroySwapchainKHR(device->vkHandle(), handle, nullptr);
         }
     }
 
-    const VkSwapchainKHR& Swapchain::vkHandle() const{
+    const VkSwapchainKHR& Swapchain::vkHandle() const noexcept {
         return handle;
     }
 
-    Swapchain::operator VkSwapchainKHR() const{
-        return handle;
+    const VkExtent2D & Swapchain::Extent() const noexcept {
+        return extent;
+    }
+
+    const uint32_t & Swapchain::ImageCount() const noexcept {
+        return imageCount;
+    }
+
+    const VkColorSpaceKHR & Swapchain::ColorSpace() const noexcept {
+        return colorSpace;
+    }
+
+    const VkFormat & Swapchain::ColorFormat() const noexcept {
+        return colorFormat;
+    }
+
+    const VkImage & Swapchain::Image(const size_t & idx) const {
+        return images[idx];
+    }
+
+    const VkImageView & Swapchain::ImageView(const size_t & idx) const {
+        return imageViews[idx];
+    }
+
+    void Swapchain::create() {
+        setParameters();
+        setupCreateInfo();
+
+        VkResult result = vkCreateSwapchainKHR(device->vkHandle(), &createInfo, nullptr, &handle);
+        VkAssert(result);
+
+        setupSwapImages();
+        setupImageViews();
     }
 
 }

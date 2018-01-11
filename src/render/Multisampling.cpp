@@ -5,15 +5,15 @@
 
 VkSampleCountFlagBits vpr::Multisampling::SampleCount = VK_SAMPLE_COUNT_8_BIT;
 
-vpr::Multisampling::Multisampling(const Device * dvc, const Swapchain * swapchain, const VkSampleCountFlagBits & sample_count, const uint32_t & width, const uint32_t & height) : device(dvc), sampleCount(sample_count) {
+vpr::Multisampling::Multisampling(const Device * dvc, const Swapchain * swapchain, const VkSampleCountFlagBits & sample_count) : device(dvc), sampleCount(sample_count) {
 
     /*
         Setup attachments to render into
     */
 
     VkImageCreateInfo image_info = vk_image_create_info_base;
-    image_info.format = swapchain->ColorFormat;
-    image_info.extent = VkExtent3D{ width, height, 1 };
+    image_info.format = swapchain->ColorFormat();
+    image_info.extent = VkExtent3D{ swapchain->Extent().width, swapchain->Extent().height, 1 };
     image_info.tiling = VK_IMAGE_TILING_OPTIMAL;
     image_info.samples = sampleCount;
     image_info.usage = VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
@@ -26,7 +26,7 @@ vpr::Multisampling::Multisampling(const Device * dvc, const Swapchain * swapchai
 
     VkImageViewCreateInfo msaa_view_info = vk_image_view_create_info_base;
     msaa_view_info.image = ColorBufferMS->vkHandle();
-    msaa_view_info.format = swapchain->ColorFormat;
+    msaa_view_info.format = swapchain->ColorFormat();
 
     ColorBufferMS->CreateView(msaa_view_info);
 

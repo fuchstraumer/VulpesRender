@@ -42,7 +42,7 @@ namespace vpr {
          *  to record transfer commands until multiple buffers in parallel, then submit all these
          *  transfers at once.
          */
-        const std::vector<VkCommandBuffer>& BeginAll() const;
+        const VkCommandBuffer* BeginAll() const;
 
         /** Calls VkEndCommandBuffer on this object's command buffer, then proceeds to submit it. This 
         *   transfer will wait on the VkFence object attached to this pool, resetting the owned command 

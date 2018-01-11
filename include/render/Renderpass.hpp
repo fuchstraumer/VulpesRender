@@ -22,7 +22,7 @@ namespace vpr {
         ~Renderpass();
         
         /** Must be setup before trying to use the VkRenderPassBeginInfo object attached to this class. Will cause validation layer and rendering errors otherwise. */
-        void SetupBeginInfo(const std::vector<VkClearValue>& clear_values, const VkExtent2D& render_area);
+        void SetupBeginInfo(const VkClearValue* clear_values, const size_t num_values, const VkExtent2D& render_area);
         /** Call each frame or when changing a framebuffer to ensure the correct framebuffer is rendered to. */
         void UpdateBeginInfo(const VkFramebuffer& current_framebuffer);
         void Destroy();

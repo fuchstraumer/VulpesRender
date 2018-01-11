@@ -27,9 +27,9 @@ namespace vpr {
         Destroy();
     }
 
-    void Renderpass::SetupBeginInfo(const std::vector<VkClearValue>& clear_values, const VkExtent2D & render_area) {
+    void Renderpass::SetupBeginInfo(const VkClearValue* clear_values, const size_t num_values, const VkExtent2D & render_area) {
 
-        clearValues = clear_values;
+        clearValues = std::move(std::vector<VkClearValue>{ clear_values, clear_values + num_values });
         clearValues.shrink_to_fit();
 
         beginInfo = VkRenderPassBeginInfo{

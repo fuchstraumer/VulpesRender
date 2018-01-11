@@ -7,8 +7,28 @@
 
 namespace vpr {
 
-    Device::Device(const Instance* instance, const PhysicalDevice * device) : parent(device), parentInstance(instance) {
+    constexpr const char* const SWAPCHAIN_EXTENSION_NAME = "VK_KHR_swapchain";
+    constexpr std::array<const char*, 3> recommended_extensions {
+        VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+        VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME,
+        VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME
+    };
 
+    Device::Device(const Instance* instance, const PhysicalDevice * device, bool use_recommended_extensions) : parent(device), parentInstance(instance) {
+        if (use_recommended_extensions) {
+            create(static_cast<uint32_t>(recommended_extensions.size()), recommended_extensions.data(), 0, nullptr);
+        }
+        else {
+            create(0, nullptr, 0, nullptr);
+        }
+    }
+
+    Device::Device(const Instance* instance, const PhysicalDevice* dvc, const uint32_t extension_count, const char* const* extension_names,
+        const uint32_t layer_count, const char* const* layer_names) : parent(dvc), parentInstance(instance) {
+        create(extension_count, extension_names, layer_count, layer_names);
+    }
+
+    void Device::create(const uint32_t ext_count, const char* const* exts, const uint32_t layer_count, const char* const* layers) {
         setupGraphicsQueues();
         setupComputeQueues();
         setupTransferQueues();
@@ -23,20 +43,45 @@ namespace vpr {
         }
 
         VerifyPresentationSupport();
-        
+
         createInfo = vk_device_create_info_base;
         createInfo.queueCreateInfoCount = static_cast<uint32_t>(queue_infos.size());
         createInfo.pQueueCreateInfos = queue_infos.data();
-        createInfo.pEnabledFeatures = &device->Features;
-        createInfo.enabledExtensionCount = static_cast<uint32_t>(device_extensions.size());
-        createInfo.ppEnabledExtensionNames = device_extensions.data();
-        createInfo.enabledLayerCount = 0;
-        createInfo.ppEnabledLayerNames = nullptr;
-        
-        VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, AllocCallbacks, &handle);
+
+        if (parentInstance->ValidationEnabled()) {
+            if ((layer_count == 0) && (layers == nullptr)) {
+                constexpr static const char* const default_layer = "VK_LAYER_LUNARG_standard_validation";
+                createInfo.enabledLayerCount = 1;
+                createInfo.ppEnabledLayerNames = &default_layer;
+            }
+            else {
+                createInfo.enabledLayerCount = layer_count;
+                createInfo.ppEnabledLayerNames = layers;
+            }
+        }
+
+        if ((ext_count != 0) && (exts != nullptr)) {
+            std::vector<const char*> req_extensions{ exts, exts + ext_count };
+            checkRequestedExtensions(req_extensions);
+            auto iter = std::find(req_extensions.cbegin(), req_extensions.cend(), SWAPCHAIN_EXTENSION_NAME);
+            if (iter == req_extensions.cend()) {
+                LOG(WARNING) << SWAPCHAIN_EXTENSION_NAME << " not requested as a device extension. Cannot render or create a swapchain object!";
+            }
+
+            checkDedicatedAllocExtensions(req_extensions);
+            createInfo.enabledExtensionCount = static_cast<uint32_t>(req_extensions.size());
+            createInfo.ppEnabledExtensionNames = req_extensions.data();
+        }
+        else {
+            createInfo.enabledExtensionCount = 0;
+            createInfo.ppEnabledExtensionNames = nullptr;
+            enableDedicatedAllocations = false;
+        }
+
+        VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, nullptr, &handle);
         VkAssert(result);
 
-        vkAllocator = std::make_unique<Allocator>(this);
+        vkAllocator = std::make_unique<Allocator>(this, enableDedicatedAllocations);
 
     }
 
@@ -45,8 +90,7 @@ namespace vpr {
         auto create_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_GRAPHICS_BIT));
         create_info.queueFamilyIndex = QueueFamilyIndices.Graphics;
         NumGraphicsQueues = create_info.queueCount;
-        static std::vector<float> priorities;
-        priorities.assign(NumGraphicsQueues, 1.0f);
+        const std::vector<float> priorities(NumGraphicsQueues, 1.0f);
         create_info.pQueuePriorities = priorities.data();
         queueInfos.insert(std::make_pair(VK_QUEUE_GRAPHICS_BIT, create_info));
     }
@@ -57,8 +101,7 @@ namespace vpr {
             auto compute_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_COMPUTE_BIT));
             compute_info.queueFamilyIndex = QueueFamilyIndices.Compute;
             NumComputeQueues = compute_info.queueCount;
-            static std::vector<float> priorities;
-            priorities.assign(NumComputeQueues, 1.0f);
+            const std::vector<float> priorities(NumComputeQueues, 1.0f);
             compute_info.pQueuePriorities = priorities.data();
             queueInfos.insert(std::make_pair(VK_QUEUE_COMPUTE_BIT, compute_info));
         }
@@ -78,8 +121,7 @@ namespace vpr {
             auto transfer_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_TRANSFER_BIT));
             transfer_info.queueFamilyIndex = QueueFamilyIndices.Transfer;
             NumTransferQueues = transfer_info.queueCount;
-            static std::vector<float> priorities;
-            priorities.assign(NumTransferQueues, 1.0f);
+            const std::vector<float> priorities(NumTransferQueues, 1.0f);
             transfer_info.pQueuePriorities = priorities.data();
             queueInfos.insert(std::make_pair(VK_QUEUE_TRANSFER_BIT, transfer_info));
         }
@@ -98,6 +140,9 @@ namespace vpr {
             auto sparse_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT));
             sparse_info.queueFamilyIndex = QueueFamilyIndices.SparseBinding;
             NumSparseBindingQueues = sparse_info.queueCount;
+            const std::vector<float> priorities(NumSparseBindingQueues, 1.0f);
+            sparse_info.pQueuePriorities = priorities.data();
+            queueInfos.insert(std::make_pair(VK_QUEUE_SPARSE_BINDING_BIT, sparse_info));
         }
         else {
             auto queue_properties = parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT);
@@ -138,7 +183,7 @@ namespace vpr {
 
     Device::~Device(){
         vkAllocator.reset();
-        vkDestroyDevice(handle, AllocCallbacks);
+        vkDestroyDevice(handle, nullptr);
     }
 
     const VkDevice & Device::vkHandle() const{
@@ -209,15 +254,15 @@ namespace vpr {
         }
     }
 
-    VkFormat Device::FindSupportedFormat(const std::vector<VkFormat>& options, const VkImageTiling & tiling, const VkFormatFeatureFlags & flags) const {
-        for (const auto& fmt : options) {
+    VkFormat Device::FindSupportedFormat(const VkFormat* formats, const size_t num_formats, const VkImageTiling & tiling, const VkFormatFeatureFlags & flags) const {
+        for (size_t i = 0; i < num_formats; ++i) {
             VkFormatProperties properties;
-            vkGetPhysicalDeviceFormatProperties(parent->vkHandle(), fmt, &properties);
+            vkGetPhysicalDeviceFormatProperties(parent->vkHandle(), formats[i], &properties);
             if (tiling == VK_IMAGE_TILING_LINEAR && (properties.linearTilingFeatures & flags) == flags) {
-                return fmt;
+                return formats[i];
             }
             else if (tiling == VK_IMAGE_TILING_OPTIMAL && (properties.optimalTilingFeatures & flags) == flags) {
-                return fmt;
+                return formats[i];
             }
         }
         LOG(ERROR) << "Could not find texture format that supports requested tiling and feature flags: ( " << std::to_string(tiling) << " , " << std::to_string(flags) << " )";
@@ -225,7 +270,8 @@ namespace vpr {
     }
 
     VkFormat Device::FindDepthFormat() const{
-        return FindSupportedFormat({ VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT }, VK_IMAGE_TILING_OPTIMAL, VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
+        static const std::vector<VkFormat> format_options{ VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT };
+        return FindSupportedFormat(format_options.data(), format_options.size(), VK_IMAGE_TILING_OPTIMAL, VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
     }
 
     VkFormat Device::GetSwapchainColorFormat() const {
@@ -275,6 +321,50 @@ namespace vpr {
         vkGetDeviceQueue(vkHandle(), idx, desired_idx, &result);
         return result;
 
+    }
+
+    void Device::checkRequestedExtensions(std::vector<const char*>& extensions) {
+        uint32_t queried_count = 0;
+        vkEnumerateDeviceExtensionProperties(parent->vkHandle(), nullptr, &queried_count, nullptr);
+        std::vector<VkExtensionProperties> queried_extensions(queried_count);
+        vkEnumerateDeviceExtensionProperties(parent->vkHandle(), nullptr, &queried_count, queried_extensions.data());
+
+        const auto has_extension = [queried_extensions](const char* name) {
+            const auto req_found = std::find_if(queried_extensions.cbegin(), queried_extensions.cend(), [name](const VkExtensionProperties& p) {
+                return strcmp(p.extensionName, name) == 0;
+            });
+            return req_found != queried_extensions.end();
+        };
+
+        auto iter = extensions.begin();
+        while (iter != extensions.end()) {
+            if (!has_extension(*iter)) {
+                LOG(WARNING) << "Requested device extension with name \"" << *iter << "\" is not available, removing from list.";
+                extensions.erase(iter++);
+            }
+            else {
+                ++iter;
+            }
+        }
+    }
+    
+    void Device::checkDedicatedAllocExtensions(const std::vector<const char*>& exts) {
+        constexpr std::array<const char*, 2> mem_extensions{ VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME, VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME };
+        auto iter = std::find(exts.cbegin(), exts.cend(), mem_extensions[0]);
+        if (iter != exts.cend()) {
+            iter = std::find(exts.cbegin(), exts.cend(), mem_extensions[1]);
+            if (iter != exts.cend()) {
+                LOG(INFO) << "Both extensions required to enable better dedicated allocations have been enabled/found.";
+                enableDedicatedAllocations = true;
+            }    
+            else {
+                LOG(WARNING) << "Only one of the extensions required for better allocations was found - cannot enable/use.";
+                enableDedicatedAllocations = false;
+            }
+        }
+        else {
+            enableDedicatedAllocations = false;
+        }
     }
 
 
