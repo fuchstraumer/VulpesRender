@@ -103,7 +103,7 @@ namespace vpr {
         void setupSparseBindingQueues();
         
         void checkRequestedExtensions(std::vector<const char*>& requested_extensions);
-        void checkDedicatedAllocExtensions(const std::vector<const char*>& exts)
+        void checkDedicatedAllocExtensions(const std::vector<const char*>& exts);
         VkDevice handle;
         VkDeviceCreateInfo createInfo;
 

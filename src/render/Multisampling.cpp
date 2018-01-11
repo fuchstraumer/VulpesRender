@@ -13,7 +13,7 @@ vpr::Multisampling::Multisampling(const Device * dvc, const Swapchain * swapchai
 
     VkImageCreateInfo image_info = vk_image_create_info_base;
     image_info.format = swapchain->ColorFormat;
-    image_info.extent = VkExtent3D{ swapcahin->Extent.width, swapchain->Extent.height, 1 };
+    image_info.extent = VkExtent3D{ swapchain->Extent.width, swapchain->Extent.height, 1 };
     image_info.tiling = VK_IMAGE_TILING_OPTIMAL;
     image_info.samples = sampleCount;
     image_info.usage = VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;

@@ -4,9 +4,8 @@
 
 namespace vpr {
 
-    TransferPool::TransferPool(const Device * _parent) : CommandPool(_parent, true) {
-        
-        createInfo = transfer_pool_info;
+    TransferPool::TransferPool(const Device * _parent) : CommandPool(_parent, transfer_pool_info) {
+
         createInfo.queueFamilyIndex = parent->QueueFamilyIndices.Transfer;
         VkResult result = vkCreateCommandPool(parent->vkHandle(), &createInfo, allocators, &handle);
         VkAssert(result);
@@ -129,7 +128,7 @@ namespace vpr {
     }
 
     void TransferPool::completeTransfer() const {   
-        VkResult result = vkWaitForFences(parent->vkHandle(), 1, &fence, VK_TRUE, vk_default_fence_timeout);
+        VkResult result = vkWaitForFences(parent->vkHandle(), 1, &fence, VK_TRUE, 10);
         VkAssert(result);
         result = vkResetFences(parent->vkHandle(), 1, &fence);
         vkResetCommandPool(parent->vkHandle(), handle, VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);

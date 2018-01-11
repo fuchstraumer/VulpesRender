@@ -59,6 +59,7 @@ namespace vpr {
         GraphicsPipeline& operator=(const GraphicsPipeline&) = delete;
     public:
 
+        GraphicsPipeline(const Device* parent, VkGraphicsPipelineCreateInfo create_info, VkPipeline handle);
         GraphicsPipeline(const Device* parent);
         ~GraphicsPipeline();
         
@@ -69,7 +70,6 @@ namespace vpr {
         void Destroy();
         const VkPipeline& vkHandle() const noexcept;
 
-        static void CreateMultiple(std::vector<GraphicsPipeline&>& pipelines, const std::vector<VkGraphicsPipelineCreateInfo>& infos, VkPipelineCache cache);
     private:
 
         const VkAllocationCallbacks* allocators = nullptr;
@@ -78,6 +78,8 @@ namespace vpr {
         VkGraphicsPipelineCreateInfo createInfo;
 
     };
+
+    void CreateMultiple(const Device* dvc, const std::vector<VkGraphicsPipelineCreateInfo>& infos, VkPipelineCache cache, GraphicsPipeline** dest_pipelines_array);
 
 }
 #endif // !VULPES_VK_GRAPHICS_PIPELINE_H

@@ -20,6 +20,8 @@ namespace vpr {
             
     }
 
+    GraphicsPipeline::GraphicsPipeline(const Device* _d, VkGraphicsPipelineCreateInfo info, VkPipeline _handle) : parent(_d), createInfo(std::move(info)), handle(_handle) {}
+
     GraphicsPipeline::GraphicsPipeline(const Device * _parent) : parent(_parent), createInfo(vk_graphics_pipeline_create_info_base) {}
 
     GraphicsPipeline::GraphicsPipeline(GraphicsPipeline&& other) noexcept : parent(std::move(other.parent)), createInfo(std::move(other.createInfo)), handle(std::move(other.handle)) {
@@ -49,14 +51,18 @@ namespace vpr {
             vkDestroyPipeline(parent->vkHandle(), handle, allocators);
         }
     }
-    
-    void GraphicsPipeline::CreateMultiple(std::vector<GraphicsPipeline&>& pipelines, const std::vector<VkGraphicsPipelineCreateInfo>& infos, VkPipelineCache cache) {
-        std::vector<VkGraphicsPipeline> handles(pipelines.size());
-        vkCreateGraphicsPipelines(pipelines.front().device, cache, infos.size(), infos.data(), nullptr, handles.data());
-    }
 
     const VkPipeline & GraphicsPipeline::vkHandle() const noexcept {
         return handle;
+    }
+
+    void CreateMultiple(const Device* dvc, const std::vector<VkGraphicsPipelineCreateInfo>& infos, VkPipelineCache cache, GraphicsPipeline** results) {
+        std::vector<VkPipeline> handles(infos.size());
+        VkResult result = vkCreateGraphicsPipelines(dvc->vkHandle(), cache, static_cast<uint32_t>(infos.size()), infos.data(), nullptr, handles.data());
+        VkAssert(result);
+        for (size_t i = 0; i < handles.size(); ++i) {
+            results[i] = new GraphicsPipeline(dvc, infos[i], handles[i]);
+        }
     }
 
 }

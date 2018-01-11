@@ -28,7 +28,7 @@ namespace vpr {
         create(extension_count, extension_names, layer_count, layer_names);
     }
 
-    void Device::create(const uint32_t ext_count, const char* const* exts, const uint32_t layer_coutn, const char* const* layers) {
+    void Device::create(const uint32_t ext_count, const char* const* exts, const uint32_t layer_count, const char* const* layers) {
         setupGraphicsQueues();
         setupComputeQueues();
         setupTransferQueues();
@@ -48,20 +48,20 @@ namespace vpr {
         createInfo.queueCreateInfoCount = static_cast<uint32_t>(queue_infos.size());
         createInfo.pQueueCreateInfos = queue_infos.data();
 
-        if (instance->ValidationEnabled()) {
-            if ((layer_count == 0) && (layer_names == nullptr)) {
+        if (parentInstance->ValidationEnabled()) {
+            if ((layer_count == 0) && (layers == nullptr)) {
                 constexpr static const char* const default_layer = "VK_LAYER_LUNARG_standard_validation";
                 createInfo.enabledLayerCount = 1;
                 createInfo.ppEnabledLayerNames = &default_layer;
             }
             else {
                 createInfo.enabledLayerCount = layer_count;
-                createInfo.ppEnabledLayerNames = layer_names;
+                createInfo.ppEnabledLayerNames = layers;
             }
         }
 
-        if ((extension_count != 0) && (extension_names != nullptr)) {
-            std::vector<const char*> req_extensions{ extension_names, extension_names + extension_count };
+        if ((ext_count != 0) && (exts != nullptr)) {
+            std::vector<const char*> req_extensions{ exts, exts + ext_count };
             checkRequestedExtensions(req_extensions);
             auto iter = std::find(req_extensions.cbegin(), req_extensions.cend(), SWAPCHAIN_EXTENSION_NAME);
             if (iter == req_extensions.cend()) {
@@ -69,7 +69,7 @@ namespace vpr {
             }
 
             checkDedicatedAllocExtensions(req_extensions);
-            createInfo.enabledExtensionCount = req_extensions.size();
+            createInfo.enabledExtensionCount = static_cast<uint32_t>(req_extensions.size());
             createInfo.ppEnabledExtensionNames = req_extensions.data();
         }
         else {
@@ -81,7 +81,7 @@ namespace vpr {
         VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, nullptr, &handle);
         VkAssert(result);
 
-        vkAllocator = std::make_unique<Allocator>(this);
+        vkAllocator = std::make_unique<Allocator>(this, enableDedicatedAllocations);
 
     }
 
@@ -349,10 +349,10 @@ namespace vpr {
     
     void Device::checkDedicatedAllocExtensions(const std::vector<const char*>& exts) {
         constexpr std::array<const char*, 2> mem_extensions{ VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME, VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME };
-        iter = std::find(req_extensions.cbegin(), req_extensions.cend(), mem_extensions[0]);
-        if (iter != req_extensions.cend()) {
-            iter = std::find(req_extensions.cbegin(), req_extensions.cend(), mem_extensions[1]);
-            if (iter != req_extensions.cend()) {
+        auto iter = std::find(exts.cbegin(), exts.cend(), mem_extensions[0]);
+        if (iter != exts.cend()) {
+            iter = std::find(exts.cbegin(), exts.cend(), mem_extensions[1]);
+            if (iter != exts.cend()) {
                 LOG(INFO) << "Both extensions required to enable better dedicated allocations have been enabled/found.";
                 enableDedicatedAllocations = true;
             }    
