@@ -33,8 +33,8 @@ namespace vpr {
     public:
         
         Device(const Instance* instance, const PhysicalDevice* device, bool use_recommended_extensions);
-        Device(const Instance* instance, const PhysicalDevice* p_device, const uint32_t extension_count, const char* const* extension_names,
-            const uint32_t layer_count = std::numeric_limits<uint32_t>::max(), const char* const* layer_names = nullptr);
+        Device(const Instance* instance, const PhysicalDevice* p_device, const VprExtensionPack* extensions, 
+            const char* const* layer_names = nullptr, const uint32_t layer_count = std::numeric_limits<uint32_t>::max());
 
         void VerifyPresentationSupport();
 
@@ -96,13 +96,18 @@ namespace vpr {
 
     private:
 
-        void create(const uint32_t ext_count, const char* const* exts, const uint32_t layer_count, const char* const* layers);
+        void create(const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count);
+        void setupQueues();
+        void setupValidation(const char* const* layers, const uint32_t layer_count);
+        void setupExtensions(const VprExtensionPack* extensions);
         void setupGraphicsQueues();
         void setupComputeQueues();
         void setupTransferQueues();
         void setupSparseBindingQueues();
-        
-        void checkRequestedExtensions(std::vector<const char*>& requested_extensions);
+    
+        void prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const;
+        void prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const noexcept;
+        void checkExtensions(std::vector<const char*>& requested_extensions, bool throw_on_error) const;
         void checkDedicatedAllocExtensions(const std::vector<const char*>& exts);
         VkDevice handle;
         VkDeviceCreateInfo createInfo;
