@@ -112,7 +112,7 @@ namespace vpr {
         /** If the other file-based methods cannot work for an intended use case, use this method along with the specified buffer info to setup
         *   a texture object appropriately. 
         */
-        void CreateFromBuffer(VkBuffer&& staging_buffer, const VkFormat& texture_format, const std::vector<VkBufferImageCopy>& copy_info);
+        void CreateFromBuffer(VkBuffer&& staging_buffer, const VkFormat& texture_format, VkBufferImageCopy* copies, const size_t num_copies);
         /** Creates an empty texture suitable for use as an object to write to in compute/graphics renderpasses.
         */
         void CreateEmptyTexture(const VkFormat& texture_format, const uint32_t& width, const uint32_t& height);

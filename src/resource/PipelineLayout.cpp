@@ -29,35 +29,21 @@ namespace vpr {
         }
     }
 
-    void PipelineLayout::Create(const std::vector<VkPushConstantRange>& push_constants) {
-        Create(std::vector<VkDescriptorSetLayout>(), push_constants);
+    void PipelineLayout::Create(const VkPushConstantRange * push_constants, const size_t num_push_constants) {
+        Create(push_constants, num_push_constants, nullptr, 0);
     }
 
-    void PipelineLayout::Create(const std::vector<VkDescriptorSetLayout>& set_layouts) {
-        Create(set_layouts, std::vector<VkPushConstantRange>());
+    void PipelineLayout::Create(const VkDescriptorSetLayout * set_layouts, const size_t num_layouts) {
+        Create(nullptr, 0, set_layouts, num_layouts);
     }
 
-    void PipelineLayout::Create(const std::vector<VkDescriptorSetLayout>& set_layouts, const std::vector<VkPushConstantRange>& push_constants) {
+    void PipelineLayout::Create(const VkPushConstantRange* ranges, const size_t num_ranges, const VkDescriptorSetLayout* set_layouts, const size_t num_layouts) {
 
         createInfo = vk_pipeline_layout_create_info_base;
-
-        if (!set_layouts.empty()) {
-            createInfo.setLayoutCount = static_cast<uint32_t>(set_layouts.size());
-            createInfo.pSetLayouts = set_layouts.data();
-        }
-        else {
-            createInfo.setLayoutCount = 0;
-            createInfo.pSetLayouts = nullptr;
-        }
-
-        if (!push_constants.empty()) {
-            createInfo.pushConstantRangeCount = static_cast<uint32_t>(push_constants.size());
-            createInfo.pPushConstantRanges = push_constants.data();
-        }
-        else {
-            createInfo.pushConstantRangeCount = 0;
-            createInfo.pPushConstantRanges = nullptr;
-        }
+        createInfo.setLayoutCount = static_cast<uint32_t>(num_layouts);
+        createInfo.pSetLayouts = set_layouts;
+        createInfo.pushConstantRangeCount = static_cast<uint32_t>(num_ranges);
+        createInfo.pPushConstantRanges = ranges;
 
         VkResult result = vkCreatePipelineLayout(device->vkHandle(), &createInfo, nullptr, &handle);
         VkAssert(result);

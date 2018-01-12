@@ -30,7 +30,7 @@ namespace vpr {
         /** Takes a pipeline cache header and checks it for validity.
         *
         */
-        bool Verify(const std::vector<int8_t>& cache_header) const;
+        bool Verify(const int8_t* cache_header) const;
 
         void LoadCacheFromFile(const char * filename);
 

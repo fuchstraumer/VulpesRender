@@ -74,9 +74,7 @@ namespace vpr {
     protected:
 
         std::vector<VkCommandBuffer> cmdBuffers;
-        std::vector<bool> bufferInUse;
         VkCommandPool handle;
-        VkCommandPoolCreateInfo createInfo;
         const Device* parent;
         const VkAllocationCallbacks* allocators = nullptr;
 
