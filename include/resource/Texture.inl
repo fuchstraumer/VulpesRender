@@ -35,11 +35,11 @@ namespace vpr {
     }
 
     template<typename texture_type>
-    inline void Texture<texture_type>::CreateFromBuffer(VkBuffer&& staging_buffer, const VkFormat & texture_format, const std::vector<VkBufferImageCopy>& copy_info) {
-        
+    inline void Texture<texture_type>::CreateFromBuffer(VkBuffer&& staging_buffer, const VkFormat & texture_format, VkBufferImageCopy* copies, const size_t num_copies) {
+
         stagingBuffer = std::move(staging_buffer);
         format = texture_format;
-        copyInfo = copy_info;
+        copyInfo = std::vector<VkBufferImageCopy>{ copies, copies + num_copies };
 
         Width = copyInfo.front().imageExtent.width;
         Height = copyInfo.front().imageExtent.height;

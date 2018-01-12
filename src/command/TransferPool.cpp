@@ -5,9 +5,10 @@
 namespace vpr {
 
     TransferPool::TransferPool(const Device * _parent) : CommandPool(_parent, transfer_pool_info) {
-
-        createInfo.queueFamilyIndex = parent->QueueFamilyIndices.Transfer;
-        VkResult result = vkCreateCommandPool(parent->vkHandle(), &createInfo, allocators, &handle);
+        VkCommandPoolCreateInfo create_info = vk_command_pool_info_base;
+        create_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT | VK_COMMAND_POOL_CREATE_TRANSIENT_BIT;
+        create_info.queueFamilyIndex = parent->QueueFamilyIndices.Transfer;
+        VkResult result = vkCreateCommandPool(parent->vkHandle(), &create_info, allocators, &handle);
         VkAssert(result);
 
         VkCommandBufferAllocateInfo allocInfo = {};
