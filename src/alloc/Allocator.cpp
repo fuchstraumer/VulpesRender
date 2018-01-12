@@ -317,7 +317,7 @@ namespace vpr {
     }
 
     struct raw_equal_comparator {
-        raw_equal_comparator(const Allocation* _ptr) : ptr(ptr) {};
+        raw_equal_comparator(const Allocation* _ptr) : ptr(_ptr) {};
         bool operator()(const Allocation* other) const {
             return ptr == other;
         }

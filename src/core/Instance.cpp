@@ -14,6 +14,7 @@ namespace vpr {
         window(_window), validationEnabled(enable_validation), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, info } {
         
         extensionSetup(extensions);
+        prepareValidation(layers, layer_count);
 
         VkResult err = vkCreateInstance(&createInfo, nullptr, &handle);
         VkAssert(err);

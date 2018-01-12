@@ -68,6 +68,7 @@ namespace vpr {
         alloc_info.pSetLayouts = &set_layout->vkHandle();
 
         VkResult result = vkAllocateDescriptorSets(device->vkHandle(), &alloc_info, &descriptorSet);
+        VkAssert(result);
         allocated = true;
 
     }
