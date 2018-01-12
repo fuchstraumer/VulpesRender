@@ -8,7 +8,7 @@ namespace vpr {
         VkCommandPoolCreateInfo create_info = vk_command_pool_info_base;
         create_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT | VK_COMMAND_POOL_CREATE_TRANSIENT_BIT;
         create_info.queueFamilyIndex = parent->QueueFamilyIndices.Transfer;
-        VkResult result = vkCreateCommandPool(parent->vkHandle(), &create_info, allocators, &handle);
+        VkResult result = vkCreateCommandPool(parent->vkHandle(), &create_info, nullptr, &handle);
         VkAssert(result);
 
         VkCommandBufferAllocateInfo allocInfo = {};
@@ -19,7 +19,7 @@ namespace vpr {
 
         AllocateCmdBuffers(1, VK_COMMAND_BUFFER_LEVEL_PRIMARY);
 
-        result = vkCreateFence(parent->vkHandle(), &vk_fence_create_info_base, allocators, &fence);
+        result = vkCreateFence(parent->vkHandle(), &vk_fence_create_info_base, nullptr, &fence);
         VkAssert(result);
 
         queue = parent->TransferQueue(0);
