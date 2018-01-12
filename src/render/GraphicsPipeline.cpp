@@ -9,7 +9,7 @@ namespace vpr {
             VkGraphicsPipelineCreateInfo create_info = vk_graphics_pipeline_create_info_base;
             create_info.pVertexInputState = &VertexInfo;
             create_info.pInputAssemblyState = &AssemblyInfo;
-            create_info.pTessellationState = nullptr;
+            create_info.pTessellationState = &TesselationInfo;
             create_info.pViewportState = &ViewportInfo;
             create_info.pRasterizationState = &RasterizationInfo;
             create_info.pMultisampleState = &MultisampleInfo;
