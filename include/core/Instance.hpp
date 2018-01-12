@@ -12,6 +12,19 @@ namespace vpr {
     * \defgroup Core
     */
 
+    /**The VprExtensionPack structure makes requesting extensions in the device and instance constructors easier and more robust,
+     * by allowing the specification of required and optional extensions. The inability or failure to enable a required extension
+     * will cause an exception ot be thrown, while issues with optional extensions will log the extension unable (at a WARNING level)
+     * to be enabled or used - then it will be removed from the list of extensions submitted to the constructor.
+     * \ingroup Core
+     */
+    struct VprExtensionPack {
+        const char* const* RequiredExtensionNames;
+        uint32_t RequiredExtensionCount;
+        const char* const* OptionalExtensionNames;
+        uint32_t OptionalExtensionCount;
+    };
+
     /** Instance is a wrapper around the base Vulkan object that must be initialized first. The VkInstanceCreateInfo struct passed to the constructor
     *    contains information about the current layers enabled, and which Vulkan Instance extensions to enable. By default, this should/will contain
     *    extensions required to support the creation of a window surface (VkSurfaceKHR).
@@ -26,8 +39,7 @@ namespace vpr {
     public:
         
         Instance(bool enable_validation, const VkApplicationInfo* info, GLFWwindow* window);
-        Instance(bool enable_validation, const VkApplicationInfo* info, GLFWwindow* window, const char** extensions, const uint32_t extension_count, const char** layers = nullptr, const uint32_t layer_count = 0);
-
+        Instance(bool enable_validation, const VkApplicationInfo* info, GLFWwindow* window, const VprExtensionPack* extensions, const char* const* layers = nullptr, const uint32_t layer_count = 0);
         ~Instance();
 
         const VkInstance& vkHandle() const noexcept;
@@ -42,7 +54,15 @@ namespace vpr {
 
     private:
 
-        void checkExtensions(std::vector<const char*>& requested_extensions);
+        void prepareValidation(const char* const* layers, const uint32_t layer_count);
+        bool checkValidationSupport(const char* const* layer_names, const uint32_t layer_count) const;
+        void prepareValidationCallbacks();
+        void extensionSetup(const VprExtensionPack* extensions);
+        void prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const;
+        void prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const;
+        void extensionCheck(std::vector<const char*>& extensions, bool throw_on_error) const;
+        void checkOptionalExtensions(std::vector<const char*>& optional_extensions) const;
+        void checkRequiredExtensions(std::vector<const char*>& required_extensions) const;
         void setupPhysicalDevice();
         
         mutable GLFWwindow* window;
@@ -52,8 +72,7 @@ namespace vpr {
         VkInstanceCreateInfo createInfo;
         bool validationEnabled; 
 
-        bool checkValidationSupport(const char** layer_names, const uint32_t layer_count);
-        void prepareValidation();
+        
 
         VkDebugReportCallbackEXT debugCallback;
 
