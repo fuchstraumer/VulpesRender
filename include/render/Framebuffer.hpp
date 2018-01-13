@@ -31,7 +31,6 @@ namespace vpr {
     protected:
 
         const Device* parent;
-        const VkAllocationCallbacks* allocators = nullptr;
         VkFramebuffer handle;
     };
 
