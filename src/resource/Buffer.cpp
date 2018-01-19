@@ -68,10 +68,10 @@ namespace vpr {
         Map(offset);
 
         if (size == 0) {
-            memcpy(MappedMemory, data, Size());
+            memcpy(MappedMemory, data, static_cast<size_t>(Size()));
         }
         else {
-            memcpy(MappedMemory, data, copy_size);
+            memcpy(MappedMemory, data, static_cast<size_t>(copy_size));
         }
 
         Unmap();
@@ -86,7 +86,7 @@ namespace vpr {
         void* mapped;
         VkResult result = vkMapMemory(parent->vkHandle(), staging_alloc.Memory(), staging_alloc.Offset(), copy_size, 0, &mapped);
         VkAssert(result);
-        memcpy(mapped, data, copy_size);
+        memcpy(mapped, data, static_cast<size_t>(copy_size));
         vkUnmapMemory(parent->vkHandle(), staging_alloc.Memory());
 
         VkBufferCopy copy{};
@@ -108,7 +108,7 @@ namespace vpr {
         void* mapped;
         VkResult result = vkMapMemory(parent->vkHandle(), staging_alloc.Memory(), staging_alloc.Offset(), copy_size, 0, &mapped);
         VkAssert(result);
-        memcpy(mapped, data, copy_size);
+        memcpy(mapped, data, static_cast<size_t>(copy_size));
         vkUnmapMemory(parent->vkHandle(), staging_alloc.Memory());
 
         VkCommandBuffer copy_cmd = cmd_pool->StartSingleCmdBuffer();

@@ -70,6 +70,9 @@ namespace vpr {
         /** Additional flags that would be nice/useful to have, but are not required. An attempt to meet these will be 
          *  made, but not meeting them won't be considered a failure.*/
         VkMemoryPropertyFlags preferredFlags = VkMemoryPropertyFlags(0);
+
+        bool prefersDedicatedKHR = false;
+        bool requiresDedicatedKHR = false;
     };
 
     

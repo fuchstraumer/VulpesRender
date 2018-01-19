@@ -7,47 +7,64 @@
 
 namespace vpr {
 
-    constexpr const char* const SWAPCHAIN_EXTENSION_NAME = "VK_KHR_swapchain";
-    constexpr std::array<const char*, 3> recommended_extensions {
-        VK_KHR_SWAPCHAIN_EXTENSION_NAME,
-        VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME,
-        VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME
+    constexpr const char* const RECOMMENDED_REQUIRED_EXTENSION = "VK_KHR_swapchain";
+    constexpr static std::array<const char*, 2> RECOMMENDED_OPTIONAL_EXTENSIONS {
+        VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME, VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME
+    };
+    constexpr VprExtensionPack RECOMMENDED_EXTENSIONS {
+        &RECOMMENDED_REQUIRED_EXTENSION,
+        1,
+        &RECOMMENDED_OPTIONAL_EXTENSIONS[0],
+        static_cast<uint32_t>(RECOMMENDED_OPTIONAL_EXTENSIONS.size())
     };
 
     Device::Device(const Instance* instance, const PhysicalDevice * device, bool use_recommended_extensions) : parent(device), parentInstance(instance) {
         if (use_recommended_extensions) {
-            create(static_cast<uint32_t>(recommended_extensions.size()), recommended_extensions.data(), 0, nullptr);
+            create(&RECOMMENDED_EXTENSIONS, nullptr, 0);
         }
         else {
-            create(0, nullptr, 0, nullptr);
+            create(nullptr, nullptr, 0);
         }
     }
 
-    Device::Device(const Instance* instance, const PhysicalDevice* dvc, const uint32_t extension_count, const char* const* extension_names,
-        const uint32_t layer_count, const char* const* layer_names) : parent(dvc), parentInstance(instance) {
-        create(extension_count, extension_names, layer_count, layer_names);
+    Device::Device(const Instance* instance, const PhysicalDevice* dvc, const VprExtensionPack* extensions, const char* const* layer_names, 
+        const uint32_t layer_count) : parent(dvc), parentInstance(instance) {
+        create(extensions, layer_names, layer_count);
     }
 
-    void Device::create(const uint32_t ext_count, const char* const* exts, const uint32_t layer_count, const char* const* layers) {
+    void Device::create(const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) {
+    
+        VerifyPresentationSupport();
+        setupQueues();
+        setupValidation(layers, layer_count);
+        setupExtensions(extensions);
+
+        VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, nullptr, &handle);
+        VkAssert(result);
+
+        vkAllocator = std::make_unique<Allocator>(this, enableDedicatedAllocations);
+
+    }
+
+    void Device::setupQueues() {
+
         setupGraphicsQueues();
         setupComputeQueues();
         setupTransferQueues();
         setupSparseBindingQueues();
-
-        // Local vector copy of QueueCreateInfos: need raw data ptr for createInfo,
-        // and easier to insert/include the presentation queues this way.
-        // also this way it's stored linearly as Vulkan expects it to be
         std::vector<VkDeviceQueueCreateInfo> queue_infos;
         for (const auto& queue_info_entry : queueInfos) {
             queue_infos.push_back(queue_info_entry.second);
         }
 
-        VerifyPresentationSupport();
-
         createInfo = vk_device_create_info_base;
         createInfo.queueCreateInfoCount = static_cast<uint32_t>(queue_infos.size());
         createInfo.pQueueCreateInfos = queue_infos.data();
 
+    }
+
+    void Device::setupValidation(const char* const* layers, const uint32_t layer_count) {
+        
         if (parentInstance->ValidationEnabled()) {
             if ((layer_count == 0) && (layers == nullptr)) {
                 constexpr static const char* const default_layer = "VK_LAYER_LUNARG_standard_validation";
@@ -60,28 +77,23 @@ namespace vpr {
             }
         }
 
-        if ((ext_count != 0) && (exts != nullptr)) {
-            std::vector<const char*> req_extensions{ exts, exts + ext_count };
-            checkRequestedExtensions(req_extensions);
-            auto iter = std::find(req_extensions.cbegin(), req_extensions.cend(), SWAPCHAIN_EXTENSION_NAME);
-            if (iter == req_extensions.cend()) {
-                LOG(WARNING) << SWAPCHAIN_EXTENSION_NAME << " not requested as a device extension. Cannot render or create a swapchain object!";
-            }
+    }
 
-            checkDedicatedAllocExtensions(req_extensions);
-            createInfo.enabledExtensionCount = static_cast<uint32_t>(req_extensions.size());
-            createInfo.ppEnabledExtensionNames = req_extensions.data();
+    void Device::setupExtensions(const VprExtensionPack* extensions) {
+        
+        if (extensions) {
+            std::vector<const char*> all_extensions;
+            prepareRequiredExtensions(extensions, all_extensions);
+            prepareOptionalExtensions(extensions, all_extensions);
+            checkDedicatedAllocExtensions(all_extensions);
+            createInfo.enabledExtensionCount = static_cast<uint32_t>(all_extensions.size());
+            createInfo.ppEnabledExtensionNames = all_extensions.data();
         }
         else {
             createInfo.enabledExtensionCount = 0;
             createInfo.ppEnabledExtensionNames = nullptr;
             enableDedicatedAllocations = false;
         }
-
-        VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, nullptr, &handle);
-        VkAssert(result);
-
-        vkAllocator = std::make_unique<Allocator>(this, enableDedicatedAllocations);
 
     }
 
@@ -323,7 +335,28 @@ namespace vpr {
 
     }
 
-    void Device::checkRequestedExtensions(std::vector<const char*>& extensions) {
+    void Device::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const {
+        std::vector<const char*> required_extensions{ extensions->RequiredExtensionNames, 
+            extensions->RequiredExtensionNames + extensions->RequiredExtensionCount };
+        checkExtensions(required_extensions, true);
+
+        for (auto&& elem : required_extensions) {
+            output.push_back(std::move(elem));
+        }
+    }
+
+    void Device::prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const noexcept{
+        std::vector<const char*> optional_extensions{ extensions->OptionalExtensionNames, 
+            extensions->OptionalExtensionNames + extensions->OptionalExtensionCount };
+        checkExtensions(optional_extensions, false);
+
+        for (auto&& elem : optional_extensions) {
+            output.push_back(std::move(elem));
+        }
+
+    }
+
+    void Device::checkExtensions(std::vector<const char*>& extensions, bool throw_on_error) const {
         uint32_t queried_count = 0;
         vkEnumerateDeviceExtensionProperties(parent->vkHandle(), nullptr, &queried_count, nullptr);
         std::vector<VkExtensionProperties> queried_extensions(queried_count);
@@ -339,8 +372,14 @@ namespace vpr {
         auto iter = extensions.begin();
         while (iter != extensions.end()) {
             if (!has_extension(*iter)) {
-                LOG(WARNING) << "Requested device extension with name \"" << *iter << "\" is not available, removing from list.";
-                extensions.erase(iter++);
+                if (throw_on_error) {
+                    LOG(ERROR) << "Current VkDevice does not support extension \"" << *iter << "\" that is required!";
+                    throw std::runtime_error("Could not enable/use required extension for the logical device.");
+                }
+                else {
+                    LOG(WARNING) << "Requested device extension with name \"" << *iter << "\" is not available, removing from list.";
+                    extensions.erase(iter++);
+                }
             }
             else {
                 ++iter;

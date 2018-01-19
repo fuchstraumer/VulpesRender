@@ -36,5 +36,6 @@ namespace vpr {
     template<typename texture_type>
     class Texture;
     struct GraphicsPipelineInfo;
+    struct VprExtensionPack;
 }
 #endif // !VULPES_VK_FORWARD_DECL_H

@@ -8,58 +8,19 @@
 
 namespace vpr {
 
-    Instance::Instance(bool enable_validation, const VkApplicationInfo*info, GLFWwindow* _window) : Instance(enable_validation, info, _window, nullptr, 0, nullptr, 0) {}
+    Instance::Instance(bool enable_validation, const VkApplicationInfo*info, GLFWwindow* _window) : Instance(enable_validation, info, _window, nullptr) {}
 
-    Instance::Instance(bool enable_validation, const VkApplicationInfo * info, GLFWwindow * _window, const char ** extensions, const uint32_t extension_count, const char ** layers, const uint32_t layer_count) :
-        window(_window), validationEnabled(enable_validation), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0 } {
-        createInfo.pApplicationInfo = info;
-        // Check for validation enabled first, since it adds a requirement for an extension.
-        if (!validationEnabled) {
-            assert(!layers && (layer_count == 0));
-            createInfo.ppEnabledLayerNames = nullptr;
-            createInfo.enabledLayerCount = 0;
-        }
-        else {
-            if (layers && (layer_count != 0)) {
-                if (!checkValidationSupport(layers, layer_count)) {
-                    throw std::runtime_error("Tried to enable Vulkan validation layers, but they're unsupported on the current system!");
-                }
-                createInfo.ppEnabledLayerNames = layers;
-                createInfo.enabledLayerCount = layer_count;
-            }
-            else {
-                constexpr static const char* const default_layer = "VK_LAYER_LUNARG_standard_validation";
-                createInfo.ppEnabledLayerNames = &default_layer;
-                createInfo.enabledLayerCount = 1;
-            }
-        }
-
-        // Get required extensions, then add on the requested ones.
-        uint32_t req_ext_cnt = 0;
-        const char** req_ext_names = nullptr;
-        req_ext_names = glfwGetRequiredInstanceExtensions(&req_ext_cnt);
-        std::vector<const char*> required_extensions{ req_ext_names, req_ext_names + req_ext_cnt };
-
-        std::vector<const char*> all_extensions{ extensions, extensions + extension_count };
-
-        for (auto&& req_extension : required_extensions) {
-            all_extensions.push_back(std::move(req_extension));
-        }
-
-        if (validationEnabled) {
-            all_extensions.push_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
-        }
-
-        checkExtensions(all_extensions);
-
-        createInfo.ppEnabledExtensionNames = all_extensions.data();
-        createInfo.enabledExtensionCount = static_cast<uint32_t>(all_extensions.size());
+    Instance::Instance(bool enable_validation, const VkApplicationInfo * info, GLFWwindow * _window, const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) :
+        window(_window), validationEnabled(enable_validation), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, info } {
+        
+        extensionSetup(extensions);
+        prepareValidation(layers, layer_count);
 
         VkResult err = vkCreateInstance(&createInfo, nullptr, &handle);
         VkAssert(err);
 
         if (validationEnabled) {
-            prepareValidation();
+            prepareValidationCallbacks();
         }
 
         setupPhysicalDevice();
@@ -107,40 +68,29 @@ namespace vpr {
         swap->Recreate();
     }
 
-
-    void Instance::checkExtensions(std::vector<const char*>& requested_extensions) {
-
-        uint32_t queried_extension_count = 0;
-        vkEnumerateInstanceExtensionProperties(nullptr, &queried_extension_count, nullptr);
-        std::vector<VkExtensionProperties> queried_extensions(queried_extension_count);
-        vkEnumerateInstanceExtensionProperties(nullptr, &queried_extension_count, queried_extensions.data());
-
-        const auto has_extension = [queried_extensions](const char* name) {
-            auto req_found = std::find_if(queried_extensions.cbegin(), queried_extensions.cend(), [name](const VkExtensionProperties& properties) {
-                return strcmp(properties.extensionName, name) == 0;
-            });
-            return req_found != queried_extensions.cend();
-        };
-
-        auto iter = requested_extensions.begin();
-        while (iter != requested_extensions.end()) {
-            if (!has_extension(*iter)) {
-                LOG(WARNING) << "Extension with name \"" << *iter << "\" requested but isn't supported. Removing from list attached to Instance's creation info.";
-                requested_extensions.erase(iter++);
+    void Instance::prepareValidation(const char* const* layers, const uint32_t layer_count) {
+        if (!validationEnabled) {
+            assert(!layers && (layer_count == 0));
+            createInfo.ppEnabledLayerNames = nullptr;
+            createInfo.enabledLayerCount = 0;
+        }
+        else {
+            if (layers && (layer_count != 0)) {
+                if (!checkValidationSupport(layers, layer_count)) {
+                    throw std::runtime_error("Tried to enable Vulkan validation layers, but they're unsupported on the current system!");
+                }
+                createInfo.ppEnabledLayerNames = layers;
+                createInfo.enabledLayerCount = layer_count;
             }
             else {
-                ++iter;
+                constexpr static const char* const default_layer = "VK_LAYER_LUNARG_standard_validation";
+                createInfo.ppEnabledLayerNames = &default_layer;
+                createInfo.enabledLayerCount = 1;
             }
-            
         }
-
     }
 
-    void Instance::setupPhysicalDevice() {
-        physicalDevice = std::make_unique<PhysicalDevice>(vkHandle());
-    }
-
-    bool Instance::checkValidationSupport(const char ** layer_names, const uint32_t layer_count) {
+    bool Instance::checkValidationSupport(const char* const* layer_names, const uint32_t layer_count) const {
         uint32_t queried_count = 0;
         vkEnumerateInstanceLayerProperties(&queried_count, nullptr);
         std::vector<VkLayerProperties> queried_layers(queried_count);
@@ -164,7 +114,7 @@ namespace vpr {
         return true;
     }
 
-    void Instance::prepareValidation() {
+    void Instance::prepareValidationCallbacks() {
         const VkDebugReportCallbackCreateInfoEXT create_info{
             VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,
             nullptr,
@@ -176,6 +126,98 @@ namespace vpr {
         assert(func);
         VkResult result = func(handle, &create_info, nullptr, &debugCallback);
         VkAssert(result);
+    }
+
+    void Instance::extensionSetup(const VprExtensionPack* extensions) {
+
+        std::vector<const char*> all_extensions;
+        prepareRequiredExtensions(extensions, all_extensions);
+        prepareOptionalExtensions(extensions, all_extensions);
+
+        createInfo.ppEnabledExtensionNames = all_extensions.data();
+        createInfo.enabledExtensionCount = static_cast<uint32_t>(all_extensions.size());
+
+    }
+
+    void Instance::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const {
+
+        uint32_t req_ext_cnt = 0;
+        const char** req_ext_names = nullptr;
+        req_ext_names = glfwGetRequiredInstanceExtensions(&req_ext_cnt);
+        std::vector<const char*> glfw_required_extensions{ req_ext_names, req_ext_names + req_ext_cnt };
+
+        for (auto&& elem : glfw_required_extensions) {
+            output.push_back(std::move(elem));
+        }
+        
+        std::vector<const char*> input_required_extensions{ extensions->RequiredExtensionNames, 
+            extensions->RequiredExtensionNames + extensions->RequiredExtensionCount };
+        
+        for (auto&& elem : input_required_extensions) {
+            output.push_back(std::move(elem));
+        }
+    
+        if (validationEnabled) {
+            output.emplace_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
+        }
+
+        checkRequiredExtensions(output);
+    }
+
+    void Instance::prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const {
+        std::vector<const char*> optional_extensions{ extensions->OptionalExtensionNames, 
+            extensions->OptionalExtensionNames + extensions->OptionalExtensionCount };
+
+        checkOptionalExtensions(optional_extensions);
+
+        for(auto&& elem : optional_extensions) {
+            output.push_back(std::move(elem));
+        }
+
+    }
+
+    void Instance::extensionCheck(std::vector<const char*>& extensions, bool throw_on_error) const {
+        uint32_t queried_extension_count = 0;
+        vkEnumerateInstanceExtensionProperties(nullptr, &queried_extension_count, nullptr);
+        std::vector<VkExtensionProperties> queried_extensions(queried_extension_count);
+        vkEnumerateInstanceExtensionProperties(nullptr, &queried_extension_count, queried_extensions.data());
+
+        const auto has_extension = [queried_extensions](const char* name) {
+            auto req_found = std::find_if(queried_extensions.cbegin(), queried_extensions.cend(), [name](const VkExtensionProperties& properties) {
+                return strcmp(properties.extensionName, name) == 0;
+            });
+            return req_found != queried_extensions.cend();
+        };
+
+        auto iter = extensions.begin();
+        while (iter != extensions.end()) {
+            if (!has_extension(*iter)) {
+                if (throw_on_error) {
+                    LOG(ERROR) << "Required extension \"" << *iter << "\" not supported for instance in construction!";
+                    throw std::runtime_error("Instance does not support a required extension!");
+                }
+                else {
+                    LOG(WARNING) << "Extension with name \"" << *iter << "\" requested but isn't supported. Removing from list attached to Instance's creation info.";
+                    extensions.erase(iter++);
+                }
+            }
+            else {
+                ++iter;
+            }
+            
+        }
+    }
+
+    void Instance::checkRequiredExtensions(std::vector<const char*>& required_extensions) const {
+        extensionCheck(required_extensions, true);
+    }
+
+    void Instance::checkOptionalExtensions(std::vector<const char*>& requested_extensions) const {
+        extensionCheck(requested_extensions, false);
+    }
+
+    void Instance::setupPhysicalDevice() {
+        physicalDevice = std::make_unique<PhysicalDevice>(vkHandle());
     }
 
     constexpr const char* const GetObjectTypeStr(VkDebugReportObjectTypeEXT obj) {

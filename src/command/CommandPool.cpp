@@ -6,14 +6,10 @@
 
 namespace vpr {
 
-    CommandPool::CommandPool(const Device * _parent, const VkCommandPoolCreateInfo & create_info) : parent(_parent), createInfo(create_info), handle(VK_NULL_HANDLE) {
-        Create();
+    CommandPool::CommandPool(const Device * _parent, const VkCommandPoolCreateInfo & create_info) : parent(_parent), handle(VK_NULL_HANDLE) {
+        vkCreateCommandPool(parent->vkHandle(), &create_info, nullptr, &handle);
     }
 
-    void CommandPool::Create() {
-        VkResult result = vkCreateCommandPool(parent->vkHandle(), &createInfo, allocators, &handle);
-        VkAssert(result);
-    }
 
     void CommandPool::ResetCmdPool(const VkCommandPoolResetFlagBits& command_pool_reset_flags) {
         vkResetCommandPool(parent->vkHandle(), handle, command_pool_reset_flags);
@@ -23,8 +19,6 @@ namespace vpr {
         handle = std::move(other.handle);
         cmdBuffers = std::move(other.cmdBuffers);
         parent = std::move(other.parent);
-        allocators = std::move(other.allocators);
-        createInfo = std::move(other.createInfo);
         other.handle = VK_NULL_HANDLE;
     }
 
@@ -32,22 +26,20 @@ namespace vpr {
         handle = std::move(other.handle);
         cmdBuffers = std::move(other.cmdBuffers);
         parent = std::move(other.parent);
-        allocators = std::move(other.allocators);
-        createInfo = std::move(other.createInfo);
         other.handle = VK_NULL_HANDLE;
         return *this;
     }
 
     CommandPool::~CommandPool(){
-        Destroy();
+        destroy();
     }
 
-    void CommandPool::Destroy(){
+    void CommandPool::destroy(){
         if (!cmdBuffers.empty()) {
             FreeCommandBuffers();
         }
         if (handle != VK_NULL_HANDLE) {
-            vkDestroyCommandPool(parent->vkHandle(), handle, allocators);
+            vkDestroyCommandPool(parent->vkHandle(), handle, nullptr);
             LOG(INFO) << "Command Pool " << handle << " destroyed.";
             handle = VK_NULL_HANDLE;
         }

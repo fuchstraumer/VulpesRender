@@ -90,9 +90,9 @@ namespace vpr {
         
     }
 
-    bool PipelineCache::Verify(const std::vector<int8_t>& cache_header) const {
+    bool PipelineCache::Verify(const int8_t* cache_header) const {
 
-        const uint32_t* header = reinterpret_cast<const uint32_t*>(cache_header.data());
+        const uint32_t* header = reinterpret_cast<const uint32_t*>(cache_header);
         
         if (header[0] != 32) {
             return false;
@@ -113,7 +113,7 @@ namespace vpr {
         }
 
         uint8_t cache_uuid[VK_UUID_SIZE] = {};
-        memcpy(cache_uuid, cache_header.data() + 16, VK_UUID_SIZE);
+        memcpy(cache_uuid, cache_header + 16, VK_UUID_SIZE);
 
         if (memcmp(cache_uuid, physical_device.Properties.pipelineCacheUUID, sizeof(cache_uuid)) != 0) {
             LOG(INFO) << "Pipeline cache UUID incorrect, requires rebuilding.";
@@ -135,7 +135,7 @@ namespace vpr {
             cache.get(reinterpret_cast<char*>(header.data()), 64);
 
             // Check to see if header data matches current device.
-            if (Verify(header)) {
+            if (Verify(header.data())) {
                 LOG(INFO) << "Found valid pipeline cache data with ID # " << std::to_string(hashID) << " .";
                 std::string cache_str((std::istreambuf_iterator<char>(cache)), std::istreambuf_iterator<char>());
                 uint32_t cache_size = static_cast<uint32_t>(cache_str.size() * sizeof(char));

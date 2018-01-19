@@ -29,8 +29,6 @@ namespace vpr {
 
         virtual ~CommandPool();
 
-        void Destroy();
-        void Create();
 
         void AllocateCmdBuffers(const uint32_t& num_buffers, const VkCommandBufferLevel& cmd_buffer_level);
         
@@ -73,12 +71,10 @@ namespace vpr {
 
     protected:
 
+        void destroy();
         std::vector<VkCommandBuffer> cmdBuffers;
-        std::vector<bool> bufferInUse;
         VkCommandPool handle;
-        VkCommandPoolCreateInfo createInfo;
         const Device* parent;
-        const VkAllocationCallbacks* allocators = nullptr;
 
     };
 

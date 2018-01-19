@@ -19,6 +19,8 @@ namespace vpr {
     public:
 
         PhysicalDevice(const VkInstance& instance_handle);
+        PhysicalDevice(const VkInstance& instance_handle, const VkPhysicalDeviceFeatures& required_features);
+        
         const VkPhysicalDevice& vkHandle() const noexcept;
 
         /**! Attempts to find the hardware-appropriate index of a memory type that meets the flags given.

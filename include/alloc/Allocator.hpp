@@ -92,6 +92,9 @@ namespace vpr {
         // called from "FreeMemory" if memory to free isn't found in the allocation vectors for any of our active memory types.
         bool freePrivateMemory(const Allocation* memory_to_free);
 
+        void getBufferMemReqs(VkBuffer& handle, VkMemoryRequirements& reqs, bool& requires_dedicated, bool& prefers_dedicated);
+        void getImageMemReqs(VkImage& handle, VkMemoryRequirements& reqs, bool& requires_dedicated, bool& prefers_dedicated);
+        
         std::vector<std::unique_ptr<AllocationCollection>> allocations;
         std::unordered_set<std::unique_ptr<Allocation>> privateAllocations;
         std::vector<bool> emptyAllocations;
@@ -106,7 +109,7 @@ namespace vpr {
         VkDeviceSize preferredLargeHeapBlockSize;
         VkDeviceSize preferredSmallHeapBlockSize;
         const VkAllocationCallbacks* pAllocationCallbacks = nullptr;
-        bool usingAllocationKHR;
+        bool usingMemoryExtensions;
 
         /*
             Used GPU Open allocator impl. hints and this:

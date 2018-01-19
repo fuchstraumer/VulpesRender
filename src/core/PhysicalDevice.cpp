@@ -13,6 +13,18 @@ namespace vpr {
 
     }
 
+    PhysicalDevice::PhysicalDevice(const VkInstance& handle, const VkPhysicalDeviceFeatures& req_features) : 
+        handle(std::move(getBestDevice(handle))) {
+        
+        getAttributes();
+        if (req_features != Features) {
+            LOG(ERROR) << "Current physical device doesn't support all required features!";
+            throw std::runtime_error("Incompatible physical device, features required are not available.");
+        }
+        retrieveQueueFamilyProperties();
+        
+    }
+
     void PhysicalDevice::getAttributes() noexcept {
 
         vkGetPhysicalDeviceProperties(handle, &Properties);
