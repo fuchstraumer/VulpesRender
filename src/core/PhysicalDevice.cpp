@@ -2,6 +2,73 @@
 #include "core/PhysicalDevice.hpp"
 #include "util/easylogging++.h"
 
+bool check_required_features(const VkPhysicalDeviceFeatures& req, const VkPhysicalDeviceFeatures& supported) {
+    if (req.robustBufferAccess) {
+        return supported.robustBufferAccess;
+    }
+    if (req.fullDrawIndexUint32) {
+        return supported.fullDrawIndexUint32;
+    }
+    if (req.imageCubeArray) {
+        return supported.imageCubeArray;
+    }
+    if (req.independentBlend) {
+        return supported.independentBlend;
+    }
+    if (req.geometryShader) {
+        return supported.geometryShader;
+    }
+    if (req.tessellationShader) {
+        return supported.tessellationShader;
+    }
+    if (req.sampleRateShading) {
+        return supported.sampleRateShading;
+    }
+    if (req.dualSrcBlend) {
+        return supported.dualSrcBlend;
+    }
+    if (req.logicOp) {
+        return supported.logicOp;
+    }
+    if (req.multiDrawIndirect) {
+        return supported.multiDrawIndirect;
+    }
+    if (req.drawIndirectFirstInstance) {
+        return supported.drawIndirectFirstInstance;
+    }
+    if (req.depthClamp) {
+        return supported.depthClamp;
+    }
+    if (req.depthBiasClamp) {
+        return supported.depthBiasClamp;
+    }
+    if (req.fillModeNonSolid) {
+        return supported.fillModeNonSolid;
+    }
+    if (req.depthBounds) {
+        return supported.depthBounds;
+    }
+    if (req.wideLines) {
+        return supported.wideLines;
+    }
+    if (req.largePoints) {
+        return supported.largePoints;
+    }
+    if (req.alphaToOne) {
+        return supported.alphaToOne;
+    }
+    if (req.multiViewport) {
+        return supported.multiViewport;
+    }
+    if (req.samplerAnisotropy) {
+        return supported.samplerAnisotropy;
+    }
+    if (req.textureCompressionETC2) {
+        return supported.textureCompressionETC2;
+    }
+    return true;
+}
+
 namespace vpr {
 
     PhysicalDevice::PhysicalDevice(const VkInstance& instance_handle) {
@@ -17,7 +84,7 @@ namespace vpr {
         handle(std::move(getBestDevice(handle))) {
         
         getAttributes();
-        if (req_features != Features) {
+        if (check_required_features(req_features, Features)) {
             LOG(ERROR) << "Current physical device doesn't support all required features!";
             throw std::runtime_error("Incompatible physical device, features required are not available.");
         }
