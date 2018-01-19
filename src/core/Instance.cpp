@@ -138,10 +138,14 @@ namespace vpr {
 
         std::vector<const char*> all_extensions;
         prepareRequiredExtensions(extensions, all_extensions);
-        prepareOptionalExtensions(extensions, all_extensions);
-
-        createInfo.ppEnabledExtensionNames = all_extensions.data();
-        createInfo.enabledExtensionCount = static_cast<uint32_t>(all_extensions.size());
+        if (extensions != nullptr) {
+            if (extensions->OptionalExtensionNames != nullptr) {
+                prepareOptionalExtensions(extensions, all_extensions);
+            }
+        }
+        enabledExtensions = all_extensions;
+        createInfo.ppEnabledExtensionNames = enabledExtensions.data();
+        createInfo.enabledExtensionCount = static_cast<uint32_t>(enabledExtensions.size());
 
     }
 
@@ -156,11 +160,15 @@ namespace vpr {
             output.push_back(std::move(elem));
         }
         
-        std::vector<const char*> input_required_extensions{ extensions->RequiredExtensionNames, 
-            extensions->RequiredExtensionNames + extensions->RequiredExtensionCount };
-        
-        for (auto&& elem : input_required_extensions) {
-            output.push_back(std::move(elem));
+        if (extensions != nullptr) {
+            if (extensions->RequiredExtensionNames != nullptr) {
+                std::vector<const char*> input_required_extensions{ extensions->RequiredExtensionNames,
+                    extensions->RequiredExtensionNames + extensions->RequiredExtensionCount };
+
+                for (auto&& elem : input_required_extensions) {
+                    output.push_back(std::move(elem));
+                }
+            }
         }
     
         if (validationEnabled) {
