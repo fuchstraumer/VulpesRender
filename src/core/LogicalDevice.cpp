@@ -18,6 +18,13 @@ namespace vpr {
         static_cast<uint32_t>(RECOMMENDED_OPTIONAL_EXTENSIONS.size())
     };
 
+    struct queue_priorities_t {
+        std::vector<float> graphics;
+        std::vector<float> transfer;
+        std::vector<float> compute;
+        std::vector<float> sparse_binding;
+    } queue_priorities;
+
     Device::Device(const Instance* instance, const PhysicalDevice * device, bool use_recommended_extensions) : parent(device), parentInstance(instance) {
         if (use_recommended_extensions) {
             create(&RECOMMENDED_EXTENSIONS, nullptr, 0);
@@ -33,11 +40,22 @@ namespace vpr {
     }
 
     void Device::create(const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) {
-    
+
+        createInfo = vk_device_create_info_base;
         VerifyPresentationSupport();
         setupQueues();
         setupValidation(layers, layer_count);
         setupExtensions(extensions);
+
+        // This has to be here so that the queue_infos vector persists through device creation.
+        std::vector<VkDeviceQueueCreateInfo> queue_infos;
+        for (const auto& queue_info_entry : queueInfos) {
+            queue_infos.push_back(queue_info_entry.second);
+        }
+
+        createInfo.queueCreateInfoCount = static_cast<uint32_t>(queue_infos.size());
+        createInfo.pQueueCreateInfos = queue_infos.data();
+        createInfo.pEnabledFeatures = &parent->Features;
 
         VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, nullptr, &handle);
         VkAssert(result);
@@ -51,15 +69,7 @@ namespace vpr {
         setupGraphicsQueues();
         setupComputeQueues();
         setupTransferQueues();
-        setupSparseBindingQueues();
-        std::vector<VkDeviceQueueCreateInfo> queue_infos;
-        for (const auto& queue_info_entry : queueInfos) {
-            queue_infos.push_back(queue_info_entry.second);
-        }
-
-        createInfo = vk_device_create_info_base;
-        createInfo.queueCreateInfoCount = static_cast<uint32_t>(queue_infos.size());
-        createInfo.pQueueCreateInfos = queue_infos.data();
+        setupSparseBindingQueues(); 
 
     }
 
@@ -86,8 +96,9 @@ namespace vpr {
             prepareRequiredExtensions(extensions, all_extensions);
             prepareOptionalExtensions(extensions, all_extensions);
             checkDedicatedAllocExtensions(all_extensions);
-            createInfo.enabledExtensionCount = static_cast<uint32_t>(all_extensions.size());
-            createInfo.ppEnabledExtensionNames = all_extensions.data();
+            enabledExtensions = all_extensions;
+            createInfo.enabledExtensionCount = static_cast<uint32_t>(enabledExtensions.size());
+            createInfo.ppEnabledExtensionNames = enabledExtensions.data();
         }
         else {
             createInfo.enabledExtensionCount = 0;
@@ -102,8 +113,8 @@ namespace vpr {
         auto create_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_GRAPHICS_BIT));
         create_info.queueFamilyIndex = QueueFamilyIndices.Graphics;
         NumGraphicsQueues = create_info.queueCount;
-        const std::vector<float> priorities(NumGraphicsQueues, 1.0f);
-        create_info.pQueuePriorities = priorities.data();
+        queue_priorities.graphics = std::vector<float>(NumGraphicsQueues, 1.0f);
+        create_info.pQueuePriorities = queue_priorities.graphics.data();
         queueInfos.insert(std::make_pair(VK_QUEUE_GRAPHICS_BIT, create_info));
     }
 
@@ -113,8 +124,8 @@ namespace vpr {
             auto compute_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_COMPUTE_BIT));
             compute_info.queueFamilyIndex = QueueFamilyIndices.Compute;
             NumComputeQueues = compute_info.queueCount;
-            const std::vector<float> priorities(NumComputeQueues, 1.0f);
-            compute_info.pQueuePriorities = priorities.data();
+            queue_priorities.compute = std::vector<float>(NumComputeQueues, 1.0f);
+            compute_info.pQueuePriorities = queue_priorities.compute.data();
             queueInfos.insert(std::make_pair(VK_QUEUE_COMPUTE_BIT, compute_info));
         }
         else {
@@ -133,8 +144,8 @@ namespace vpr {
             auto transfer_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_TRANSFER_BIT));
             transfer_info.queueFamilyIndex = QueueFamilyIndices.Transfer;
             NumTransferQueues = transfer_info.queueCount;
-            const std::vector<float> priorities(NumTransferQueues, 1.0f);
-            transfer_info.pQueuePriorities = priorities.data();
+            queue_priorities.transfer = std::vector<float>(NumTransferQueues, 1.0f);
+            transfer_info.pQueuePriorities = queue_priorities.transfer.data();
             queueInfos.insert(std::make_pair(VK_QUEUE_TRANSFER_BIT, transfer_info));
         }
         else {
@@ -152,8 +163,8 @@ namespace vpr {
             auto sparse_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT));
             sparse_info.queueFamilyIndex = QueueFamilyIndices.SparseBinding;
             NumSparseBindingQueues = sparse_info.queueCount;
-            const std::vector<float> priorities(NumSparseBindingQueues, 1.0f);
-            sparse_info.pQueuePriorities = priorities.data();
+            queue_priorities.sparse_binding = std::vector<float>(NumSparseBindingQueues, 1.0f);
+            sparse_info.pQueuePriorities = queue_priorities.sparse_binding.data();
             queueInfos.insert(std::make_pair(VK_QUEUE_SPARSE_BINDING_BIT, sparse_info));
         }
         else {

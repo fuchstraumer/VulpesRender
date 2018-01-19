@@ -116,7 +116,7 @@ namespace vpr {
         const Instance* parentInstance;
 
         bool enableDedicatedAllocations;
-
+        std::vector<const char*> enabledExtensions;
         std::map<VkQueueFlags, VkDeviceQueueCreateInfo> queueInfos;
 
     };

@@ -444,7 +444,7 @@ namespace vpr {
             VkMemoryRequirements2KHR reqs2 = vk_memory_requirements_2_khr_base;
             reqs2.pNext = &ded_reqs;
 
-            vkGetBufferMemoryRequirements2KHR(parent->vkHandle(), &memory_reqs, &reqs2);
+            pVkGetBufferMemoryRequirements2KHR(parent->vkHandle(), &memory_reqs, &reqs2);
 
             reqs = reqs2.memoryRequirements;
             prefers_dedicated= ded_reqs.prefersDedicatedAllocation;
@@ -468,7 +468,7 @@ namespace vpr {
             VkMemoryRequirements2KHR reqs2 = vk_memory_requirements_2_khr_base;
             reqs2.pNext = &ded_reqs;
 
-            vkGetImageMemoryRequirements2KHR(parent->vkHandle(), &memory_reqs, &reqs2);
+            pVkGetImageMemoryRequirements2KHR(parent->vkHandle(), &memory_reqs, &reqs2);
 
             reqs = reqs2.memoryRequirements;
             requires_dedicated = ded_reqs.requiresDedicatedAllocation;
