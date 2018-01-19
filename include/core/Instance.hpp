@@ -71,7 +71,7 @@ namespace vpr {
         VkInstance handle;
         VkInstanceCreateInfo createInfo;
         bool validationEnabled; 
-
+        std::vector<const char*> enabledExtensions;
         
 
         VkDebugReportCallbackEXT debugCallback;
