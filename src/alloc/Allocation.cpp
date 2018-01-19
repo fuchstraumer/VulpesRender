@@ -15,7 +15,7 @@ namespace vpr {
         return *this;
     }
 
-    void Allocation::Init(MemoryBlock * parent_block, const VkDeviceSize & offset, const VkDeviceSize & alignment, const VkDeviceSize & alloc_size) {
+    void Allocation::Init(MemoryBlock * parent_block, const VkDeviceSize & offset, const VkDeviceSize & alignment, const VkDeviceSize & alloc_size, void* user_data) {
         blockAllocation alloc;
         alloc.ParentBlock = parent_block;
         alloc.Offset = offset;
@@ -30,7 +30,7 @@ namespace vpr {
         alloc.Offset = new_offset;
     }
 
-    void Allocation::InitPrivate(const uint32_t & type_idx, VkDeviceMemory & dvc_memory, bool persistently_mapped, void * mapped_data, const VkDeviceSize & data_size) {
+    void Allocation::InitPrivate(const uint32_t & type_idx, VkDeviceMemory & dvc_memory, bool persistently_mapped, void * mapped_data, const VkDeviceSize & data_size, void* user_data) {
         Size = data_size;
         privateAllocation p_alloc;
         p_alloc.DvcMemory = dvc_memory;

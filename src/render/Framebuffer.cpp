@@ -9,16 +9,15 @@ namespace vpr {
     }
 
     Framebuffer::Framebuffer(const Device * _parent, const VkFramebufferCreateInfo & create_info) : parent(_parent) {
-        VkResult result = vkCreateFramebuffer(parent->vkHandle(), &create_info, allocators, &handle);
+        VkResult result = vkCreateFramebuffer(parent->vkHandle(), &create_info, nullptr, &handle);
         VkAssert(result);
     }
 
-    Framebuffer::Framebuffer(Framebuffer&& other) noexcept : handle(std::move(other.handle)), parent(std::move(other.parent)), allocators(std::move(other.allocators)) {}
+    Framebuffer::Framebuffer(Framebuffer&& other) noexcept : handle(std::move(other.handle)), parent(std::move(other.parent)) {}
 
     Framebuffer& Framebuffer::operator=(Framebuffer&& other) noexcept {
         handle = std::move(other.handle);
         parent = std::move(other.parent);
-        allocators = std::move(other.allocators);
         other.handle = VK_NULL_HANDLE;
         return *this;
     }
@@ -28,7 +27,7 @@ namespace vpr {
     }
 
     void Framebuffer::Destroy(){
-        vkDestroyFramebuffer(parent->vkHandle(), handle, allocators);
+        vkDestroyFramebuffer(parent->vkHandle(), handle, nullptr);
     }
 
 
