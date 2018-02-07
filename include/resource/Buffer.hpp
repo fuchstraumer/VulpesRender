@@ -37,6 +37,8 @@ namespace vpr {
         *                       updated like UBOs.
         */
         void CreateBuffer(const VkBufferUsageFlags& usage_flags, const VkMemoryPropertyFlags& memory_flags, const VkDeviceSize& size);
+
+        void CreateBuffer(const VkBufferCreateInfo& create_info, const VkMemoryPropertyFlags& memory_flags);
         void Destroy();
 
         /** Maps this object, copies data to this object, then ensures to unmap this object.

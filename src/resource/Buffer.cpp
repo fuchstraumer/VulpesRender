@@ -43,12 +43,6 @@ namespace vpr {
     }
 
     void Buffer::CreateBuffer(const VkBufferUsageFlags & usage_flags, const VkMemoryPropertyFlags & memory_flags, const VkDeviceSize & _size) {
-        
-        if (parent == nullptr) {
-            LOG(ERROR) << "Tried to create a buffer without a parent device object.";
-            throw(std::runtime_error("Set the parent of a buffer before trying to populate it, you dolt."));
-        }
-
         createInfo.usage = usage_flags;
         createInfo.size = _size;
         dataSize = _size;
@@ -61,6 +55,18 @@ namespace vpr {
         VkAssert(result);
         size = memoryAllocation.Size;
 
+    }
+
+    void Buffer::CreateBuffer(const VkBufferCreateInfo& info, const VkMemoryPropertyFlags& memory_flags) {
+        createInfo = info;
+        dataSize = info.size;
+        AllocationRequirements reqs;
+        reqs.preferredFlags = 0;
+        reqs.privateMemory = false;
+        reqs.requiredFlags = memory_flags;
+        VkResult result = parent->vkAllocator->CreateBuffer(&handle, &createInfo, reqs, memoryAllocation);
+        VkAssert(result);
+        size = memoryAllocation.Size;
     }
 
     void Buffer::Destroy(){
