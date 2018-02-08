@@ -16,7 +16,7 @@ namespace vpr {
 
         /** Specifies that a descriptor of the given type be accessible from the given stage, and sets the index it will be accessed at in the shader.
         */
-        void AddDescriptorBinding(const VkDescriptorType& descriptor_type, const VkShaderStageFlagBits& shader_stage, const uint32_t& descriptor_binding_loc) noexcept;
+        void AddDescriptorBinding(const VkDescriptorType& descriptor_type, const VkShaderStageFlags& shader_stage, const uint32_t& descriptor_binding_loc) noexcept;
         
         const VkDescriptorSetLayout& vkHandle() const noexcept;
     private:

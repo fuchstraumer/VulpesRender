@@ -9,7 +9,7 @@ namespace vpr {
         vkDestroyDescriptorSetLayout(device->vkHandle(), handle, nullptr);
     }
 
-    void DescriptorSetLayout::AddDescriptorBinding(const VkDescriptorType& descriptor_type, const VkShaderStageFlagBits& shader_stage, const uint32_t& descriptor_binding_loc) noexcept {
+    void DescriptorSetLayout::AddDescriptorBinding(const VkDescriptorType& descriptor_type, const VkShaderStageFlags& shader_stage, const uint32_t& descriptor_binding_loc) noexcept {
         
         VkDescriptorSetLayoutBinding new_binding {
             descriptor_binding_loc,
