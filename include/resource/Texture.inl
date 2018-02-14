@@ -4,9 +4,29 @@ namespace vpr {
     inline void Texture<texture_2d_t>::updateTextureParameters(const texture_2d_t& txdata);
     
     template<typename texture_type>
-    inline Texture<texture_type>::Texture(const Device * _parent, const VkImageUsageFlags & flags) : Image(_parent) {
+    inline Texture<texture_type>::Texture(const Device * _parent, const VkImageUsageFlags & flags) : Image(_parent), sampler(VK_NULL_HANDLE) {
         createInfo = vk_image_create_info_base;
         createInfo.usage = flags;
+    }
+
+    template<typename texture_type>
+    inline Texture<texture_type>::Texture(Texture&& other) noexcept : Image(std::move(other)), sampler(std::move(other.sampler)), stagingBuffer(std::move(other.stagingBuffer)),
+        stagingMemory(std::move(other.stagingMemory)), mipLevels(std::move(other.mipLevels)), layerCount(std::move(other.layerCount)), descriptorInfoSet(std::move(other.descriptorInfoSet)),
+        texDescriptor(std::move(other.texDescriptor)), copyInfo(std::move(other.copyInfo)) { other.sampler = VK_NULL_HANDLE; }
+    
+    template<typename texture_type>
+    inline Texture<texture_type>& Texture<texture_type>::operator=(Texture&& other) noexcept {
+        Image::operator=(std::move(other));
+        sampler = std::move(other.sampler);
+        stagingBuffer = std::move(other.stagingBuffer);
+        stagingMemory = std::move(other.stagingMemory);
+        mipLevels = std::move(other.mipLevels);
+        layerCount = std::move(other.layerCount);
+        descriptorInfoSet = std::move(other.descriptorInfoSet);
+        texDescriptor = std::move(other.texDescriptor);
+        copyInfo = std::move(other.copyInfo);
+        other.sampler = VK_NULL_HANDLE;
+        return *this;
     }
 
     template<typename texture_type>
