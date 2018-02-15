@@ -147,7 +147,7 @@ namespace vpr {
         VkBuffer stagingBuffer;
         Allocation stagingMemory;
 
-        uint32_t mipLevels = 0;/
+        uint32_t mipLevels = 0;
         uint32_t layerCount = 0;
         mutable bool descriptorInfoSet = false;
         mutable VkDescriptorImageInfo texDescriptor;
