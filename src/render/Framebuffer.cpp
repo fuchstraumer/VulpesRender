@@ -3,17 +3,20 @@
 #include "core/LogicalDevice.hpp"
 
 namespace vpr {
+    
+    Framebuffer::Framebuffer(const Device * _parent, const VkFramebufferCreateInfo & create_info) : parent(_parent),
+        handle(VK_NULL_HANDLE) {
+        VkResult result = vkCreateFramebuffer(parent->vkHandle(), &create_info, nullptr, &handle);
+        VkAssert(result);
+    }
 
     Framebuffer::~Framebuffer() {
         Destroy();
     }
 
-    Framebuffer::Framebuffer(const Device * _parent, const VkFramebufferCreateInfo & create_info) : parent(_parent) {
-        VkResult result = vkCreateFramebuffer(parent->vkHandle(), &create_info, nullptr, &handle);
-        VkAssert(result);
+    Framebuffer::Framebuffer(Framebuffer&& other) noexcept : handle(std::move(other.handle)), parent(std::move(other.parent)) {
+        other.handle = VK_NULL_HANDLE;
     }
-
-    Framebuffer::Framebuffer(Framebuffer&& other) noexcept : handle(std::move(other.handle)), parent(std::move(other.parent)) {}
 
     Framebuffer& Framebuffer::operator=(Framebuffer&& other) noexcept {
         handle = std::move(other.handle);
@@ -26,8 +29,10 @@ namespace vpr {
         return handle;
     }
 
-    void Framebuffer::Destroy(){
-        vkDestroyFramebuffer(parent->vkHandle(), handle, nullptr);
+    void Framebuffer::Destroy() {
+        if (handle != VK_NULL_HANDLE) {
+            vkDestroyFramebuffer(parent->vkHandle(), handle, nullptr);
+        }
     }
 
 

@@ -8,9 +8,11 @@
 #endif
 
 namespace vpr {
+    
+    constexpr static VkPipelineCacheCreateInfo base_create_info{ VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO, nullptr, 0, 0, nullptr };
 
-    PipelineCache::PipelineCache(const Device* _parent, const uint16_t& hash_id) : parent(_parent), 
-        createInfo(VkPipelineCacheCreateInfo{ VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO, nullptr, 0, 0, nullptr }), hashID(hash_id) {
+    PipelineCache::PipelineCache(const Device* _parent, const size_t hash_id) : parent(_parent), createInfo(base_create_info), 
+        hashID(std::move(hash_id)), handle(VK_NULL_HANDLE) {
         
         std::string cache_dir = std::string("./rsrc/shader_cache/");
             
@@ -35,17 +37,26 @@ namespace vpr {
     }
 
     PipelineCache::~PipelineCache() {
-        
-        // Want to make sure cache isn't in use before saving.
-        vkDeviceWaitIdle(parent->vkHandle());
-        
-        VkResult saved = saveToFile();
-        VkAssert(saved);
-
-        vkDestroyPipelineCache(parent->vkHandle(), handle, nullptr);
-
+        if (handle != VK_NULL_HANDLE) {
+            VkResult saved = saveToFile();
+            VkAssert(saved);
+            vkDestroyPipelineCache(parent->vkHandle(), handle, nullptr);
+        }
     }
 
+    PipelineCache::PipelineCache(PipelineCache&& other) noexcept : parent(std::move(other.parent)), createInfo(std::move(other.createInfo)),
+        hashID(std::move(other.hashID)), handle(std::move(other.handle)), filename(std::move(other.filename)) { other.handle = VK_NULL_HANDLE; }
+
+    PipelineCache& PipelineCache::operator=(PipelineCache&& other) noexcept {
+        parent = std::move(other.parent);
+        createInfo = std::move(other.createInfo);
+        hashID = std::move(other.hashID);
+        handle = std::move(other.handle);
+        other.handle = VK_NULL_HANDLE;
+        filename = std::move(other.filename);
+        return *this;
+    }
+    
     VkResult PipelineCache::saveToFile() const {
 
         VkResult result = VK_SUCCESS;

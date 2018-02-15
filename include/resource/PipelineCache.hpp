@@ -23,24 +23,24 @@ namespace vpr {
 
         /** Creates a pipeline cache, or loads a pre-existing one from file.
         *   \param hash_id: This can be nicely setting by using typeid(owning_type).hash_code(), so that types all share a pipline cache and there is still a unique identifier per type.  */
-        PipelineCache(const Device* parent, const uint16_t& hash_id);
-
+        PipelineCache(const Device* parent, const size_t hash_id);
         ~PipelineCache();
+
+        PipelineCache(PipelineCache&& other) noexcept;
+        PipelineCache& operator=(PipelineCache&& other) noexcept;
 
         /** Takes a pipeline cache header and checks it for validity.
         *
         */
         bool Verify(const int8_t* cache_header) const;
-
         void LoadCacheFromFile(const char * filename);
-
         const VkPipelineCache& vkHandle() const;
 
     private:
 
         std::string filename;
         VkResult saveToFile() const;
-        uint16_t hashID;
+        size_t hashID;
         const Device* parent;
         VkPipelineCache handle;
         VkPipelineCacheCreateInfo createInfo;

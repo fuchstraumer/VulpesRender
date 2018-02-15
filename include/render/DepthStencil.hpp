@@ -13,12 +13,13 @@ namespace vpr {
     *   \ingroup Rendering
     */
     class VPR_API DepthStencil : public Image {
+        DepthStencil(const DepthStencil&) = delete;
+        DepthStencil& operator=(const DepthStencil&) = delete;
     public:
 
         DepthStencil(const Device* _parent, const VkExtent3D& extents);
-
         ~DepthStencil() = default;
-
+        
         VkAttachmentDescription DepthAttachment() const noexcept;
     };
 

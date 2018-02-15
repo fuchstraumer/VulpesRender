@@ -4,7 +4,8 @@ namespace vpr {
     inline void Texture<texture_2d_t>::updateTextureParameters(const texture_2d_t& txdata);
     
     template<typename texture_type>
-    inline Texture<texture_type>::Texture(const Device * _parent, const VkImageUsageFlags & flags) : Image(_parent), sampler(VK_NULL_HANDLE) {
+    inline Texture<texture_type>::Texture(const Device * _parent, const VkImageUsageFlags & flags) : Image(_parent), sampler(VK_NULL_HANDLE),
+        stagingBuffer(VK_NULL_HANDLE) {
         createInfo = vk_image_create_info_base;
         createInfo.usage = flags;
     }
