@@ -26,11 +26,9 @@ namespace vpr {
         void Destroy();
 
         void Create(const VkImageCreateInfo& create_info, const VkMemoryPropertyFlagBits& memory_flags = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
-
         void Create(const VkExtent3D& extents, const VkFormat& format, const VkImageUsageFlags& usage_flags, const VkImageLayout& init_layout = VK_IMAGE_LAYOUT_PREINITIALIZED);
         
         void CreateView(const VkImageViewCreateInfo& info);
-        
         void CreateView(const VkImageAspectFlags& aspect_flags);
 
         void TransitionLayout(const VkImageLayout& initial, const VkImageLayout& final, CommandPool* cmd, VkQueue& queue);
@@ -50,7 +48,7 @@ namespace vpr {
         virtual VkExtent3D GetExtents() const noexcept;
 
         VkFormat Format() const noexcept;
-        void SetFormat(const VkFormat& format) noexcept;
+        void SetFormat(VkFormat format) noexcept;
 
         VkImageLayout Layout() const noexcept;
         void SetFinalLayout(VkImageLayout new_layout);
