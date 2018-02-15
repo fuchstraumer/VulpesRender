@@ -17,6 +17,9 @@ namespace vpr {
         DescriptorSet(const Device* parent);
         ~DescriptorSet();
 
+        DescriptorSet(DescriptorSet&& other) noexcept;
+        DescriptorSet& operator=(DescriptorSet&& other) noexcept;
+
         /** Sets the required image info for the descriptor at the given index. Make sure this is called appropriately for each call to AddDescriptorBinding
         */
         void AddDescriptorInfo(const VkDescriptorImageInfo& info, const VkDescriptorType& type, const size_t& item_binding_idx);
@@ -34,7 +37,7 @@ namespace vpr {
 
         const Device* device;
         const DescriptorPool* descriptorPool;
-        VkDescriptorSet descriptorSet;
+        VkDescriptorSet handle;
         bool updated = false;
         bool allocated = false;
         std::map<size_t, VkWriteDescriptorSet> writeDescriptors;
