@@ -37,6 +37,8 @@ namespace vpr {
         *                       updated like UBOs.
         */
         void CreateBuffer(const VkBufferUsageFlags& usage_flags, const VkMemoryPropertyFlags& memory_flags, const VkDeviceSize& size);
+
+        void CreateBuffer(const VkBufferCreateInfo& create_info, const VkMemoryPropertyFlags& memory_flags);
         void Destroy();
 
         /** Maps this object, copies data to this object, then ensures to unmap this object.
@@ -58,11 +60,14 @@ namespace vpr {
 
         VkBufferMemoryBarrier CreateMemoryBarrier(VkAccessFlags src, VkAccessFlags dst, uint32_t src_idx, uint32_t dst_idx, VkDeviceSize sz) const;
 
+        void CreateView(const VkFormat format, const uint32_t range, const uint32_t offset);
+        
         void Map(const VkDeviceSize& offset = 0);
         void Unmap();
 
         const VkBuffer& vkHandle() const noexcept;
         VkBuffer& vkHandle() noexcept;
+        const VkBufferView& View() const noexcept;
         const VkDescriptorBufferInfo& GetDescriptor() const noexcept;
 
         VkDeviceSize Size() const noexcept;
@@ -91,7 +96,9 @@ namespace vpr {
         const Device* parent;
         const VkAllocationCallbacks* allocators = nullptr;
         VkBuffer handle;
+        VkBufferView view;
         VkBufferCreateInfo createInfo;
+        VkBufferViewCreateInfo viewCreateInfo;
         Allocation memoryAllocation;
         VkDeviceSize size;
         VkDeviceSize dataSize;

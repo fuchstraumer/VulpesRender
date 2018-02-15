@@ -8,17 +8,21 @@
 namespace vpr {
 
     std::vector<std::pair<VkBuffer, Allocation>> Buffer::stagingBuffers = std::vector<std::pair<VkBuffer, Allocation>>();
+    VkBufferViewCreateInfo base_view_info{ VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO, nullptr, 0, VK_NULL_HANDLE, VK_FORMAT_UNDEFINED, 0, 0 };
 
-    Buffer::Buffer(const Device * _parent) : parent(_parent), createInfo(vk_buffer_create_info_base), handle(VK_NULL_HANDLE) {}
+    Buffer::Buffer(const Device * _parent) : parent(_parent), createInfo(vk_buffer_create_info_base), viewCreateInfo(base_view_info),
+        handle(VK_NULL_HANDLE), view(VK_NULL_HANDLE) {}
 
     Buffer::~Buffer(){
         Destroy();
     }
 
     Buffer::Buffer(Buffer && other) noexcept : allocators(std::move(other.allocators)), size(std::move(other.size)), createInfo(std::move(other.createInfo)), 
-        handle(std::move(other.handle)), memoryAllocation(std::move(other.memoryAllocation)), parent(std::move(other.parent)), MappedMemory(std::move(other.MappedMemory)) {
+        handle(std::move(other.handle)), memoryAllocation(std::move(other.memoryAllocation)), parent(std::move(other.parent)), 
+        MappedMemory(std::move(other.MappedMemory)), viewCreateInfo(std::move(other.viewCreateInfo)), view(std::move(other.view)) {
         // Make sure to nullify so destructor checks safer/more likely to succeed.
         other.handle = VK_NULL_HANDLE;
+        other.view = VK_NULL_HANDLE;
         other.MappedMemory = nullptr;
     }
 
@@ -30,18 +34,15 @@ namespace vpr {
         memoryAllocation = std::move(other.memoryAllocation);
         parent = std::move(other.parent);
         MappedMemory = std::move(other.MappedMemory);
+        view = std::move(other.view);
+        viewCreateInfo = std::move(other.viewCreateInfo);
         other.handle = VK_NULL_HANDLE;
         other.MappedMemory = nullptr;
+        other.view = VK_NULL_HANDLE;
         return *this;
     }
 
     void Buffer::CreateBuffer(const VkBufferUsageFlags & usage_flags, const VkMemoryPropertyFlags & memory_flags, const VkDeviceSize & _size) {
-        
-        if (parent == nullptr) {
-            LOG(ERROR) << "Tried to create a buffer without a parent device object.";
-            throw(std::runtime_error("Set the parent of a buffer before trying to populate it, you dolt."));
-        }
-
         createInfo.usage = usage_flags;
         createInfo.size = _size;
         dataSize = _size;
@@ -56,10 +57,25 @@ namespace vpr {
 
     }
 
+    void Buffer::CreateBuffer(const VkBufferCreateInfo& info, const VkMemoryPropertyFlags& memory_flags) {
+        createInfo = info;
+        dataSize = info.size;
+        AllocationRequirements reqs;
+        reqs.preferredFlags = 0;
+        reqs.privateMemory = false;
+        reqs.requiredFlags = memory_flags;
+        VkResult result = parent->vkAllocator->CreateBuffer(&handle, &createInfo, reqs, memoryAllocation);
+        VkAssert(result);
+        size = memoryAllocation.Size;
+    }
+
     void Buffer::Destroy(){
         if (handle != VK_NULL_HANDLE) {
             parent->vkAllocator->DestroyBuffer(handle, memoryAllocation);
             handle = VK_NULL_HANDLE;
+        }
+        if (view != VK_NULL_HANDLE) {
+            vkDestroyBufferView(parent->vkHandle(), view, nullptr);
         }
     }
 
@@ -132,6 +148,15 @@ namespace vpr {
             handle, memoryAllocation.Offset(), sz };
     }
 
+    void Buffer::CreateView(const VkFormat format, const uint32_t range, const uint32_t offset) {
+        viewCreateInfo.format = format;
+        viewCreateInfo.range = range;
+        viewCreateInfo.offset = offset;
+        viewCreateInfo.buffer = handle;
+        VkResult result = vkCreateBufferView(parent->vkHandle(), &viewCreateInfo, nullptr, &view);
+        VkAssert(result);
+    }
+
     void Buffer::Map(const VkDeviceSize& offset){
         assert(offset < memoryAllocation.Size);
         VkResult result = vkMapMemory(parent->vkHandle(), memoryAllocation.Memory(), memoryAllocation.Offset() + offset, memoryAllocation.Size, 0, &MappedMemory);
@@ -148,6 +173,10 @@ namespace vpr {
 
     VkBuffer & Buffer::vkHandle() noexcept{
         return handle;
+    }
+
+    const VkBufferView& Buffer::View() const noexcept {
+        return view;
     }
 
     void Buffer::setDescriptorInfo() const noexcept {

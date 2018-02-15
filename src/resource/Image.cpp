@@ -5,17 +5,19 @@
 #include "alloc/Allocator.hpp"
 namespace vpr {
 
-    Image::Image(const Device * _parent) : parent(_parent) {}
+    Image::Image(const Device * _parent) : parent(_parent), handle(VK_NULL_HANDLE), view(VK_NULL_HANDLE) {}
 
     Image::Image(Image && other) noexcept : handle(std::move(other.handle)), createInfo(std::move(other.createInfo)), view(std::move(other.view)), memoryAllocation(std::move(other.memoryAllocation)), 
         finalLayout(std::move(other.finalLayout)), extents(std::move(other.extents)), format(std::move(other.format)), usageFlags(std::move(other.usageFlags)), imageDataSize(std::move(other.imageDataSize)) {
         parent = other.parent;
         other.handle = VK_NULL_HANDLE;
+        other.view = VK_NULL_HANDLE;
     }
 
     Image & Image::operator=(Image && other) noexcept {
         handle = std::move(other.handle);
         other.handle = VK_NULL_HANDLE;
+        other.view = VK_NULL_HANDLE;
         createInfo = std::move(other.createInfo);
         view = std::move(other.view);
         memoryAllocation = std::move(other.memoryAllocation);

@@ -16,8 +16,9 @@ but still allowing me to keep RAII semantics.
 
 There are a few big things on my to-do list, yet:
 - [x] Fix the way debug callbacks and markers are handled (FIXED: via removing them altogether, for now)
-- [ ] Consider finding a way to make this work as a dynamic library (WIP, GLFW doesn't like option toggles for dyn lib build)
-- [ ] Make thread safety for objects storing vectors/arrays of objects more secure
+- [x] Consider finding a way to make this work as a dynamic library
+- [x] Make thread safety for objects storing vectors/arrays of objects more secure
+- [ ] More extension support: i.e, add implicit support and usage of device groups and a few other KHR extensions that are particularly useful.
 - [ ] Implement the Pimpl idiom at some point (after dynamic library build is good to go)
 - [ ] Improve the memory allocator, primarily trying to reduce fragmentation by dividing the memory pools/regions by size as well as type. This way there shouldn't be any more 256-512 byte buffers in between the much bigger vertex and index buffers.
 

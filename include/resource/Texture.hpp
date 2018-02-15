@@ -94,9 +94,13 @@ namespace vpr {
     */
     template<typename texture_type>
     class Texture : public Image {
+        Texture(const Texture&) = delete;
+        Texture& operator=(const Texture&) = delete;
     public:
 
         Texture(const Device* _parent, const VkImageUsageFlags& flags = VK_IMAGE_USAGE_SAMPLED_BIT);
+        Texture(Texture&& other) noexcept;
+        Texture& operator=(Texture&& other) noexcept;
 
         ~Texture();
 
