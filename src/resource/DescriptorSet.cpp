@@ -28,9 +28,10 @@ namespace vpr {
         bufferInfos = std::move(other.bufferInfos);
         return *this;
     }
-    void DescriptorSet::AddDescriptorInfo(const VkDescriptorImageInfo& info, const VkDescriptorType& type, const size_t& item_binding_idx) {
+    void DescriptorSet::AddDescriptorInfo(VkDescriptorImageInfo info, const VkDescriptorType& type, const size_t& item_binding_idx) {
 
-        VkWriteDescriptorSet write_descriptor {
+        imageInfos.emplace(item_binding_idx, std::move(info));
+        writeDescriptors.emplace(item_binding_idx, VkWriteDescriptorSet{
             VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
             nullptr,
             handle,
@@ -38,20 +39,18 @@ namespace vpr {
             0,
             1,
             type,
-            &info,
+            &imageInfos.at(item_binding_idx),
             nullptr,
             nullptr,
-        };
-
-        writeDescriptors.insert(std::make_pair(item_binding_idx, write_descriptor));
+        });
 
     }
 
-    void DescriptorSet::AddDescriptorInfo(const VkDescriptorBufferInfo& info, const VkDescriptorType& descr_type, const size_t& item_binding_idx) {
+    void DescriptorSet::AddDescriptorInfo(VkDescriptorBufferInfo info, const VkDescriptorType& descr_type, const size_t& item_binding_idx) {
         
-        bufferInfos.insert(std::make_pair(item_binding_idx, info));
+        bufferInfos.emplace(item_binding_idx, std::move(info));
 
-        VkWriteDescriptorSet write_descriptor {
+        writeDescriptors.emplace(item_binding_idx, VkWriteDescriptorSet{
             VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
             nullptr,
             handle,
@@ -62,18 +61,15 @@ namespace vpr {
             nullptr,
             &bufferInfos.at(item_binding_idx),
             nullptr,
-        };
-
-        writeDescriptors.insert(std::make_pair(item_binding_idx, write_descriptor));
-
+        });
     }
 
-    void DescriptorSet::AddDescriptorInfo(const VkDescriptorBufferInfo & info, const VkBufferView & view, const VkDescriptorType & type, const size_t & idx) {
+    void DescriptorSet::AddDescriptorInfo(VkDescriptorBufferInfo info, const VkBufferView & view, const VkDescriptorType & type, const size_t & idx) {
 
-        bufferInfos.emplace(idx, info);
+        bufferInfos.emplace(idx, std::move(info));
         bufferViews.emplace(idx, view);
 
-        VkWriteDescriptorSet descr {
+        writeDescriptors.emplace(idx, VkWriteDescriptorSet{
             VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
             nullptr,
             handle,
@@ -84,7 +80,7 @@ namespace vpr {
             nullptr,
             &bufferInfos.at(idx),
             &bufferViews.at(idx)
-        };
+        });
     }
 
     void DescriptorSet::Init(const DescriptorPool * parent_pool, const DescriptorSetLayout* set_layout) {
