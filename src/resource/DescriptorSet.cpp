@@ -68,6 +68,25 @@ namespace vpr {
 
     }
 
+    void DescriptorSet::AddDescriptorInfo(const VkDescriptorBufferInfo & info, const VkBufferView & view, const VkDescriptorType & type, const size_t & idx) {
+
+        bufferInfos.emplace(idx, info);
+        bufferViews.emplace(idx, view);
+
+        VkWriteDescriptorSet descr {
+            VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            nullptr,
+            handle,
+            static_cast<uint32_t>(idx),
+            0,
+            1,
+            type,
+            nullptr,
+            &bufferInfos.at(idx),
+            &bufferViews.at(idx)
+        };
+    }
+
     void DescriptorSet::Init(const DescriptorPool * parent_pool, const DescriptorSetLayout* set_layout) {
 
         allocate(parent_pool, set_layout);
@@ -104,6 +123,9 @@ namespace vpr {
             }
             if (entry.second.pImageInfo != nullptr) {
                 write_descriptors.back().pImageInfo = entry.second.pImageInfo;
+            }
+            if (entry.second.pTexelBufferView != nullptr) {
+                write_descriptors.back().pTexelBufferView = entry.second.pTexelBufferView;
             }
         }
 
