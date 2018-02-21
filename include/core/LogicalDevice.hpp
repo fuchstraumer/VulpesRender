@@ -79,7 +79,6 @@ namespace vpr {
 
         */
         VkFormat FindDepthFormat() const;
-        VkFormat GetSwapchainColorFormat() const;
 
         /*
             Methods related to physical device
