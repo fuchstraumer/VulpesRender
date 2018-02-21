@@ -6,6 +6,7 @@
 #include "AllocCommon.hpp"
 #include "AllocationCollection.hpp"
 #include <unordered_set>
+#include <map>
 
 namespace vpr {
 
@@ -46,6 +47,7 @@ namespace vpr {
     public:
 
         Allocator(const Device* parent_dvc, bool dedicated_alloc_enabled);
+
         ~Allocator();
 
         void Recreate();
@@ -82,6 +84,9 @@ namespace vpr {
 
     private:
 
+        void createAllocationMaps();
+        void clearAllocationMaps();
+
         // Won't throw: but can return invalid indices. Make sure to handle this.
         uint32_t findMemoryTypeIdx(const VkMemoryRequirements& mem_reqs, const AllocationRequirements& details) const noexcept;
 
@@ -94,10 +99,20 @@ namespace vpr {
 
         void getBufferMemReqs(VkBuffer& handle, VkMemoryRequirements& reqs, bool& requires_dedicated, bool& prefers_dedicated);
         void getImageMemReqs(VkImage& handle, VkMemoryRequirements& reqs, bool& requires_dedicated, bool& prefers_dedicated);
-        
-        std::vector<std::unique_ptr<AllocationCollection>> allocations;
+
+        enum class AllocationSize {
+            SMALL,
+            MEDIUM,
+            LARGE,
+            EXTRA_LARGE
+        };
+
+        AllocationSize GetAllocSize(const VkDeviceSize& size) const;
+
+        std::map<AllocationSize, std::vector<std::unique_ptr<AllocationCollection>>> allocations;
+        std::map<AllocationSize, std::vector<bool>> emptyAllocations;
         std::unordered_set<std::unique_ptr<Allocation>> privateAllocations;
-        std::vector<bool> emptyAllocations;
+
         /**Guards the private allocations set, since it's a different object entirely than the main one.
         */
         std::mutex privateMutex;

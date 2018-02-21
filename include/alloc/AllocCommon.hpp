@@ -9,9 +9,14 @@ namespace vpr {
     constexpr static size_t vkMaxMemoryTypes = 32;
     constexpr static VkDeviceSize MinSuballocationSizeToRegister = 16;
 
-    constexpr static VkDeviceSize SmallHeapMaxSize = 512 * 1024 * 1024;
+    constexpr static VkDeviceSize SmallHeapMaxSize = 64 * 1024 * 1024;
+    // Blocks are sized to hold 32 single allocations
     constexpr static VkDeviceSize DefaultLargeHeapBlockSize = 256 * 1024 * 1024;
-    constexpr static VkDeviceSize DefaultSmallHeapBlockSize = 64 * 1024 * 1024;
+    constexpr static VkDeviceSize LargeBlockSingleAllocSize = 512 * 16384; // ~8mb
+    constexpr static VkDeviceSize DefaultMediumHeapBlockSize = 16777216; 
+    constexpr static VkDeviceSize MediumBlockSingleAllocSize = 262144 * 2; // ~0.512mb
+    constexpr static VkDeviceSize DefaultSmallHeapBlockSize = 16 * 4096;
+    constexpr static VkDeviceSize SmallBlockSingleAllocSize = 4096;
 
 #if !defined NDEBUG || defined FORCE_ALLOCATOR_VALIDATION
     constexpr bool VALIDATE_MEMORY = true;
