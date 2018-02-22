@@ -177,6 +177,8 @@ namespace vpr {
     template<typename texture_type>
     inline void Texture<texture_type>::createSampler() {
         VkSamplerCreateInfo sampler_create_info = vk_sampler_create_info_base;
+        sampler_create_info.addressModeU = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+        sampler_create_info.addressModeV = VK_SAMPLER_ADDRESS_MODE_REPEAT;
         VkResult result = vkCreateSampler(parent->vkHandle(), &sampler_create_info, nullptr, &sampler);
         VkAssert(result);
     }
