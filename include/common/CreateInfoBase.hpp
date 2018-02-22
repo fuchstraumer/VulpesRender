@@ -395,7 +395,7 @@ namespace vpr {
 		0,
 		VK_SAMPLE_COUNT_1_BIT,
 		VK_FALSE,
-		0.25f, 
+		0.0f, 
 		nullptr, 
 		VK_FALSE,
 		VK_FALSE,
