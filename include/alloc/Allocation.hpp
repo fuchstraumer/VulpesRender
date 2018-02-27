@@ -13,14 +13,14 @@ namespace vpr {
     *   \ingroup Allocator
     */
     class VPR_API Allocation {
-        Allocation(const Allocation&) = delete;
-        Allocation& operator=(const Allocation&) = delete;
     public:
         /** If this is an allocation bound to a smaller region of a larger object, it is a block allocation. 
          *  Otherwise, it has it's own VkDeviceMemory object and is a "PRIVATE_ALLOCATION" type.
         */
         Allocation() = default;
         ~Allocation() = default;
+        Allocation(const Allocation&) = default;
+        Allocation& operator=(const Allocation&) = default;
         Allocation(Allocation&& other) noexcept;
         Allocation& operator=(Allocation&& other) noexcept;
 
@@ -37,8 +37,7 @@ namespace vpr {
         void* GetUserData() const;
         bool IsPrivateAllocation() const noexcept;
 
-        VkDeviceSize Size{ 0 };
-        VkDeviceSize Alignment{ 0 };
+        VkDeviceSize Size, Alignment;
     private:
 
         struct blockAllocation {
