@@ -115,18 +115,18 @@ namespace vpr {
 
         auto& physical_device = parent->GetPhysicalDevice();
 
-        if (header[2] != physical_device.Properties.vendorID) {
+        if (header[2] != physical_device.GetProperties().vendorID) {
             return false;
         }
 
-        if (header[3] != physical_device.Properties.deviceID) {
+        if (header[3] != physical_device.GetProperties().deviceID) {
             return false;
         }
 
         uint8_t cache_uuid[VK_UUID_SIZE] = {};
         memcpy(cache_uuid, cache_header + 16, VK_UUID_SIZE);
 
-        if (memcmp(cache_uuid, physical_device.Properties.pipelineCacheUUID, sizeof(cache_uuid)) != 0) {
+        if (memcmp(cache_uuid, physical_device.GetProperties().pipelineCacheUUID, sizeof(cache_uuid)) != 0) {
             LOG(INFO) << "Pipeline cache UUID incorrect, requires rebuilding.";
             return false;
         }

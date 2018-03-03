@@ -55,7 +55,7 @@ namespace vpr {
 
         createInfo.queueCreateInfoCount = static_cast<uint32_t>(queue_infos.size());
         createInfo.pQueueCreateInfos = queue_infos.data();
-        createInfo.pEnabledFeatures = &parent->Features;
+        createInfo.pEnabledFeatures = &parent->GetFeatures();
 
         VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, nullptr, &handle);
         VkAssert(result);
@@ -305,7 +305,7 @@ namespace vpr {
     }
 
     uint32_t Device::GetPhysicalDeviceID() const noexcept{
-        return parent->Properties.deviceID;
+        return parent->GetProperties().deviceID;
     }
 
     const PhysicalDevice & Device::GetPhysicalDevice() const noexcept{
@@ -313,11 +313,11 @@ namespace vpr {
     }
 
     VkPhysicalDeviceProperties Device::GetPhysicalDeviceProperties() const noexcept {
-        return parent->Properties;
+        return parent->GetProperties();
     }
 
     VkPhysicalDeviceMemoryProperties Device::GetPhysicalDeviceMemoryProperties() const noexcept {
-        return parent->MemoryProperties;
+        return parent->GetMemoryProperties();
     }
 
     bool Device::HasDedicatedComputeQueues() const {
