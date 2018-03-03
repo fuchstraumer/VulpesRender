@@ -104,6 +104,7 @@ namespace vpr {
         PhysicalDeviceImpl(const VkInstance& instance);
         PhysicalDeviceImpl(PhysicalDeviceImpl&& other) noexcept;
         PhysicalDeviceImpl& operator=(PhysicalDeviceImpl&& other) noexcept;
+        ~PhysicalDeviceImpl();
 
         uint32_t GetMemoryTypeIdx(const uint32_t & type_bitfield, const VkMemoryPropertyFlags & property_flags, VkBool32 * memory_type_found) const noexcept;
         
@@ -143,6 +144,9 @@ namespace vpr {
         return *this;
     }
 
+    PhysicalDeviceImpl::~PhysicalDeviceImpl() {
+    }
+
     uint32_t PhysicalDeviceImpl::GetMemoryTypeIdx(const uint32_t & type_bitfield, const VkMemoryPropertyFlags & property_flags, VkBool32 * memory_type_found) const noexcept {
         auto bitfield = type_bitfield;
         const uint32_t num_memory_types = MemoryProperties.memoryTypeCount;
@@ -175,6 +179,8 @@ namespace vpr {
         other.impl.reset();
         return *this;
     }
+
+    PhysicalDevice::~PhysicalDevice() { }
 
     void PhysicalDeviceImpl::getAttributes() noexcept {
         vkGetPhysicalDeviceProperties(handle, &Properties);

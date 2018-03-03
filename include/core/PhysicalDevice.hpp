@@ -23,6 +23,7 @@ namespace vpr {
         PhysicalDevice(const VkInstance& instance_handle);
         PhysicalDevice(PhysicalDevice&& other) noexcept;
         PhysicalDevice& operator=(PhysicalDevice&& other) noexcept;
+        ~PhysicalDevice();
         
         const VkPhysicalDevice& vkHandle() const noexcept;
 
