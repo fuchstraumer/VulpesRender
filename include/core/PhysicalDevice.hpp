@@ -5,6 +5,8 @@
 
 namespace vpr {
 
+    class PhysicalDeviceImpl;
+
     /**! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle representing a Vulkan-compatible
     *    hardware device in a user's system. This class stores the relevant VkPhysicalDeviceProperties, VkPhysicalDeviceFeatures, and 
     *    VkPhysicalDeviceMemoryProperties that can be freely queried from anywhere in the program. This can/should be used to check for
@@ -19,7 +21,8 @@ namespace vpr {
     public:
 
         PhysicalDevice(const VkInstance& instance_handle);
-        PhysicalDevice(const VkInstance& instance_handle, const VkPhysicalDeviceFeatures& required_features);
+        PhysicalDevice(PhysicalDevice&& other) noexcept;
+        PhysicalDevice& operator=(PhysicalDevice&& other) noexcept;
         
         const VkPhysicalDevice& vkHandle() const noexcept;
 
@@ -37,20 +40,14 @@ namespace vpr {
         */
         uint32_t GetQueueFamilyIndex(const VkQueueFlagBits& bitfield) const noexcept ;
         VkQueueFamilyProperties GetQueueFamilyProperties(const VkQueueFlagBits& bitfield) const;
+        const VkPhysicalDeviceProperties& GetProperties() const noexcept;
+        const VkPhysicalDeviceFeatures& GetFeatures() const noexcept;
+        const VkPhysicalDeviceMemoryProperties& GetMemoryProperties() const noexcept;
 
-        VkPhysicalDeviceProperties Properties;
-        VkPhysicalDeviceFeatures Features;
-        VkPhysicalDeviceMemoryProperties MemoryProperties;
 
     private:
 
-        void getAttributes() noexcept;
-        void retrieveQueueFamilyProperties() noexcept;
-        VkPhysicalDevice getBestDevice(const VkInstance & parent_instance);
-
-        std::vector<VkQueueFamilyProperties> queueFamilyProperties;
-        VkPhysicalDevice handle;
-        
+        std::unique_ptr<PhysicalDeviceImpl> impl;
     };
 
 }
