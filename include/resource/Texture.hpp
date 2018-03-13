@@ -34,7 +34,7 @@ namespace vpr {
         texture_2d_t(const texture_2d_t&) = delete;
         texture_2d_t& operator=(const texture_2d_t&) = delete;
 
-        texture_2d_t(const char* filename) {
+        texture_2d_t(const char* filename) : pixels(nullptr) {
             pixels = stbi_load(filename, &x, &y, &channels, 4);
         }
 
@@ -77,9 +77,10 @@ namespace vpr {
             return 1;
         }
 
-        int x, y;
-        int channels;
-        stbi_uc* pixels;
+        int x = -1;
+        int y = -1;
+        int channels = -1;
+        stbi_uc* pixels = nullptr;
     };
 
     /** A templated wrapper around Vulkan texture objects, which require quite a bit of boilerplate code. The templated parameter decides the underlying type 
@@ -146,7 +147,8 @@ namespace vpr {
         VkBuffer stagingBuffer;
         Allocation stagingMemory;
 
-        uint32_t mipLevels = 0, layerCount = 0;
+        uint32_t mipLevels = 0;
+        uint32_t layerCount = 0;
         mutable bool descriptorInfoSet = false;
         mutable VkDescriptorImageInfo texDescriptor;
         std::vector<VkBufferImageCopy> copyInfo;

@@ -24,54 +24,74 @@ namespace vpr {
         preferredSmallHeapBlockSize(DefaultSmallHeapBlockSize), preferredLargeHeapBlockSize(DefaultLargeHeapBlockSize) {
         deviceProperties = parent->GetPhysicalDeviceProperties();
         deviceMemoryProperties = parent->GetPhysicalDeviceMemoryProperties();
-        allocations.resize(GetMemoryTypeCount());
-        emptyAllocations.resize(GetMemoryTypeCount());
-        // initialize base pools, one per memory type.
-        for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
-            allocations[i] = std::make_unique<AllocationCollection>(this);
-            emptyAllocations[i] = true;
-        }
 
         if (usingMemoryExtensions) {
             fetchAllocFunctionPointersKHR();
         }
+
+        createAllocationMaps();
+    }
+
+    void Allocator::createAllocationMaps() {
+        allocations.emplace(AllocationSize::SMALL, std::vector<std::unique_ptr<AllocationCollection>>());
+        auto& small_allocs = allocations.at(AllocationSize::SMALL);
+        for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
+            small_allocs.emplace_back(std::make_unique<AllocationCollection>(this));
+        }
+        emptyAllocations.emplace(AllocationSize::SMALL, std::vector<bool>(GetMemoryTypeCount(), true));
+
+        allocations.emplace(AllocationSize::MEDIUM, std::vector<std::unique_ptr<AllocationCollection>>());
+        auto& med_allocs = allocations.at(AllocationSize::MEDIUM);
+        for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
+            med_allocs.emplace_back(std::make_unique<AllocationCollection>(this));
+        }
+        emptyAllocations.emplace(AllocationSize::MEDIUM, std::vector<bool>(GetMemoryTypeCount(), true));
+
+        allocations.emplace(AllocationSize::LARGE, std::vector<std::unique_ptr<AllocationCollection>>());
+        auto& large_allocs = allocations.at(AllocationSize::LARGE);
+        for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
+            large_allocs.emplace_back(std::make_unique<AllocationCollection>(this));
+        }
+        emptyAllocations.emplace(AllocationSize::LARGE, std::vector<bool>(GetMemoryTypeCount(), true));
+    }
+
+    void Allocator::clearAllocationMaps() {
+        /*
+        Delete collections: destructors of these should take care of the rest.
+        */
+        allocations.clear();
+        privateAllocations.clear();
+        emptyAllocations.clear();
     }
 
     Allocator::~Allocator() {
-
-        /*
-            Delete collections: destructors of these should take care of the rest.
-        */
-
-        allocations.clear();
-        privateAllocations.clear();
-        emptyAllocations.clear();
-        allocations.shrink_to_fit();
-        emptyAllocations.shrink_to_fit();
-
+        clearAllocationMaps();
     }
 
     void Allocator::Recreate() {
-
-        allocations.clear();
-        privateAllocations.clear();
-        emptyAllocations.clear();
-        allocations.shrink_to_fit();
-        emptyAllocations.shrink_to_fit();
-
-        allocations.resize(GetMemoryTypeCount());
-        emptyAllocations.resize(GetMemoryTypeCount());
-        // initialize base pools, one per memory type.
-        for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
-            allocations[i] = std::make_unique<AllocationCollection>(this);
-            emptyAllocations[i] = true;
-        }
-
+        clearAllocationMaps();
+        createAllocationMaps();
     }
 
     VkDeviceSize Allocator::GetPreferredBlockSize(const uint32_t& memory_type_idx) const noexcept {
         VkDeviceSize heapSize = deviceMemoryProperties.memoryHeaps[deviceMemoryProperties.memoryTypes[memory_type_idx].heapIndex].size;
         return (heapSize <= DefaultSmallHeapBlockSize) ? preferredSmallHeapBlockSize : preferredLargeHeapBlockSize;
+    }
+
+    Allocator::AllocationSize Allocator::GetAllocSize(const VkDeviceSize & size) const {
+        if (size > LargeBlockSingleAllocSize * 32) {
+            // Would take up half a large block - should probably make private
+            return AllocationSize::LARGE;
+        }
+        else if (size > MediumBlockSingleAllocSize) {
+            return AllocationSize::LARGE;
+        }
+        else if (size > SmallBlockSingleAllocSize) {
+            return AllocationSize::MEDIUM;
+        }
+        else {
+            return AllocationSize::SMALL;
+        }
     }
 
     VkDeviceSize Allocator::GetBufferImageGranularity() const noexcept {
@@ -109,7 +129,9 @@ namespace vpr {
         if (!memory_to_free->IsPrivateAllocation()) {
 
             type_idx = memory_to_free->MemoryTypeIdx();
-            auto& allocation_collection = allocations[type_idx];
+            // allocations binned vaguely by size, alongside type
+            const auto alloc_bin = GetAllocSize(memory_to_free->Size);
+            auto& allocation_collection = allocations.at(alloc_bin)[type_idx];
             
             auto* block = (*allocation_collection)[0];
             auto free_size = memory_to_free->Size;
@@ -127,12 +149,12 @@ namespace vpr {
             }
 
             if (block->Empty()) {
-                if (emptyAllocations[type_idx]) {
+                if (emptyAllocations.at(alloc_bin)[type_idx]) {
                     block->Destroy(this);
                     allocation_collection->RemoveBlock(block);
                 }
                 else {
-                    emptyAllocations[type_idx] = true;
+                    emptyAllocations.at(alloc_bin)[type_idx] = true;
                 }
             }
 
@@ -294,7 +316,9 @@ namespace vpr {
             }
         }
         else {
-            auto& alloc_collection = allocations[memory_type_idx];
+            const auto rec_alloc_bin = GetAllocSize(memory_reqs.size);
+
+            auto& alloc_collection = allocations.at(rec_alloc_bin)[memory_type_idx];
 
             // first, check existing allocations
             for (auto iter = alloc_collection->cbegin(); iter != alloc_collection->cend(); ++iter) {
@@ -302,7 +326,7 @@ namespace vpr {
                 const auto& block = *iter;
                 if (block->RequestSuballocation(GetBufferImageGranularity(), memory_reqs.size, memory_reqs.alignment, type, &request)) {
                     if (block->Empty()) {
-                        emptyAllocations[memory_type_idx] = false;
+                        emptyAllocations.at(rec_alloc_bin)[memory_type_idx] = false;
                     }
 
                     block->Allocate(request, type, memory_reqs.size);
@@ -331,6 +355,21 @@ namespace vpr {
             }
             else {
                 VkMemoryAllocateInfo alloc_info{ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO, nullptr, preferredBlockSize, memory_type_idx };
+
+                switch (rec_alloc_bin) {
+                case AllocationSize::LARGE:
+                    alloc_info.allocationSize = DefaultLargeHeapBlockSize;
+                    break;
+                case AllocationSize::MEDIUM:
+                    alloc_info.allocationSize = DefaultMediumHeapBlockSize;
+                    break;
+                case AllocationSize::SMALL:
+                    alloc_info.allocationSize = DefaultSmallHeapBlockSize;
+                    break;
+                default:
+                    throw std::domain_error("Somehow got to an invalid case in switch statement setting new allocation size: how did this occur?");
+                }
+                
                 VkDeviceMemory new_memory = VK_NULL_HANDLE;
                 VkResult result = vkAllocateMemory(parent->vkHandle(), &alloc_info, nullptr, &new_memory);
                 assert(result != VK_ERROR_OUT_OF_DEVICE_MEMORY); // make sure we're not over-allocating and using all device memory.
@@ -476,6 +515,8 @@ namespace vpr {
             return;
         }
     }
+
+ 
 
     void Allocator::fetchAllocFunctionPointersKHR() {
         

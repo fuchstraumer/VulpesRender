@@ -17,12 +17,17 @@ namespace vpr {
         DescriptorSet(const Device* parent);
         ~DescriptorSet();
 
+        DescriptorSet(DescriptorSet&& other) noexcept;
+        DescriptorSet& operator=(DescriptorSet&& other) noexcept;
+
         /** Sets the required image info for the descriptor at the given index. Make sure this is called appropriately for each call to AddDescriptorBinding
         */
-        void AddDescriptorInfo(const VkDescriptorImageInfo& info, const VkDescriptorType& type, const size_t& item_binding_idx);
+        void AddDescriptorInfo(VkDescriptorImageInfo info, const VkDescriptorType& type, const size_t& item_binding_idx);
         /** Functionally the same as AddDescriptorInfo with VkDescriptorImageInfo.  
         */
-        void AddDescriptorInfo(const VkDescriptorBufferInfo& info, const VkDescriptorType& descr_type, const size_t& item_binding_idx);
+        void AddDescriptorInfo(VkDescriptorBufferInfo info, const VkDescriptorType& descr_type, const size_t& item_binding_idx);
+        /* Add info a texel buffer. */
+        void AddDescriptorInfo(VkDescriptorBufferInfo info, const VkBufferView& view, const VkDescriptorType& type, const size_t& idx);
         /** Call after all descriptor bindings and infos required have been added, and make sure you have enough space in the given pool for all of these resources. */
         void Init(const DescriptorPool* parent_pool, const DescriptorSetLayout* set_layout);
         const VkDescriptorSet& vkHandle() const noexcept;
@@ -34,11 +39,13 @@ namespace vpr {
 
         const Device* device;
         const DescriptorPool* descriptorPool;
-        VkDescriptorSet descriptorSet;
+        VkDescriptorSet handle;
         bool updated = false;
         bool allocated = false;
         std::map<size_t, VkWriteDescriptorSet> writeDescriptors;
         std::map<size_t, VkDescriptorBufferInfo> bufferInfos;
+        std::map<size_t, VkDescriptorImageInfo> imageInfos;
+        std::map<size_t, VkBufferView> bufferViews;
     };
 
 }

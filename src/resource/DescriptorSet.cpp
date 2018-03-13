@@ -5,39 +5,55 @@
 #include "resource/DescriptorSetLayout.hpp"
 namespace vpr {
 
-    DescriptorSet::DescriptorSet(const Device * parent) : device(parent) { }
+    DescriptorSet::DescriptorSet(const Device * parent) : device(parent), handle(VK_NULL_HANDLE) { }
 
     DescriptorSet::~DescriptorSet() {
-        vkFreeDescriptorSets(device->vkHandle(), descriptorPool->vkHandle(), 1, &descriptorSet);
+        if (handle != VK_NULL_HANDLE) {
+            vkFreeDescriptorSets(device->vkHandle(), descriptorPool->vkHandle(), 1, &handle);
+        }
     }
 
-    void DescriptorSet::AddDescriptorInfo(const VkDescriptorImageInfo& info, const VkDescriptorType& type, const size_t& item_binding_idx) {
+    DescriptorSet::DescriptorSet(DescriptorSet&& other) noexcept : device(std::move(other.device)), handle(std::move(other.handle)),
+        descriptorPool(std::move(other.descriptorPool)), updated(std::move(other.updated)), allocated(std::move(other.allocated)),
+        writeDescriptors(std::move(other.writeDescriptors)), bufferInfos(std::move(other.bufferInfos)) { other.handle = VK_NULL_HANDLE; }
 
-        VkWriteDescriptorSet write_descriptor {
+    DescriptorSet& DescriptorSet::operator=(DescriptorSet&& other) noexcept {
+        device = std::move(other.device);
+        descriptorPool = std::move(other.descriptorPool);
+        handle = std::move(other.handle);
+        other.handle = VK_NULL_HANDLE;
+        updated = std::move(other.updated);
+        allocated = std::move(other.allocated);
+        writeDescriptors = std::move(other.writeDescriptors);
+        bufferInfos = std::move(other.bufferInfos);
+        return *this;
+    }
+    void DescriptorSet::AddDescriptorInfo(VkDescriptorImageInfo info, const VkDescriptorType& type, const size_t& item_binding_idx) {
+
+        imageInfos.emplace(item_binding_idx, std::move(info));
+        writeDescriptors.emplace(item_binding_idx, VkWriteDescriptorSet{
             VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
             nullptr,
-            descriptorSet,
+            handle,
             static_cast<uint32_t>(item_binding_idx),
             0,
             1,
             type,
-            &info,
+            &imageInfos.at(item_binding_idx),
             nullptr,
             nullptr,
-        };
-
-        writeDescriptors.insert(std::make_pair(item_binding_idx, write_descriptor));
+        });
 
     }
 
-    void DescriptorSet::AddDescriptorInfo(const VkDescriptorBufferInfo& info, const VkDescriptorType& descr_type, const size_t& item_binding_idx) {
+    void DescriptorSet::AddDescriptorInfo(VkDescriptorBufferInfo info, const VkDescriptorType& descr_type, const size_t& item_binding_idx) {
         
-        bufferInfos.insert(std::make_pair(item_binding_idx, info));
+        bufferInfos.emplace(item_binding_idx, std::move(info));
 
-        VkWriteDescriptorSet write_descriptor {
+        writeDescriptors.emplace(item_binding_idx, VkWriteDescriptorSet{
             VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
             nullptr,
-            descriptorSet,
+            handle,
             static_cast<uint32_t>(item_binding_idx),
             0,
             1,
@@ -45,10 +61,26 @@ namespace vpr {
             nullptr,
             &bufferInfos.at(item_binding_idx),
             nullptr,
-        };
+        });
+    }
 
-        writeDescriptors.insert(std::make_pair(item_binding_idx, write_descriptor));
+    void DescriptorSet::AddDescriptorInfo(VkDescriptorBufferInfo info, const VkBufferView & view, const VkDescriptorType & type, const size_t & idx) {
 
+        bufferInfos.emplace(idx, std::move(info));
+        bufferViews.emplace(idx, view);
+
+        writeDescriptors.emplace(idx, VkWriteDescriptorSet{
+            VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            nullptr,
+            handle,
+            static_cast<uint32_t>(idx),
+            0,
+            1,
+            type,
+            nullptr,
+            &bufferInfos.at(idx),
+            &bufferViews.at(idx)
+        });
     }
 
     void DescriptorSet::Init(const DescriptorPool * parent_pool, const DescriptorSetLayout* set_layout) {
@@ -67,7 +99,7 @@ namespace vpr {
         alloc_info.descriptorSetCount = 1;
         alloc_info.pSetLayouts = &set_layout->vkHandle();
 
-        VkResult result = vkAllocateDescriptorSets(device->vkHandle(), &alloc_info, &descriptorSet);
+        VkResult result = vkAllocateDescriptorSets(device->vkHandle(), &alloc_info, &handle);
         VkAssert(result);
         allocated = true;
 
@@ -81,12 +113,15 @@ namespace vpr {
 
         for (const auto& entry : writeDescriptors) {
             write_descriptors.push_back(entry.second);
-            write_descriptors.back().dstSet = descriptorSet;
+            write_descriptors.back().dstSet = handle;
             if (entry.second.pBufferInfo != nullptr) {
                 write_descriptors.back().pBufferInfo = entry.second.pBufferInfo;
             }
             if (entry.second.pImageInfo != nullptr) {
                 write_descriptors.back().pImageInfo = entry.second.pImageInfo;
+            }
+            if (entry.second.pTexelBufferView != nullptr) {
+                write_descriptors.back().pTexelBufferView = entry.second.pTexelBufferView;
             }
         }
 
@@ -97,7 +132,7 @@ namespace vpr {
     }
 
     const VkDescriptorSet & DescriptorSet::vkHandle() const noexcept {
-        return descriptorSet;
+        return handle;
     }
 
 }

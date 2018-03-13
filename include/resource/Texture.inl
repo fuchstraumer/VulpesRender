@@ -1,10 +1,14 @@
 namespace vpr {
 
+#ifndef  _MSC_VER
+    // This forward declaration is required for clang/gcc
     template<>
     inline void Texture<texture_2d_t>::updateTextureParameters(const texture_2d_t& txdata);
-    
+#endif // ! _MSC_VER
+
     template<typename texture_type>
-    inline Texture<texture_type>::Texture(const Device * _parent, const VkImageUsageFlags & flags) : Image(_parent), sampler(VK_NULL_HANDLE) {
+    inline Texture<texture_type>::Texture(const Device * _parent, const VkImageUsageFlags & flags) : Image(_parent), sampler(VK_NULL_HANDLE),
+        stagingBuffer(VK_NULL_HANDLE) {
         createInfo = vk_image_create_info_base;
         createInfo.usage = flags;
     }
@@ -85,7 +89,7 @@ namespace vpr {
         vkCmdPipelineBarrier(transfer_cmd_buffer, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier0);
         assert(!copyInfo.empty());
         vkCmdCopyBufferToImage(transfer_cmd_buffer, stagingBuffer, handle, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, static_cast<uint32_t>(copyInfo.size()), copyInfo.data());
-        //vkCmdPipelineBarrier(transfer_cmd_buffer, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier1);
+        vkCmdPipelineBarrier(transfer_cmd_buffer, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_VERTEX_SHADER_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier1);
 
     }
 
@@ -176,6 +180,8 @@ namespace vpr {
     template<typename texture_type>
     inline void Texture<texture_type>::createSampler() {
         VkSamplerCreateInfo sampler_create_info = vk_sampler_create_info_base;
+        sampler_create_info.addressModeU = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+        sampler_create_info.addressModeV = VK_SAMPLER_ADDRESS_MODE_REPEAT;
         VkResult result = vkCreateSampler(parent->vkHandle(), &sampler_create_info, nullptr, &sampler);
         VkAssert(result);
     }

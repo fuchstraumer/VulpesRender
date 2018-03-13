@@ -55,7 +55,7 @@ namespace vpr {
 
         createInfo.queueCreateInfoCount = static_cast<uint32_t>(queue_infos.size());
         createInfo.pQueueCreateInfos = queue_infos.data();
-        createInfo.pEnabledFeatures = &parent->Features;
+        createInfo.pEnabledFeatures = &parent->GetFeatures();
 
         VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, nullptr, &handle);
         VkAssert(result);
@@ -112,7 +112,7 @@ namespace vpr {
         QueueFamilyIndices.Graphics = parent->GetQueueFamilyIndex(VK_QUEUE_GRAPHICS_BIT);
         auto create_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_GRAPHICS_BIT));
         create_info.queueFamilyIndex = QueueFamilyIndices.Graphics;
-        NumGraphicsQueues = create_info.queueCount;
+        NumGraphicsQueues = 1;
         queue_priorities.graphics = std::vector<float>(NumGraphicsQueues, 1.0f);
         create_info.pQueuePriorities = queue_priorities.graphics.data();
         queueInfos.insert(std::make_pair(VK_QUEUE_GRAPHICS_BIT, create_info));
@@ -227,21 +227,23 @@ namespace vpr {
     }
 
     VkQueue Device::TransferQueue(const uint32_t & idx) const{
-
-        LOG_IF(QueueFamilyIndices.Compute == QueueFamilyIndices.Graphics, INFO) << "Retrieving queue that supports transfer ops, but isn't dedicated transfer queue.";
-
-        assert(idx < NumTransferQueues);
+        static bool logged_warning = false;
+        if ((QueueFamilyIndices.Transfer == QueueFamilyIndices.Graphics) && !logged_warning) {
+            LOG(WARNING) << "Retrieving queue that supports transfer ops, but isn't dedicated transfer queue. This warning is only issued once - but retrieval is likely occuring multiple times.";
+            logged_warning = true;
+        }
         VkQueue result;
         vkGetDeviceQueue(vkHandle(), QueueFamilyIndices.Transfer, idx, &result);
-        assert(result != VK_NULL_HANDLE);
         return result;
 
     }
 
     VkQueue Device::ComputeQueue(const uint32_t & idx) const{
-
-        LOG_IF(QueueFamilyIndices.Compute == QueueFamilyIndices.Graphics, INFO) << "Retrieving queue that supports compute ops, but isn't dedicated compute queue.";
-        assert(idx < NumComputeQueues);
+        static bool logged_warning = false;
+        if ((QueueFamilyIndices.Compute == QueueFamilyIndices.Graphics) && !logged_warning) {
+            LOG(WARNING) << "Retrieving queue that supports compute ops, but isn't dedicated compute queue. This warning is only issued once - but retrieval is likely occuring multiple times.";
+            logged_warning = true;
+        }
         VkQueue result;
         vkGetDeviceQueue(vkHandle(), QueueFamilyIndices.Compute, idx, &result);
         return result;
@@ -256,8 +258,6 @@ namespace vpr {
         }
 
         LOG_IF(QueueFamilyIndices.Compute == QueueFamilyIndices.Graphics, INFO) << "Retrieving queue that supports sparse binding, but isn't dedicated sparse binding queue.";
-
-        assert(idx < NumSparseBindingQueues);
         VkQueue result;
         vkGetDeviceQueue(handle, QueueFamilyIndices.SparseBinding, idx, &result);
         return result;
@@ -272,7 +272,10 @@ namespace vpr {
         }
         else {
             // Check that the device at least supports the desired features for linear tiling
-            assert(properties.linearTilingFeatures & flags);
+            if (!(properties.linearTilingFeatures & flags)) {
+                LOG(ERROR) << "Could not retrieve VkImageTiling mode for format, indicating that the format is probably not supported on the current device!";
+                throw std::runtime_error("Requested format is likely not supported on current device!");
+            }
             return VK_IMAGE_TILING_LINEAR;
         }
     }
@@ -297,16 +300,12 @@ namespace vpr {
         return FindSupportedFormat(format_options.data(), format_options.size(), VK_IMAGE_TILING_OPTIMAL, VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
     }
 
-    VkFormat Device::GetSwapchainColorFormat() const {
-        return VK_FORMAT_B8G8R8A8_UNORM;
-    }
-
     uint32_t Device::GetMemoryTypeIdx(const uint32_t & type_bitfield, const VkMemoryPropertyFlags & property_flags, VkBool32 * memory_type_found) const{
         return parent->GetMemoryTypeIdx(type_bitfield, property_flags, memory_type_found);
     }
 
     uint32_t Device::GetPhysicalDeviceID() const noexcept{
-        return parent->Properties.deviceID;
+        return parent->GetProperties().deviceID;
     }
 
     const PhysicalDevice & Device::GetPhysicalDevice() const noexcept{
@@ -314,11 +313,11 @@ namespace vpr {
     }
 
     VkPhysicalDeviceProperties Device::GetPhysicalDeviceProperties() const noexcept {
-        return parent->Properties;
+        return parent->GetProperties();
     }
 
     VkPhysicalDeviceMemoryProperties Device::GetPhysicalDeviceMemoryProperties() const noexcept {
-        return parent->MemoryProperties;
+        return parent->GetMemoryProperties();
     }
 
     bool Device::HasDedicatedComputeQueues() const {

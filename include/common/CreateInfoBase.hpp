@@ -313,8 +313,8 @@ namespace vpr {
 		VK_FALSE, // Don't want to do this, discards certain fragments. Useful for shadow maps, mainly.
 		VK_FALSE, // If set to true this stage is disabled.
 		VK_POLYGON_MODE_FILL, 
-		VK_CULL_MODE_NONE,
-		VK_FRONT_FACE_CLOCKWISE,
+		VK_CULL_MODE_BACK_BIT,
+        VK_FRONT_FACE_COUNTER_CLOCKWISE,
 		VK_FALSE,
 		0.0f,
 		0.0f,
@@ -395,7 +395,7 @@ namespace vpr {
 		0,
 		VK_SAMPLE_COUNT_1_BIT,
 		VK_FALSE,
-		0.25f, 
+		0.0f, 
 		nullptr, 
 		VK_FALSE,
 		VK_FALSE,

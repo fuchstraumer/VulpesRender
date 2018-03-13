@@ -1,12 +1,8 @@
 #pragma once
 #ifndef VULPES_VK_FRAMEBUFFER_H
 #define VULPES_VK_FRAMEBUFFER_H
-
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
-#include "resource/Image.hpp"
-#include "core/LogicalDevice.hpp"
-
 
 namespace vpr {
     /** The Framebuffer class merely handles constructing an appropriate framebuffer for the current rendering context. It is

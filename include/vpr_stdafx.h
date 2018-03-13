@@ -1,6 +1,4 @@
 #pragma once
-// Push this only for external libraries.
-#pragma warning(push, 0)
 #ifdef _WIN32
 #define NOMINMAX
 #endif //!_WIN32
@@ -41,7 +39,6 @@
 
 #define GLFW_INCLUDE_VULKAN
 
-#pragma warning(pop)
 
 #include "common/CreateInfoBase.hpp"
 #include "common/vkAssert.hpp"

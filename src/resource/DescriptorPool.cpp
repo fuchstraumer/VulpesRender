@@ -19,14 +19,28 @@ namespace vpr {
         VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT
     };
 
-    DescriptorPool::DescriptorPool(const Device * _device, const size_t & max_sets) : device(_device), maxSets(max_sets) {
+    DescriptorPool::DescriptorPool(const Device * _device, const size_t & max_sets) : device(_device), maxSets(max_sets), handle(VK_NULL_HANDLE) {
         for (const auto& type : descriptor_types) {
             resourceTypes[type] = 0;
         }
     }
 
     DescriptorPool::~DescriptorPool() {
-        vkDestroyDescriptorPool(device->vkHandle(), handle, nullptr);
+        if (handle != VK_NULL_HANDLE) {
+            vkDestroyDescriptorPool(device->vkHandle(), handle, nullptr);
+        }
+    }
+
+    DescriptorPool::DescriptorPool(DescriptorPool&& other) noexcept : device(std::move(other.device)), handle(std::move(other.handle)),
+        maxSets(std::move(other.maxSets)), resourceTypes(std::move(other.resourceTypes)) { other.handle = VK_NULL_HANDLE; }
+
+    DescriptorPool& DescriptorPool::operator=(DescriptorPool&& other) noexcept {
+        device = std::move(other.device);
+        handle = std::move(other.handle);
+        other.handle = VK_NULL_HANDLE;
+        maxSets = std::move(other.maxSets);
+        resourceTypes = std::move(other.resourceTypes);
+        return *this;
     }
 
     void DescriptorPool::AddResourceType(const VkDescriptorType & descriptor_type, const uint32_t & descriptor_count) {

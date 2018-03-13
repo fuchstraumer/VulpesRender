@@ -1,125 +1,67 @@
 #include "vpr_stdafx.h"
 #include "core/PhysicalDevice.hpp"
 #include "util/easylogging++.h"
-
-bool check_required_features(const VkPhysicalDeviceFeatures& req, const VkPhysicalDeviceFeatures& supported) {
-    if (req.robustBufferAccess) {
-        return supported.robustBufferAccess;
-    }
-    if (req.fullDrawIndexUint32) {
-        return supported.fullDrawIndexUint32;
-    }
-    if (req.imageCubeArray) {
-        return supported.imageCubeArray;
-    }
-    if (req.independentBlend) {
-        return supported.independentBlend;
-    }
-    if (req.geometryShader) {
-        return supported.geometryShader;
-    }
-    if (req.tessellationShader) {
-        return supported.tessellationShader;
-    }
-    if (req.sampleRateShading) {
-        return supported.sampleRateShading;
-    }
-    if (req.dualSrcBlend) {
-        return supported.dualSrcBlend;
-    }
-    if (req.logicOp) {
-        return supported.logicOp;
-    }
-    if (req.multiDrawIndirect) {
-        return supported.multiDrawIndirect;
-    }
-    if (req.drawIndirectFirstInstance) {
-        return supported.drawIndirectFirstInstance;
-    }
-    if (req.depthClamp) {
-        return supported.depthClamp;
-    }
-    if (req.depthBiasClamp) {
-        return supported.depthBiasClamp;
-    }
-    if (req.fillModeNonSolid) {
-        return supported.fillModeNonSolid;
-    }
-    if (req.depthBounds) {
-        return supported.depthBounds;
-    }
-    if (req.wideLines) {
-        return supported.wideLines;
-    }
-    if (req.largePoints) {
-        return supported.largePoints;
-    }
-    if (req.alphaToOne) {
-        return supported.alphaToOne;
-    }
-    if (req.multiViewport) {
-        return supported.multiViewport;
-    }
-    if (req.samplerAnisotropy) {
-        return supported.samplerAnisotropy;
-    }
-    if (req.textureCompressionETC2) {
-        return supported.textureCompressionETC2;
-    }
-    return true;
-}
+#include <set>
 
 namespace vpr {
 
-    PhysicalDevice::PhysicalDevice(const VkInstance& instance_handle) {
+    static std::map<int32_t, VkPhysicalDevice> physicalDevices;
 
-        handle = std::move(getBestDevice(instance_handle));
-
-        getAttributes();
-        retrieveQueueFamilyProperties();
-
+    // Gets best available physical device and removes it from the map, as it's no longer available.
+    static VkPhysicalDevice GetBestAvailPhysicalDevice() {
+        auto best_device = (physicalDevices.rbegin());
+        VkPhysicalDevice result = best_device->second;
+        physicalDevices.erase(best_device->first);
+        return result;
     }
 
-    PhysicalDevice::PhysicalDevice(const VkInstance& handle, const VkPhysicalDeviceFeatures& req_features) : 
-        handle(std::move(getBestDevice(handle))) {
-        
-        getAttributes();
-        if (check_required_features(req_features, Features)) {
-            LOG(ERROR) << "Current physical device doesn't support all required features!";
-            throw std::runtime_error("Incompatible physical device, features required are not available.");
-        }
-        retrieveQueueFamilyProperties();
-        
-    }
+    static inline int32_t ScoreDevice(const VkPhysicalDevice& dvc) {
 
-    void PhysicalDevice::getAttributes() noexcept {
-
-        vkGetPhysicalDeviceProperties(handle, &Properties);
-        vkGetPhysicalDeviceFeatures(handle, &Features);
-        vkGetPhysicalDeviceMemoryProperties(handle, &MemoryProperties);
-
-    }
-
-    void PhysicalDevice::retrieveQueueFamilyProperties() noexcept {
-
-        uint32_t queue_family_cnt = 0;
-        vkGetPhysicalDeviceQueueFamilyProperties(handle, &queue_family_cnt, nullptr);
-        queueFamilyProperties.resize(queue_family_cnt);
-        vkGetPhysicalDeviceQueueFamilyProperties(handle, &queue_family_cnt, queueFamilyProperties.data());
-
-    }
-
-    static inline uint32_t ScoreDevice(const VkPhysicalDevice& dvc) {
-
-        uint32_t score = 0;
+        int32_t score = 0;
         VkPhysicalDeviceFeatures features;
         VkPhysicalDeviceProperties properties;
         vkGetPhysicalDeviceFeatures(dvc, &features);
         vkGetPhysicalDeviceProperties(dvc, &properties);
 
-        if (!features.geometryShader || !features.tessellationShader) {
+        if (!features.geometryShader) {
+            score -= 1000;
+        }
+
+        if (!features.tessellationShader) {
+            score -= 1000;
+        }
+
+        if (!features.samplerAnisotropy) {
+            score -= 250;
+        }
+
+        if (!features.imageCubeArray) {
+            score -= 250;
+        }
+
+        if (!features.fullDrawIndexUint32) {
             score -= 500;
         }
+
+        if (features.multiDrawIndirect) {
+            score += 250;
+        }
+
+        if (features.textureCompressionETC2) {
+            score += 250;
+        }
+
+        if (features.textureCompressionASTC_LDR) {
+            score += 250;
+        }
+
+        score += (10 * properties.limits.maxBoundDescriptorSets);
+        score += (5 * ( 
+            properties.limits.maxPerStageDescriptorUniformBuffers +
+            properties.limits.maxPerStageDescriptorSampledImages +
+            properties.limits.maxPerStageDescriptorSamplers +
+            properties.limits.maxPerStageDescriptorStorageImages
+            ));
 
         if (properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
             score += 1000;
@@ -132,14 +74,14 @@ namespace vpr {
         };
 
         for (auto& sz : tex_sizes) {
-            score += sz / 100;
+            score += sz / 1000;
         }
 
         return score;
 
     }
 
-    VkPhysicalDevice PhysicalDevice::getBestDevice(const VkInstance & parent_instance) {
+    void PopulatePhysicalDeviceMap(const VkInstance & parent_instance) {
 
         // Enumerate devices.
         uint32_t dvc_cnt = 0;
@@ -147,33 +89,72 @@ namespace vpr {
         std::vector<VkPhysicalDevice> devices(dvc_cnt);
         vkEnumeratePhysicalDevices(parent_instance, &dvc_cnt, devices.data());
 
-        std::map<uint32_t, VkPhysicalDevice> physical_devices;
-
         for (const auto& dvc : devices) {
-            physical_devices.insert(std::make_pair(ScoreDevice(dvc), dvc));
+            physicalDevices.emplace(ScoreDevice(dvc), dvc);
         }
-
-        // Get best device handle.
-        uint32_t best_score = 0;
-        VkPhysicalDevice best_device = VK_NULL_HANDLE;
-
-        for (const auto& dvc_iter : physical_devices) {
-            if (dvc_iter.first > best_score) {
-                best_score = dvc_iter.first;
-                best_device = dvc_iter.second;
-            }
-        }
-
-        assert(best_score > 0 && best_device != VK_NULL_HANDLE);
-
-        return best_device;
 
     }
 
-    uint32_t PhysicalDevice::GetMemoryTypeIdx(const uint32_t & type_bitfield, const VkMemoryPropertyFlags & property_flags, VkBool32 * memory_type_found) const noexcept {
-        auto bitfield = type_bitfield;
 
-        for (uint32_t i = 0; i < MemoryProperties.memoryTypeCount; ++i) {
+    class PhysicalDeviceImpl {
+        PhysicalDeviceImpl(const PhysicalDeviceImpl&) = delete;
+        PhysicalDeviceImpl& operator=(const PhysicalDeviceImpl&) = delete;
+    public:
+
+        PhysicalDeviceImpl(const VkInstance& instance);
+        PhysicalDeviceImpl(PhysicalDeviceImpl&& other) noexcept;
+        PhysicalDeviceImpl& operator=(PhysicalDeviceImpl&& other) noexcept;
+        ~PhysicalDeviceImpl();
+
+        uint32_t GetMemoryTypeIdx(const uint32_t & type_bitfield, const VkMemoryPropertyFlags & property_flags, VkBool32 * memory_type_found) const noexcept;
+        
+        void getAttributes() noexcept;
+        void retrieveQueueFamilyProperties() noexcept;
+
+        uint32_t GetQueueFamilyIndex(const VkQueueFlagBits & queue_bits) const noexcept;
+
+        VkPhysicalDeviceProperties Properties;
+        VkPhysicalDeviceFeatures Features;
+        VkPhysicalDeviceMemoryProperties MemoryProperties;
+        VkPhysicalDeviceSubgroupProperties SubgroupProperties;
+        std::vector<VkQueueFamilyProperties> queueFamilyProperties;
+        VkPhysicalDevice handle;
+    };
+
+    PhysicalDeviceImpl::PhysicalDeviceImpl(const VkInstance& instance) {
+
+        if (physicalDevices.empty()) {
+            PopulatePhysicalDeviceMap(instance);
+        }
+
+        handle = GetBestAvailPhysicalDevice();
+
+        getAttributes();
+        retrieveQueueFamilyProperties();
+    }
+
+    PhysicalDeviceImpl::PhysicalDeviceImpl(PhysicalDeviceImpl && other) noexcept : Properties(std::move(other.Properties)), Features(std::move(other.Features)), MemoryProperties(std::move(other.MemoryProperties)),
+        queueFamilyProperties(std::move(other.queueFamilyProperties)), SubgroupProperties(std::move(other.SubgroupProperties)),
+        handle(std::move(other.handle)) { other.handle = VK_NULL_HANDLE; }
+
+    PhysicalDeviceImpl & PhysicalDeviceImpl::operator=(PhysicalDeviceImpl && other) noexcept {
+        Properties = std::move(other.Properties);
+        Features = std::move(other.Features);
+        MemoryProperties = std::move(other.MemoryProperties);
+        queueFamilyProperties = std::move(other.queueFamilyProperties);
+        SubgroupProperties = std::move(other.SubgroupProperties);
+        handle = std::move(other.handle);
+        return *this;
+    }
+
+    PhysicalDeviceImpl::~PhysicalDeviceImpl() {
+    }
+
+    uint32_t PhysicalDeviceImpl::GetMemoryTypeIdx(const uint32_t & type_bitfield, const VkMemoryPropertyFlags & property_flags, VkBool32 * memory_type_found) const noexcept {
+        auto bitfield = type_bitfield;
+        const uint32_t num_memory_types = MemoryProperties.memoryTypeCount;
+
+        for (uint32_t i = 0; i < num_memory_types; ++i) {
             if (bitfield & 1) {
                 // check if property flags match
                 if ((MemoryProperties.memoryTypes[i].propertyFlags & property_flags) == property_flags) {
@@ -188,10 +169,43 @@ namespace vpr {
 
         LOG(WARNING) << "Failed to find suitable memory type index.";
         return std::numeric_limits<uint32_t>::max();
-
     }
 
-    uint32_t PhysicalDevice::GetQueueFamilyIndex(const VkQueueFlagBits & bitfield) const noexcept {
+    PhysicalDevice::PhysicalDevice(const VkInstance& handle) : impl(std::make_unique<PhysicalDeviceImpl>(handle)) {}
+
+    PhysicalDevice::PhysicalDevice(PhysicalDevice && other) noexcept : impl(std::move(other.impl)) {
+        other.impl.reset();
+    }
+
+    PhysicalDevice & PhysicalDevice::operator=(PhysicalDevice && other) noexcept {
+        impl = std::move(other.impl);
+        other.impl.reset();
+        return *this;
+    }
+
+    PhysicalDevice::~PhysicalDevice() { }
+
+    void PhysicalDeviceImpl::getAttributes() noexcept {
+        vkGetPhysicalDeviceProperties(handle, &Properties);
+        vkGetPhysicalDeviceFeatures(handle, &Features);
+        vkGetPhysicalDeviceMemoryProperties(handle, &MemoryProperties);
+        VkPhysicalDeviceProperties2 properties2{ VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2, &SubgroupProperties, Properties };
+        vkGetPhysicalDeviceProperties2(handle, &properties2);
+    }
+
+    void PhysicalDeviceImpl::retrieveQueueFamilyProperties() noexcept {
+        uint32_t queue_family_cnt = 0;
+        vkGetPhysicalDeviceQueueFamilyProperties(handle, &queue_family_cnt, nullptr);
+        queueFamilyProperties.resize(queue_family_cnt);
+        vkGetPhysicalDeviceQueueFamilyProperties(handle, &queue_family_cnt, queueFamilyProperties.data());
+    }
+
+
+    uint32_t PhysicalDevice::GetMemoryTypeIdx(const uint32_t & type_bitfield, const VkMemoryPropertyFlags & property_flags, VkBool32 * memory_type_found) const noexcept {
+        return impl->GetMemoryTypeIdx(type_bitfield, property_flags, memory_type_found);
+    }
+
+    uint32_t PhysicalDeviceImpl::GetQueueFamilyIndex(const VkQueueFlagBits& bitfield) const noexcept {
         if (bitfield & VK_QUEUE_COMPUTE_BIT) {
             for (uint32_t i = 0; i < static_cast<uint32_t>(queueFamilyProperties.size()); ++i) {
                 if ((queueFamilyProperties[i].queueFlags & bitfield) && ((queueFamilyProperties[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) == 0)) {
@@ -218,6 +232,10 @@ namespace vpr {
         return std::numeric_limits<uint32_t>::max();
     }
 
+    uint32_t PhysicalDevice::GetQueueFamilyIndex(const VkQueueFlagBits & bitfield) const noexcept {
+        return impl->GetQueueFamilyIndex(bitfield);
+    }
+
     VkQueueFamilyProperties PhysicalDevice::GetQueueFamilyProperties(const VkQueueFlagBits & bitfield) const{
 
         uint32_t idx = GetQueueFamilyIndex(bitfield);
@@ -226,13 +244,29 @@ namespace vpr {
             return VkQueueFamilyProperties();
         }
         else {
-            return queueFamilyProperties[idx];
+            return impl->queueFamilyProperties[idx];
         }
         
     }
 
+    const VkPhysicalDeviceProperties & PhysicalDevice::GetProperties() const noexcept {
+        return impl->Properties;
+    }
+
+    const VkPhysicalDeviceFeatures & PhysicalDevice::GetFeatures() const noexcept {
+        return impl->Features;
+    }
+
+    const VkPhysicalDeviceMemoryProperties & PhysicalDevice::GetMemoryProperties() const noexcept {
+        return impl->MemoryProperties;
+    }
+
+    const VkPhysicalDeviceSubgroupProperties& PhysicalDevice::GetSubgroupProperties() const noexcept {
+        return impl->SubgroupProperties;
+    }
+
     const VkPhysicalDevice & PhysicalDevice::vkHandle() const noexcept{
-        return handle;
+        return impl->handle;
     }
 
 }

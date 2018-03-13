@@ -5,7 +5,9 @@
 
 namespace vpr {
 
-    ShaderModule::ShaderModule(const Device* device, const char * filename, const VkShaderStageFlagBits & _stages, const char * shader_name) : pipelineInfo(vk_pipeline_shader_stage_create_info_base), stages(_stages), createInfo(vk_shader_module_create_info_base), parent(device) {
+    ShaderModule::ShaderModule(const Device* device, const char * filename, const VkShaderStageFlagBits & _stages, const char * shader_name) : 
+        pipelineInfo(vk_pipeline_shader_stage_create_info_base), stages(_stages), createInfo(vk_shader_module_create_info_base), parent(device),
+        handle(VK_NULL_HANDLE) {
         
         pipelineInfo.stage = stages;
 
@@ -26,7 +28,9 @@ namespace vpr {
 
     }
 
-    ShaderModule::ShaderModule(const Device * device, const std::string & filename, const VkShaderStageFlagBits & _stages, const char * shader_entry_point) : pipelineInfo(vk_pipeline_shader_stage_create_info_base), stages(_stages), createInfo(vk_shader_module_create_info_base), parent(device) {
+    ShaderModule::ShaderModule(const Device * device, const std::string & filename, const VkShaderStageFlagBits & _stages, 
+        const char * shader_entry_point) : pipelineInfo(vk_pipeline_shader_stage_create_info_base), stages(_stages), 
+        createInfo(vk_shader_module_create_info_base), parent(device), handle(VK_NULL_HANDLE) {
         
         pipelineInfo.stage = stages;
 
@@ -46,7 +50,8 @@ namespace vpr {
         pipelineInfo.pSpecializationInfo = nullptr;
     }
 
-    ShaderModule::ShaderModule(const Device* device, const VkShaderStageFlagBits& stages, const uint32_t* binary_source, const uint32_t& len) {
+    ShaderModule::ShaderModule(const Device* device, const VkShaderStageFlagBits& stages, const uint32_t* binary_source, const uint32_t& len) :
+        parent(device), handle(VK_NULL_HANDLE) {
 
         createInfo = vk_shader_module_create_info_base;
         createInfo.codeSize = len;
@@ -61,10 +66,10 @@ namespace vpr {
 
     }
 
-    ShaderModule::ShaderModule(const Device * device, const char * filename, VkPipelineShaderStageCreateInfo & create_info) : pipelineInfo(create_info), createInfo(vk_shader_module_create_info_base), parent(device) {
+    ShaderModule::ShaderModule(const Device * device, const char * filename, VkPipelineShaderStageCreateInfo & create_info) : 
+        pipelineInfo(create_info), createInfo(vk_shader_module_create_info_base), parent(device), handle(VK_NULL_HANDLE) {
 
         LoadCodeFromFile(filename);
-
         VkResult result = vkCreateShaderModule(device->vkHandle(), &createInfo, allocators, &handle);
         VkAssert(result);
     }
@@ -99,16 +104,9 @@ namespace vpr {
         }
     }
 
-    ShaderModule::ShaderModule(ShaderModule && other) noexcept{
-        handle = std::move(other.handle);
-        stages = std::move(other.stages);
-        createInfo = std::move(other.createInfo);
-        pipelineInfo = std::move(other.pipelineInfo);
-        code = std::move(other.code);
-        codeSize = std::move(other.codeSize);
-        parent = std::move(other.parent);
-        other.handle = VK_NULL_HANDLE;
-    }
+    ShaderModule::ShaderModule(ShaderModule && other) noexcept : handle(std::move(other.handle)), stages(std::move(other.stages)), 
+        createInfo(std::move(other.createInfo)), pipelineInfo(std::move(other.pipelineInfo)), code(std::move(other.code)), 
+        codeSize(std::move(other.codeSize)), parent(std::move(other.parent)) { other.handle = VK_NULL_HANDLE; }
 
     ShaderModule & ShaderModule::operator=(ShaderModule && other) noexcept {
         handle = std::move(other.handle);

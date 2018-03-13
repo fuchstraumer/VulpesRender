@@ -129,7 +129,7 @@ namespace vpr {
     }
 
     void TransferPool::completeTransfer() const {   
-        VkResult result = vkWaitForFences(parent->vkHandle(), 1, &fence, VK_TRUE, 2e9);
+        VkResult result = vkWaitForFences(parent->vkHandle(), 1, &fence, VK_TRUE, static_cast<uint64_t>(2e9));
         VkAssert(result);
         result = vkResetFences(parent->vkHandle(), 1, &fence);
         vkResetCommandPool(parent->vkHandle(), handle, VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);

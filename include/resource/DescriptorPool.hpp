@@ -20,6 +20,9 @@ namespace vpr {
         DescriptorPool(const Device* device, const size_t& max_sets);
         ~DescriptorPool();
 
+        DescriptorPool(DescriptorPool&& other) noexcept;
+        DescriptorPool& operator=(DescriptorPool&& other) noexcept;
+
         /** Counts up the resources required by the given DescriptorSet instance, and adds them to the resourceTypes container for eventual allocation. 
         *   \todo Is this required? */
         void AddDescriptorSet(const DescriptorSet* descriptor_set);

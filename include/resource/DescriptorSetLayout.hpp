@@ -8,6 +8,14 @@
 
 namespace vpr {
 
+    /**Simple wrapper around the VkDescriptorSetLayout object. No explicit construction function: it is created
+     * when it is first used by calling vkHandle(). This class has been left copyable as it doesn't represent any
+     * underlying resources or allocations like the other descriptor set related objects.
+     * 
+     * Make sure to add bindings before calling vkHandle(), however, as I believe an empty set won't break anything
+     * but the validation layers should give warnings or errors regardless.
+     * \ingroup Resources
+     */
     class VPR_API DescriptorSetLayout {
     public:
 
