@@ -5,8 +5,8 @@
 #include "ForwardDecl.hpp"
 
 namespace vpr {
-    /** The Framebuffer class merely handles constructing an appropriate framebuffer for the current rendering context. It is
-    *   a relatively thin wrapper around a VkFramebuffer object, mostly just for the sake of RAII. Most important information on
+
+    /** The Framebuffer class merely handles lifetime of a VkFramebuffer object. All important information on
     *   how to setup this class is provided by the VkFramebufferCreateInfo struct in the constructor.
     *   \ingroup Rendering
     */

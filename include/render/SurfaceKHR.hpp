@@ -6,6 +6,13 @@
 
 namespace vpr {
 
+    /**
+     * The bare-minimum required to wrap a VkSurfaceKHR object. Uses the glfwCreateWindowSurface function
+     * to handle the various platform-specific details that would change otherwise.
+     * 
+     * Note that this class only works for non-fullscreen windows.
+     * \ingroup Rendering
+     */
     class VPR_API SurfaceKHR {
     public:
 

@@ -52,8 +52,8 @@ namespace vpr {
     };
 
     /** The GraphicsPipeline object is an RAII wrapper around a vkGraphicsPipeline object, handling construction and destruction
-    *   alone. Otherwise, the GraphicsPipelineInfo struct is the one worth the most attention due to how much it influences the 
-    *   created pipeline, and due to how complex it is.
+    *   alone. The GraphicsPipelineInfo structure is, truthfully, much more important and much complex than this class is.
+    *
     *   \ingroup Rendering
     */
     class VPR_API GraphicsPipeline {
@@ -67,7 +67,7 @@ namespace vpr {
         
         GraphicsPipeline(GraphicsPipeline&& other) noexcept;
         GraphicsPipeline& operator=(GraphicsPipeline&& other) noexcept;
-
+        
         void Init(VkGraphicsPipelineCreateInfo& create_info, const VkPipelineCache& cache = VK_NULL_HANDLE);
         void Destroy();
         const VkPipeline& vkHandle() const noexcept;

@@ -8,8 +8,7 @@ namespace vpr {
 
     /** This class abstracts away much of the detailed work and boilerplate code required to setup a swapchain in Vulkan. Init() only needs to be called once 
     *   during runtime: recreating the swapchain is easily accomplished using the appropriate recreation method. 
-    *   \todo Clean this up, update it for new coding standards/styles, and make more members private + add const access methods.
-    *   \ingroup Rendering.
+    *   \ingroup Rendering
     */
     class VPR_API Swapchain {
         Swapchain(const Swapchain&) = delete;

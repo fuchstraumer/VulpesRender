@@ -8,7 +8,8 @@
 namespace vpr {
 
     /** RAII wrapper around a Vulkan object, with a few utility methods to avoid redundancy and clutter in command-recording methods
-    *   for various scenes. 
+    *   for various scenes. Requires updating per-frame with the framebuffer being rendered to, and make sure to set both the render 
+    *   area and the clear values array after creating the object.
     *   \ingroup Rendering
     */
     class VPR_API Renderpass {
