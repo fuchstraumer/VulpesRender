@@ -19,11 +19,10 @@ namespace vpr {
 
     Buffer::Buffer(Buffer && other) noexcept : allocators(std::move(other.allocators)), size(std::move(other.size)), createInfo(std::move(other.createInfo)), 
         handle(std::move(other.handle)), memoryAllocation(std::move(other.memoryAllocation)), parent(std::move(other.parent)), 
-        MappedMemory(std::move(other.MappedMemory)), viewCreateInfo(std::move(other.viewCreateInfo)), view(std::move(other.view)) {
+        viewCreateInfo(std::move(other.viewCreateInfo)), view(std::move(other.view)) {
         // Make sure to nullify so destructor checks safer/more likely to succeed.
         other.handle = VK_NULL_HANDLE;
         other.view = VK_NULL_HANDLE;
-        other.MappedMemory = nullptr;
     }
 
     Buffer & Buffer::operator=(Buffer && other) noexcept {
@@ -33,11 +32,9 @@ namespace vpr {
         handle = std::move(other.handle);
         memoryAllocation = std::move(other.memoryAllocation);
         parent = std::move(other.parent);
-        MappedMemory = std::move(other.MappedMemory);
         view = std::move(other.view);
         viewCreateInfo = std::move(other.viewCreateInfo);
         other.handle = VK_NULL_HANDLE;
-        other.MappedMemory = nullptr;
         other.view = VK_NULL_HANDLE;
         return *this;
     }
@@ -84,10 +81,10 @@ namespace vpr {
         Map(offset);
 
         if (size == 0) {
-            memcpy(MappedMemory, data, static_cast<size_t>(Size()));
+            memcpy(mappedMemory, data, static_cast<size_t>(Size()));
         }
         else {
-            memcpy(MappedMemory, data, static_cast<size_t>(copy_size));
+            memcpy(mappedMemory, data, static_cast<size_t>(copy_size));
         }
 
         Unmap();
@@ -177,7 +174,7 @@ namespace vpr {
 
     void Buffer::Map(const VkDeviceSize& offset){
         assert(offset < memoryAllocation.Size);
-        VkResult result = vkMapMemory(parent->vkHandle(), memoryAllocation.Memory(), memoryAllocation.Offset() + offset, memoryAllocation.Size, 0, &MappedMemory);
+        VkResult result = vkMapMemory(parent->vkHandle(), memoryAllocation.Memory(), memoryAllocation.Offset() + offset, memoryAllocation.Size, 0, &mappedMemory);
         VkAssert(result);
     }
 
@@ -245,6 +242,10 @@ namespace vpr {
 
         stagingBuffers.clear(); 
         stagingBuffers.shrink_to_fit();
+    }
+
+    void Buffer::SetMappedMemory(void * mapping_destination) {
+        mappedMemory = mapping_destination;
     }
 
     void Buffer::createStagingBuffer(const VkDeviceSize & staging_size, VkBuffer & staging_buffer, Allocation& dest_memory_alloc){

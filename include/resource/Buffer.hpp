@@ -94,6 +94,8 @@ namespace vpr {
         */
         static void DestroyStagingResources(const Device* device);
 
+        void SetMappedMemory(void* mapping_destination);
+
         VkBufferUsageFlags Usage() const noexcept;
     protected:
 
@@ -110,6 +112,7 @@ namespace vpr {
         Allocation memoryAllocation;
         VkDeviceSize size;
         VkDeviceSize dataSize;
+        void* mappedMemory;
 
         void setDescriptorInfo() const noexcept;
         mutable bool descriptorInfoSet = false;
