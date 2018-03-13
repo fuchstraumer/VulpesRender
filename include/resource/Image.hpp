@@ -7,9 +7,8 @@
 
 namespace vpr {
 
-    /** Wraps the common image creation, transfer, and staging methods. Texture derives from this, and so does DepthStencil.
-    *   \ingroup Resources
-    *   \todo Check validity of default parameters, consider folding/cleaning up the static CreateImage methods 
+    /**Wraps the common image creation, transfer, and staging methods. Texture derives from this, and so does DepthStencil.
+    *  \ingroup Resources
     */
     class VPR_API Image {
         Image(const Image&) = delete;
