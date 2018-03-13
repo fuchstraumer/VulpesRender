@@ -38,7 +38,12 @@ namespace vpr {
         */
         void CreateBuffer(const VkBufferUsageFlags& usage_flags, const VkMemoryPropertyFlags& memory_flags, const VkDeviceSize& size);
 
+        /** Creates underlying handles and binds a memory region from the allocator subsystem, but takes a VkBufferCreatInfo
+         *  structure containing all the relevant required setup information.
+         */
         void CreateBuffer(const VkBufferCreateInfo& create_info, const VkMemoryPropertyFlags& memory_flags);
+        /** Destroys handles belonging to this object and attempts to free/unbind the memory region it used.
+         */
         void Destroy();
 
         /** Maps this object, copies data to this object, then ensures to unmap this object.
@@ -47,6 +52,10 @@ namespace vpr {
         *   \param offset: destination offset, but can be set to 0 if copying to the front of the buffer or if the copy size is equivalent to the buffer's total size.
         */
         void CopyToMapped(const void* data, const VkDeviceSize& size, const VkDeviceSize& offset);
+        /**Copys the data pointed to by the relevant parameter into a staging buffer, then records commands copying data from the staging object
+         * into the destination object. The lifetime of the staging buffer will persist after the command is submitted: make sure to call FreeStagingBuffers()
+         * somewhat frequently, in order to ensure that excess host-side memory isn't being occupied/used.
+         */
         void CopyTo(const void* data, const VkCommandBuffer & transfer_cmd, const VkDeviceSize& copy_size, const VkDeviceSize& copy_offset);
         /** Copies data using a single command buffer submission form the given pool to the given queue. Attempt to use a transfer-specialized queue when available.
         *   \deprecated Use the other CopyTo method that accepts a command buffer instead of this one: using a single command buffer submission like this method does
@@ -54,9 +63,13 @@ namespace vpr {
         */
         void CopyTo(const void* data, CommandPool* cmd_pool, const VkQueue & transfer_queue, const VkDeviceSize& size, const VkDeviceSize& offset);
 
-        /** Updates the buffer, as it says on the tin. An important note, however, is that this can NOT be called in an active renderpass (part of the Vulkan spec, unfortunately).
+        /**Used to update a sub-region of the buffer. Cannot be called in an active renderpass.
         */
         void Update(const VkCommandBuffer& cmd, const VkDeviceSize& data_sz, const VkDeviceSize& offset, const void* data);
+
+        /**Fills buffer with given value.
+         */
+        void Fill(const VkCommandBuffer& cmd, const VkDeviceSize sz, const VkDeviceSize offset, const uint32_t value);
 
         VkBufferMemoryBarrier CreateMemoryBarrier(VkAccessFlags src, VkAccessFlags dst, uint32_t src_idx, uint32_t dst_idx, VkDeviceSize sz) const;
 
@@ -71,11 +84,6 @@ namespace vpr {
         const VkDescriptorBufferInfo& GetDescriptor() const noexcept;
 
         VkDeviceSize Size() const noexcept;
-        // Due to alignment requirements, the size reported by Size() might not reflect the size of the data uploaded.
-        // Use this when we are checking against data uploaded (for changes)
-        VkDeviceSize InitDataSize() const noexcept;
-
-        void* MappedMemory = nullptr;
 
         /** Creates a staging buffer of given size, using the given (hopefully not used) VkBuffer handle and updating the members of the given Allocation struct.
         *   Adds both of those objects to a static pool, so that they can be cleaned up together independent of individual object scopes and lifetimes.

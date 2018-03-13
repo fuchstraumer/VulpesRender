@@ -140,10 +140,28 @@ namespace vpr {
     }
 
     void Buffer::Update(const VkCommandBuffer & cmd, const VkDeviceSize & data_sz, const VkDeviceSize & offset, const void * data) {
-        vkCmdUpdateBuffer(cmd, handle, memoryAllocation.Offset() + offset, data_sz, data);
+        vkCmdUpdateBuffer(cmd, handle, offset, data_sz, data);
+    }
+
+    void Buffer::Fill(const VkCommandBuffer& cmd, const VkDeviceSize sz, const VkDeviceSize offset, const uint32_t value) {
+        #ifdef NDEBUG
+        if (offset % 4 != 0) {
+            LOG(ERROR) << "Supplied offset value to Buffer fill command is not a multiple of 4, and is as such not valid!";
+        }
+
+        if ((sz % 4 != 0) && (sz != Size())) {
+            LOG(ERROR) << "Size of fill operation supplied to Buffer fill command is both not a multiple of 4 and wouldn't fill the whole buffer!";
+        }
+        #endif
+        vkCmdFillBuffer(cmd, handle, offset, sz, value);
     }
 
     VkBufferMemoryBarrier Buffer::CreateMemoryBarrier(VkAccessFlags src, VkAccessFlags dst, uint32_t src_idx, uint32_t dst_idx, VkDeviceSize sz) const {
+        
+        if ((src_idx != dst_idx) && (createInfo.sharingMode == VK_SHARING_MODE_EXCLUSIVE)) {
+            LOG(WARNING) << "Created a memory barrier for a buffer with different source/destination queues, but the buffer has sharing mode VK_SHARING_MODE_EXCLUSIVE!";
+        }
+        
         return VkBufferMemoryBarrier{ VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER, nullptr, src, dst, src_idx, dst_idx, 
             handle, memoryAllocation.Offset(), sz };
     }
@@ -194,11 +212,7 @@ namespace vpr {
     VkDeviceSize Buffer::Size() const noexcept{
         return size;
     }
-
-    VkDeviceSize Buffer::InitDataSize() const noexcept {
-        return dataSize;
-    }
-
+    
     void Buffer::CreateStagingBuffer(const Device * dvc, const VkDeviceSize & size, VkBuffer & dest, Allocation& dest_memory_alloc){
         
         VkBufferCreateInfo create_info = vk_buffer_create_info_base;
