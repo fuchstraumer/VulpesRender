@@ -9,18 +9,23 @@
 namespace vpr {
 
     /**Simple wrapper around the VkDescriptorSetLayout object. No explicit construction function: it is created
-     * when it is first used by calling vkHandle(). This class has been left copyable as it doesn't represent any
-     * underlying resources or allocations like the other descriptor set related objects.
+     * when it is first used by calling vkHandle(). Make sure to add bindings before calling vkHandle(), however, 
+     * as I believe an empty set won't break anything  but the validation layers should give warnings or errors 
+     * if it's not done for valid reasons.
      * 
-     * Make sure to add bindings before calling vkHandle(), however, as I believe an empty set won't break anything
-     * but the validation layers should give warnings or errors regardless.
+     * Empty sets can be required if you have shaders that use descriptors at bindings 1 and 3, for example, as
+     * you will still then need to pass an array of 3 set layouts to the function for binding descriptor sets.
      * \ingroup Resources
      */
     class VPR_API DescriptorSetLayout {
+        DescriptorSetLayout(const DescriptorSetLayout&) = delete;
+        DescriptorSetLayout& operator=(const DescriptorSetLayout&) = delete;
     public:
 
         DescriptorSetLayout(const Device* _dvc);
         ~DescriptorSetLayout();
+        DescriptorSetLayout(DescriptorSetLayout&& other) noexcept;
+        DescriptorSetLayout& operator=(DescriptorSetLayout&& other) noexcept;
 
         /** Specifies that a descriptor of the given type be accessible from the given stage, and sets the index it will be accessed at in the shader.
         */
