@@ -44,7 +44,7 @@ namespace vpr {
         const VkPhysicalDeviceProperties& GetProperties() const noexcept;
         const VkPhysicalDeviceFeatures& GetFeatures() const noexcept;
         const VkPhysicalDeviceMemoryProperties& GetMemoryProperties() const noexcept;
-
+        const VkPhysicalDeviceSubgroupProperties& GetSubgroupProperties() const noexcept;
 
     private:
 

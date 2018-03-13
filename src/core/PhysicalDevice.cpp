@@ -116,6 +116,7 @@ namespace vpr {
         VkPhysicalDeviceProperties Properties;
         VkPhysicalDeviceFeatures Features;
         VkPhysicalDeviceMemoryProperties MemoryProperties;
+        VkPhysicalDeviceSubgroupProperties SubgroupProperties;
         std::vector<VkQueueFamilyProperties> queueFamilyProperties;
         VkPhysicalDevice handle;
     };
@@ -133,13 +134,15 @@ namespace vpr {
     }
 
     PhysicalDeviceImpl::PhysicalDeviceImpl(PhysicalDeviceImpl && other) noexcept : Properties(std::move(other.Properties)), Features(std::move(other.Features)), MemoryProperties(std::move(other.MemoryProperties)),
-        queueFamilyProperties(std::move(other.queueFamilyProperties)), handle(std::move(other.handle)) { other.handle = VK_NULL_HANDLE; }
+        queueFamilyProperties(std::move(other.queueFamilyProperties)), SubgroupProperties(std::move(other.SubgroupProperties)),
+        handle(std::move(other.handle)) { other.handle = VK_NULL_HANDLE; }
 
     PhysicalDeviceImpl & PhysicalDeviceImpl::operator=(PhysicalDeviceImpl && other) noexcept {
         Properties = std::move(other.Properties);
         Features = std::move(other.Features);
         MemoryProperties = std::move(other.MemoryProperties);
         queueFamilyProperties = std::move(other.queueFamilyProperties);
+        SubgroupProperties = std::move(other.SubgroupProperties);
         handle = std::move(other.handle);
         return *this;
     }
@@ -186,6 +189,8 @@ namespace vpr {
         vkGetPhysicalDeviceProperties(handle, &Properties);
         vkGetPhysicalDeviceFeatures(handle, &Features);
         vkGetPhysicalDeviceMemoryProperties(handle, &MemoryProperties);
+        VkPhysicalDeviceProperties2 properties2{ VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2, &SubgroupProperties, Properties };
+        vkGetPhysicalDeviceProperties2(handle, &properties2);
     }
 
     void PhysicalDeviceImpl::retrieveQueueFamilyProperties() noexcept {
@@ -254,6 +259,10 @@ namespace vpr {
 
     const VkPhysicalDeviceMemoryProperties & PhysicalDevice::GetMemoryProperties() const noexcept {
         return impl->MemoryProperties;
+    }
+
+    const VkPhysicalDeviceSubgroupProperties& PhysicalDevice::GetSubgroupProperties() const noexcept {
+        return impl->SubgroupProperties;
     }
 
     const VkPhysicalDevice & PhysicalDevice::vkHandle() const noexcept{
