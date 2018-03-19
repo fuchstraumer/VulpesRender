@@ -25,16 +25,20 @@ namespace vpr {
     
     void DescriptorSetLayout::AddDescriptorBinding(const VkDescriptorType& descriptor_type, const VkShaderStageFlags& shader_stage, const uint32_t& descriptor_binding_loc) noexcept {
         
-        VkDescriptorSetLayoutBinding new_binding {
+        
+
+        bindings.emplace(descriptor_binding_loc, VkDescriptorSetLayoutBinding{
             descriptor_binding_loc,
             descriptor_type,
             1,
             VkShaderStageFlags(shader_stage),
             nullptr
-        };
+        });
 
-        bindings.insert(std::make_pair(descriptor_binding_loc, new_binding));
+    }
 
+    void DescriptorSetLayout::AddDescriptorBinding(const VkDescriptorSetLayoutBinding& binding) {
+        bindings.emplace(binding.binding, binding);
     }
 
     const VkDescriptorSetLayout& DescriptorSetLayout::vkHandle() const noexcept {
