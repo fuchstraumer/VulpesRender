@@ -14,3 +14,5 @@ fixes\.yaml
 ext/include/GLFW/
 
 download/glfw/src/glfw3-stamp/RelWithDebInfo/glfw3-mkdir
+
+\.vscode/c_cpp_properties\.json

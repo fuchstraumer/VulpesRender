@@ -189,8 +189,11 @@ namespace vpr {
         vkGetPhysicalDeviceProperties(handle, &Properties);
         vkGetPhysicalDeviceFeatures(handle, &Features);
         vkGetPhysicalDeviceMemoryProperties(handle, &MemoryProperties);
+        /*
+        SubgroupProperties = VkPhysicalDeviceSubgroupProperties{ VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES, nullptr };
         VkPhysicalDeviceProperties2 properties2{ VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2, &SubgroupProperties, Properties };
         vkGetPhysicalDeviceProperties2(handle, &properties2);
+        */
     }
 
     void PhysicalDeviceImpl::retrieveQueueFamilyProperties() noexcept {

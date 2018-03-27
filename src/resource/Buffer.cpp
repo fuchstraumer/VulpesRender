@@ -19,11 +19,10 @@ namespace vpr {
 
     Buffer::Buffer(Buffer && other) noexcept : allocators(std::move(other.allocators)), size(std::move(other.size)), createInfo(std::move(other.createInfo)), 
         handle(std::move(other.handle)), memoryAllocation(std::move(other.memoryAllocation)), parent(std::move(other.parent)), 
-        MappedMemory(std::move(other.MappedMemory)), viewCreateInfo(std::move(other.viewCreateInfo)), view(std::move(other.view)) {
+        viewCreateInfo(std::move(other.viewCreateInfo)), view(std::move(other.view)) {
         // Make sure to nullify so destructor checks safer/more likely to succeed.
         other.handle = VK_NULL_HANDLE;
         other.view = VK_NULL_HANDLE;
-        other.MappedMemory = nullptr;
     }
 
     Buffer & Buffer::operator=(Buffer && other) noexcept {
@@ -33,11 +32,9 @@ namespace vpr {
         handle = std::move(other.handle);
         memoryAllocation = std::move(other.memoryAllocation);
         parent = std::move(other.parent);
-        MappedMemory = std::move(other.MappedMemory);
         view = std::move(other.view);
         viewCreateInfo = std::move(other.viewCreateInfo);
         other.handle = VK_NULL_HANDLE;
-        other.MappedMemory = nullptr;
         other.view = VK_NULL_HANDLE;
         return *this;
     }
@@ -84,10 +81,10 @@ namespace vpr {
         Map(offset);
 
         if (size == 0) {
-            memcpy(MappedMemory, data, static_cast<size_t>(Size()));
+            memcpy(mappedMemory, data, static_cast<size_t>(Size()));
         }
         else {
-            memcpy(MappedMemory, data, static_cast<size_t>(copy_size));
+            memcpy(mappedMemory, data, static_cast<size_t>(copy_size));
         }
 
         Unmap();
@@ -140,10 +137,28 @@ namespace vpr {
     }
 
     void Buffer::Update(const VkCommandBuffer & cmd, const VkDeviceSize & data_sz, const VkDeviceSize & offset, const void * data) {
-        vkCmdUpdateBuffer(cmd, handle, memoryAllocation.Offset() + offset, data_sz, data);
+        vkCmdUpdateBuffer(cmd, handle, offset, data_sz, data);
+    }
+
+    void Buffer::Fill(const VkCommandBuffer& cmd, const VkDeviceSize sz, const VkDeviceSize offset, const uint32_t value) {
+        #ifdef NDEBUG
+        if (offset % 4 != 0) {
+            LOG(ERROR) << "Supplied offset value to Buffer fill command is not a multiple of 4, and is as such not valid!";
+        }
+
+        if ((sz % 4 != 0) && (sz != Size())) {
+            LOG(ERROR) << "Size of fill operation supplied to Buffer fill command is both not a multiple of 4 and wouldn't fill the whole buffer!";
+        }
+        #endif
+        vkCmdFillBuffer(cmd, handle, offset, sz, value);
     }
 
     VkBufferMemoryBarrier Buffer::CreateMemoryBarrier(VkAccessFlags src, VkAccessFlags dst, uint32_t src_idx, uint32_t dst_idx, VkDeviceSize sz) const {
+        
+        if ((src_idx != dst_idx) && (createInfo.sharingMode == VK_SHARING_MODE_EXCLUSIVE)) {
+            LOG(WARNING) << "Created a memory barrier for a buffer with different source/destination queues, but the buffer has sharing mode VK_SHARING_MODE_EXCLUSIVE!";
+        }
+        
         return VkBufferMemoryBarrier{ VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER, nullptr, src, dst, src_idx, dst_idx, 
             handle, memoryAllocation.Offset(), sz };
     }
@@ -159,7 +174,7 @@ namespace vpr {
 
     void Buffer::Map(const VkDeviceSize& offset){
         assert(offset < memoryAllocation.Size);
-        VkResult result = vkMapMemory(parent->vkHandle(), memoryAllocation.Memory(), memoryAllocation.Offset() + offset, memoryAllocation.Size, 0, &MappedMemory);
+        VkResult result = vkMapMemory(parent->vkHandle(), memoryAllocation.Memory(), memoryAllocation.Offset() + offset, memoryAllocation.Size, 0, &mappedMemory);
         VkAssert(result);
     }
 
@@ -194,11 +209,7 @@ namespace vpr {
     VkDeviceSize Buffer::Size() const noexcept{
         return size;
     }
-
-    VkDeviceSize Buffer::InitDataSize() const noexcept {
-        return dataSize;
-    }
-
+    
     void Buffer::CreateStagingBuffer(const Device * dvc, const VkDeviceSize & size, VkBuffer & dest, Allocation& dest_memory_alloc){
         
         VkBufferCreateInfo create_info = vk_buffer_create_info_base;
@@ -231,6 +242,10 @@ namespace vpr {
 
         stagingBuffers.clear(); 
         stagingBuffers.shrink_to_fit();
+    }
+
+    void Buffer::SetMappedMemory(void * mapping_destination) {
+        mappedMemory = mapping_destination;
     }
 
     void Buffer::createStagingBuffer(const VkDeviceSize & staging_size, VkBuffer & staging_buffer, Allocation& dest_memory_alloc){
