@@ -24,9 +24,6 @@ namespace vpr {
     }
     
     void DescriptorSetLayout::AddDescriptorBinding(const VkDescriptorType& descriptor_type, const VkShaderStageFlags& shader_stage, const uint32_t& descriptor_binding_loc) noexcept {
-        
-        
-
         bindings.emplace(descriptor_binding_loc, VkDescriptorSetLayoutBinding{
             descriptor_binding_loc,
             descriptor_type,
@@ -40,7 +37,12 @@ namespace vpr {
     void DescriptorSetLayout::AddDescriptorBinding(const VkDescriptorSetLayoutBinding& binding) {
         bindings.emplace(binding.binding, binding);
     }
-
+    
+    void DescriptorSetLayout::AddDescriptorBindings(const std::vector<VkDescriptorSetLayoutBinding>& bindings_vec) {
+        for (const auto& binding : bindings_vec) {
+            bindings.emplace(binding.binding, binding);
+        }
+    }
     const VkDescriptorSetLayout& DescriptorSetLayout::vkHandle() const noexcept {
         if(!ready) {
             create();
