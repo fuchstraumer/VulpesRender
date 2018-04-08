@@ -10,7 +10,7 @@ namespace vpr {
     constexpr static VkDeviceSize MinSuballocationSizeToRegister = 16;
 
     constexpr static VkDeviceSize SmallHeapMaxSize = 64 * 1024 * 1024;
-    // Blocks are sized to hold 32 single allocations
+
     constexpr static VkDeviceSize DefaultLargeHeapBlockSize = 256 * 1024 * 1024;
     constexpr static VkDeviceSize LargeBlockSingleAllocSize = 512 * 16384; // ~8mb
     constexpr static VkDeviceSize DefaultMediumHeapBlockSize = 16777216; 
@@ -24,6 +24,11 @@ namespace vpr {
     constexpr bool VALIDATE_MEMORY = false;
 #endif // !NDEBUG
 
+    /**
+     * Suballocations bound to a single memory block can represent different objects,
+     * though one will usually find that they end up grouped together.
+     * \ingroup Allocation 
+     */
     enum class SuballocationType : uint8_t {
         Free = 0, // unused entry
         Unknown, // could be various cpu storage objects, or extension objects
@@ -90,14 +95,14 @@ namespace vpr {
     *    Taken from the Vulkan specification, section 11.6
     *    Essentially, we need to ensure that linear and non-linear resources are properly placed on separate memory pages so that
     *    they avoid any accidental aliasing. Linear resources are just those that could be read like any other memory region, without
-    *   any particular optimization for size or access speed. Optimally tiled resources are those that are tiled either by the hardware drivers,
-    *   or the Vulkan implementation. Think of things like Z-Order curve encoding for texture data, or block-based compression for DDS/KTX texture formats.
-    *   \param item_a_offset: non-linear object's offset
-    *   \param item_a_size: non-linear object's size
-    *   \param item_b_offset: linear object's offset
-    *   \param item_b_size: linear object's size
-    *   \param page_size: almost universally tends to be the bufferImageGranularity value retrieved by the parent Allocator class.
-    *   \ingroup Allocation
+    *    any particular optimization for size or access speed. Optimally tiled resources are those that are tiled either by the hardware drivers,
+    *    or the Vulkan implementation. Think of things like Z-Order curve encoding for texture data, or block-based compression for DDS/KTX texture formats.
+    *    \param item_a_offset: non-linear object's offset
+    *    \param item_a_size: non-linear object's size
+    *    \param item_b_offset: linear object's offset
+    *    \param item_b_size: linear object's size
+    *    \param page_size: almost universally tends to be the bufferImageGranularity value retrieved by the parent Allocator class.
+    *    \ingroup Allocation
     */
     constexpr static inline bool CheckBlocksOnSamePage(const VkDeviceSize& item_a_offset, const VkDeviceSize& item_a_size, const VkDeviceSize& item_b_offset, const VkDeviceSize& page_size) {
         assert(item_a_offset + item_a_size <= item_b_offset && item_a_size > 0 && page_size > 0);
@@ -110,11 +115,11 @@ namespace vpr {
     /**
     *    Checks to make sure the two objects of type "type_a" and "type_b" wouldn't cause a conflict with the buffer-image granularity values. Returns true if
     *    conflict, false if no conflict. This is unlike the CheckBlocksOnSamePage method, in that it doesn't check memory location and alignment values, merely
-    *   comparing the resource types for incompatabilities. This is used to avoid the more detailed checks like CheckBlocksOnSamePage (and the corrections required
-    *   if this also fails)
+    *    comparing the resource types for incompatabilities. This is used to avoid the more detailed checks like CheckBlocksOnSamePage (and the corrections required
+    *    if this also fails)
     *
     *    BufferImageGranularity specifies interactions between linear and non-linear resources, so we check based on those.
-    *   \ingroup Allocation
+    *    \ingroup Allocation
     */
     constexpr static inline bool CheckBufferImageGranularityConflict(SuballocationType type_a, SuballocationType type_b) {
         if (type_a > type_b) {
