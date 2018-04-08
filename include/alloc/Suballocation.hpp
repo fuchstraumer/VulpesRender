@@ -13,17 +13,17 @@ namespace vpr {
      * \ingroup Allocation
      */ 
     struct Suballocation {
-        VkDeviceSize Offset{ 0 };
-        VkDevice Size{ 0 };
-        SuballocationType Type{ SuballocationType::Unknown };
+        VkDeviceSize Offset;
+        VkDeviceSize Size;
+        SuballocationType Type = SuballocationType::Unknown;
         bool operator<(const Suballocation& other) const noexcept {
-            return offset < other.offset;
+            return Offset < other.Offset;
         }
     };
 
     struct suballocOffsetCompare {
         bool operator()(const Suballocation& s0, const Suballocation& s1) const noexcept {
-            return s0.offset < s1.offset; // true when s0 is before s1
+            return s0.Offset < s1.Offset; // true when s0 is before s1
         }
     };
 
@@ -33,14 +33,14 @@ namespace vpr {
      * \ingroup Allocation
      */
     struct SuballocationRequest {
-        suballocationList::iterator freeSuballocation; // location of suballoc this request can use.
-        VkDeviceSize offset{ 0 };
+        suballocationList::iterator FreeSuballocation; // location of suballoc this request can use.
+        VkDeviceSize Offset{ 0 };
     };
 
 
     struct suballocIterCompare {
         bool operator()(const suballocationList::iterator& iter0, const suballocationList::iterator& iter1) const noexcept {
-            return iter0->size < iter1->size;
+            return iter0->Size < iter1->Size;
         }
     };
 

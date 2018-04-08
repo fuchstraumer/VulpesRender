@@ -134,12 +134,12 @@ namespace vpr {
             const Suballocation& curr = *iter;
 
             // if offset of current suballoc is wrong, then this allocation is invalid
-            if (curr.offset != calculated_offset) {
+            if (curr.Offset != calculated_offset) {
                 return ValidationCode::INCORRECT_SUBALLOC_OFFSET;
             }
 
             // two adjacent free entries is invalid: should be merged.
-            const bool curr_free = (curr.type == SuballocationType::Free);
+            const bool curr_free = (curr.Type == SuballocationType::Free);
             if (curr_free && prev_entry_free) {
                 return ValidationCode::NEED_MERGE_SUBALLOCS;
             }
@@ -148,14 +148,14 @@ namespace vpr {
             prev_entry_free = curr_free;
 
             if (curr_free) {
-                calculated_free_size += curr.size;
+                calculated_free_size += curr.Size;
                 ++calculated_free_suballocs;
-                if (curr.size >= MinSuballocationSizeToRegister) {
+                if (curr.Size >= MinSuballocationSizeToRegister) {
                     ++num_suballocs_to_register; // this suballocation should be registered in the free list.
                 }
             }
 
-            calculated_offset += curr.size;
+            calculated_offset += curr.Size;
         }
 
         // Number of free suballocations in objects list doesn't match what our calculated value says we should have
@@ -168,16 +168,16 @@ namespace vpr {
             auto curr_iter = availSuballocations[i];
 
             // non-free suballoc in free list
-            if (curr_iter->type != SuballocationType::Free) {
+            if (curr_iter->Type != SuballocationType::Free) {
                 return ValidationCode::USED_SUBALLOC_IN_FREE_LIST;
             }
 
             // sorting of free list is incorrect
-            if (curr_iter->size < last_entry_size) {
+            if (curr_iter->Size < last_entry_size) {
                 return ValidationCode::FREE_SUBALLOC_SORT_INCORRECT;
             }
 
-            last_entry_size = curr_iter->size;
+            last_entry_size = curr_iter->Size;
         }
 
         if (calculated_offset != Size) {
@@ -207,7 +207,7 @@ namespace vpr {
 
         size_t avail_idx = std::numeric_limits<size_t>::max();
         for (auto iter = availSuballocations.cbegin(); iter != availSuballocations.cend(); ++iter) {
-            if ((*iter)->size > allocation_size) {
+            if ((*iter)->Size > allocation_size) {
                 avail_idx = iter - availSuballocations.cbegin();
                 break;
             }
@@ -223,8 +223,8 @@ namespace vpr {
             // Check allocation for validity
             bool allocation_valid = VerifySuballocation(buffer_image_granularity, allocation_size, allocation_alignment, allocation_type, iter, &offset);
             if (allocation_valid) {
-                dest_request->freeSuballocation = iter;
-                dest_request->offset = offset;
+                dest_request->FreeSuballocation = iter;
+                dest_request->Offset = offset;
                 return true;
             }
         }
@@ -239,13 +239,13 @@ namespace vpr {
         assert(dest_offset != nullptr);
 
         const Suballocation& suballoc = *dest_suballocation_location;
-        assert(suballoc.type == SuballocationType::Free);
+        assert(suballoc.Type == SuballocationType::Free);
 
-        if (suballoc.size < allocation_size) {
+        if (suballoc.Size < allocation_size) {
             return false;
         }
 
-        *dest_offset = suballoc.offset;
+        *dest_offset = suballoc.Offset;
 
         // Apply alignment
         *dest_offset = AlignUp<VkDeviceSize>(*dest_offset, allocation_alignment);
@@ -259,9 +259,9 @@ namespace vpr {
             while (prev_suballoc_iter != Suballocations.cbegin()) {
                 --prev_suballoc_iter;
                 const Suballocation& prev_suballoc = *prev_suballoc_iter;
-                bool on_same_page = CheckBlocksOnSamePage(prev_suballoc.offset, prev_suballoc.size, *dest_offset, buffer_image_granularity);
+                bool on_same_page = CheckBlocksOnSamePage(prev_suballoc.Offset, prev_suballoc.Size, *dest_offset, buffer_image_granularity);
                 if (on_same_page) {
-                    conflict_found = CheckBufferImageGranularityConflict(prev_suballoc.type, allocation_type);
+                    conflict_found = CheckBufferImageGranularityConflict(prev_suballoc.Type, allocation_type);
                     if (conflict_found) {
                         LOG(INFO) << "A buffer-image granularity conflict was identified in suballocation " << std::to_string(reinterpret_cast<size_t>(&prev_suballoc));
                         break;
@@ -278,7 +278,7 @@ namespace vpr {
         }
 
         // calculate padding at beginning from offset
-        const VkDeviceSize padding_begin = *dest_offset - suballoc.offset;
+        const VkDeviceSize padding_begin = *dest_offset - suballoc.Offset;
 
         // calculate required padding at end, assuming current suballoc isn't at end of memory object
         auto next_iter = dest_suballocation_location;
@@ -286,7 +286,7 @@ namespace vpr {
         const VkDeviceSize padding_end = (next_iter != Suballocations.cend()) ? DEBUG_PADDING : 0;
 
         // Can't allocate if padding at begin and end is greater than requested size.
-        if (padding_begin + padding_end + allocation_size > suballoc.size) {
+        if (padding_begin + padding_end + allocation_size > suballoc.Size) {
             LOG(INFO) << "Suballocation verification failed as required padding for alignment + required size is greater than available space.";
             return false;
         }
@@ -297,9 +297,9 @@ namespace vpr {
             ++next_suballoc_iter;
             while (next_suballoc_iter != Suballocations.cend()) {
                 const auto& next_suballoc = *next_suballoc_iter;
-                bool on_same_page = CheckBlocksOnSamePage(*dest_offset, allocation_size, next_suballoc.offset, buffer_image_granularity);
+                bool on_same_page = CheckBlocksOnSamePage(*dest_offset, allocation_size, next_suballoc.Offset, buffer_image_granularity);
                 if (on_same_page) {
-                    if (CheckBufferImageGranularityConflict(allocation_type, next_suballoc.type)) {
+                    if (CheckBufferImageGranularityConflict(allocation_type, next_suballoc.Type)) {
                         LOG(INFO) << "Suballocation verification failed as there were too many buffer-image granularity conflicts.";
                         return false;
                     }
@@ -320,41 +320,41 @@ namespace vpr {
 
     void MemoryBlock::Allocate(const SuballocationRequest & request, const SuballocationType & allocation_type, const VkDeviceSize & allocation_size) {
 
-        assert(request.freeSuballocation != Suballocations.cend());
-        Suballocation& suballoc = *request.freeSuballocation;
-        assert(suballoc.type == SuballocationType::Free); 
+        assert(request.FreeSuballocation != Suballocations.cend());
+        Suballocation& suballoc = *request.FreeSuballocation;
+        assert(suballoc.Type == SuballocationType::Free); 
 
-        const VkDeviceSize padding_begin = request.offset - suballoc.offset;
-        const VkDeviceSize padding_end = suballoc.size - padding_begin - allocation_size;
+        const VkDeviceSize padding_begin = request.Offset - suballoc.Offset;
+        const VkDeviceSize padding_end = suballoc.Size - padding_begin - allocation_size;
 
-        removeFreeSuballocation(request.freeSuballocation);
-        suballoc.offset = request.offset;
-        suballoc.size = allocation_size;
-        suballoc.type = allocation_type;
+        removeFreeSuballocation(request.FreeSuballocation);
+        suballoc.Offset = request.Offset;
+        suballoc.Size = allocation_size;
+        suballoc.Type = allocation_type;
 
         // if there's any remaining memory after this allocation, register it
 
         if (padding_end) {
-            Suballocation padding_suballoc{ request.offset + allocation_size, padding_end, SuballocationType::Free };
-            auto next_iter = request.freeSuballocation;
+            Suballocation padding_suballoc{ request.Offset + allocation_size, padding_end, SuballocationType::Free };
+            auto next_iter = request.FreeSuballocation;
             ++next_iter;
             {
                 std::lock_guard<std::mutex> alloc_guard(guardMutex);
                 const auto insert_iter = Suballocations.insert(next_iter, padding_suballoc);
+                // insert_iter returns iterator giving location of inserted item
+                insertFreeSuballocation(insert_iter);
             }
-            // insert_iter returns iterator giving location of inserted item
-            insertFreeSuballocation(insert_iter);
         }
 
         // if there's any remaining memory before the allocation, register it.
         if (padding_begin) {
-            Suballocation padding_suballoc{ request.offset - padding_begin, padding_begin, SuballocationType::Free };
-            auto next_iter = request.freeSuballocation;
+            Suballocation padding_suballoc{ request.Offset - padding_begin, padding_begin, SuballocationType::Free };
+            auto next_iter = request.FreeSuballocation;
             {
                 std::lock_guard<std::mutex> alloc_guard(guardMutex);
                 const auto insert_iter = Suballocations.insert(next_iter, padding_suballoc);
+                insertFreeSuballocation(insert_iter);
             }
-            insertFreeSuballocation(insert_iter);
         }
 
         --freeCount;
@@ -374,7 +374,7 @@ namespace vpr {
     void MemoryBlock::Free(const Allocation* memory_to_free) {
         for (auto iter = Suballocations.begin(); iter != Suballocations.end(); ++iter) {        
             auto& suballoc = *iter;
-            if (suballoc.offset == memory_to_free->Offset()) {
+            if (suballoc.Offset == memory_to_free->Offset()) {
                 freeSuballocation(iter);
                 if (VALIDATE_MEMORY) {
                     auto vcode = Validate();
@@ -400,7 +400,7 @@ namespace vpr {
     }
 
     VkDeviceSize MemoryBlock::LargestAvailRegion() const noexcept {
-        return (*availSuballocations.front()).size;
+        return (*availSuballocations.front()).Size;
     }
 
     suballocation_iterator_t MemoryBlock::begin() {
@@ -455,9 +455,9 @@ namespace vpr {
         auto next_iter = item_to_merge;
         ++next_iter;
         assert(next_iter != Suballocations.cend());
-        assert(next_iter->type == SuballocationType::Free);
+        assert(next_iter->Type == SuballocationType::Free);
         // add item to merge's size to the size of the object after it
-        item_to_merge->size += next_iter->size;
+        item_to_merge->Size += next_iter->Size;
         --freeCount;
         std::lock_guard<std::mutex> alloc_guard(guardMutex);
         Suballocations.erase(next_iter);
@@ -465,16 +465,16 @@ namespace vpr {
 
     void MemoryBlock::freeSuballocation(const suballocationList::iterator & item_to_free) {
         Suballocation& suballoc = *item_to_free;
-        suballoc.type = SuballocationType::Free;
+        suballoc.Type = SuballocationType::Free;
 
         ++freeCount;
-        availSize += suballoc.size;
+        availSize += suballoc.Size;
 
         bool merge_next = false, merge_prev = false;
 
         auto next_iter = item_to_free;
         ++next_iter;
-        if ((next_iter != Suballocations.cend()) && (next_iter->type == SuballocationType::Free)) {
+        if ((next_iter != Suballocations.cend()) && (next_iter->Type == SuballocationType::Free)) {
             merge_next = true;
         }
 
@@ -482,7 +482,7 @@ namespace vpr {
         
         if (prev_iter != Suballocations.cbegin()) {
             --prev_iter;
-            if (prev_iter->type == SuballocationType::Free) {
+            if (prev_iter->Type == SuballocationType::Free) {
                 merge_prev = true;
             }
         }
@@ -504,7 +504,7 @@ namespace vpr {
 
     void MemoryBlock::insertFreeSuballocation(const suballocationList::iterator & item_to_insert) {
         std::lock_guard<std::mutex> alloc_guard(guardMutex);
-        if (item_to_insert->size >= MinSuballocationSizeToRegister) {
+        if (item_to_insert->Size >= MinSuballocationSizeToRegister) {
             if (availSuballocations.empty()) {
                 availSuballocations.push_back(item_to_insert);
             }
@@ -519,7 +519,7 @@ namespace vpr {
 
     void MemoryBlock::removeFreeSuballocation(const suballocationList::iterator & item_to_remove) {
         std::lock_guard<std::mutex> alloc_guard(guardMutex);
-        if (item_to_remove->size >= MinSuballocationSizeToRegister) {
+        if (item_to_remove->Size >= MinSuballocationSizeToRegister) {
             auto remove_iter = std::remove(availSuballocations.begin(), availSuballocations.end(), item_to_remove);
             assert(remove_iter != availSuballocations.cend());
             availSuballocations.erase(remove_iter);
