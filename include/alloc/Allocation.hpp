@@ -10,7 +10,7 @@ namespace vpr {
     /**    
     *    Allocation class represents a singular allocation: can be a private allocation (i.e, only user
     *    of attached DeviceMemory) or a block allocation (bound to sub-region of device memory)
-    *   \ingroup Allocator
+    *   \ingroup Allocation
     */
     class VPR_API Allocation {
     public:

@@ -54,7 +54,7 @@ namespace vpr {
         
         for(const auto& entry : resourceTypes) {
             if (entry.second > 0) {
-                pool_sizes.push_back(VkDescriptorPoolSize{ entry.first, static_cast<uint32_t>(entry.second) });
+                pool_sizes.emplace_back(VkDescriptorPoolSize{ entry.first, static_cast<uint32_t>(entry.second) });
             }
         }
 

@@ -112,7 +112,7 @@ namespace vpr {
         std::vector<VkWriteDescriptorSet> write_descriptors;
 
         for (const auto& entry : writeDescriptors) {
-            write_descriptors.push_back(entry.second);
+            write_descriptors.emplace_back(entry.second);
             write_descriptors.back().dstSet = handle;
             if (entry.second.pBufferInfo != nullptr) {
                 write_descriptors.back().pBufferInfo = entry.second.pBufferInfo;

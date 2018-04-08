@@ -107,8 +107,7 @@ namespace vpr {
         copy.dstOffset = copy_offset;
         vkCmdCopyBuffer(transfer_cmd, staging_buffer, handle, 1, &copy);
 
-        auto pair = std::make_pair(std::move(staging_buffer), std::move(staging_alloc));
-        stagingBuffers.push_back(std::move(pair));
+        stagingBuffers.emplace_back(std::make_pair(std::move(staging_buffer), std::move(staging_alloc)));
 
     }
 
@@ -131,8 +130,7 @@ namespace vpr {
             vkCmdCopyBuffer(copy_cmd, staging_buffer, handle, 1, &copy);
         cmd_pool->EndSingleCmdBuffer(copy_cmd, transfer_queue);
 
-        auto pair = std::make_pair(std::move(staging_buffer), std::move(staging_alloc));
-        stagingBuffers.push_back(std::move(pair));
+        stagingBuffers.emplace_back(std::make_pair(std::move(staging_buffer), std::move(staging_alloc)));
 
     }
 
@@ -224,9 +222,7 @@ namespace vpr {
         VkResult result = dvc->vkAllocator->CreateBuffer(&dest, &create_info, alloc_reqs, dest_memory_alloc);
         VkAssert(result);
 
-        auto pair = std::make_pair(std::move(dest), dest_memory_alloc);
-        stagingBuffers.push_back(std::move(pair));
-        
+        stagingBuffers.emplace_back(std::make_pair(std::move(dest), dest_memory_alloc));
         LOG(INFO) << "Created a staging buffer. Currently have " << std::to_string(stagingBuffers.size()) << " staging buffers in the pool.";
     }
 

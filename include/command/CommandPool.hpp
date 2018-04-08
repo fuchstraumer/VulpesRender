@@ -71,6 +71,8 @@ namespace vpr {
 
     protected:
 
+        CommandPool(const Device* parent);
+
         void destroy();
         std::vector<VkCommandBuffer> cmdBuffers;
         VkCommandPool handle;

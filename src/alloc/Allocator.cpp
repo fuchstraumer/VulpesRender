@@ -178,8 +178,6 @@ namespace vpr {
     }
 
     VkResult Allocator::AllocateForImage(VkImage & image_handle, const AllocationRequirements & details, const SuballocationType & alloc_type, Allocation& dest_allocation) {
-        std::mutex image_alloc_mutex;
-        std::lock_guard<std::mutex> image_alloc_guard(image_alloc_mutex);
         VkMemoryRequirements memreqs;
         AllocationRequirements details2 = details;
         getImageMemReqs(image_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
@@ -187,8 +185,6 @@ namespace vpr {
     }
 
     VkResult Allocator::AllocateForBuffer(VkBuffer & buffer_handle, const AllocationRequirements & details, const SuballocationType & alloc_type, Allocation& dest_allocation) {
-        std::mutex buffer_alloc_mutex;
-        std::lock_guard<std::mutex> buffer_alloc_guard(buffer_alloc_mutex);
         VkMemoryRequirements memreqs;
         AllocationRequirements details2 = details;
         getBufferMemReqs(buffer_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
@@ -330,7 +326,7 @@ namespace vpr {
                     }
 
                     block->Allocate(request, type, memory_reqs.size);
-                    dest_allocation.Init(block.get(), request.offset, memory_reqs.alignment, memory_reqs.size);
+                    dest_allocation.Init(block.get(), request.Offset, memory_reqs.alignment, memory_reqs.size);
 
                     if (VALIDATE_MEMORY) {
                         ValidationCode result_code = block->Validate();
@@ -343,7 +339,7 @@ namespace vpr {
                         }
                     }
                     // only log for larger allocations of at least half a mb: otherwise, log gets clogged with updates
-                    LOG_IF((static_cast<float>(memory_reqs.size) / 1.0e6f) > 0.5f, INFO) << "Successfully allocated by binding to suballocation with size of " << std::to_string(memory_reqs.size / 1e6) << "mb at offset " << std::to_string(request.offset);
+                    LOG_IF((static_cast<float>(memory_reqs.size) / 1.0e6f) > 0.5f, INFO) << "Successfully allocated by binding to suballocation with size of " << std::to_string(memory_reqs.size / 1e6) << "mb at offset " << std::to_string(request.Offset);
                     return VK_SUCCESS;
                 }
             }
@@ -399,20 +395,26 @@ namespace vpr {
                     }
                 }
 
-                std::unique_ptr<MemoryBlock> new_block = std::make_unique<MemoryBlock>(this);
-                // need pointer to initialize child objects, but need to move unique_ptr into container.
-                size_t new_block_idx = alloc_collection->AddMemoryBlock(std::move(new_block));
+                MemoryBlock* new_block_ptr{ nullptr };
+                size_t new_block_idx{ std::numeric_limits<size_t>::max() };
 
-                auto* new_block_ptr = (*alloc_collection)[new_block_idx];
+                {
+                    std::lock_guard<std::mutex> new_block_guard(allocMutex);
+                    std::unique_ptr<MemoryBlock> new_block = std::make_unique<MemoryBlock>(this);
+                    // need pointer to initialize child objects, but need to move unique_ptr into container.
+                    new_block_idx = alloc_collection->AddMemoryBlock(std::move(new_block));
+                }
+
+                new_block_ptr = (*alloc_collection)[new_block_idx];
                 // allocation size is more up-to-date than mem reqs size
                 new_block_ptr->Init(new_memory, alloc_info.allocationSize);
                 new_block_ptr->MemoryTypeIdx = memory_type_idx;
 
                 SuballocationRequest request{ *new_block_ptr->avail_begin(), 0 };
                 new_block_ptr->Allocate(request, type, memory_reqs.size);
-                
-                dest_allocation.Init(new_block_ptr, request.offset, memory_reqs.alignment, memory_reqs.size);
 
+                dest_allocation.Init(new_block_ptr, request.Offset, memory_reqs.alignment, memory_reqs.size);
+                
                 if (VALIDATE_MEMORY) {
                     ValidationCode result_code = new_block_ptr->Validate();
                     if (result_code != ValidationCode::VALIDATION_PASSED) {

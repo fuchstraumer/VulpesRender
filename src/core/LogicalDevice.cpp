@@ -50,7 +50,7 @@ namespace vpr {
         // This has to be here so that the queue_infos vector persists through device creation.
         std::vector<VkDeviceQueueCreateInfo> queue_infos;
         for (const auto& queue_info_entry : queueInfos) {
-            queue_infos.push_back(queue_info_entry.second);
+            queue_infos.emplace_back(queue_info_entry.second);
         }
 
         createInfo.queueCreateInfoCount = static_cast<uint32_t>(queue_infos.size());
@@ -198,9 +198,6 @@ namespace vpr {
     VkDeviceQueueCreateInfo Device::SetupQueueFamily(const VkQueueFamilyProperties & family_properties) {
         VkDeviceQueueCreateInfo result = vk_device_queue_create_info_base;
         result.queueCount = family_properties.queueCount;
-        std::vector<float> queue_priorities;
-        queue_priorities.assign(result.queueCount, 1.0f);
-        result.pQueuePriorities = std::move(queue_priorities.data());
         return result;
     }
 
@@ -351,7 +348,7 @@ namespace vpr {
         checkExtensions(required_extensions, true);
 
         for (auto&& elem : required_extensions) {
-            output.push_back(std::move(elem));
+            output.emplace_back(std::move(elem));
         }
     }
 
@@ -361,7 +358,7 @@ namespace vpr {
         checkExtensions(optional_extensions, false);
 
         for (auto&& elem : optional_extensions) {
-            output.push_back(std::move(elem));
+            output.emplace_back(std::move(elem));
         }
 
     }

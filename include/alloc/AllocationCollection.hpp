@@ -7,7 +7,8 @@
 namespace vpr {
   
     /** An allocation collection is just a vector of MemoryBlocks of the same type. With commonly used memory types we wil quite easily fill one block up (e.g, device-local memory) 
-     *  so we will need to create a new block. In order to keep some organization among memory types, though, we store these similar memory blocks in this object.
+     *  so we will need to create a new block. In order to keep some organization among memory types, though, we store these similar memory blocks in this object so that one 
+     *  allocation collection stores all the device memory blocks of uniform type and "block" size (small, medimum, large)
      *  \ingroup Allocation
      */
     class AllocationCollection {

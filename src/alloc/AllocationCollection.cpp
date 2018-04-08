@@ -31,7 +31,7 @@ namespace vpr {
 
     size_t AllocationCollection::AddMemoryBlock(std::unique_ptr<MemoryBlock>&& new_block) noexcept {
         std::lock_guard<std::mutex> push_guard(containerMutex);
-        allocations.push_back(std::move(new_block));
+        allocations.emplace_back(std::move(new_block));
         return allocations.size() - 1;
     }
 

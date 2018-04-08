@@ -34,6 +34,9 @@ namespace vpr {
         destroy();
     }
 
+    CommandPool::CommandPool(const Device * _parent) : parent(_parent), handle(VK_NULL_HANDLE) {
+    }
+
     void CommandPool::destroy(){
         if (!cmdBuffers.empty()) {
             FreeCommandBuffers();

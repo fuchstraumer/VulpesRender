@@ -67,19 +67,15 @@ namespace vpr {
 
         suballocation_iterator_t begin();
         suballocation_iterator_t end();
-
         const_suballocation_iterator_t begin() const;
         const_suballocation_iterator_t end() const;
-
         const_suballocation_iterator_t cbegin() const;
         const_suballocation_iterator_t cend() const;
 
         avail_suballocation_iterator_t avail_begin();
         avail_suballocation_iterator_t avail_end();
-
         const_avail_suballocation_iterator_t avail_begin() const;
         const_avail_suballocation_iterator_t avail_end() const;
-
         const_avail_suballocation_iterator_t avail_cbegin() const;
         const_avail_suballocation_iterator_t avail_cend() const;
 
@@ -91,9 +87,9 @@ namespace vpr {
     protected:
 
         std::mutex guardMutex;
-        VkDeviceSize availSize;
-        uint32_t freeCount;
-        VkDeviceMemory memory;
+        VkDeviceSize availSize{ 0 };
+        uint32_t freeCount{ 0 };
+        VkDeviceMemory memory{ VK_NULL_HANDLE };
         /** Changes the item pointed to by the iterator to be a free type, then adds the now-available size to availSize and increments freeCount. This method
          *  may also call mergeFreeWithNext, insertFreeSuballocation, and removeFreeSuballocation if adjacent suballocations are free or can be merged with the 
          *  now-free allocation passed in.
