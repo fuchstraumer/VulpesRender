@@ -19,7 +19,7 @@ namespace vpr {
 
     TransferPool::TransferPool(const Device * _parent, const size_t & num_buffers) : CommandPool(_parent), queue(_parent->TransferQueue(0)) {
         createPool();
-        AllocateCmdBuffers(num_buffers, VK_COMMAND_BUFFER_LEVEL_PRIMARY);
+        AllocateCmdBuffers(static_cast<uint32_t>(num_buffers), VK_COMMAND_BUFFER_LEVEL_PRIMARY);
         createFence();
     }
 

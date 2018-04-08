@@ -198,9 +198,6 @@ namespace vpr {
     VkDeviceQueueCreateInfo Device::SetupQueueFamily(const VkQueueFamilyProperties & family_properties) {
         VkDeviceQueueCreateInfo result = vk_device_queue_create_info_base;
         result.queueCount = family_properties.queueCount;
-        std::vector<float> queue_priorities;
-        queue_priorities.assign(result.queueCount, 1.0f);
-        result.pQueuePriorities = std::move(queue_priorities.data());
         return result;
     }
 
