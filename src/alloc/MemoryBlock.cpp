@@ -296,7 +296,7 @@ namespace vpr {
             auto next_suballoc_iter = dest_suballocation_location;
             ++next_suballoc_iter;
             while (next_suballoc_iter != Suballocations.cend()) {
-                const auto& next_suballoc = *next_iter;
+                const auto& next_suballoc = *next_suballoc_iter;
                 bool on_same_page = CheckBlocksOnSamePage(*dest_offset, allocation_size, next_suballoc.offset, buffer_image_granularity);
                 if (on_same_page) {
                     if (CheckBufferImageGranularityConflict(allocation_type, next_suballoc.type)) {
@@ -320,7 +320,6 @@ namespace vpr {
 
     void MemoryBlock::Allocate(const SuballocationRequest & request, const SuballocationType & allocation_type, const VkDeviceSize & allocation_size) {
 
-        std::lock_guard<std::mutex> alloc_guard(guardMutex);
         assert(request.freeSuballocation != Suballocations.cend());
         Suballocation& suballoc = *request.freeSuballocation;
         assert(suballoc.type == SuballocationType::Free); 
@@ -339,7 +338,10 @@ namespace vpr {
             Suballocation padding_suballoc{ request.offset + allocation_size, padding_end, SuballocationType::Free };
             auto next_iter = request.freeSuballocation;
             ++next_iter;
-            const auto insert_iter = Suballocations.insert(next_iter, padding_suballoc);
+            {
+                std::lock_guard<std::mutex> alloc_guard(guardMutex);
+                const auto insert_iter = Suballocations.insert(next_iter, padding_suballoc);
+            }
             // insert_iter returns iterator giving location of inserted item
             insertFreeSuballocation(insert_iter);
         }
@@ -348,7 +350,10 @@ namespace vpr {
         if (padding_begin) {
             Suballocation padding_suballoc{ request.offset - padding_begin, padding_begin, SuballocationType::Free };
             auto next_iter = request.freeSuballocation;
-            const auto insert_iter = Suballocations.insert(next_iter, padding_suballoc);
+            {
+                std::lock_guard<std::mutex> alloc_guard(guardMutex);
+                const auto insert_iter = Suballocations.insert(next_iter, padding_suballoc);
+            }
             insertFreeSuballocation(insert_iter);
         }
 
@@ -367,9 +372,7 @@ namespace vpr {
     }
 
     void MemoryBlock::Free(const Allocation* memory_to_free) {
-        std::lock_guard<std::mutex> suballoc_guard(guardMutex);
-        for (auto iter = Suballocations.begin(); iter != Suballocations.end(); ++iter) {
-            
+        for (auto iter = Suballocations.begin(); iter != Suballocations.end(); ++iter) {        
             auto& suballoc = *iter;
             if (suballoc.offset == memory_to_free->Offset()) {
                 freeSuballocation(iter);
@@ -456,6 +459,7 @@ namespace vpr {
         // add item to merge's size to the size of the object after it
         item_to_merge->size += next_iter->size;
         --freeCount;
+        std::lock_guard<std::mutex> alloc_guard(guardMutex);
         Suballocations.erase(next_iter);
     }
 
@@ -499,6 +503,7 @@ namespace vpr {
     }
 
     void MemoryBlock::insertFreeSuballocation(const suballocationList::iterator & item_to_insert) {
+        std::lock_guard<std::mutex> alloc_guard(guardMutex);
         if (item_to_insert->size >= MinSuballocationSizeToRegister) {
             if (availSuballocations.empty()) {
                 availSuballocations.push_back(item_to_insert);
@@ -513,6 +518,7 @@ namespace vpr {
     }
 
     void MemoryBlock::removeFreeSuballocation(const suballocationList::iterator & item_to_remove) {
+        std::lock_guard<std::mutex> alloc_guard(guardMutex);
         if (item_to_remove->size >= MinSuballocationSizeToRegister) {
             auto remove_iter = std::remove(availSuballocations.begin(), availSuballocations.end(), item_to_remove);
             assert(remove_iter != availSuballocations.cend());
