@@ -157,7 +157,7 @@ namespace vpr {
         std::vector<const char*> glfw_required_extensions{ req_ext_names, req_ext_names + req_ext_cnt };
 
         for (auto&& elem : glfw_required_extensions) {
-            output.push_back(std::move(elem));
+            output.emplace_back(std::move(elem));
         }
         
         if (extensions != nullptr) {
@@ -166,7 +166,7 @@ namespace vpr {
                     extensions->RequiredExtensionNames + extensions->RequiredExtensionCount };
 
                 for (auto&& elem : input_required_extensions) {
-                    output.push_back(std::move(elem));
+                    output.emplace_back(std::move(elem));
                 }
             }
         }
@@ -185,7 +185,7 @@ namespace vpr {
         checkOptionalExtensions(optional_extensions);
 
         for(auto&& elem : optional_extensions) {
-            output.push_back(std::move(elem));
+            output.emplace_back(std::move(elem));
         }
 
     }

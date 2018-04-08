@@ -70,13 +70,12 @@ namespace vpr {
         availSuballocations.clear();
 
         // note/create suballocation defining our singular free region.
-        Suballocation suballoc{ 0, new_size, SuballocationType::Free };
-        Suballocations.push_back(suballoc);
+        Suballocations.emplace_back(Suballocation{ 0, new_size, SuballocationType::Free });
 
         // add location of that suballocation to mapping vector
         auto suballoc_iter = Suballocations.end();
         --suballoc_iter;
-        availSuballocations.push_back(suballoc_iter);
+        availSuballocations.emplace_back(suballoc_iter);
 
         LOG(INFO) << "Created new MemoryBlock with size " << std::to_string(Size * 1e-6) << "mb ";
     }
@@ -506,7 +505,7 @@ namespace vpr {
         std::lock_guard<std::mutex> alloc_guard(guardMutex);
         if (item_to_insert->Size >= MinSuballocationSizeToRegister) {
             if (availSuballocations.empty()) {
-                availSuballocations.push_back(item_to_insert);
+                availSuballocations.emplace_back(item_to_insert);
             }
             else {
                 // find correct position ot insert "item_to_insert" and do so.

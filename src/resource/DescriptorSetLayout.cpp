@@ -55,7 +55,7 @@ namespace vpr {
         assert(!bindings.empty());
         std::vector<VkDescriptorSetLayoutBinding> bindings_vec;
         for(const auto& entry : bindings) {
-            bindings_vec.push_back(entry.second);
+            bindings_vec.emplace_back(entry.second);
         }
 
         VkDescriptorSetLayoutCreateInfo set_layout_create_info = vk_descriptor_set_layout_create_info_base;
