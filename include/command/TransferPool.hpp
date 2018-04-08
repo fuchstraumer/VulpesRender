@@ -16,13 +16,6 @@ namespace vpr {
     *   \ingroup Command
     */
 
-    constexpr static VkCommandPoolCreateInfo transfer_pool_info{
-        VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO,
-        nullptr,
-        VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT,
-        0,
-    };
-
     class VPR_API TransferPool : public CommandPool {
         TransferPool(TransferPool&& other) = delete;
         TransferPool& operator=(TransferPool&& other) = delete;
@@ -30,7 +23,6 @@ namespace vpr {
 
         TransferPool(const Device* _parent);
         TransferPool(const Device* _parent, const size_t& num_buffers);
-
         ~TransferPool();
 
         /** Returns the command buffer associated with this pool, call VkBeginCommandBuffer
@@ -60,7 +52,10 @@ namespace vpr {
         void SubmitAll() const;
 
     protected:
-        
+
+        void createPool();
+        void createFence();
+
         /** Just a convienience method wrapping the command code required to reset the fence, reset the 
          *  command buffer(s), and make sure to unlock the transfer mutex.
          */

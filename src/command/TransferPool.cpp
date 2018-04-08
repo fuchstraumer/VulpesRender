@@ -4,26 +4,23 @@
 
 namespace vpr {
 
-    TransferPool::TransferPool(const Device * _parent) : CommandPool(_parent, transfer_pool_info) {
-        VkCommandPoolCreateInfo create_info = vk_command_pool_info_base;
-        create_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT | VK_COMMAND_POOL_CREATE_TRANSIENT_BIT;
-        create_info.queueFamilyIndex = parent->QueueFamilyIndices.Transfer;
-        VkResult result = vkCreateCommandPool(parent->vkHandle(), &create_info, nullptr, &handle);
-        VkAssert(result);
+    constexpr static VkCommandPoolCreateInfo transfer_pool_info{
+        VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO,
+        nullptr,
+        VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT,
+        0,
+    };
 
-        VkCommandBufferAllocateInfo allocInfo = {};
-        allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-        allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-        allocInfo.commandPool = handle;
-        allocInfo.commandBufferCount = 1;
-
+    TransferPool::TransferPool(const Device * _parent) : CommandPool(_parent), queue(_parent->TransferQueue(0)) {
+        createPool();
         AllocateCmdBuffers(1, VK_COMMAND_BUFFER_LEVEL_PRIMARY);
+        createFence();
+    }
 
-        result = vkCreateFence(parent->vkHandle(), &vk_fence_create_info_base, nullptr, &fence);
-        VkAssert(result);
-
-        queue = parent->TransferQueue(0);
-
+    TransferPool::TransferPool(const Device * _parent, const size_t & num_buffers) : CommandPool(_parent), queue(_parent->TransferQueue(0)) {
+        createPool();
+        AllocateCmdBuffers(num_buffers, VK_COMMAND_BUFFER_LEVEL_PRIMARY);
+        createFence();
     }
 
     TransferPool::~TransferPool() {
@@ -126,6 +123,19 @@ namespace vpr {
 
         completeTransfer();
         
+    }
+
+    void TransferPool::createPool() {
+        VkCommandPoolCreateInfo create_info = vk_command_pool_info_base;
+        create_info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT | VK_COMMAND_POOL_CREATE_TRANSIENT_BIT;
+        create_info.queueFamilyIndex = parent->QueueFamilyIndices.Transfer;
+        VkResult result = vkCreateCommandPool(parent->vkHandle(), &create_info, nullptr, &handle);
+        VkAssert(result);
+    }
+
+    void TransferPool::createFence() {
+        VkResult result = vkCreateFence(parent->vkHandle(), &vk_fence_create_info_base, nullptr, &fence);
+        VkAssert(result);
     }
 
     void TransferPool::completeTransfer() const {   
