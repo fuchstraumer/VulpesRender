@@ -116,6 +116,7 @@ namespace vpr {
         /**Guards the private allocations set, since it's a different object entirely than the main one.
         */
         std::mutex privateMutex;
+        std::mutex allocMutex;
         const Device* parent;
 
         VkPhysicalDeviceProperties deviceProperties;

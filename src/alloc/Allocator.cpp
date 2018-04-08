@@ -178,8 +178,6 @@ namespace vpr {
     }
 
     VkResult Allocator::AllocateForImage(VkImage & image_handle, const AllocationRequirements & details, const SuballocationType & alloc_type, Allocation& dest_allocation) {
-        std::mutex image_alloc_mutex;
-        std::lock_guard<std::mutex> image_alloc_guard(image_alloc_mutex);
         VkMemoryRequirements memreqs;
         AllocationRequirements details2 = details;
         getImageMemReqs(image_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
@@ -187,8 +185,6 @@ namespace vpr {
     }
 
     VkResult Allocator::AllocateForBuffer(VkBuffer & buffer_handle, const AllocationRequirements & details, const SuballocationType & alloc_type, Allocation& dest_allocation) {
-        std::mutex buffer_alloc_mutex;
-        std::lock_guard<std::mutex> buffer_alloc_guard(buffer_alloc_mutex);
         VkMemoryRequirements memreqs;
         AllocationRequirements details2 = details;
         getBufferMemReqs(buffer_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
@@ -399,15 +395,18 @@ namespace vpr {
                     }
                 }
 
-                std::unique_ptr<MemoryBlock> new_block = std::make_unique<MemoryBlock>(this);
-                // need pointer to initialize child objects, but need to move unique_ptr into container.
-                size_t new_block_idx = alloc_collection->AddMemoryBlock(std::move(new_block));
+                {
+                    std::lock_guard<std::mutex> new_block_guard(allocMutex);
+                    std::unique_ptr<MemoryBlock> new_block = std::make_unique<MemoryBlock>(this);
+                    // need pointer to initialize child objects, but need to move unique_ptr into container.
+                    size_t new_block_idx = alloc_collection->AddMemoryBlock(std::move(new_block));
 
-                auto* new_block_ptr = (*alloc_collection)[new_block_idx];
-                // allocation size is more up-to-date than mem reqs size
-                new_block_ptr->Init(new_memory, alloc_info.allocationSize);
-                new_block_ptr->MemoryTypeIdx = memory_type_idx;
-
+                    auto* new_block_ptr = (*alloc_collection)[new_block_idx];
+                    // allocation size is more up-to-date than mem reqs size
+                    new_block_ptr->Init(new_memory, alloc_info.allocationSize);
+                    new_block_ptr->MemoryTypeIdx = memory_type_idx;
+                }
+                
                 SuballocationRequest request{ *new_block_ptr->avail_begin(), 0 };
                 new_block_ptr->Allocate(request, type, memory_reqs.size);
                 
