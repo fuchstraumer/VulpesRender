@@ -36,6 +36,10 @@ namespace vpr {
         void LoadCacheFromFile(const char * filename);
         const VkPipelineCache& vkHandle() const;
 
+        /**Merges given cache objects into this object
+         */
+        void MergeCaches(const uint32_t num_caches, const VkPipelineCache* caches);
+
     private:
 
         std::string filename;

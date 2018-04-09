@@ -56,51 +56,7 @@ namespace vpr {
         filename = std::move(other.filename);
         return *this;
     }
-    
-    VkResult PipelineCache::saveToFile() const {
-
-        VkResult result = VK_SUCCESS;
-        size_t cache_size;
-
-        if (!parent) {
-            LOG(ERROR) << "Attempted to delete/save a non-existent cache!";
-            return VK_ERROR_DEVICE_LOST;
-        }
-
-        // works like enumerate calls: get size first, then use size to get data.
-        result = vkGetPipelineCacheData(parent->vkHandle(), handle, &cache_size, nullptr);
-        VkAssert(result);
-
-        if (cache_size != 0) {
-            try {
-                std::ofstream file(filename, std::ios::out | std::ios::trunc);
-
-                void* cache_data;
-                cache_data = malloc(cache_size);
-
-                result = vkGetPipelineCacheData(parent->vkHandle(), handle, &cache_size, cache_data);
-                VkAssert(result);
-
-                file.write(reinterpret_cast<const char*>(cache_data), cache_size);
-                file.close();
-
-                free(cache_data);
-                LOG(INFO) << "Saved pipeline cache data to file successfully";
-
-                return VK_SUCCESS;
-            }
-            catch (std::ofstream::failure&) {
-                LOG(WARNING) << "Saving of pipeline cache to file failed with unindentified exception in std::ofstream.";
-                return VK_ERROR_VALIDATION_FAILED_EXT;
-            }
-        }
-        else {
-            LOG(WARNING) << "Cache data was reported empty by Vulkan: errors possible.";
-            return VK_SUCCESS;
-        }
-        
-    }
-
+ 
     bool PipelineCache::Verify(const int8_t* cache_header) const {
 
         const uint32_t* header = reinterpret_cast<const uint32_t*>(cache_header);
@@ -163,6 +119,54 @@ namespace vpr {
 
     const VkPipelineCache& PipelineCache::vkHandle() const{
         return handle;
+    }
+
+    void PipelineCache::MergeCaches(const uint32_t num_caches, const VkPipelineCache* caches) {
+        vkMergePipelineCaches(parent->vkHandle(), handle, num_caches, caches);
+    }
+    
+    VkResult PipelineCache::saveToFile() const {
+
+        VkResult result = VK_SUCCESS;
+        size_t cache_size;
+
+        if (!parent) {
+            LOG(ERROR) << "Attempted to delete/save a non-existent cache!";
+            return VK_ERROR_DEVICE_LOST;
+        }
+
+        // works like enumerate calls: get size first, then use size to get data.
+        result = vkGetPipelineCacheData(parent->vkHandle(), handle, &cache_size, nullptr);
+        VkAssert(result);
+
+        if (cache_size != 0) {
+            try {
+                std::ofstream file(filename, std::ios::out | std::ios::trunc);
+
+                void* cache_data;
+                cache_data = malloc(cache_size);
+
+                result = vkGetPipelineCacheData(parent->vkHandle(), handle, &cache_size, cache_data);
+                VkAssert(result);
+
+                file.write(reinterpret_cast<const char*>(cache_data), cache_size);
+                file.close();
+
+                free(cache_data);
+                LOG(INFO) << "Saved pipeline cache data to file successfully";
+
+                return VK_SUCCESS;
+            }
+            catch (std::ofstream::failure&) {
+                LOG(WARNING) << "Saving of pipeline cache to file failed with unindentified exception in std::ofstream.";
+                return VK_ERROR_VALIDATION_FAILED_EXT;
+            }
+        }
+        else {
+            LOG(WARNING) << "Cache data was reported empty by Vulkan: errors possible.";
+            return VK_SUCCESS;
+        }
+        
     }
 
 }
