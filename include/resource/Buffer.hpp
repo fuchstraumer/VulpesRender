@@ -73,7 +73,7 @@ namespace vpr {
 
         VkBufferMemoryBarrier CreateMemoryBarrier(VkAccessFlags src, VkAccessFlags dst, uint32_t src_idx, uint32_t dst_idx, VkDeviceSize sz) const;
 
-        void CreateView(const VkFormat format, const uint32_t range, const uint32_t offset);
+        void CreateView(const VkFormat format, const VkDeviceSize range, const VkDeviceSize offset);
         
         void Map(const VkDeviceSize& offset = 0);
         void Unmap();
