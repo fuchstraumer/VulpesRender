@@ -38,9 +38,9 @@ namespace vpr {
         bindings.emplace(binding.binding, binding);
     }
     
-    void DescriptorSetLayout::AddDescriptorBindings(const std::vector<VkDescriptorSetLayoutBinding>& bindings_vec) {
-        for (const auto& binding : bindings_vec) {
-            bindings.emplace(binding.binding, binding);
+    void DescriptorSetLayout::AddDescriptorBindings(const uint32_t num_bindings, const VkDescriptorSetLayoutBinding* bindings_ptr) {
+        for (uint32_t i = 0; i < num_bindings; ++i) {
+            bindings.emplace(bindings_ptr[i].binding, bindings_ptr[i]);
         }
     }
     const VkDescriptorSetLayout& DescriptorSetLayout::vkHandle() const noexcept {
