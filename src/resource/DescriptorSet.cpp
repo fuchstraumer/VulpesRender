@@ -90,9 +90,10 @@ namespace vpr {
 
     }
 
-    void DescriptorSet::allocate(const DescriptorPool* parent_pool, const DescriptorSetLayout* set_layout) {
+    void DescriptorSet::allocate(const DescriptorPool* parent_pool, const DescriptorSetLayout* set_layout) const {
         
         descriptorPool = parent_pool;
+        setLayout = set_layout;
 
         VkDescriptorSetAllocateInfo alloc_info = vk_descriptor_set_alloc_info_base;
         alloc_info.descriptorPool = descriptorPool->vkHandle();
@@ -105,7 +106,11 @@ namespace vpr {
 
     }
 
-    void DescriptorSet::update() {
+    void DescriptorSet::Update() const {
+        update();
+    }
+
+    void DescriptorSet::update() const {
 
         assert(descriptorPool && allocated && !writeDescriptors.empty());
 
@@ -132,7 +137,21 @@ namespace vpr {
     }
 
     const VkDescriptorSet & DescriptorSet::vkHandle() const noexcept {
+        if (!allocated) {
+            allocate(descriptorPool, setLayout);
+        }
+        if (!updated) {
+            update();
+        }
         return handle;
+    }
+    
+    void DescriptorSet::Reset() {
+        writeDescriptors.clear();
+        bufferInfos.clear();
+        bufferViews.clear();
+        imageInfos.clear();
+        updated = false;
     }
 
 }

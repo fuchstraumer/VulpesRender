@@ -161,7 +161,7 @@ namespace vpr {
             handle, memoryAllocation.Offset(), sz };
     }
 
-    void Buffer::CreateView(const VkFormat format, const uint32_t range, const uint32_t offset) {
+    void Buffer::CreateView(const VkFormat format, const VkDeviceSize range, const VkDeviceSize offset) {
         viewCreateInfo.format = format;
         viewCreateInfo.range = range;
         viewCreateInfo.offset = offset;

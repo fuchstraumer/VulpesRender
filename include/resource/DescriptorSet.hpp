@@ -32,21 +32,28 @@ namespace vpr {
         */
         void Init(const DescriptorPool* parent_pool, const DescriptorSetLayout* set_layout);
         const VkDescriptorSet& vkHandle() const noexcept;
+
+        // Calls vkUpdateDescriptorSets, updating the bindings with potentially new handles representing different buffers
+        void Update() const;
+
+        // Clears the write descriptors and info vectors, requiring an update call after re-adding the descriptors
+        void Reset();
         
     private:
 
-        void allocate(const DescriptorPool* parent_pool, const DescriptorSetLayout* set_layout);
-        void update();
+        void allocate(const DescriptorPool* parent_pool, const DescriptorSetLayout* set_layout) const;
+        void update() const;
 
         const Device* device;
         const DescriptorPool* descriptorPool;
+        const DescriptorSetLayout* setLayout;
         VkDescriptorSet handle;
-        bool updated = false;
-        bool allocated = false;
-        std::map<size_t, VkWriteDescriptorSet> writeDescriptors;
-        std::map<size_t, VkDescriptorBufferInfo> bufferInfos;
-        std::map<size_t, VkDescriptorImageInfo> imageInfos;
-        std::map<size_t, VkBufferView> bufferViews;
+        mutable bool updated = false;
+        mutable bool allocated = false;
+        mutable std::map<size_t, VkWriteDescriptorSet> writeDescriptors;
+        mutable std::map<size_t, VkDescriptorBufferInfo> bufferInfos;
+        mutable std::map<size_t, VkDescriptorImageInfo> imageInfos;
+        mutable std::map<size_t, VkBufferView> bufferViews;
     };
 
 }
