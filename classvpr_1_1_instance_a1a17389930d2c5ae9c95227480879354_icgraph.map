@@ -1,0 +1,8 @@
+<map id="vpr::Instance::extensionCheck" name="vpr::Instance::extensionCheck">
+<area shape="rect" id="node2" href="$classvpr_1_1_instance.html#a768d30a4546bc9401107839450a4ce23" title="vpr::Instance::checkOptional\lExtensions" alt="" coords="213,5,400,47"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_instance.html#afd2bf68c4ad36c3cd7d43207f3663870" title="vpr::Instance::checkRequired\lExtensions" alt="" coords="212,71,401,112"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_instance.html#adaf88c2f093cb1f2fe411c07233f1004" title="vpr::Instance::prepareOptional\lExtensions" alt="" coords="451,5,645,47"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_instance.html#ad1fadb1385b0906b157ed42ff392d59e" title="vpr::Instance::extension\lSetup" alt="" coords="695,39,853,80"/>
+<area shape="rect" id="node5" href="$classvpr_1_1_instance.html#a875cd0ca8909a26c346b9d83b85280a2" title="vpr::Instance::Instance" alt="" coords="901,46,1053,73"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_instance.html#a7d3ba80f5dbf37ed8acacc1625ee41c7" title="vpr::Instance::prepareRequired\lExtensions" alt="" coords="449,71,647,112"/>
+</map>

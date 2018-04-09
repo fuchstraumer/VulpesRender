@@ -1,0 +1,6 @@
+<map id="vpr::Allocation::IsPrivateAllocation" name="vpr::Allocation::IsPrivateAllocation">
+<area shape="rect" id="node2" href="$classvpr_1_1_allocator.html#a438bbd88a3f18c741f7de90f528300b1" title="vpr::Allocator::FreeMemory" alt="" coords="427,31,605,57"/>
+<area shape="rect" id="node5" href="$classvpr_1_1_allocator.html#ab9d7b854a663fa66385938506f0676d3" title="vpr::Allocator::freePrivate\lMemory" alt="" coords="213,53,379,94"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_allocator.html#a9c04f050d22a383fd21f02e036bf2572" title="vpr::Allocator::DestroyImage" alt="" coords="653,5,839,32"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_allocator.html#aba5e7b8623bceb91e2eb3551d55afb86" title="vpr::Allocator::DestroyBuffer" alt="" coords="655,56,837,83"/>
+</map>

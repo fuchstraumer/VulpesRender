@@ -1,0 +1,12 @@
+<map id="vpr::Swapchain::create" name="vpr::Swapchain::create">
+<area shape="rect" id="node2" href="$classvpr_1_1_swapchain.html#a72f010b980cf7b7c49bfd63d1548114e" title="vpr::Swapchain::setParameters" alt="" coords="209,143,411,170"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_swapchain.html#ab96b4ceb2bb9b542dcb7645e9bcddf42" title="vpr::Swapchain::setupCreateInfo" alt="" coords="207,223,413,250"/>
+<area shape="rect" id="node9" href="$classvpr_1_1_swapchain.html#a045b42094a13f95a236b123584e1924a" title="vpr::Swapchain::setupImage\lViews" alt="" coords="218,275,402,316"/>
+<area shape="rect" id="node10" href="$classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" title="vpr::Device::vkHandle" alt="" coords="491,341,635,367"/>
+<area shape="rect" id="node11" href="$classvpr_1_1_swapchain.html#a4fcc08dbfa54e99092e0ded1dd2cdca7" title="vpr::Swapchain::setupSwap\lImages" alt="" coords="219,392,401,433"/>
+<area shape="rect" id="node3" href="$structvpr_1_1_swapchain_1_1_swapchain_info.html#a4c2ad2b59c261d0d9d6fe67af3d80a6d" title="vpr::Swapchain::Swapchain\lInfo::GetBestFormat" alt="" coords="473,5,653,47"/>
+<area shape="rect" id="node4" href="$structvpr_1_1_swapchain_1_1_swapchain_info.html#a592ca88f80fa410d788ace4014ade438" title="vpr::Swapchain::Swapchain\lInfo::GetBestPresentMode" alt="" coords="473,71,653,112"/>
+<area shape="rect" id="node5" href="$structvpr_1_1_swapchain_1_1_swapchain_info.html#a8e5ec662e23f85142cffed5e97522628" title="vpr::Swapchain::Swapchain\lInfo::ChooseSwapchainExtent" alt="" coords="466,136,661,177"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_instance.html#a6409855c39056544050766847f937602" title="vpr::Instance::GetGLFWwindow" alt="" coords="461,202,665,229"/>
+<area shape="rect" id="node8" href="$classvpr_1_1_instance.html#aa8afd0e70a5fd70ee82daba6c179be8d" title="vpr::Instance::vkSurface" alt="" coords="484,253,643,279"/>
+</map>

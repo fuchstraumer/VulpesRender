@@ -1,0 +1,22 @@
+<map id="el::Logger" name="el::Logger">
+<area shape="rect" id="node2" href="$classel_1_1base_1_1threading_1_1_thread_safe.html" title="Base of thread safe class, this class is inheritable&#45;only. " alt="" coords="821,35,950,77"/>
+<area shape="rect" id="node10" href="$classel_1_1base_1_1_typed_configurations.html" title="Configurations with data types. " alt="" coords="2285,339,2479,365"/>
+<area shape="rect" id="node16" href="$classel_1_1base_1_1utils_1_1_abstract_registry.html" title="el::base::utils::Abstract\lRegistry\&lt; Configuration,\l std::vector\&lt; Configuration *\&gt; \&gt;" alt="" coords="1167,381,1369,437"/>
+<area shape="rect" id="node3" href="$classel_1_1base_1_1threading_1_1internal_1_1_no_mutex.html" title="Mutex wrapper used when multi&#45;threading is disabled. " alt="" coords="469,35,601,77"/>
+<area shape="rect" id="node4" href="$classel_1_1base_1_1_no_copy.html" title="Internal helper class that prevent copy constructor for class. " alt="" coords="181,43,304,69"/>
+<area shape="rect" id="node5" href="$classel_1_1_loggable.html" title="Base of Easylogging++ friendly class. " alt="" coords="197,641,289,668"/>
+<area shape="rect" id="node18" href="$classel_1_1_configuration.html" title="Represents single configuration that has representing level, configuration type and a string based va..." alt="" coords="477,396,592,423"/>
+<area shape="rect" id="node23" href="$classel_1_1base_1_1_log_format.html" title="Represents log format containing flags and date format. This is used internally to start initial log..." alt="" coords="465,524,604,551"/>
+<area shape="rect" id="node8" title="STL class. " alt="" coords="203,416,283,443"/>
+<area shape="rect" id="node14" href="$classel_1_1_configurations.html" title="Thread&#45;safe Configuration repository. " alt="" coords="1912,463,2035,489"/>
+<area shape="rect" id="node9" title="STL class. " alt="" coords="5,409,132,450"/>
+<area shape="rect" id="node15" href="$classel_1_1base_1_1utils_1_1_registry_with_pred.html" title="el::base::utils::Registry\lWithPred\&lt; Configuration,\l Configuration::Predicate \&gt;" alt="" coords="1584,381,1760,437"/>
+<area shape="rect" id="node20" href="$classel_1_1base_1_1_subsecond_precision.html" title="A subsecond precision class containing actual width and offset of the subsecond part. " alt="" coords="1575,331,1769,357"/>
+<area shape="rect" id="node24" title="STL class. " alt="" coords="2322,727,2442,753"/>
+<area shape="rect" id="node25" title="STL class. " alt="" coords="1894,726,2053,767"/>
+<area shape="rect" id="node26" title="STL class. " alt="" coords="1604,726,1740,767"/>
+<area shape="rect" id="node27" title="STL class. " alt="" coords="1203,791,1333,833"/>
+<area shape="rect" id="node28" title="STL class. " alt="" coords="808,767,963,793"/>
+<area shape="rect" id="node30" title="STL class. " alt="" coords="1201,726,1335,767"/>
+<area shape="rect" id="node29" title="STL class. " alt="" coords="485,767,585,793"/>
+</map>

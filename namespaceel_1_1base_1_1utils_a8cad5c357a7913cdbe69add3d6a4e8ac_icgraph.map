@@ -1,0 +1,23 @@
+<map id="el::base::utils::safeDelete" name="el::base::utils::safeDelete">
+<area shape="rect" id="node2" href="$classel_1_1_logger.html#ad9db621dbf8977bf814dc7baea8dcee4" title="Configures the logger using specified configurations. " alt="" coords="248,143,387,170"/>
+<area shape="rect" id="node13" href="$classel_1_1_logger.html#a984de07936a8c783e91496dfa6df69ea" title="el::Logger::Logger" alt="" coords="254,205,381,231"/>
+<area shape="rect" id="node14" href="$classel_1_1base_1_1utils_1_1_file.html#a0fabd4453ec4df237bbc9cca63bf6f13" title="Creates new out file stream for specified filename. " alt="" coords="253,256,382,297"/>
+<area shape="rect" id="node16" href="$classel_1_1_logger.html#a467df515136bf1183919fbf7a2cc8559" title="el::Logger::operator=" alt="" coords="246,322,389,349"/>
+<area shape="rect" id="node17" href="$classel_1_1base_1_1utils_1_1_registry.html#aab6f0ce3a99feff11add0bd8b869fcb8" title="Unregisters single entry mapped to specified unique key. " alt="" coords="239,373,395,429"/>
+<area shape="rect" id="node18" href="$classel_1_1base_1_1utils_1_1_registry_with_pred.html#aaf1afb5a9f8bd1d99c46ac529ea16417" title="el::base::utils::Registry\lWithPred\&lt; base::HitCounter,\l base::HitCounter::Predicate\l \&gt;::unregister" alt="" coords="223,453,412,524"/>
+<area shape="rect" id="node19" href="$classel_1_1base_1_1utils_1_1_registry.html#ac40e62ddf5017beb91c28b472c9628c2" title="el::base::utils::Registry\l\&lt; Logger, std::string \&gt;\l::unregisterAll" alt="" coords="239,549,395,605"/>
+<area shape="rect" id="node20" href="$classel_1_1base_1_1utils_1_1_registry_with_pred.html#a66b4eca5bb71f3fa3f0737105a00890c" title="el::base::utils::Registry\lWithPred\&lt; base::HitCounter,\l base::HitCounter::Predicate\l \&gt;::unregisterAll" alt="" coords="223,629,412,700"/>
+<area shape="rect" id="node21" href="$classel_1_1_logger.html#ae285e82b96ffcbe715ed1f9e51f2f86e" title="el::Logger::~Logger" alt="" coords="250,725,385,751"/>
+<area shape="rect" id="node22" href="$classel_1_1base_1_1_storage.html#a0c635c0a87812a340fa725f8db8474c3" title="el::base::Storage::\l~Storage" alt="" coords="253,776,382,817"/>
+<area shape="rect" id="node3" href="$classel_1_1_loggers.html#adedfcc17831fe3d3f14026c91e8df88c" title="Sets configurations from global configuration file. " alt="" coords="469,27,645,68"/>
+<area shape="rect" id="node4" href="$classel_1_1_logger.html#a43abea8865d7316f05c8a676a8c04896" title="el::Logger::Logger" alt="" coords="493,93,620,119"/>
+<area shape="rect" id="node5" href="$classel_1_1_logger.html#adfd57ab27fb398cc980a3edfab92927e" title="Reconfigures logger using existing configurations. " alt="" coords="481,143,632,170"/>
+<area shape="rect" id="node9" href="$classel_1_1_loggers.html#a02223004494a404a2c3e7cd0c4380d3b" title="Reconfigures specified logger with new configurations. " alt="" coords="478,199,635,240"/>
+<area shape="rect" id="node6" href="$classel_1_1_loggers.html#a396b601e204ede36f5a9acc76a8c5585" title="Reconfigures single configuration for all the loggers for specified level. " alt="" coords="701,5,859,47"/>
+<area shape="rect" id="node7" href="$classel_1_1_loggers.html#a89ec21259cfcfee3f761fca68c4ec043" title="Reconfigures logger&#39;s single configuration. " alt="" coords="701,71,859,112"/>
+<area shape="rect" id="node8" href="$classel_1_1base_1_1_storage.html#a4932a8f8a55c3b00467cf2feed6acf59" title="el::base::Storage::\lStorage" alt="" coords="715,136,845,177"/>
+<area shape="rect" id="node10" href="$classel_1_1_loggers.html#a42f99e79d72d391df563df8d09272194" title="Reconfigures all the existing loggers with new configurations. " alt="" coords="701,201,859,243"/>
+<area shape="rect" id="node12" href="$classel_1_1_loggers.html#af3252cc39fa4ac17b4abf50acf6b4c5e" title="Reconfigures logger with new configurations after looking it up using identity. " alt="" coords="701,267,859,308"/>
+<area shape="rect" id="node11" href="$classel_1_1_loggers.html#a3f478b619f82cab39244ed8cde4778e2" title="Sets default configurations. This configuration is used for future (and conditionally for existing) l..." alt="" coords="907,209,1141,235"/>
+<area shape="rect" id="node15" href="$classel_1_1base_1_1_typed_configurations.html#a858bb6bc3328dc87a5ff31a42f16ee74" title="el::base::TypedConfigurations\l::insertFile" alt="" coords="460,264,653,305"/>
+</map>

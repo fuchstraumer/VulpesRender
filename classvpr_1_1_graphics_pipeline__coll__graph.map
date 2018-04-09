@@ -1,0 +1,14 @@
+<map id="vpr::GraphicsPipeline" name="vpr::GraphicsPipeline">
+<area shape="rect" id="node2" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="891,615,975,641"/>
+<area shape="rect" id="node11" href="$classvpr_1_1_allocator.html" title="The primary interface and class of this subsystem. " alt="" coords="544,726,641,753"/>
+<area shape="rect" id="node4" href="$namespacevpr.html#structvpr_1_1vk_queue_family_indices" title="vpr::vkQueueFamilyIndices" alt="" coords="862,503,1038,530"/>
+<area shape="rect" id="node28" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="1276,503,1371,530"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="1029,303,1164,329"/>
+<area shape="rect" id="node8" href="$classvpr_1_1_physical_device_impl.html" title="vpr::PhysicalDeviceImpl" alt="" coords="1017,109,1176,136"/>
+<area shape="rect" id="node15" href="$classvpr_1_1_allocation_collection.html" title="An allocation collection is just a vector of MemoryBlocks of the same type. " alt="" coords="366,1135,526,1161"/>
+<area shape="rect" id="node18" href="$classvpr_1_1_memory_block.html" title="A MemoryBlock is a large contiguous region of Vulkan memory of a uniform type (device local..." alt="" coords="224,830,351,857"/>
+<area shape="rect" id="node20" href="$structvpr_1_1_suballocation.html" title="During the process of finding a suitable region to bind to, we need to store things like &quot;Suballocati..." alt="" coords="27,615,151,641"/>
+<area shape="rect" id="node22" title="STL iterator class. " alt="" coords="175,615,319,641"/>
+<area shape="rect" id="node25" href="$classvpr_1_1_allocation.html" title="Allocation class represents a singular allocation: can be a private allocation (i.e, only user of attached DeviceMemory) or a block allocation (bound to sub&#45;region of device memory) " alt="" coords="351,399,453,426"/>
+<area shape="rect" id="node31" href="$classvpr_1_1_surface_k_h_r.html" title="The bare&#45;minimum required to wrap a VkSurfaceKHR object. " alt="" coords="1385,615,1502,641"/>
+</map>

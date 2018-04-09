@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classvpr_1_1_image.html" title="Wraps the common image creation, transfer, and staging methods. " alt="" coords="5,5,87,32"/>
+<area shape="rect" id="node2" href="$classvpr_1_1_depth_stencil.html" title="The DepthStencil class is exactly what it says on the tin: it creates the depth&#45;stencil image..." alt="" coords="135,5,255,32"/>
+</map>

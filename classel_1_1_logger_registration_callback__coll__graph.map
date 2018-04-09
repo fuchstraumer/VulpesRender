@@ -1,0 +1,6 @@
+<map id="el::LoggerRegistrationCallback" name="el::LoggerRegistrationCallback">
+<area shape="rect" id="node2" href="$classel_1_1_callback.html" title="el::Callback\&lt; Logger \&gt;" alt="" coords="28,276,181,303"/>
+<area shape="rect" id="node3" href="$classel_1_1base_1_1threading_1_1_thread_safe.html" title="Base of thread safe class, this class is inheritable&#45;only. " alt="" coords="40,185,169,227"/>
+<area shape="rect" id="node4" href="$classel_1_1base_1_1threading_1_1internal_1_1_no_mutex.html" title="Mutex wrapper used when multi&#45;threading is disabled. " alt="" coords="39,81,171,123"/>
+<area shape="rect" id="node5" href="$classel_1_1base_1_1_no_copy.html" title="Internal helper class that prevent copy constructor for class. " alt="" coords="43,5,166,32"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="vpr::Allocator::AllocateMemory" name="vpr::Allocator::AllocateMemory">
+<area shape="rect" id="node2" href="$classvpr_1_1_allocator.html#aa8aad8539721142d8dfa92a3196ab90b" title="vpr::Allocator::Allocate\lForBuffer" alt="" coords="205,5,357,47"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_allocator.html#a79b5ace2d3d620783793593c99d50d4e" title="vpr::Allocator::Allocate\lForImage" alt="" coords="205,71,357,112"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_allocator.html#a98ce3e7a210998e2e6723079ae2bb8ff" title="vpr::Allocator::CreateBuffer" alt="" coords="407,13,583,39"/>
+<area shape="rect" id="node5" href="$classvpr_1_1_allocator.html#a2fe7722a4b3f19bd7705a80be50171bb" title="vpr::Allocator::CreateImage" alt="" coords="405,78,584,105"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="vpr::MemoryBlock::Free" name="vpr::MemoryBlock::Free">
+<area shape="rect" id="node2" href="$classvpr_1_1_memory_block.html#a3aa9297d61b2cd0d71588c7bf8e7b47e" title="Changes the item pointed to by the iterator to be a free type, then adds the now&#45;available size to av..." alt="" coords="213,78,447,105"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397" title="vpr::Allocation::Offset" alt="" coords="257,129,403,155"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_memory_block.html#ac05d7c8692b9d305726c1d948a3ec6d9" title="Verifies integrity of memory by checking all contained suballocations for integrity and correctness..." alt="" coords="239,179,421,206"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_memory_block.html#afbbaf6e2f0de8d1bed31e8a8cf71cfed" title="Removes a free suballocation, usually indicating that it is about to be made active and used by an ob..." alt="" coords="505,5,680,47"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_memory_block.html#a37eea135267c92dcac0fc70e7c6f9ad1" title="Effectively reduces fragmentation by merging two free allocations that are adjacent in memory into on..." alt="" coords="495,71,691,112"/>
+<area shape="rect" id="node5" href="$classvpr_1_1_memory_block.html#aca430805fb87da6c9f14facd22166d5f" title="Registers a free suballocation, inserting it into the proper location to keep the sorting intact (via..." alt="" coords="509,136,676,177"/>
+</map>

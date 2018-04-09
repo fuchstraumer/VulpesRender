@@ -1,0 +1,5 @@
+<map id="vpr::Device::setupTransferQueues" name="vpr::Device::setupTransferQueues">
+<area shape="rect" id="node2" href="$classvpr_1_1_physical_device.html#af443c2a585d182166c464f252782a57b" title="! Attempts to find a Queue family that supports the full bitfield given: this can be multiple types..." alt="" coords="475,5,633,47"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_physical_device.html#a2ee4f96b16a9762953ecad3b658d84e6" title="vpr::PhysicalDevice\l::GetQueueFamilyProperties" alt="" coords="232,35,419,76"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_device.html#af043c9b7994791cc4ae4b8a76a8d8918" title="vpr::Device::SetupQueueFamily" alt="" coords="224,101,427,127"/>
+</map>

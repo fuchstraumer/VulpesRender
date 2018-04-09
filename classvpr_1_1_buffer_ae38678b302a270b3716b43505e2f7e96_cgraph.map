@@ -1,0 +1,8 @@
+<map id="vpr::Buffer::CopyToMapped" name="vpr::Buffer::CopyToMapped">
+<area shape="rect" id="node2" href="$classvpr_1_1_buffer.html#a4c04d59a27d4c3471bdf90eda1c8b662" title="vpr::Buffer::Map" alt="" coords="239,56,351,83"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_buffer.html#a05392d328541adc298ff9b5283a9c6ed" title="vpr::Buffer::Size" alt="" coords="238,107,351,133"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_buffer.html#a780ba4c43b7f1a8ec88a5990a76a3cd0" title="vpr::Buffer::Unmap" alt="" coords="231,5,359,32"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" title="vpr::Device::vkHandle" alt="" coords="414,56,558,83"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_allocation.html#a1a223e41ca865271544ece71d18edce2" title="vpr::Allocation::Memory" alt="" coords="407,5,565,32"/>
+<area shape="rect" id="node5" href="$classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397" title="vpr::Allocation::Offset" alt="" coords="413,107,559,133"/>
+</map>

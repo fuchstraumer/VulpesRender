@@ -1,0 +1,5 @@
+<map id="el::base::RegisteredLoggers" name="el::base::RegisteredLoggers">
+<area shape="rect" id="node2" href="$classel_1_1base_1_1utils_1_1_registry.html" title="el::base::utils::Registry\l\&lt; Logger, std::string \&gt;" alt="" coords="24,199,180,240"/>
+<area shape="rect" id="node3" href="$classel_1_1base_1_1utils_1_1_abstract_registry.html" title="el::base::utils::Abstract\lRegistry\&lt; Logger, std::\lmap\&lt; std::string, Logger *\&gt; \&gt;" alt="" coords="5,95,199,151"/>
+<area shape="rect" id="node4" href="$classel_1_1base_1_1threading_1_1_thread_safe.html" title="Base of thread safe class, this class is inheritable&#45;only. " alt="" coords="37,5,167,47"/>
+</map>

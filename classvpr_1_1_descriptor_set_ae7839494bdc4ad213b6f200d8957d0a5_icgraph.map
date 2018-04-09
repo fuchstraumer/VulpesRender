@@ -1,0 +1,4 @@
+<map id="vpr::DescriptorSet::allocate" name="vpr::DescriptorSet::allocate">
+<area shape="rect" id="node2" href="$classvpr_1_1_descriptor_set.html#a6e2329db70462daabad9be5a29b8caeb" title="Call after all descriptor bindings and infos required have been added, and make sure you have enough ..." alt="" coords="179,5,304,47"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_descriptor_set.html#a10bd2e1ea290ca2a02a8b878d92d47dd" title="vpr::DescriptorSet\l::vkHandle" alt="" coords="179,71,304,112"/>
+</map>

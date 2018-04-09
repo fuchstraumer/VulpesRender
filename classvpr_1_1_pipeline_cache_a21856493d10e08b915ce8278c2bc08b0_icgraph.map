@@ -1,0 +1,4 @@
+<map id="vpr::PipelineCache::Verify" name="vpr::PipelineCache::Verify">
+<area shape="rect" id="node2" href="$classvpr_1_1_pipeline_cache.html#aa982f664e3dd6c95682bfa1084cf9a80" title="vpr::PipelineCache\l::LoadCacheFromFile" alt="" coords="183,5,329,47"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_pipeline_cache.html#aeddb8ba50e50cd84f19e30484b8736d2" title="Creates a pipeline cache, or loads a pre&#45;existing one from file. " alt="" coords="377,5,507,47"/>
+</map>

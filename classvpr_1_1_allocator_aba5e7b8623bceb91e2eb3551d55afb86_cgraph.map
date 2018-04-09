@@ -1,0 +1,8 @@
+<map id="vpr::Allocator::DestroyBuffer" name="vpr::Allocator::DestroyBuffer">
+<area shape="rect" id="node2" href="$classvpr_1_1_allocator.html#a438bbd88a3f18c741f7de90f528300b1" title="vpr::Allocator::FreeMemory" alt="" coords="236,80,415,107"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" title="vpr::Device::vkHandle" alt="" coords="721,168,865,195"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_allocation.html#ad23615cd9f84e8e2354cf1f1e7e8f162" title="vpr::Allocation::IsPrivate\lAllocation" alt="" coords="713,22,873,63"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_allocation.html#ab07876bad87d1c3e085ab02c1c608179" title="vpr::Allocation::MemoryTypeIdx" alt="" coords="463,29,665,56"/>
+<area shape="rect" id="node5" href="$classvpr_1_1_allocator.html#a32c2e59911a888c64b7d56005014865b" title="vpr::Allocator::GetAllocSize" alt="" coords="473,80,655,107"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_allocator.html#ab9d7b854a663fa66385938506f0676d3" title="vpr::Allocator::freePrivate\lMemory" alt="" coords="481,131,647,173"/>
+</map>

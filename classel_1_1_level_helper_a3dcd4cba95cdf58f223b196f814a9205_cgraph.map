@@ -1,0 +1,3 @@
+<map id="el::LevelHelper::convertFromString" name="el::LevelHelper::convertFromString">
+<area shape="rect" id="node2" href="$classel_1_1base_1_1utils_1_1_str.html#a7e47930ab4ebdcb0b50aa34fe992793f" title="Compares cstring equality (case&#45;insensitive) &#45; uses toupper(char) Dont use strcasecmp because of CRT ..." alt="" coords="208,5,333,47"/>
+</map>

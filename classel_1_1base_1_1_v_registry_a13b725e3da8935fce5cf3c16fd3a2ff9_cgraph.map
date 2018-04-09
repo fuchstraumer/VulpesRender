@@ -1,0 +1,6 @@
+<map id="el::base::VRegistry::allowed" name="el::base::VRegistry::allowed">
+<area shape="rect" id="node2" href="$classel_1_1base_1_1utils_1_1_file.html#a6e259e600e50f4d72d44f75c9ce77e27" title="builds base filename and puts it in buff " alt="" coords="194,5,334,47"/>
+<area shape="rect" id="node3" href="$namespaceel_1_1base_1_1utils.html#a51e93c9ba0ac509b2b7a933147349891" title="el::base::utils::hasFlag" alt="" coords="187,71,341,98"/>
+<area shape="rect" id="node4" href="$classel_1_1base_1_1threading_1_1_thread_safe.html#affb45b35790a7305d0a659562c8104fc" title="el::base::threading\l::ThreadSafe::lock" alt="" coords="199,123,329,164"/>
+<area shape="rect" id="node5" href="$classel_1_1base_1_1utils_1_1_str.html#a0f96b488eca9772e204f8b5feddd9a90" title="Matches wildcards, &#39;*&#39; and &#39;?&#39; only supported. " alt="" coords="201,188,327,229"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="vpr::PhysicalDevice::GetQueueFamilyIndex" name="vpr::PhysicalDevice::GetQueueFamilyIndex">
+<area shape="rect" id="node2" href="$classvpr_1_1_device.html#a6914a8dd1054f00fbdc3454e55b3c14b" title="! Returns queue that has support for most operation types. " alt="" coords="218,5,393,32"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_physical_device.html#a2ee4f96b16a9762953ecad3b658d84e6" title="vpr::PhysicalDevice\l::GetQueueFamilyProperties" alt="" coords="212,158,399,199"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_device.html#adbe15d529a11af4d7034a2135255e773" title="vpr::Device::setupGraphics\lQueues" alt="" coords="447,61,623,102"/>
+<area shape="rect" id="node8" href="$classvpr_1_1_device.html#abdb29331fbcc15a242b3f0e82b02beef" title="vpr::Device::setupCompute\lQueues" alt="" coords="447,126,623,167"/>
+<area shape="rect" id="node9" href="$classvpr_1_1_device.html#aa64b2412561fa0950722c2dc4997da9f" title="vpr::Device::setupTransfer\lQueues" alt="" coords="449,191,620,233"/>
+<area shape="rect" id="node10" href="$classvpr_1_1_device.html#a22ee8e6517d4898282d9d6385545100a" title="vpr::Device::setupSparse\lBindingQueues" alt="" coords="452,257,617,298"/>
+<area shape="rect" id="node5" href="$classvpr_1_1_device.html#af52c3b24f6bca1308a5170eb3acfeb11" title="vpr::Device::setupQueues" alt="" coords="671,167,840,193"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_device.html#a3b0734cd598d9a64f3c459e9dc4e84ce" title="vpr::Device::create" alt="" coords="888,167,1016,193"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_device.html#a870f832d4e57cf09fc0705718a498aff" title="vpr::Device::Device" alt="" coords="1064,167,1195,193"/>
+</map>

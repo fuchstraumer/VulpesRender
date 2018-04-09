@@ -1,0 +1,10 @@
+<map id="vpr::Allocator::Allocator" name="vpr::Allocator::Allocator">
+<area shape="rect" id="node2" href="$classvpr_1_1_allocator.html#ae35a57af9edd668c0bd7e135de1973f8" title="vpr::Allocator::createAllocationMaps" alt="" coords="209,13,440,39"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_allocator.html#a5babc9b4c2391bea64a4f9f26ea04257" title="vpr::Allocator::fetchAlloc\lFunctionPointersKHR" alt="" coords="243,64,406,105"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_device.html#adf45896758bbbbe38a3b2011c29b568c" title="vpr::Device::GetPhysical\lDeviceMemoryProperties" alt="" coords="241,129,408,171"/>
+<area shape="rect" id="node8" href="$classvpr_1_1_device.html#a1280b60865e8685bd670543e53291622" title="vpr::Device::GetPhysical\lDeviceProperties" alt="" coords="243,195,406,236"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_allocator.html#a4277250f2867fd5b729bc78e7dc5eb6f" title="vpr::Allocator::GetMemory\lTypeCount" alt="" coords="488,5,661,47"/>
+<area shape="rect" id="node5" href="$classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" title="vpr::Device::vkHandle" alt="" coords="503,71,647,98"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_physical_device.html#a1d9827e465aa6c51331bec797d2318f3" title="vpr::PhysicalDevice\l::GetMemoryProperties" alt="" coords="496,129,653,171"/>
+<area shape="rect" id="node9" href="$classvpr_1_1_physical_device.html#a395785af128c95f3098203a0b32f99ed" title="vpr::PhysicalDevice\l::GetProperties" alt="" coords="507,195,642,236"/>
+</map>

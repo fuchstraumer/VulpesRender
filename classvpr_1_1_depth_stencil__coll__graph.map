@@ -1,0 +1,15 @@
+<map id="vpr::DepthStencil" name="vpr::DepthStencil">
+<area shape="rect" id="node2" href="$classvpr_1_1_image.html" title="Wraps the common image creation, transfer, and staging methods. " alt="" coords="964,726,1045,753"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="848,615,932,641"/>
+<area shape="rect" id="node12" href="$classvpr_1_1_allocator.html" title="The primary interface and class of this subsystem. " alt="" coords="551,726,648,753"/>
+<area shape="rect" id="node5" href="$namespacevpr.html#structvpr_1_1vk_queue_family_indices" title="vpr::vkQueueFamilyIndices" alt="" coords="850,503,1026,530"/>
+<area shape="rect" id="node29" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="1332,503,1427,530"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="393,303,528,329"/>
+<area shape="rect" id="node9" href="$classvpr_1_1_physical_device_impl.html" title="vpr::PhysicalDeviceImpl" alt="" coords="381,109,540,136"/>
+<area shape="rect" id="node16" href="$classvpr_1_1_allocation_collection.html" title="An allocation collection is just a vector of MemoryBlocks of the same type. " alt="" coords="373,1135,533,1161"/>
+<area shape="rect" id="node19" href="$classvpr_1_1_memory_block.html" title="A MemoryBlock is a large contiguous region of Vulkan memory of a uniform type (device local..." alt="" coords="227,830,353,857"/>
+<area shape="rect" id="node21" href="$structvpr_1_1_suballocation.html" title="During the process of finding a suitable region to bind to, we need to store things like &quot;Suballocati..." alt="" coords="21,615,145,641"/>
+<area shape="rect" id="node23" title="STL iterator class. " alt="" coords="170,615,314,641"/>
+<area shape="rect" id="node26" href="$classvpr_1_1_allocation.html" title="Allocation class represents a singular allocation: can be a private allocation (i.e, only user of attached DeviceMemory) or a block allocation (bound to sub&#45;region of device memory) " alt="" coords="879,399,981,426"/>
+<area shape="rect" id="node32" href="$classvpr_1_1_surface_k_h_r.html" title="The bare&#45;minimum required to wrap a VkSurfaceKHR object. " alt="" coords="1291,615,1409,641"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="vpr::PhysicalDeviceImpl::PhysicalDeviceImpl" name="vpr::PhysicalDeviceImpl::PhysicalDeviceImpl">
+<area shape="rect" id="node2" href="$classvpr_1_1_physical_device_impl.html#af87fd9143013fabf4df17ca888d541fb" title="vpr::PhysicalDeviceImpl\l::getAttributes" alt="" coords="238,5,397,47"/>
+<area shape="rect" id="node3" href="$namespacevpr.html#ac9ad3c752dabd8483c29187ef86587c9" title="vpr::GetBestAvailPhysical\lDevice" alt="" coords="232,71,403,112"/>
+<area shape="rect" id="node4" href="$namespacevpr.html#add78d0571fc38d8ee80c540f9754ca50" title="vpr::PopulatePhysicalDeviceMap" alt="" coords="212,137,423,163"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_physical_device_impl.html#a69d80ff2220466001ff60b2703152b66" title="vpr::PhysicalDeviceImpl\l::retrieveQueueFamilyProperties" alt="" coords="214,188,421,229"/>
+<area shape="rect" id="node5" href="$namespacevpr.html#ac7aa57a8b381b41b0230767e64e08bfe" title="vpr::ScoreDevice" alt="" coords="471,137,589,163"/>
+</map>

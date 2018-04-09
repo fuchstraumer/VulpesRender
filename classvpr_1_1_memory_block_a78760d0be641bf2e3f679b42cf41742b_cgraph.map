@@ -1,0 +1,5 @@
+<map id="vpr::MemoryBlock::~MemoryBlock" name="vpr::MemoryBlock::~MemoryBlock">
+<area shape="rect" id="node2" href="$classvpr_1_1_memory_block.html#a3d1d4492ecdb7855569025fe1089f78c" title="Cleans up resources and prepares object to be safely destroyed. " alt="" coords="188,13,367,39"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_allocator.html#a1be30aa02991f0323def73b9be9a3c44" title="vpr::Allocator::DeviceHandle" alt="" coords="415,13,597,39"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" title="vpr::Device::vkHandle" alt="" coords="645,13,789,39"/>
+</map>

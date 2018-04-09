@@ -1,0 +1,7 @@
+<map id="el::base::LogDispatcher::dispatch" name="el::base::LogDispatcher::dispatch">
+<area shape="rect" id="node2" href="$classel_1_1_callback.html#aab4afe42d3f4b6282e69e90efdaa8ea7" title="el::Callback::enabled" alt="" coords="237,5,380,32"/>
+<area shape="rect" id="node3" href="$classel_1_1_callback.html#a8997c7971d65062c374ef24e653061be" title="el::Callback::handle" alt="" coords="241,56,377,83"/>
+<area shape="rect" id="node4" href="$classel_1_1_log_dispatch_data.html#ae85d1d70f93b81ec57f058cf4bda27d4" title="el::LogDispatchData\l::setDispatchAction" alt="" coords="239,107,378,149"/>
+<area shape="rect" id="node5" href="$classel_1_1_log_dispatch_data.html#a09fcf704874e1f0a9d9061fafdaa0ce8" title="el::LogDispatchData\l::setLogMessage" alt="" coords="239,173,378,214"/>
+<area shape="rect" id="node6" href="$classel_1_1base_1_1_typed_configurations.html#af371459159951b76f7f138a0580cfb3c" title="el::base::TypedConfigurations\l::validateFileRolling" alt="" coords="212,238,405,279"/>
+</map>

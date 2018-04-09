@@ -1,0 +1,6 @@
+<map id="el::base::utils::RegistryWithPred&lt; T_Ptr, Pred &gt;" name="el::base::utils::RegistryWithPred&lt; T_Ptr, Pred &gt;">
+<area shape="rect" id="node2" href="$classel_1_1base_1_1utils_1_1_abstract_registry.html" title="el::base::utils::Abstract\lRegistry\&lt; T_Ptr, std::vector\l\&lt; T_Ptr *\&gt; \&gt;" alt="" coords="101,289,282,345"/>
+<area shape="rect" id="node3" href="$classel_1_1base_1_1threading_1_1_thread_safe.html" title="Base of thread safe class, this class is inheritable&#45;only. " alt="" coords="7,185,136,227"/>
+<area shape="rect" id="node4" href="$classel_1_1base_1_1threading_1_1internal_1_1_no_mutex.html" title="Mutex wrapper used when multi&#45;threading is disabled. " alt="" coords="5,81,137,123"/>
+<area shape="rect" id="node5" href="$classel_1_1base_1_1_no_copy.html" title="Internal helper class that prevent copy constructor for class. " alt="" coords="10,5,133,32"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="vpr::Device::VerifyPresentationSupport" name="vpr::Device::VerifyPresentationSupport">
+<area shape="rect" id="node2" href="$classvpr_1_1_physical_device.html#a00de7d3556d98b1cfda28d1f769f8fa8" title="vpr::PhysicalDevice\l::vkHandle" alt="" coords="264,5,399,47"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_instance.html#aa8afd0e70a5fd70ee82daba6c179be8d" title="vpr::Instance::vkSurface" alt="" coords="252,71,411,98"/>
+</map>

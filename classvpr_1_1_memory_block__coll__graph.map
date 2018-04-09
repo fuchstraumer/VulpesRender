@@ -1,0 +1,13 @@
+<map id="vpr::MemoryBlock" name="vpr::MemoryBlock">
+<area shape="rect" id="node3" href="$structvpr_1_1_suballocation.html" title="During the process of finding a suitable region to bind to, we need to store things like &quot;Suballocati..." alt="" coords="15,7,139,33"/>
+<area shape="rect" id="node5" title="STL iterator class. " alt="" coords="5,65,149,92"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_allocator.html" title="The primary interface and class of this subsystem. " alt="" coords="2686,160,2783,187"/>
+<area shape="rect" id="node10" href="$classvpr_1_1_allocation_collection.html" title="An allocation collection is just a vector of MemoryBlocks of the same type. " alt="" coords="1336,80,1496,107"/>
+<area shape="rect" id="node13" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="3341,309,3425,336"/>
+<area shape="rect" id="node15" href="$namespacevpr.html#structvpr_1_1vk_queue_family_indices" title="vpr::vkQueueFamilyIndices" alt="" coords="2971,309,3147,336"/>
+<area shape="rect" id="node22" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="3012,492,3107,519"/>
+<area shape="rect" id="node17" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="2331,412,2465,439"/>
+<area shape="rect" id="node19" href="$classvpr_1_1_physical_device_impl.html" title="vpr::PhysicalDeviceImpl" alt="" coords="1695,412,1853,439"/>
+<area shape="rect" id="node25" href="$classvpr_1_1_surface_k_h_r.html" title="The bare&#45;minimum required to wrap a VkSurfaceKHR object. " alt="" coords="3324,488,3441,515"/>
+<area shape="rect" id="node28" href="$classvpr_1_1_allocation.html" title="Allocation class represents a singular allocation: can be a private allocation (i.e, only user of attached DeviceMemory) or a block allocation (bound to sub&#45;region of device memory) " alt="" coords="1723,160,1825,187"/>
+</map>

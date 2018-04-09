@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['datasize',['dataSize',['../classvpr_1_1_buffer.html#ae153d808e4e2c669e5a925f166aa3e56',1,'vpr::Buffer']]],
+  ['debug_5fpadding',['DEBUG_PADDING',['../namespacevpr.html#a386b8228079a9d82883cb1b818fec3e9',1,'vpr']]],
+  ['debugcallback',['debugCallback',['../classvpr_1_1_instance.html#a9cfd9941aa80f6776f6d74c3950b57ba',1,'vpr::Instance']]],
+  ['default_5fpriorityf',['default_priorityf',['../namespacevpr.html#a1f4584791e4f10ebfe800bfa1c8f47f5',1,'vpr']]],
+  ['defaultlargeheapblocksize',['DefaultLargeHeapBlockSize',['../namespacevpr.html#a252c3121a6d349509e2184d4d4641152',1,'vpr']]],
+  ['defaultmediumheapblocksize',['DefaultMediumHeapBlockSize',['../namespacevpr.html#a5bba3da651d451dc432584c42b9e4ef2',1,'vpr']]],
+  ['defaultsmallheapblocksize',['DefaultSmallHeapBlockSize',['../namespacevpr.html#a8ca1df7d6fffb8c6c1730dfd4b7780bf',1,'vpr']]],
+  ['depthstencilinfo',['DepthStencilInfo',['../structvpr_1_1_graphics_pipeline_info.html#a8f4b01f4c7440cf6be64e30bb4f47942',1,'vpr::GraphicsPipelineInfo']]],
+  ['descriptor',['descriptor',['../classvpr_1_1_buffer.html#a96bfe91f86798bdd5c4caafd5d03e0ad',1,'vpr::Buffer']]],
+  ['descriptor_5ftypes',['descriptor_types',['../namespacevpr.html#ab21fa0d40941a97c77d37f00adde7af1',1,'vpr']]],
+  ['descriptorinfoset',['descriptorInfoSet',['../classvpr_1_1_buffer.html#a10eaeb5b9ea147bc00ca1b58653cdf69',1,'vpr::Buffer']]],
+  ['descriptorpool',['descriptorPool',['../classvpr_1_1_descriptor_set.html#a56f324442bd9a1c653c889128e094797',1,'vpr::DescriptorSet']]],
+  ['device',['device',['../classvpr_1_1_query_pool.html#acd05c46ca0e353bedf21c5c595dc030f',1,'vpr::QueryPool::device()'],['../classvpr_1_1_swapchain.html#ada41a211f8bd4e84c5f31221b5456f06',1,'vpr::Swapchain::device()'],['../classvpr_1_1_descriptor_pool.html#a0ee8da0b374f4606b00eab0d62c9dbf9',1,'vpr::DescriptorPool::device()'],['../classvpr_1_1_descriptor_set.html#aaa93f454255f66ae3c357871533a129c',1,'vpr::DescriptorSet::device()'],['../classvpr_1_1_descriptor_set_layout.html#af7895bc2666bb7b9cfdc473b83de0425',1,'vpr::DescriptorSetLayout::device()'],['../classvpr_1_1_pipeline_layout.html#a5a0beeea8a75ce0d959e30ce8484a4d3',1,'vpr::PipelineLayout::device()'],['../classvpr_1_1_sampler.html#a9b4a653e42efcdbe530752d1839da3e4',1,'vpr::Sampler::device()'],['../classvpr_1_1_semaphore.html#a2f885754279bd54d8e5b9de20f074bb3',1,'vpr::Semaphore::device()']]],
+  ['devicememoryproperties',['deviceMemoryProperties',['../classvpr_1_1_allocator.html#a22905217f341eaaec4788f71034dbab5',1,'vpr::Allocator']]],
+  ['deviceproperties',['deviceProperties',['../classvpr_1_1_allocator.html#ad14908372af93e06ddcaee4f97185fcf',1,'vpr::Allocator']]],
+  ['dvcmemory',['DvcMemory',['../group___allocation.html#a6aca57626ceb41add82d17be604e2b42',1,'vpr::Allocation::privateAllocation']]],
+  ['dynamicstateinfo',['DynamicStateInfo',['../structvpr_1_1_graphics_pipeline_info.html#aec220e52f813d1d8420ba6006bbaa15b',1,'vpr::GraphicsPipelineInfo']]]
+];

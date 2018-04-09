@@ -1,0 +1,4 @@
+<map id="vpr::MemoryBlock::mergeFreeWithNext" name="vpr::MemoryBlock::mergeFreeWithNext">
+<area shape="rect" id="node2" href="$classvpr_1_1_memory_block.html#a3aa9297d61b2cd0d71588c7bf8e7b47e" title="Changes the item pointed to by the iterator to be a free type, then adds the now&#45;available size to av..." alt="" coords="249,13,483,39"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_memory_block.html#a88cde43def4e7d21b8a782554497b064" title="Frees memory in region specified (i.e frees/destroys a suballocation) " alt="" coords="531,13,691,39"/>
+</map>

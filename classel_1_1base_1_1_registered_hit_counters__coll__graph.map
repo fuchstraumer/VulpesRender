@@ -1,0 +1,8 @@
+<map id="el::base::RegisteredHitCounters" name="el::base::RegisteredHitCounters">
+<area shape="rect" id="node2" href="$classel_1_1base_1_1utils_1_1_registry_with_pred.html" title="el::base::utils::Registry\lWithPred\&lt; base::HitCounter,\l base::HitCounter::Predicate \&gt;" alt="" coords="913,27,1112,83"/>
+<area shape="rect" id="node3" href="$classel_1_1base_1_1utils_1_1_abstract_registry.html" title="el::base::utils::Abstract\lRegistry\&lt; base::HitCounter,\l std::vector\&lt; base::HitCounter *\&gt; \&gt;" alt="" coords="640,27,864,83"/>
+<area shape="rect" id="node4" href="$classel_1_1base_1_1threading_1_1_thread_safe.html" title="Base of thread safe class, this class is inheritable&#45;only. " alt="" coords="422,5,551,47"/>
+<area shape="rect" id="node5" href="$classel_1_1base_1_1threading_1_1internal_1_1_no_mutex.html" title="Mutex wrapper used when multi&#45;threading is disabled. " alt="" coords="180,5,312,47"/>
+<area shape="rect" id="node6" href="$classel_1_1base_1_1_no_copy.html" title="Internal helper class that prevent copy constructor for class. " alt="" coords="5,13,128,39"/>
+<area shape="rect" id="node8" href="$classel_1_1base_1_1_hit_counter.html" title="Class that keeps record of current line hit for occasional logging. " alt="" coords="177,78,315,105"/>
+</map>

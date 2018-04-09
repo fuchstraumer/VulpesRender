@@ -1,0 +1,3 @@
+<map id="vpr::Buffer::createStagingBuffer" name="vpr::Buffer::createStagingBuffer">
+<area shape="rect" id="node2" href="$classvpr_1_1_buffer.html#a843cf452ecc4aed63fef2915d40ab9c4" title="Copys the data pointed to by the relevant parameter into a staging buffer, then records commands copy..." alt="" coords="220,13,351,39"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="el::Logger::id" name="el::Logger::id">
+<area shape="rect" id="node2" href="$classel_1_1_loggers.html#adedfcc17831fe3d3f14026c91e8df88c" title="Sets configurations from global configuration file. " alt="" coords="157,15,333,56"/>
+<area shape="rect" id="node3" href="$classel_1_1base_1_1_writer.html#ab1678300b6c7144041e09be423821682" title="el::base::Writer::construct" alt="" coords="158,81,331,107"/>
+<area shape="rect" id="node7" href="$classel_1_1base_1_1_default_log_dispatch_callback.html#adc7c200395c99534d55cb23cfabafcb1" title="el::base::DefaultLogDispatch\lCallback::dispatch" alt="" coords="151,132,339,173"/>
+<area shape="rect" id="node8" href="$classel_1_1base_1_1_registered_loggers.html#ad8fa8f829fdb6a03e6f5a38704811e7b" title="el::base::RegisteredLoggers\l::unregister" alt="" coords="153,199,337,240"/>
+<area shape="rect" id="node4" href="$classel_1_1base_1_1_p_error_writer.html#a72c3ef41fd608b5f87ded491957e4c32" title="el::base::PErrorWriter\l::PErrorWriter" alt="" coords="405,5,553,47"/>
+<area shape="rect" id="node5" href="$classel_1_1base_1_1_writer.html#ae687ebbee62b086f318ee4c8d1a655c4" title="el::base::Writer::initialize\lLogger" alt="" coords="395,71,562,112"/>
+<area shape="rect" id="node6" href="$classel_1_1base_1_1_writer.html#a1c7d90bd4e00af4e7307f5936e1b6507" title="el::base::Writer::trigger\lDispatch" alt="" coords="401,136,556,177"/>
+<area shape="rect" id="node9" href="$classel_1_1base_1_1_registered_loggers.html#a4d17dc9673f6aa6216571e182097400a" title="el::base::RegisteredLoggers\l::remove" alt="" coords="387,201,571,243"/>
+</map>

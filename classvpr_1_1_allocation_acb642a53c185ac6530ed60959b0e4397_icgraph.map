@@ -1,0 +1,11 @@
+<map id="vpr::Allocation::Offset" name="vpr::Allocation::Offset">
+<area shape="rect" id="node2" href="$classvpr_1_1_buffer.html#a843cf452ecc4aed63fef2915d40ab9c4" title="Copys the data pointed to by the relevant parameter into a staging buffer, then records commands copy..." alt="" coords="223,5,353,32"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_allocator.html#a98ce3e7a210998e2e6723079ae2bb8ff" title="vpr::Allocator::CreateBuffer" alt="" coords="200,56,376,83"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_allocator.html#a2fe7722a4b3f19bd7705a80be50171bb" title="vpr::Allocator::CreateImage" alt="" coords="199,107,377,133"/>
+<area shape="rect" id="node5" href="$classvpr_1_1_buffer.html#a51dacf22b4cbfcf0224c467e1f7ba7ac" title="vpr::Buffer::CreateMemory\lBarrier" alt="" coords="202,158,374,199"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_memory_block.html#a88cde43def4e7d21b8a782554497b064" title="Frees memory in region specified (i.e frees/destroys a suballocation) " alt="" coords="208,224,368,251"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_memory_block.html#a7a429e3be46b6f748e687450aa524e09" title="When we map a suballocation, we are mapping a sub&#45;region of the larger memory object it is bound to..." alt="" coords="209,275,367,301"/>
+<area shape="rect" id="node8" href="$classvpr_1_1_buffer.html#a4c04d59a27d4c3471bdf90eda1c8b662" title="vpr::Buffer::Map" alt="" coords="232,325,344,352"/>
+<area shape="rect" id="node10" href="$classvpr_1_1_image.html#a33666589e50590d711ec46c91f6fa6e7" title="vpr::Image::Memory" alt="" coords="220,376,356,403"/>
+<area shape="rect" id="node9" href="$classvpr_1_1_buffer.html#ae38678b302a270b3716b43505e2f7e96" title="Maps this object, copies data to this object, then ensures to unmap this object. " alt="" coords="425,325,603,352"/>
+</map>

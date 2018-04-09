@@ -1,0 +1,13 @@
+<map id="vpr::AllocationCollection" name="vpr::AllocationCollection">
+<area shape="rect" id="node2" href="$classvpr_1_1_allocator.html" title="The primary interface and class of this subsystem. " alt="" coords="1386,413,1483,440"/>
+<area shape="rect" id="node26" href="$classvpr_1_1_memory_block.html" title="A MemoryBlock is a large contiguous region of Vulkan memory of a uniform type (device local..." alt="" coords="1713,661,1840,688"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="2067,231,2151,257"/>
+<area shape="rect" id="node8" href="$namespacevpr.html#structvpr_1_1vk_queue_family_indices" title="vpr::vkQueueFamilyIndices" alt="" coords="1689,179,1865,205"/>
+<area shape="rect" id="node15" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="1729,61,1824,88"/>
+<area shape="rect" id="node10" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="1013,236,1148,263"/>
+<area shape="rect" id="node12" href="$classvpr_1_1_physical_device_impl.html" title="vpr::PhysicalDeviceImpl" alt="" coords="377,236,536,263"/>
+<area shape="rect" id="node18" href="$classvpr_1_1_surface_k_h_r.html" title="The bare&#45;minimum required to wrap a VkSurfaceKHR object. " alt="" coords="2051,5,2168,32"/>
+<area shape="rect" id="node21" href="$classvpr_1_1_allocation.html" title="Allocation class represents a singular allocation: can be a private allocation (i.e, only user of attached DeviceMemory) or a block allocation (bound to sub&#45;region of device memory) " alt="" coords="405,395,508,421"/>
+<area shape="rect" id="node28" href="$structvpr_1_1_suballocation.html" title="During the process of finding a suitable region to bind to, we need to store things like &quot;Suballocati..." alt="" coords="1019,720,1143,747"/>
+<area shape="rect" id="node30" title="STL iterator class. " alt="" coords="1009,661,1153,688"/>
+</map>
