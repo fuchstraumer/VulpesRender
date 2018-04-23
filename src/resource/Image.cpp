@@ -57,13 +57,6 @@ namespace vpr {
         CreateImage(handle, memoryAllocation, parent, createInfo, memory_flags);
     }
 
-    void Image::Create(const VkExtent3D& _extents, const VkFormat& _format, const VkImageUsageFlags& usage_flags, const VkImageLayout& init_layout) {
-        extents = _extents;
-        format = _format;
-        usageFlags = usage_flags;
-        CreateImage(handle, memoryAllocation, parent, extents, format, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, usageFlags, VK_IMAGE_TILING_OPTIMAL, init_layout);
-    }
-
     void Image::CreateView(const VkImageViewCreateInfo & info){
         VkResult result = vkCreateImageView(parent->vkHandle(), &info, allocators, &view);
         VkAssert(result);
@@ -160,28 +153,6 @@ namespace vpr {
         return barrier;
     }
 
-    void Image::CreateImage(VkImage & dest_image, Allocation& dest_alloc, const Device* parent, const VkExtent3D & extents, const VkFormat & image_format, const VkMemoryPropertyFlags & memory_flags, const VkImageUsageFlags & usage_flags, const VkImageTiling& tiling, const VkImageLayout& init_layout) {
-
-        VkImageCreateInfo create_info = vk_image_create_info_base;
-        create_info.imageType = VK_IMAGE_TYPE_2D;
-        create_info.extent = extents;
-        create_info.mipLevels = 1;
-        create_info.arrayLayers = 1;
-        create_info.format = image_format;
-        create_info.tiling = tiling;
-        create_info.initialLayout = init_layout;
-        create_info.samples = VK_SAMPLE_COUNT_1_BIT;
-        create_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-        create_info.usage = usage_flags;
-
-        AllocationRequirements alloc_reqs;
-        alloc_reqs.requiredFlags = memory_flags;
-
-        VkResult result = parent->vkAllocator->CreateImage(&dest_image, &create_info, alloc_reqs, dest_alloc);
-        VkAssert(result);
-
-    }
-
     void Image::CreateImage(VkImage & dest_image, Allocation& dest_alloc, const Device * parent, const VkImageCreateInfo & create_info, const VkMemoryPropertyFlags & memory_flags) {
         
         AllocationRequirements alloc_reqs;
@@ -202,10 +173,6 @@ namespace vpr {
 
     const VkImageView & Image::View() const noexcept{    
         return view;
-    }
-
-    VkMappedMemoryRange Image::Memory() const noexcept{
-        return VkMappedMemoryRange{ VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE, nullptr, memoryAllocation.Memory(), memoryAllocation.Offset(), memoryAllocation.Size };
     }
 
     VkExtent3D Image::GetExtents() const noexcept{
