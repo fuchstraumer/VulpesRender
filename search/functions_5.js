@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['fence',['Fence',['../classvpr_1_1_fence.html#a65415778511c1da4b9ded51aec7f445a',1,'vpr::Fence::Fence(const Fence &amp;)=delete'],['../classvpr_1_1_fence.html#aee4fb1dfd27513d6274f7995642fd480',1,'vpr::Fence::Fence(const Device *dvc, VkFenceCreateFlags flags)'],['../classvpr_1_1_fence.html#ac1f0161242b1cb131a46e028d4e008b1',1,'vpr::Fence::Fence(Fence &amp;&amp;other) noexcept']]],
   ['fetchallocfunctionpointerskhr',['fetchAllocFunctionPointersKHR',['../classvpr_1_1_allocator.html#a5babc9b4c2391bea64a4f9f26ea04257',1,'vpr::Allocator']]],
   ['file',['file',['../classel_1_1_log_message.html#adcced1cf014f9dde378c58e0f993640e',1,'el::LogMessage']]],
   ['filename',['filename',['../classel_1_1base_1_1_typed_configurations.html#a6e989a8496b9e08e6e8c9ac4d3fe5b1e',1,'el::base::TypedConfigurations::filename()'],['../classel_1_1base_1_1_hit_counter.html#a47876995665d4f6389ac150ac8a80b89',1,'el::base::HitCounter::filename()']]],
@@ -9,7 +10,7 @@ var searchData=
   ['findmemorytypeidx',['findMemoryTypeIdx',['../classvpr_1_1_allocator.html#a12b2ce29d3b6b28131cc9c5a331d2286',1,'vpr::Allocator']]],
   ['findsupportedformat',['FindSupportedFormat',['../classvpr_1_1_device.html#a2a58028f056c580337c9454195683eae',1,'vpr::Device']]],
   ['flags',['flags',['../classel_1_1base_1_1_log_format.html#ae4fc4ce8c79267d8e50161e0f5f27e46',1,'el::base::LogFormat::flags()'],['../classel_1_1base_1_1_storage.html#aef58f703540d1cd21942d487ba56a686',1,'el::base::Storage::flags()']]],
-  ['flush',['flush',['../classel_1_1_logger.html#a9a89d454008b1ee1a197eec4b92ce22a',1,'el::Logger::flush(void)'],['../classel_1_1_logger.html#a83c85278ebeeef6a24cc112e56c344dd',1,'el::Logger::flush(Level level, base::type::fstream_t *fs)']]],
+  ['flush',['flush',['../classel_1_1_logger.html#a9a89d454008b1ee1a197eec4b92ce22a',1,'el::Logger::flush(void)'],['../classel_1_1_logger.html#a83c85278ebeeef6a24cc112e56c344dd',1,'el::Logger::flush(Level level, base::type::fstream_t *fs)'],['../classvpr_1_1_buffer.html#a805e50dbbed7233718d366a9742d3246',1,'vpr::Buffer::Flush()']]],
   ['flushall',['flushAll',['../classel_1_1base_1_1_registered_loggers.html#abe6fdac67d9d4c35fb48c9fd88a49c2e',1,'el::base::RegisteredLoggers::flushAll()'],['../classel_1_1_loggers.html#a47e5eca4ee2f6cfbdccb2efabd2c4f12',1,'el::Loggers::flushAll()']]],
   ['foreachconfigtype',['forEachConfigType',['../classel_1_1_configuration_type_helper.html#a0b91c3c00c57483cbddca2748f477582',1,'el::ConfigurationTypeHelper']]],
   ['foreachlevel',['forEachLevel',['../classel_1_1_level_helper.html#a7f0dbfceb2354a72c2802d02c300430d',1,'el::LevelHelper']]],

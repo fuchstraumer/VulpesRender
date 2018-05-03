@@ -9,21 +9,21 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>vpr::Buffer::Map</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-24 257,-24 257,4 -4,4"/>
-<!-- Node63 -->
-<g id="node1" class="node"><title>Node63</title>
+<!-- Node69 -->
+<g id="node1" class="node"><title>Node69</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-19.5 84,-19.5 84,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="42" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Buffer::Map</text>
 </g>
-<!-- Node64 -->
-<g id="node2" class="node"><title>Node64</title>
+<!-- Node70 -->
+<g id="node2" class="node"><title>Node70</title>
 <g id="a_node2"><a xlink:href="classvpr_1_1_buffer.html#ae38678b302a270b3716b43505e2f7e96" target="_top" xlink:title="Maps this object, copies data to this object, then ensures to unmap this object. ">
 <polygon fill="white" stroke="black" points="120,-0.5 120,-19.5 253,-19.5 253,-0.5 120,-0.5"/>
 <text text-anchor="middle" x="186.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Buffer::CopyToMapped</text>
 </a>
 </g>
 </g>
-<!-- Node63&#45;&gt;Node64 -->
-<g id="edge1" class="edge"><title>Node63&#45;&gt;Node64</title>
+<!-- Node69&#45;&gt;Node70 -->
+<g id="edge1" class="edge"><title>Node69&#45;&gt;Node70</title>
 <path fill="none" stroke="midnightblue" d="M94.455,-10C102.731,-10 111.393,-10 119.946,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="94.2169,-6.5001 84.2169,-10 94.2169,-13.5001 94.2169,-6.5001"/>
 </g>

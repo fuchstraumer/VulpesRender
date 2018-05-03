@@ -1,0 +1,7 @@
+<map id="vpr::Fence" name="vpr::Fence">
+<area shape="rect" id="node2" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="1097,122,1181,149"/>
+<area shape="rect" id="node9" href="$classvpr_1_1_allocator.html" title="The primary interface and class of this subsystem. " alt="" coords="1271,122,1368,149"/>
+<area shape="rect" id="node4" href="$namespacevpr.html#structvpr_1_1vk_queue_family_indices" title="vpr::vkQueueFamilyIndices" alt="" coords="745,71,921,98"/>
+<area shape="rect" id="node10" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="785,245,880,271"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="237,162,372,189"/>
+</map>

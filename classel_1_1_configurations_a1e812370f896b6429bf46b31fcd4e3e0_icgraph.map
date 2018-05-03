@@ -3,11 +3,10 @@
 <area shape="rect" id="node3" href="$classel_1_1_logger.html#a43abea8865d7316f05c8a676a8c04896" title="el::Logger::Logger" alt="" coords="391,93,518,119"/>
 <area shape="rect" id="node4" href="$classel_1_1_logger.html#adfd57ab27fb398cc980a3edfab92927e" title="Reconfigures logger using existing configurations. " alt="" coords="379,143,530,170"/>
 <area shape="rect" id="node8" href="$classel_1_1_loggers.html#a02223004494a404a2c3e7cd0c4380d3b" title="Reconfigures specified logger with new configurations. " alt="" coords="376,199,533,240"/>
-<area shape="rect" id="node12" href="$classel_1_1_loggers.html#adedfcc17831fe3d3f14026c91e8df88c" title="Sets configurations from global configuration file. " alt="" coords="367,264,543,305"/>
+<area shape="rect" id="node11" href="$classel_1_1_loggers.html#adedfcc17831fe3d3f14026c91e8df88c" title="Sets configurations from global configuration file. " alt="" coords="367,264,543,305"/>
 <area shape="rect" id="node5" href="$classel_1_1base_1_1_storage.html#a4932a8f8a55c3b00467cf2feed6acf59" title="el::base::Storage::\lStorage" alt="" coords="605,5,734,47"/>
 <area shape="rect" id="node6" href="$classel_1_1_loggers.html#a89ec21259cfcfee3f761fca68c4ec043" title="Reconfigures logger&#39;s single configuration. " alt="" coords="591,71,748,112"/>
 <area shape="rect" id="node7" href="$classel_1_1_loggers.html#a396b601e204ede36f5a9acc76a8c5585" title="Reconfigures single configuration for all the loggers for specified level. " alt="" coords="591,136,748,177"/>
 <area shape="rect" id="node9" href="$classel_1_1_loggers.html#af3252cc39fa4ac17b4abf50acf6b4c5e" title="Reconfigures logger with new configurations after looking it up using identity. " alt="" coords="591,201,748,243"/>
 <area shape="rect" id="node10" href="$classel_1_1_loggers.html#a42f99e79d72d391df563df8d09272194" title="Reconfigures all the existing loggers with new configurations. " alt="" coords="591,267,748,308"/>
-<area shape="rect" id="node11" href="$classel_1_1_loggers.html#a3f478b619f82cab39244ed8cde4778e2" title="Sets default configurations. This configuration is used for future (and conditionally for existing) l..." alt="" coords="796,274,1031,301"/>
 </map>

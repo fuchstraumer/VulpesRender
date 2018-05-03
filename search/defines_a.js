@@ -13,6 +13,8 @@ var searchData=
   ['vpr_5fallocator_5fcommon_5fitems_5fhpp',['VPR_ALLOCATOR_COMMON_ITEMS_HPP',['../_alloc_common_8hpp.html#a58df9e053a4c17141caaa896685a5efc',1,'AllocCommon.hpp']]],
   ['vpr_5fapi',['VPR_API',['../vpr__stdafx_8h.html#a4b940ef35de523c8e5f22898d34635f1',1,'vpr_stdafx.h']]],
   ['vpr_5fdescriptor_5fset_5flayout_5fhpp',['VPR_DESCRIPTOR_SET_LAYOUT_HPP',['../_descriptor_set_layout_8hpp.html#a755f7f6f653dd87686ac87645285c39b',1,'DescriptorSetLayout.hpp']]],
+  ['vpr_5fevent_5fhpp',['VPR_EVENT_HPP',['../_event_8hpp.html#ac847a293c49e7214be82a7c0697bbb5e',1,'Event.hpp']]],
+  ['vpr_5ffence_5fhpp',['VPR_FENCE_HPP',['../_fence_8hpp.html#ac1c30d463444d65f71e24b60cef55210',1,'Fence.hpp']]],
   ['vpr_5fmemory_5fblock_5fhpp',['VPR_MEMORY_BLOCK_HPP',['../_memory_block_8hpp.html#a51a565dc220a0b7236fe4acf5347b4f0',1,'MemoryBlock.hpp']]],
   ['vpr_5fsampler_5fhpp',['VPR_SAMPLER_HPP',['../_sampler_8hpp.html#ae0335a647fc69a1207b02f99fedd14c4',1,'Sampler.hpp']]],
   ['vpr_5fsemaphore_5fhpp',['VPR_SEMAPHORE_HPP',['../_semaphore_8hpp.html#a3b806b30f0ba5734a091237f3da04ca7',1,'Semaphore.hpp']]],
@@ -38,6 +40,5 @@ var searchData=
   ['vulpes_5fvk_5fsurface_5fkhr_5fhpp',['VULPES_VK_SURFACE_KHR_HPP',['../_surface_k_h_r_8hpp.html#a59186ef93ecae4f9acfbc224306b517f',1,'SurfaceKHR.hpp']]],
   ['vulpes_5fvk_5fswapchain_5fh',['VULPES_VK_SWAPCHAIN_H',['../_swapchain_8hpp.html#a0c8f927372192bdf1e8635e10fca197a',1,'Swapchain.hpp']]],
   ['vulpes_5fvk_5ftransfer_5fpool_5fh',['VULPES_VK_TRANSFER_POOL_H',['../_transfer_pool_8hpp.html#a97ce91217b340bbb4bd8c7dd1c104253',1,'TransferPool.hpp']]],
-  ['vulpesrender_5fquery_5fpool_5fhpp',['VULPESRENDER_QUERY_POOL_HPP',['../_query_pool_8hpp.html#a164f210a8afee4a0db8e184b44cf08ff',1,'QueryPool.hpp']]],
   ['vulpesrender_5fqueue_5fhpp',['VULPESRENDER_QUEUE_HPP',['../_queue_8hpp.html#a571e670962c0d50f10049b4e8ebb1039',1,'Queue.hpp']]]
 ];

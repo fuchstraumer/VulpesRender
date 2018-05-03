@@ -1,27 +1,21 @@
 <map id="el::LevelHelper::forEachLevel" name="el::LevelHelper::forEachLevel">
-<area shape="rect" id="node2" href="$classel_1_1_logger.html#a9a89d454008b1ee1a197eec4b92ce22a" title="Flushes logger to sync all log files for all levels. " alt="" coords="238,53,353,79"/>
-<area shape="rect" id="node15" href="$classel_1_1_configurations.html#a1e812370f896b6429bf46b31fcd4e3e0" title="Determines whether or not specified configuration type exists in the repository. " alt="" coords="232,104,359,145"/>
-<area shape="rect" id="node16" href="$classel_1_1_logger.html#ae7c1d538f6163b6be5d37dafcaf24610" title="el::Logger::initUnflushed\lCount" alt="" coords="215,235,376,276"/>
-<area shape="rect" id="node18" href="$classel_1_1_logger.html#acfb9ef869b9b4dc3efd78d7f64b8bebd" title="el::Logger::resolveLogger\lFormatSpec" alt="" coords="212,169,379,211"/>
-<area shape="rect" id="node19" href="$classel_1_1_configurations.html#ac658068ac7454b47284e211e16da5b18" title="Sets configurations for all levels including Level::Global if includeGlobalLevel is true..." alt="" coords="234,365,357,407"/>
-<area shape="rect" id="node20" href="$classel_1_1_configurations.html#a800efb58724eb771027135b282eae512" title="Sets configurations (Unsafely) for all levels including Level::Global if includeGlobalLevel is true..." alt="" coords="228,300,363,341"/>
-<area shape="rect" id="node3" href="$classel_1_1_logger.html#ad9db621dbf8977bf814dc7baea8dcee4" title="Configures the logger using specified configurations. " alt="" coords="451,137,590,163"/>
-<area shape="rect" id="node14" href="$classel_1_1base_1_1_default_log_dispatch_callback.html#adc7c200395c99534d55cb23cfabafcb1" title="el::base::DefaultLogDispatch\lCallback::dispatch" alt="" coords="427,45,615,87"/>
-<area shape="rect" id="node4" href="$classel_1_1_logger.html#a43abea8865d7316f05c8a676a8c04896" title="el::Logger::Logger" alt="" coords="687,23,814,50"/>
-<area shape="rect" id="node5" href="$classel_1_1_logger.html#adfd57ab27fb398cc980a3edfab92927e" title="Reconfigures logger using existing configurations. " alt="" coords="675,143,826,170"/>
-<area shape="rect" id="node9" href="$classel_1_1_loggers.html#a02223004494a404a2c3e7cd0c4380d3b" title="Reconfigures specified logger with new configurations. " alt="" coords="672,75,829,116"/>
-<area shape="rect" id="node13" href="$classel_1_1_loggers.html#adedfcc17831fe3d3f14026c91e8df88c" title="Sets configurations from global configuration file. " alt="" coords="663,195,839,236"/>
-<area shape="rect" id="node6" href="$classel_1_1base_1_1_storage.html#a4932a8f8a55c3b00467cf2feed6acf59" title="el::base::Storage::\lStorage" alt="" coords="903,136,1033,177"/>
-<area shape="rect" id="node7" href="$classel_1_1_loggers.html#a89ec21259cfcfee3f761fca68c4ec043" title="Reconfigures logger&#39;s single configuration. " alt="" coords="889,267,1047,308"/>
-<area shape="rect" id="node8" href="$classel_1_1_loggers.html#a396b601e204ede36f5a9acc76a8c5585" title="Reconfigures single configuration for all the loggers for specified level. " alt="" coords="889,201,1047,243"/>
-<area shape="rect" id="node10" href="$classel_1_1_loggers.html#af3252cc39fa4ac17b4abf50acf6b4c5e" title="Reconfigures logger with new configurations after looking it up using identity. " alt="" coords="889,71,1047,112"/>
-<area shape="rect" id="node11" href="$classel_1_1_loggers.html#a42f99e79d72d391df563df8d09272194" title="Reconfigures all the existing loggers with new configurations. " alt="" coords="889,5,1047,47"/>
-<area shape="rect" id="node12" href="$classel_1_1_loggers.html#a3f478b619f82cab39244ed8cde4778e2" title="Sets default configurations. This configuration is used for future (and conditionally for existing) l..." alt="" coords="1097,13,1332,39"/>
-<area shape="rect" id="node17" href="$classel_1_1_logger.html#a59b1c5a0f8c5c670e59d2f69f9e39fbb" title="el::Logger::Logger" alt="" coords="457,230,584,257"/>
-<area shape="rect" id="node21" href="$classel_1_1_configurations.html#a332717de96efc851a202b7afcc5e395c" title="Sets value of configuration for specified level. " alt="" coords="677,281,825,307"/>
-<area shape="rect" id="node23" href="$classel_1_1_configurations.html#a05c373510ca513e4f61999c84d512831" title="Thread unsafe set. " alt="" coords="459,332,582,373"/>
-<area shape="rect" id="node22" href="$classel_1_1_configurations_1_1_parser.html#a70e0d8b27e7c1b5dd94e6838c304a751" title="el::Configurations\l::Parser::parseLine" alt="" coords="902,332,1034,373"/>
-<area shape="rect" id="node24" href="$classel_1_1_configurations.html#a84c06d47e550b5eda3060f399698ec28" title="Unsafely sets configuration if does not already exist. " alt="" coords="679,375,823,416"/>
-<area shape="rect" id="node25" href="$classel_1_1_configurations.html#ad89b7d2dd750e4d1b3deff800e278fdb" title="Lets you set the remaining configurations to default. " alt="" coords="887,397,1049,439"/>
-<area shape="rect" id="node26" href="$classel_1_1_configurations.html#ae341bd647734d1180a5a138222d2f1ea" title="Constructor used to set configurations using configuration file. " alt="" coords="1153,397,1276,439"/>
+<area shape="rect" id="node2" href="$classel_1_1_logger.html#a9a89d454008b1ee1a197eec4b92ce22a" title="Flushes logger to sync all log files for all levels. " alt="" coords="238,13,353,39"/>
+<area shape="rect" id="node11" href="$classel_1_1_configurations.html#a1e812370f896b6429bf46b31fcd4e3e0" title="Determines whether or not specified configuration type exists in the repository. " alt="" coords="232,64,359,105"/>
+<area shape="rect" id="node12" href="$classel_1_1_logger.html#ae7c1d538f6163b6be5d37dafcaf24610" title="el::Logger::initUnflushed\lCount" alt="" coords="215,195,376,236"/>
+<area shape="rect" id="node14" href="$classel_1_1_logger.html#acfb9ef869b9b4dc3efd78d7f64b8bebd" title="el::Logger::resolveLogger\lFormatSpec" alt="" coords="212,129,379,171"/>
+<area shape="rect" id="node15" href="$classel_1_1_configurations.html#ac658068ac7454b47284e211e16da5b18" title="Sets configurations for all levels including Level::Global if includeGlobalLevel is true..." alt="" coords="234,325,357,367"/>
+<area shape="rect" id="node16" href="$classel_1_1_configurations.html#a800efb58724eb771027135b282eae512" title="Sets configurations (Unsafely) for all levels including Level::Global if includeGlobalLevel is true..." alt="" coords="228,260,363,301"/>
+<area shape="rect" id="node3" href="$classel_1_1_logger.html#ad9db621dbf8977bf814dc7baea8dcee4" title="Configures the logger using specified configurations. " alt="" coords="451,118,590,145"/>
+<area shape="rect" id="node10" href="$classel_1_1base_1_1_default_log_dispatch_callback.html#adc7c200395c99534d55cb23cfabafcb1" title="el::base::DefaultLogDispatch\lCallback::dispatch" alt="" coords="427,5,615,47"/>
+<area shape="rect" id="node4" href="$classel_1_1_logger.html#a43abea8865d7316f05c8a676a8c04896" title="el::Logger::Logger" alt="" coords="687,158,814,185"/>
+<area shape="rect" id="node5" href="$classel_1_1_logger.html#adfd57ab27fb398cc980a3edfab92927e" title="Reconfigures logger using existing configurations. " alt="" coords="675,209,826,235"/>
+<area shape="rect" id="node8" href="$classel_1_1_loggers.html#a02223004494a404a2c3e7cd0c4380d3b" title="Reconfigures specified logger with new configurations. " alt="" coords="672,27,829,68"/>
+<area shape="rect" id="node9" href="$classel_1_1_loggers.html#adedfcc17831fe3d3f14026c91e8df88c" title="Sets configurations from global configuration file. " alt="" coords="663,92,839,133"/>
+<area shape="rect" id="node6" href="$classel_1_1_loggers.html#a89ec21259cfcfee3f761fca68c4ec043" title="Reconfigures logger&#39;s single configuration. " alt="" coords="887,267,1044,308"/>
+<area shape="rect" id="node7" href="$classel_1_1_loggers.html#a396b601e204ede36f5a9acc76a8c5585" title="Reconfigures single configuration for all the loggers for specified level. " alt="" coords="887,201,1044,243"/>
+<area shape="rect" id="node13" href="$classel_1_1_logger.html#a59b1c5a0f8c5c670e59d2f69f9e39fbb" title="el::Logger::Logger" alt="" coords="457,202,584,229"/>
+<area shape="rect" id="node17" href="$classel_1_1_configurations.html#a332717de96efc851a202b7afcc5e395c" title="Sets value of configuration for specified level. " alt="" coords="677,326,825,353"/>
+<area shape="rect" id="node19" href="$classel_1_1_configurations.html#a05c373510ca513e4f61999c84d512831" title="Thread unsafe set. " alt="" coords="459,260,582,301"/>
+<area shape="rect" id="node18" href="$classel_1_1_configurations_1_1_parser.html#a70e0d8b27e7c1b5dd94e6838c304a751" title="el::Configurations\l::Parser::parseLine" alt="" coords="899,332,1031,373"/>
+<area shape="rect" id="node20" href="$classel_1_1_configurations.html#a84c06d47e550b5eda3060f399698ec28" title="Unsafely sets configuration if does not already exist. " alt="" coords="679,260,823,301"/>
 </map>

@@ -1,4 +1,4 @@
 <map id="vpr::CommandPool::StartSingleCmdBuffer" name="vpr::CommandPool::StartSingleCmdBuffer">
 <area shape="rect" id="node2" href="$classvpr_1_1_buffer.html#a3a369873112eb478f3dfdf7b1549d2f6" title="Copies data using a single command buffer submission form the given pool to the given queue..." alt="" coords="283,5,413,32"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_image.html#af859b6a324c843f53bc822fcb90fdf33" title="vpr::Image::TransitionLayout" alt="" coords="256,56,440,83"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_image.html#af859b6a324c843f53bc822fcb90fdf33" title="Uses a memory barrier to enforce an image layout change. " alt="" coords="256,56,440,83"/>
 </map>

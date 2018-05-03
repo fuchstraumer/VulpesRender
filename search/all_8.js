@@ -37,12 +37,15 @@ var searchData=
   ['instance',['Instance',['../classvpr_1_1_instance.html',1,'vpr::Instance'],['../classvpr_1_1_instance.html#ad84c0d2b814c5a7e578df1c33c228cf2',1,'vpr::Instance::Instance(const Instance &amp;)=delete'],['../classvpr_1_1_instance.html#a3b1cbb971938ac32992a7947f8d443d9',1,'vpr::Instance::Instance(bool enable_validation, const VkApplicationInfo *info, GLFWwindow *window)'],['../classvpr_1_1_instance.html#a875cd0ca8909a26c346b9d83b85280a2',1,'vpr::Instance::Instance(bool enable_validation, const VkApplicationInfo *info, GLFWwindow *window, const VprExtensionPack *extensions, const char *const *layers=nullptr, const uint32_t layer_count=0)'],['../classvpr_1_1_swapchain.html#a1a7123f85d9549c1005f7f3d1bc8ee1f',1,'vpr::Swapchain::instance()']]],
   ['instance_2ecpp',['Instance.cpp',['../_instance_8cpp.html',1,'']]],
   ['instance_2ehpp',['Instance.hpp',['../_instance_8hpp.html',1,'']]],
+  ['invalidate',['Invalidate',['../classvpr_1_1_buffer.html#ae44f3e3a2bcb922d522088c102147663',1,'vpr::Buffer']]],
   ['iscomment',['isComment',['../classel_1_1_configurations_1_1_parser.html#afbf7fb724d1a1a9f0040c966023cc04b',1,'el::Configurations::Parser']]],
   ['isconfig',['isConfig',['../classel_1_1_configurations_1_1_parser.html#a6d55cc5727c054922d479bda6624c7d3',1,'el::Configurations::Parser']]],
   ['isdigit',['isDigit',['../classel_1_1base_1_1utils_1_1_str.html#a4caae91dfe0310d9f182bd9b7e99103c',1,'el::base::utils::Str']]],
   ['isflushneeded',['isFlushNeeded',['../classel_1_1_logger.html#abdf56c00388c71d1cbaa7e2df4449202',1,'el::Logger']]],
   ['islevel',['isLevel',['../classel_1_1_configurations_1_1_parser.html#ade3578dee6378620c6281b090433ce72',1,'el::Configurations::Parser']]],
   ['isprivateallocation',['IsPrivateAllocation',['../classvpr_1_1_allocation.html#ad23615cd9f84e8e2354cf1f1e7e8f162',1,'vpr::Allocation']]],
+  ['isreset',['IsReset',['../classvpr_1_1_event.html#a136668a70c07e1e3f3801184e6bc80d1',1,'vpr::Event']]],
+  ['isset',['IsSet',['../classvpr_1_1_event.html#a065551f41d822e7fe5d371d96f23282a',1,'vpr::Event']]],
   ['isvalidid',['isValidId',['../classel_1_1_logger.html#ab134ceead9e69cab71380af41e3ee5d3',1,'el::Logger']]],
   ['iterator',['iterator',['../classvpr_1_1_allocation_collection.html#a723a651fdda475182b15d93e131441f7',1,'vpr::AllocationCollection::iterator()'],['../classel_1_1base_1_1utils_1_1_abstract_registry.html#a58d0536c748633afd3f7c237b63a9a7c',1,'el::base::utils::AbstractRegistry::iterator()'],['../classel_1_1base_1_1utils_1_1_registry.html#a31f3d725285e6b65f1f9e990066f96ed',1,'el::base::utils::Registry::iterator()'],['../classel_1_1base_1_1utils_1_1_registry_with_pred.html#afc03d2d0a72f5ebf03e1e3b37bd9932d',1,'el::base::utils::RegistryWithPred::iterator()']]]
 ];

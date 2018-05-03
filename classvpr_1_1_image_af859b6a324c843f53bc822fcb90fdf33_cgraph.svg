@@ -9,13 +9,13 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 123)">
 <title>vpr::Image::TransitionLayout</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-123 474,-123 474,4 -4,4"/>
-<!-- Node57 -->
-<g id="node1" class="node"><title>Node57</title>
+<!-- Node48 -->
+<g id="node1" class="node"><title>Node48</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-50 0,-69 138,-69 138,-50 0,-50"/>
 <text text-anchor="middle" x="69" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Image::TransitionLayout</text>
 </g>
-<!-- Node58 -->
-<g id="node2" class="node"><title>Node58</title>
+<!-- Node49 -->
+<g id="node2" class="node"><title>Node49</title>
 <g id="a_node2"><a xlink:href="classvpr_1_1_command_pool.html#ac46b6fae9d0650041a4929698d59508a" target="_top" xlink:title="vpr::CommandPool::EndSingle\lCmdBuffer">
 <polygon fill="white" stroke="black" points="175.5,-88.5 175.5,-118.5 324.5,-118.5 324.5,-88.5 175.5,-88.5"/>
 <text text-anchor="start" x="183.5" y="-106.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::CommandPool::EndSingle</text>
@@ -23,26 +23,26 @@
 </a>
 </g>
 </g>
-<!-- Node57&#45;&gt;Node58 -->
-<g id="edge1" class="edge"><title>Node57&#45;&gt;Node58</title>
+<!-- Node48&#45;&gt;Node49 -->
+<g id="edge1" class="edge"><title>Node48&#45;&gt;Node49</title>
 <path fill="none" stroke="midnightblue" d="M108.84,-69.0473C128.994,-74.0012 154.257,-80.2112 177.764,-85.9895"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="177.165,-89.4463 187.711,-88.4346 178.836,-82.6487 177.165,-89.4463"/>
 </g>
-<!-- Node59 -->
-<g id="node3" class="node"><title>Node59</title>
+<!-- Node50 -->
+<g id="node3" class="node"><title>Node50</title>
 <g id="a_node3"><a xlink:href="classvpr_1_1_image.html#a27901dcfdf4bf4df50dcd759052ed7de" target="_top" xlink:title="Returns an appropriate memory barrier for the given image, to transfer it between image layouts...">
 <polygon fill="white" stroke="black" points="177,-50 177,-69 323,-69 323,-50 177,-50"/>
 <text text-anchor="middle" x="250" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Image::GetMemoryBarrier</text>
 </a>
 </g>
 </g>
-<!-- Node57&#45;&gt;Node59 -->
-<g id="edge2" class="edge"><title>Node57&#45;&gt;Node59</title>
+<!-- Node48&#45;&gt;Node50 -->
+<g id="edge2" class="edge"><title>Node48&#45;&gt;Node50</title>
 <path fill="none" stroke="midnightblue" d="M138.183,-59.5C147.47,-59.5 157.082,-59.5 166.587,-59.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="166.839,-63.0001 176.839,-59.5 166.839,-56.0001 166.839,-63.0001"/>
 </g>
-<!-- Node60 -->
-<g id="node4" class="node"><title>Node60</title>
+<!-- Node51 -->
+<g id="node4" class="node"><title>Node51</title>
 <g id="a_node4"><a xlink:href="classvpr_1_1_command_pool.html#a27e9ae2e084faaffe032cb9b92ad2fa4" target="_top" xlink:title="vpr::CommandPool::StartSingle\lCmdBuffer">
 <polygon fill="white" stroke="black" points="174,-0.5 174,-30.5 326,-30.5 326,-0.5 174,-0.5"/>
 <text text-anchor="start" x="182" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::CommandPool::StartSingle</text>
@@ -50,21 +50,21 @@
 </a>
 </g>
 </g>
-<!-- Node57&#45;&gt;Node60 -->
-<g id="edge3" class="edge"><title>Node57&#45;&gt;Node60</title>
+<!-- Node48&#45;&gt;Node51 -->
+<g id="edge3" class="edge"><title>Node48&#45;&gt;Node51</title>
 <path fill="none" stroke="midnightblue" d="M108.84,-49.9527C128.994,-44.9988 154.257,-38.7888 177.764,-33.0105"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="178.836,-36.3513 187.711,-30.5654 177.165,-29.5537 178.836,-36.3513"/>
 </g>
-<!-- Node61 -->
-<g id="node5" class="node"><title>Node61</title>
+<!-- Node52 -->
+<g id="node5" class="node"><title>Node52</title>
 <g id="a_node5"><a xlink:href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" target="_top" xlink:title="vpr::Device::vkHandle">
 <polygon fill="white" stroke="black" points="362,-6 362,-25 470,-25 470,-6 362,-6"/>
 <text text-anchor="middle" x="416" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::vkHandle</text>
 </a>
 </g>
 </g>
-<!-- Node60&#45;&gt;Node61 -->
-<g id="edge4" class="edge"><title>Node60&#45;&gt;Node61</title>
+<!-- Node51&#45;&gt;Node52 -->
+<g id="edge4" class="edge"><title>Node51&#45;&gt;Node52</title>
 <path fill="none" stroke="midnightblue" d="M326.28,-15.5C334.687,-15.5 343.19,-15.5 351.43,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="351.701,-19.0001 361.701,-15.5 351.701,-12.0001 351.701,-19.0001"/>
 </g>

@@ -1,16 +1,9 @@
 <map id="vpr::DescriptorSet" name="vpr::DescriptorSet">
-<area shape="rect" id="node4" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="971,615,1055,641"/>
-<area shape="rect" id="node13" href="$classvpr_1_1_allocator.html" title="The primary interface and class of this subsystem. " alt="" coords="523,726,620,753"/>
-<area shape="rect" id="node34" href="$classvpr_1_1_descriptor_pool.html" title="RAII wrapper around a VkDescriptorPool intended to facilitate sharing of descriptor pools between dis..." alt="" coords="950,726,1081,753"/>
-<area shape="rect" id="node38" href="$classvpr_1_1_descriptor_set_layout.html" title="Simple wrapper around the VkDescriptorSetLayout object. " alt="" coords="1505,726,1669,753"/>
-<area shape="rect" id="node6" href="$namespacevpr.html#structvpr_1_1vk_queue_family_indices" title="vpr::vkQueueFamilyIndices" alt="" coords="925,503,1101,530"/>
-<area shape="rect" id="node30" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="1365,503,1460,530"/>
-<area shape="rect" id="node8" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="1163,303,1297,329"/>
-<area shape="rect" id="node10" href="$classvpr_1_1_physical_device_impl.html" title="vpr::PhysicalDeviceImpl" alt="" coords="1151,109,1309,136"/>
-<area shape="rect" id="node17" href="$classvpr_1_1_allocation_collection.html" title="An allocation collection is just a vector of MemoryBlocks of the same type. " alt="" coords="365,1135,525,1161"/>
-<area shape="rect" id="node20" href="$classvpr_1_1_memory_block.html" title="A MemoryBlock is a large contiguous region of Vulkan memory of a uniform type (device local..." alt="" coords="223,830,349,857"/>
-<area shape="rect" id="node22" href="$structvpr_1_1_suballocation.html" title="During the process of finding a suitable region to bind to, we need to store things like &quot;Suballocati..." alt="" coords="27,615,151,641"/>
-<area shape="rect" id="node24" title="STL iterator class. " alt="" coords="193,615,337,641"/>
-<area shape="rect" id="node27" href="$classvpr_1_1_allocation.html" title="Allocation class represents a singular allocation: can be a private allocation (i.e, only user of attached DeviceMemory) or a block allocation (bound to sub&#45;region of device memory) " alt="" coords="384,399,487,426"/>
-<area shape="rect" id="node33" href="$classvpr_1_1_surface_k_h_r.html" title="The bare&#45;minimum required to wrap a VkSurfaceKHR object. " alt="" coords="1703,615,1821,641"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="1157,122,1241,149"/>
+<area shape="rect" id="node11" href="$classvpr_1_1_allocator.html" title="The primary interface and class of this subsystem. " alt="" coords="1490,7,1587,34"/>
+<area shape="rect" id="node15" href="$classvpr_1_1_descriptor_pool.html" title="RAII wrapper around a VkDescriptorPool intended to facilitate sharing of descriptor pools between dis..." alt="" coords="1473,183,1604,210"/>
+<area shape="rect" id="node19" href="$classvpr_1_1_descriptor_set_layout.html" title="Simple wrapper around the VkDescriptorSetLayout object. " alt="" coords="1457,366,1621,393"/>
+<area shape="rect" id="node6" href="$namespacevpr.html#structvpr_1_1vk_queue_family_indices" title="vpr::vkQueueFamilyIndices" alt="" coords="745,71,921,98"/>
+<area shape="rect" id="node12" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="785,245,880,271"/>
+<area shape="rect" id="node8" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="237,162,372,189"/>
 </map>

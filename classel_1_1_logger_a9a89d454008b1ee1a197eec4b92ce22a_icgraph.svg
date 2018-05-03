@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 805;
+var viewWidth = 593;
 var viewHeight = 243;
 var sectionId = 'dynsection-11';
 </script>
@@ -54,7 +54,7 @@ var sectionId = 'dynsection-11';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>el::Logger::flush</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-239 801,-239 801,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-239 589,-239 589,4 -4,4"/>
 <!-- Node70 -->
 <g id="node1" class="node"><title>Node70</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-125 0,-144 86,-144 86,-125 0,-125"/>
@@ -74,8 +74,8 @@ var sectionId = 'dynsection-11';
 <polygon fill="midnightblue" stroke="midnightblue" points="96.6745,-138.818 86.2676,-140.804 95.6418,-145.741 96.6745,-138.818"/>
 </g>
 <!-- Node82 -->
-<g id="node13" class="node"><title>Node82</title>
-<g id="a_node13"><a xlink:href="classel_1_1base_1_1_default_log_dispatch_callback.html#adc7c200395c99534d55cb23cfabafcb1" target="_top" xlink:title="el::base::DefaultLogDispatch\lCallback::dispatch">
+<g id="node12" class="node"><title>Node82</title>
+<g id="a_node12"><a xlink:href="classel_1_1base_1_1_default_log_dispatch_callback.html#adc7c200395c99534d55cb23cfabafcb1" target="_top" xlink:title="el::base::DefaultLogDispatch\lCallback::dispatch">
 <polygon fill="white" stroke="black" points="122,-97.5 122,-127.5 263,-127.5 263,-97.5 122,-97.5"/>
 <text text-anchor="start" x="130" y="-115.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::DefaultLogDispatch</text>
 <text text-anchor="middle" x="192.5" y="-104.5" font-family="Helvetica,sans-Serif" font-size="10.00">Callback::dispatch</text>
@@ -83,7 +83,7 @@ var sectionId = 'dynsection-11';
 </g>
 </g>
 <!-- Node70&#45;&gt;Node82 -->
-<g id="edge12" class="edge"><title>Node70&#45;&gt;Node82</title>
+<g id="edge11" class="edge"><title>Node70&#45;&gt;Node82</title>
 <path fill="none" stroke="midnightblue" d="M96.2025,-126.714C104.537,-125.471 113.275,-124.167 121.935,-122.876"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="95.6418,-123.259 86.2676,-128.196 96.6745,-130.182 95.6418,-123.259"/>
 </g>
@@ -200,7 +200,7 @@ var sectionId = 'dynsection-11';
 <!-- Node80 -->
 <g id="node11" class="node"><title>Node80</title>
 <g id="a_node11"><a xlink:href="classel_1_1_loggers.html#a42f99e79d72d391df563df8d09272194" target="_top" xlink:title="Reconfigures all the existing loggers with new configurations. ">
-<polygon fill="white" stroke="black" points="467,-0.5 467,-30.5 585,-30.5 585,-0.5 467,-0.5"/>
+<polygon fill="white" stroke="red" points="467,-0.5 467,-30.5 585,-30.5 585,-0.5 467,-0.5"/>
 <text text-anchor="start" x="475" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggers::reconfigure</text>
 <text text-anchor="middle" x="526" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">AllLoggers</text>
 </a>
@@ -210,19 +210,6 @@ var sectionId = 'dynsection-11';
 <g id="edge10" class="edge"><title>Node78&#45;&gt;Node80</title>
 <path fill="none" stroke="midnightblue" d="M424.775,-46.3871C441.678,-41.1778 459.926,-35.5543 476.159,-30.5516"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="423.528,-43.1086 415.003,-49.3986 425.59,-49.7982 423.528,-43.1086"/>
-</g>
-<!-- Node81 -->
-<g id="node12" class="node"><title>Node81</title>
-<g id="a_node12"><a xlink:href="classel_1_1_loggers.html#a3f478b619f82cab39244ed8cde4778e2" target="_top" xlink:title="Sets default configurations. This configuration is used for future (and conditionally for existing) l...">
-<polygon fill="white" stroke="black" points="621,-6 621,-25 797,-25 797,-6 621,-6"/>
-<text text-anchor="middle" x="709" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggers::setDefaultConfigurations</text>
-</a>
-</g>
-</g>
-<!-- Node80&#45;&gt;Node81 -->
-<g id="edge11" class="edge"><title>Node80&#45;&gt;Node81</title>
-<path fill="none" stroke="midnightblue" d="M595.299,-15.5C603.65,-15.5 612.271,-15.5 620.851,-15.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="595.266,-12.0001 585.266,-15.5 595.266,-19.0001 595.266,-12.0001"/>
 </g>
 </g>
 </svg>

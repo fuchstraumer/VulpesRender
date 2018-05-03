@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 792;
+var viewWidth = 580;
 var viewHeight = 333;
 var sectionId = 'dynsection-18';
 </script>
@@ -54,7 +54,7 @@ var sectionId = 'dynsection-18';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>el::Configurations::setFromBase</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-329 788,-329 788,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-329 576,-329 576,4 -4,4"/>
 <!-- Node123 -->
 <g id="node1" class="node"><title>Node123</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-49.5 0,-79.5 92,-79.5 92,-49.5 0,-49.5"/>
@@ -75,8 +75,8 @@ var sectionId = 'dynsection-18';
 <polygon fill="midnightblue" stroke="midnightblue" points="79.5908,-82.2381 69.3419,-79.553 75.6794,-88.0434 79.5908,-82.2381"/>
 </g>
 <!-- Node135 -->
-<g id="node13" class="node"><title>Node135</title>
-<g id="a_node13"><a xlink:href="classel_1_1_configurations_1_1_parser.html#ab8e266318b9feaeee4d3169e4a7ca275" target="_top" xlink:title="Parses configuration from file. ">
+<g id="node12" class="node"><title>Node135</title>
+<g id="a_node12"><a xlink:href="classel_1_1_configurations_1_1_parser.html#ab8e266318b9feaeee4d3169e4a7ca275" target="_top" xlink:title="Parses configuration from file. ">
 <polygon fill="white" stroke="black" points="129.5,-0.5 129.5,-30.5 248.5,-30.5 248.5,-0.5 129.5,-0.5"/>
 <text text-anchor="start" x="137.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Configurations</text>
 <text text-anchor="middle" x="189" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">::Parser::parseFromFile</text>
@@ -84,13 +84,13 @@ var sectionId = 'dynsection-18';
 </g>
 </g>
 <!-- Node123&#45;&gt;Node135 -->
-<g id="edge12" class="edge"><title>Node123&#45;&gt;Node135</title>
+<g id="edge11" class="edge"><title>Node123&#45;&gt;Node135</title>
 <path fill="none" stroke="midnightblue" d="M99.9171,-46.1104C114.598,-41.0084 130.366,-35.5289 144.446,-30.6359"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="98.7521,-42.8098 90.4552,-49.3986 101.05,-49.4219 98.7521,-42.8098"/>
 </g>
 <!-- Node138 -->
-<g id="node16" class="node"><title>Node138</title>
-<g id="a_node16"><a xlink:href="classel_1_1_configurations_1_1_parser.html#ae4efa4823ce108eb35bc69442155a037" target="_top" xlink:title="Parse configurations from configuration string. ">
+<g id="node15" class="node"><title>Node138</title>
+<g id="a_node15"><a xlink:href="classel_1_1_configurations_1_1_parser.html#ae4efa4823ce108eb35bc69442155a037" target="_top" xlink:title="Parse configurations from configuration string. ">
 <polygon fill="white" stroke="black" points="128,-49.5 128,-79.5 250,-79.5 250,-49.5 128,-49.5"/>
 <text text-anchor="start" x="136" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Configurations</text>
 <text text-anchor="middle" x="189" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">::Parser::parseFromText</text>
@@ -98,7 +98,7 @@ var sectionId = 'dynsection-18';
 </g>
 </g>
 <!-- Node123&#45;&gt;Node138 -->
-<g id="edge15" class="edge"><title>Node123&#45;&gt;Node138</title>
+<g id="edge14" class="edge"><title>Node123&#45;&gt;Node138</title>
 <path fill="none" stroke="midnightblue" d="M102.15,-64.5C110.626,-64.5 119.413,-64.5 127.988,-64.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="102.001,-61.0001 92.001,-64.5 102.001,-68.0001 102.001,-61.0001"/>
 </g>
@@ -143,8 +143,8 @@ var sectionId = 'dynsection-18';
 <polygon fill="midnightblue" stroke="midnightblue" points="251.28,-156 241.28,-159.5 251.28,-163 251.28,-156"/>
 </g>
 <!-- Node134 -->
-<g id="node12" class="node"><title>Node134</title>
-<g id="a_node12"><a xlink:href="classel_1_1_loggers.html#adedfcc17831fe3d3f14026c91e8df88c" target="_top" xlink:title="Sets configurations from global configuration file. ">
+<g id="node11" class="node"><title>Node134</title>
+<g id="a_node11"><a xlink:href="classel_1_1_loggers.html#adedfcc17831fe3d3f14026c91e8df88c" target="_top" xlink:title="Sets configurations from global configuration file. ">
 <polygon fill="white" stroke="black" points="440,-49.5 440,-79.5 572,-79.5 572,-49.5 440,-49.5"/>
 <text text-anchor="start" x="448" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggers::configureFrom</text>
 <text text-anchor="middle" x="506" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">Global</text>
@@ -152,7 +152,7 @@ var sectionId = 'dynsection-18';
 </g>
 </g>
 <!-- Node124&#45;&gt;Node134 -->
-<g id="edge11" class="edge"><title>Node124&#45;&gt;Node134</title>
+<g id="edge10" class="edge"><title>Node124&#45;&gt;Node134</title>
 <path fill="none" stroke="midnightblue" d="M231.505,-146.982C289.143,-129.6 393.287,-98.1912 455.09,-79.5521"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="230.209,-143.718 221.646,-149.956 232.23,-150.42 230.209,-143.718"/>
 </g>
@@ -215,7 +215,7 @@ var sectionId = 'dynsection-18';
 <!-- Node132 -->
 <g id="node10" class="node"><title>Node132</title>
 <g id="a_node10"><a xlink:href="classel_1_1_loggers.html#a42f99e79d72d391df563df8d09272194" target="_top" xlink:title="Reconfigures all the existing loggers with new configurations. ">
-<polygon fill="white" stroke="black" points="447,-98.5 447,-128.5 565,-128.5 565,-98.5 447,-98.5"/>
+<polygon fill="white" stroke="red" points="447,-98.5 447,-128.5 565,-128.5 565,-98.5 447,-98.5"/>
 <text text-anchor="start" x="455" y="-116.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggers::reconfigure</text>
 <text text-anchor="middle" x="506" y="-105.5" font-family="Helvetica,sans-Serif" font-size="10.00">AllLoggers</text>
 </a>
@@ -226,22 +226,9 @@ var sectionId = 'dynsection-18';
 <path fill="none" stroke="midnightblue" d="M407.758,-141.633C422.743,-137.298 438.615,-132.706 453.092,-128.517"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="406.696,-138.297 398.063,-144.438 408.641,-145.021 406.696,-138.297"/>
 </g>
-<!-- Node133 -->
-<g id="node11" class="node"><title>Node133</title>
-<g id="a_node11"><a xlink:href="classel_1_1_loggers.html#a3f478b619f82cab39244ed8cde4778e2" target="_top" xlink:title="Sets default configurations. This configuration is used for future (and conditionally for existing) l...">
-<polygon fill="white" stroke="black" points="608,-104 608,-123 784,-123 784,-104 608,-104"/>
-<text text-anchor="middle" x="696" y="-111" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggers::setDefaultConfigurations</text>
-</a>
-</g>
-</g>
-<!-- Node132&#45;&gt;Node133 -->
-<g id="edge10" class="edge"><title>Node132&#45;&gt;Node133</title>
-<path fill="none" stroke="midnightblue" d="M575.502,-113.5C585.981,-113.5 596.917,-113.5 607.734,-113.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="575.197,-110 565.197,-113.5 575.197,-117 575.197,-110"/>
-</g>
 <!-- Node136 -->
-<g id="node14" class="node"><title>Node136</title>
-<g id="a_node14"><a xlink:href="classel_1_1_configurations.html#aaa098126d64a5ee04a3944b1a65dcdca" target="_top" xlink:title="Parses configuration from file. ">
+<g id="node13" class="node"><title>Node136</title>
+<g id="a_node13"><a xlink:href="classel_1_1_configurations.html#aaa098126d64a5ee04a3944b1a65dcdca" target="_top" xlink:title="Parses configuration from file. ">
 <polygon fill="white" stroke="black" points="299,-0.5 299,-30.5 391,-30.5 391,-0.5 299,-0.5"/>
 <text text-anchor="start" x="307" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Configurations</text>
 <text text-anchor="middle" x="345" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">::parseFromFile</text>
@@ -249,13 +236,13 @@ var sectionId = 'dynsection-18';
 </g>
 </g>
 <!-- Node135&#45;&gt;Node136 -->
-<g id="edge13" class="edge"><title>Node135&#45;&gt;Node136</title>
+<g id="edge12" class="edge"><title>Node135&#45;&gt;Node136</title>
 <path fill="none" stroke="midnightblue" d="M258.935,-15.5C272.494,-15.5 286.39,-15.5 298.917,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="258.66,-12.0001 248.66,-15.5 258.66,-19.0001 258.66,-12.0001"/>
 </g>
 <!-- Node137 -->
-<g id="node15" class="node"><title>Node137</title>
-<g id="a_node15"><a xlink:href="classel_1_1_configurations.html#ae341bd647734d1180a5a138222d2f1ea" target="_top" xlink:title="Constructor used to set configurations using configuration file. ">
+<g id="node14" class="node"><title>Node137</title>
+<g id="a_node14"><a xlink:href="classel_1_1_configurations.html#ae341bd647734d1180a5a138222d2f1ea" target="_top" xlink:title="Constructor used to set configurations using configuration file. ">
 <polygon fill="white" stroke="black" points="460,-0.5 460,-30.5 552,-30.5 552,-0.5 460,-0.5"/>
 <text text-anchor="start" x="468" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Configurations</text>
 <text text-anchor="middle" x="506" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">::Configurations</text>
@@ -263,13 +250,13 @@ var sectionId = 'dynsection-18';
 </g>
 </g>
 <!-- Node136&#45;&gt;Node137 -->
-<g id="edge14" class="edge"><title>Node136&#45;&gt;Node137</title>
+<g id="edge13" class="edge"><title>Node136&#45;&gt;Node137</title>
 <path fill="none" stroke="midnightblue" d="M401.216,-15.5C420.335,-15.5 441.526,-15.5 459.749,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="401.138,-12.0001 391.138,-15.5 401.138,-19.0001 401.138,-12.0001"/>
 </g>
 <!-- Node139 -->
-<g id="node17" class="node"><title>Node139</title>
-<g id="a_node17"><a xlink:href="classel_1_1_configurations.html#af262a41dff665a11889261137b62af4a" target="_top" xlink:title="Parse configurations from configuration string. ">
+<g id="node16" class="node"><title>Node139</title>
+<g id="a_node16"><a xlink:href="classel_1_1_configurations.html#af262a41dff665a11889261137b62af4a" target="_top" xlink:title="Parse configurations from configuration string. ">
 <polygon fill="white" stroke="black" points="299,-49.5 299,-79.5 391,-79.5 391,-49.5 299,-49.5"/>
 <text text-anchor="start" x="307" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Configurations</text>
 <text text-anchor="middle" x="345" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">::parseFromText</text>
@@ -277,12 +264,12 @@ var sectionId = 'dynsection-18';
 </g>
 </g>
 <!-- Node138&#45;&gt;Node139 -->
-<g id="edge16" class="edge"><title>Node138&#45;&gt;Node139</title>
+<g id="edge15" class="edge"><title>Node138&#45;&gt;Node139</title>
 <path fill="none" stroke="midnightblue" d="M260.769,-64.5C273.77,-64.5 287.009,-64.5 298.991,-64.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="260.423,-61.0001 250.423,-64.5 260.423,-68.0001 260.423,-61.0001"/>
 </g>
 <!-- Node139&#45;&gt;Node134 -->
-<g id="edge17" class="edge"><title>Node139&#45;&gt;Node134</title>
+<g id="edge16" class="edge"><title>Node139&#45;&gt;Node134</title>
 <path fill="none" stroke="midnightblue" d="M401.345,-64.5C413.776,-64.5 427.078,-64.5 439.866,-64.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="401.138,-61.0001 391.138,-64.5 401.138,-68.0001 401.138,-61.0001"/>
 </g>

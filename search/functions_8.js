@@ -19,11 +19,14 @@ var searchData=
   ['installloggerregistrationcallback',['installLoggerRegistrationCallback',['../classel_1_1base_1_1_registered_loggers.html#a62000b4c52b2383ec7f480ee0fd12586',1,'el::base::RegisteredLoggers::installLoggerRegistrationCallback()'],['../classel_1_1_loggers.html#a8df040fad4898c2682be34ba5128b61d',1,'el::Loggers::installLoggerRegistrationCallback()']]],
   ['installprerolloutcallback',['installPreRollOutCallback',['../classel_1_1_helpers.html#a5fd7ad6d636c28d2e706203d0c43cf8c',1,'el::Helpers']]],
   ['instance',['Instance',['../classvpr_1_1_instance.html#ad84c0d2b814c5a7e578df1c33c228cf2',1,'vpr::Instance::Instance(const Instance &amp;)=delete'],['../classvpr_1_1_instance.html#a3b1cbb971938ac32992a7947f8d443d9',1,'vpr::Instance::Instance(bool enable_validation, const VkApplicationInfo *info, GLFWwindow *window)'],['../classvpr_1_1_instance.html#a875cd0ca8909a26c346b9d83b85280a2',1,'vpr::Instance::Instance(bool enable_validation, const VkApplicationInfo *info, GLFWwindow *window, const VprExtensionPack *extensions, const char *const *layers=nullptr, const uint32_t layer_count=0)']]],
+  ['invalidate',['Invalidate',['../classvpr_1_1_buffer.html#ae44f3e3a2bcb922d522088c102147663',1,'vpr::Buffer']]],
   ['iscomment',['isComment',['../classel_1_1_configurations_1_1_parser.html#afbf7fb724d1a1a9f0040c966023cc04b',1,'el::Configurations::Parser']]],
   ['isconfig',['isConfig',['../classel_1_1_configurations_1_1_parser.html#a6d55cc5727c054922d479bda6624c7d3',1,'el::Configurations::Parser']]],
   ['isdigit',['isDigit',['../classel_1_1base_1_1utils_1_1_str.html#a4caae91dfe0310d9f182bd9b7e99103c',1,'el::base::utils::Str']]],
   ['isflushneeded',['isFlushNeeded',['../classel_1_1_logger.html#abdf56c00388c71d1cbaa7e2df4449202',1,'el::Logger']]],
   ['islevel',['isLevel',['../classel_1_1_configurations_1_1_parser.html#ade3578dee6378620c6281b090433ce72',1,'el::Configurations::Parser']]],
   ['isprivateallocation',['IsPrivateAllocation',['../classvpr_1_1_allocation.html#ad23615cd9f84e8e2354cf1f1e7e8f162',1,'vpr::Allocation']]],
+  ['isreset',['IsReset',['../classvpr_1_1_event.html#a136668a70c07e1e3f3801184e6bc80d1',1,'vpr::Event']]],
+  ['isset',['IsSet',['../classvpr_1_1_event.html#a065551f41d822e7fe5d371d96f23282a',1,'vpr::Event']]],
   ['isvalidid',['isValidId',['../classel_1_1_logger.html#ab134ceead9e69cab71380af41e3ee5d3',1,'el::Logger']]]
 ];

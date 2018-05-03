@@ -1,0 +1,5 @@
+<map id="vpr::DescriptorSetLayout::AddDescriptorBindings" name="vpr::DescriptorSetLayout::AddDescriptorBindings">
+<area shape="rect" id="node2" href="$classvpr_1_1_descriptor_set_layout.html#a1e22c5f5bab22786c71d280940b92b63" title="vpr::DescriptorSetLayout\l::create" alt="" coords="429,25,593,66"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" title="vpr::Device::vkHandle" alt="" coords="641,62,785,88"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_descriptor_set_layout.html#ac798e1138e8a7a380653b27fe7e06058" title="vpr::DescriptorSetLayout\l::vkHandle" alt="" coords="217,25,381,66"/>
+</map>

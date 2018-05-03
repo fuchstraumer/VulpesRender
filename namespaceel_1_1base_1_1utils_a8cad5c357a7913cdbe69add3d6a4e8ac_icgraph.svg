@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 860;
+var viewWidth = 648;
 var viewHeight = 617;
 var sectionId = 'dynsection-5';
 </script>
@@ -54,7 +54,7 @@ var sectionId = 'dynsection-5';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>el::base::utils::safeDelete</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-613 856,-613 856,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-613 644,-613 644,4 -4,4"/>
 <!-- Node32 -->
 <g id="node1" class="node"><title>Node32</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-270 0,-289 127,-289 127,-270 0,-270"/>
@@ -74,21 +74,21 @@ var sectionId = 'dynsection-5';
 <polygon fill="midnightblue" stroke="midnightblue" points="72.9694,-297.965 66.9293,-289.261 66.2229,-299.832 72.9694,-297.965"/>
 </g>
 <!-- Node44 -->
-<g id="node13" class="node"><title>Node44</title>
-<g id="a_node13"><a xlink:href="classel_1_1_logger.html#a984de07936a8c783e91496dfa6df69ea" target="_top" xlink:title="el::Logger::Logger">
+<g id="node12" class="node"><title>Node44</title>
+<g id="a_node12"><a xlink:href="classel_1_1_logger.html#a984de07936a8c783e91496dfa6df69ea" target="_top" xlink:title="el::Logger::Logger">
 <polygon fill="white" stroke="black" points="186.5,-440 186.5,-459 281.5,-459 281.5,-440 186.5,-440"/>
 <text text-anchor="middle" x="234" y="-447" font-family="Helvetica,sans-Serif" font-size="10.00">el::Logger::Logger</text>
 </a>
 </g>
 </g>
 <!-- Node32&#45;&gt;Node44 -->
-<g id="edge12" class="edge"><title>Node32&#45;&gt;Node44</title>
+<g id="edge11" class="edge"><title>Node32&#45;&gt;Node44</title>
 <path fill="none" stroke="midnightblue" d="M71.6323,-298.592C84.6732,-330.832 115.473,-395.926 163,-430.5 169.925,-435.537 178.109,-439.239 186.396,-441.959"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="74.7885,-297.052 67.892,-289.009 68.2676,-299.597 74.7885,-297.052"/>
 </g>
 <!-- Node45 -->
-<g id="node14" class="node"><title>Node45</title>
-<g id="a_node14"><a xlink:href="classel_1_1base_1_1utils_1_1_file.html#a0fabd4453ec4df237bbc9cca63bf6f13" target="_top" xlink:title="Creates new out file stream for specified filename. ">
+<g id="node13" class="node"><title>Node45</title>
+<g id="a_node13"><a xlink:href="classel_1_1base_1_1utils_1_1_file.html#a0fabd4453ec4df237bbc9cca63bf6f13" target="_top" xlink:title="Creates new out file stream for specified filename. ">
 <polygon fill="white" stroke="black" points="185.5,-390.5 185.5,-420.5 282.5,-420.5 282.5,-390.5 185.5,-390.5"/>
 <text text-anchor="start" x="193.5" y="-408.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::utils::File</text>
 <text text-anchor="middle" x="234" y="-397.5" font-family="Helvetica,sans-Serif" font-size="10.00">::newFileStream</text>
@@ -96,26 +96,26 @@ var sectionId = 'dynsection-5';
 </g>
 </g>
 <!-- Node32&#45;&gt;Node45 -->
-<g id="edge13" class="edge"><title>Node32&#45;&gt;Node45</title>
+<g id="edge12" class="edge"><title>Node32&#45;&gt;Node45</title>
 <path fill="none" stroke="midnightblue" d="M77.5926,-297.238C94.8803,-319.524 127.331,-357.613 163,-380.5 169.842,-384.89 177.557,-388.634 185.299,-391.783"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="80.3752,-295.115 71.5376,-289.271 74.8021,-299.351 80.3752,-295.115"/>
 </g>
 <!-- Node47 -->
-<g id="node16" class="node"><title>Node47</title>
-<g id="a_node16"><a xlink:href="classel_1_1_logger.html#a467df515136bf1183919fbf7a2cc8559" target="_top" xlink:title="el::Logger::operator=">
+<g id="node15" class="node"><title>Node47</title>
+<g id="a_node15"><a xlink:href="classel_1_1_logger.html#a467df515136bf1183919fbf7a2cc8559" target="_top" xlink:title="el::Logger::operator=">
 <polygon fill="white" stroke="black" points="180.5,-352 180.5,-371 287.5,-371 287.5,-352 180.5,-352"/>
 <text text-anchor="middle" x="234" y="-359" font-family="Helvetica,sans-Serif" font-size="10.00">el::Logger::operator=</text>
 </a>
 </g>
 </g>
 <!-- Node32&#45;&gt;Node47 -->
-<g id="edge15" class="edge"><title>Node32&#45;&gt;Node47</title>
+<g id="edge14" class="edge"><title>Node32&#45;&gt;Node47</title>
 <path fill="none" stroke="midnightblue" d="M84.8805,-295.168C104.104,-309.289 134.191,-329.737 163,-342.5 171.405,-346.223 180.708,-349.368 189.714,-351.962"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="86.963,-292.355 76.8564,-289.176 82.7745,-297.963 86.963,-292.355"/>
 </g>
 <!-- Node48 -->
-<g id="node17" class="node"><title>Node48</title>
-<g id="a_node17"><a xlink:href="classel_1_1base_1_1utils_1_1_registry.html#aab6f0ce3a99feff11add0bd8b869fcb8" target="_top" xlink:title="Unregisters single entry mapped to specified unique key. ">
+<g id="node16" class="node"><title>Node48</title>
+<g id="a_node16"><a xlink:href="classel_1_1base_1_1utils_1_1_registry.html#aab6f0ce3a99feff11add0bd8b869fcb8" target="_top" xlink:title="Unregisters single entry mapped to specified unique key. ">
 <polygon fill="white" stroke="black" points="175.5,-292 175.5,-333 292.5,-333 292.5,-292 175.5,-292"/>
 <text text-anchor="start" x="183.5" y="-321" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::utils::Registry</text>
 <text text-anchor="start" x="183.5" y="-310" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; Logger, std::string &gt;</text>
@@ -124,13 +124,13 @@ var sectionId = 'dynsection-5';
 </g>
 </g>
 <!-- Node32&#45;&gt;Node48 -->
-<g id="edge16" class="edge"><title>Node32&#45;&gt;Node48</title>
+<g id="edge15" class="edge"><title>Node32&#45;&gt;Node48</title>
 <path fill="none" stroke="midnightblue" d="M123.507,-291.056C140.352,-294.355 158.681,-297.945 175.439,-301.227"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="123.723,-287.532 113.237,-289.045 122.378,-294.402 123.723,-287.532"/>
 </g>
 <!-- Node49 -->
-<g id="node18" class="node"><title>Node49</title>
-<g id="a_node18"><a xlink:href="classel_1_1base_1_1utils_1_1_registry_with_pred.html#aaf1afb5a9f8bd1d99c46ac529ea16417" target="_top" xlink:title="el::base::utils::Registry\lWithPred\&lt; base::HitCounter,\l base::HitCounter::Predicate\l \&gt;::unregister">
+<g id="node17" class="node"><title>Node49</title>
+<g id="a_node17"><a xlink:href="classel_1_1base_1_1utils_1_1_registry_with_pred.html#aaf1afb5a9f8bd1d99c46ac529ea16417" target="_top" xlink:title="el::base::utils::Registry\lWithPred\&lt; base::HitCounter,\l base::HitCounter::Predicate\l \&gt;::unregister">
 <polygon fill="white" stroke="black" points="163,-220.5 163,-272.5 305,-272.5 305,-220.5 163,-220.5"/>
 <text text-anchor="start" x="171" y="-260.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::utils::Registry</text>
 <text text-anchor="start" x="171" y="-249.5" font-family="Helvetica,sans-Serif" font-size="10.00">WithPred&lt; base::HitCounter,</text>
@@ -140,13 +140,13 @@ var sectionId = 'dynsection-5';
 </g>
 </g>
 <!-- Node32&#45;&gt;Node49 -->
-<g id="edge17" class="edge"><title>Node32&#45;&gt;Node49</title>
+<g id="edge16" class="edge"><title>Node32&#45;&gt;Node49</title>
 <path fill="none" stroke="midnightblue" d="M123.252,-267.994C136.001,-265.497 149.61,-262.832 162.751,-260.258"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="122.378,-264.598 113.237,-269.955 123.723,-271.468 122.378,-264.598"/>
 </g>
 <!-- Node50 -->
-<g id="node19" class="node"><title>Node50</title>
-<g id="a_node19"><a xlink:href="classel_1_1base_1_1utils_1_1_registry.html#ac40e62ddf5017beb91c28b472c9628c2" target="_top" xlink:title="el::base::utils::Registry\l\&lt; Logger, std::string \&gt;\l::unregisterAll">
+<g id="node18" class="node"><title>Node50</title>
+<g id="a_node18"><a xlink:href="classel_1_1base_1_1utils_1_1_registry.html#ac40e62ddf5017beb91c28b472c9628c2" target="_top" xlink:title="el::base::utils::Registry\l\&lt; Logger, std::string \&gt;\l::unregisterAll">
 <polygon fill="white" stroke="black" points="175.5,-160 175.5,-201 292.5,-201 292.5,-160 175.5,-160"/>
 <text text-anchor="start" x="183.5" y="-189" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::utils::Registry</text>
 <text text-anchor="start" x="183.5" y="-178" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; Logger, std::string &gt;</text>
@@ -155,13 +155,13 @@ var sectionId = 'dynsection-5';
 </g>
 </g>
 <!-- Node32&#45;&gt;Node50 -->
-<g id="edge18" class="edge"><title>Node32&#45;&gt;Node50</title>
+<g id="edge17" class="edge"><title>Node32&#45;&gt;Node50</title>
 <path fill="none" stroke="midnightblue" d="M84.8659,-263.756C104.291,-249.153 134.7,-227.35 163,-211.5 169.494,-207.863 176.496,-204.334 183.474,-201.039"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="82.6075,-261.076 76.7608,-269.912 86.8413,-266.651 82.6075,-261.076"/>
 </g>
 <!-- Node51 -->
-<g id="node20" class="node"><title>Node51</title>
-<g id="a_node20"><a xlink:href="classel_1_1base_1_1utils_1_1_registry_with_pred.html#a66b4eca5bb71f3fa3f0737105a00890c" target="_top" xlink:title="el::base::utils::Registry\lWithPred\&lt; base::HitCounter,\l base::HitCounter::Predicate\l \&gt;::unregisterAll">
+<g id="node19" class="node"><title>Node51</title>
+<g id="a_node19"><a xlink:href="classel_1_1base_1_1utils_1_1_registry_with_pred.html#a66b4eca5bb71f3fa3f0737105a00890c" target="_top" xlink:title="el::base::utils::Registry\lWithPred\&lt; base::HitCounter,\l base::HitCounter::Predicate\l \&gt;::unregisterAll">
 <polygon fill="white" stroke="black" points="163,-88.5 163,-140.5 305,-140.5 305,-88.5 163,-88.5"/>
 <text text-anchor="start" x="171" y="-128.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::utils::Registry</text>
 <text text-anchor="start" x="171" y="-117.5" font-family="Helvetica,sans-Serif" font-size="10.00">WithPred&lt; base::HitCounter,</text>
@@ -171,26 +171,26 @@ var sectionId = 'dynsection-5';
 </g>
 </g>
 <!-- Node32&#45;&gt;Node51 -->
-<g id="edge19" class="edge"><title>Node32&#45;&gt;Node51</title>
+<g id="edge18" class="edge"><title>Node32&#45;&gt;Node51</title>
 <path fill="none" stroke="midnightblue" d="M74.8921,-261.109C90.9173,-234.052 123.931,-183.196 163,-150.5 167.192,-146.992 171.783,-143.701 176.546,-140.645"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="71.7693,-259.517 69.777,-269.922 77.8236,-263.03 71.7693,-259.517"/>
 </g>
 <!-- Node52 -->
-<g id="node21" class="node"><title>Node52</title>
-<g id="a_node21"><a xlink:href="classel_1_1_logger.html#ae285e82b96ffcbe715ed1f9e51f2f86e" target="_top" xlink:title="el::Logger::~Logger">
+<g id="node20" class="node"><title>Node52</title>
+<g id="a_node20"><a xlink:href="classel_1_1_logger.html#ae285e82b96ffcbe715ed1f9e51f2f86e" target="_top" xlink:title="el::Logger::~Logger">
 <polygon fill="white" stroke="black" points="183.5,-50 183.5,-69 284.5,-69 284.5,-50 183.5,-50"/>
 <text text-anchor="middle" x="234" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">el::Logger::~Logger</text>
 </a>
 </g>
 </g>
 <!-- Node32&#45;&gt;Node52 -->
-<g id="edge20" class="edge"><title>Node32&#45;&gt;Node52</title>
+<g id="edge19" class="edge"><title>Node32&#45;&gt;Node52</title>
 <path fill="none" stroke="midnightblue" d="M68.4427,-259.866C77.5857,-219.544 104.104,-127.118 163,-78.5 168.924,-73.6099 175.999,-69.9715 183.341,-67.2659"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="64.9919,-259.265 66.3122,-269.777 71.8356,-260.736 64.9919,-259.265"/>
 </g>
 <!-- Node53 -->
-<g id="node22" class="node"><title>Node53</title>
-<g id="a_node22"><a xlink:href="classel_1_1base_1_1_storage.html#a0c635c0a87812a340fa725f8db8474c3" target="_top" xlink:title="el::base::Storage::\l~Storage">
+<g id="node21" class="node"><title>Node53</title>
+<g id="a_node21"><a xlink:href="classel_1_1base_1_1_storage.html#a0c635c0a87812a340fa725f8db8474c3" target="_top" xlink:title="el::base::Storage::\l~Storage">
 <polygon fill="white" stroke="black" points="185.5,-0.5 185.5,-30.5 282.5,-30.5 282.5,-0.5 185.5,-0.5"/>
 <text text-anchor="start" x="193.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::Storage::</text>
 <text text-anchor="middle" x="234" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">~Storage</text>
@@ -198,7 +198,7 @@ var sectionId = 'dynsection-5';
 </g>
 </g>
 <!-- Node32&#45;&gt;Node53 -->
-<g id="edge21" class="edge"><title>Node32&#45;&gt;Node53</title>
+<g id="edge20" class="edge"><title>Node32&#45;&gt;Node53</title>
 <path fill="none" stroke="midnightblue" d="M67.1478,-259.743C74.2286,-214.545 97.7154,-102.73 163,-40.5 169.352,-34.4454 177.268,-29.8434 185.47,-26.3495"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="63.6716,-259.326 65.6856,-269.727 70.5977,-260.34 63.6716,-259.326"/>
 </g>
@@ -301,7 +301,7 @@ var sectionId = 'dynsection-5';
 <!-- Node41 -->
 <g id="node10" class="node"><title>Node41</title>
 <g id="a_node10"><a xlink:href="classel_1_1_loggers.html#a42f99e79d72d391df563df8d09272194" target="_top" xlink:title="Reconfigures all the existing loggers with new configurations. ">
-<polygon fill="white" stroke="black" points="522,-431.5 522,-461.5 640,-461.5 640,-431.5 522,-431.5"/>
+<polygon fill="white" stroke="red" points="522,-431.5 522,-461.5 640,-461.5 640,-431.5 522,-431.5"/>
 <text text-anchor="start" x="530" y="-449.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggers::reconfigure</text>
 <text text-anchor="middle" x="581" y="-438.5" font-family="Helvetica,sans-Serif" font-size="10.00">AllLoggers</text>
 </a>
@@ -313,8 +313,8 @@ var sectionId = 'dynsection-5';
 <polygon fill="midnightblue" stroke="midnightblue" points="482.806,-444.174 472.849,-447.795 482.891,-451.174 482.806,-444.174"/>
 </g>
 <!-- Node43 -->
-<g id="node12" class="node"><title>Node43</title>
-<g id="a_node12"><a xlink:href="classel_1_1_loggers.html#af3252cc39fa4ac17b4abf50acf6b4c5e" target="_top" xlink:title="Reconfigures logger with new configurations after looking it up using identity. ">
+<g id="node11" class="node"><title>Node43</title>
+<g id="a_node11"><a xlink:href="classel_1_1_loggers.html#af3252cc39fa4ac17b4abf50acf6b4c5e" target="_top" xlink:title="Reconfigures logger with new configurations after looking it up using identity. ">
 <polygon fill="white" stroke="black" points="522,-382.5 522,-412.5 640,-412.5 640,-382.5 522,-382.5"/>
 <text text-anchor="start" x="530" y="-400.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggers::reconfigure</text>
 <text text-anchor="middle" x="581" y="-389.5" font-family="Helvetica,sans-Serif" font-size="10.00">Logger</text>
@@ -322,26 +322,13 @@ var sectionId = 'dynsection-5';
 </g>
 </g>
 <!-- Node40&#45;&gt;Node43 -->
-<g id="edge11" class="edge"><title>Node40&#45;&gt;Node43</title>
+<g id="edge10" class="edge"><title>Node40&#45;&gt;Node43</title>
 <path fill="none" stroke="midnightblue" d="M473.033,-430.462C492.096,-424.588 513.04,-418.134 531.302,-412.506"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="471.786,-427.184 463.26,-433.474 473.848,-433.874 471.786,-427.184"/>
 </g>
-<!-- Node42 -->
-<g id="node11" class="node"><title>Node42</title>
-<g id="a_node11"><a xlink:href="classel_1_1_loggers.html#a3f478b619f82cab39244ed8cde4778e2" target="_top" xlink:title="Sets default configurations. This configuration is used for future (and conditionally for existing) l...">
-<polygon fill="white" stroke="black" points="676,-437 676,-456 852,-456 852,-437 676,-437"/>
-<text text-anchor="middle" x="764" y="-444" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggers::setDefaultConfigurations</text>
-</a>
-</g>
-</g>
-<!-- Node41&#45;&gt;Node42 -->
-<g id="edge10" class="edge"><title>Node41&#45;&gt;Node42</title>
-<path fill="none" stroke="midnightblue" d="M650.299,-446.5C658.65,-446.5 667.271,-446.5 675.851,-446.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="650.266,-443 640.266,-446.5 650.266,-450 650.266,-443"/>
-</g>
 <!-- Node46 -->
-<g id="node15" class="node"><title>Node46</title>
-<g id="a_node15"><a xlink:href="classel_1_1base_1_1_typed_configurations.html#a858bb6bc3328dc87a5ff31a42f16ee74" target="_top" xlink:title="el::base::TypedConfigurations\l::insertFile">
+<g id="node14" class="node"><title>Node46</title>
+<g id="a_node14"><a xlink:href="classel_1_1base_1_1_typed_configurations.html#a858bb6bc3328dc87a5ff31a42f16ee74" target="_top" xlink:title="el::base::TypedConfigurations\l::insertFile">
 <polygon fill="white" stroke="black" points="341,-384.5 341,-414.5 486,-414.5 486,-384.5 341,-384.5"/>
 <text text-anchor="start" x="349" y="-402.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::TypedConfigurations</text>
 <text text-anchor="middle" x="413.5" y="-391.5" font-family="Helvetica,sans-Serif" font-size="10.00">::insertFile</text>
@@ -349,7 +336,7 @@ var sectionId = 'dynsection-5';
 </g>
 </g>
 <!-- Node45&#45;&gt;Node46 -->
-<g id="edge14" class="edge"><title>Node45&#45;&gt;Node46</title>
+<g id="edge13" class="edge"><title>Node45&#45;&gt;Node46</title>
 <path fill="none" stroke="midnightblue" d="M292.893,-403.543C308.168,-403.027 324.837,-402.463 340.748,-401.925"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="292.443,-400.056 282.567,-403.892 292.679,-407.052 292.443,-400.056"/>
 </g>

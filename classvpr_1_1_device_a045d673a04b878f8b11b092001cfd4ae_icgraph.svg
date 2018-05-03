@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 772;
+var viewWidth = 638;
 var viewHeight = 88;
 var sectionId = 'dynsection-5';
 </script>
@@ -54,7 +54,7 @@ var sectionId = 'dynsection-5';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>vpr::Device::checkExtensions</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-84 768,-84 768,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-84 634,-84 634,4 -4,4"/>
 <!-- Node57 -->
 <g id="node1" class="node"><title>Node57</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-30 0,-49 144,-49 144,-30 0,-30"/>
@@ -75,8 +75,8 @@ var sectionId = 'dynsection-5';
 <polygon fill="midnightblue" stroke="midnightblue" points="150.433,-46.964 140.04,-49.0227 149.448,-53.8944 150.433,-46.964"/>
 </g>
 <!-- Node62 -->
-<g id="node6" class="node"><title>Node62</title>
-<g id="a_node6"><a xlink:href="classvpr_1_1_device.html#a3cedda7b364230945a994267d220ab0f" target="_top" xlink:title="vpr::Device::prepareRequired\lExtensions">
+<g id="node5" class="node"><title>Node62</title>
+<g id="a_node5"><a xlink:href="classvpr_1_1_device.html#a3cedda7b364230945a994267d220ab0f" target="_top" xlink:title="vpr::Device::prepareRequired\lExtensions">
 <polygon fill="white" stroke="black" points="180,-0.5 180,-30.5 320,-30.5 320,-0.5 180,-0.5"/>
 <text text-anchor="start" x="188" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::prepareRequired</text>
 <text text-anchor="middle" x="250" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Extensions</text>
@@ -84,7 +84,7 @@ var sectionId = 'dynsection-5';
 </g>
 </g>
 <!-- Node57&#45;&gt;Node62 -->
-<g id="edge5" class="edge"><title>Node57&#45;&gt;Node62</title>
+<g id="edge4" class="edge"><title>Node57&#45;&gt;Node62</title>
 <path fill="none" stroke="midnightblue" d="M152.9,-28.6045C161.895,-27.3779 171.004,-26.1358 179.847,-24.9299"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="152.248,-25.161 142.813,-29.9801 153.194,-32.0968 152.248,-25.161"/>
 </g>
@@ -104,7 +104,7 @@ var sectionId = 'dynsection-5';
 <!-- Node60 -->
 <g id="node4" class="node"><title>Node60</title>
 <g id="a_node4"><a xlink:href="classvpr_1_1_device.html#a3b0734cd598d9a64f3c459e9dc4e84ce" target="_top" xlink:title="vpr::Device::create">
-<polygon fill="white" stroke="black" points="534,-30 534,-49 630,-49 630,-30 534,-30"/>
+<polygon fill="white" stroke="red" points="534,-30 534,-49 630,-49 630,-30 534,-30"/>
 <text text-anchor="middle" x="582" y="-37" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::create</text>
 </a>
 </g>
@@ -114,21 +114,8 @@ var sectionId = 'dynsection-5';
 <path fill="none" stroke="midnightblue" d="M508.461,-39.5C517.172,-39.5 525.814,-39.5 533.935,-39.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="508.231,-36.0001 498.231,-39.5 508.231,-43.0001 508.231,-36.0001"/>
 </g>
-<!-- Node61 -->
-<g id="node5" class="node"><title>Node61</title>
-<g id="a_node5"><a xlink:href="classvpr_1_1_device.html#a870f832d4e57cf09fc0705718a498aff" target="_top" xlink:title="vpr::Device::Device">
-<polygon fill="white" stroke="black" points="666,-30 666,-49 764,-49 764,-30 666,-30"/>
-<text text-anchor="middle" x="715" y="-37" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::Device</text>
-</a>
-</g>
-</g>
-<!-- Node60&#45;&gt;Node61 -->
-<g id="edge4" class="edge"><title>Node60&#45;&gt;Node61</title>
-<path fill="none" stroke="midnightblue" d="M640.503,-39.5C648.979,-39.5 657.636,-39.5 665.895,-39.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="640.294,-36.0001 630.294,-39.5 640.294,-43.0001 640.294,-36.0001"/>
-</g>
 <!-- Node62&#45;&gt;Node59 -->
-<g id="edge6" class="edge"><title>Node62&#45;&gt;Node59</title>
+<g id="edge5" class="edge"><title>Node62&#45;&gt;Node59</title>
 <path fill="none" stroke="midnightblue" d="M330.333,-26.38C339.056,-27.5762 347.888,-28.7875 356.478,-29.9655"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="330.547,-22.8767 320.165,-24.9854 329.596,-29.8118 330.547,-22.8767"/>
 </g>

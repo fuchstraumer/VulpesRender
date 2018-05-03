@@ -9,37 +9,37 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1002)">
 <title>Graphical Class Hierarchy</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-1002 691,-1002 691,4 -4,4"/>
-<!-- Node81 -->
-<g id="node1" class="node"><title>Node81</title>
+<!-- Node80 -->
+<g id="node1" class="node"><title>Node80</title>
 <g id="a_node1"><a xlink:href="classel_1_1_loggable.html" target="_top" xlink:title="Base of Easylogging++ friendly class. ">
 <polygon fill="white" stroke="black" points="14,-940.5 14,-959.5 83,-959.5 83,-940.5 14,-940.5"/>
 <text text-anchor="middle" x="48.5" y="-947.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggable</text>
 </a>
 </g>
 </g>
-<!-- Node82 -->
-<g id="node2" class="node"><title>Node82</title>
+<!-- Node81 -->
+<g id="node2" class="node"><title>Node81</title>
 <g id="a_node2"><a xlink:href="classel_1_1base_1_1_log_format.html" target="_top" xlink:title="Represents log format containing flags and date format. This is used internally to start initial log...">
 <polygon fill="white" stroke="black" points="165,-978.5 165,-997.5 269,-997.5 269,-978.5 165,-978.5"/>
 <text text-anchor="middle" x="217" y="-985.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::LogFormat</text>
 </a>
 </g>
 </g>
-<!-- Node81&#45;&gt;Node82 -->
-<g id="edge1" class="edge"><title>Node81&#45;&gt;Node82</title>
+<!-- Node80&#45;&gt;Node81 -->
+<g id="edge1" class="edge"><title>Node80&#45;&gt;Node81</title>
 <path fill="none" stroke="midnightblue" d="M93.1419,-959.96C118.147,-965.667 149.368,-972.793 174.079,-978.432"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="93.7219,-956.503 83.1938,-957.69 92.1643,-963.327 93.7219,-956.503"/>
 </g>
-<!-- Node83 -->
-<g id="node3" class="node"><title>Node83</title>
+<!-- Node82 -->
+<g id="node3" class="node"><title>Node82</title>
 <g id="a_node3"><a xlink:href="classel_1_1_configuration.html" target="_top" xlink:title="Represents single configuration that has representing level, configuration type and a string based va...">
 <polygon fill="white" stroke="black" points="174,-940.5 174,-959.5 260,-959.5 260,-940.5 174,-940.5"/>
 <text text-anchor="middle" x="217" y="-947.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Configuration</text>
 </a>
 </g>
 </g>
-<!-- Node81&#45;&gt;Node83 -->
-<g id="edge2" class="edge"><title>Node81&#45;&gt;Node83</title>
+<!-- Node80&#45;&gt;Node82 -->
+<g id="edge2" class="edge"><title>Node80&#45;&gt;Node82</title>
 <path fill="none" stroke="midnightblue" d="M93.4369,-950C118.289,-950 149.208,-950 173.773,-950"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="93.1938,-946.5 83.1938,-950 93.1937,-953.5 93.1938,-946.5"/>
 </g>
@@ -51,42 +51,42 @@
 </a>
 </g>
 </g>
-<!-- Node81&#45;&gt;Node26 -->
-<g id="edge3" class="edge"><title>Node81&#45;&gt;Node26</title>
+<!-- Node80&#45;&gt;Node26 -->
+<g id="edge3" class="edge"><title>Node80&#45;&gt;Node26</title>
 <path fill="none" stroke="midnightblue" d="M93.3087,-940.002C123.032,-933.218 161.481,-924.443 187.348,-918.539"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="92.1643,-936.673 83.1938,-942.31 93.7219,-943.497 92.1643,-936.673"/>
 </g>
-<!-- Node69 -->
-<g id="node5" class="node"><title>Node69</title>
+<!-- Node68 -->
+<g id="node5" class="node"><title>Node68</title>
 <g id="a_node5"><a xlink:href="classel_1_1base_1_1_no_copy.html" target="_top" xlink:title="Internal helper class that prevent copy constructor for class. ">
 <polygon fill="white" stroke="black" points="2.5,-164.5 2.5,-183.5 94.5,-183.5 94.5,-164.5 2.5,-164.5"/>
 <text text-anchor="middle" x="48.5" y="-171.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::NoCopy</text>
 </a>
 </g>
 </g>
-<!-- Node70 -->
-<g id="node6" class="node"><title>Node70</title>
+<!-- Node69 -->
+<g id="node6" class="node"><title>Node69</title>
 <g id="a_node6"><a xlink:href="classel_1_1base_1_1_log_dispatcher.html" target="_top" xlink:title="Dispatches log messages. ">
 <polygon fill="white" stroke="black" points="157.5,-224.5 157.5,-243.5 276.5,-243.5 276.5,-224.5 157.5,-224.5"/>
 <text text-anchor="middle" x="217" y="-231.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::LogDispatcher</text>
 </a>
 </g>
 </g>
-<!-- Node69&#45;&gt;Node70 -->
-<g id="edge4" class="edge"><title>Node69&#45;&gt;Node70</title>
+<!-- Node68&#45;&gt;Node69 -->
+<g id="edge4" class="edge"><title>Node68&#45;&gt;Node69</title>
 <path fill="none" stroke="#8b1a1a" d="M74.8162,-188.345C91.0368,-197.05 112.769,-207.827 133,-215 143.449,-218.705 154.9,-221.87 165.868,-224.493"/>
 <polygon fill="#8b1a1a" stroke="#8b1a1a" points="76.409,-185.227 65.9555,-183.502 73.0518,-191.37 76.409,-185.227"/>
 </g>
-<!-- Node71 -->
-<g id="node7" class="node"><title>Node71</title>
+<!-- Node70 -->
+<g id="node7" class="node"><title>Node70</title>
 <g id="a_node7"><a xlink:href="classel_1_1base_1_1_null_writer.html" target="_top" xlink:title="Writes nothing &#45; Used when certain log is disabled. ">
 <polygon fill="white" stroke="black" points="167,-186.5 167,-205.5 267,-205.5 267,-186.5 167,-186.5"/>
 <text text-anchor="middle" x="217" y="-193.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::NullWriter</text>
 </a>
 </g>
 </g>
-<!-- Node69&#45;&gt;Node71 -->
-<g id="edge5" class="edge"><title>Node69&#45;&gt;Node71</title>
+<!-- Node68&#45;&gt;Node70 -->
+<g id="edge5" class="edge"><title>Node68&#45;&gt;Node70</title>
 <path fill="none" stroke="#8b1a1a" d="M104.512,-181.269C124.627,-183.927 147.237,-186.914 166.812,-189.501"/>
 <polygon fill="#8b1a1a" stroke="#8b1a1a" points="104.93,-177.794 94.5573,-179.954 104.013,-184.733 104.93,-177.794"/>
 </g>
@@ -98,13 +98,13 @@
 </a>
 </g>
 </g>
-<!-- Node69&#45;&gt;Node21 -->
-<g id="edge6" class="edge"><title>Node69&#45;&gt;Node21</title>
+<!-- Node68&#45;&gt;Node21 -->
+<g id="edge6" class="edge"><title>Node68&#45;&gt;Node21</title>
 <path fill="none" stroke="#8b1a1a" d="M57.6697,-192.959C70.0133,-219.248 95.9722,-266.315 133,-291 144.316,-298.544 158.218,-303.119 171.386,-305.886"/>
 <polygon fill="#8b1a1a" stroke="#8b1a1a" points="60.788,-191.36 53.4798,-183.689 54.4093,-194.243 60.788,-191.36"/>
 </g>
-<!-- Node72 -->
-<g id="node9" class="node"><title>Node72</title>
+<!-- Node71 -->
+<g id="node9" class="node"><title>Node71</title>
 <g id="a_node9"><a xlink:href="classel_1_1base_1_1threading_1_1internal_1_1_no_mutex.html" target="_top" xlink:title="Mutex wrapper used when multi&#45;threading is disabled. ">
 <polygon fill="white" stroke="black" points="167.5,-137 167.5,-167 266.5,-167 266.5,-137 167.5,-137"/>
 <text text-anchor="start" x="175.5" y="-155" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::threading</text>
@@ -112,13 +112,13 @@
 </a>
 </g>
 </g>
-<!-- Node69&#45;&gt;Node72 -->
-<g id="edge7" class="edge"><title>Node69&#45;&gt;Node72</title>
+<!-- Node68&#45;&gt;Node71 -->
+<g id="edge7" class="edge"><title>Node68&#45;&gt;Node71</title>
 <path fill="none" stroke="#8b1a1a" d="M104.6,-166.719C124.896,-164.038 147.722,-161.022 167.402,-158.421"/>
 <polygon fill="#8b1a1a" stroke="#8b1a1a" points="104.013,-163.267 94.5573,-168.046 104.93,-170.206 104.013,-163.267"/>
 </g>
-<!-- Node73 -->
-<g id="node10" class="node"><title>Node73</title>
+<!-- Node72 -->
+<g id="node10" class="node"><title>Node72</title>
 <g id="a_node10"><a xlink:href="classel_1_1base_1_1threading_1_1internal_1_1_no_scoped_lock.html" target="_top" xlink:title="Lock guard wrapper used when multi&#45;threading is disabled. ">
 <polygon fill="white" stroke="black" points="154,-76.5 154,-117.5 280,-117.5 280,-76.5 154,-76.5"/>
 <text text-anchor="start" x="162" y="-105.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::threading</text>
@@ -127,8 +127,8 @@
 </a>
 </g>
 </g>
-<!-- Node69&#45;&gt;Node73 -->
-<g id="edge8" class="edge"><title>Node69&#45;&gt;Node73</title>
+<!-- Node68&#45;&gt;Node72 -->
+<g id="edge8" class="edge"><title>Node68&#45;&gt;Node72</title>
 <path fill="none" stroke="#8b1a1a" d="M73.6909,-158.97C90.0684,-149.15 112.394,-136.444 133,-127 140.104,-123.744 147.671,-120.595 155.236,-117.639"/>
 <polygon fill="#8b1a1a" stroke="#8b1a1a" points="71.525,-156.19 64.7934,-164.371 75.1578,-162.174 71.525,-156.19"/>
 </g>
@@ -140,60 +140,60 @@
 </a>
 </g>
 </g>
-<!-- Node69&#45;&gt;Node24 -->
-<g id="edge9" class="edge"><title>Node69&#45;&gt;Node24</title>
+<!-- Node68&#45;&gt;Node24 -->
+<g id="edge9" class="edge"><title>Node68&#45;&gt;Node24</title>
 <path fill="none" stroke="#8b1a1a" d="M63.3589,-191.82C78.4947,-210.018 104.421,-237.706 133,-253 143.296,-258.51 155.142,-262.429 166.6,-265.214"/>
 <polygon fill="#8b1a1a" stroke="#8b1a1a" points="65.8395,-189.321 56.8311,-183.744 60.3956,-193.721 65.8395,-189.321"/>
 </g>
-<!-- Node74 -->
-<g id="node12" class="node"><title>Node74</title>
+<!-- Node73 -->
+<g id="node12" class="node"><title>Node73</title>
 <g id="a_node12"><a xlink:href="classel_1_1base_1_1_writer.html" target="_top" xlink:title="Main entry point of each logging. ">
 <polygon fill="white" stroke="black" points="175.5,-38.5 175.5,-57.5 258.5,-57.5 258.5,-38.5 175.5,-38.5"/>
 <text text-anchor="middle" x="217" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::Writer</text>
 </a>
 </g>
 </g>
-<!-- Node69&#45;&gt;Node74 -->
-<g id="edge10" class="edge"><title>Node69&#45;&gt;Node74</title>
+<!-- Node68&#45;&gt;Node73 -->
+<g id="edge10" class="edge"><title>Node68&#45;&gt;Node73</title>
 <path fill="none" stroke="#8b1a1a" d="M58.8609,-155.249C71.9927,-130.961 98.2272,-89.1213 133,-67 145.597,-58.9861 161.174,-54.3382 175.418,-51.6477"/>
 <polygon fill="#8b1a1a" stroke="#8b1a1a" points="55.7176,-153.707 54.1911,-164.192 61.9226,-156.948 55.7176,-153.707"/>
 </g>
-<!-- Node76 -->
-<g id="node14" class="node"><title>Node76</title>
+<!-- Node75 -->
+<g id="node14" class="node"><title>Node75</title>
 <g id="a_node14"><a xlink:href="classel_1_1_log_builder.html" target="_top" xlink:title="el::LogBuilder">
 <polygon fill="white" stroke="black" points="179,-0.5 179,-19.5 255,-19.5 255,-0.5 179,-0.5"/>
 <text text-anchor="middle" x="217" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::LogBuilder</text>
 </a>
 </g>
 </g>
-<!-- Node69&#45;&gt;Node76 -->
-<g id="edge12" class="edge"><title>Node69&#45;&gt;Node76</title>
+<!-- Node68&#45;&gt;Node75 -->
+<g id="edge12" class="edge"><title>Node68&#45;&gt;Node75</title>
 <path fill="none" stroke="#8b1a1a" d="M55.06,-154.642C65.1453,-123.154 89.5398,-61.134 133,-29 146.194,-19.2447 163.55,-14.377 178.979,-11.9925"/>
 <polygon fill="#8b1a1a" stroke="#8b1a1a" points="51.6512,-153.821 52.0817,-164.407 58.3467,-155.863 51.6512,-153.821"/>
 </g>
-<!-- Node75 -->
-<g id="node13" class="node"><title>Node75</title>
+<!-- Node74 -->
+<g id="node13" class="node"><title>Node74</title>
 <g id="a_node13"><a xlink:href="classel_1_1base_1_1_p_error_writer.html" target="_top" xlink:title="el::base::PErrorWriter">
 <polygon fill="white" stroke="black" points="361,-38.5 361,-57.5 472,-57.5 472,-38.5 361,-38.5"/>
 <text text-anchor="middle" x="416.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::PErrorWriter</text>
 </a>
 </g>
 </g>
-<!-- Node74&#45;&gt;Node75 -->
-<g id="edge11" class="edge"><title>Node74&#45;&gt;Node75</title>
+<!-- Node73&#45;&gt;Node74 -->
+<g id="edge11" class="edge"><title>Node73&#45;&gt;Node74</title>
 <path fill="none" stroke="midnightblue" d="M268.955,-48C297.092,-48 332.051,-48 360.766,-48"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="268.922,-44.5001 258.922,-48 268.922,-51.5001 268.922,-44.5001"/>
 </g>
-<!-- Node77 -->
-<g id="node15" class="node"><title>Node77</title>
+<!-- Node76 -->
+<g id="node15" class="node"><title>Node76</title>
 <g id="a_node15"><a xlink:href="classel_1_1base_1_1_default_log_builder.html" target="_top" xlink:title="el::base::DefaultLogBuilder">
 <polygon fill="white" stroke="black" points="350,-0.5 350,-19.5 483,-19.5 483,-0.5 350,-0.5"/>
 <text text-anchor="middle" x="416.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::DefaultLogBuilder</text>
 </a>
 </g>
 </g>
-<!-- Node76&#45;&gt;Node77 -->
-<g id="edge13" class="edge"><title>Node76&#45;&gt;Node77</title>
+<!-- Node75&#45;&gt;Node76 -->
+<g id="edge13" class="edge"><title>Node75&#45;&gt;Node76</title>
 <path fill="none" stroke="midnightblue" d="M265.219,-10C290.513,-10 322.072,-10 349.731,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="265.148,-6.5001 255.148,-10 265.148,-13.5001 265.148,-6.5001"/>
 </g>

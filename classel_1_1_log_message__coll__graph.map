@@ -1,23 +1,12 @@
 <map id="el::LogMessage" name="el::LogMessage">
-<area shape="rect" id="node2" title="STL class. " alt="" coords="203,654,283,681"/>
-<area shape="rect" id="node4" href="$classel_1_1_logger.html" title="Represents a logger holding ID and configurations we need to write logs. " alt="" coords="2664,471,2743,498"/>
-<area shape="rect" id="node15" href="$classel_1_1_configurations.html" title="Thread&#45;safe Configuration repository. " alt="" coords="1912,642,2035,669"/>
-<area shape="rect" id="node19" href="$classel_1_1_configuration.html" title="Represents single configuration that has representing level, configuration type and a string based va..." alt="" coords="477,589,592,615"/>
-<area shape="rect" id="node24" href="$classel_1_1base_1_1_log_format.html" title="Represents log format containing flags and date format. This is used internally to start initial log..." alt="" coords="465,203,604,230"/>
-<area shape="rect" id="node3" title="STL class. " alt="" coords="5,647,132,688"/>
-<area shape="rect" id="node5" href="$classel_1_1base_1_1threading_1_1_thread_safe.html" title="Base of thread safe class, this class is inheritable&#45;only. " alt="" coords="821,464,950,505"/>
-<area shape="rect" id="node11" href="$classel_1_1base_1_1_typed_configurations.html" title="Configurations with data types. " alt="" coords="2285,471,2479,498"/>
-<area shape="rect" id="node17" href="$classel_1_1base_1_1utils_1_1_abstract_registry.html" title="el::base::utils::Abstract\lRegistry\&lt; Configuration,\l std::vector\&lt; Configuration *\&gt; \&gt;" alt="" coords="1167,574,1369,630"/>
-<area shape="rect" id="node6" href="$classel_1_1base_1_1threading_1_1internal_1_1_no_mutex.html" title="Mutex wrapper used when multi&#45;threading is disabled. " alt="" coords="469,464,601,505"/>
-<area shape="rect" id="node7" href="$classel_1_1base_1_1_no_copy.html" title="Internal helper class that prevent copy constructor for class. " alt="" coords="181,471,304,498"/>
-<area shape="rect" id="node8" href="$classel_1_1_loggable.html" title="Base of Easylogging++ friendly class. " alt="" coords="197,203,289,230"/>
-<area shape="rect" id="node16" href="$classel_1_1base_1_1utils_1_1_registry_with_pred.html" title="el::base::utils::Registry\lWithPred\&lt; Configuration,\l Configuration::Predicate \&gt;" alt="" coords="1584,574,1760,630"/>
-<area shape="rect" id="node21" href="$classel_1_1base_1_1_subsecond_precision.html" title="A subsecond precision class containing actual width and offset of the subsecond part. " alt="" coords="1575,414,1769,441"/>
-<area shape="rect" id="node25" title="STL class. " alt="" coords="2322,86,2442,113"/>
-<area shape="rect" id="node26" title="STL class. " alt="" coords="1894,71,2053,112"/>
-<area shape="rect" id="node27" title="STL class. " alt="" coords="1604,71,1740,112"/>
-<area shape="rect" id="node28" title="STL class. " alt="" coords="1203,5,1333,47"/>
-<area shape="rect" id="node29" title="STL class. " alt="" coords="808,54,963,81"/>
-<area shape="rect" id="node31" title="STL class. " alt="" coords="1201,71,1335,112"/>
-<area shape="rect" id="node30" title="STL class. " alt="" coords="485,54,585,81"/>
+<area shape="rect" id="node2" title="STL class. " alt="" coords="207,519,287,546"/>
+<area shape="rect" id="node4" href="$classel_1_1_logger.html" title="Represents a logger holding ID and configurations we need to write logs. " alt="" coords="1268,465,1347,491"/>
+<area shape="rect" id="node14" href="$classel_1_1_configurations.html" title="Thread&#45;safe Configuration repository. " alt="" coords="516,519,639,546"/>
+<area shape="rect" id="node3" title="STL class. " alt="" coords="5,512,132,553"/>
+<area shape="rect" id="node5" href="$classel_1_1base_1_1threading_1_1_thread_safe.html" title="Base of thread safe class, this class is inheritable&#45;only. " alt="" coords="513,5,642,47"/>
+<area shape="rect" id="node10" href="$classel_1_1base_1_1_typed_configurations.html" title="Configurations with data types. " alt="" coords="889,305,1083,331"/>
+<area shape="rect" id="node6" href="$classel_1_1base_1_1threading_1_1internal_1_1_no_mutex.html" title="Mutex wrapper used when multi&#45;threading is disabled. " alt="" coords="181,5,313,47"/>
+<area shape="rect" id="node7" href="$classel_1_1_loggable.html" title="Base of Easylogging++ friendly class. " alt="" coords="940,406,1032,433"/>
+<area shape="rect" id="node18" title="STL class. " alt="" coords="926,586,1046,613"/>
+<area shape="rect" id="node19" title="STL class. " alt="" coords="498,571,657,612"/>
 </map>

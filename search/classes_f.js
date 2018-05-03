@@ -1,21 +1,12 @@
 var searchData=
 [
-  ['sampler',['Sampler',['../classvpr_1_1_sampler.html',1,'vpr']]],
-  ['scopedaddflag',['ScopedAddFlag',['../classel_1_1_loggers_1_1_scoped_add_flag.html',1,'el::Loggers']]],
-  ['scopedremoveflag',['ScopedRemoveFlag',['../classel_1_1_loggers_1_1_scoped_remove_flag.html',1,'el::Loggers']]],
-  ['semaphore',['Semaphore',['../classvpr_1_1_semaphore.html',1,'vpr']]],
-  ['shadermodule',['ShaderModule',['../classvpr_1_1_shader_module.html',1,'vpr']]],
-  ['staticclass',['StaticClass',['../classel_1_1base_1_1_static_class.html',1,'el::base']]],
-  ['storage',['Storage',['../classel_1_1base_1_1_storage.html',1,'el::base']]],
-  ['str',['Str',['../classel_1_1base_1_1utils_1_1_str.html',1,'el::base::utils']]],
-  ['stringtolevelitem',['StringToLevelItem',['../namespaceel.html#structel_1_1_string_to_level_item',1,'el']]],
-  ['suballocation',['Suballocation',['../structvpr_1_1_suballocation.html',1,'vpr']]],
-  ['suballocationrequest',['SuballocationRequest',['../group___allocation.html#structvpr_1_1_suballocation_request',1,'vpr']]],
-  ['suballocitercompare',['suballocIterCompare',['../structvpr_1_1suballoc_iter_compare.html',1,'vpr']]],
-  ['suballocoffsetcompare',['suballocOffsetCompare',['../structvpr_1_1suballoc_offset_compare.html',1,'vpr']]],
-  ['subsecondprecision',['SubsecondPrecision',['../classel_1_1base_1_1_subsecond_precision.html',1,'el::base']]],
-  ['surfacekhr',['SurfaceKHR',['../classvpr_1_1_surface_k_h_r.html',1,'vpr']]],
-  ['swapchain',['Swapchain',['../classvpr_1_1_swapchain.html',1,'vpr']]],
-  ['swapchaininfo',['SwapchainInfo',['../structvpr_1_1_swapchain_1_1_swapchain_info.html',1,'vpr::Swapchain']]],
-  ['sysloginitializer',['SysLogInitializer',['../classel_1_1_sys_log_initializer.html',1,'el']]]
+  ['raw_5fequal_5fcomparator',['raw_equal_comparator',['../structvpr_1_1raw__equal__comparator.html',1,'vpr']]],
+  ['registeredhitcounters',['RegisteredHitCounters',['../classel_1_1base_1_1_registered_hit_counters.html',1,'el::base']]],
+  ['registeredloggers',['RegisteredLoggers',['../classel_1_1base_1_1_registered_loggers.html',1,'el::base']]],
+  ['registry',['Registry',['../classel_1_1base_1_1utils_1_1_registry.html',1,'el::base::utils']]],
+  ['registry_3c_20logger_2c_20std_3a_3astring_20_3e',['Registry&lt; Logger, std::string &gt;',['../classel_1_1base_1_1utils_1_1_registry.html',1,'el::base::utils']]],
+  ['registrywithpred',['RegistryWithPred',['../classel_1_1base_1_1utils_1_1_registry_with_pred.html',1,'el::base::utils']]],
+  ['registrywithpred_3c_20base_3a_3ahitcounter_2c_20base_3a_3ahitcounter_3a_3apredicate_20_3e',['RegistryWithPred&lt; base::HitCounter, base::HitCounter::Predicate &gt;',['../classel_1_1base_1_1utils_1_1_registry_with_pred.html',1,'el::base::utils']]],
+  ['registrywithpred_3c_20configuration_2c_20configuration_3a_3apredicate_20_3e',['RegistryWithPred&lt; Configuration, Configuration::Predicate &gt;',['../classel_1_1base_1_1utils_1_1_registry_with_pred.html',1,'el::base::utils']]],
+  ['renderpass',['Renderpass',['../classvpr_1_1_renderpass.html',1,'vpr']]]
 ];

@@ -30,7 +30,7 @@
 </g>
 <!-- Node49 -->
 <g id="node3" class="node"><title>Node49</title>
-<g id="a_node3"><a xlink:href="classvpr_1_1_image.html#af859b6a324c843f53bc822fcb90fdf33" target="_top" xlink:title="vpr::Image::TransitionLayout">
+<g id="a_node3"><a xlink:href="classvpr_1_1_image.html#af859b6a324c843f53bc822fcb90fdf33" target="_top" xlink:title="Uses a memory barrier to enforce an image layout change. ">
 <polygon fill="white" stroke="black" points="185,-0.5 185,-19.5 323,-19.5 323,-0.5 185,-0.5"/>
 <text text-anchor="middle" x="254" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Image::TransitionLayout</text>
 </a>

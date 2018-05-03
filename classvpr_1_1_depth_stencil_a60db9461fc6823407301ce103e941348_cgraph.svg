@@ -102,7 +102,7 @@ var sectionId = 'dynsection-2';
 </g>
 <!-- Node4 -->
 <g id="node3" class="node"><title>Node4</title>
-<g id="a_node3"><a xlink:href="classvpr_1_1_image.html#ad5f759d9da1c31461511821a0a74f98a" target="_top" xlink:title="Creates an image using the latter 7 parameters. ">
+<g id="a_node3"><a xlink:href="classvpr_1_1_image.html#a7f1db39dbc01e0775d8ba7adcb8507fa" target="_top" xlink:title="Simplified version of the other CreateImage method, that takes an already setup VkImageCreateInfo str...">
 <polygon fill="white" stroke="black" points="317,-88 317,-107 439,-107 439,-88 317,-88"/>
 <text text-anchor="middle" x="378" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Image::CreateImage</text>
 </a>

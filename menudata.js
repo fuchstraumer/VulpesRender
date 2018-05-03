@@ -40,17 +40,7 @@ var menudata={children:[
 {text:"s",url:"namespacemembers_vars.html#index_s"},
 {text:"t",url:"namespacemembers_vars.html#index_t"},
 {text:"v",url:"namespacemembers_vars.html#index_v"}]},
-{text:"Typedefs",url:"namespacemembers_type.html",children:[
-{text:"a",url:"namespacemembers_type.html#index_a"},
-{text:"c",url:"namespacemembers_type.html#index_c"},
-{text:"e",url:"namespacemembers_type.html#index_e"},
-{text:"f",url:"namespacemembers_type.html#index_f"},
-{text:"l",url:"namespacemembers_type.html#index_l"},
-{text:"m",url:"namespacemembers_type.html#index_m"},
-{text:"o",url:"namespacemembers_type.html#index_o"},
-{text:"p",url:"namespacemembers_type.html#index_p"},
-{text:"s",url:"namespacemembers_type.html#index_s"},
-{text:"v",url:"namespacemembers_type.html#index_v"}]},
+{text:"Typedefs",url:"namespacemembers_type.html"},
 {text:"Enumerations",url:"namespacemembers_enum.html"}]}]},
 {text:"Classes",url:"annotated.html",children:[
 {text:"Class List",url:"annotated.html"},

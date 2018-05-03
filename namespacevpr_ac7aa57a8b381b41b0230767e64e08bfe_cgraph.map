@@ -1,0 +1,22 @@
+<map id="vpr::ScoreDevice" name="vpr::ScoreDevice">
+<area shape="rect" id="node2" href="$classvpr_1_1_physical_device_impl.html#af87fd9143013fabf4df17ca888d541fb" title="vpr::PhysicalDeviceImpl\l::getAttributes" alt="" coords="198,5,357,47"/>
+<area shape="rect" id="node3" href="$namespacevpr.html#ac9ad3c752dabd8483c29187ef86587c9" title="vpr::GetBestAvailPhysical\lDevice" alt="" coords="192,71,363,112"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_physical_device.html#addc7471aceef1ca343cc1b6e5c242278" title="vpr::PhysicalDevice\l::GetFeatures" alt="" coords="210,136,345,177"/>
+<area shape="rect" id="node5" href="$classvpr_1_1_physical_device.html#a1d9827e465aa6c51331bec797d2318f3" title="vpr::PhysicalDevice\l::GetMemoryProperties" alt="" coords="199,201,356,243"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_physical_device.html#ac374493c59bb13f5300d1c96b87b8380" title="! Attempts to find the hardware&#45;appropriate index of a memory type that meets the flags given..." alt="" coords="206,267,349,308"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_physical_device_impl.html#a228761ffdb770f4690168e2f0e47a0d1" title="vpr::PhysicalDeviceImpl\l::GetMemoryTypeIdx" alt="" coords="198,332,357,373"/>
+<area shape="rect" id="node8" href="$classvpr_1_1_physical_device.html#a395785af128c95f3098203a0b32f99ed" title="vpr::PhysicalDevice\l::GetProperties" alt="" coords="210,397,345,439"/>
+<area shape="rect" id="node9" href="$classvpr_1_1_physical_device.html#af443c2a585d182166c464f252782a57b" title="! Attempts to find a Queue family that supports the full bitfield given: this can be multiple types..." alt="" coords="431,519,589,560"/>
+<area shape="rect" id="node10" href="$classvpr_1_1_physical_device_impl.html#a488d6bf461f75785b039909d6bb6d96e" title="vpr::PhysicalDeviceImpl\l::GetQueueFamilyIndex" alt="" coords="198,515,357,556"/>
+<area shape="rect" id="node11" href="$classvpr_1_1_physical_device.html#a2ee4f96b16a9762953ecad3b658d84e6" title="vpr::PhysicalDevice\l::GetQueueFamilyProperties" alt="" coords="184,580,371,621"/>
+<area shape="rect" id="node12" href="$classvpr_1_1_physical_device.html#a95acb634567ba94471f0e5f6ad5fb4a0" title="vpr::PhysicalDevice\l::GetSubgroupProperties" alt="" coords="195,645,360,687"/>
+<area shape="rect" id="node13" href="$classvpr_1_1_physical_device.html#a2314cb016c95404ae4c11b4cb4777544" title="vpr::PhysicalDevice\l::operator=" alt="" coords="210,711,345,752"/>
+<area shape="rect" id="node14" href="$classvpr_1_1_physical_device_impl.html#a87891e2247f80651e2a7c1c5892b6218" title="vpr::PhysicalDeviceImpl\l::operator=" alt="" coords="198,776,357,817"/>
+<area shape="rect" id="node15" href="$classvpr_1_1_physical_device.html#a8185e5a07b9a04975a1751c2358bcebe" title="vpr::PhysicalDevice\l::PhysicalDevice" alt="" coords="210,841,345,883"/>
+<area shape="rect" id="node16" href="$classvpr_1_1_physical_device_impl.html#ac19f6987df28dcfae6e107d3c4967cb6" title="vpr::PhysicalDeviceImpl\l::PhysicalDeviceImpl" alt="" coords="198,907,357,948"/>
+<area shape="rect" id="node17" href="$namespacevpr.html#add78d0571fc38d8ee80c540f9754ca50" title="vpr::PopulatePhysicalDeviceMap" alt="" coords="172,973,383,999"/>
+<area shape="rect" id="node18" href="$classvpr_1_1_physical_device_impl.html#a69d80ff2220466001ff60b2703152b66" title="vpr::PhysicalDeviceImpl\l::retrieveQueueFamilyProperties" alt="" coords="174,1024,381,1065"/>
+<area shape="rect" id="node19" href="$classvpr_1_1_physical_device.html#a00de7d3556d98b1cfda28d1f769f8fa8" title="vpr::PhysicalDevice\l::vkHandle" alt="" coords="210,1089,345,1131"/>
+<area shape="rect" id="node20" href="$classvpr_1_1_physical_device.html#a90f3c207c76cc8ecd39eb80cf2b74050" title="vpr::PhysicalDevice\l::~PhysicalDevice" alt="" coords="210,1155,345,1196"/>
+<area shape="rect" id="node21" href="$classvpr_1_1_physical_device_impl.html#a6168130477087e7bc3aeed40d214cc0a" title="vpr::PhysicalDeviceImpl\l::~PhysicalDeviceImpl" alt="" coords="198,1220,357,1261"/>
+</map>

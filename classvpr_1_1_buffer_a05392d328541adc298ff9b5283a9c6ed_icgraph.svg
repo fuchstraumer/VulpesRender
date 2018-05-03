@@ -9,34 +9,34 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 62)">
 <title>vpr::Buffer::Size</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-62 258,-62 258,4 -4,4"/>
-<!-- Node75 -->
-<g id="node1" class="node"><title>Node75</title>
+<!-- Node86 -->
+<g id="node1" class="node"><title>Node86</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-19.5 0,-38.5 85,-38.5 85,-19.5 0,-19.5"/>
 <text text-anchor="middle" x="42.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Buffer::Size</text>
 </g>
-<!-- Node76 -->
-<g id="node2" class="node"><title>Node76</title>
+<!-- Node87 -->
+<g id="node2" class="node"><title>Node87</title>
 <g id="a_node2"><a xlink:href="classvpr_1_1_buffer.html#ae38678b302a270b3716b43505e2f7e96" target="_top" xlink:title="Maps this object, copies data to this object, then ensures to unmap this object. ">
 <polygon fill="white" stroke="black" points="121,-38.5 121,-57.5 254,-57.5 254,-38.5 121,-38.5"/>
 <text text-anchor="middle" x="187.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Buffer::CopyToMapped</text>
 </a>
 </g>
 </g>
-<!-- Node75&#45;&gt;Node76 -->
-<g id="edge1" class="edge"><title>Node75&#45;&gt;Node76</title>
+<!-- Node86&#45;&gt;Node87 -->
+<g id="edge1" class="edge"><title>Node86&#45;&gt;Node87</title>
 <path fill="none" stroke="midnightblue" d="M95.431,-35.8999C103.659,-36.9931 112.261,-38.1361 120.754,-39.2645"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="95.6198,-32.3943 85.2459,-34.5467 94.6978,-39.3334 95.6198,-32.3943"/>
 </g>
-<!-- Node77 -->
-<g id="node3" class="node"><title>Node77</title>
+<!-- Node88 -->
+<g id="node3" class="node"><title>Node88</title>
 <g id="a_node3"><a xlink:href="classvpr_1_1_buffer.html#ab4f798aaec92861e165cff4e7a12cc18" target="_top" xlink:title="Fills buffer with given value. ">
 <polygon fill="white" stroke="black" points="148.5,-0.5 148.5,-19.5 226.5,-19.5 226.5,-0.5 148.5,-0.5"/>
 <text text-anchor="middle" x="187.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Buffer::Fill</text>
 </a>
 </g>
 </g>
-<!-- Node75&#45;&gt;Node77 -->
-<g id="edge2" class="edge"><title>Node75&#45;&gt;Node77</title>
+<!-- Node86&#45;&gt;Node88 -->
+<g id="edge2" class="edge"><title>Node86&#45;&gt;Node88</title>
 <path fill="none" stroke="midnightblue" d="M95.3335,-22.113C112.862,-19.7841 132.1,-17.2279 148.368,-15.0665"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="94.6978,-18.6666 85.2459,-23.4533 95.6198,-25.6057 94.6978,-18.6666"/>
 </g>

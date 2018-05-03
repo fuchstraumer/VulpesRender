@@ -5,7 +5,5 @@
 <area shape="rect" id="node4" href="$classvpr_1_1_allocator.html#a4fb24600d3edbff034389a4ea111513f" title="vpr::Allocator::Recreate" alt="" coords="505,56,663,83"/>
 <area shape="rect" id="node6" href="$classvpr_1_1_allocator.html#a1d36e3567e4fd7ef8bf1395942f6c714" title="vpr::Allocator::Allocate\lMemory" alt="" coords="508,107,660,149"/>
 <area shape="rect" id="node7" href="$classvpr_1_1_allocator.html#aa8aad8539721142d8dfa92a3196ab90b" title="vpr::Allocator::Allocate\lForBuffer" alt="" coords="711,74,863,115"/>
-<area shape="rect" id="node9" href="$classvpr_1_1_allocator.html#a79b5ace2d3d620783793593c99d50d4e" title="vpr::Allocator::Allocate\lForImage" alt="" coords="711,139,863,181"/>
-<area shape="rect" id="node8" href="$classvpr_1_1_allocator.html#a98ce3e7a210998e2e6723079ae2bb8ff" title="vpr::Allocator::CreateBuffer" alt="" coords="912,81,1088,108"/>
-<area shape="rect" id="node10" href="$classvpr_1_1_allocator.html#a2fe7722a4b3f19bd7705a80be50171bb" title="vpr::Allocator::CreateImage" alt="" coords="911,147,1089,173"/>
+<area shape="rect" id="node8" href="$classvpr_1_1_allocator.html#a79b5ace2d3d620783793593c99d50d4e" title="vpr::Allocator::Allocate\lForImage" alt="" coords="711,139,863,181"/>
 </map>

@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 768;
+var viewWidth = 628;
 var viewHeight = 351;
 var sectionId = 'dynsection-9';
 </script>
@@ -54,7 +54,7 @@ var sectionId = 'dynsection-9';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>el::Loggers::reconfigureLogger</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-346.5 764,-346.5 764,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-346.5 624,-346.5 624,4 -4,4"/>
 <!-- Node100 -->
 <g id="node1" class="node"><title>Node100</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-143 0,-173 118,-173 118,-143 0,-143"/>
@@ -158,21 +158,21 @@ var sectionId = 'dynsection-9';
 <polygon fill="midnightblue" stroke="midnightblue" points="293.378,-173.523 303.764,-171.431 294.34,-166.589 293.378,-173.523"/>
 </g>
 <!-- Node113 -->
-<g id="node14" class="node"><title>Node113</title>
-<g id="a_node14"><a xlink:href="namespaceel_1_1base_1_1utils.html#a8cad5c357a7913cdbe69add3d6a4e8ac" target="_top" xlink:title="Deletes memory safely and points to null. ">
+<g id="node13" class="node"><title>Node113</title>
+<g id="a_node13"><a xlink:href="namespaceel_1_1base_1_1utils.html#a8cad5c357a7913cdbe69add3d6a4e8ac" target="_top" xlink:title="Deletes memory safely and points to null. ">
 <polygon fill="white" stroke="black" points="303,-0.5 303,-19.5 430,-19.5 430,-0.5 303,-0.5"/>
 <text text-anchor="middle" x="366.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::utils::safeDelete</text>
 </a>
 </g>
 </g>
 <!-- Node101&#45;&gt;Node113 -->
-<g id="edge20" class="edge"><title>Node101&#45;&gt;Node113</title>
+<g id="edge19" class="edge"><title>Node101&#45;&gt;Node113</title>
 <path fill="none" stroke="midnightblue" d="M210.753,-148.15C220.515,-123.898 249.105,-60.9557 294,-29 296.721,-27.0635 299.626,-25.3244 302.651,-23.7625"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="304.308,-26.8559 312.018,-19.5885 301.459,-20.462 304.308,-26.8559"/>
 </g>
 <!-- Node114 -->
-<g id="node15" class="node"><title>Node114</title>
-<g id="a_node15"><a xlink:href="classel_1_1_configurations.html#a4c6db218908b39d23cc09b1a16a18e83" target="_top" xlink:title="Sets configuration based&#45;off an existing configurations. ">
+<g id="node14" class="node"><title>Node114</title>
+<g id="a_node14"><a xlink:href="classel_1_1_configurations.html#a4c6db218908b39d23cc09b1a16a18e83" target="_top" xlink:title="Sets configuration based&#45;off an existing configurations. ">
 <polygon fill="white" stroke="black" points="320.5,-39 320.5,-69 412.5,-69 412.5,-39 320.5,-39"/>
 <text text-anchor="start" x="328.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">el::Configurations</text>
 <text text-anchor="middle" x="366.5" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">::setFromBase</text>
@@ -180,7 +180,7 @@ var sectionId = 'dynsection-9';
 </g>
 </g>
 <!-- Node101&#45;&gt;Node114 -->
-<g id="edge21" class="edge"><title>Node101&#45;&gt;Node114</title>
+<g id="edge20" class="edge"><title>Node101&#45;&gt;Node114</title>
 <path fill="none" stroke="midnightblue" d="M216.398,-148.265C231.571,-132.974 262.915,-103.103 294,-84 300.308,-80.1235 307.206,-76.5279 314.149,-73.2715"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="315.894,-76.325 323.593,-69.0466 313.036,-69.9351 315.894,-76.325"/>
 </g>
@@ -249,7 +249,7 @@ var sectionId = 'dynsection-9';
 <!-- Node110 -->
 <g id="node11" class="node"><title>Node110</title>
 <g id="a_node11"><a xlink:href="classel_1_1base_1_1_typed_configurations.html#a05b8ea32f63c3246a68dbc9085b7e847" target="_top" xlink:title="el::base::TypedConfigurations\l::logFormat">
-<polygon fill="white" stroke="black" points="475,-165 475,-195 620,-195 620,-165 475,-165"/>
+<polygon fill="white" stroke="red" points="475,-165 475,-195 620,-195 620,-165 475,-165"/>
 <text text-anchor="start" x="483" y="-183" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::TypedConfigurations</text>
 <text text-anchor="middle" x="547.5" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">::logFormat</text>
 </a>
@@ -261,8 +261,8 @@ var sectionId = 'dynsection-9';
 <polygon fill="midnightblue" stroke="midnightblue" points="464.93,-183.5 474.93,-180 464.93,-176.5 464.93,-183.5"/>
 </g>
 <!-- Node112 -->
-<g id="node13" class="node"><title>Node112</title>
-<g id="a_node13"><a xlink:href="classel_1_1base_1_1utils_1_1_str.html#a0f271d7da2bb3c1f2fa062219c0e0ba2" target="_top" xlink:title="el::base::utils::Str\l::replaceFirstWithEscape">
+<g id="node12" class="node"><title>Node112</title>
+<g id="a_node12"><a xlink:href="classel_1_1base_1_1utils_1_1_str.html#a0f271d7da2bb3c1f2fa062219c0e0ba2" target="_top" xlink:title="el::base::utils::Str\l::replaceFirstWithEscape">
 <polygon fill="white" stroke="black" points="484,-116 484,-146 611,-146 611,-116 484,-116"/>
 <text text-anchor="start" x="492" y="-134" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::utils::Str</text>
 <text text-anchor="middle" x="547.5" y="-123" font-family="Helvetica,sans-Serif" font-size="10.00">::replaceFirstWithEscape</text>
@@ -270,32 +270,18 @@ var sectionId = 'dynsection-9';
 </g>
 </g>
 <!-- Node109&#45;&gt;Node112 -->
-<g id="edge19" class="edge"><title>Node109&#45;&gt;Node112</title>
+<g id="edge18" class="edge"><title>Node109&#45;&gt;Node112</title>
 <path fill="none" stroke="midnightblue" d="M422.666,-164.899C441.384,-159.775 462.463,-154.004 481.853,-148.697"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="482.795,-152.068 491.516,-146.052 480.946,-145.316 482.795,-152.068"/>
 </g>
-<!-- Node111 -->
-<g id="node12" class="node"><title>Node111</title>
-<g id="a_node12"><a xlink:href="classel_1_1base_1_1_log_format.html#aeacb2c9d313ce5713b3e85e03a4baab5" target="_top" xlink:title="el::base::LogFormat\l::level">
-<polygon fill="white" stroke="black" points="656,-165 656,-195 760,-195 760,-165 656,-165"/>
-<text text-anchor="start" x="664" y="-183" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::LogFormat</text>
-<text text-anchor="middle" x="708" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">::level</text>
-</a>
-</g>
-</g>
-<!-- Node110&#45;&gt;Node111 -->
-<g id="edge18" class="edge"><title>Node110&#45;&gt;Node111</title>
-<path fill="none" stroke="midnightblue" d="M620.33,-180C628.832,-180 637.449,-180 645.784,-180"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="645.786,-183.5 655.786,-180 645.786,-176.5 645.786,-183.5"/>
-</g>
 <!-- Node114&#45;&gt;Node106 -->
-<g id="edge23" class="edge"><title>Node114&#45;&gt;Node106</title>
+<g id="edge22" class="edge"><title>Node114&#45;&gt;Node106</title>
 <path fill="none" stroke="midnightblue" d="M412.669,-61.0656C435.79,-64.6823 464.192,-69.125 488.873,-72.9858"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="488.419,-76.4572 498.84,-74.5448 489.501,-69.5413 488.419,-76.4572"/>
 </g>
 <!-- Node115 -->
-<g id="node16" class="node"><title>Node115</title>
-<g id="a_node16"><a xlink:href="classel_1_1base_1_1utils_1_1_abstract_registry.html#a072859d3728a75f910c2898f62fd12da" target="_top" xlink:title="Returns underlying container by reference. ">
+<g id="node15" class="node"><title>Node115</title>
+<g id="a_node15"><a xlink:href="classel_1_1base_1_1utils_1_1_abstract_registry.html#a072859d3728a75f910c2898f62fd12da" target="_top" xlink:title="Returns underlying container by reference. ">
 <polygon fill="white" stroke="black" points="488.5,-18 488.5,-48 606.5,-48 606.5,-18 488.5,-18"/>
 <text text-anchor="start" x="496.5" y="-36" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::utils::Abstract</text>
 <text text-anchor="middle" x="547.5" y="-25" font-family="Helvetica,sans-Serif" font-size="10.00">Registry::list</text>
@@ -303,7 +289,7 @@ var sectionId = 'dynsection-9';
 </g>
 </g>
 <!-- Node114&#45;&gt;Node115 -->
-<g id="edge22" class="edge"><title>Node114&#45;&gt;Node115</title>
+<g id="edge21" class="edge"><title>Node114&#45;&gt;Node115</title>
 <path fill="none" stroke="midnightblue" d="M412.669,-48.7008C432.608,-46.3616 456.474,-43.5618 478.494,-40.9783"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="478.937,-44.4505 488.461,-39.809 478.121,-37.4982 478.937,-44.4505"/>
 </g>

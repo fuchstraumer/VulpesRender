@@ -76,6 +76,7 @@ var searchData=
   ['m_5fwidth',['m_width',['../classel_1_1base_1_1_subsecond_precision.html#a7e24991325599de4d9ff96ac691cbbf6',1,'el::base::SubsecondPrecision']]],
   ['mappeddata',['MappedData',['../group___allocation.html#a509f136487f269c94452d86ff1ab6c1c',1,'vpr::Allocation::privateAllocation']]],
   ['mappedmemory',['mappedMemory',['../classvpr_1_1_buffer.html#aa3dff6309040e420e748c8b6fc79d345',1,'vpr::Buffer']]],
+  ['mappedmemoryrange',['mappedMemoryRange',['../classvpr_1_1_buffer.html#a8b5196067a89499585f01e629b7f8b55',1,'vpr::Buffer']]],
   ['maxsets',['maxSets',['../classvpr_1_1_descriptor_pool.html#a532fbe052ae5a4e2ee8057132f6617f7',1,'vpr::DescriptorPool']]],
   ['mediumblocksingleallocsize',['MediumBlockSingleAllocSize',['../namespacevpr.html#a77400da4edea43dcef9869495bf7357c',1,'vpr']]],
   ['memory',['memory',['../classvpr_1_1_memory_block.html#adcf64572527adcb7b7f38cf020eae14c',1,'vpr::MemoryBlock']]],

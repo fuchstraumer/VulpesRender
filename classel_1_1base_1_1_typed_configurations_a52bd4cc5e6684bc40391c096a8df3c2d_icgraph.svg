@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 827;
+var viewWidth = 615;
 var viewHeight = 243;
 var sectionId = 'dynsection-4';
 </script>
@@ -54,7 +54,7 @@ var sectionId = 'dynsection-4';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>el::base::TypedConfigurations::configurations</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-239 823,-239 823,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-239 611,-239 611,4 -4,4"/>
 <!-- Node19 -->
 <g id="node1" class="node"><title>Node19</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-141.5 0,-171.5 145,-171.5 145,-141.5 0,-141.5"/>
@@ -173,7 +173,7 @@ var sectionId = 'dynsection-4';
 <!-- Node28 -->
 <g id="node10" class="node"><title>Node28</title>
 <g id="a_node10"><a xlink:href="classel_1_1_loggers.html#a42f99e79d72d391df563df8d09272194" target="_top" xlink:title="Reconfigures all the existing loggers with new configurations. ">
-<polygon fill="white" stroke="black" points="489,-49.5 489,-79.5 607,-79.5 607,-49.5 489,-49.5"/>
+<polygon fill="white" stroke="red" points="489,-49.5 489,-79.5 607,-79.5 607,-49.5 489,-49.5"/>
 <text text-anchor="start" x="497" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggers::reconfigure</text>
 <text text-anchor="middle" x="548" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">AllLoggers</text>
 </a>
@@ -185,8 +185,8 @@ var sectionId = 'dynsection-4';
 <polygon fill="midnightblue" stroke="midnightblue" points="456.303,-61.0001 446.303,-64.5 456.303,-68.0001 456.303,-61.0001"/>
 </g>
 <!-- Node30 -->
-<g id="node12" class="node"><title>Node30</title>
-<g id="a_node12"><a xlink:href="classel_1_1_loggers.html#af3252cc39fa4ac17b4abf50acf6b4c5e" target="_top" xlink:title="Reconfigures logger with new configurations after looking it up using identity. ">
+<g id="node11" class="node"><title>Node30</title>
+<g id="a_node11"><a xlink:href="classel_1_1_loggers.html#af3252cc39fa4ac17b4abf50acf6b4c5e" target="_top" xlink:title="Reconfigures logger with new configurations after looking it up using identity. ">
 <polygon fill="white" stroke="black" points="489,-0.5 489,-30.5 607,-30.5 607,-0.5 489,-0.5"/>
 <text text-anchor="start" x="497" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggers::reconfigure</text>
 <text text-anchor="middle" x="548" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Logger</text>
@@ -194,22 +194,9 @@ var sectionId = 'dynsection-4';
 </g>
 </g>
 <!-- Node27&#45;&gt;Node30 -->
-<g id="edge11" class="edge"><title>Node27&#45;&gt;Node30</title>
+<g id="edge10" class="edge"><title>Node27&#45;&gt;Node30</title>
 <path fill="none" stroke="midnightblue" d="M446.775,-46.3871C463.678,-41.1778 481.926,-35.5543 498.159,-30.5516"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="445.528,-43.1086 437.003,-49.3986 447.59,-49.7982 445.528,-43.1086"/>
-</g>
-<!-- Node29 -->
-<g id="node11" class="node"><title>Node29</title>
-<g id="a_node11"><a xlink:href="classel_1_1_loggers.html#a3f478b619f82cab39244ed8cde4778e2" target="_top" xlink:title="Sets default configurations. This configuration is used for future (and conditionally for existing) l...">
-<polygon fill="white" stroke="black" points="643,-55 643,-74 819,-74 819,-55 643,-55"/>
-<text text-anchor="middle" x="731" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggers::setDefaultConfigurations</text>
-</a>
-</g>
-</g>
-<!-- Node28&#45;&gt;Node29 -->
-<g id="edge10" class="edge"><title>Node28&#45;&gt;Node29</title>
-<path fill="none" stroke="midnightblue" d="M617.299,-64.5C625.65,-64.5 634.271,-64.5 642.851,-64.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="617.266,-61.0001 607.266,-64.5 617.266,-68.0001 617.266,-61.0001"/>
 </g>
 </g>
 </svg>

@@ -1,0 +1,4 @@
+<map id="vpr::Event::GetStatus" name="vpr::Event::GetStatus">
+<area shape="rect" id="node2" href="$classvpr_1_1_event.html#a136668a70c07e1e3f3801184e6bc80d1" title="vpr::Event::IsReset" alt="" coords="199,5,329,32"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_event.html#a065551f41d822e7fe5d371d96f23282a" title="vpr::Event::IsSet" alt="" coords="206,56,322,83"/>
+</map>

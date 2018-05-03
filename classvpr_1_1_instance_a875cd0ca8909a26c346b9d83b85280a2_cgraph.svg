@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 834;
+var viewWidth = 679;
 var viewHeight = 228;
 var sectionId = 'dynsection-1';
 </script>
@@ -54,7 +54,7 @@ var sectionId = 'dynsection-1';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>vpr::Instance::Instance</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-224 830,-224 830,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-224 675,-224 675,4 -4,4"/>
 <!-- Node4 -->
 <g id="node1" class="node"><title>Node4</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-99 0,-118 114,-118 114,-99 0,-99"/>
@@ -88,21 +88,21 @@ var sectionId = 'dynsection-1';
 <polygon fill="midnightblue" stroke="midnightblue" points="162.177,-140.232 172.744,-139.457 164.001,-133.473 162.177,-140.232"/>
 </g>
 <!-- Node12 -->
-<g id="node9" class="node"><title>Node12</title>
-<g id="a_node9"><a xlink:href="classvpr_1_1_instance.html#a8e32fee4f0a877997ee6e75ea3d3c3a1" target="_top" xlink:title="vpr::Instance::prepareValidation">
+<g id="node8" class="node"><title>Node12</title>
+<g id="a_node8"><a xlink:href="classvpr_1_1_instance.html#a8e32fee4f0a877997ee6e75ea3d3c3a1" target="_top" xlink:title="vpr::Instance::prepareValidation">
 <polygon fill="white" stroke="black" points="153.5,-99 153.5,-118 305.5,-118 305.5,-99 153.5,-99"/>
 <text text-anchor="middle" x="229.5" y="-106" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Instance::prepareValidation</text>
 </a>
 </g>
 </g>
 <!-- Node4&#45;&gt;Node12 -->
-<g id="edge9" class="edge"><title>Node4&#45;&gt;Node12</title>
+<g id="edge7" class="edge"><title>Node4&#45;&gt;Node12</title>
 <path fill="none" stroke="midnightblue" d="M114.301,-108.5C123.587,-108.5 133.394,-108.5 143.202,-108.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="143.401,-112 153.401,-108.5 143.401,-105 143.401,-112"/>
 </g>
 <!-- Node14 -->
-<g id="node11" class="node"><title>Node14</title>
-<g id="a_node11"><a xlink:href="classvpr_1_1_instance.html#a6bda35727942a76ac88f80ebf275ac91" target="_top" xlink:title="vpr::Instance::prepareValidation\lCallbacks">
+<g id="node10" class="node"><title>Node14</title>
+<g id="a_node10"><a xlink:href="classvpr_1_1_instance.html#a6bda35727942a76ac88f80ebf275ac91" target="_top" xlink:title="vpr::Instance::prepareValidation\lCallbacks">
 <polygon fill="white" stroke="black" points="153.5,-49.5 153.5,-79.5 305.5,-79.5 305.5,-49.5 153.5,-49.5"/>
 <text text-anchor="start" x="161.5" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Instance::prepareValidation</text>
 <text text-anchor="middle" x="229.5" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">Callbacks</text>
@@ -110,13 +110,13 @@ var sectionId = 'dynsection-1';
 </g>
 </g>
 <!-- Node4&#45;&gt;Node14 -->
-<g id="edge11" class="edge"><title>Node4&#45;&gt;Node14</title>
+<g id="edge9" class="edge"><title>Node4&#45;&gt;Node14</title>
 <path fill="none" stroke="midnightblue" d="M94.996,-98.9527C114.107,-94.0209 138.041,-87.8442 160.347,-82.0879"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="161.314,-85.4532 170.122,-79.5654 159.564,-78.6752 161.314,-85.4532"/>
 </g>
 <!-- Node17 -->
-<g id="node14" class="node"><title>Node17</title>
-<g id="a_node14"><a xlink:href="classvpr_1_1_instance.html#aa1b18feac92f797ece4ea81a32f9a1d1" target="_top" xlink:title="vpr::Instance::setupPhysical\lDevice">
+<g id="node13" class="node"><title>Node17</title>
+<g id="a_node13"><a xlink:href="classvpr_1_1_instance.html#aa1b18feac92f797ece4ea81a32f9a1d1" target="_top" xlink:title="vpr::Instance::setupPhysical\lDevice">
 <polygon fill="white" stroke="black" points="160,-0.5 160,-30.5 299,-30.5 299,-0.5 160,-0.5"/>
 <text text-anchor="start" x="168" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Instance::setupPhysical</text>
 <text text-anchor="middle" x="229.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Device</text>
@@ -124,7 +124,7 @@ var sectionId = 'dynsection-1';
 </g>
 </g>
 <!-- Node4&#45;&gt;Node17 -->
-<g id="edge14" class="edge"><title>Node4&#45;&gt;Node17</title>
+<g id="edge12" class="edge"><title>Node4&#45;&gt;Node17</title>
 <path fill="none" stroke="midnightblue" d="M68.2303,-98.9051C84.4111,-84.1979 117.427,-56.0503 150,-39.5 153.716,-37.6118 157.608,-35.8417 161.587,-34.1875"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="162.932,-37.4197 170.987,-30.5367 160.398,-30.8945 162.932,-37.4197"/>
 </g>
@@ -143,8 +143,8 @@ var sectionId = 'dynsection-1';
 <polygon fill="midnightblue" stroke="midnightblue" points="350.896,-190.228 361.46,-189.423 352.699,-183.464 350.896,-190.228"/>
 </g>
 <!-- Node10 -->
-<g id="node7" class="node"><title>Node10</title>
-<g id="a_node7"><a xlink:href="classvpr_1_1_instance.html#adaf88c2f093cb1f2fe411c07233f1004" target="_top" xlink:title="vpr::Instance::prepareOptional\lExtensions">
+<g id="node6" class="node"><title>Node10</title>
+<g id="a_node6"><a xlink:href="classvpr_1_1_instance.html#adaf88c2f093cb1f2fe411c07233f1004" target="_top" xlink:title="vpr::Instance::prepareOptional\lExtensions">
 <polygon fill="white" stroke="black" points="346,-140.5 346,-170.5 492,-170.5 492,-140.5 346,-140.5"/>
 <text text-anchor="start" x="354" y="-158.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Instance::prepareOptional</text>
 <text text-anchor="middle" x="419" y="-147.5" font-family="Helvetica,sans-Serif" font-size="10.00">Extensions</text>
@@ -152,14 +152,14 @@ var sectionId = 'dynsection-1';
 </g>
 </g>
 <!-- Node6&#45;&gt;Node10 -->
-<g id="edge6" class="edge"><title>Node6&#45;&gt;Node10</title>
+<g id="edge5" class="edge"><title>Node6&#45;&gt;Node10</title>
 <path fill="none" stroke="midnightblue" d="M289.055,-154.812C303.775,-154.891 319.849,-154.977 335.499,-155.06"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="335.684,-158.561 345.703,-155.114 335.722,-151.561 335.684,-158.561"/>
 </g>
 <!-- Node8 -->
 <g id="node5" class="node"><title>Node8</title>
 <g id="a_node5"><a xlink:href="classvpr_1_1_instance.html#afd2bf68c4ad36c3cd7d43207f3663870" target="_top" xlink:title="vpr::Instance::checkRequired\lExtensions">
-<polygon fill="white" stroke="black" points="529,-189.5 529,-219.5 671,-219.5 671,-189.5 529,-189.5"/>
+<polygon fill="white" stroke="red" points="529,-189.5 529,-219.5 671,-219.5 671,-189.5 529,-189.5"/>
 <text text-anchor="start" x="537" y="-207.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Instance::checkRequired</text>
 <text text-anchor="middle" x="600" y="-196.5" font-family="Helvetica,sans-Serif" font-size="10.00">Extensions</text>
 </a>
@@ -170,42 +170,23 @@ var sectionId = 'dynsection-1';
 <path fill="none" stroke="midnightblue" d="M493.064,-204.5C501.449,-204.5 510.033,-204.5 518.508,-204.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="518.771,-208 528.771,-204.5 518.771,-201 518.771,-208"/>
 </g>
-<!-- Node9 -->
-<g id="node6" class="node"><title>Node9</title>
-<g id="a_node6"><a xlink:href="classvpr_1_1_instance.html#a1a17389930d2c5ae9c95227480879354" target="_top" xlink:title="vpr::Instance::extension\lCheck">
-<polygon fill="white" stroke="black" points="707,-164.5 707,-194.5 826,-194.5 826,-164.5 707,-164.5"/>
-<text text-anchor="start" x="715" y="-182.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Instance::extension</text>
-<text text-anchor="middle" x="766.5" y="-171.5" font-family="Helvetica,sans-Serif" font-size="10.00">Check</text>
-</a>
-</g>
-</g>
-<!-- Node8&#45;&gt;Node9 -->
-<g id="edge5" class="edge"><title>Node8&#45;&gt;Node9</title>
-<path fill="none" stroke="midnightblue" d="M671.24,-193.825C679.683,-192.542 688.299,-191.233 696.721,-189.953"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="697.513,-193.373 706.874,-188.41 696.461,-186.452 697.513,-193.373"/>
-</g>
 <!-- Node11 -->
-<g id="node8" class="node"><title>Node11</title>
-<g id="a_node8"><a xlink:href="classvpr_1_1_instance.html#a768d30a4546bc9401107839450a4ce23" target="_top" xlink:title="vpr::Instance::checkOptional\lExtensions">
-<polygon fill="white" stroke="black" points="530,-140.5 530,-170.5 670,-170.5 670,-140.5 530,-140.5"/>
+<g id="node7" class="node"><title>Node11</title>
+<g id="a_node7"><a xlink:href="classvpr_1_1_instance.html#a768d30a4546bc9401107839450a4ce23" target="_top" xlink:title="vpr::Instance::checkOptional\lExtensions">
+<polygon fill="white" stroke="red" points="530,-140.5 530,-170.5 670,-170.5 670,-140.5 530,-140.5"/>
 <text text-anchor="start" x="538" y="-158.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Instance::checkOptional</text>
 <text text-anchor="middle" x="600" y="-147.5" font-family="Helvetica,sans-Serif" font-size="10.00">Extensions</text>
 </a>
 </g>
 </g>
 <!-- Node10&#45;&gt;Node11 -->
-<g id="edge7" class="edge"><title>Node10&#45;&gt;Node11</title>
+<g id="edge6" class="edge"><title>Node10&#45;&gt;Node11</title>
 <path fill="none" stroke="midnightblue" d="M492.032,-155.5C501.067,-155.5 510.349,-155.5 519.49,-155.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="519.73,-159 529.73,-155.5 519.73,-152 519.73,-159"/>
 </g>
-<!-- Node11&#45;&gt;Node9 -->
-<g id="edge8" class="edge"><title>Node11&#45;&gt;Node9</title>
-<path fill="none" stroke="midnightblue" d="M670.286,-165.609C679.058,-166.888 688.033,-168.198 696.796,-169.476"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="696.561,-172.979 706.961,-170.959 697.572,-166.052 696.561,-172.979"/>
-</g>
 <!-- Node13 -->
-<g id="node10" class="node"><title>Node13</title>
-<g id="a_node10"><a xlink:href="classvpr_1_1_instance.html#ad6d5590582b6b4487544954c9d10be5f" target="_top" xlink:title="vpr::Instance::checkValidation\lSupport">
+<g id="node9" class="node"><title>Node13</title>
+<g id="a_node9"><a xlink:href="classvpr_1_1_instance.html#ad6d5590582b6b4487544954c9d10be5f" target="_top" xlink:title="vpr::Instance::checkValidation\lSupport">
 <polygon fill="white" stroke="black" points="346,-91.5 346,-121.5 492,-121.5 492,-91.5 346,-91.5"/>
 <text text-anchor="start" x="354" y="-109.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Instance::checkValidation</text>
 <text text-anchor="middle" x="419" y="-98.5" font-family="Helvetica,sans-Serif" font-size="10.00">Support</text>
@@ -213,46 +194,46 @@ var sectionId = 'dynsection-1';
 </g>
 </g>
 <!-- Node12&#45;&gt;Node13 -->
-<g id="edge10" class="edge"><title>Node12&#45;&gt;Node13</title>
+<g id="edge8" class="edge"><title>Node12&#45;&gt;Node13</title>
 <path fill="none" stroke="midnightblue" d="M305.683,-107.698C315.513,-107.593 325.627,-107.485 335.568,-107.379"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="335.885,-110.876 345.847,-107.27 335.81,-103.877 335.885,-110.876"/>
 </g>
 <!-- Node15 -->
-<g id="node12" class="node"><title>Node15</title>
-<g id="a_node12"><a xlink:href="namespacevpr.html#ae727cdb4a6ce21df09e8c12b5b5a8844" target="_top" xlink:title="vpr::VkDebugCallbackFn">
+<g id="node11" class="node"><title>Node15</title>
+<g id="a_node11"><a xlink:href="namespacevpr.html#ae727cdb4a6ce21df09e8c12b5b5a8844" target="_top" xlink:title="vpr::VkDebugCallbackFn">
 <polygon fill="white" stroke="black" points="357.5,-53 357.5,-72 480.5,-72 480.5,-53 357.5,-53"/>
 <text text-anchor="middle" x="419" y="-60" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::VkDebugCallbackFn</text>
 </a>
 </g>
 </g>
 <!-- Node14&#45;&gt;Node15 -->
-<g id="edge12" class="edge"><title>Node14&#45;&gt;Node15</title>
+<g id="edge10" class="edge"><title>Node14&#45;&gt;Node15</title>
 <path fill="none" stroke="midnightblue" d="M305.683,-63.698C319.404,-63.5517 333.677,-63.3994 347.263,-63.2545"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="347.536,-66.7519 357.498,-63.1454 347.461,-59.7523 347.536,-66.7519"/>
 </g>
 <!-- Node16 -->
-<g id="node13" class="node"><title>Node16</title>
-<g id="a_node13"><a xlink:href="namespacevpr.html#a96427d3519084ed32543b56a621d1df7" target="_top" xlink:title="vpr::GetObjectTypeStr">
+<g id="node12" class="node"><title>Node16</title>
+<g id="a_node12"><a xlink:href="namespacevpr.html#a96427d3519084ed32543b56a621d1df7" target="_top" xlink:title="vpr::GetObjectTypeStr">
 <polygon fill="white" stroke="black" points="543.5,-53 543.5,-72 656.5,-72 656.5,-53 543.5,-53"/>
 <text text-anchor="middle" x="600" y="-60" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::GetObjectTypeStr</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node16 -->
-<g id="edge13" class="edge"><title>Node15&#45;&gt;Node16</title>
+<g id="edge11" class="edge"><title>Node15&#45;&gt;Node16</title>
 <path fill="none" stroke="midnightblue" d="M480.601,-62.5C497.4,-62.5 515.72,-62.5 532.819,-62.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="533.283,-66.0001 543.283,-62.5 533.283,-59.0001 533.283,-66.0001"/>
 </g>
 <!-- Node18 -->
-<g id="node15" class="node"><title>Node18</title>
-<g id="a_node15"><a xlink:href="classvpr_1_1_instance.html#a6082a006a3f2ab9688d4a14c123cb04a" target="_top" xlink:title="vpr::Instance::vkHandle">
+<g id="node14" class="node"><title>Node18</title>
+<g id="a_node14"><a xlink:href="classvpr_1_1_instance.html#a6082a006a3f2ab9688d4a14c123cb04a" target="_top" xlink:title="vpr::Instance::vkHandle">
 <polygon fill="white" stroke="black" points="361,-6 361,-25 477,-25 477,-6 361,-6"/>
 <text text-anchor="middle" x="419" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Instance::vkHandle</text>
 </a>
 </g>
 </g>
 <!-- Node17&#45;&gt;Node18 -->
-<g id="edge15" class="edge"><title>Node17&#45;&gt;Node18</title>
+<g id="edge13" class="edge"><title>Node17&#45;&gt;Node18</title>
 <path fill="none" stroke="midnightblue" d="M299.253,-15.5C316.045,-15.5 333.99,-15.5 350.712,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="350.944,-19.0001 360.944,-15.5 350.944,-12.0001 350.944,-19.0001"/>
 </g>

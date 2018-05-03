@@ -1,7 +1,6 @@
 <map id="vpr::Swapchain::SwapchainInfo::ChooseSwapchainExtent" name="vpr::Swapchain::SwapchainInfo::ChooseSwapchainExtent">
-<area shape="rect" id="node2" href="$classvpr_1_1_swapchain.html#a72f010b980cf7b7c49bfd63d1548114e" title="vpr::Swapchain::setParameters" alt="" coords="248,38,451,65"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_swapchain.html#ad75f5394aaa57d86286a71e5d54ab3c6" title="vpr::Swapchain::create" alt="" coords="499,38,652,65"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_swapchain.html#acf014a8530f47418adba1c9e62c0c78e" title="vpr::Swapchain::Recreate" alt="" coords="705,13,875,39"/>
-<area shape="rect" id="node6" href="$classvpr_1_1_swapchain.html#a49bc91a7423fe49320b0375e78653439" title="vpr::Swapchain::Swapchain" alt="" coords="700,63,880,90"/>
-<area shape="rect" id="node5" href="$namespacevpr.html#a94afd8081f855771118d14af569f9bba" title="Pass a swapchain and instance pointer to this to have the swapchain and surface destroyed and recreat..." alt="" coords="928,5,1112,47"/>
+<area shape="rect" id="node2" href="$classvpr_1_1_swapchain.html#a72f010b980cf7b7c49bfd63d1548114e" title="vpr::Swapchain::setParameters" alt="" coords="248,31,451,57"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_swapchain.html#ad75f5394aaa57d86286a71e5d54ab3c6" title="vpr::Swapchain::create" alt="" coords="499,31,652,57"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_swapchain.html#acf014a8530f47418adba1c9e62c0c78e" title="vpr::Swapchain::Recreate" alt="" coords="705,5,875,32"/>
+<area shape="rect" id="node5" href="$classvpr_1_1_swapchain.html#a49bc91a7423fe49320b0375e78653439" title="vpr::Swapchain::Swapchain" alt="" coords="700,56,880,83"/>
 </map>

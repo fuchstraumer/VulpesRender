@@ -6,6 +6,5 @@
 <area shape="rect" id="node6" href="$classvpr_1_1_memory_block.html#a88cde43def4e7d21b8a782554497b064" title="Frees memory in region specified (i.e frees/destroys a suballocation) " alt="" coords="208,224,368,251"/>
 <area shape="rect" id="node7" href="$classvpr_1_1_memory_block.html#a7a429e3be46b6f748e687450aa524e09" title="When we map a suballocation, we are mapping a sub&#45;region of the larger memory object it is bound to..." alt="" coords="209,275,367,301"/>
 <area shape="rect" id="node8" href="$classvpr_1_1_buffer.html#a4c04d59a27d4c3471bdf90eda1c8b662" title="vpr::Buffer::Map" alt="" coords="232,325,344,352"/>
-<area shape="rect" id="node10" href="$classvpr_1_1_image.html#a33666589e50590d711ec46c91f6fa6e7" title="vpr::Image::Memory" alt="" coords="220,376,356,403"/>
 <area shape="rect" id="node9" href="$classvpr_1_1_buffer.html#ae38678b302a270b3716b43505e2f7e96" title="Maps this object, copies data to this object, then ensures to unmap this object. " alt="" coords="425,325,603,352"/>
 </map>

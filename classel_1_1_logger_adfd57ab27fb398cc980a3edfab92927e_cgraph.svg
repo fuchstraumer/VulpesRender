@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 763;
+var viewWidth = 623;
 var viewHeight = 351;
 var sectionId = 'dynsection-24';
 </script>
@@ -54,7 +54,7 @@ var sectionId = 'dynsection-24';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>el::Logger::reconfigure</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-346.5 759,-346.5 759,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-346.5 619,-346.5 619,4 -4,4"/>
 <!-- Node167 -->
 <g id="node1" class="node"><title>Node167</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-148.5 0,-167.5 113,-167.5 113,-148.5 0,-148.5"/>
@@ -157,21 +157,21 @@ var sectionId = 'dynsection-24';
 <polygon fill="midnightblue" stroke="midnightblue" points="288.378,-173.523 298.764,-171.431 289.34,-166.589 288.378,-173.523"/>
 </g>
 <!-- Node180 -->
-<g id="node14" class="node"><title>Node180</title>
-<g id="a_node14"><a xlink:href="namespaceel_1_1base_1_1utils.html#a8cad5c357a7913cdbe69add3d6a4e8ac" target="_top" xlink:title="Deletes memory safely and points to null. ">
+<g id="node13" class="node"><title>Node180</title>
+<g id="a_node13"><a xlink:href="namespaceel_1_1base_1_1utils.html#a8cad5c357a7913cdbe69add3d6a4e8ac" target="_top" xlink:title="Deletes memory safely and points to null. ">
 <polygon fill="white" stroke="black" points="298,-0.5 298,-19.5 425,-19.5 425,-0.5 298,-0.5"/>
 <text text-anchor="middle" x="361.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::utils::safeDelete</text>
 </a>
 </g>
 </g>
 <!-- Node168&#45;&gt;Node180 -->
-<g id="edge20" class="edge"><title>Node168&#45;&gt;Node180</title>
+<g id="edge19" class="edge"><title>Node168&#45;&gt;Node180</title>
 <path fill="none" stroke="midnightblue" d="M205.753,-148.15C215.515,-123.898 244.105,-60.9557 289,-29 291.721,-27.0635 294.626,-25.3244 297.651,-23.7625"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="299.308,-26.8559 307.018,-19.5885 296.459,-20.462 299.308,-26.8559"/>
 </g>
 <!-- Node181 -->
-<g id="node15" class="node"><title>Node181</title>
-<g id="a_node15"><a xlink:href="classel_1_1_configurations.html#a4c6db218908b39d23cc09b1a16a18e83" target="_top" xlink:title="Sets configuration based&#45;off an existing configurations. ">
+<g id="node14" class="node"><title>Node181</title>
+<g id="a_node14"><a xlink:href="classel_1_1_configurations.html#a4c6db218908b39d23cc09b1a16a18e83" target="_top" xlink:title="Sets configuration based&#45;off an existing configurations. ">
 <polygon fill="white" stroke="black" points="315.5,-39 315.5,-69 407.5,-69 407.5,-39 315.5,-39"/>
 <text text-anchor="start" x="323.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">el::Configurations</text>
 <text text-anchor="middle" x="361.5" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">::setFromBase</text>
@@ -179,7 +179,7 @@ var sectionId = 'dynsection-24';
 </g>
 </g>
 <!-- Node168&#45;&gt;Node181 -->
-<g id="edge21" class="edge"><title>Node168&#45;&gt;Node181</title>
+<g id="edge20" class="edge"><title>Node168&#45;&gt;Node181</title>
 <path fill="none" stroke="midnightblue" d="M211.398,-148.265C226.571,-132.974 257.915,-103.103 289,-84 295.308,-80.1235 302.206,-76.5279 309.149,-73.2715"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="310.894,-76.325 318.593,-69.0466 308.036,-69.9351 310.894,-76.325"/>
 </g>
@@ -236,7 +236,7 @@ var sectionId = 'dynsection-24';
 <polygon fill="midnightblue" stroke="midnightblue" points="472.765,-232.5 482.765,-229 472.765,-225.5 472.765,-232.5"/>
 </g>
 <!-- Node176&#45;&gt;Node171 -->
-<g id="edge18" class="edge"><title>Node176&#45;&gt;Node171</title>
+<g id="edge17" class="edge"><title>Node176&#45;&gt;Node171</title>
 <path fill="none" stroke="midnightblue" d="M418.815,-195.129C424.18,-197.665 429.346,-200.603 434,-204 455.828,-219.932 447.772,-237.631 470,-253 473.519,-255.433 477.327,-257.571 481.29,-259.45"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="480.178,-262.778 490.755,-263.381 482.862,-256.313 480.178,-262.778"/>
 </g>
@@ -248,7 +248,7 @@ var sectionId = 'dynsection-24';
 <!-- Node177 -->
 <g id="node11" class="node"><title>Node177</title>
 <g id="a_node11"><a xlink:href="classel_1_1base_1_1_typed_configurations.html#a05b8ea32f63c3246a68dbc9085b7e847" target="_top" xlink:title="el::base::TypedConfigurations\l::logFormat">
-<polygon fill="white" stroke="black" points="470,-165 470,-195 615,-195 615,-165 470,-165"/>
+<polygon fill="white" stroke="red" points="470,-165 470,-195 615,-195 615,-165 470,-165"/>
 <text text-anchor="start" x="478" y="-183" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::TypedConfigurations</text>
 <text text-anchor="middle" x="542.5" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">::logFormat</text>
 </a>
@@ -260,8 +260,8 @@ var sectionId = 'dynsection-24';
 <polygon fill="midnightblue" stroke="midnightblue" points="459.93,-183.5 469.93,-180 459.93,-176.5 459.93,-183.5"/>
 </g>
 <!-- Node179 -->
-<g id="node13" class="node"><title>Node179</title>
-<g id="a_node13"><a xlink:href="classel_1_1base_1_1utils_1_1_str.html#a0f271d7da2bb3c1f2fa062219c0e0ba2" target="_top" xlink:title="el::base::utils::Str\l::replaceFirstWithEscape">
+<g id="node12" class="node"><title>Node179</title>
+<g id="a_node12"><a xlink:href="classel_1_1base_1_1utils_1_1_str.html#a0f271d7da2bb3c1f2fa062219c0e0ba2" target="_top" xlink:title="el::base::utils::Str\l::replaceFirstWithEscape">
 <polygon fill="white" stroke="black" points="479,-116 479,-146 606,-146 606,-116 479,-116"/>
 <text text-anchor="start" x="487" y="-134" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::utils::Str</text>
 <text text-anchor="middle" x="542.5" y="-123" font-family="Helvetica,sans-Serif" font-size="10.00">::replaceFirstWithEscape</text>
@@ -269,32 +269,18 @@ var sectionId = 'dynsection-24';
 </g>
 </g>
 <!-- Node176&#45;&gt;Node179 -->
-<g id="edge19" class="edge"><title>Node176&#45;&gt;Node179</title>
+<g id="edge18" class="edge"><title>Node176&#45;&gt;Node179</title>
 <path fill="none" stroke="midnightblue" d="M417.666,-164.899C436.384,-159.775 457.463,-154.004 476.853,-148.697"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="477.795,-152.068 486.516,-146.052 475.946,-145.316 477.795,-152.068"/>
 </g>
-<!-- Node178 -->
-<g id="node12" class="node"><title>Node178</title>
-<g id="a_node12"><a xlink:href="classel_1_1base_1_1_log_format.html#aeacb2c9d313ce5713b3e85e03a4baab5" target="_top" xlink:title="el::base::LogFormat\l::level">
-<polygon fill="white" stroke="black" points="651,-165 651,-195 755,-195 755,-165 651,-165"/>
-<text text-anchor="start" x="659" y="-183" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::LogFormat</text>
-<text text-anchor="middle" x="703" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">::level</text>
-</a>
-</g>
-</g>
-<!-- Node177&#45;&gt;Node178 -->
-<g id="edge17" class="edge"><title>Node177&#45;&gt;Node178</title>
-<path fill="none" stroke="midnightblue" d="M615.33,-180C623.832,-180 632.449,-180 640.784,-180"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="640.786,-183.5 650.786,-180 640.786,-176.5 640.786,-183.5"/>
-</g>
 <!-- Node181&#45;&gt;Node173 -->
-<g id="edge23" class="edge"><title>Node181&#45;&gt;Node173</title>
+<g id="edge22" class="edge"><title>Node181&#45;&gt;Node173</title>
 <path fill="none" stroke="midnightblue" d="M407.669,-61.0656C430.79,-64.6823 459.192,-69.125 483.873,-72.9858"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="483.419,-76.4572 493.84,-74.5448 484.501,-69.5413 483.419,-76.4572"/>
 </g>
 <!-- Node182 -->
-<g id="node16" class="node"><title>Node182</title>
-<g id="a_node16"><a xlink:href="classel_1_1base_1_1utils_1_1_abstract_registry.html#a072859d3728a75f910c2898f62fd12da" target="_top" xlink:title="Returns underlying container by reference. ">
+<g id="node15" class="node"><title>Node182</title>
+<g id="a_node15"><a xlink:href="classel_1_1base_1_1utils_1_1_abstract_registry.html#a072859d3728a75f910c2898f62fd12da" target="_top" xlink:title="Returns underlying container by reference. ">
 <polygon fill="white" stroke="black" points="483.5,-18 483.5,-48 601.5,-48 601.5,-18 483.5,-18"/>
 <text text-anchor="start" x="491.5" y="-36" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::utils::Abstract</text>
 <text text-anchor="middle" x="542.5" y="-25" font-family="Helvetica,sans-Serif" font-size="10.00">Registry::list</text>
@@ -302,7 +288,7 @@ var sectionId = 'dynsection-24';
 </g>
 </g>
 <!-- Node181&#45;&gt;Node182 -->
-<g id="edge22" class="edge"><title>Node181&#45;&gt;Node182</title>
+<g id="edge21" class="edge"><title>Node181&#45;&gt;Node182</title>
 <path fill="none" stroke="midnightblue" d="M407.669,-48.7008C427.608,-46.3616 451.474,-43.5618 473.494,-40.9783"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="473.937,-44.4505 483.461,-39.809 473.121,-37.4982 473.937,-44.4505"/>
 </g>

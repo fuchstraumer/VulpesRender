@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['nocopy',['NoCopy',['../classel_1_1base_1_1_no_copy.html',1,'el::base']]],
-  ['nomutex',['NoMutex',['../classel_1_1base_1_1threading_1_1internal_1_1_no_mutex.html',1,'el::base::threading::internal']]],
-  ['noscopedlock',['NoScopedLock',['../classel_1_1base_1_1threading_1_1internal_1_1_no_scoped_lock.html',1,'el::base::threading::internal']]],
-  ['nullwriter',['NullWriter',['../classel_1_1base_1_1_null_writer.html',1,'el::base']]]
+  ['memoryblock',['MemoryBlock',['../classvpr_1_1_memory_block.html',1,'vpr']]],
+  ['messagebuilder',['MessageBuilder',['../classel_1_1base_1_1_message_builder.html',1,'el::base']]]
 ];

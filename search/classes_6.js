@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['helpers',['Helpers',['../classel_1_1_helpers.html',1,'el']]],
-  ['hitcounter',['HitCounter',['../classel_1_1base_1_1_hit_counter.html',1,'el::base']]]
+  ['graphicspipeline',['GraphicsPipeline',['../classvpr_1_1_graphics_pipeline.html',1,'vpr']]],
+  ['graphicspipelineinfo',['GraphicsPipelineInfo',['../structvpr_1_1_graphics_pipeline_info.html',1,'vpr']]]
 ];

@@ -3,7 +3,6 @@
 <area shape="rect" id="node3" href="$classvpr_1_1_allocator.html#a98ce3e7a210998e2e6723079ae2bb8ff" title="vpr::Allocator::CreateBuffer" alt="" coords="213,56,389,83"/>
 <area shape="rect" id="node4" href="$classvpr_1_1_allocator.html#a2fe7722a4b3f19bd7705a80be50171bb" title="vpr::Allocator::CreateImage" alt="" coords="212,107,391,133"/>
 <area shape="rect" id="node5" href="$classvpr_1_1_buffer.html#a4c04d59a27d4c3471bdf90eda1c8b662" title="vpr::Buffer::Map" alt="" coords="245,157,357,184"/>
-<area shape="rect" id="node7" href="$classvpr_1_1_image.html#a33666589e50590d711ec46c91f6fa6e7" title="vpr::Image::Memory" alt="" coords="233,208,369,235"/>
-<area shape="rect" id="node8" href="$classvpr_1_1_buffer.html#a780ba4c43b7f1a8ec88a5990a76a3cd0" title="vpr::Buffer::Unmap" alt="" coords="237,259,365,285"/>
-<area shape="rect" id="node6" href="$classvpr_1_1_buffer.html#ae38678b302a270b3716b43505e2f7e96" title="Maps this object, copies data to this object, then ensures to unmap this object. " alt="" coords="439,208,616,235"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_buffer.html#a780ba4c43b7f1a8ec88a5990a76a3cd0" title="vpr::Buffer::Unmap" alt="" coords="237,208,365,235"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_buffer.html#ae38678b302a270b3716b43505e2f7e96" title="Maps this object, copies data to this object, then ensures to unmap this object. " alt="" coords="439,183,616,209"/>
 </map>

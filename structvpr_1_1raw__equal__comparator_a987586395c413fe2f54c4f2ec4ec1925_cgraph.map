@@ -1,0 +1,37 @@
+<map id="vpr::raw_equal_comparator::operator()" name="vpr::raw_equal_comparator::operator()">
+<area shape="rect" id="node2" href="$classvpr_1_1_allocator.html#aa8aad8539721142d8dfa92a3196ab90b" title="vpr::Allocator::Allocate\lForBuffer" alt="" coords="502,804,654,845"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_allocator.html#a1d36e3567e4fd7ef8bf1395942f6c714" title="vpr::Allocator::Allocate\lMemory" alt="" coords="767,905,919,947"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_allocator.html#a40618202c2c86027ee1915cadbc18afd" title="vpr::Allocator::allocate\lMemoryType" alt="" coords="1008,923,1159,964"/>
+<area shape="rect" id="node5" href="$classvpr_1_1_allocator.html#ad4d7daf9b55d81a4fab0cb4a657d6508" title="vpr::Allocator::allocate\lPrivateMemory" alt="" coords="1238,55,1389,96"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_allocation.html#ad680abfd77facfe5efcc222b154b595d" title="vpr::Allocation::InitPrivate" alt="" coords="1452,33,1619,59"/>
+<area shape="rect" id="node8" href="$classvpr_1_1_allocator.html#a32c2e59911a888c64b7d56005014865b" title="vpr::Allocator::GetAllocSize" alt="" coords="1223,854,1404,881"/>
+<area shape="rect" id="node9" href="$classvpr_1_1_allocator.html#af89f4383e7e9eb534e1ddc76081c43fd" title="vpr::Allocator::GetBuffer\lImageGranularity" alt="" coords="1234,960,1393,1001"/>
+<area shape="rect" id="node10" href="$classvpr_1_1_allocator.html#aee9903438ded8311fd11f757f80002d6" title="vpr::Allocator::GetPreferred\lBlockSize" alt="" coords="1224,1031,1403,1072"/>
+<area shape="rect" id="node11" href="$classvpr_1_1_allocation.html#ad5d461398f23e593c58f70a8cac78922" title="vpr::Allocation::Init" alt="" coords="1249,1106,1377,1133"/>
+<area shape="rect" id="node12" href="$classvpr_1_1_allocator.html#a12b2ce29d3b6b28131cc9c5a331d2286" title="vpr::Allocator::findMemory\lTypeIdx" alt="" coords="997,1276,1169,1317"/>
+<area shape="rect" id="node13" href="$namespacevpr.html#a4670febea81bc9a6a25fb8b1cf1afaaa" title="vpr::countBitsSet" alt="" coords="1253,1254,1374,1281"/>
+<area shape="rect" id="node14" href="$classvpr_1_1_allocator.html#a4277250f2867fd5b729bc78e7dc5eb6f" title="vpr::Allocator::GetMemory\lTypeCount" alt="" coords="1227,1385,1400,1427"/>
+<area shape="rect" id="node15" href="$classvpr_1_1_allocator.html#a9e7a1ff1daa157cd1f74d1437a8384de" title="vpr::Allocator::getBuffer\lMemReqs" alt="" coords="765,753,921,795"/>
+<area shape="rect" id="node16" href="$classvpr_1_1_allocator.html#a79b5ace2d3d620783793593c99d50d4e" title="vpr::Allocator::Allocate\lForImage" alt="" coords="502,585,654,627"/>
+<area shape="rect" id="node17" href="$classvpr_1_1_allocator.html#a526196279f36a8fe91524f2bbde9386f" title="vpr::Allocator::getImage\lMemReqs" alt="" coords="763,492,922,533"/>
+<area shape="rect" id="node18" href="$classvpr_1_1_allocator.html#a17a1897a3de8cd25b9a2d3fc89620352" title="vpr::Allocator::Allocator" alt="" coords="244,1630,400,1657"/>
+<area shape="rect" id="node19" href="$classvpr_1_1_allocator.html#a3c37dadb79cd49b8764f977bcb31ad26" title="vpr::Allocator::clearAllocationMaps" alt="" coords="467,1529,689,1555"/>
+<area shape="rect" id="node20" href="$classvpr_1_1_allocator.html#ae35a57af9edd668c0bd7e135de1973f8" title="vpr::Allocator::createAllocationMaps" alt="" coords="463,1443,693,1470"/>
+<area shape="rect" id="node21" href="$classvpr_1_1_allocator.html#a98ce3e7a210998e2e6723079ae2bb8ff" title="vpr::Allocator::CreateBuffer" alt="" coords="234,702,410,729"/>
+<area shape="rect" id="node22" href="$classvpr_1_1_allocation.html#a1a223e41ca865271544ece71d18edce2" title="vpr::Allocation::Memory" alt="" coords="499,534,657,561"/>
+<area shape="rect" id="node23" href="$classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397" title="vpr::Allocation::Offset" alt="" coords="505,651,651,678"/>
+<area shape="rect" id="node24" href="$classvpr_1_1_allocator.html#a2fe7722a4b3f19bd7705a80be50171bb" title="vpr::Allocator::CreateImage" alt="" coords="233,550,411,577"/>
+<area shape="rect" id="node25" href="$classvpr_1_1_allocator.html#aba5e7b8623bceb91e2eb3551d55afb86" title="vpr::Allocator::DestroyBuffer" alt="" coords="231,179,413,206"/>
+<area shape="rect" id="node26" href="$classvpr_1_1_allocator.html#a438bbd88a3f18c741f7de90f528300b1" title="vpr::Allocator::FreeMemory" alt="" coords="489,331,667,358"/>
+<area shape="rect" id="node27" href="$classvpr_1_1_allocator.html#ab9d7b854a663fa66385938506f0676d3" title="vpr::Allocator::freePrivate\lMemory" alt="" coords="760,324,925,365"/>
+<area shape="rect" id="node28" href="$classvpr_1_1_allocation.html#ad23615cd9f84e8e2354cf1f1e7e8f162" title="vpr::Allocation::IsPrivate\lAllocation" alt="" coords="1003,265,1163,307"/>
+<area shape="rect" id="node29" href="$classvpr_1_1_allocation.html#ab07876bad87d1c3e085ab02c1c608179" title="vpr::Allocation::MemoryTypeIdx" alt="" coords="741,441,944,467"/>
+<area shape="rect" id="node30" href="$classvpr_1_1_allocator.html#a9c04f050d22a383fd21f02e036bf2572" title="vpr::Allocator::DestroyImage" alt="" coords="229,230,415,257"/>
+<area shape="rect" id="node31" href="$classvpr_1_1_allocator.html#a1be30aa02991f0323def73b9be9a3c44" title="vpr::Allocator::DeviceHandle" alt="" coords="992,1342,1175,1369"/>
+<area shape="rect" id="node32" href="$classvpr_1_1_allocator.html#a5babc9b4c2391bea64a4f9f26ea04257" title="vpr::Allocator::fetchAlloc\lFunctionPointersKHR" alt="" coords="1002,1159,1165,1200"/>
+<area shape="rect" id="node33" href="$classvpr_1_1_allocator.html#a7cb910e5db04c436abedbabd3f2385e1" title="vpr::Allocator::GetMemory\lHeapCount" alt="" coords="235,1681,409,1723"/>
+<area shape="rect" id="node34" href="$structvpr_1_1raw__equal__comparator.html#a73b22721f942a82aed7319d6a423b8f9" title="vpr::raw_equal_comparator\l::raw_equal_comparator" alt="" coords="234,1747,410,1788"/>
+<area shape="rect" id="node35" href="$classvpr_1_1_allocator.html#a4fb24600d3edbff034389a4ea111513f" title="vpr::Allocator::Recreate" alt="" coords="243,1478,401,1505"/>
+<area shape="rect" id="node36" href="$classvpr_1_1_allocator.html#a9db2082e4275074f63a5e1257a89825f" title="vpr::Allocator::~Allocator" alt="" coords="240,1579,404,1606"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" title="vpr::Device::vkHandle" alt="" coords="1463,558,1607,585"/>
+</map>

@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 734;
+var viewWidth = 564;
 var viewHeight = 88;
 var sectionId = 'dynsection-1';
 </script>
@@ -54,7 +54,7 @@ var sectionId = 'dynsection-1';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>vpr::countBitsSet</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-84 730,-84 730,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-84 560,-84 560,4 -4,4"/>
 <!-- Node3 -->
 <g id="node1" class="node"><title>Node3</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-30 0,-49 91,-49 91,-30 0,-30"/>
@@ -91,7 +91,7 @@ var sectionId = 'dynsection-1';
 <!-- Node6 -->
 <g id="node4" class="node"><title>Node6</title>
 <g id="a_node4"><a xlink:href="classvpr_1_1_allocator.html#a79b5ace2d3d620783793593c99d50d4e" target="_top" xlink:title="vpr::Allocator::Allocate\lForImage">
-<polygon fill="white" stroke="black" points="442,-49.5 442,-79.5 556,-79.5 556,-49.5 442,-49.5"/>
+<polygon fill="white" stroke="red" points="442,-49.5 442,-79.5 556,-79.5 556,-49.5 442,-49.5"/>
 <text text-anchor="start" x="450" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Allocator::Allocate</text>
 <text text-anchor="middle" x="499" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">ForImage</text>
 </a>
@@ -103,44 +103,18 @@ var sectionId = 'dynsection-1';
 <polygon fill="midnightblue" stroke="midnightblue" points="416.818,-47.2373 406.375,-49.0227 415.652,-54.1395 416.818,-47.2373"/>
 </g>
 <!-- Node8 -->
-<g id="node6" class="node"><title>Node8</title>
-<g id="a_node6"><a xlink:href="classvpr_1_1_allocator.html#aa8aad8539721142d8dfa92a3196ab90b" target="_top" xlink:title="vpr::Allocator::Allocate\lForBuffer">
-<polygon fill="white" stroke="black" points="442,-0.5 442,-30.5 556,-30.5 556,-0.5 442,-0.5"/>
+<g id="node5" class="node"><title>Node8</title>
+<g id="a_node5"><a xlink:href="classvpr_1_1_allocator.html#aa8aad8539721142d8dfa92a3196ab90b" target="_top" xlink:title="vpr::Allocator::Allocate\lForBuffer">
+<polygon fill="white" stroke="red" points="442,-0.5 442,-30.5 556,-30.5 556,-0.5 442,-0.5"/>
 <text text-anchor="start" x="450" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Allocator::Allocate</text>
 <text text-anchor="middle" x="499" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">ForBuffer</text>
 </a>
 </g>
 </g>
 <!-- Node5&#45;&gt;Node8 -->
-<g id="edge5" class="edge"><title>Node5&#45;&gt;Node8</title>
+<g id="edge4" class="edge"><title>Node5&#45;&gt;Node8</title>
 <path fill="none" stroke="midnightblue" d="M416.28,-28.7519C424.796,-27.371 433.449,-25.9678 441.782,-24.6164"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="415.685,-25.3025 406.375,-30.3582 416.806,-32.2122 415.685,-25.3025"/>
-</g>
-<!-- Node7 -->
-<g id="node5" class="node"><title>Node7</title>
-<g id="a_node5"><a xlink:href="classvpr_1_1_allocator.html#a2fe7722a4b3f19bd7705a80be50171bb" target="_top" xlink:title="vpr::Allocator::CreateImage">
-<polygon fill="white" stroke="black" points="592,-55 592,-74 726,-74 726,-55 592,-55"/>
-<text text-anchor="middle" x="659" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Allocator::CreateImage</text>
-</a>
-</g>
-</g>
-<!-- Node6&#45;&gt;Node7 -->
-<g id="edge4" class="edge"><title>Node6&#45;&gt;Node7</title>
-<path fill="none" stroke="midnightblue" d="M566.301,-64.5C574.725,-64.5 583.347,-64.5 591.77,-64.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="566.15,-61.0001 556.15,-64.5 566.15,-68.0001 566.15,-61.0001"/>
-</g>
-<!-- Node9 -->
-<g id="node7" class="node"><title>Node9</title>
-<g id="a_node7"><a xlink:href="classvpr_1_1_allocator.html#a98ce3e7a210998e2e6723079ae2bb8ff" target="_top" xlink:title="vpr::Allocator::CreateBuffer">
-<polygon fill="white" stroke="black" points="593,-6 593,-25 725,-25 725,-6 593,-6"/>
-<text text-anchor="middle" x="659" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Allocator::CreateBuffer</text>
-</a>
-</g>
-</g>
-<!-- Node8&#45;&gt;Node9 -->
-<g id="edge6" class="edge"><title>Node8&#45;&gt;Node9</title>
-<path fill="none" stroke="midnightblue" d="M566.331,-15.5C575.11,-15.5 584.103,-15.5 592.862,-15.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="566.15,-12.0001 556.15,-15.5 566.15,-19.0001 566.15,-12.0001"/>
 </g>
 </g>
 </svg>

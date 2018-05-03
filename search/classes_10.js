@@ -1,7 +1,21 @@
 var searchData=
 [
-  ['texture',['Texture',['../namespacevpr.html#classvpr_1_1_texture',1,'vpr']]],
-  ['threadsafe',['ThreadSafe',['../classel_1_1base_1_1threading_1_1_thread_safe.html',1,'el::base::threading']]],
-  ['transferpool',['TransferPool',['../classvpr_1_1_transfer_pool.html',1,'vpr']]],
-  ['typedconfigurations',['TypedConfigurations',['../classel_1_1base_1_1_typed_configurations.html',1,'el::base']]]
+  ['sampler',['Sampler',['../classvpr_1_1_sampler.html',1,'vpr']]],
+  ['scopedaddflag',['ScopedAddFlag',['../classel_1_1_loggers_1_1_scoped_add_flag.html',1,'el::Loggers']]],
+  ['scopedremoveflag',['ScopedRemoveFlag',['../classel_1_1_loggers_1_1_scoped_remove_flag.html',1,'el::Loggers']]],
+  ['semaphore',['Semaphore',['../classvpr_1_1_semaphore.html',1,'vpr']]],
+  ['shadermodule',['ShaderModule',['../classvpr_1_1_shader_module.html',1,'vpr']]],
+  ['staticclass',['StaticClass',['../classel_1_1base_1_1_static_class.html',1,'el::base']]],
+  ['storage',['Storage',['../classel_1_1base_1_1_storage.html',1,'el::base']]],
+  ['str',['Str',['../classel_1_1base_1_1utils_1_1_str.html',1,'el::base::utils']]],
+  ['stringtolevelitem',['StringToLevelItem',['../namespaceel.html#structel_1_1_string_to_level_item',1,'el']]],
+  ['suballocation',['Suballocation',['../structvpr_1_1_suballocation.html',1,'vpr']]],
+  ['suballocationrequest',['SuballocationRequest',['../group___allocation.html#structvpr_1_1_suballocation_request',1,'vpr']]],
+  ['suballocitercompare',['suballocIterCompare',['../structvpr_1_1suballoc_iter_compare.html',1,'vpr']]],
+  ['suballocoffsetcompare',['suballocOffsetCompare',['../structvpr_1_1suballoc_offset_compare.html',1,'vpr']]],
+  ['subsecondprecision',['SubsecondPrecision',['../classel_1_1base_1_1_subsecond_precision.html',1,'el::base']]],
+  ['surfacekhr',['SurfaceKHR',['../classvpr_1_1_surface_k_h_r.html',1,'vpr']]],
+  ['swapchain',['Swapchain',['../classvpr_1_1_swapchain.html',1,'vpr']]],
+  ['swapchaininfo',['SwapchainInfo',['../structvpr_1_1_swapchain_1_1_swapchain_info.html',1,'vpr::Swapchain']]],
+  ['sysloginitializer',['SysLogInitializer',['../classel_1_1_sys_log_initializer.html',1,'el']]]
 ];

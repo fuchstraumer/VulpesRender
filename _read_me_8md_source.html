@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>VulpesRender: ReadMe.md Source File</title>
+<title>VulpesRender: C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/ReadMe.md Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.6.5</span>
+   &#160;<span id="projectnumber">v0.8.7</span>
    </div>
    <div id="projectbrief">A library of Vulkan Primitives</div>
   </td>
@@ -61,7 +61,7 @@ $(function() {
 
 <div class="header">
   <div class="headertitle">
-<div class="title">ReadMe.md</div>  </div>
+<div class="title">C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/ReadMe.md</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="_read_me_8md.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;# VulpesRender</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;#### Or, yet another Vulkan wrapper</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;This project has recently been re-scoped: instead of being a Vulkan renderer or </div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;framework, it&#39;s really a set of &quot;primitives&quot; that wrap Vulkan fuctionality and</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;objects into simple RAII classes. There&#39;s little &quot;advanced&quot; functionality here - </div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;the most advanced code is in the allocator subsystem, and much of the rest of the</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;project really is nothing but RAII wrappers over Vulkan objects.</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;Classes have been kept simple and to-the-point as much as possible, and have been</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;tuned to make using them easier. I tried to keep the &quot;does what it says on the tin&quot;</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;and &quot;what you see if what you get&quot; feeling of the raw Vulkan API mostly intact.</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;This project also features a minimal usage of the STL, insofar as I can manage. </div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;std::unique_ptr is used nearly everywhere to allow me to control initialization time and order, </div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;but still allowing me to keep RAII semantics.</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;### Usage</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;VPR can be used as a static or dynamic library (though the dynamic library usage could definitely use some improvement). The only</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;real dependency to speak of is GLFW, and this is all handled and linked in appropriately. </div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;I need to write more example documentation on how to use the various classes in this repository, but they&#39;re all</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;pretty simple and not far removed from how&#39;d you see them used in official examples or things like Sascha&#39;s examples.</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;I welcome criticism, comments, and requests! I&#39;m constantly trying to improve this project and my own skills, so all input </div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;is truly appreciated :)</div></div><!-- fragment --></div><!-- contents -->

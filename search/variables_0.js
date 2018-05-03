@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['activequeries',['activeQueries',['../classvpr_1_1_query_pool.html#aed53e5e79d21dcd364e5b106912ed662',1,'vpr::QueryPool']]],
   ['alignment',['Alignment',['../classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752',1,'vpr::Allocation']]],
   ['allocated',['allocated',['../classvpr_1_1_descriptor_set.html#adf3ff95348c1b1ae8c2b0d807d16955e',1,'vpr::DescriptorSet']]],
   ['allocations',['allocations',['../classvpr_1_1_allocation_collection.html#a1d13e83ce527ebb61edf3184ed808fce',1,'vpr::AllocationCollection::allocations()'],['../classvpr_1_1_allocator.html#a2a2514477bbb94a7e96a85acf73fdca7',1,'vpr::Allocator::allocations()']]],

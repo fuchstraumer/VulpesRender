@@ -6,12 +6,11 @@
 <area shape="rect" id="node8" href="$classel_1_1_configurations.html#a1e812370f896b6429bf46b31fcd4e3e0" title="Determines whether or not specified configuration type exists in the repository. " alt="" coords="431,71,557,112"/>
 <area shape="rect" id="node9" href="$classel_1_1_logger.html#ae7c1d538f6163b6be5d37dafcaf24610" title="el::Logger::initUnflushed\lCount" alt="" coords="413,136,575,177"/>
 <area shape="rect" id="node10" href="$classel_1_1_logger.html#acfb9ef869b9b4dc3efd78d7f64b8bebd" title="el::Logger::resolveLogger\lFormatSpec" alt="" coords="411,201,577,243"/>
-<area shape="rect" id="node14" href="$namespaceel_1_1base_1_1utils.html#a8cad5c357a7913cdbe69add3d6a4e8ac" title="Deletes memory safely and points to null. " alt="" coords="409,435,579,462"/>
-<area shape="rect" id="node15" href="$classel_1_1_configurations.html#a4c6db218908b39d23cc09b1a16a18e83" title="Sets configuration based&#45;off an existing configurations. " alt="" coords="433,369,555,411"/>
+<area shape="rect" id="node13" href="$namespaceel_1_1base_1_1utils.html#a8cad5c357a7913cdbe69add3d6a4e8ac" title="Deletes memory safely and points to null. " alt="" coords="409,435,579,462"/>
+<area shape="rect" id="node14" href="$classel_1_1_configurations.html#a4c6db218908b39d23cc09b1a16a18e83" title="Sets configuration based&#45;off an existing configurations. " alt="" coords="433,369,555,411"/>
 <area shape="rect" id="node5" href="$classel_1_1_level_helper.html#a1279f27df29a003df5ecc3d0bf4dacbb" title="Casts int(ushort) to level, useful for iterating through enum. " alt="" coords="644,85,827,111"/>
 <area shape="rect" id="node6" href="$classel_1_1_level_helper.html#a7f0dbfceb2354a72c2802d02c300430d" title="Applies specified function to each level starting from startIndex. " alt="" coords="656,136,815,177"/>
 <area shape="rect" id="node11" href="$classel_1_1base_1_1_typed_configurations.html#a05b8ea32f63c3246a68dbc9085b7e847" title="el::base::TypedConfigurations\l::logFormat" alt="" coords="639,201,832,243"/>
-<area shape="rect" id="node13" href="$classel_1_1base_1_1utils_1_1_str.html#a0f271d7da2bb3c1f2fa062219c0e0ba2" title="el::base::utils::Str\l::replaceFirstWithEscape" alt="" coords="651,267,820,308"/>
-<area shape="rect" id="node12" href="$classel_1_1base_1_1_log_format.html#aeacb2c9d313ce5713b3e85e03a4baab5" title="el::base::LogFormat\l::level" alt="" coords="880,201,1019,243"/>
-<area shape="rect" id="node16" href="$classel_1_1base_1_1utils_1_1_abstract_registry.html#a072859d3728a75f910c2898f62fd12da" title="Returns underlying container by reference. " alt="" coords="657,397,814,439"/>
+<area shape="rect" id="node12" href="$classel_1_1base_1_1utils_1_1_str.html#a0f271d7da2bb3c1f2fa062219c0e0ba2" title="el::base::utils::Str\l::replaceFirstWithEscape" alt="" coords="651,267,820,308"/>
+<area shape="rect" id="node15" href="$classel_1_1base_1_1utils_1_1_abstract_registry.html#a072859d3728a75f910c2898f62fd12da" title="Returns underlying container by reference. " alt="" coords="657,397,814,439"/>
 </map>

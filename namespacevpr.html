@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.6.5</span>
+   &#160;<span id="projectnumber">v0.8.7</span>
    </div>
    <div id="projectbrief">A library of Vulkan Primitives</div>
   </td>
@@ -61,7 +61,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
@@ -72,11 +71,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespacevpr_1_1detail"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevpr_1_1detail.html">detail</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html">Allocation</a></td></tr>
@@ -112,6 +106,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_device.html">Device</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">!The <a class="el" href="classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. ">Device</a> class is a wrapper around the vkLogicalDevice object.  <a href="classvpr_1_1_device.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_event.html">Event</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Events are a unique synchronization primitive on Vulkan: unlike fences or semaphores they are not strictly intended for only use on the device or only use on the host.  <a href="classvpr_1_1_event.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_fence.html">Fence</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A fence is the most heavyweight of Vulkan synchronization primitives, and is for explicitly synchronizating the device and host.  <a href="classvpr_1_1_fence.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_framebuffer.html">Framebuffer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classvpr_1_1_framebuffer.html" title="The Framebuffer class merely handles lifetime of a VkFramebuffer object. ">Framebuffer</a> class merely handles lifetime of a VkFramebuffer object.  <a href="classvpr_1_1_framebuffer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,8 +141,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_pipeline_layout.html">PipelineLayout</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classvpr_1_1_pipeline_layout.html" title="PipelineLayout is an RAII wrapper around a VkPipelineLayout object that also simplifies setting what ...">PipelineLayout</a> is an RAII wrapper around a VkPipelineLayout object that also simplifies setting what resources the pipeline layout will have bound to it.  <a href="classvpr_1_1_pipeline_layout.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_query_pool.html">QueryPool</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_queue.html">Queue</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:structvpr_1_1queue__priorities__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevpr.html#structvpr_1_1queue__priorities__t">queue_priorities_t</a></td></tr>
@@ -156,6 +154,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bare minimum RAII wrapper around Vulkan sampler object.  <a href="classvpr_1_1_sampler.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_semaphore.html">Semaphore</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The semaphore is Vulkan's device-exclusive synchronization primitive.  <a href="classvpr_1_1_semaphore.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_shader_module.html">ShaderModule</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A thoroughly thin wrapper around a VkShaderModule object, whose primary utility beyond RAII resource management is setting up the VkPipelineShaderStageCreateInfo required when creating/setting up an objects graphics pipeline.  <a href="classvpr_1_1_shader_module.html#details">More...</a><br /></td></tr>
@@ -203,14 +202,6 @@ Typedefs</h2></td></tr>
 <tr class="separator:a43160a49c54463723cf97f5d8c51e1f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab423494fb93a04bbd6bd02f5b3b4b393"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevpr.html#ab423494fb93a04bbd6bd02f5b3b4b393">const_suballocation_iterator_t</a> = suballocationList::const_iterator</td></tr>
 <tr class="separator:ab423494fb93a04bbd6bd02f5b3b4b393"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab11e9b47e273cfa1fbe70cd867c7d452"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevpr.html#ab11e9b47e273cfa1fbe70cd867c7d452">occlusion_query_t</a> = std::integral_constant&lt; VkQueryType, VK_QUERY_TYPE_OCCLUSION &gt;</td></tr>
-<tr class="separator:ab11e9b47e273cfa1fbe70cd867c7d452"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ba637193cd50abfd2e4cbd4a6305672"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevpr.html#a6ba637193cd50abfd2e4cbd4a6305672">pipeline_stats_query_t</a> = std::integral_constant&lt; VkQueryType, VK_QUERY_TYPE_PIPELINE_STATISTICS &gt;</td></tr>
-<tr class="separator:a6ba637193cd50abfd2e4cbd4a6305672"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afcc3f1fec88b58d0c8e9720c6128c59e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevpr.html#afcc3f1fec88b58d0c8e9720c6128c59e">exec_time_query_t</a> = std::integral_constant&lt; VkQueryType, VK_QUERY_TYPE_TIMESTAMP &gt;</td></tr>
-<tr class="separator:afcc3f1fec88b58d0c8e9720c6128c59e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee87650a45b46a7e75b81f51e139625e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevpr.html#aee87650a45b46a7e75b81f51e139625e">area_query_t</a> = std::integral_constant&lt; VkQueryType, VK_QUERY_TYPE_RANGE_SIZE &gt;</td></tr>
-<tr class="separator:aee87650a45b46a7e75b81f51e139625e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -504,7 +495,7 @@ transfer</td>
 class vpr::Texture&lt; texture_type &gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="_forward_decl_8hpp_source.html#l00037">37</a> of file <a class="el" href="_forward_decl_8hpp_source.html">ForwardDecl.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_forward_decl_8hpp_source.html#l00041">41</a> of file <a class="el" href="_forward_decl_8hpp_source.html">ForwardDecl.hpp</a>.</p>
 </div>
 </div>
 </div>
@@ -574,22 +565,6 @@ Transfer</td>
 
 </div>
 </div>
-<a id="aee87650a45b46a7e75b81f51e139625e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee87650a45b46a7e75b81f51e139625e">&#9670;&nbsp;</a></span>area_query_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="namespacevpr.html#aee87650a45b46a7e75b81f51e139625e">vpr::area_query_t</a> = typedef std::integral_constant&lt;VkQueryType, VK_QUERY_TYPE_RANGE_SIZE&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_query_pool_8hpp_source.html#l00016">16</a> of file <a class="el" href="_query_pool_8hpp_source.html">QueryPool.hpp</a>.</p>
-
-</div>
-</div>
 <a id="ae45fb55dc24425884ab5770dfdb39cdb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae45fb55dc24425884ab5770dfdb39cdb">&#9670;&nbsp;</a></span>avail_suballocation_iterator_t</h2>
 
@@ -651,54 +626,6 @@ Transfer</td>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_suballocation_8hpp_source.html#l00050">50</a> of file <a class="el" href="_suballocation_8hpp_source.html">Suballocation.hpp</a>.</p>
-
-</div>
-</div>
-<a id="afcc3f1fec88b58d0c8e9720c6128c59e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afcc3f1fec88b58d0c8e9720c6128c59e">&#9670;&nbsp;</a></span>exec_time_query_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="namespacevpr.html#afcc3f1fec88b58d0c8e9720c6128c59e">vpr::exec_time_query_t</a> = typedef std::integral_constant&lt;VkQueryType, VK_QUERY_TYPE_TIMESTAMP&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_query_pool_8hpp_source.html#l00013">13</a> of file <a class="el" href="_query_pool_8hpp_source.html">QueryPool.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ab11e9b47e273cfa1fbe70cd867c7d452"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab11e9b47e273cfa1fbe70cd867c7d452">&#9670;&nbsp;</a></span>occlusion_query_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="namespacevpr.html#ab11e9b47e273cfa1fbe70cd867c7d452">vpr::occlusion_query_t</a> = typedef std::integral_constant&lt;VkQueryType, VK_QUERY_TYPE_OCCLUSION&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_query_pool_8hpp_source.html#l00011">11</a> of file <a class="el" href="_query_pool_8hpp_source.html">QueryPool.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a6ba637193cd50abfd2e4cbd4a6305672"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ba637193cd50abfd2e4cbd4a6305672">&#9670;&nbsp;</a></span>pipeline_stats_query_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="namespacevpr.html#a6ba637193cd50abfd2e4cbd4a6305672">vpr::pipeline_stats_query_t</a> = typedef std::integral_constant&lt;VkQueryType, VK_QUERY_TYPE_PIPELINE_STATISTICS&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_query_pool_8hpp_source.html#l00012">12</a> of file <a class="el" href="_query_pool_8hpp_source.html">QueryPool.hpp</a>.</p>
 
 </div>
 </div>
@@ -1005,7 +932,7 @@ Here is the caller graph for this function:</div>
 <div class="fragment"><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                                                                            {</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        swap-&gt;Destroy();</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        instance-&gt;DestroySurfaceKHR();</div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        instance-&gt;CreateSurfaceKHR();</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        swap-&gt;Recreate();</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div></div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="namespacevpr_a94afd8081f855771118d14af569f9bba_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="namespacevpr_a94afd8081f855771118d14af569f9bba_cgraph.svg" width="100%" height="552"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 
@@ -1390,7 +1317,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_alloc_common_8hpp_source.html#l00010">10</a> of file <a class="el" href="_alloc_common_8hpp_source.html">AllocCommon.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_memory_block_8cpp_source.html#l00504">vpr::MemoryBlock::insertFreeSuballocation()</a>, <a class="el" href="_memory_block_8cpp_source.html#l00519">vpr::MemoryBlock::removeFreeSuballocation()</a>, and <a class="el" href="_memory_block_8cpp_source.html#l00111">vpr::MemoryBlock::Validate()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_memory_block_8cpp_source.html#l00502">vpr::MemoryBlock::insertFreeSuballocation()</a>, <a class="el" href="_memory_block_8cpp_source.html#l00517">vpr::MemoryBlock::removeFreeSuballocation()</a>, and <a class="el" href="_memory_block_8cpp_source.html#l00111">vpr::MemoryBlock::Validate()</a>.</p>
 
 </div>
 </div>
@@ -1582,7 +1509,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_alloc_common_8hpp_source.html#l00022">22</a> of file <a class="el" href="_alloc_common_8hpp_source.html">AllocCommon.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_allocator_8cpp_source.html#l00297">vpr::Allocator::allocateMemoryType()</a>, <a class="el" href="_memory_block_8cpp_source.html#l00373">vpr::MemoryBlock::Free()</a>, and <a class="el" href="_allocator_8cpp_source.html#l00126">vpr::Allocator::FreeMemory()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_allocator_8cpp_source.html#l00297">vpr::Allocator::allocateMemoryType()</a>, <a class="el" href="_memory_block_8cpp_source.html#l00371">vpr::MemoryBlock::Free()</a>, and <a class="el" href="_allocator_8cpp_source.html#l00126">vpr::Allocator::FreeMemory()</a>.</p>
 
 </div>
 </div>
@@ -1665,7 +1592,7 @@ Here is the caller graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div><div class="line">        VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,</div><div class="line">        <span class="keyword">nullptr</span>,</div><div class="line">        0,</div><div class="line">        0,</div><div class="line">        VK_BUFFER_USAGE_FLAG_BITS_MAX_ENUM,</div><div class="line">        VK_SHARING_MODE_EXCLUSIVE,</div><div class="line">        0,</div><div class="line">        <span class="keyword">nullptr</span></div><div class="line">    }</div></div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="_create_info_base_8hpp_source.html#l00066">66</a> of file <a class="el" href="_create_info_base_8hpp_source.html">CreateInfoBase.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_buffer_8cpp_source.html#l00211">vpr::Buffer::CreateStagingBuffer()</a>, and <a class="el" href="_buffer_8cpp_source.html#l00247">vpr::Buffer::createStagingBuffer()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_buffer_8cpp_source.html#l00226">vpr::Buffer::CreateStagingBuffer()</a>, and <a class="el" href="_buffer_8cpp_source.html#l00262">vpr::Buffer::createStagingBuffer()</a>.</p>
 
 </div>
 </div>
@@ -2000,6 +1927,8 @@ Here is the caller graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div><div class="line">        VK_STRUCTURE_TYPE_EVENT_CREATE_INFO,</div><div class="line">        <span class="keyword">nullptr</span>,</div><div class="line">        0</div><div class="line">    }</div></div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="_create_info_base_8hpp_source.html#l00568">568</a> of file <a class="el" href="_create_info_base_8hpp_source.html">CreateInfoBase.hpp</a>.</p>
 
+<p class="reference">Referenced by <a class="el" href="_event_8cpp_source.html#l00006">vpr::Event::Event()</a>.</p>
+
 </div>
 </div>
 <a id="a383ce267f4c15be17e424c49aded58bc"></a>
@@ -2016,7 +1945,7 @@ Here is the caller graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div><div class="line">        VK_STRUCTURE_TYPE_FENCE_CREATE_INFO,</div><div class="line">        <span class="keyword">nullptr</span>,</div><div class="line">        0,</div><div class="line">    }</div></div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="_create_info_base_8hpp_source.html#l00151">151</a> of file <a class="el" href="_create_info_base_8hpp_source.html">CreateInfoBase.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_transfer_pool_8cpp_source.html#l00136">vpr::TransferPool::createFence()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_transfer_pool_8cpp_source.html#l00136">vpr::TransferPool::createFence()</a>, and <a class="el" href="_fence_8cpp_source.html#l00005">vpr::Fence::Fence()</a>.</p>
 
 </div>
 </div>
@@ -2068,7 +1997,7 @@ Here is the caller graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div><div class="line">        VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,</div><div class="line">        <span class="keyword">nullptr</span>,</div><div class="line">        0,</div><div class="line">        VK_IMAGE_TYPE_2D,</div><div class="line">        VK_FORMAT_UNDEFINED,</div><div class="line">        VkExtent3D{},</div><div class="line">        0,</div><div class="line">        0,</div><div class="line">        VK_SAMPLE_COUNT_1_BIT,</div><div class="line">        VK_IMAGE_TILING_LINEAR,</div><div class="line">        0,</div><div class="line">        VK_SHARING_MODE_EXCLUSIVE,</div><div class="line">        0,</div><div class="line">        <span class="keyword">nullptr</span>,</div><div class="line">        VK_IMAGE_LAYOUT_UNDEFINED,</div><div class="line">    }</div></div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="_create_info_base_8hpp_source.html#l00158">158</a> of file <a class="el" href="_create_info_base_8hpp_source.html">CreateInfoBase.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_image_8cpp_source.html#l00163">vpr::Image::CreateImage()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_depth_stencil_8cpp_source.html#l00007">vpr::DepthStencil::DepthStencil()</a>.</p>
 
 </div>
 </div>
@@ -2102,7 +2031,7 @@ Here is the caller graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div><div class="line">        VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER,</div><div class="line">        <span class="keyword">nullptr</span>,</div><div class="line">        0,</div><div class="line">        0,</div><div class="line">        VK_IMAGE_LAYOUT_UNDEFINED,</div><div class="line">        VK_IMAGE_LAYOUT_UNDEFINED,</div><div class="line">        VK_QUEUE_FAMILY_IGNORED,</div><div class="line">        VK_QUEUE_FAMILY_IGNORED,</div><div class="line">        VK_NULL_HANDLE,</div><div class="line">        VK_NULL_HANDLE,</div><div class="line">    }</div></div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="_create_info_base_8hpp_source.html#l00487">487</a> of file <a class="el" href="_create_info_base_8hpp_source.html">CreateInfoBase.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_image_8cpp_source.html#l00089">vpr::Image::GetMemoryBarrier()</a>, and <a class="el" href="_image_8cpp_source.html#l00081">vpr::Image::TransitionLayout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_image_8cpp_source.html#l00082">vpr::Image::GetMemoryBarrier()</a>, and <a class="el" href="_image_8cpp_source.html#l00074">vpr::Image::TransitionLayout()</a>.</p>
 
 </div>
 </div>
@@ -2154,7 +2083,7 @@ Here is the caller graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div><div class="line">        VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,</div><div class="line">        <span class="keyword">nullptr</span>,</div><div class="line">        0,</div><div class="line">        VK_NULL_HANDLE,</div><div class="line">        VK_IMAGE_VIEW_TYPE_2D,</div><div class="line">        VK_FORMAT_UNDEFINED,</div><div class="line">        { VK_COMPONENT_SWIZZLE_R, VK_COMPONENT_SWIZZLE_G, VK_COMPONENT_SWIZZLE_B, VK_COMPONENT_SWIZZLE_A },</div><div class="line">        { VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1 },</div><div class="line">    }</div></div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="_create_info_base_8hpp_source.html#l00212">212</a> of file <a class="el" href="_create_info_base_8hpp_source.html">CreateInfoBase.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_image_8cpp_source.html#l00072">vpr::Image::CreateView()</a>, and <a class="el" href="_swapchain_8cpp_source.html#l00150">vpr::Swapchain::setupImageViews()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_image_8cpp_source.html#l00065">vpr::Image::CreateView()</a>, and <a class="el" href="_swapchain_8cpp_source.html#l00150">vpr::Swapchain::setupImageViews()</a>.</p>
 
 </div>
 </div>
@@ -2432,8 +2361,6 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">{</div><div class="line">        VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO,</div><div class="line">        <span class="keyword">nullptr</span>,</div><div class="line">        0,</div><div class="line">        VK_QUERY_TYPE_MAX_ENUM,</div><div class="line">        0,</div><div class="line">        0,</div><div class="line">    }</div></div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="_create_info_base_8hpp_source.html#l00553">553</a> of file <a class="el" href="_create_info_base_8hpp_source.html">CreateInfoBase.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="_query_pool_8hpp_source.html#l00064">vpr::QueryPool&lt; query_type, num_queries &gt;::QueryPool()</a>.</p>
 
 </div>
 </div>

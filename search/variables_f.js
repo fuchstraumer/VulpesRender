@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['queryresults',['queryResults',['../classvpr_1_1_query_pool.html#ad832bc96546f25eb2efec7cbf6c43dc1',1,'vpr::QueryPool']]],
   ['queue',['queue',['../classvpr_1_1_transfer_pool.html#ae07a500b8bb4e3e083baefab375b33da',1,'vpr::TransferPool']]],
   ['queue_5fpriorities',['queue_priorities',['../namespacevpr.html#a41f4e9004d0d504471306d39072c24e0',1,'vpr']]],
   ['queuefamilyindices',['QueueFamilyIndices',['../classvpr_1_1_device.html#aa6945b37d50683451ab230f40b6c8671',1,'vpr::Device']]],

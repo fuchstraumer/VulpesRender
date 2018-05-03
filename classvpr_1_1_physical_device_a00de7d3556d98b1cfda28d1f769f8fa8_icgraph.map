@@ -1,16 +1,15 @@
 <map id="vpr::PhysicalDevice::vkHandle" name="vpr::PhysicalDevice::vkHandle">
 <area shape="rect" id="node2" href="$classvpr_1_1_device.html#a045d673a04b878f8b11b092001cfd4ae" title="vpr::Device::checkExtensions" alt="" coords="188,78,380,105"/>
 <area shape="rect" id="node5" href="$classvpr_1_1_device.html#a3b0734cd598d9a64f3c459e9dc4e84ce" title="vpr::Device::create" alt="" coords="915,137,1043,163"/>
-<area shape="rect" id="node8" href="$classvpr_1_1_device.html#a645901ebf7875fcb856b721f7ea2faed" title="vpr::Device::CheckSurface\lSupport" alt="" coords="197,188,371,229"/>
-<area shape="rect" id="node9" href="$classvpr_1_1_device.html#a2a58028f056c580337c9454195683eae" title="! Checks a collection of possible formats, returning the one that supports the given tiling and featu..." alt="" coords="196,253,372,295"/>
-<area shape="rect" id="node12" href="$classvpr_1_1_device.html#ad9c1f7de10b5e4b0816bbd8233fa4987" title="! Checks whether or not the given format along with the specified flags supports optimal or linear ti..." alt="" coords="192,319,376,346"/>
-<area shape="rect" id="node13" href="$classvpr_1_1_swapchain.html#acf014a8530f47418adba1c9e62c0c78e" title="vpr::Swapchain::Recreate" alt="" coords="199,370,369,397"/>
-<area shape="rect" id="node15" href="$classvpr_1_1_device.html#ad468caae9ccd5b6b2f9dd00bd32faca3" title="vpr::Device::VerifyPresentation\lSupport" alt="" coords="668,365,867,407"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_device.html#a645901ebf7875fcb856b721f7ea2faed" title="vpr::Device::CheckSurface\lSupport" alt="" coords="197,188,371,229"/>
+<area shape="rect" id="node8" href="$classvpr_1_1_device.html#a2a58028f056c580337c9454195683eae" title="! Checks a collection of possible formats, returning the one that supports the given tiling and featu..." alt="" coords="196,253,372,295"/>
+<area shape="rect" id="node11" href="$classvpr_1_1_device.html#ad9c1f7de10b5e4b0816bbd8233fa4987" title="! Checks whether or not the given format along with the specified flags supports optimal or linear ti..." alt="" coords="192,319,376,346"/>
+<area shape="rect" id="node12" href="$classvpr_1_1_swapchain.html#acf014a8530f47418adba1c9e62c0c78e" title="vpr::Swapchain::Recreate" alt="" coords="199,370,369,397"/>
+<area shape="rect" id="node14" href="$classvpr_1_1_device.html#ad468caae9ccd5b6b2f9dd00bd32faca3" title="vpr::Device::VerifyPresentation\lSupport" alt="" coords="668,365,867,407"/>
 <area shape="rect" id="node3" href="$classvpr_1_1_device.html#a2524d9604f056d1e7d4c4a124ecad638" title="vpr::Device::prepareOptional\lExtensions" alt="" coords="433,5,615,47"/>
-<area shape="rect" id="node7" href="$classvpr_1_1_device.html#a3cedda7b364230945a994267d220ab0f" title="vpr::Device::prepareRequired\lExtensions" alt="" coords="431,71,617,112"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_device.html#a3cedda7b364230945a994267d220ab0f" title="vpr::Device::prepareRequired\lExtensions" alt="" coords="431,71,617,112"/>
 <area shape="rect" id="node4" href="$classvpr_1_1_device.html#a165976c19ab59de329855485a9dab5aa" title="vpr::Device::setupExtensions" alt="" coords="673,78,862,105"/>
-<area shape="rect" id="node6" href="$classvpr_1_1_device.html#a870f832d4e57cf09fc0705718a498aff" title="vpr::Device::Device" alt="" coords="1091,137,1221,163"/>
-<area shape="rect" id="node10" href="$classvpr_1_1_device.html#a4820a276bf1258c8ad6a5718fc7cd6fb" title="! Finds a Vulkan image format suitable for use in the depth buffer " alt="" coords="428,261,620,287"/>
-<area shape="rect" id="node11" href="$classvpr_1_1_depth_stencil.html#a60db9461fc6823407301ce103e941348" title="vpr::DepthStencil::\lDepthStencil" alt="" coords="703,253,831,295"/>
-<area shape="rect" id="node14" href="$namespacevpr.html#a94afd8081f855771118d14af569f9bba" title="Pass a swapchain and instance pointer to this to have the swapchain and surface destroyed and recreat..." alt="" coords="432,355,616,396"/>
+<area shape="rect" id="node9" href="$classvpr_1_1_device.html#a4820a276bf1258c8ad6a5718fc7cd6fb" title="! Finds a Vulkan image format suitable for use in the depth buffer " alt="" coords="428,261,620,287"/>
+<area shape="rect" id="node10" href="$classvpr_1_1_depth_stencil.html#a60db9461fc6823407301ce103e941348" title="vpr::DepthStencil::\lDepthStencil" alt="" coords="703,253,831,295"/>
+<area shape="rect" id="node13" href="$namespacevpr.html#a94afd8081f855771118d14af569f9bba" title="Pass a swapchain and instance pointer to this to have the swapchain and surface destroyed and recreat..." alt="" coords="432,355,616,396"/>
 </map>

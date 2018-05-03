@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 922;
+var viewWidth = 734;
 var viewHeight = 351;
 var sectionId = 'dynsection-6';
 </script>
@@ -54,272 +54,159 @@ var sectionId = 'dynsection-6';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>el::Loggers::reconfigureAllLoggers</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-346.5 918,-346.5 918,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-347 730,-347 730,4 -4,4"/>
 <!-- Node54 -->
 <g id="node1" class="node"><title>Node54</title>
-<polygon fill="#bfbfbf" stroke="black" points="0,-143 0,-173 118,-173 118,-143 0,-143"/>
-<text text-anchor="start" x="8" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggers::reconfigure</text>
-<text text-anchor="middle" x="59" y="-150" font-family="Helvetica,sans-Serif" font-size="10.00">AllLoggers</text>
+<polygon fill="#bfbfbf" stroke="black" points="0,-161.5 0,-191.5 118,-191.5 118,-161.5 0,-161.5"/>
+<text text-anchor="start" x="8" y="-179.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggers::reconfigure</text>
+<text text-anchor="middle" x="59" y="-168.5" font-family="Helvetica,sans-Serif" font-size="10.00">AllLoggers</text>
 </g>
 <!-- Node55 -->
 <g id="node2" class="node"><title>Node55</title>
 <g id="a_node2"><a xlink:href="classel_1_1_loggers.html#a02223004494a404a2c3e7cd0c4380d3b" target="_top" xlink:title="Reconfigures specified logger with new configurations. ">
-<polygon fill="white" stroke="black" points="154,-143 154,-173 272,-173 272,-143 154,-143"/>
-<text text-anchor="start" x="162" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggers::reconfigure</text>
-<text text-anchor="middle" x="213" y="-150" font-family="Helvetica,sans-Serif" font-size="10.00">Logger</text>
+<polygon fill="white" stroke="black" points="154,-161.5 154,-191.5 272,-191.5 272,-161.5 154,-161.5"/>
+<text text-anchor="start" x="162" y="-179.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Loggers::reconfigure</text>
+<text text-anchor="middle" x="213" y="-168.5" font-family="Helvetica,sans-Serif" font-size="10.00">Logger</text>
 </a>
 </g>
 </g>
 <!-- Node54&#45;&gt;Node55 -->
 <g id="edge1" class="edge"><title>Node54&#45;&gt;Node55</title>
-<path fill="none" stroke="midnightblue" d="M118.332,-158C126.606,-158 135.175,-158 143.617,-158"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="143.824,-161.5 153.824,-158 143.824,-154.5 143.824,-161.5"/>
+<path fill="none" stroke="midnightblue" d="M118.332,-176.5C126.606,-176.5 135.175,-176.5 143.617,-176.5"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="143.824,-180 153.824,-176.5 143.824,-173 143.824,-180"/>
 </g>
 <!-- Node56 -->
 <g id="node3" class="node"><title>Node56</title>
 <g id="a_node3"><a xlink:href="classel_1_1_logger.html#ad9db621dbf8977bf814dc7baea8dcee4" target="_top" xlink:title="Configures the logger using specified configurations. ">
-<polygon fill="white" stroke="black" points="308,-148.5 308,-167.5 412,-167.5 412,-148.5 308,-148.5"/>
-<text text-anchor="middle" x="360" y="-155.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Logger::configure</text>
+<polygon fill="white" stroke="black" points="308,-167 308,-186 412,-186 412,-167 308,-167"/>
+<text text-anchor="middle" x="360" y="-174" font-family="Helvetica,sans-Serif" font-size="10.00">el::Logger::configure</text>
 </a>
 </g>
 </g>
 <!-- Node55&#45;&gt;Node56 -->
 <g id="edge2" class="edge"><title>Node55&#45;&gt;Node56</title>
-<path fill="none" stroke="midnightblue" d="M272.142,-158C280.544,-158 289.214,-158 297.676,-158"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="297.863,-161.5 307.862,-158 297.862,-154.5 297.863,-161.5"/>
+<path fill="none" stroke="midnightblue" d="M272.142,-176.5C280.544,-176.5 289.214,-176.5 297.676,-176.5"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="297.863,-180 307.862,-176.5 297.862,-173 297.863,-180"/>
 </g>
 <!-- Node57 -->
 <g id="node4" class="node"><title>Node57</title>
 <g id="a_node4"><a xlink:href="classel_1_1base_1_1_typed_configurations.html#a52bd4cc5e6684bc40391c096a8df3c2d" target="_top" xlink:title="el::base::TypedConfigurations\l::configurations">
-<polygon fill="white" stroke="black" points="448,-312 448,-342 593,-342 593,-312 448,-312"/>
-<text text-anchor="start" x="456" y="-330" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::TypedConfigurations</text>
-<text text-anchor="middle" x="520.5" y="-319" font-family="Helvetica,sans-Serif" font-size="10.00">::configurations</text>
+<polygon fill="white" stroke="black" points="448,-312.5 448,-342.5 593,-342.5 593,-312.5 448,-312.5"/>
+<text text-anchor="start" x="456" y="-330.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::TypedConfigurations</text>
+<text text-anchor="middle" x="520.5" y="-319.5" font-family="Helvetica,sans-Serif" font-size="10.00">::configurations</text>
 </a>
 </g>
 </g>
 <!-- Node56&#45;&gt;Node57 -->
 <g id="edge3" class="edge"><title>Node56&#45;&gt;Node57</title>
-<path fill="none" stroke="midnightblue" d="M364.136,-167.718C372.986,-193.62 400.637,-264.925 448,-303 449.607,-304.292 451.287,-305.516 453.025,-306.675"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="451.72,-309.964 462.128,-311.949 455.23,-303.907 451.72,-309.964"/>
+<path fill="none" stroke="midnightblue" d="M365.125,-186.258C375.526,-209.724 405.087,-269.781 448,-302.5 450.431,-304.354 453.011,-306.077 455.691,-307.678"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="454.067,-310.779 464.539,-312.387 457.356,-304.599 454.067,-310.779"/>
 </g>
 <!-- Node58 -->
 <g id="node5" class="node"><title>Node58</title>
 <g id="a_node5"><a xlink:href="classel_1_1_logger.html#a9a89d454008b1ee1a197eec4b92ce22a" target="_top" xlink:title="Flushes logger to sync all log files for all levels. ">
-<polygon fill="white" stroke="black" points="477.5,-126.5 477.5,-145.5 563.5,-145.5 563.5,-126.5 477.5,-126.5"/>
-<text text-anchor="middle" x="520.5" y="-133.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Logger::flush</text>
+<polygon fill="white" stroke="red" points="477.5,-274 477.5,-293 563.5,-293 563.5,-274 477.5,-274"/>
+<text text-anchor="middle" x="520.5" y="-281" font-family="Helvetica,sans-Serif" font-size="10.00">el::Logger::flush</text>
 </a>
 </g>
 </g>
 <!-- Node56&#45;&gt;Node58 -->
 <g id="edge4" class="edge"><title>Node56&#45;&gt;Node58</title>
-<path fill="none" stroke="midnightblue" d="M412.023,-150.918C429.649,-148.471 449.419,-145.727 467.15,-143.266"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="467.899,-146.696 477.322,-141.854 466.936,-139.762 467.899,-146.696"/>
+<path fill="none" stroke="midnightblue" d="M368.594,-186.12C382.566,-203.215 414.039,-239.011 448,-259.5 455.252,-263.876 463.405,-267.572 471.54,-270.654"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="470.431,-273.974 481.026,-273.992 472.755,-267.371 470.431,-273.974"/>
 </g>
 <!-- Node61 -->
-<g id="node8" class="node"><title>Node61</title>
-<g id="a_node8"><a xlink:href="classel_1_1base_1_1threading_1_1_thread_safe.html#affb45b35790a7305d0a659562c8104fc" target="_top" xlink:title="el::base::threading\l::ThreadSafe::lock">
-<polygon fill="white" stroke="black" points="653,-67 653,-97 750,-97 750,-67 653,-67"/>
-<text text-anchor="start" x="661" y="-85" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::threading</text>
-<text text-anchor="middle" x="701.5" y="-74" font-family="Helvetica,sans-Serif" font-size="10.00">::ThreadSafe::lock</text>
+<g id="node6" class="node"><title>Node61</title>
+<g id="a_node6"><a xlink:href="classel_1_1base_1_1threading_1_1_thread_safe.html#affb45b35790a7305d0a659562c8104fc" target="_top" xlink:title="el::base::threading\l::ThreadSafe::lock">
+<polygon fill="white" stroke="black" points="629,-230.5 629,-260.5 726,-260.5 726,-230.5 629,-230.5"/>
+<text text-anchor="start" x="637" y="-248.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::threading</text>
+<text text-anchor="middle" x="677.5" y="-237.5" font-family="Helvetica,sans-Serif" font-size="10.00">::ThreadSafe::lock</text>
 </a>
 </g>
 </g>
 <!-- Node56&#45;&gt;Node61 -->
-<g id="edge14" class="edge"><title>Node56&#45;&gt;Node61</title>
-<path fill="none" stroke="midnightblue" d="M377.405,-148.418C394.465,-138.904 422.233,-124.663 448,-117 513.022,-97.6628 590.702,-88.9344 642.572,-85.0431"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="642.865,-88.5312 652.59,-84.3276 642.366,-81.5489 642.865,-88.5312"/>
+<g id="edge8" class="edge"><title>Node56&#45;&gt;Node61</title>
+<path fill="none" stroke="midnightblue" d="M373.432,-186.03C389.612,-197.848 419.228,-217.528 448,-226.5 504.293,-244.055 571.946,-247.655 618.964,-247.573"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="618.994,-251.073 628.968,-247.499 618.943,-244.073 618.994,-251.073"/>
 </g>
 <!-- Node62 -->
-<g id="node9" class="node"><title>Node62</title>
-<g id="a_node9"><a xlink:href="classel_1_1_configurations.html#a1e812370f896b6429bf46b31fcd4e3e0" target="_top" xlink:title="Determines whether or not specified configuration type exists in the repository. ">
-<polygon fill="white" stroke="black" points="473,-263 473,-293 568,-293 568,-263 473,-263"/>
-<text text-anchor="start" x="481" y="-281" font-family="Helvetica,sans-Serif" font-size="10.00">el::Configurations</text>
-<text text-anchor="middle" x="520.5" y="-270" font-family="Helvetica,sans-Serif" font-size="10.00">::hasConfiguration</text>
+<g id="node7" class="node"><title>Node62</title>
+<g id="a_node7"><a xlink:href="classel_1_1_configurations.html#a1e812370f896b6429bf46b31fcd4e3e0" target="_top" xlink:title="Determines whether or not specified configuration type exists in the repository. ">
+<polygon fill="white" stroke="red" points="473,-186.5 473,-216.5 568,-216.5 568,-186.5 473,-186.5"/>
+<text text-anchor="start" x="481" y="-204.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Configurations</text>
+<text text-anchor="middle" x="520.5" y="-193.5" font-family="Helvetica,sans-Serif" font-size="10.00">::hasConfiguration</text>
 </a>
 </g>
 </g>
 <!-- Node56&#45;&gt;Node62 -->
-<g id="edge8" class="edge"><title>Node56&#45;&gt;Node62</title>
-<path fill="none" stroke="midnightblue" d="M367.263,-167.523C380.17,-186.441 411.59,-228.997 448,-253 452.853,-256.199 458.162,-259.039 463.624,-261.548"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="462.335,-264.803 472.909,-265.464 465.055,-258.353 462.335,-264.803"/>
+<g id="edge6" class="edge"><title>Node56&#45;&gt;Node62</title>
+<path fill="none" stroke="midnightblue" d="M412.023,-184.548C428.211,-187.101 446.206,-189.939 462.769,-192.552"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="462.446,-196.044 472.869,-194.145 463.536,-189.13 462.446,-196.044"/>
 </g>
 <!-- Node63 -->
-<g id="node10" class="node"><title>Node63</title>
-<g id="a_node10"><a xlink:href="classel_1_1_logger.html#ae7c1d538f6163b6be5d37dafcaf24610" target="_top" xlink:title="el::Logger::initUnflushed\lCount">
-<polygon fill="white" stroke="black" points="460,-214 460,-244 581,-244 581,-214 460,-214"/>
-<text text-anchor="start" x="468" y="-232" font-family="Helvetica,sans-Serif" font-size="10.00">el::Logger::initUnflushed</text>
-<text text-anchor="middle" x="520.5" y="-221" font-family="Helvetica,sans-Serif" font-size="10.00">Count</text>
+<g id="node8" class="node"><title>Node63</title>
+<g id="a_node8"><a xlink:href="classel_1_1_logger.html#ae7c1d538f6163b6be5d37dafcaf24610" target="_top" xlink:title="el::Logger::initUnflushed\lCount">
+<polygon fill="white" stroke="red" points="460,-137.5 460,-167.5 581,-167.5 581,-137.5 460,-137.5"/>
+<text text-anchor="start" x="468" y="-155.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Logger::initUnflushed</text>
+<text text-anchor="middle" x="520.5" y="-144.5" font-family="Helvetica,sans-Serif" font-size="10.00">Count</text>
 </a>
 </g>
 </g>
 <!-- Node56&#45;&gt;Node63 -->
-<g id="edge11" class="edge"><title>Node56&#45;&gt;Node63</title>
-<path fill="none" stroke="midnightblue" d="M377.314,-167.575C394.53,-177.451 422.631,-192.932 448,-204 452.972,-206.169 458.198,-208.288 463.467,-210.317"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="462.36,-213.64 472.953,-213.863 464.811,-207.083 462.36,-213.64"/>
+<g id="edge7" class="edge"><title>Node56&#45;&gt;Node63</title>
+<path fill="none" stroke="midnightblue" d="M412.023,-168.774C424.019,-166.958 437.009,-164.991 449.672,-163.073"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="450.37,-166.508 459.733,-161.55 449.322,-159.587 450.37,-166.508"/>
 </g>
 <!-- Node64 -->
-<g id="node11" class="node"><title>Node64</title>
-<g id="a_node11"><a xlink:href="classel_1_1_logger.html#acfb9ef869b9b4dc3efd78d7f64b8bebd" target="_top" xlink:title="el::Logger::resolveLogger\lFormatSpec">
-<polygon fill="white" stroke="black" points="458,-165 458,-195 583,-195 583,-165 458,-165"/>
-<text text-anchor="start" x="466" y="-183" font-family="Helvetica,sans-Serif" font-size="10.00">el::Logger::resolveLogger</text>
-<text text-anchor="middle" x="520.5" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">FormatSpec</text>
+<g id="node9" class="node"><title>Node64</title>
+<g id="a_node9"><a xlink:href="classel_1_1_logger.html#acfb9ef869b9b4dc3efd78d7f64b8bebd" target="_top" xlink:title="el::Logger::resolveLogger\lFormatSpec">
+<polygon fill="white" stroke="red" points="458,-88.5 458,-118.5 583,-118.5 583,-88.5 458,-88.5"/>
+<text text-anchor="start" x="466" y="-106.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Logger::resolveLogger</text>
+<text text-anchor="middle" x="520.5" y="-95.5" font-family="Helvetica,sans-Serif" font-size="10.00">FormatSpec</text>
 </a>
 </g>
 </g>
 <!-- Node56&#45;&gt;Node64 -->
-<g id="edge15" class="edge"><title>Node56&#45;&gt;Node64</title>
-<path fill="none" stroke="midnightblue" d="M412.023,-165.082C423.406,-166.662 435.682,-168.366 447.726,-170.038"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="447.378,-173.523 457.764,-171.431 448.34,-166.589 447.378,-173.523"/>
+<g id="edge9" class="edge"><title>Node56&#45;&gt;Node64</title>
+<path fill="none" stroke="midnightblue" d="M376.625,-166.83C393.731,-156.496 422.171,-140.043 448,-128.5 452.952,-126.287 458.165,-124.138 463.426,-122.09"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="464.777,-125.321 472.901,-118.52 462.309,-118.77 464.777,-125.321"/>
 </g>
 <!-- Node68 -->
-<g id="node15" class="node"><title>Node68</title>
-<g id="a_node15"><a xlink:href="namespaceel_1_1base_1_1utils.html#a8cad5c357a7913cdbe69add3d6a4e8ac" target="_top" xlink:title="Deletes memory safely and points to null. ">
-<polygon fill="white" stroke="black" points="457,-0.5 457,-19.5 584,-19.5 584,-0.5 457,-0.5"/>
-<text text-anchor="middle" x="520.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::utils::safeDelete</text>
+<g id="node10" class="node"><title>Node68</title>
+<g id="a_node10"><a xlink:href="namespaceel_1_1base_1_1utils.html#a8cad5c357a7913cdbe69add3d6a4e8ac" target="_top" xlink:title="Deletes memory safely and points to null. ">
+<polygon fill="white" stroke="black" points="457,-50 457,-69 584,-69 584,-50 457,-50"/>
+<text text-anchor="middle" x="520.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::utils::safeDelete</text>
 </a>
 </g>
 </g>
 <!-- Node56&#45;&gt;Node68 -->
-<g id="edge21" class="edge"><title>Node56&#45;&gt;Node68</title>
-<path fill="none" stroke="midnightblue" d="M364.753,-148.15C374.515,-123.898 403.105,-60.9557 448,-29 450.721,-27.0635 453.626,-25.3244 456.651,-23.7625"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="458.308,-26.8559 466.018,-19.5885 455.459,-20.462 458.308,-26.8559"/>
+<g id="edge10" class="edge"><title>Node56&#45;&gt;Node68</title>
+<path fill="none" stroke="midnightblue" d="M366.892,-166.87C379.352,-147.333 410.346,-102.91 448,-79.5 452.16,-76.9139 456.66,-74.6549 461.308,-72.6828"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="462.876,-75.8322 470.994,-69.0251 460.403,-69.2835 462.876,-75.8322"/>
 </g>
 <!-- Node69 -->
-<g id="node16" class="node"><title>Node69</title>
-<g id="a_node16"><a xlink:href="classel_1_1_configurations.html#a4c6db218908b39d23cc09b1a16a18e83" target="_top" xlink:title="Sets configuration based&#45;off an existing configurations. ">
-<polygon fill="white" stroke="black" points="474.5,-39 474.5,-69 566.5,-69 566.5,-39 474.5,-39"/>
-<text text-anchor="start" x="482.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">el::Configurations</text>
-<text text-anchor="middle" x="520.5" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">::setFromBase</text>
+<g id="node11" class="node"><title>Node69</title>
+<g id="a_node11"><a xlink:href="classel_1_1_configurations.html#a4c6db218908b39d23cc09b1a16a18e83" target="_top" xlink:title="Sets configuration based&#45;off an existing configurations. ">
+<polygon fill="white" stroke="red" points="474.5,-0.5 474.5,-30.5 566.5,-30.5 566.5,-0.5 474.5,-0.5"/>
+<text text-anchor="start" x="482.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::Configurations</text>
+<text text-anchor="middle" x="520.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">::setFromBase</text>
 </a>
 </g>
 </g>
 <!-- Node56&#45;&gt;Node69 -->
-<g id="edge22" class="edge"><title>Node56&#45;&gt;Node69</title>
-<path fill="none" stroke="midnightblue" d="M370.398,-148.265C385.571,-132.974 416.915,-103.103 448,-84 454.308,-80.1235 461.206,-76.5279 468.149,-73.2715"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="469.894,-76.325 477.593,-69.0466 467.036,-69.9351 469.894,-76.325"/>
-</g>
-<!-- Node59 -->
-<g id="node6" class="node"><title>Node59</title>
-<g id="a_node6"><a xlink:href="classel_1_1_level_helper.html#a1279f27df29a003df5ecc3d0bf4dacbb" target="_top" xlink:title="Casts int(ushort) to level, useful for iterating through enum. ">
-<polygon fill="white" stroke="black" points="633,-263.5 633,-282.5 770,-282.5 770,-263.5 633,-263.5"/>
-<text text-anchor="middle" x="701.5" y="-270.5" font-family="Helvetica,sans-Serif" font-size="10.00">el::LevelHelper::castFromInt</text>
-</a>
-</g>
-</g>
-<!-- Node58&#45;&gt;Node59 -->
-<g id="edge5" class="edge"><title>Node58&#45;&gt;Node59</title>
-<path fill="none" stroke="midnightblue" d="M563.788,-140.262C574.34,-143.079 584.932,-147.645 593,-155 627.29,-186.262 594.915,-221.516 629,-253 631.293,-255.118 633.792,-257.015 636.438,-258.712"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="634.849,-261.831 645.314,-263.486 638.164,-255.666 634.849,-261.831"/>
-</g>
-<!-- Node60 -->
-<g id="node7" class="node"><title>Node60</title>
-<g id="a_node7"><a xlink:href="classel_1_1_level_helper.html#a7f0dbfceb2354a72c2802d02c300430d" target="_top" xlink:title="Applies specified function to each level starting from startIndex. ">
-<polygon fill="white" stroke="black" points="642,-214 642,-244 761,-244 761,-214 642,-214"/>
-<text text-anchor="start" x="650" y="-232" font-family="Helvetica,sans-Serif" font-size="10.00">el::LevelHelper::forEach</text>
-<text text-anchor="middle" x="701.5" y="-221" font-family="Helvetica,sans-Serif" font-size="10.00">Level</text>
-</a>
-</g>
-</g>
-<!-- Node58&#45;&gt;Node60 -->
-<g id="edge6" class="edge"><title>Node58&#45;&gt;Node60</title>
-<path fill="none" stroke="midnightblue" d="M563.632,-142.177C573.835,-144.985 584.298,-149.067 593,-155 615.327,-170.224 607.272,-187.932 629,-204 631.509,-205.856 634.168,-207.582 636.927,-209.188"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="635.53,-212.406 646.018,-213.912 638.758,-206.195 635.53,-212.406"/>
+<g id="edge11" class="edge"><title>Node56&#45;&gt;Node69</title>
+<path fill="none" stroke="midnightblue" d="M364.616,-166.701C374.253,-141.909 402.927,-76.1376 448,-40.5 453.077,-36.4857 458.845,-33.0909 464.85,-30.2258"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="466.591,-33.2883 474.417,-26.1464 463.846,-26.8492 466.591,-33.2883"/>
 </g>
 <!-- Node58&#45;&gt;Node61 -->
-<g id="edge7" class="edge"><title>Node58&#45;&gt;Node61</title>
-<path fill="none" stroke="midnightblue" d="M553.09,-126.47C577.887,-118.989 613.078,-108.373 642.858,-99.3892"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="644.164,-102.651 652.727,-96.412 642.142,-95.9494 644.164,-102.651"/>
-</g>
-<!-- Node62&#45;&gt;Node59 -->
-<g id="edge9" class="edge"><title>Node62&#45;&gt;Node59</title>
-<path fill="none" stroke="midnightblue" d="M568.063,-276.699C584.757,-276.233 604.062,-275.694 622.682,-275.174"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="623.036,-278.665 632.934,-274.887 622.841,-271.668 623.036,-278.665"/>
-</g>
-<!-- Node62&#45;&gt;Node60 -->
-<g id="edge10" class="edge"><title>Node62&#45;&gt;Node60</title>
-<path fill="none" stroke="midnightblue" d="M568.063,-265.254C588.727,-259.597 613.392,-252.845 635.805,-246.71"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="636.865,-250.048 645.586,-244.032 635.017,-243.297 636.865,-250.048"/>
-</g>
-<!-- Node63&#45;&gt;Node59 -->
-<g id="edge12" class="edge"><title>Node63&#45;&gt;Node59</title>
-<path fill="none" stroke="midnightblue" d="M581.104,-243.651C604.123,-249.31 630.123,-255.701 651.969,-261.071"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="651.143,-264.472 661.689,-263.46 652.814,-257.674 651.143,-264.472"/>
-</g>
-<!-- Node63&#45;&gt;Node60 -->
-<g id="edge13" class="edge"><title>Node63&#45;&gt;Node60</title>
-<path fill="none" stroke="midnightblue" d="M581.104,-229C597.275,-229 614.917,-229 631.556,-229"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="631.765,-232.5 641.765,-229 631.765,-225.5 631.765,-232.5"/>
-</g>
-<!-- Node64&#45;&gt;Node59 -->
-<g id="edge16" class="edge"><title>Node64&#45;&gt;Node59</title>
-<path fill="none" stroke="midnightblue" d="M577.815,-195.129C583.18,-197.665 588.346,-200.603 593,-204 614.828,-219.932 606.772,-237.631 629,-253 632.519,-255.433 636.327,-257.571 640.29,-259.45"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="639.178,-262.778 649.755,-263.381 641.862,-256.313 639.178,-262.778"/>
-</g>
-<!-- Node64&#45;&gt;Node60 -->
-<g id="edge17" class="edge"><title>Node64&#45;&gt;Node60</title>
-<path fill="none" stroke="midnightblue" d="M576.666,-195.101C595.384,-200.225 616.463,-205.996 635.853,-211.303"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="634.946,-214.684 645.516,-213.948 636.795,-207.932 634.946,-214.684"/>
-</g>
-<!-- Node65 -->
-<g id="node12" class="node"><title>Node65</title>
-<g id="a_node12"><a xlink:href="classel_1_1base_1_1_typed_configurations.html#a05b8ea32f63c3246a68dbc9085b7e847" target="_top" xlink:title="el::base::TypedConfigurations\l::logFormat">
-<polygon fill="white" stroke="black" points="629,-165 629,-195 774,-195 774,-165 629,-165"/>
-<text text-anchor="start" x="637" y="-183" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::TypedConfigurations</text>
-<text text-anchor="middle" x="701.5" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">::logFormat</text>
-</a>
-</g>
-</g>
-<!-- Node64&#45;&gt;Node65 -->
-<g id="edge18" class="edge"><title>Node64&#45;&gt;Node65</title>
-<path fill="none" stroke="midnightblue" d="M583.102,-180C594.637,-180 606.859,-180 618.889,-180"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="618.93,-183.5 628.93,-180 618.93,-176.5 618.93,-183.5"/>
-</g>
-<!-- Node67 -->
-<g id="node14" class="node"><title>Node67</title>
-<g id="a_node14"><a xlink:href="classel_1_1base_1_1utils_1_1_str.html#a0f271d7da2bb3c1f2fa062219c0e0ba2" target="_top" xlink:title="el::base::utils::Str\l::replaceFirstWithEscape">
-<polygon fill="white" stroke="black" points="638,-116 638,-146 765,-146 765,-116 638,-116"/>
-<text text-anchor="start" x="646" y="-134" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::utils::Str</text>
-<text text-anchor="middle" x="701.5" y="-123" font-family="Helvetica,sans-Serif" font-size="10.00">::replaceFirstWithEscape</text>
-</a>
-</g>
-</g>
-<!-- Node64&#45;&gt;Node67 -->
-<g id="edge20" class="edge"><title>Node64&#45;&gt;Node67</title>
-<path fill="none" stroke="midnightblue" d="M576.666,-164.899C595.384,-159.775 616.463,-154.004 635.853,-148.697"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="636.795,-152.068 645.516,-146.052 634.946,-145.316 636.795,-152.068"/>
-</g>
-<!-- Node66 -->
-<g id="node13" class="node"><title>Node66</title>
-<g id="a_node13"><a xlink:href="classel_1_1base_1_1_log_format.html#aeacb2c9d313ce5713b3e85e03a4baab5" target="_top" xlink:title="el::base::LogFormat\l::level">
-<polygon fill="white" stroke="black" points="810,-165 810,-195 914,-195 914,-165 810,-165"/>
-<text text-anchor="start" x="818" y="-183" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::LogFormat</text>
-<text text-anchor="middle" x="862" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">::level</text>
-</a>
-</g>
-</g>
-<!-- Node65&#45;&gt;Node66 -->
-<g id="edge19" class="edge"><title>Node65&#45;&gt;Node66</title>
-<path fill="none" stroke="midnightblue" d="M774.33,-180C782.832,-180 791.449,-180 799.784,-180"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="799.786,-183.5 809.786,-180 799.786,-176.5 799.786,-183.5"/>
+<g id="edge5" class="edge"><title>Node58&#45;&gt;Node61</title>
+<path fill="none" stroke="midnightblue" d="M560.613,-273.911C578.255,-269.586 599.446,-264.391 618.856,-259.632"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="619.937,-262.971 628.816,-257.19 618.27,-256.172 619.937,-262.971"/>
 </g>
 <!-- Node69&#45;&gt;Node61 -->
-<g id="edge24" class="edge"><title>Node69&#45;&gt;Node61</title>
-<path fill="none" stroke="midnightblue" d="M566.669,-61.0656C589.79,-64.6823 618.192,-69.125 642.873,-72.9858"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="642.419,-76.4572 652.84,-74.5448 643.501,-69.5413 642.419,-76.4572"/>
-</g>
-<!-- Node70 -->
-<g id="node17" class="node"><title>Node70</title>
-<g id="a_node17"><a xlink:href="classel_1_1base_1_1utils_1_1_abstract_registry.html#a072859d3728a75f910c2898f62fd12da" target="_top" xlink:title="Returns underlying container by reference. ">
-<polygon fill="white" stroke="black" points="642.5,-18 642.5,-48 760.5,-48 760.5,-18 642.5,-18"/>
-<text text-anchor="start" x="650.5" y="-36" font-family="Helvetica,sans-Serif" font-size="10.00">el::base::utils::Abstract</text>
-<text text-anchor="middle" x="701.5" y="-25" font-family="Helvetica,sans-Serif" font-size="10.00">Registry::list</text>
-</a>
-</g>
-</g>
-<!-- Node69&#45;&gt;Node70 -->
-<g id="edge23" class="edge"><title>Node69&#45;&gt;Node70</title>
-<path fill="none" stroke="midnightblue" d="M566.669,-48.7008C586.608,-46.3616 610.474,-43.5618 632.494,-40.9783"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="632.937,-44.4505 642.461,-39.809 632.121,-37.4982 632.937,-44.4505"/>
+<g id="edge12" class="edge"><title>Node69&#45;&gt;Node61</title>
+<path fill="none" stroke="midnightblue" d="M566.723,-24.842C576.27,-28.4813 585.662,-33.5229 593,-40.5 645.265,-90.1932 665.774,-177.193 672.999,-220.099"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="669.584,-220.914 674.596,-230.248 676.499,-219.825 669.584,-220.914"/>
 </g>
 </g>
 </svg>

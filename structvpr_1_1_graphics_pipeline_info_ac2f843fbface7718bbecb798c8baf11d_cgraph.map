@@ -1,0 +1,5 @@
+<map id="vpr::GraphicsPipelineInfo::GraphicsPipelineInfo" name="vpr::GraphicsPipelineInfo::GraphicsPipelineInfo">
+<area shape="rect" id="node2" href="$namespacevpr.html#a6a772d67a2c0736f57d52c2216c5c7a3" title="vpr::CreateMultiple" alt="" coords="217,42,347,69"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_graphics_pipeline.html#aa64ec5438a3f77ef4b0900dedd088dc3" title="vpr::GraphicsPipeline\l::GraphicsPipeline" alt="" coords="395,5,539,47"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" title="vpr::Device::vkHandle" alt="" coords="395,71,539,98"/>
+</map>
