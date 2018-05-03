@@ -7,10 +7,6 @@
 
 namespace vpr {
 
-    /**Packs up a bunch of information used to create/specify a Vulkan image into a single structure,
-      *to simplify function signatures but still make sure we can access all the parameters we need
-    */
-
     /**Wraps the common image creation, transfer, and staging methods. Texture derives from this, and so does DepthStencil. Also provides
      * static functions to initialize a passed VkImage handle and Allocation object. 
     *  \ingroup Resources

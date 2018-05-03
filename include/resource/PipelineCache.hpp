@@ -36,7 +36,8 @@ namespace vpr {
         void LoadCacheFromFile(const char * filename);
         const VkPipelineCache& vkHandle() const;
 
-        /**Merges given cache objects into this object
+        /**Merges given cache objects into this object. Useful to generate pipelines across several threads,
+         * but merge their cache data back into a single object for later re-use.
          */
         void MergeCaches(const uint32_t num_caches, const VkPipelineCache* caches);
 
