@@ -51,7 +51,7 @@ namespace vpr {
         VkResult result = parent->vkAllocator->CreateBuffer(&handle, &createInfo, reqs, memoryAllocation);
         VkAssert(result);
         size = memoryAllocation.Size;
-
+        setMappedMemoryRange();
     }
 
     void Buffer::CreateBuffer(const VkBufferCreateInfo& info, const VkMemoryPropertyFlags& memory_flags) {
@@ -64,6 +64,7 @@ namespace vpr {
         VkResult result = parent->vkAllocator->CreateBuffer(&handle, &createInfo, reqs, memoryAllocation);
         VkAssert(result);
         size = memoryAllocation.Size;
+        setMappedMemoryRange();
     }
 
     void Buffer::Destroy(){
@@ -170,14 +171,24 @@ namespace vpr {
         VkAssert(result);
     }
 
-    void Buffer::Map(const VkDeviceSize& offset){
+    void Buffer::Map(const VkDeviceSize& offset) {
         assert(offset < memoryAllocation.Size);
         VkResult result = vkMapMemory(parent->vkHandle(), memoryAllocation.Memory(), memoryAllocation.Offset() + offset, memoryAllocation.Size, 0, &mappedMemory);
         VkAssert(result);
     }
 
-    void Buffer::Unmap(){
+    void Buffer::Unmap() {
         vkUnmapMemory(parent->vkHandle(), memoryAllocation.Memory());
+    }
+
+    void Buffer::Flush() {
+        VkResult result = vkFlushMappedMemoryRanges(device->vkHandle(), 1, &mappedMemoryRange);
+        VkAssert(result);
+    }
+
+    void Buffer::Invalidate() {
+        VkResult result = vkInvalidateMappedMemoryRanges(device->vkHandle(), 1, &mappedMemoryRange);
+        VkAssert(result);
     }
 
     const VkBuffer & Buffer::vkHandle() const noexcept{
@@ -190,6 +201,10 @@ namespace vpr {
 
     const VkBufferView& Buffer::View() const noexcept {
         return view;
+    }
+
+    const VkMappedMemoryRange& Buffer::MappedMemoryRange() const noexcept {
+        return mappedMemoryRange;
     }
 
     void Buffer::setDescriptorInfo() const noexcept {
@@ -264,5 +279,10 @@ namespace vpr {
 
     VkBufferUsageFlags Buffer::Usage() const noexcept {
         return createInfo.usage;
+    }
+
+    void Buffer::setMappedMemoryRange() const {
+        mappedMemoryRange = VkMappedMemoryRange{ VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE, nullptr, 
+            memoryAllocation.memory(), memoryAllocation.offset(), memoryAllocation.size() };
     }
 }

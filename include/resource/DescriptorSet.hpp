@@ -45,9 +45,9 @@ namespace vpr {
         void update() const;
 
         const Device* device;
-        const DescriptorPool* descriptorPool;
-        const DescriptorSetLayout* setLayout;
-        VkDescriptorSet handle;
+        mutable const DescriptorPool* descriptorPool;
+        mutable const DescriptorSetLayout* setLayout;
+        mutable VkDescriptorSet handle;
         mutable bool updated = false;
         mutable bool allocated = false;
         mutable std::map<size_t, VkWriteDescriptorSet> writeDescriptors;

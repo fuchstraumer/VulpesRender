@@ -31,7 +31,7 @@ namespace vpr {
         */
         void AddDescriptorBinding(const VkDescriptorType& descriptor_type, const VkShaderStageFlags& shader_stage, const uint32_t& descriptor_binding_loc) noexcept;
         void AddDescriptorBinding(const VkDescriptorSetLayoutBinding& binding);
-        void AddDescriptorBindings(const std::vector<VkDescriptorSetLayoutBinding>& bindings);
+        void AddDescriptorBindings(const uint32_t num_bindings, const VkDescriptorSetLayoutBinding* bindings);
 
         const VkDescriptorSetLayout& vkHandle() const noexcept;
     private:

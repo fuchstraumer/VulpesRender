@@ -33,6 +33,10 @@ namespace vpr {
     class Multisampling;
     class SurfaceKHR;
     class DescriptorSetLayout;
+    class Sampler;
+    class Fence;
+    class Semaphore;
+    class Event;
     template<typename texture_type>
     class Texture;
     struct GraphicsPipelineInfo;

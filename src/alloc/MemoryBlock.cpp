@@ -338,7 +338,6 @@ namespace vpr {
             auto next_iter = request.FreeSuballocation;
             ++next_iter;
             {
-                std::lock_guard<std::mutex> alloc_guard(guardMutex);
                 const auto insert_iter = Suballocations.insert(next_iter, padding_suballoc);
                 // insert_iter returns iterator giving location of inserted item
                 insertFreeSuballocation(insert_iter);
@@ -350,7 +349,6 @@ namespace vpr {
             Suballocation padding_suballoc{ request.Offset - padding_begin, padding_begin, SuballocationType::Free };
             auto next_iter = request.FreeSuballocation;
             {
-                std::lock_guard<std::mutex> alloc_guard(guardMutex);
                 const auto insert_iter = Suballocations.insert(next_iter, padding_suballoc);
                 insertFreeSuballocation(insert_iter);
             }

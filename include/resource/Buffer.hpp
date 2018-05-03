@@ -77,11 +77,14 @@ namespace vpr {
         
         void Map(const VkDeviceSize& offset = 0);
         void Unmap();
+        void Flush();
+        void Invalidate();
 
         const VkBuffer& vkHandle() const noexcept;
         VkBuffer& vkHandle() noexcept;
         const VkBufferView& View() const noexcept;
         const VkDescriptorBufferInfo& GetDescriptor() const noexcept;
+        const VkMappedMemoryRange& MappedMemoryRange() const noexcept;
 
         VkDeviceSize Size() const noexcept;
 
@@ -100,8 +103,8 @@ namespace vpr {
     protected:
 
         static std::vector<std::pair<VkBuffer, Allocation>> stagingBuffers;
-
         void createStagingBuffer(const VkDeviceSize& size, VkBuffer& staging_buffer, Allocation& dest_memory_range);
+        void setMappedMemoryRange() const;
 
         const Device* parent;
         const VkAllocationCallbacks* allocators = nullptr;
@@ -109,6 +112,7 @@ namespace vpr {
         VkBufferView view;
         VkBufferCreateInfo createInfo;
         VkBufferViewCreateInfo viewCreateInfo;
+        mutable VkMappedMemoryRange mappedMemoryRange;
         Allocation memoryAllocation;
         VkDeviceSize size;
         VkDeviceSize dataSize;
