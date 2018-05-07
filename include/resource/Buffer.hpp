@@ -92,10 +92,8 @@ namespace vpr {
         *   Adds both of those objects to a static pool, so that they can be cleaned up together independent of individual object scopes and lifetimes.
         */
         static void CreateStagingBuffer(const Device* dvc, const VkDeviceSize& size, VkBuffer& dest, Allocation& dest_memory_range);
-        /** Destroys any existing buffers in the static pool, and frees any existing allocations in the very same. This can't throw, and can be safely called
-        *   after each frame (so long as you are done with transfers, and make sure they complete before ending a frame via the BaseScene endFrame() method)
-        */
-        static void DestroyStagingResources(const Device* device);
+        static std::unique_ptr<Buffer> CreateStagingBuffer(const Device* dvc, void* data, const size_t data_size);
+        
 
         void SetMappedMemory(void* mapping_destination);
 
