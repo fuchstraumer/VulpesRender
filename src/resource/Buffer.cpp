@@ -91,6 +91,13 @@ namespace vpr {
         Unmap();
     }
 
+    void Buffer::CopyTo(const Buffer* buff, const VkCommandBuffer& cmd, const VkDeviceSize offset) {
+        VkBufferCopy copy{};
+        copy.size = buff->Size();
+        copy.dstOffset = offset;
+        vkCmdCopyBuffer(cmd, buff->vkHandle(), handle, 1, &copy);
+    }
+
     void Buffer::CopyTo(const void* data, const VkCommandBuffer& transfer_cmd, const VkDeviceSize& copy_size, const VkDeviceSize& copy_offset) {
 
         VkBuffer staging_buffer;

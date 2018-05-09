@@ -52,6 +52,10 @@ namespace vpr {
         *   \param offset: destination offset, but can be set to 0 if copying to the front of the buffer or if the copy size is equivalent to the buffer's total size.
         */
         void CopyToMapped(const void* data, const VkDeviceSize& size, const VkDeviceSize& offset);
+
+        /**Copies the data in the given Buffer pointer to this object. */
+        void CopyTo(const Buffer* other_buffer, const VkCommandBufer& cmd, const VkDeviceSize offset);
+
         /**Copys the data pointed to by the relevant parameter into a staging buffer, then records commands copying data from the staging object
          * into the destination object. The lifetime of the staging buffer will persist after the command is submitted: make sure to call FreeStagingBuffers()
          * somewhat frequently, in order to ensure that excess host-side memory isn't being occupied/used.
