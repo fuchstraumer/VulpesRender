@@ -37,8 +37,7 @@ namespace vpr {
     class Fence;
     class Semaphore;
     class Event;
-    template<typename texture_type>
-    class Texture;
+    class Sampler;
     struct GraphicsPipelineInfo;
     struct VprExtensionPack;
 }

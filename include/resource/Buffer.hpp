@@ -52,6 +52,10 @@ namespace vpr {
         *   \param offset: destination offset, but can be set to 0 if copying to the front of the buffer or if the copy size is equivalent to the buffer's total size.
         */
         void CopyToMapped(const void* data, const VkDeviceSize& size, const VkDeviceSize& offset);
+
+        /**Copies the data in the given Buffer pointer to this object. */
+        void CopyTo(const Buffer* other_buffer, const VkCommandBuffer& cmd, const VkDeviceSize offset);
+
         /**Copys the data pointed to by the relevant parameter into a staging buffer, then records commands copying data from the staging object
          * into the destination object. The lifetime of the staging buffer will persist after the command is submitted: make sure to call FreeStagingBuffers()
          * somewhat frequently, in order to ensure that excess host-side memory isn't being occupied/used.
@@ -92,10 +96,8 @@ namespace vpr {
         *   Adds both of those objects to a static pool, so that they can be cleaned up together independent of individual object scopes and lifetimes.
         */
         static void CreateStagingBuffer(const Device* dvc, const VkDeviceSize& size, VkBuffer& dest, Allocation& dest_memory_range);
-        /** Destroys any existing buffers in the static pool, and frees any existing allocations in the very same. This can't throw, and can be safely called
-        *   after each frame (so long as you are done with transfers, and make sure they complete before ending a frame via the BaseScene endFrame() method)
-        */
-        static void DestroyStagingResources(const Device* device);
+        static std::unique_ptr<Buffer> CreateStagingBuffer(const Device* dvc, void* data, const size_t data_size);
+        
 
         void SetMappedMemory(void* mapping_destination);
 

@@ -91,6 +91,13 @@ namespace vpr {
         Unmap();
     }
 
+    void Buffer::CopyTo(const Buffer* buff, const VkCommandBuffer& cmd, const VkDeviceSize offset) {
+        VkBufferCopy copy{};
+        copy.size = buff->Size();
+        copy.dstOffset = offset;
+        vkCmdCopyBuffer(cmd, buff->vkHandle(), handle, 1, &copy);
+    }
+
     void Buffer::CopyTo(const void* data, const VkCommandBuffer& transfer_cmd, const VkDeviceSize& copy_size, const VkDeviceSize& copy_offset) {
 
         VkBuffer staging_buffer;
@@ -182,12 +189,12 @@ namespace vpr {
     }
 
     void Buffer::Flush() {
-        VkResult result = vkFlushMappedMemoryRanges(device->vkHandle(), 1, &mappedMemoryRange);
+        VkResult result = vkFlushMappedMemoryRanges(parent->vkHandle(), 1, &mappedMemoryRange);
         VkAssert(result);
     }
 
     void Buffer::Invalidate() {
-        VkResult result = vkInvalidateMappedMemoryRanges(device->vkHandle(), 1, &mappedMemoryRange);
+        VkResult result = vkInvalidateMappedMemoryRanges(parent->vkHandle(), 1, &mappedMemoryRange);
         VkAssert(result);
     }
 
@@ -237,22 +244,19 @@ namespace vpr {
         VkResult result = dvc->vkAllocator->CreateBuffer(&dest, &create_info, alloc_reqs, dest_memory_alloc);
         VkAssert(result);
 
-        stagingBuffers.emplace_back(std::make_pair(std::move(dest), dest_memory_alloc));
-        LOG(INFO) << "Created a staging buffer. Currently have " << std::to_string(stagingBuffers.size()) << " staging buffers in the pool.";
     }
 
-    void Buffer::DestroyStagingResources(const Device* device){
+    std::unique_ptr<Buffer> Buffer::CreateStagingBuffer(const Device* dvc, void* data, const size_t data_size) {
+        VkBufferCreateInfo buffer_info = vk_buffer_create_info_base;
+        buffer_info.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
+        buffer_info.size = static_cast<VkDeviceSize>(data_size);
+        buffer_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
 
-        if (stagingBuffers.empty()) {
-            return;
-        }
+        std::unique_ptr<Buffer> result = std::make_unique<Buffer>(dvc);
+        result->CreateBuffer(buffer_info, VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT);
+        result->CopyToMapped(data, static_cast<VkDeviceSize>(data_size), 0);
 
-        for (auto& buff : stagingBuffers) {
-            device->vkAllocator->DestroyBuffer(buff.first, buff.second);
-        }
-
-        stagingBuffers.clear(); 
-        stagingBuffers.shrink_to_fit();
+        return std::move(result);
     }
 
     void Buffer::SetMappedMemory(void * mapping_destination) {
@@ -272,8 +276,6 @@ namespace vpr {
         alloc_reqs.requiredFlags = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
 
         VkResult result = parent->vkAllocator->CreateBuffer(&staging_buffer, &create_info, alloc_reqs, dest_memory_alloc);
-        VkAssert(result);
-        LOG_IF(stagingBuffers.size() > 100, WARNING) << "Warning! More than 100 staging buffers currently in the staging buffer pool!";
 
     }
 
@@ -283,6 +285,6 @@ namespace vpr {
 
     void Buffer::setMappedMemoryRange() const {
         mappedMemoryRange = VkMappedMemoryRange{ VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE, nullptr, 
-            memoryAllocation.memory(), memoryAllocation.offset(), memoryAllocation.size() };
+            memoryAllocation.Memory(), memoryAllocation.Offset(), memoryAllocation.Size };
     }
 }
