@@ -189,12 +189,12 @@ namespace vpr {
     }
 
     void Buffer::Flush() {
-        VkResult result = vkFlushMappedMemoryRanges(device->vkHandle(), 1, &mappedMemoryRange);
+        VkResult result = vkFlushMappedMemoryRanges(parent->vkHandle(), 1, &mappedMemoryRange);
         VkAssert(result);
     }
 
     void Buffer::Invalidate() {
-        VkResult result = vkInvalidateMappedMemoryRanges(device->vkHandle(), 1, &mappedMemoryRange);
+        VkResult result = vkInvalidateMappedMemoryRanges(parent->vkHandle(), 1, &mappedMemoryRange);
         VkAssert(result);
     }
 
@@ -285,6 +285,6 @@ namespace vpr {
 
     void Buffer::setMappedMemoryRange() const {
         mappedMemoryRange = VkMappedMemoryRange{ VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE, nullptr, 
-            memoryAllocation.memory(), memoryAllocation.offset(), memoryAllocation.size() };
+            memoryAllocation.Memory(), memoryAllocation.Offset(), memoryAllocation.Size };
     }
 }
