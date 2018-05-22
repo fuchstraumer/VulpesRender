@@ -42,7 +42,7 @@ namespace vpr {
         const VkImageCreateInfo& CreateInfo() const noexcept;
         const VkImage& vkHandle() const noexcept;
         const VkImageView& View() const noexcept;
-        virtual VkExtent3D GetExtents() const noexcept;
+        const Allocation& MemoryAllocation() const noexcept;
 
         VkFormat Format() const noexcept;
         void SetFormat(VkFormat format) noexcept;

@@ -175,10 +175,10 @@ namespace vpr {
         return view;
     }
 
-    VkExtent3D Image::GetExtents() const noexcept{
-        return extents;
+    const Allocation& Image::MemoryAllocation() const noexcept {
+        return memoryAllocation;
     }
-
+    
     VkFormat Image::Format() const noexcept {
         return format;
     }
