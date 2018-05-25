@@ -1,6 +1,6 @@
 #include "vpr_stdafx.h"
 #include "core/PhysicalDevice.hpp"
-#include "util/easylogging++.h"
+#include "easylogging++.h"
 #include <set>
 
 namespace vpr {

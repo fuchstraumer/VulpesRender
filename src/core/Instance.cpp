@@ -3,7 +3,7 @@
 #include "core/PhysicalDevice.hpp"
 #include "render/SurfaceKHR.hpp"
 #include "render/Swapchain.hpp"
-#include "util/easylogging++.h"
+#include "easylogging++.h"
 #include "GLFW/glfw3.h"
 
 namespace vpr {

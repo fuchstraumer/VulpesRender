@@ -3,7 +3,7 @@
 #include "core/LogicalDevice.hpp"
 #include "alloc/Allocation.hpp"
 #include "alloc/MemoryBlock.hpp"
-#include "util/easylogging++.h"
+#include "easylogging++.h"
 #include <sstream>
 #include <vulkan/vulkan.h>
 namespace vpr {

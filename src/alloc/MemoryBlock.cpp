@@ -2,7 +2,7 @@
 #include "alloc/MemoryBlock.hpp"
 #include "alloc/Allocation.hpp"
 #include "alloc/Allocator.hpp"
-#include "util/easylogging++.h"
+#include "easylogging++.h"
 
 
 namespace vpr {

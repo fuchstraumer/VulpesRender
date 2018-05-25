@@ -2,7 +2,7 @@
 #include "command/CommandPool.hpp"
 #include "core/Instance.hpp"
 #include "core/LogicalDevice.hpp"
-#include "util/easylogging++.h"
+#include "easylogging++.h"
 
 namespace vpr {
 

@@ -71,6 +71,9 @@ ENDIF()
 TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:VulpesRender>)
+TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/easyloggingpp>
+    $<INSTALL_INTERFACE:easyloggingpp>)
 TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/glfw/include")
 TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/imgui>
@@ -87,6 +90,7 @@ ENDIF()
 
 # Easier to gather headers this way, so we can more cleanly set where they end up.
 INSTALL(DIRECTORY "include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/VulpesRender/")
+INSTALL(DIRECTORY "easyloggingpp/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/easyloggingpp/")
 INSTALL(TARGETS VulpesRender LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib")
 INSTALL(FILES "include/vpr_stdafx.h" "include/ForwardDecl.hpp" 
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/VulpesRender")

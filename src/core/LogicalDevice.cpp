@@ -3,7 +3,7 @@
 #include "core/PhysicalDevice.hpp"
 #include "core/Instance.hpp"
 #include "alloc/Allocator.hpp"
-#include "util/easylogging++.h"
+#include "easylogging++.h"
 
 namespace vpr {
 
