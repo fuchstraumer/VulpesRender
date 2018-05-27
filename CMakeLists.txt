@@ -15,8 +15,8 @@ ENDIF()
 
 ADD_SUBDIRECTORY(glfw)
 
-FILE(GLOB UTIL "${CMAKE_CURRENT_SOURCE_DIR}/src/util/*.cc" "${CMAKE_CURRENT_SOURCE_DIR}/src/util/*.cpp" 
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/util/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/include/util/*.hpp")
+FILE(GLOB UTIL "${CMAKE_CURRENT_SOURCE_DIR}/easyloggingpp/*.cc" "${CMAKE_CURRENT_SOURCE_DIR}/src/util/*.cpp" 
+    "${CMAKE_CURRENT_SOURCE_DIR}/easyloggingpp/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/include/util/*.hpp")
 FILE(GLOB COMMON "${CMAKE_CURRENT_SOURCE_DIR}/src/common/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/common/*.hpp")
 FILE(GLOB COMMAND_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/command/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/command/*.hpp")
 FILE(GLOB CORE "${CMAKE_CURRENT_SOURCE_DIR}/src/core/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/core/*.hpp")
