@@ -339,7 +339,7 @@ namespace vpr {
                         }
                     }
                     // only log for larger allocations of at least half a mb: otherwise, log gets clogged with updates
-                    LOG_IF((static_cast<float>(memory_reqs.size) / 1.0e6f) > 0.5f, INFO) << "Successfully allocated by binding to suballocation with size of " << std::to_string(memory_reqs.size / 1e6) << "mb at offset " << std::to_string(request.Offset);
+                    LOG_IF(VERBOSE_LOGGING, INFO) << "Successfully allocated by binding to suballocation with size of " << std::to_string(memory_reqs.size / 1e6) << "mb at offset " << std::to_string(request.Offset);
                     return VK_SUCCESS;
                 }
             }
