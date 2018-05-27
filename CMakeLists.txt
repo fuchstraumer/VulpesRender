@@ -7,6 +7,8 @@ IF(BUILD_DYNAMIC_LIBRARY)
     SET(BUILD_SHARED_LIBS ON)
 ENDIF()
 
+OPTION(VERBOSE_LOGGING "Enable extra output from easyloggingpp" OFF)
+
 IF(APPLE)
   FIND_LIBRARY(MoltenVK NAMES "libMoltenVK.dylib" HINTS "${CMAKE_CURRENT_SOURCE_DIR}/ext/MoltenVK/macOS")
   SET(APPLE_VK_INCL "-DVULKAN_INCLUDE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/ext/MoltenVk/include/vulkan")
@@ -42,6 +44,10 @@ ELSE()
 ADD_LIBRARY(VulpesRender STATIC "${CMAKE_CURRENT_SOURCE_DIR}/include/vpr_stdafx.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/ForwardDecl.hpp" ${UTIL} ${COMMON} ${COMMAND_FILES} ${IMGUI}
     ${CORE} ${RESOURCES} ${RENDER} ${SHADERS} ${ALLOC})
+ENDIF()
+
+IF(VERBOSE_LOGGING) 
+    TARGET_COMPILE_DEFINITIONS(VulpesRender PUBLIC "-DVPR_VERBOSE_LOGGING")
 ENDIF()
 
 #Enable minimal rebuild, and manually set c++17 standard since it doesn't get set right otherwise.

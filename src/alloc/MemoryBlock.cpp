@@ -77,7 +77,7 @@ namespace vpr {
         --suballoc_iter;
         availSuballocations.emplace_back(suballoc_iter);
 
-        LOG(INFO) << "Created new MemoryBlock with size " << std::to_string(Size * 1e-6) << "mb ";
+        LOG_IF(VERBOSE_LOGGING, INFO) << "Created new MemoryBlock with size " << std::to_string(Size * 1e-6) << "mb ";
     }
 
     void MemoryBlock::Destroy(Allocator * alloc) {
@@ -90,7 +90,7 @@ namespace vpr {
             availSuballocations.clear();
         }
 
-        LOG(INFO) << "MemoryBlock memory freed, memory handle was: " << memory << " and size was " << std::to_string(Size * 1e-6) << "mb";
+        LOG_IF(VERBOSE_LOGGING, INFO) << "MemoryBlock memory freed, memory handle was: " << memory << " and size was " << std::to_string(Size * 1e-6) << "mb";
         vkFreeMemory(alloc->DeviceHandle(), memory, nullptr);
         memory = VK_NULL_HANDLE;
 
@@ -286,7 +286,7 @@ namespace vpr {
 
         // Can't allocate if padding at begin and end is greater than requested size.
         if (padding_begin + padding_end + allocation_size > suballoc.Size) {
-            LOG(INFO) << "Suballocation verification failed as required padding for alignment + required size is greater than available space.";
+            LOG(WARNING) << "Suballocation verification failed as required padding for alignment + required size is greater than available space.";
             return false;
         }
 
@@ -299,7 +299,7 @@ namespace vpr {
                 bool on_same_page = CheckBlocksOnSamePage(*dest_offset, allocation_size, next_suballoc.Offset, buffer_image_granularity);
                 if (on_same_page) {
                     if (CheckBufferImageGranularityConflict(allocation_type, next_suballoc.Type)) {
-                        LOG(INFO) << "Suballocation verification failed as there were too many buffer-image granularity conflicts.";
+                        LOG(WARNING) << "Suballocation verification failed as there were too many buffer-image granularity conflicts.";
                         return false;
                     }
                 }

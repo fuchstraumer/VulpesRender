@@ -39,6 +39,16 @@
 
 #define GLFW_INCLUDE_VULKAN
 
+#ifdef VPR_VERBOSE_LOGGING
+namespace vpr {
+    constexpr bool VERBOSE_LOGGING = true;
+}
+#else
+namespace vpr {
+    constexpr bool VERBOSE_LOGGING = false;
+}
+#endif
+
 
 #include "common/CreateInfoBase.hpp"
 #include "common/vkAssert.hpp"

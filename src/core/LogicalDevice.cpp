@@ -400,11 +400,11 @@ namespace vpr {
         if (iter != exts.cend()) {
             iter = std::find(exts.cbegin(), exts.cend(), mem_extensions[1]);
             if (iter != exts.cend()) {
-                LOG(INFO) << "Both extensions required to enable better dedicated allocations have been enabled/found.";
+                LOG_IF(VERBOSE_LOGGING, INFO) << "Both extensions required to enable better dedicated allocations have been enabled/found.";
                 enableDedicatedAllocations = true;
             }    
             else {
-                LOG(WARNING) << "Only one of the extensions required for better allocations was found - cannot enable/use.";
+                LOG_IF(VERBOSE_LOGGING, WARNING) << "Only one of the extensions required for better allocations was found - cannot enable/use.";
                 enableDedicatedAllocations = false;
             }
         }

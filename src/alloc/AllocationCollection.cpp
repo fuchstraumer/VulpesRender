@@ -53,7 +53,7 @@ namespace vpr {
 
         for (auto iter = allocations.begin(); iter != allocations.end(); ++iter) {
             if ((*iter).get() == block_to_erase) {
-                LOG(INFO) << "Removed memory block " << (*iter).get() << " from allocation collection.";
+                LOG_IF(VERBOSE_LOGGING, INFO) << "Removed memory block " << (*iter).get() << " from allocation collection.";
                 allocations.erase(iter);
                 return;
             }
