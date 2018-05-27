@@ -136,7 +136,7 @@ namespace vpr {
             auto* block = (*allocation_collection)[0];
             auto free_size = memory_to_free->Size;
             block->Free(memory_to_free);
-            LOG_IF((static_cast<float>(free_size) / 1.0e6f) > 0.5f, INFO) << "Freed a memory allocation with size " << std::to_string(free_size / 1e6) << "mb";
+            LOG_IF(VERBOSE_LOGGING, INFO) << "Freed a memory allocation with size " << std::to_string(free_size / 1e6) << "mb";
             if (VALIDATE_MEMORY) {
                 auto err = block->Validate();
                 if (err != ValidationCode::VALIDATION_PASSED) {

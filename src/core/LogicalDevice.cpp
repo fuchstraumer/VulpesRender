@@ -113,6 +113,7 @@ namespace vpr {
         auto create_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_GRAPHICS_BIT));
         create_info.queueFamilyIndex = QueueFamilyIndices.Graphics;
         NumGraphicsQueues = 1;
+        create_info.queueCount = NumGraphicsQueues;
         queue_priorities.graphics = std::vector<float>(NumGraphicsQueues, 1.0f);
         create_info.pQueuePriorities = queue_priorities.graphics.data();
         queueInfos.insert(std::make_pair(VK_QUEUE_GRAPHICS_BIT, create_info));
@@ -124,6 +125,7 @@ namespace vpr {
             auto compute_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_COMPUTE_BIT));
             compute_info.queueFamilyIndex = QueueFamilyIndices.Compute;
             NumComputeQueues = compute_info.queueCount;
+            compute_info.queueCount = NumComputeQueues;
             queue_priorities.compute = std::vector<float>(NumComputeQueues, 1.0f);
             compute_info.pQueuePriorities = queue_priorities.compute.data();
             queueInfos.insert(std::make_pair(VK_QUEUE_COMPUTE_BIT, compute_info));

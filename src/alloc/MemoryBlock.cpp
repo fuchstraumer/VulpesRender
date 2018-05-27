@@ -262,7 +262,7 @@ namespace vpr {
                 if (on_same_page) {
                     conflict_found = CheckBufferImageGranularityConflict(prev_suballoc.Type, allocation_type);
                     if (conflict_found) {
-                        LOG(INFO) << "A buffer-image granularity conflict was identified in suballocation " << std::to_string(reinterpret_cast<size_t>(&prev_suballoc));
+                        LOG(WARNING) << "A buffer-image granularity conflict was identified in suballocation " << std::to_string(reinterpret_cast<size_t>(&prev_suballoc));
                         break;
                     }
                 }
