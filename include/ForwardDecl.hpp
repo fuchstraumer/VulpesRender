@@ -24,13 +24,11 @@ namespace vpr {
     class CommandPool;
     class TransferPool;
     class GraphicsPipeline;
-    class DeferredPass;
     class PipelineCache;
     class DescriptorSet;
     class DescriptorPool;
     class PipelineLayout;
     class DepthStencil;
-    class Multisampling;
     class SurfaceKHR;
     class DescriptorSetLayout;
     class Sampler;
