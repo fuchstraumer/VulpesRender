@@ -50,7 +50,7 @@ IF(VERBOSE_LOGGING)
     TARGET_COMPILE_DEFINITIONS(VulpesRender PUBLIC "-DVPR_VERBOSE_LOGGING")
 ENDIF()
 
-#Enable minimal rebuild, and manually set c++17 standard since it doesn't get set right otherwise.
+# Enable minimal rebuild, and manually set c++17 standard since it doesn't get set right otherwise.
 IF(MSVC)
     TARGET_COMPILE_OPTIONS(VulpesRender PUBLIC "/std:c++17" "/Gm")
 ENDIF()
@@ -62,8 +62,7 @@ ENDIF()
 IF(APPLE)
   TARGET_LINK_LIBRARIES(VulpesRender INTERFACE glfw "${MoltenVK}")
 ELSEIF(UNIX)
-  TARGET_LINK_LIBRARIES(VulpesRender INTERFACE glfw "$ENV{VULKAN_SDK}/lib/libvulkan.so" "dl" "pthread" "X11" "Xi" "Xrandr") 
-  TARGET_LINK_LIBRARIES(VulpesRender INTERFACE "-lstdc++fs")
+  TARGET_LINK_LIBRARIES(VulpesRender INTERFACE glfw "$ENV{VULKAN_SDK}/lib/libvulkan.so" "dl" "pthread" "X11" "Xi" "Xrandr")
 ELSEIF(WIN32)
     IF(BUILD_DYNAMIC_LIBRARY)
         TARGET_LINK_LIBRARIES(VulpesRender PUBLIC "${PROJECT_SOURCE_DIR}/ext/lib/glfw3dll.lib")
@@ -76,27 +75,25 @@ ENDIF()
 
 TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:VulpesRender>)
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/VulpesRender>)
 TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/easyloggingpp>
-    $<INSTALL_INTERFACE:easyloggingpp>)
-TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/glfw/include")
-TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/imgui>
-    $<INSTALL_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/imgui>)
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/easyloggingpp>)
+TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/glfw/include>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/GLFW>)
 
 IF(APPLE)
   TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
       $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/ext/MoltenVK/include>)
 ELSE()
-  TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC 
-      $<BUILD_INTERFACE:$ENV{VULKAN_SDK}/include>
-      $<INSTALL_INTERFACE:$ENV{VULKAN_SDK}/include>)
+  TARGET_INCLUDE_DIRECTORIES(VulpesRender PUBLIC "$ENV{VULKAN_SDK}/include")
 ENDIF()
 
 # Easier to gather headers this way, so we can more cleanly set where they end up.
 INSTALL(DIRECTORY "include/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/VulpesRender/")
-INSTALL(DIRECTORY "easyloggingpp/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/easyloggingpp/")
+INSTALL(DIRECTORY "glfw/include/GLFW/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/GLFW/")
+INSTALL(FILES "easyloggingpp/easylogging++.h" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/easyloggingpp/")
 INSTALL(TARGETS VulpesRender LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib")
 INSTALL(FILES "include/vpr_stdafx.h" "include/ForwardDecl.hpp" 
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/VulpesRender")
