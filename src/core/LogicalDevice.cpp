@@ -8,9 +8,11 @@
 namespace vpr {
 
     constexpr const char* const RECOMMENDED_REQUIRED_EXTENSION = "VK_KHR_swapchain";
+
     constexpr static std::array<const char*, 2> RECOMMENDED_OPTIONAL_EXTENSIONS {
         VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME, VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME
     };
+
     constexpr VprExtensionPack RECOMMENDED_EXTENSIONS {
         &RECOMMENDED_REQUIRED_EXTENSION,
         1,
@@ -414,6 +416,5 @@ namespace vpr {
             enableDedicatedAllocations = false;
         }
     }
-
 
 }

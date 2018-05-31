@@ -46,4 +46,5 @@ namespace vpr {
     };
 
 }
+
 #endif // !VULPES_VK_RENDER_PASS_H

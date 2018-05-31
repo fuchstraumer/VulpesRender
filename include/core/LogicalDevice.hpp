@@ -126,8 +126,6 @@ namespace vpr {
 
     };
 
-
-
 }
 
 #endif // !VULPES_VK_LOGICAL_DEVICE_H

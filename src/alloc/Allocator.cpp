@@ -19,7 +19,6 @@ namespace vpr {
         const Allocation* ptr;
     };
 
-
     Allocator::Allocator(const Device * parent_dvc, bool dedicated_alloc_enabled) : parent(parent_dvc), usingMemoryExtensions(dedicated_alloc_enabled),
         preferredSmallHeapBlockSize(DefaultSmallHeapBlockSize), preferredLargeHeapBlockSize(DefaultLargeHeapBlockSize) {
         deviceProperties = parent->GetPhysicalDeviceProperties();

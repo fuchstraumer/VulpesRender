@@ -9,8 +9,6 @@
 
 namespace vpr {
 
-
-
     Instance::Instance(instance_layers layers, const VkApplicationInfo*info, GLFWwindow* _window) : Instance(layers, info, _window, nullptr) {}
 
     Instance::Instance(instance_layers layers_flags, const VkApplicationInfo * info, GLFWwindow * _window, const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) :

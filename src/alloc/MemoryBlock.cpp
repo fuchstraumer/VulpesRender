@@ -4,11 +4,9 @@
 #include "alloc/Allocator.hpp"
 #include "easylogging++.h"
 
-
 namespace vpr {
 
     constexpr static VkDeviceSize DEBUG_PADDING = 0;
-
     VkBool32 AllocationRequirements::noNewAllocations = false;
     
     /** This is a simple and common overload to print enum info to any stream (this also works, FYI, with easylogging++). A note to make, however,

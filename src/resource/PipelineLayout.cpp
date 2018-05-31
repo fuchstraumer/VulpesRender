@@ -53,4 +53,5 @@ namespace vpr {
     const VkPipelineLayout & PipelineLayout::vkHandle() const noexcept {
         return handle;
     }
+
 }

@@ -56,7 +56,7 @@ namespace vpr {
         return handle;
     }
 
-    void CreateMultiple(const Device* dvc, const VkGraphicsPipelineCreateInfo* infos, const size_t num_infos, VkPipelineCache cache, GraphicsPipeline** results) {
+    void GraphicsPipeline::CreateMultiple(const Device* dvc, const VkGraphicsPipelineCreateInfo* infos, const size_t num_infos, VkPipelineCache cache, GraphicsPipeline** results) {
         std::vector<VkPipeline> handles(num_infos);
         VkResult result = vkCreateGraphicsPipelines(dvc->vkHandle(), cache, static_cast<uint32_t>(num_infos), infos, nullptr, handles.data());
         VkAssert(result);
