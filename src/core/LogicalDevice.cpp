@@ -25,8 +25,8 @@ namespace vpr {
         std::vector<float> sparse_binding;
     } queue_priorities;
 
-    Device::Device(const Instance* instance, const PhysicalDevice * device, bool use_recommended_extensions) : parent(device), parentInstance(instance) {
-        if (use_recommended_extensions) {
+    Device::Device(const Instance* instance, const PhysicalDevice * device, device_extensions extensions_to_use) : parent(device), parentInstance(instance) {
+        if (extensions_to_use != device_extensions::None) {
             create(&RECOMMENDED_EXTENSIONS, nullptr, 0);
         }
         else {
