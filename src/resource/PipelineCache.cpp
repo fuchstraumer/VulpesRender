@@ -2,7 +2,7 @@
 #include "resource/PipelineCache.hpp"
 #include "core/LogicalDevice.hpp"
 #include "core/PhysicalDevice.hpp"
-#include "util/easylogging++.h"
+#include "easylogging++.h"
 #ifdef USE_EXPERIMENTAL_FILESYSTEM
 #include <experimental/filesystem>
 #endif
@@ -83,7 +83,7 @@ namespace vpr {
         memcpy(cache_uuid, cache_header + 16, VK_UUID_SIZE);
 
         if (memcmp(cache_uuid, physical_device.GetProperties().pipelineCacheUUID, sizeof(cache_uuid)) != 0) {
-            LOG(INFO) << "Pipeline cache UUID incorrect, requires rebuilding.";
+            LOG(WARNING) << "Pipeline cache UUID incorrect, requires rebuilding.";
             return false;
         }
 
@@ -103,14 +103,14 @@ namespace vpr {
 
             // Check to see if header data matches current device.
             if (Verify(header.data())) {
-                LOG(INFO) << "Found valid pipeline cache data with ID # " << std::to_string(hashID) << " .";
+                LOG_IF(VERBOSE_LOGGING, INFO) << "Found valid pipeline cache data with ID # " << std::to_string(hashID) << " .";
                 std::string cache_str((std::istreambuf_iterator<char>(cache)), std::istreambuf_iterator<char>());
                 uint32_t cache_size = static_cast<uint32_t>(cache_str.size() * sizeof(char));
                 createInfo.initialDataSize = cache_size;
                 createInfo.pInitialData = cache_str.data();
             }
             else {
-                LOG(INFO) << "Pre-existing cache file isn't valid: creating new pipeline cache.";
+                LOG_IF(VERBOSE_LOGGING, INFO) << "Pre-existing cache file isn't valid: creating new pipeline cache.";
                 createInfo.initialDataSize = 0;
                 createInfo.pInitialData = nullptr;
             }

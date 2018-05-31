@@ -2,7 +2,7 @@
 #include "resource/Buffer.hpp"
 #include "core/LogicalDevice.hpp"
 #include "command/CommandPool.hpp"
-#include "util/easylogging++.h"
+#include "easylogging++.h"
 #include "alloc/Allocator.hpp"
 
 namespace vpr {

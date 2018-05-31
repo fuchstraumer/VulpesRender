@@ -3,7 +3,7 @@
 #include "core/LogicalDevice.hpp"
 #include "alloc/Allocation.hpp"
 #include "alloc/MemoryBlock.hpp"
-#include "util/easylogging++.h"
+#include "easylogging++.h"
 #include <sstream>
 #include <vulkan/vulkan.h>
 namespace vpr {
@@ -18,7 +18,6 @@ namespace vpr {
         }
         const Allocation* ptr;
     };
-
 
     Allocator::Allocator(const Device * parent_dvc, bool dedicated_alloc_enabled) : parent(parent_dvc), usingMemoryExtensions(dedicated_alloc_enabled),
         preferredSmallHeapBlockSize(DefaultSmallHeapBlockSize), preferredLargeHeapBlockSize(DefaultLargeHeapBlockSize) {
@@ -136,7 +135,7 @@ namespace vpr {
             auto* block = (*allocation_collection)[0];
             auto free_size = memory_to_free->Size;
             block->Free(memory_to_free);
-            LOG_IF((static_cast<float>(free_size) / 1.0e6f) > 0.5f, INFO) << "Freed a memory allocation with size " << std::to_string(free_size / 1e6) << "mb";
+            LOG_IF(VERBOSE_LOGGING, INFO) << "Freed a memory allocation with size " << std::to_string(free_size / 1e6) << "mb";
             if (VALIDATE_MEMORY) {
                 auto err = block->Validate();
                 if (err != ValidationCode::VALIDATION_PASSED) {
@@ -194,14 +193,14 @@ namespace vpr {
     VkResult Allocator::CreateImage(VkImage * image_handle, const VkImageCreateInfo * img_create_info, const AllocationRequirements & alloc_reqs, Allocation& dest_allocation) {
 
         // create image object first.
-        LOG(INFO) << "Creating new image handle.";
+        LOG_IF(VERBOSE_LOGGING, INFO) << "Creating new image handle.";
         VkResult result = vkCreateImage(parent->vkHandle(), img_create_info, nullptr, image_handle);
         VkAssert(result);
-        LOG(INFO) << "Allocating memory for image.";
+        LOG_IF(VERBOSE_LOGGING, INFO) << "Allocating memory for image.";
         SuballocationType image_type = img_create_info->tiling == VK_IMAGE_TILING_OPTIMAL ? SuballocationType::ImageOptimal : SuballocationType::ImageLinear;
         result = AllocateForImage(*image_handle, alloc_reqs, image_type, dest_allocation);
         VkAssert(result);
-        LOG(INFO) << "Binding image to memory.";
+        LOG_IF(VERBOSE_LOGGING, INFO) << "Binding image to memory.";
         result = vkBindImageMemory(parent->vkHandle(), *image_handle, dest_allocation.Memory(), dest_allocation.Offset());
         VkAssert(result);
 
@@ -339,7 +338,7 @@ namespace vpr {
                         }
                     }
                     // only log for larger allocations of at least half a mb: otherwise, log gets clogged with updates
-                    LOG_IF((static_cast<float>(memory_reqs.size) / 1.0e6f) > 0.5f, INFO) << "Successfully allocated by binding to suballocation with size of " << std::to_string(memory_reqs.size / 1e6) << "mb at offset " << std::to_string(request.Offset);
+                    LOG_IF(VERBOSE_LOGGING, INFO) << "Successfully allocated by binding to suballocation with size of " << std::to_string(memory_reqs.size / 1e6) << "mb at offset " << std::to_string(request.Offset);
                     return VK_SUCCESS;
                 }
             }
@@ -386,7 +385,7 @@ namespace vpr {
                 if (result != VK_SUCCESS && (private_memory)) {
                     result = allocatePrivateMemory(memory_reqs.size, memory_type_idx, dest_allocation);
                     if (result == VK_SUCCESS) {
-                        LOG(INFO) << "Allocation of memory succeeded";
+                        LOG_IF(VERBOSE_LOGGING, INFO) << "Allocation of memory succeeded";
                         return VK_SUCCESS;
                     }
                     else {
@@ -426,7 +425,7 @@ namespace vpr {
                     }
                 }
 
-                LOG(INFO) << "Created new allocation object w/ size of " << std::to_string(alloc_info.allocationSize * 1e-6) << "mb";
+                LOG_IF(VERBOSE_LOGGING, INFO) << "Created new allocation object w/ size of " << std::to_string(alloc_info.allocationSize * 1e-6) << "mb";
                 return VK_SUCCESS;
             }
         }
@@ -463,7 +462,7 @@ namespace vpr {
             (*iter).get()->Unmap();
             vkFreeMemory(parent->vkHandle(), private_handle, nullptr);
             privateAllocations.erase(iter);
-            LOG(INFO) << "Freed a private memory allocation.";
+            LOG_IF(VERBOSE_LOGGING, INFO) << "Freed a private memory allocation.";
             return true;
         }
 

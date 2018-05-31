@@ -31,8 +31,14 @@ namespace vpr {
         Device& operator=(const Device&) = delete;
         Device& operator=(Device&&) = delete;
     public:
+
+        enum class device_extensions : uint32_t {
+            None,
+            RecommendedMinRequired,
+            RecommendedAll
+        };
         
-        Device(const Instance* instance, const PhysicalDevice* device, bool use_recommended_extensions);
+        Device(const Instance* instance, const PhysicalDevice* device, device_extensions extensions_to_use);
         Device(const Instance* instance, const PhysicalDevice* p_device, const VprExtensionPack* extensions, 
             const char* const* layer_names = nullptr, const uint32_t layer_count = std::numeric_limits<uint32_t>::max());
 
@@ -119,8 +125,6 @@ namespace vpr {
         std::map<VkQueueFlags, VkDeviceQueueCreateInfo> queueInfos;
 
     };
-
-
 
 }
 

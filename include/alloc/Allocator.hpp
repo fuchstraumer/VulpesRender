@@ -139,8 +139,6 @@ namespace vpr {
         PFN_vkGetImageSparseMemoryRequirements2KHR pVkGetImageSparseMemoryRequirements2KHR;
     };
 
-    
-
 }
 
 #endif // !VULPES_VK_ALLOCATOR_H

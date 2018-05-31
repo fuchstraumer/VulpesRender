@@ -1,7 +1,7 @@
 #include "vpr_stdafx.h"
 #include "alloc/Allocation.hpp"
 #include "alloc/MemoryBlock.hpp"
-#include "util/easylogging++.h"
+#include "easylogging++.h"
 
 namespace vpr {
 
@@ -45,7 +45,7 @@ namespace vpr {
             std::get<blockAllocation>(typeData).ParentBlock->Map(this, size_to_map, offset_to_map_at, address_to_map_to);
         }
         else if (std::holds_alternative<privateAllocation>(typeData)) {
-            LOG(INFO) << "Attempted to map private allocation, setting given address_to_map_to to permanently mapped address.";
+            LOG_IF(VERBOSE_LOGGING,INFO) << "Attempted to map private allocation, setting given address_to_map_to to permanently mapped address.";
             address_to_map_to = std::get<privateAllocation>(typeData).MappedData;
         }
     }

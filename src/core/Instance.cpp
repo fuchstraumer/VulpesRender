@@ -3,25 +3,27 @@
 #include "core/PhysicalDevice.hpp"
 #include "render/SurfaceKHR.hpp"
 #include "render/Swapchain.hpp"
-#include "util/easylogging++.h"
+#include "easylogging++.h"
 #include "GLFW/glfw3.h"
+#include <vulkan/vulkan.h>
 
 namespace vpr {
 
+    Instance::Instance(instance_layers layers, const VkApplicationInfo*info, GLFWwindow* _window) : Instance(layers, info, _window, nullptr) {}
 
+    Instance::Instance(instance_layers layers_flags, const VkApplicationInfo * info, GLFWwindow * _window, const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) :
+        window(_window), validationLayers(layers_flags), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, nullptr } {
+        VkApplicationInfo our_info = *info;
 
-    Instance::Instance(bool enable_validation, const VkApplicationInfo*info, GLFWwindow* _window) : Instance(enable_validation, info, _window, nullptr) {}
-
-    Instance::Instance(bool enable_validation, const VkApplicationInfo * info, GLFWwindow * _window, const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) :
-        window(_window), validationEnabled(enable_validation), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, info } {
-        
         extensionSetup(extensions);
+        checkApiVersionSupport(&our_info);
         prepareValidation(layers, layer_count);
 
+        createInfo.pApplicationInfo = &our_info;
         VkResult err = vkCreateInstance(&createInfo, nullptr, &handle);
         VkAssert(err);
 
-        if (validationEnabled) {
+        if (validationLayers != instance_layers::Disabled) {
             prepareValidationCallbacks();
         }
 
@@ -30,7 +32,7 @@ namespace vpr {
     }
 
     Instance::~Instance() {
-        if (debugCallback && validationEnabled) {
+        if (debugCallback && (validationLayers != instance_layers::Disabled)) {
             auto func = (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(handle, "vkDestroyDebugReportCallbackEXT");
             func(handle, debugCallback, nullptr);
         }
@@ -48,7 +50,7 @@ namespace vpr {
     }
 
     const bool& Instance::ValidationEnabled() const noexcept {
-        return validationEnabled;
+        return (validationLayers != instance_layers::Disabled);
     }
 
     const VkInstance& Instance::vkHandle() const noexcept {
@@ -74,8 +76,19 @@ namespace vpr {
         swap->Recreate();
     }
 
+    void Instance::checkApiVersionSupport(VkApplicationInfo* info) {
+        uint32_t api_version = 0;
+        vkEnumerateInstanceVersion(&api_version);
+        if (VK_MAKE_VERSION(1, 1, 0) <= api_version) {
+            info->apiVersion = VK_MAKE_VERSION(1, 1, 0);
+        }
+        else {
+            info->apiVersion = VK_MAKE_VERSION(1, 0, 0);
+        }
+    }
+
     void Instance::prepareValidation(const char* const* layers, const uint32_t layer_count) {
-        if (!validationEnabled) {
+        if (validationLayers != instance_layers::Disabled) {
             assert(!layers && (layer_count == 0));
             createInfo.ppEnabledLayerNames = nullptr;
             createInfo.enabledLayerCount = 0;
@@ -171,7 +184,7 @@ namespace vpr {
             }
         }
     
-        if (validationEnabled) {
+        if (validationLayers != instance_layers::Disabled) {
             output.emplace_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
         }
 

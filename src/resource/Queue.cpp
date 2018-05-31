@@ -3,7 +3,7 @@
 
 namespace vpr {
 
-    Queue::Queue(const VkQueue& _handle, const Device* dvc) : handle(_handle), parent(dvc) {
+    Queue::Queue(const VkQueue& _handle) : handle(_handle) {
         queueMutex.lock();
     }
 

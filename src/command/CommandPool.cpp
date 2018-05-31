@@ -2,7 +2,7 @@
 #include "command/CommandPool.hpp"
 #include "core/Instance.hpp"
 #include "core/LogicalDevice.hpp"
-#include "util/easylogging++.h"
+#include "easylogging++.h"
 
 namespace vpr {
 
@@ -43,7 +43,7 @@ namespace vpr {
         }
         if (handle != VK_NULL_HANDLE) {
             vkDestroyCommandPool(parent->vkHandle(), handle, nullptr);
-            LOG(INFO) << "Command Pool " << handle << " destroyed.";
+            LOG_IF(VERBOSE_LOGGING, INFO) << "Command Pool " << handle << " destroyed.";
             handle = VK_NULL_HANDLE;
         }
     }
@@ -60,13 +60,13 @@ namespace vpr {
         alloc_info.commandBufferCount = num_buffers;
         alloc_info.level = cmd_buffer_level;
         VkResult result = vkAllocateCommandBuffers(parent->vkHandle(), &alloc_info, cmdBuffers.data());
-        LOG(INFO) << std::to_string(num_buffers) << " command buffers allocated for command pool " << handle;
+        LOG_IF(VERBOSE_LOGGING, INFO) << std::to_string(num_buffers) << " command buffers allocated for command pool " << handle;
         VkAssert(result);
     }
 
     void CommandPool::FreeCommandBuffers(){
         vkFreeCommandBuffers(parent->vkHandle(), handle, static_cast<uint32_t>(cmdBuffers.size()), cmdBuffers.data());
-        LOG(INFO) << std::to_string(cmdBuffers.size()) << " command buffers freed.";
+        LOG_IF(VERBOSE_LOGGING, INFO) << std::to_string(cmdBuffers.size()) << " command buffers freed.";
         cmdBuffers.clear();
         cmdBuffers.shrink_to_fit();
     }

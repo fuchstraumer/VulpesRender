@@ -30,6 +30,5 @@ namespace vpr {
         VkFramebuffer handle;
     };
 
-
 }
 #endif // !VULPES_VK_FRAMEBUFFER_H

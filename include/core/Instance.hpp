@@ -1,7 +1,6 @@
 #pragma once
 #ifndef VULPES_VK_INSTANCE_H
 #define VULPES_VK_INSTANCE_H
-
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 
@@ -37,9 +36,16 @@ namespace vpr {
         Instance(const Instance &) = delete;
         Instance& operator=(const Instance &) = delete;
     public:
+    
+        enum class instance_layers : uint32_t {
+            Disabled,
+            Minimal,
+            Full,
+        };
         
-        Instance(bool enable_validation, const VkApplicationInfo* info, GLFWwindow* window);
-        Instance(bool enable_validation, const VkApplicationInfo* info, GLFWwindow* window, const VprExtensionPack* extensions, const char* const* layers = nullptr, const uint32_t layer_count = 0);
+        Instance(instance_layers layers, const VkApplicationInfo* info, GLFWwindow* window);
+        Instance(instance_layers layers_flags, const VkApplicationInfo* info, GLFWwindow* window, const VprExtensionPack* extensions, 
+            const char* const* layers = nullptr, const uint32_t layer_count = 0);
         ~Instance();
 
         const VkInstance& vkHandle() const noexcept;
@@ -56,6 +62,7 @@ namespace vpr {
 
         void prepareValidation(const char* const* layers, const uint32_t layer_count);
         bool checkValidationSupport(const char* const* layer_names, const uint32_t layer_count) const;
+        void checkApiVersionSupport(VkApplicationInfo* info);
         void prepareValidationCallbacks();
         void extensionSetup(const VprExtensionPack* extensions);
         void prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const;
@@ -70,7 +77,7 @@ namespace vpr {
         std::unique_ptr<SurfaceKHR> surface;     
         VkInstance handle;
         VkInstanceCreateInfo createInfo;
-        bool validationEnabled; 
+        instance_layers validationLayers; 
         std::vector<const char*> enabledExtensions;
         
 

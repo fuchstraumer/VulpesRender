@@ -3,14 +3,16 @@
 #include "core/PhysicalDevice.hpp"
 #include "core/Instance.hpp"
 #include "alloc/Allocator.hpp"
-#include "util/easylogging++.h"
+#include "easylogging++.h"
 
 namespace vpr {
 
     constexpr const char* const RECOMMENDED_REQUIRED_EXTENSION = "VK_KHR_swapchain";
+
     constexpr static std::array<const char*, 2> RECOMMENDED_OPTIONAL_EXTENSIONS {
         VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME, VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME
     };
+
     constexpr VprExtensionPack RECOMMENDED_EXTENSIONS {
         &RECOMMENDED_REQUIRED_EXTENSION,
         1,
@@ -25,8 +27,8 @@ namespace vpr {
         std::vector<float> sparse_binding;
     } queue_priorities;
 
-    Device::Device(const Instance* instance, const PhysicalDevice * device, bool use_recommended_extensions) : parent(device), parentInstance(instance) {
-        if (use_recommended_extensions) {
+    Device::Device(const Instance* instance, const PhysicalDevice * device, device_extensions extensions_to_use) : parent(device), parentInstance(instance) {
+        if (extensions_to_use != device_extensions::None) {
             create(&RECOMMENDED_EXTENSIONS, nullptr, 0);
         }
         else {
@@ -113,6 +115,7 @@ namespace vpr {
         auto create_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_GRAPHICS_BIT));
         create_info.queueFamilyIndex = QueueFamilyIndices.Graphics;
         NumGraphicsQueues = 1;
+        create_info.queueCount = NumGraphicsQueues;
         queue_priorities.graphics = std::vector<float>(NumGraphicsQueues, 1.0f);
         create_info.pQueuePriorities = queue_priorities.graphics.data();
         queueInfos.insert(std::make_pair(VK_QUEUE_GRAPHICS_BIT, create_info));
@@ -124,6 +127,7 @@ namespace vpr {
             auto compute_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_COMPUTE_BIT));
             compute_info.queueFamilyIndex = QueueFamilyIndices.Compute;
             NumComputeQueues = compute_info.queueCount;
+            compute_info.queueCount = NumComputeQueues;
             queue_priorities.compute = std::vector<float>(NumComputeQueues, 1.0f);
             compute_info.pQueuePriorities = queue_priorities.compute.data();
             queueInfos.insert(std::make_pair(VK_QUEUE_COMPUTE_BIT, compute_info));
@@ -400,11 +404,11 @@ namespace vpr {
         if (iter != exts.cend()) {
             iter = std::find(exts.cbegin(), exts.cend(), mem_extensions[1]);
             if (iter != exts.cend()) {
-                LOG(INFO) << "Both extensions required to enable better dedicated allocations have been enabled/found.";
+                LOG_IF(VERBOSE_LOGGING, INFO) << "Both extensions required to enable better dedicated allocations have been enabled/found.";
                 enableDedicatedAllocations = true;
             }    
             else {
-                LOG(WARNING) << "Only one of the extensions required for better allocations was found - cannot enable/use.";
+                LOG_IF(VERBOSE_LOGGING, WARNING) << "Only one of the extensions required for better allocations was found - cannot enable/use.";
                 enableDedicatedAllocations = false;
             }
         }
@@ -412,6 +416,5 @@ namespace vpr {
             enableDedicatedAllocations = false;
         }
     }
-
 
 }

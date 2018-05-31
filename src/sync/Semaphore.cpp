@@ -1,5 +1,6 @@
-#include "resource/Semaphore.hpp"
+#include "sync/Semaphore.hpp"
 #include "core/LogicalDevice.hpp"
+
 namespace vpr {
 
     Semaphore::Semaphore(const Device* dvc) : device(dvc) {

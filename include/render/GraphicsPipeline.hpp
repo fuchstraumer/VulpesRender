@@ -1,7 +1,6 @@
 #pragma once
 #ifndef VULPES_VK_GRAPHICS_PIPELINE_H
 #define VULPES_VK_GRAPHICS_PIPELINE_H
-
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 
@@ -72,6 +71,7 @@ namespace vpr {
         void Destroy();
         const VkPipeline& vkHandle() const noexcept;
 
+        static void CreateMultiple(const Device* dvc, const VkGraphicsPipelineCreateInfo* infos, const size_t num_infos, VkPipelineCache cache, GraphicsPipeline** dest_pipelines_array);
     private:
 
         const VkAllocationCallbacks* allocators = nullptr;
@@ -81,7 +81,7 @@ namespace vpr {
 
     };
 
-    void CreateMultiple(const Device* dvc, const VkGraphicsPipelineCreateInfo* infos, const size_t  num_infos, VkPipelineCache cache, GraphicsPipeline** dest_pipelines_array);
+    
 
 }
 #endif // !VULPES_VK_GRAPHICS_PIPELINE_H
