@@ -44,12 +44,12 @@ namespace vpr {
         void allocate(const DescriptorPool* parent_pool, const DescriptorSetLayout* set_layout) const;
         void update() const;
 
-        const Device* device;
-        mutable const DescriptorPool* descriptorPool;
-        mutable const DescriptorSetLayout* setLayout;
-        mutable VkDescriptorSet handle;
-        mutable bool updated = false;
-        mutable bool allocated = false;
+        const Device* device{ nullptr };
+        mutable const DescriptorPool* descriptorPool{ nullptr };
+        mutable const DescriptorSetLayout* setLayout{ nullptr };
+        mutable VkDescriptorSet handle{ VK_NULL_HANDLE };
+        mutable bool updated{ false };
+        mutable bool allocated{ false };
         mutable std::map<size_t, VkWriteDescriptorSet> writeDescriptors;
         mutable std::map<size_t, VkDescriptorBufferInfo> bufferInfos;
         mutable std::map<size_t, VkDescriptorImageInfo> imageInfos;

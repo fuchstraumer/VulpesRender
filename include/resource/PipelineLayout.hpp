@@ -17,7 +17,6 @@ namespace vpr {
 
         PipelineLayout(const Device* device);
         ~PipelineLayout();
-        
         PipelineLayout(PipelineLayout&& other) noexcept;
         PipelineLayout& operator=(PipelineLayout&& other) noexcept;
 
@@ -34,10 +33,9 @@ namespace vpr {
         const VkPipelineLayout& vkHandle() const noexcept;
 
     private:
-
-        const Device* device;
-        VkPipelineLayoutCreateInfo createInfo;
-        VkPipelineLayout handle;
+        const Device* device{ nullptr };
+        VkPipelineLayoutCreateInfo createInfo{ vk_pipeline_layout_create_info_base };
+        VkPipelineLayout handle{ VK_NULL_HANDLE };
     };
 
 }

@@ -33,10 +33,10 @@ namespace vpr {
 
     private:
 
-        VkDescriptorPool handle;
-        std::map<VkDescriptorType, size_t> resourceTypes;
-        size_t maxSets;
-        const Device* device;
+        VkDescriptorPool handle{ VK_NULL_HANDLE };
+        std::map<VkDescriptorType, size_t> resourceTypes{};
+        size_t maxSets{ std::numeric_limits<size_t>::max() };
+        const Device* device{ nullptr };
 
     };
 
