@@ -56,7 +56,7 @@ namespace vpr {
         void CreateSurfaceKHR();
         void DestroySurfaceKHR();
 
-        const bool& ValidationEnabled() const noexcept;
+        bool ValidationEnabled() const noexcept;
 
     private:
 
