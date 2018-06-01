@@ -14,10 +14,15 @@ namespace vpr {
      * \ingroup Rendering
      */
     class VPR_API SurfaceKHR {
+        SurfaceKHR(const SurfaceKHR&) = delete;
+        SurfaceKHR& operator=(const SurfaceKHR&) = delete;
     public:
 
         SurfaceKHR(const Instance* _parent, GLFWwindow* window);
+        SurfaceKHR(SurfaceKHR&& other) noexcept;
+        SurfaceKHR& operator=(SurfaceKHR&& other) noexcept;
         ~SurfaceKHR();
+
         const VkSurfaceKHR& vkHandle() const noexcept;
 
     private:
