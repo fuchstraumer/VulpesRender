@@ -7,6 +7,10 @@ IF(BUILD_DYNAMIC_LIBRARY)
     SET(BUILD_SHARED_LIBS ON)
 ENDIF()
 
+IF(UNIX)
+    SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+ENDIF()
+
 OPTION(VERBOSE_LOGGING "Enable extra output from easyloggingpp" OFF)
 
 IF(APPLE)
@@ -53,6 +57,8 @@ ENDIF()
 # Enable minimal rebuild, and manually set c++17 standard since it doesn't get set right otherwise.
 IF(MSVC)
     TARGET_COMPILE_OPTIONS(VulpesRender PUBLIC "/std:c++17" "/Gm")
+ELSE()
+    SET_TARGET_PROPERTIES(VulpesRender PROPERTIES CXX_STANDARD 17 CMAKE_CXX_STANDARD_REQUIRED ON)
 ENDIF()
 
 IF (BUILD_DYNAMIC_LIBRARY) 
