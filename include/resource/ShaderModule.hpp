@@ -38,8 +38,6 @@ namespace vpr {
         VkPipelineShaderStageCreateInfo pipelineInfo;
         VkShaderModuleCreateInfo createInfo;
         VkShaderModule handle;
-        uint32_t codeSize;
-        std::vector<uint32_t> code;
         const VkAllocationCallbacks* allocators = nullptr;
     };
 
