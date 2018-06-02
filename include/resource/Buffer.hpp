@@ -108,21 +108,21 @@ namespace vpr {
         void createStagingBuffer(const VkDeviceSize& size, VkBuffer& staging_buffer, Allocation& dest_memory_range);
         void setMappedMemoryRange() const;
 
-        const Device* parent;
+        const Device* parent{ nullptr };
         const VkAllocationCallbacks* allocators = nullptr;
-        VkBuffer handle;
-        VkBufferView view;
-        VkBufferCreateInfo createInfo;
-        VkBufferViewCreateInfo viewCreateInfo;
-        mutable VkMappedMemoryRange mappedMemoryRange;
+        VkBuffer handle{ VK_NULL_HANDLE };
+        VkBufferView view{ VK_NULL_HANDLE };
+        VkBufferCreateInfo createInfo{ vk_buffer_create_info_base };
+        VkBufferViewCreateInfo viewCreateInfo{ VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO, nullptr, 0 };
+        mutable VkMappedMemoryRange mappedMemoryRange{ vk_mapped_memory_base };
         Allocation memoryAllocation;
-        VkDeviceSize size;
-        VkDeviceSize dataSize;
-        void* mappedMemory;
+        VkDeviceSize size{ std::numeric_limits<VkDeviceSize>::max() };
+        VkDeviceSize dataSize{ std::numeric_limits<VkDeviceSize>::max() };
+        void* mappedMemory{ nullptr };
 
         void setDescriptorInfo() const noexcept;
-        mutable bool descriptorInfoSet = false;
-        mutable VkDescriptorBufferInfo descriptor;
+        mutable bool descriptorInfoSet{ false };
+        mutable VkDescriptorBufferInfo descriptor{ VK_NULL_HANDLE, 0, 0 };
 
     };
     

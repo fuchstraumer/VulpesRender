@@ -35,10 +35,10 @@ namespace vpr {
 
         const VkDescriptorSetLayout& vkHandle() const noexcept;
     private:
-        mutable bool ready = false;
+        mutable bool ready{ false };
         void create() const;
-        const Device* device;
-        mutable VkDescriptorSetLayout handle;
+        const Device* device{ nullptr };
+        mutable VkDescriptorSetLayout handle{ VK_NULL_HANDLE };
         std::map<size_t, VkDescriptorSetLayoutBinding> bindings;
     };
 

@@ -13,9 +13,9 @@ namespace vpr {
      * \ingroup Allocation
      */ 
     struct Suballocation {
-        VkDeviceSize Offset;
-        VkDeviceSize Size;
-        SuballocationType Type = SuballocationType::Unknown;
+        VkDeviceSize Offset{ std::numeric_limits<VkDeviceSize>::max() };
+        VkDeviceSize Size{ std::numeric_limits<VkDeviceSize>::max() };
+        SuballocationType Type{ SuballocationType::Unknown };
         bool operator<(const Suballocation& other) const noexcept {
             return Offset < other.Offset;
         }

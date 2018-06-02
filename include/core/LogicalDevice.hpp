@@ -95,7 +95,10 @@ namespace vpr {
         VkPhysicalDeviceProperties GetPhysicalDeviceProperties() const noexcept;
         VkPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties() const noexcept;
         
-        uint32_t NumGraphicsQueues = 0, NumComputeQueues = 0, NumTransferQueues = 0, NumSparseBindingQueues = 0;
+        uint32_t NumGraphicsQueues = 0;
+        uint32_t NumComputeQueues = 0;
+        uint32_t NumTransferQueues = 0;
+        uint32_t NumSparseBindingQueues = 0;
         vkQueueFamilyIndices QueueFamilyIndices;
         std::unique_ptr<Allocator> vkAllocator;
 
@@ -114,13 +117,13 @@ namespace vpr {
         void prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const noexcept;
         void checkExtensions(std::vector<const char*>& requested_extensions, bool throw_on_error) const;
         void checkDedicatedAllocExtensions(const std::vector<const char*>& exts);
-        VkDevice handle;
-        VkDeviceCreateInfo createInfo;
+        VkDevice handle{ VK_NULL_HANDLE };
+        VkDeviceCreateInfo createInfo{ vk_device_create_info_base };
 
-        const PhysicalDevice* parent;
-        const Instance* parentInstance;
+        const PhysicalDevice* parent{ nullptr };
+        const Instance* parentInstance{ nullptr };
 
-        bool enableDedicatedAllocations;
+        bool enableDedicatedAllocations{ false };
         std::vector<const char*> enabledExtensions;
         std::map<VkQueueFlags, VkDeviceQueueCreateInfo> queueInfos;
 

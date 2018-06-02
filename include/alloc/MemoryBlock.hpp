@@ -79,16 +79,16 @@ namespace vpr {
         const_avail_suballocation_iterator_t avail_cbegin() const;
         const_avail_suballocation_iterator_t avail_cend() const;
 
-        VkDeviceSize Size;
+        VkDeviceSize Size{ std::numeric_limits<VkDeviceSize>::max() };
         suballocationList Suballocations;
-        Allocator* allocator;
-        uint32_t MemoryTypeIdx;
+        Allocator* allocator{ nullptr };
+        uint32_t MemoryTypeIdx{ std::numeric_limits<uint32_t>::max() };
 
     protected:
 
         std::mutex guardMutex;
-        VkDeviceSize availSize{ 0 };
-        uint32_t freeCount{ 0 };
+        VkDeviceSize availSize{ std::numeric_limits<VkDeviceSize>::max() };
+        uint32_t freeCount{ std::numeric_limits<uint32_t>::max() };
         VkDeviceMemory memory{ VK_NULL_HANDLE };
         /** Changes the item pointed to by the iterator to be a free type, then adds the now-available size to availSize and increments freeCount. This method
          *  may also call mergeFreeWithNext, insertFreeSuballocation, and removeFreeSuballocation if adjacent suballocations are free or can be merged with the 

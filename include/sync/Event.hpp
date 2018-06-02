@@ -54,9 +54,8 @@ namespace vpr {
             const VkPipelineStageFlags stages_to_wait_at);
 
     private:
-
-        const Device* device;
-        VkEvent handle;
+        const Device* device{ nullptr };
+        VkEvent handle{ VK_NULL_HANDLE };
     };
 
 }

@@ -21,9 +21,10 @@ namespace vpr {
         Sampler& operator=(Sampler&& other) noexcept;
 
         const VkSampler& vkHandle() const noexcept;
+
     private:
-        const Device* device;
-        VkSampler handle;
+        const Device* device{ nullptr };
+        VkSampler handle{ VK_NULL_HANDLE };
     };
 
 }

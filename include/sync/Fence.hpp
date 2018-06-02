@@ -25,8 +25,8 @@ namespace vpr {
         const VkFence& vkHandle() const noexcept;
 
     private:
-        const Device* device;
-        VkFence handle;
+        const Device* device{ nullptr };
+        VkFence handle{ VK_NULL_HANDLE };
     };
 
 }

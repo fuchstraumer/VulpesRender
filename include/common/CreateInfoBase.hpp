@@ -15,7 +15,7 @@
 namespace vpr {
 
 	// base application info struct
-	constexpr VkApplicationInfo vk_base_application_info{
+	constexpr static VkApplicationInfo vk_base_application_info{
 		VK_STRUCTURE_TYPE_APPLICATION_INFO,
 		nullptr,
 		"!!(Update Application Info pApplicationName field)!!",
@@ -26,7 +26,7 @@ namespace vpr {
 	};
 
 	// base instance creation struct
-	constexpr VkInstanceCreateInfo vk_base_instance_info{
+	constexpr static VkInstanceCreateInfo vk_base_instance_info{
 		VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
 		nullptr,					// used for extensions when not nullptr
 		0,							// VK_INSTANCE_CREATE_FLAGS, currently unused
@@ -34,7 +34,7 @@ namespace vpr {
 	};
 
 	// Debug report callback info
-	static VkDebugReportCallbackCreateInfoEXT vk_debug_callback_create_info_base{
+	constexpr static VkDebugReportCallbackCreateInfoEXT vk_debug_callback_create_info_base{
 		VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,
 		nullptr,
 		0,
@@ -43,8 +43,8 @@ namespace vpr {
 	};
 
 	// Queue object create info
-	constexpr float default_priorityf = 1.0f;
-	constexpr VkDeviceQueueCreateInfo vk_device_queue_create_info_base{
+	constexpr static float default_priorityf = 1.0f;
+	constexpr static VkDeviceQueueCreateInfo vk_device_queue_create_info_base{
 		VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO,
 		nullptr,
 		0,
@@ -54,7 +54,7 @@ namespace vpr {
 	};
 
 	// Logical device create info, base
-	constexpr VkDeviceCreateInfo vk_device_create_info_base{
+	constexpr static VkDeviceCreateInfo vk_device_create_info_base{
 		VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
 		nullptr,
 		0,
@@ -63,7 +63,7 @@ namespace vpr {
 	};
 
 	// Base buffer create info
-	constexpr VkBufferCreateInfo vk_buffer_create_info_base{
+	constexpr static VkBufferCreateInfo vk_buffer_create_info_base{
 		VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
 		nullptr,
 		0,
@@ -75,13 +75,13 @@ namespace vpr {
 	};
 
 	// Base memory allocation info
-	constexpr VkMemoryAllocateInfo vk_allocation_info_base{
+	constexpr static VkMemoryAllocateInfo vk_allocation_info_base{
 		VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
 		nullptr,
 	};
 
 	// default mapped memory range
-	constexpr VkMappedMemoryRange vk_mapped_memory_base{
+	constexpr static VkMappedMemoryRange vk_mapped_memory_base{
 		VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE,
 		nullptr,
 		VK_NULL_HANDLE,
@@ -90,7 +90,7 @@ namespace vpr {
 	};
 
 	// default command pool create info
-	constexpr VkCommandPoolCreateInfo vk_command_pool_info_base{
+	constexpr static VkCommandPoolCreateInfo vk_command_pool_info_base{
 		VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO,
 		nullptr,
 		0,
@@ -98,7 +98,7 @@ namespace vpr {
 	};
 
 	// default command buffer create info
-	constexpr VkCommandBufferAllocateInfo vk_command_buffer_allocate_info_base{
+	constexpr static VkCommandBufferAllocateInfo vk_command_buffer_allocate_info_base{
 		VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO,
 		nullptr,
 		VK_NULL_HANDLE,
@@ -106,14 +106,14 @@ namespace vpr {
 		0,
 	};
 
-	constexpr VkCommandBufferBeginInfo vk_command_buffer_begin_info_base{
+	constexpr static VkCommandBufferBeginInfo vk_command_buffer_begin_info_base{
 		VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO,
 		nullptr,
 		0,
 		nullptr,
 	};
 
-	constexpr VkCommandBufferInheritanceInfo vk_command_buffer_inheritance_info_base{
+	constexpr static VkCommandBufferInheritanceInfo vk_command_buffer_inheritance_info_base{
 		VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO,
 		nullptr,
 		VK_NULL_HANDLE,
@@ -124,7 +124,7 @@ namespace vpr {
 		0,
 	};
 
-	constexpr VkRenderPassBeginInfo vk_renderpass_begin_info_base{
+	constexpr static VkRenderPassBeginInfo vk_renderpass_begin_info_base{
 		VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO, 
 		nullptr,
 		VK_NULL_HANDLE, 
@@ -135,7 +135,7 @@ namespace vpr {
 	};
 
 	// default command submission info
-	constexpr VkSubmitInfo vk_submit_info_base{
+	constexpr static VkSubmitInfo vk_submit_info_base{
 		VK_STRUCTURE_TYPE_SUBMIT_INFO,
 		nullptr,
 		0,
@@ -148,14 +148,14 @@ namespace vpr {
 	};
 
 	// default fence create info
-	constexpr VkFenceCreateInfo vk_fence_create_info_base{
+	constexpr static VkFenceCreateInfo vk_fence_create_info_base{
 		VK_STRUCTURE_TYPE_FENCE_CREATE_INFO,
 		nullptr,
 		0,
 	};
 
 	// default image create info
-	constexpr VkImageCreateInfo vk_image_create_info_base{
+	constexpr static VkImageCreateInfo vk_image_create_info_base{
 		VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
 		nullptr,
 		0,
@@ -173,7 +173,7 @@ namespace vpr {
 		VK_IMAGE_LAYOUT_UNDEFINED,
 	};
 
-	constexpr VkSamplerCreateInfo vk_sampler_create_info_base{
+	constexpr static VkSamplerCreateInfo vk_sampler_create_info_base{
 		VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
 		nullptr,
 		0,
@@ -194,7 +194,7 @@ namespace vpr {
 		VK_FALSE,
 	};
 
-	constexpr VkImageMemoryBarrier vk_image_mem_barrier_base{
+	constexpr static VkImageMemoryBarrier vk_image_mem_barrier_base{
 		VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER,
 		nullptr,
 		0,
@@ -209,7 +209,7 @@ namespace vpr {
 
 	// This should be tuned at least slightly before being used: format at the least needs to be set.
 	// Component swizzles and last field may also change between image views.
-	constexpr VkImageViewCreateInfo vk_image_view_create_info_base{
+	constexpr static VkImageViewCreateInfo vk_image_view_create_info_base{
 		VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
 		nullptr,
 		0,
@@ -220,7 +220,7 @@ namespace vpr {
 		{ VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1 },
 	};
 
-	constexpr VkRenderPassCreateInfo vk_render_pass_create_info_base{
+	constexpr static VkRenderPassCreateInfo vk_render_pass_create_info_base{
 		VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO,
 		nullptr,
 		0,
@@ -232,7 +232,7 @@ namespace vpr {
 		nullptr,
 	};
 
-	constexpr VkFramebufferCreateInfo vk_framebuffer_create_info_base{
+	constexpr static VkFramebufferCreateInfo vk_framebuffer_create_info_base{
 		VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO,
 		nullptr,
 		0,
@@ -244,7 +244,7 @@ namespace vpr {
 		0,
 	};
 
-	constexpr VkSwapchainCreateInfoKHR vk_swapchain_create_info_base{
+	constexpr static VkSwapchainCreateInfoKHR vk_swapchain_create_info_base{
 		VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR,
 		nullptr, 
 		0,
@@ -265,7 +265,7 @@ namespace vpr {
 		VK_NULL_HANDLE,
 	};
 
-	constexpr VkPresentInfoKHR vk_present_info_base{
+	constexpr static VkPresentInfoKHR vk_present_info_base{
 		VK_STRUCTURE_TYPE_PRESENT_INFO_KHR,
 		nullptr,
 		0,
@@ -276,7 +276,7 @@ namespace vpr {
 		nullptr,
 	};
 
-	constexpr VkShaderModuleCreateInfo vk_shader_module_create_info_base {
+	constexpr static VkShaderModuleCreateInfo vk_shader_module_create_info_base {
 		VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO,
 		nullptr,
 		0,
@@ -284,7 +284,7 @@ namespace vpr {
 		nullptr,
 	};
 
-	constexpr VkPipelineShaderStageCreateInfo vk_pipeline_shader_stage_create_info_base{
+	constexpr static VkPipelineShaderStageCreateInfo vk_pipeline_shader_stage_create_info_base{
 		VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,
 		nullptr,
 		0,
@@ -298,7 +298,7 @@ namespace vpr {
 		Bunch of pipeline create info's follow
 	*/
 
-	constexpr VkPipelineInputAssemblyStateCreateInfo vk_pipeline_input_assembly_create_info_base{
+	constexpr static VkPipelineInputAssemblyStateCreateInfo vk_pipeline_input_assembly_create_info_base{
 		VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO,
 		nullptr,
 		0,
@@ -306,7 +306,7 @@ namespace vpr {
 		VK_FALSE,
 	};
 
-	constexpr VkPipelineRasterizationStateCreateInfo vk_pipeline_rasterization_create_info_base{
+	constexpr static VkPipelineRasterizationStateCreateInfo vk_pipeline_rasterization_create_info_base{
 		VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO,
 		nullptr,
 		0,
@@ -324,14 +324,14 @@ namespace vpr {
 
 	
 
-	constexpr VkPipelineTessellationStateCreateInfo vk_pipeline_tesselation_state_create_info_base{
+	constexpr static VkPipelineTessellationStateCreateInfo vk_pipeline_tesselation_state_create_info_base{
 		VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO,
 		nullptr,
 		0,
 		0,
 	};
 
-	constexpr VkPipelineColorBlendAttachmentState vk_pipeline_color_blend_attachment_info_base{
+	constexpr static VkPipelineColorBlendAttachmentState vk_pipeline_color_blend_attachment_info_base{
 		VK_TRUE,
 		VK_BLEND_FACTOR_SRC_ALPHA,
 		VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA,
@@ -342,7 +342,7 @@ namespace vpr {
 		VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT,
 	};
 
-	constexpr VkPipelineColorBlendStateCreateInfo vk_pipeline_color_blend_create_info_base{
+	constexpr static VkPipelineColorBlendStateCreateInfo vk_pipeline_color_blend_create_info_base{
 		VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO,
 		nullptr,
 		0,
@@ -353,7 +353,7 @@ namespace vpr {
 		{1.0f, 1.0f, 1.0f, 1.0f},
 	};
 
-	constexpr VkPipelineDepthStencilStateCreateInfo vk_pipeline_depth_stencil_create_info_base{
+	constexpr static VkPipelineDepthStencilStateCreateInfo vk_pipeline_depth_stencil_create_info_base{
 		VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO,
 		nullptr,
 		0,
@@ -368,18 +368,18 @@ namespace vpr {
 		1.0f,
 	};
 
-	constexpr VkViewport vk_default_viewport{
+	constexpr static VkViewport vk_default_viewport{
 		0, 0, // X, Y
 		1024, 720, // WIDTH, HEIGHT
 		0.0f, 1.0f // MIN_DEPTH, MAX_DEPTH
 	};
 
-	constexpr VkRect2D vk_default_viewport_scissor{
+	constexpr static VkRect2D vk_default_viewport_scissor{
 		0, 0, // Offset from zero to cut fragments at
 		VkExtent2D{static_cast<uint32_t>(vk_default_viewport.width), static_cast<uint32_t>(vk_default_viewport.height)}, // Extents to draw in, copied from default viewport.
 	};
 
-	constexpr VkPipelineViewportStateCreateInfo vk_pipeline_viewport_create_info_base{
+	constexpr static VkPipelineViewportStateCreateInfo vk_pipeline_viewport_create_info_base{
 		VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO,
 		nullptr,
 		0,
@@ -389,7 +389,7 @@ namespace vpr {
 		nullptr,
 	};
 
-	constexpr VkPipelineMultisampleStateCreateInfo vk_pipeline_multisample_create_info_base{
+	constexpr static VkPipelineMultisampleStateCreateInfo vk_pipeline_multisample_create_info_base{
 		VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO,
 		nullptr,
 		0,
@@ -401,7 +401,7 @@ namespace vpr {
 		VK_FALSE,
 	};
 
-	constexpr VkPipelineLayoutCreateInfo vk_pipeline_layout_create_info_base{
+	constexpr static VkPipelineLayoutCreateInfo vk_pipeline_layout_create_info_base{
 		VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO,
 		nullptr,
 		0,
@@ -411,7 +411,7 @@ namespace vpr {
 		nullptr
 	};
 
-	constexpr VkPipelineDynamicStateCreateInfo vk_pipeline_dynamic_state_create_info_base{
+	constexpr static VkPipelineDynamicStateCreateInfo vk_pipeline_dynamic_state_create_info_base{
 		VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO,
 		nullptr,
 		0,
@@ -419,7 +419,7 @@ namespace vpr {
 		nullptr,
 	};
 
-	constexpr VkGraphicsPipelineCreateInfo vk_graphics_pipeline_create_info_base{
+	constexpr static VkGraphicsPipelineCreateInfo vk_graphics_pipeline_create_info_base{
 		VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO,
 		nullptr,
 		0,
@@ -441,7 +441,7 @@ namespace vpr {
 		-1,
 	};
 
-	constexpr VkPipelineVertexInputStateCreateInfo vk_pipeline_vertex_input_state_create_info_base{
+	constexpr static VkPipelineVertexInputStateCreateInfo vk_pipeline_vertex_input_state_create_info_base{
 		VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO,
 		nullptr,
 		0,
@@ -451,7 +451,7 @@ namespace vpr {
 		nullptr,
 	};
 
-	constexpr VkAttachmentDescription vk_attachment_description_base{
+	constexpr static VkAttachmentDescription vk_attachment_description_base{
 		0,
 		VK_FORMAT_UNDEFINED,
 		VK_SAMPLE_COUNT_1_BIT,
@@ -463,7 +463,7 @@ namespace vpr {
 		VK_IMAGE_LAYOUT_UNDEFINED,
 	};
 
-	constexpr VkSubpassDescription vk_subpass_description_base{
+	constexpr static VkSubpassDescription vk_subpass_description_base{
 		0,
 		VK_PIPELINE_BIND_POINT_GRAPHICS,
 		0,
@@ -476,7 +476,7 @@ namespace vpr {
 		nullptr
 	};
 
-	constexpr VkPipelineCacheCreateInfo vk_pipeline_cache_create_info_base{
+	constexpr static VkPipelineCacheCreateInfo vk_pipeline_cache_create_info_base{
 		VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO,
 		nullptr,
 		0,
@@ -484,7 +484,7 @@ namespace vpr {
 		nullptr,
 	};
 
-	constexpr VkImageMemoryBarrier vk_image_memory_barrier_base{
+	constexpr static VkImageMemoryBarrier vk_image_memory_barrier_base{
 		VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER,
 		nullptr,
 		0,
@@ -497,7 +497,7 @@ namespace vpr {
 		VK_NULL_HANDLE,
 	};
 
-	constexpr VkDescriptorSetLayoutCreateInfo vk_descriptor_set_layout_create_info_base {
+	constexpr static VkDescriptorSetLayoutCreateInfo vk_descriptor_set_layout_create_info_base {
 		VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO,
 		nullptr,
 		0,
@@ -505,7 +505,7 @@ namespace vpr {
 		nullptr,
 	};
 
-	constexpr VkDescriptorPoolCreateInfo vk_descriptor_pool_create_info_base {
+	constexpr static VkDescriptorPoolCreateInfo vk_descriptor_pool_create_info_base {
 		VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO,
 		nullptr,
 		0,
@@ -514,7 +514,7 @@ namespace vpr {
 		nullptr,
 	};
 
-	constexpr VkDescriptorSetAllocateInfo vk_descriptor_set_alloc_info_base {
+	constexpr static VkDescriptorSetAllocateInfo vk_descriptor_set_alloc_info_base {
 		VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO,
 		nullptr,
 		VK_NULL_HANDLE,
@@ -523,7 +523,7 @@ namespace vpr {
 	};
 
 
-	constexpr VkComputePipelineCreateInfo vk_compute_pipeline_create_info_base{
+	constexpr static VkComputePipelineCreateInfo vk_compute_pipeline_create_info_base{
 		VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO,
 		nullptr,
 		0,
@@ -533,7 +533,7 @@ namespace vpr {
 		-1
 	};
 	
-	constexpr VkBufferMemoryBarrier vk_buffer_memory_barrier_info_base{
+	constexpr static VkBufferMemoryBarrier vk_buffer_memory_barrier_info_base{
 		VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER,
 		nullptr,
 		0,
@@ -545,12 +545,12 @@ namespace vpr {
 		0,
 	};
 
-	constexpr VkDebugMarkerObjectNameInfoEXT vk_debug_marker_object_name_info_base{
+	constexpr static VkDebugMarkerObjectNameInfoEXT vk_debug_marker_object_name_info_base{
 		VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT,
 		nullptr,
 	};
 
-	constexpr VkQueryPoolCreateInfo vk_query_pool_create_info_base {
+	constexpr static VkQueryPoolCreateInfo vk_query_pool_create_info_base {
 		VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO,
 		nullptr,
 		0,
@@ -559,61 +559,97 @@ namespace vpr {
 		0,
 	};
 
-    constexpr VkSemaphoreCreateInfo vk_semaphore_create_info_base {
+    constexpr static VkSemaphoreCreateInfo vk_semaphore_create_info_base {
         VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO,
         nullptr,
         0
     };
 
-    constexpr VkEventCreateInfo vk_event_create_info_base {
+    constexpr static VkEventCreateInfo vk_event_create_info_base {
         VK_STRUCTURE_TYPE_EVENT_CREATE_INFO,
         nullptr,
         0
     };
 
-    constexpr VkMemoryDedicatedRequirementsKHR vk_dedicated_memory_requirements_khr_base {
+    constexpr static VkMemoryDedicatedRequirementsKHR vk_dedicated_memory_requirements_khr_base {
         VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS_KHR,
         nullptr,
         VK_FALSE,
         VK_FALSE
     };
 
-    constexpr VkMemoryDedicatedAllocateInfoKHR vk_dedicated_allocate_info_khr_base {
+    constexpr static VkMemoryDedicatedAllocateInfoKHR vk_dedicated_allocate_info_khr_base {
         VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO_KHR,
         nullptr,
         VK_NULL_HANDLE,
         VK_NULL_HANDLE
     };
 
-    constexpr VkBufferMemoryRequirementsInfo2KHR vk_buffer_memory_requirements_info_khr_base {
+    constexpr static VkBufferMemoryRequirementsInfo2KHR vk_buffer_memory_requirements_info_khr_base {
         VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR,
         nullptr,
         VK_NULL_HANDLE
     };
 
-    constexpr VkImageMemoryRequirementsInfo2KHR vk_image_memory_requirements_info_khr_base {
+    constexpr static VkImageMemoryRequirementsInfo2KHR vk_image_memory_requirements_info_khr_base {
         VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR,
         nullptr,
         VK_NULL_HANDLE
     };
 
-    constexpr VkImageSparseMemoryRequirementsInfo2KHR vk_image_sparse_memory_requirements_info_khr_base {
+    constexpr static VkImageSparseMemoryRequirementsInfo2KHR vk_image_sparse_memory_requirements_info_khr_base {
         VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2_KHR,
         nullptr,
         VK_NULL_HANDLE
     };
 
-    constexpr VkMemoryRequirements2KHR vk_memory_requirements_2_khr_base {
+    constexpr static VkMemoryRequirements2KHR vk_memory_requirements_2_khr_base {
         VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2_KHR,
         nullptr,
         VkMemoryRequirements{}
     };
 
-    constexpr VkSparseImageMemoryRequirements2KHR vk_sparse_image_memory_requirements_2_khr_base {
+    constexpr static VkSparseImageMemoryRequirements2KHR vk_sparse_image_memory_requirements_2_khr_base {
         VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2_KHR,
         nullptr,
         VkSparseImageMemoryRequirements{}
     };
+
+	constexpr static VkOffset2D vk_offset_2d_base {
+		std::numeric_limits<int32_t>::max(),
+		std::numeric_limits<int32_t>::max()
+	};
+
+	constexpr static VkExtent2D vk_extent_2d_base {
+		std::numeric_limits<uint32_t>::max(),
+		std::numeric_limits<uint32_t>::max()
+	};
+
+	constexpr static VkOffset3D vk_offset_3d_base {
+		std::numeric_limits<int32_t>::max(),
+		std::numeric_limits<int32_t>::max(),
+		std::numeric_limits<int32_t>::max()
+	};
+
+	constexpr static VkExtent3D vk_extent_3d_base {
+		std::numeric_limits<uint32_t>::max(),
+		std::numeric_limits<uint32_t>::max(),
+		std::numeric_limits<uint32_t>::max()
+	};
+
+	constexpr static VkImageSubresource vk_image_subresource_base {
+		VK_IMAGE_ASPECT_FLAG_BITS_MAX_ENUM,
+		std::numeric_limits<uint32_t>::max(),
+		std::numeric_limits<uint32_t>::max()
+	};
+
+	constexpr static VkSubresourceLayout vk_subresource_layout_base {
+		std::numeric_limits<VkDeviceSize>::max(),
+		std::numeric_limits<VkDeviceSize>::max(),
+		std::numeric_limits<VkDeviceSize>::max(),
+		std::numeric_limits<VkDeviceSize>::max(),
+		std::numeric_limits<VkDeviceSize>::max()
+	};
 
 }
 

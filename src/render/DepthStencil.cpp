@@ -10,6 +10,7 @@ namespace vpr {
         image_create_info.extent = extents;
         image_create_info.format = format;
         image_create_info.usage = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
+        image_create_info.tiling = parent->GetFormatTiling(format, VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
         Create(image_create_info);
         CreateView(VK_IMAGE_ASPECT_DEPTH_BIT);
     }

@@ -52,7 +52,7 @@ namespace vpr {
         surface.reset();
     }
 
-    const bool& Instance::ValidationEnabled() const noexcept {
+    bool Instance::ValidationEnabled() const noexcept {
         return (validationLayers != instance_layers::Disabled);
     }
 
