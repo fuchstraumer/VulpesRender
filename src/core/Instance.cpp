@@ -9,6 +9,9 @@
 
 namespace vpr {
 
+    VKAPI_ATTR VkBool32 VKAPI_CALL VkDebugCallbackFn(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT type, uint64_t object_handle, 
+        size_t location, int32_t message_code, const char * layer_prefix, const char * message, void * user_data);
+
     Instance::Instance(instance_layers layers, const VkApplicationInfo*info, GLFWwindow* _window) : Instance(layers, info, _window, nullptr) {}
 
     Instance::Instance(instance_layers layers_flags, const VkApplicationInfo * info, GLFWwindow * _window, const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) :
@@ -88,7 +91,7 @@ namespace vpr {
     }
 
     void Instance::prepareValidation(const char* const* layers, const uint32_t layer_count) {
-        if (validationLayers != instance_layers::Disabled) {
+        if (validationLayers == instance_layers::Disabled) {
             assert(!layers && (layer_count == 0));
             createInfo.ppEnabledLayerNames = nullptr;
             createInfo.enabledLayerCount = 0;
@@ -137,8 +140,8 @@ namespace vpr {
         const VkDebugReportCallbackCreateInfoEXT create_info{
             VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,
             nullptr,
-            VK_DEBUG_REPORT_INFORMATION_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT | VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT | VK_DEBUG_REPORT_DEBUG_BIT_EXT,
-            VkDebugCallbackFn
+            VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT | VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT,
+            &VkDebugCallbackFn
         };
 
         auto func = (PFN_vkCreateDebugReportCallbackEXT)vkGetInstanceProcAddr(handle, "vkCreateDebugReportCallbackEXT");
