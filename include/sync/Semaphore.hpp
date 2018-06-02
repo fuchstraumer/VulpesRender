@@ -37,9 +37,8 @@ namespace vpr {
         const VkSemaphore& vkHandle() const noexcept;
 
     private:
-        const Device* device;
-        VkSemaphore handle;
-
+        const Device* device{ nullptr };
+        VkSemaphore handle{ VK_NULL_HANDLE };
     };
 
 }

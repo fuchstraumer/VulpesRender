@@ -1,8 +1,9 @@
 #pragma once
-#ifndef VULPES_VK_FORWARD_DECL_H
-#define VULPES_VK_FORWARD_DECL_H
+#ifndef VULPES_VK_FORWARD_DECL_HPP
+#define VULPES_VK_FORWARD_DECL_HPP
 
 struct GLFWwindow;
+
 namespace vpr {
     class Allocation;
     class Allocator;
@@ -10,15 +11,12 @@ namespace vpr {
     struct Suballocation;
     class AllocationCollection;
     class Instance;
-    class InstanceGLFW;
     class PhysicalDevice;
     class Device;
     class Buffer;
     class Image;
     class Swapchain;
     class ShaderModule;
-    class DeviceMemory;
-    class Pipeline;
     class Framebuffer;
     class Renderpass;
     class CommandPool;
@@ -36,6 +34,7 @@ namespace vpr {
     class Semaphore;
     class Event;
     class Sampler;
+    class Queue;
     struct GraphicsPipelineInfo;
     struct VprExtensionPack;
 }

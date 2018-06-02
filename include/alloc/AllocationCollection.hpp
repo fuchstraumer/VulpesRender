@@ -46,7 +46,7 @@ namespace vpr {
     private:  
         std::mutex containerMutex;
         std::vector<std::unique_ptr<MemoryBlock>> allocations;
-        Allocator* allocator;
+        Allocator* allocator{ nullptr };
     };
 
 }
