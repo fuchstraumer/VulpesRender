@@ -72,6 +72,12 @@ namespace vpr {
         return window;
     }
 
+    void Instance::DebugMessage(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT obj_type, uint64_t obj, size_t location, int32_t msg_code, const char * layer, const char * message) {
+        if (debugMessageFn != nullptr) {
+            debugMessageFn(handle, flags, obj_type, obj, location, msg_code, layer, message);
+        }
+    }
+
     void RecreateSwapchainAndSurface(Instance * instance, Swapchain * swap) {
         swap->Destroy();
         instance->DestroySurfaceKHR();
@@ -105,8 +111,8 @@ namespace vpr {
                 createInfo.enabledLayerCount = layer_count;
             }
             else {
-                constexpr static const char* const default_layer = "VK_LAYER_LUNARG_standard_validation";
-                createInfo.ppEnabledLayerNames = &default_layer;
+                constexpr static const char* const default_layers[1] = { "VK_LAYER_LUNARG_standard_validation" };
+                createInfo.ppEnabledLayerNames = default_layers;
                 createInfo.enabledLayerCount = 1;
             }
         }
@@ -137,17 +143,21 @@ namespace vpr {
     }
 
     void Instance::prepareValidationCallbacks() {
-        const VkDebugReportCallbackCreateInfoEXT create_info{
+        static const VkDebugReportCallbackCreateInfoEXT create_info{
             VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,
             nullptr,
             VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT | VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT,
-            &VkDebugCallbackFn
+            VkDebugCallbackFn
         };
 
         auto func = (PFN_vkCreateDebugReportCallbackEXT)vkGetInstanceProcAddr(handle, "vkCreateDebugReportCallbackEXT");
         assert(func);
         VkResult result = func(handle, &create_info, nullptr, &debugCallback);
         VkAssert(result);
+
+        debugMessageFn = reinterpret_cast<PFN_vkDebugReportMessageEXT>(vkGetInstanceProcAddr(handle, "vkDebugReportMessageEXT"));
+        assert(debugMessageFn);
+
     }
 
     void Instance::extensionSetup(const VprExtensionPack* extensions) {
@@ -333,23 +343,23 @@ namespace vpr {
         switch (flags) {
         case VK_DEBUG_REPORT_ERROR_BIT_EXT:
             LOG(ERROR) << layer_prefix << "::" << GetObjectTypeStr(type) << "::HANDLE_ID:" << std::to_string(object_handle) << ": Code " << std::to_string(message_code) 
-                << " with message of: " << message << "at location " << std::to_string(location);
+                << " with message of: " << message << " at location " << std::to_string(location);
             break;
         case VK_DEBUG_REPORT_WARNING_BIT_EXT:
             LOG(WARNING) << layer_prefix << "::" << GetObjectTypeStr(type) << "::HANDLE_ID:" << std::to_string(object_handle) << ": Code " << std::to_string(message_code) 
-                << " with message of: " << message << "at location " << std::to_string(location);
+                << " with message of: " << message << " at location " << std::to_string(location);
             break;
         case VK_DEBUG_REPORT_INFORMATION_BIT_EXT:
             LOG(INFO) << layer_prefix << "::" << GetObjectTypeStr(type) << "::HANDLE_ID:" << std::to_string(object_handle) << ": Code " << std::to_string(message_code) 
-                << " with message of: " << message << "at location " << std::to_string(location);
+                << " with message of: " << message << " at location " << std::to_string(location);
             break;
         case VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT:
             LOG(INFO) << layer_prefix << "::" << GetObjectTypeStr(type) << "::HANDLE_ID:" << std::to_string(object_handle) << ": Code " << std::to_string(message_code) 
-                << " with message of: " << message << "at location " << std::to_string(location);
+                << " with message of: " << message << " at location " << std::to_string(location);
             break;
         case VK_DEBUG_REPORT_DEBUG_BIT_EXT:
             LOG(WARNING) << layer_prefix << "::" << GetObjectTypeStr(type) << "::HANDLE_ID:" << std::to_string(object_handle) << ": Code " << std::to_string(message_code) 
-                << " with message of: " << message << "at location " << std::to_string(location);
+                << " with message of: " << message << " at location " << std::to_string(location);
             break;
         }
         return VK_FALSE;

@@ -52,6 +52,7 @@ namespace vpr {
         const VkSurfaceKHR& vkSurface() const noexcept;
         const PhysicalDevice* GetPhysicalDevice() const noexcept;
         GLFWwindow* GetGLFWwindow() const noexcept;
+        void DebugMessage(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT obj_type, uint64_t obj, size_t location, int32_t msg_code, const char* layer, const char* message);
 
         void CreateSurfaceKHR();
         void DestroySurfaceKHR();
@@ -82,7 +83,7 @@ namespace vpr {
         
 
         VkDebugReportCallbackEXT debugCallback;
-
+        PFN_vkDebugReportMessageEXT debugMessageFn{ nullptr };
     };
 
     /** Pass a swapchain and instance pointer to this to have the swapchain and surface destroyed and recreated
