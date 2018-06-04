@@ -21,7 +21,7 @@ namespace vpr {
         ShaderModule(const Device* device, const char* filename, VkPipelineShaderStageCreateInfo& create_info);
         ~ShaderModule();
 
-        void LoadCodeFromFile(const char* filename);
+        void LoadCodeFromFile(const char* filename, std::vector<uint32_t>& dest_vector);
 
         ShaderModule(ShaderModule&& other) noexcept;
         ShaderModule& operator=(ShaderModule&& other) noexcept;

@@ -21,7 +21,8 @@ namespace vpr {
             pipelineInfo.pName = "main";
         }
 
-        LoadCodeFromFile(filename.c_str());
+        std::vector<uint32_t> binary_src;
+        LoadCodeFromFile(filename.c_str(), binary_src);
 
         VkResult result = vkCreateShaderModule(device->vkHandle(), &createInfo, allocators, &handle);
         VkAssert(result);
@@ -48,8 +49,9 @@ namespace vpr {
 
     ShaderModule::ShaderModule(const Device * device, const char * filename, VkPipelineShaderStageCreateInfo & create_info) : 
         pipelineInfo(create_info), createInfo(vk_shader_module_create_info_base), parent(device), handle(VK_NULL_HANDLE) {
-
-        LoadCodeFromFile(filename);
+        
+        std::vector<uint32_t> binary_src;
+        LoadCodeFromFile(filename, binary_src);
         VkResult result = vkCreateShaderModule(device->vkHandle(), &createInfo, allocators, &handle);
         VkAssert(result);
     }
@@ -61,7 +63,7 @@ namespace vpr {
         }
     }
 
-    void ShaderModule::LoadCodeFromFile(const char * filename) {
+    void ShaderModule::LoadCodeFromFile(const char * filename, std::vector<uint32_t>& dest_vector) {
         try {
             std::vector<char> input_buff;
             std::ifstream input(filename, std::ios::binary | std::ios::in | std::ios::ate);
@@ -75,9 +77,9 @@ namespace vpr {
             input.read(input_buff.data(), code_size);
             input.close();
             createInfo.codeSize = code_size;
-            std::vector<uint32_t> code(input_buff.size() / sizeof(uint32_t) + 1);
-            memcpy(code.data(), input_buff.data(), input_buff.size());
-            createInfo.pCode = code.data();
+            dest_vector.resize(input_buff.size() / sizeof(uint32_t) + 1);
+            memcpy(dest_vector.data(), input_buff.data(), input_buff.size());
+            createInfo.pCode = dest_vector.data();
 
         }
         catch (std::ifstream::failure&) {
