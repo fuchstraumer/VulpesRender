@@ -3,8 +3,11 @@
 #define VULPES_VK_COMMAND_POOL_H
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
+#include <memory>
 
 namespace vpr {
+
+    struct CommandBuffers;
 
     /** The Command group encompasses classes related to recording commands, submitting commands, and allocating/freeing/resetting VkCommandBuffer objects.
     *   \defgroup Command
@@ -26,8 +29,7 @@ namespace vpr {
         CommandPool(const Device* parent, const VkCommandPoolCreateInfo& create_info);
         CommandPool(CommandPool&& other) noexcept;
         CommandPool& operator=(CommandPool&& other) noexcept;
-
-        virtual ~CommandPool();
+        ~CommandPool();
 
 
         void AllocateCmdBuffers(const uint32_t& num_buffers, const VkCommandBufferLevel& cmd_buffer_level);
@@ -69,13 +71,11 @@ namespace vpr {
 
         const VkCommandBuffer* Data() const noexcept;
 
-    protected:
-
-        CommandPool(const Device* parent);
+    private:
 
         void destroy();
-        std::vector<VkCommandBuffer> cmdBuffers;
         VkCommandPool handle;
+        std::unique_ptr<CommandBuffers> cmdBuffers;
         const Device* parent;
 
     };

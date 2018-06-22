@@ -2,24 +2,18 @@
 #include "resource/ShaderModule.hpp"
 #include "core/LogicalDevice.hpp"
 #include "easylogging++.h"
+#include "common/vkAssert.hpp"
+#include "common/CreateInfoBase.hpp"
 
 namespace vpr {
 
-    ShaderModule::ShaderModule(const Device* device, const char * filename, const VkShaderStageFlagBits & _stages, const char * shader_name) : 
-        ShaderModule(device, std::string(filename), _stages, shader_name) {}
-
-    ShaderModule::ShaderModule(const Device * device, const std::string & filename, const VkShaderStageFlagBits & _stages, 
-        const char * shader_entry_point) : pipelineInfo(vk_pipeline_shader_stage_create_info_base), stages(_stages), 
+    ShaderModule::ShaderModule(const Device* device, const char * filename, const VkShaderStageFlagBits & _stages, const char * shader_name) : pipelineInfo(vk_pipeline_shader_stage_create_info_base), stages(_stages),
         createInfo(vk_shader_module_create_info_base), parent(device), handle(VK_NULL_HANDLE) {
-        
-        pipelineInfo.stage = stages;
 
-        if (shader_entry_point != nullptr) {
-            pipelineInfo.pName = shader_entry_point;
-        }
-        else {
-            pipelineInfo.pName = "main";
-        }
+        pipelineInfo.stage = stages;
+        pipelineInfo.pName = "main";
+
+        LoadCodeFromFile(filename);
 
         std::vector<uint32_t> binary_src;
         LoadCodeFromFile(filename.c_str(), binary_src);

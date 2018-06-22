@@ -55,19 +55,15 @@ namespace vpr {
         const Device* parent;
         const VkAllocationCallbacks* allocators = nullptr;
 
-        VkImageCreateInfo createInfo{ vk_image_create_info_base };
-        VkImageSubresource subresource{ vk_image_subresource_base };
-        VkSubresourceLayout subresourceLayout{ vk_subresource_layout_base };
+        VkImageCreateInfo createInfo{ };
+        VkImageSubresource subresource{ };
+        VkSubresourceLayout subresourceLayout{ };
 
         VkImage handle{ VK_NULL_HANDLE };
         VkImageView view{ VK_NULL_HANDLE };
         Allocation memoryAllocation;
 
         VkImageLayout finalLayout{ VK_IMAGE_LAYOUT_MAX_ENUM };
-        VkExtent3D extents{ vk_extent_3d_base };
-        VkFormat format{ VK_FORMAT_UNDEFINED };
-        VkImageUsageFlags usageFlags{ VK_IMAGE_USAGE_FLAG_BITS_MAX_ENUM };
-        VkDeviceSize imageDataSize{ std::numeric_limits<VkDeviceSize>::max() };
     };
 
 }

@@ -1,13 +1,74 @@
 #include "vpr_stdafx.h"
 #include "render/Swapchain.hpp"
+#include "common/vkAssert.hpp"
+#include "common/CreateInfoBase.hpp"
 #include "core/Instance.hpp"
 #include "core/PhysicalDevice.hpp"
 #include "core/LogicalDevice.hpp"
 #include "GLFW/glfw3.h"
+#include <vector>
+#include <algorithm>
 
 namespace vpr {
+    
+    struct SwapchainImpl {
 
-    Swapchain::SwapchainInfo::SwapchainInfo(const VkPhysicalDevice & dvc, const VkSurfaceKHR& sfc){
+        SwapchainImpl(const Instance* instance, const Device* device);
+
+        /** SwapchainInfo takes care of hiding away much of the setup work required to create a swapchain. However, it does contain some data
+        *   that may be useful, like the presentation mode being used or the color format of the surface object being used.
+        *   \ingroup Rendering
+        */
+        struct SwapchainInfo {
+            SwapchainInfo(const VkPhysicalDevice& dvc, const VkSurfaceKHR& sfc);
+            VkSurfaceCapabilitiesKHR Capabilities;
+            std::vector<VkSurfaceFormatKHR> Formats;
+            std::vector<VkPresentModeKHR> PresentModes;
+            VkSurfaceFormatKHR GetBestFormat() const;
+            VkPresentModeKHR GetBestPresentMode() const;
+            VkExtent2D ChooseSwapchainExtent(GLFWwindow* win) const;
+        } info;
+
+        void destroy();
+        void create();
+
+        VkFormat colorFormat;
+        uint32_t imageCount;
+        VkColorSpaceKHR colorSpace;
+        VkExtent2D extent;
+
+        std::vector<VkImage> images;
+        std::vector<VkImageView> imageViews;
+        void setParameters();
+        void setupCreateInfo();
+        void setupSwapImages();
+        void setupImageViews();
+
+        VkPresentModeKHR presentMode;
+        VkSurfaceFormatKHR surfaceFormat;
+        VkSwapchainCreateInfoKHR createInfo;
+        VkSwapchainKHR handle = VK_NULL_HANDLE;
+        const Instance* instance;
+        const PhysicalDevice* phys_device;
+        const Device* device;
+    };
+
+    SwapchainImpl::SwapchainImpl(const Instance * _instance, const Device * _device) : instance(_instance), device(_device), info(_device->GetPhysicalDevice().vkHandle(), _instance->vkSurface()) {
+        create();
+    }
+
+    void SwapchainImpl::create() {
+        setParameters();
+        setupCreateInfo();
+
+        VkResult result = vkCreateSwapchainKHR(device->vkHandle(), &createInfo, nullptr, &handle);
+        VkAssert(result);
+
+        setupSwapImages();
+        setupImageViews();
+    }
+
+    SwapchainImpl::SwapchainInfo::SwapchainInfo(const VkPhysicalDevice & dvc, const VkSurfaceKHR& sfc){
         
         vkGetPhysicalDeviceSurfaceCapabilitiesKHR(dvc, sfc, &Capabilities);
         uint32_t fmt_cnt = 0;
@@ -28,7 +89,7 @@ namespace vpr {
 
     }
 
-    VkSurfaceFormatKHR Swapchain::SwapchainInfo::GetBestFormat() const{
+    VkSurfaceFormatKHR SwapchainImpl::SwapchainInfo::GetBestFormat() const{
         
         if (Formats.size() == 1 && Formats.front().format == VK_FORMAT_UNDEFINED) {
             return { VK_FORMAT_B8G8R8A8_UNORM, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR };
@@ -44,7 +105,7 @@ namespace vpr {
 
     }
 
-    VkPresentModeKHR Swapchain::SwapchainInfo::GetBestPresentMode() const{
+    VkPresentModeKHR SwapchainImpl::SwapchainInfo::GetBestPresentMode() const{
         
         VkPresentModeKHR result = VK_PRESENT_MODE_FIFO_KHR;
         for (const auto& mode : PresentModes) {
@@ -62,7 +123,7 @@ namespace vpr {
 
     }
 
-    VkExtent2D Swapchain::SwapchainInfo::ChooseSwapchainExtent(GLFWwindow* window) const{
+    VkExtent2D SwapchainImpl::SwapchainInfo::ChooseSwapchainExtent(GLFWwindow* window) const{
         
         if (Capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max()) {
             return Capabilities.currentExtent;
@@ -78,21 +139,34 @@ namespace vpr {
 
     }
 
-    Swapchain::Swapchain(const Instance * _instance, const Device * _device) : instance(_instance), device(_device), info(_device->GetPhysicalDevice().vkHandle(), _instance->vkSurface()) {
-        create();
-    }
+    Swapchain::Swapchain(const Instance * _instance, const Device * _device) : impl(std::make_unique<SwapchainImpl>(_instance, _device)) {}
 
     Swapchain::~Swapchain(){
         Destroy();
     }
 
-    void Swapchain::Recreate() {    
-        imageCount = 0;
-        info = SwapchainInfo(device->GetPhysicalDevice().vkHandle(), instance->vkSurface());
-        create();
+    void Swapchain::Recreate() {
+        const Instance* inst = impl->instance;
+        const Device* dvc = impl->device;
+        impl.reset();
+        impl = std::make_unique<SwapchainImpl>(inst, dvc);
+        impl->imageCount = 0;
+        impl->info = SwapchainImpl::SwapchainInfo(impl->device->GetPhysicalDevice().vkHandle(), impl->instance->vkSurface());
+        impl->create();
     }
 
-    void Swapchain::setParameters() {
+    void SwapchainImpl::destroy() {
+        for (const auto& view : imageViews) {
+            if (view != VK_NULL_HANDLE) {
+                vkDestroyImageView(device->vkHandle(), view, nullptr);
+            }
+        }
+        if (handle != VK_NULL_HANDLE) {
+            vkDestroySwapchainKHR(device->vkHandle(), handle, nullptr);
+        }
+    }
+
+    void SwapchainImpl::setParameters() {
 
         surfaceFormat = info.GetBestFormat();
         colorFormat = surfaceFormat.format;
@@ -107,7 +181,7 @@ namespace vpr {
 
     }
 
-    void Swapchain::setupCreateInfo() {
+    void SwapchainImpl::setupCreateInfo() {
 
         createInfo = vk_swapchain_create_info_base;
         createInfo.surface = instance->vkSurface();
@@ -138,7 +212,7 @@ namespace vpr {
 
     }
 
-    void Swapchain::setupSwapImages() {
+    void SwapchainImpl::setupSwapImages() {
 
         // Setup swap images
         vkGetSwapchainImagesKHR(device->vkHandle(), handle, &imageCount, nullptr);
@@ -147,7 +221,7 @@ namespace vpr {
 
     }
 
-    void Swapchain::setupImageViews() {
+    void SwapchainImpl::setupImageViews() {
 
         // Setup image views
         imageViews.resize(imageCount);
@@ -169,53 +243,36 @@ namespace vpr {
     }
 
     void Swapchain::Destroy(){
-        for (const auto& view : imageViews) {
-            if (view != VK_NULL_HANDLE) {
-                vkDestroyImageView(device->vkHandle(), view, nullptr);
-            }
-        }
-        if (handle != VK_NULL_HANDLE) {
-            vkDestroySwapchainKHR(device->vkHandle(), handle, nullptr);
-        }
+        impl->destroy();
+        impl.reset();
     }
 
     const VkSwapchainKHR& Swapchain::vkHandle() const noexcept {
-        return handle;
+        return impl->handle;
     }
 
-    const VkExtent2D & Swapchain::Extent() const noexcept {
-        return extent;
+    const VkExtent2D& Swapchain::Extent() const noexcept {
+        return impl->extent;
     }
 
-    const uint32_t & Swapchain::ImageCount() const noexcept {
-        return imageCount;
+    const uint32_t& Swapchain::ImageCount() const noexcept {
+        return impl->imageCount;
     }
 
-    const VkColorSpaceKHR & Swapchain::ColorSpace() const noexcept {
-        return colorSpace;
+    const VkColorSpaceKHR& Swapchain::ColorSpace() const noexcept {
+        return impl->colorSpace;
     }
 
-    const VkFormat & Swapchain::ColorFormat() const noexcept {
-        return colorFormat;
+    const VkFormat& Swapchain::ColorFormat() const noexcept {
+        return impl->colorFormat;
     }
 
-    const VkImage & Swapchain::Image(const size_t & idx) const {
-        return images[idx];
+    const VkImage& Swapchain::Image(const size_t & idx) const {
+        return impl->images[idx];
     }
 
     const VkImageView & Swapchain::ImageView(const size_t & idx) const {
-        return imageViews[idx];
-    }
-
-    void Swapchain::create() {
-        setParameters();
-        setupCreateInfo();
-
-        VkResult result = vkCreateSwapchainKHR(device->vkHandle(), &createInfo, nullptr, &handle);
-        VkAssert(result);
-
-        setupSwapImages();
-        setupImageViews();
+        return impl->imageViews[idx];
     }
 
 }

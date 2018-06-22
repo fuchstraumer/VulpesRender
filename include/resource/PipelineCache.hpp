@@ -42,12 +42,12 @@ namespace vpr {
         void MergeCaches(const uint32_t num_caches, const VkPipelineCache* caches);
 
     private:
-        std::string filename{};
+        char* filename = nullptr;
         VkResult saveToFile() const;
         size_t hashID{ 0 };
         const Device* parent{ nullptr };
         VkPipelineCache handle{ VK_NULL_HANDLE };
-        VkPipelineCacheCreateInfo createInfo{ vk_pipeline_cache_create_info_base };
+        VkPipelineCacheCreateInfo createInfo{ };
 
     };
 

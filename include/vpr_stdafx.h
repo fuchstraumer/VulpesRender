@@ -1,13 +1,10 @@
 #pragma once
+
 #ifdef _WIN32
 #define NOMINMAX
 #endif //!_WIN32
-#include <string>
-#include <vector>
-#include <array>
-#include <memory>
+
 #include <cassert>
-#include <mutex>
 
 #if defined(_WIN32) || defined(__linux__)
 #include <vulkan/vulkan.h>
@@ -48,9 +45,5 @@ namespace vpr {
     constexpr bool VERBOSE_LOGGING = false;
 }
 #endif
-
-
-#include "common/CreateInfoBase.hpp"
-#include "common/vkAssert.hpp"
 
 

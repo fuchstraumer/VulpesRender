@@ -1,6 +1,8 @@
 #include "vpr_stdafx.h"
 #include "resource/PipelineLayout.hpp"
 #include "core/LogicalDevice.hpp"
+#include "common/vkAssert.hpp"
+#include "common/CreateInfoBase.hpp"
 
 namespace vpr {
 

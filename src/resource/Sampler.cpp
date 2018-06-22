@@ -1,5 +1,8 @@
 #include "resource/Sampler.hpp"
 #include "core/LogicalDevice.hpp"
+#include "common/vkAssert.hpp"
+#include "common/CreateInfoBase.hpp"
+
 namespace vpr {
 
     Sampler::Sampler(const Device* dvc, const VkSamplerCreateInfo& info) : device(dvc), handle(VK_NULL_HANDLE) {

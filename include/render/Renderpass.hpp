@@ -1,11 +1,13 @@
 #pragma once
 #ifndef VULPES_VK_RENDER_PASS_H
 #define VULPES_VK_RENDER_PASS_H
-
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
+#include <memory>
 
 namespace vpr {
+
+    struct RenderpassImpl;
 
     /** RAII wrapper around a Vulkan object, with a few utility methods to avoid redundancy and clutter in command-recording methods
     *   for various scenes. Requires updating per-frame with the framebuffer being rendered to, and make sure to set both the render 
@@ -35,14 +37,11 @@ namespace vpr {
         const VkRenderPassBeginInfo& BeginInfo() const noexcept;
 
     private:
-
         const Device* parent;
         VkRenderPass handle;
         VkRenderPassCreateInfo createInfo;
         VkRenderPassBeginInfo beginInfo;
-        std::vector<VkClearValue> clearValues;
-        const VkAllocationCallbacks* allocators = nullptr;
-
+        std::unique_ptr<RenderpassImpl> impl;
     };
 
 }

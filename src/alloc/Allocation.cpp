@@ -1,6 +1,6 @@
 #include "vpr_stdafx.h"
 #include "alloc/Allocation.hpp"
-#include "alloc/MemoryBlock.hpp"
+#include "MemoryBlock.hpp"
 #include "easylogging++.h"
 
 namespace vpr {

@@ -4,10 +4,14 @@
 #include "command/CommandPool.hpp"
 #include "easylogging++.h"
 #include "alloc/Allocator.hpp"
+#include "alloc/AllocationRequirements.hpp"
+#include "common/vkAssert.hpp"
+#include "common/CreateInfoBase.hpp"
+#include <vector>
 
 namespace vpr {
 
-    std::vector<std::pair<VkBuffer, Allocation>> Buffer::stagingBuffers = std::vector<std::pair<VkBuffer, Allocation>>();
+    static std::vector<std::pair<VkBuffer, Allocation>> stagingBuffers = std::vector<std::pair<VkBuffer, Allocation>>();
     VkBufferViewCreateInfo base_view_info{ VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO, nullptr, 0, VK_NULL_HANDLE, VK_FORMAT_UNDEFINED, 0, 0 };
 
     Buffer::Buffer(const Device * _parent) : parent(_parent), createInfo(vk_buffer_create_info_base), viewCreateInfo(base_view_info),
@@ -48,7 +52,7 @@ namespace vpr {
         reqs.preferredFlags = 0;
         reqs.privateMemory = false;
         reqs.requiredFlags = memory_flags;
-        VkResult result = parent->vkAllocator->CreateBuffer(&handle, &createInfo, reqs, memoryAllocation);
+        VkResult result = parent->GetAllocator()->CreateBuffer(&handle, &createInfo, reqs, memoryAllocation);
         VkAssert(result);
         size = memoryAllocation.Size;
         setMappedMemoryRange();
@@ -61,7 +65,7 @@ namespace vpr {
         reqs.preferredFlags = 0;
         reqs.privateMemory = false;
         reqs.requiredFlags = memory_flags;
-        VkResult result = parent->vkAllocator->CreateBuffer(&handle, &createInfo, reqs, memoryAllocation);
+        VkResult result = parent->GetAllocator()->CreateBuffer(&handle, &createInfo, reqs, memoryAllocation);
         VkAssert(result);
         size = memoryAllocation.Size;
         setMappedMemoryRange();
@@ -69,7 +73,7 @@ namespace vpr {
 
     void Buffer::Destroy(){
         if (handle != VK_NULL_HANDLE) {
-            parent->vkAllocator->DestroyBuffer(handle, memoryAllocation);
+            parent->GetAllocator()->DestroyBuffer(handle, memoryAllocation);
             handle = VK_NULL_HANDLE;
         }
         if (view != VK_NULL_HANDLE) {
@@ -241,7 +245,7 @@ namespace vpr {
         alloc_reqs.privateMemory = false;
         alloc_reqs.requiredFlags = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
 
-        VkResult result = dvc->vkAllocator->CreateBuffer(&dest, &create_info, alloc_reqs, dest_memory_alloc);
+        VkResult result = dvc->GetAllocator()->CreateBuffer(&dest, &create_info, alloc_reqs, dest_memory_alloc);
         VkAssert(result);
 
     }
@@ -275,7 +279,7 @@ namespace vpr {
         alloc_reqs.privateMemory = false;
         alloc_reqs.requiredFlags = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
 
-        VkResult result = parent->vkAllocator->CreateBuffer(&staging_buffer, &create_info, alloc_reqs, dest_memory_alloc);
+        VkResult result = parent->GetAllocator()->CreateBuffer(&staging_buffer, &create_info, alloc_reqs, dest_memory_alloc);
 
     }
 

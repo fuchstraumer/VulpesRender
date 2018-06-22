@@ -2,6 +2,7 @@
 #ifndef VULPES_VK_PHYSICAL_DEVICE_H
 #define VULPES_VK_PHYSICAL_DEVICE_H
 #include "vpr_stdafx.h"
+#include <memory>
 
 namespace vpr {
 

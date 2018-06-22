@@ -3,8 +3,11 @@
 #define VULPES_VK_INSTANCE_H
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
+#include <memory>
 
 namespace vpr {
+
+    struct InstanceExtensionHandler;
 
     /** The Core group handles the base Vulkan resources and objects: LogicalDevice, PhysicalDevice, Instance, and Window. It also 
     *   includes the InputHandler class, which is responsible for handling input events and updats from the Window class.
@@ -17,7 +20,7 @@ namespace vpr {
      * to be enabled or used - then it will be removed from the list of extensions submitted to the constructor.
      * \ingroup Core
      */
-    struct VprExtensionPack {
+    struct VPR_API VprExtensionPack {
         const char* const* RequiredExtensionNames;
         uint32_t RequiredExtensionCount;
         const char* const* OptionalExtensionNames;
@@ -65,23 +68,14 @@ namespace vpr {
         bool checkValidationSupport(const char* const* layer_names, const uint32_t layer_count) const;
         void checkApiVersionSupport(VkApplicationInfo* info);
         void prepareValidationCallbacks();
-        void extensionSetup(const VprExtensionPack* extensions);
-        void prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const;
-        void prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const;
-        void extensionCheck(std::vector<const char*>& extensions, bool throw_on_error) const;
-        void checkOptionalExtensions(std::vector<const char*>& optional_extensions) const;
-        void checkRequiredExtensions(std::vector<const char*>& required_extensions) const;
         void setupPhysicalDevice();
         
         mutable GLFWwindow* window;
         std::unique_ptr<PhysicalDevice> physicalDevice;
-        std::unique_ptr<SurfaceKHR> surface;     
+        std::unique_ptr<SurfaceKHR> surface;
+        std::unique_ptr<InstanceExtensionHandler> extensionHandler;
         VkInstance handle;
         VkInstanceCreateInfo createInfo;
-        instance_layers validationLayers; 
-        std::vector<const char*> enabledExtensions;
-        
-
         VkDebugReportCallbackEXT debugCallback;
         PFN_vkDebugReportMessageEXT debugMessageFn{ nullptr };
     };

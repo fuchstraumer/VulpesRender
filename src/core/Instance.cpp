@@ -6,19 +6,35 @@
 #include "easylogging++.h"
 #include "GLFW/glfw3.h"
 #include <vulkan/vulkan.h>
+#include "common/vkAssert.hpp"
+#include "common/CreateInfoBase.hpp"
 
 namespace vpr {
 
     VKAPI_ATTR VkBool32 VKAPI_CALL VkDebugCallbackFn(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT type, uint64_t object_handle, 
         size_t location, int32_t message_code, const char * layer_prefix, const char * message, void * user_data);
 
+    struct InstanceExtensionHandler {
+        InstanceExtensionHandler(Instance::instance_layers layers) : validationLayers(layers) {}
+        std::vector<const char*> extensionStrings;
+        Instance::instance_layers validationLayers; 
+        void extensionSetup(const VprExtensionPack* extensions);
+        void prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const;
+        void prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const;
+        void extensionCheck(std::vector<const char*>& extensions, bool throw_on_error) const;
+        void checkOptionalExtensions(std::vector<const char*>& optional_extensions) const;
+        void checkRequiredExtensions(std::vector<const char*>& required_extensions) const;
+    };
+
     Instance::Instance(instance_layers layers, const VkApplicationInfo*info, GLFWwindow* _window) : Instance(layers, info, _window, nullptr) {}
 
     Instance::Instance(instance_layers layers_flags, const VkApplicationInfo * info, GLFWwindow * _window, const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) :
-        window(_window), validationLayers(layers_flags), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, nullptr } {
+        window(_window), extensionHandler(std::make_unique<InstanceExtensionHandler>(layers_flags)), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, nullptr } {
         VkApplicationInfo our_info = *info;
 
-        extensionSetup(extensions);
+        extensionHandler->extensionSetup(extensions);
+        createInfo.ppEnabledExtensionNames = extensionHandler->extensionStrings.data();
+        createInfo.enabledExtensionCount = static_cast<uint32_t>(extensionHandler->extensionStrings.size());
         checkApiVersionSupport(&our_info);
         prepareValidation(layers, layer_count);
 
@@ -26,7 +42,7 @@ namespace vpr {
         VkResult err = vkCreateInstance(&createInfo, nullptr, &handle);
         VkAssert(err);
 
-        if (validationLayers != instance_layers::Disabled) {
+        if (extensionHandler->validationLayers != instance_layers::Disabled) {
             prepareValidationCallbacks();
         }
 
@@ -35,7 +51,7 @@ namespace vpr {
     }
 
     Instance::~Instance() {
-        if (debugCallback && (validationLayers != instance_layers::Disabled)) {
+        if (debugCallback && (extensionHandler->validationLayers != instance_layers::Disabled)) {
             auto func = (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(handle, "vkDestroyDebugReportCallbackEXT");
             func(handle, debugCallback, nullptr);
         }
@@ -53,7 +69,7 @@ namespace vpr {
     }
 
     bool Instance::ValidationEnabled() const noexcept {
-        return (validationLayers != instance_layers::Disabled);
+        return (extensionHandler->validationLayers != instance_layers::Disabled);
     }
 
     const VkInstance& Instance::vkHandle() const noexcept {
@@ -97,7 +113,7 @@ namespace vpr {
     }
 
     void Instance::prepareValidation(const char* const* layers, const uint32_t layer_count) {
-        if (validationLayers == instance_layers::Disabled) {
+        if (extensionHandler->validationLayers == instance_layers::Disabled) {
             assert(!layers && (layer_count == 0));
             createInfo.ppEnabledLayerNames = nullptr;
             createInfo.enabledLayerCount = 0;
@@ -160,7 +176,7 @@ namespace vpr {
 
     }
 
-    void Instance::extensionSetup(const VprExtensionPack* extensions) {
+    void InstanceExtensionHandler::extensionSetup(const VprExtensionPack* extensions) {
 
         std::vector<const char*> all_extensions;
         prepareRequiredExtensions(extensions, all_extensions);
@@ -169,13 +185,11 @@ namespace vpr {
                 prepareOptionalExtensions(extensions, all_extensions);
             }
         }
-        enabledExtensions = all_extensions;
-        createInfo.ppEnabledExtensionNames = enabledExtensions.data();
-        createInfo.enabledExtensionCount = static_cast<uint32_t>(enabledExtensions.size());
+        extensionStrings = all_extensions;
 
     }
 
-    void Instance::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const {
+    void InstanceExtensionHandler::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const {
 
         uint32_t req_ext_cnt = 0;
         const char** req_ext_names = nullptr;
@@ -197,14 +211,14 @@ namespace vpr {
             }
         }
     
-        if (validationLayers != instance_layers::Disabled) {
+        if (validationLayers != Instance::instance_layers::Disabled) {
             output.emplace_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
         }
 
         checkRequiredExtensions(output);
     }
 
-    void Instance::prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const {
+    void InstanceExtensionHandler::prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const {
         std::vector<const char*> optional_extensions{ extensions->OptionalExtensionNames, 
             extensions->OptionalExtensionNames + extensions->OptionalExtensionCount };
 
@@ -216,7 +230,7 @@ namespace vpr {
 
     }
 
-    void Instance::extensionCheck(std::vector<const char*>& extensions, bool throw_on_error) const {
+    void InstanceExtensionHandler::extensionCheck(std::vector<const char*>& extensions, bool throw_on_error) const {
         uint32_t queried_extension_count = 0;
         vkEnumerateInstanceExtensionProperties(nullptr, &queried_extension_count, nullptr);
         std::vector<VkExtensionProperties> queried_extensions(queried_extension_count);
@@ -248,11 +262,11 @@ namespace vpr {
         }
     }
 
-    void Instance::checkRequiredExtensions(std::vector<const char*>& required_extensions) const {
+    void InstanceExtensionHandler::checkRequiredExtensions(std::vector<const char*>& required_extensions) const {
         extensionCheck(required_extensions, true);
     }
 
-    void Instance::checkOptionalExtensions(std::vector<const char*>& requested_extensions) const {
+    void InstanceExtensionHandler::checkOptionalExtensions(std::vector<const char*>& requested_extensions) const {
         extensionCheck(requested_extensions, false);
     }
 

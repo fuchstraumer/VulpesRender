@@ -1,12 +1,87 @@
 #include "vpr_stdafx.h"
 #include "alloc/Allocator.hpp"
+#include "AllocCommon.hpp"
+#include "AllocationCollection.hpp"
 #include "core/LogicalDevice.hpp"
 #include "alloc/Allocation.hpp"
-#include "alloc/MemoryBlock.hpp"
+#include "alloc/AllocationRequirements.hpp"
+#include "MemoryBlock.hpp"
 #include "easylogging++.h"
+#include "common/vkAssert.hpp"
+#include "common/CreateInfoBase.hpp"
 #include <sstream>
 #include <vulkan/vulkan.h>
+#include <unordered_set>
+#include <map>
+#include <vector>
+
 namespace vpr {
+
+    struct AllocatorImpl {
+
+        AllocatorImpl(const Device* dvc, Allocator::allocation_extensions extensions, Allocator* parent_alloc);
+
+        VkDeviceSize GetPreferredBlockSize(const uint32_t& memory_type_idx) const noexcept;
+        VkDeviceSize GetBufferImageGranularity() const noexcept;
+
+        uint32_t GetMemoryHeapCount() const noexcept;
+        uint32_t GetMemoryTypeCount() const noexcept;
+
+        void createAllocationMaps();
+        void clearAllocationMaps();
+
+        // Won't throw: but can return invalid indices. Make sure to handle this.
+        uint32_t findMemoryTypeIdx(const VkMemoryRequirements& mem_reqs, const AllocationRequirements& details) const noexcept;
+
+        // These allocation methods return VkResult's so that we can try different parameters (based partially on return code) in main allocation method.
+        VkResult allocateMemoryType(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const uint32_t& memory_type_idx, const SuballocationType& type, Allocation& dest_allocation);
+        VkResult allocatePrivateMemory(const VkDeviceSize& size, const uint32_t& memory_type_idx, Allocation& dest_allocation);
+
+        // called from "FreeMemory" if memory to free isn't found in the allocation vectors for any of our active memory types.
+        bool freePrivateMemory(const Allocation* memory_to_free);
+
+        void getBufferMemReqs(VkBuffer& handle, VkMemoryRequirements& reqs, bool& requires_dedicated, bool& prefers_dedicated);
+        void getImageMemReqs(VkImage& handle, VkMemoryRequirements& reqs, bool& requires_dedicated, bool& prefers_dedicated);
+
+        enum class AllocationSize {
+            SMALL,
+            MEDIUM,
+            LARGE,
+            EXTRA_LARGE
+        };
+
+        AllocationSize GetAllocSize(const VkDeviceSize& size) const;
+
+        std::map<AllocationSize, std::vector<std::unique_ptr<AllocationCollection>>> allocations;
+        std::map<AllocationSize, std::vector<bool>> emptyAllocations;
+        std::unordered_set<std::unique_ptr<Allocation>> privateAllocations;
+
+        /**Guards the private allocations set, since it's a different object entirely than the main one.
+        */
+        std::mutex privateMutex;
+        std::mutex allocMutex;
+        const Device* parent;
+        Allocator* parentAllocator;
+
+        VkPhysicalDeviceProperties deviceProperties;
+        VkPhysicalDeviceMemoryProperties deviceMemoryProperties;
+
+        VkDeviceSize preferredLargeHeapBlockSize;
+        VkDeviceSize preferredSmallHeapBlockSize;
+        const VkAllocationCallbacks* pAllocationCallbacks = nullptr;
+        bool usingMemoryExtensions;
+
+        /*
+        Used GPU Open allocator impl. hints and this:
+        http://asawicki.info/articles/VK_KHR_dedicated_allocation.php5
+        blogpost to implement support for this extension.
+        */
+        void fetchAllocFunctionPointersKHR();
+
+        PFN_vkGetBufferMemoryRequirements2KHR pVkGetBufferMemoryRequirements2KHR;
+        PFN_vkGetImageMemoryRequirements2KHR pVkGetImageMemoryRequirements2KHR;
+        PFN_vkGetImageSparseMemoryRequirements2KHR pVkGetImageSparseMemoryRequirements2KHR;
+    };
 
     struct raw_equal_comparator {
         raw_equal_comparator(const Allocation* _ptr) : ptr(_ptr) {};
@@ -19,19 +94,9 @@ namespace vpr {
         const Allocation* ptr;
     };
 
-    Allocator::Allocator(const Device * parent_dvc, bool dedicated_alloc_enabled) : parent(parent_dvc), usingMemoryExtensions(dedicated_alloc_enabled),
-        preferredSmallHeapBlockSize(DefaultSmallHeapBlockSize), preferredLargeHeapBlockSize(DefaultLargeHeapBlockSize) {
-        deviceProperties = parent->GetPhysicalDeviceProperties();
-        deviceMemoryProperties = parent->GetPhysicalDeviceMemoryProperties();
+    Allocator::Allocator(const Device * parent_dvc, allocation_extensions dedicated_alloc_enabled) : impl(std::make_unique<AllocatorImpl>(parent_dvc, dedicated_alloc_enabled)) {}
 
-        if (usingMemoryExtensions) {
-            fetchAllocFunctionPointersKHR();
-        }
-
-        createAllocationMaps();
-    }
-
-    void Allocator::createAllocationMaps() {
+    void AllocatorImpl::createAllocationMaps() {
         allocations.emplace(AllocationSize::SMALL, std::vector<std::unique_ptr<AllocationCollection>>());
         auto& small_allocs = allocations.at(AllocationSize::SMALL);
         for (size_t i = 0; i < GetMemoryTypeCount(); ++i) {
@@ -54,7 +119,7 @@ namespace vpr {
         emptyAllocations.emplace(AllocationSize::LARGE, std::vector<bool>(GetMemoryTypeCount(), true));
     }
 
-    void Allocator::clearAllocationMaps() {
+    void AllocatorImpl::clearAllocationMaps() {
         /*
         Delete collections: destructors of these should take care of the rest.
         */
@@ -64,20 +129,32 @@ namespace vpr {
     }
 
     Allocator::~Allocator() {
-        clearAllocationMaps();
+        impl->clearAllocationMaps();
     }
 
     void Allocator::Recreate() {
-        clearAllocationMaps();
+        impl->clearAllocationMaps();
+        impl->createAllocationMaps();
+    }
+
+    AllocatorImpl::AllocatorImpl(const Device * dvc, Allocator::allocation_extensions extensions, Allocator* parent_alloc) : parent(dvc), usingMemoryExtensions((extensions == Allocator::allocation_extensions::DedicatedAllocations) ? true : false),
+        preferredSmallHeapBlockSize(DefaultSmallHeapBlockSize), preferredLargeHeapBlockSize(DefaultLargeHeapBlockSize), parentAllocator(parent_alloc) {
+        deviceProperties = parent->GetPhysicalDeviceProperties();
+        deviceMemoryProperties = parent->GetPhysicalDeviceMemoryProperties();
+
+        if (usingMemoryExtensions) {
+            fetchAllocFunctionPointersKHR();
+        }
+
         createAllocationMaps();
     }
 
-    VkDeviceSize Allocator::GetPreferredBlockSize(const uint32_t& memory_type_idx) const noexcept {
+    VkDeviceSize AllocatorImpl::GetPreferredBlockSize(const uint32_t& memory_type_idx) const noexcept {
         VkDeviceSize heapSize = deviceMemoryProperties.memoryHeaps[deviceMemoryProperties.memoryTypes[memory_type_idx].heapIndex].size;
         return (heapSize <= DefaultSmallHeapBlockSize) ? preferredSmallHeapBlockSize : preferredLargeHeapBlockSize;
     }
 
-    Allocator::AllocationSize Allocator::GetAllocSize(const VkDeviceSize & size) const {
+    AllocatorImpl::AllocationSize AllocatorImpl::GetAllocSize(const VkDeviceSize & size) const {
         if (size > LargeBlockSingleAllocSize * 32) {
             // Would take up half a large block - should probably make private
             return AllocationSize::LARGE;
@@ -93,28 +170,28 @@ namespace vpr {
         }
     }
 
-    VkDeviceSize Allocator::GetBufferImageGranularity() const noexcept {
+    VkDeviceSize AllocatorImpl::GetBufferImageGranularity() const noexcept {
         return deviceProperties.limits.bufferImageGranularity;
     }
 
-    uint32_t Allocator::GetMemoryHeapCount() const noexcept {
+    uint32_t AllocatorImpl::GetMemoryHeapCount() const noexcept {
         return deviceMemoryProperties.memoryHeapCount;
     }
 
-    uint32_t Allocator::GetMemoryTypeCount() const noexcept {
+    uint32_t AllocatorImpl::GetMemoryTypeCount() const noexcept {
         return deviceMemoryProperties.memoryTypeCount;
     }
 
-    const VkDevice & Allocator::DeviceHandle() const noexcept {
-        return parent->vkHandle();
+    const VkDevice& Allocator::DeviceHandle() const noexcept {
+        return impl->parent->vkHandle();
     }
 
     VkResult Allocator::AllocateMemory(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const SuballocationType& suballoc_type, Allocation& dest_allocation) {
         
         // find memory type (i.e idx) required for this allocation
-        uint32_t memory_type_idx = findMemoryTypeIdx(memory_reqs, alloc_details);
+        uint32_t memory_type_idx = impl->findMemoryTypeIdx(memory_reqs, alloc_details);
         if (memory_type_idx != std::numeric_limits<uint32_t>::max()) {
-            return allocateMemoryType(memory_reqs, alloc_details, memory_type_idx, suballoc_type, dest_allocation);
+            return impl->allocateMemoryType(memory_reqs, alloc_details, memory_type_idx, suballoc_type, dest_allocation);
         }
         else {
             return VK_ERROR_OUT_OF_DEVICE_MEMORY;
@@ -129,8 +206,8 @@ namespace vpr {
 
             type_idx = memory_to_free->MemoryTypeIdx();
             // allocations binned vaguely by size, alongside type
-            const auto alloc_bin = GetAllocSize(memory_to_free->Size);
-            auto& allocation_collection = allocations.at(alloc_bin)[type_idx];
+            const auto alloc_bin = impl->GetAllocSize(memory_to_free->Size);
+            auto& allocation_collection = impl->allocations.at(alloc_bin)[type_idx];
             
             auto* block = (*allocation_collection)[0];
             auto free_size = memory_to_free->Size;
@@ -148,12 +225,12 @@ namespace vpr {
             }
 
             if (block->Empty()) {
-                if (emptyAllocations.at(alloc_bin)[type_idx]) {
+                if (impl->emptyAllocations.at(alloc_bin)[type_idx]) {
                     block->Destroy(this);
                     allocation_collection->RemoveBlock(block);
                 }
                 else {
-                    emptyAllocations.at(alloc_bin)[type_idx] = true;
+                    impl->emptyAllocations.at(alloc_bin)[type_idx] = true;
                 }
             }
 
@@ -167,7 +244,7 @@ namespace vpr {
 
 
         // memory_to_free not found, possible a privately/singularly allocated memory object
-        if (freePrivateMemory(memory_to_free)) {
+        if (impl->freePrivateMemory(memory_to_free)) {
             return;
         }
 
@@ -179,14 +256,14 @@ namespace vpr {
     VkResult Allocator::AllocateForImage(VkImage & image_handle, const AllocationRequirements & details, const SuballocationType & alloc_type, Allocation& dest_allocation) {
         VkMemoryRequirements memreqs;
         AllocationRequirements details2 = details;
-        getImageMemReqs(image_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
+        impl->getImageMemReqs(image_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
         return AllocateMemory(memreqs, details2, alloc_type, dest_allocation);  
     }
 
     VkResult Allocator::AllocateForBuffer(VkBuffer & buffer_handle, const AllocationRequirements & details, const SuballocationType & alloc_type, Allocation& dest_allocation) {
         VkMemoryRequirements memreqs;
         AllocationRequirements details2 = details;
-        getBufferMemReqs(buffer_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
+        impl->getBufferMemReqs(buffer_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
         return AllocateMemory(memreqs, details2, alloc_type, dest_allocation);
     }
 
@@ -194,14 +271,14 @@ namespace vpr {
 
         // create image object first.
         LOG_IF(VERBOSE_LOGGING, INFO) << "Creating new image handle.";
-        VkResult result = vkCreateImage(parent->vkHandle(), img_create_info, nullptr, image_handle);
+        VkResult result = vkCreateImage(impl->parent->vkHandle(), img_create_info, nullptr, image_handle);
         VkAssert(result);
         LOG_IF(VERBOSE_LOGGING, INFO) << "Allocating memory for image.";
         SuballocationType image_type = img_create_info->tiling == VK_IMAGE_TILING_OPTIMAL ? SuballocationType::ImageOptimal : SuballocationType::ImageLinear;
         result = AllocateForImage(*image_handle, alloc_reqs, image_type, dest_allocation);
         VkAssert(result);
         LOG_IF(VERBOSE_LOGGING, INFO) << "Binding image to memory.";
-        result = vkBindImageMemory(parent->vkHandle(), *image_handle, dest_allocation.Memory(), dest_allocation.Offset());
+        result = vkBindImageMemory(impl->parent->vkHandle(), *image_handle, dest_allocation.Memory(), dest_allocation.Offset());
         VkAssert(result);
 
         return VK_SUCCESS;
@@ -211,14 +288,14 @@ namespace vpr {
     VkResult Allocator::CreateBuffer(VkBuffer * buffer_handle, const VkBufferCreateInfo * buffer_create_info, const AllocationRequirements & alloc_reqs, Allocation& dest_allocation) {
 
         // create buffer object first
-        VkResult result = vkCreateBuffer(parent->vkHandle(), buffer_create_info, nullptr, buffer_handle);
+        VkResult result = vkCreateBuffer(impl->parent->vkHandle(), buffer_create_info, nullptr, buffer_handle);
         VkAssert(result);
 
         // allocate memory
         result = AllocateForBuffer(*buffer_handle, alloc_reqs, SuballocationType::Buffer, dest_allocation);
         VkAssert(result);
 
-        result = vkBindBufferMemory(parent->vkHandle(), *buffer_handle, dest_allocation.Memory(), dest_allocation.Offset());
+        result = vkBindBufferMemory(impl->parent->vkHandle(), *buffer_handle, dest_allocation.Memory(), dest_allocation.Offset());
         VkAssert(result);
 
         return VK_SUCCESS;
@@ -232,7 +309,7 @@ namespace vpr {
         }
 
         // delete handle.
-        vkDestroyImage(parent->vkHandle(), image_handle, nullptr);
+        vkDestroyImage(impl->parent->vkHandle(), image_handle, nullptr);
 
         // Free memory previously tied to handle.
         FreeMemory(&allocation_to_free);
@@ -245,13 +322,13 @@ namespace vpr {
             throw std::runtime_error("Cannot destroy null buffer objects.");
         }
 
-        vkDestroyBuffer(parent->vkHandle(), buffer_handle, nullptr);
+        vkDestroyBuffer(impl->parent->vkHandle(), buffer_handle, nullptr);
 
         FreeMemory(&allocation_to_free);
 
     }
     
-    uint32_t Allocator::findMemoryTypeIdx(const VkMemoryRequirements& mem_reqs, const AllocationRequirements & details) const noexcept {
+    uint32_t AllocatorImpl::findMemoryTypeIdx(const VkMemoryRequirements& mem_reqs, const AllocationRequirements & details) const noexcept {
         auto req_flags = details.requiredFlags;
         auto preferred_flags = details.preferredFlags;
         if (req_flags == 0) {
@@ -293,7 +370,7 @@ namespace vpr {
         return result_idx;
     }
 
-    VkResult Allocator::allocateMemoryType(const VkMemoryRequirements & memory_reqs, const AllocationRequirements & alloc_details, const uint32_t & memory_type_idx, const SuballocationType & type, Allocation& dest_allocation) {
+    VkResult AllocatorImpl::allocateMemoryType(const VkMemoryRequirements & memory_reqs, const AllocationRequirements & alloc_details, const uint32_t & memory_type_idx, const SuballocationType & type, Allocation& dest_allocation) {
     
         const VkDeviceSize preferredBlockSize = GetPreferredBlockSize(memory_type_idx);
 
@@ -432,7 +509,7 @@ namespace vpr {
 
     }
 
-    VkResult Allocator::allocatePrivateMemory(const VkDeviceSize & size, const uint32_t & memory_type_idx, Allocation& dest_allocation) {
+    VkResult AllocatorImpl::allocatePrivateMemory(const VkDeviceSize & size, const uint32_t & memory_type_idx, Allocation& dest_allocation) {
         VkMemoryAllocateInfo alloc_info{ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO, nullptr, size, memory_type_idx };
 
         VkDeviceMemory private_memory_handle = VK_NULL_HANDLE;
@@ -448,7 +525,7 @@ namespace vpr {
         return VK_SUCCESS;
     }
     
-    bool Allocator::freePrivateMemory(const Allocation * alloc_to_free) {
+    bool AllocatorImpl::freePrivateMemory(const Allocation * alloc_to_free) {
 
         assert(alloc_to_free->IsPrivateAllocation());
         auto iter = std::find_if(privateAllocations.begin(), privateAllocations.end(), raw_equal_comparator(alloc_to_free));
@@ -469,7 +546,7 @@ namespace vpr {
         return false;
     }
 
-    void Allocator::getBufferMemReqs(VkBuffer& handle, VkMemoryRequirements& reqs, bool& requires_dedicated, bool& prefers_dedicated) {
+    void AllocatorImpl::getBufferMemReqs(VkBuffer& handle, VkMemoryRequirements& reqs, bool& requires_dedicated, bool& prefers_dedicated) {
         if (!usingMemoryExtensions) {
             vkGetBufferMemoryRequirements(parent->vkHandle(), handle, &reqs);
             requires_dedicated = false;
@@ -493,7 +570,7 @@ namespace vpr {
         }
     }
 
-    void Allocator::getImageMemReqs(VkImage& handle, VkMemoryRequirements& reqs, bool& requires_dedicated, bool& prefers_dedicated) {
+    void AllocatorImpl::getImageMemReqs(VkImage& handle, VkMemoryRequirements& reqs, bool& requires_dedicated, bool& prefers_dedicated) {
         if (!usingMemoryExtensions) {
             vkGetImageMemoryRequirements(parent->vkHandle(), handle, &reqs);
             requires_dedicated = false;
@@ -519,7 +596,7 @@ namespace vpr {
 
  
 
-    void Allocator::fetchAllocFunctionPointersKHR() {
+    void AllocatorImpl::fetchAllocFunctionPointersKHR() {
         
         pVkGetBufferMemoryRequirements2KHR = reinterpret_cast<PFN_vkGetBufferMemoryRequirements2KHR>(vkGetDeviceProcAddr(parent->vkHandle(), 
             "vkGetBufferMemoryRequirements2KHR"));

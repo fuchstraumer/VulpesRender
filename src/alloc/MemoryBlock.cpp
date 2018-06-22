@@ -1,13 +1,15 @@
 #include "vpr_stdafx.h"
-#include "alloc/MemoryBlock.hpp"
+#include "MemoryBlock.hpp"
+#include "AllocCommon.hpp"
 #include "alloc/Allocation.hpp"
+#include "alloc/AllocationRequirements.hpp"
 #include "alloc/Allocator.hpp"
+#include "common/vkAssert.hpp"
 #include "easylogging++.h"
 
 namespace vpr {
 
     constexpr static VkDeviceSize DEBUG_PADDING = 0;
-    VkBool32 AllocationRequirements::noNewAllocations = false;
     
     /** This is a simple and common overload to print enum info to any stream (this also works, FYI, with easylogging++). A note to make, however,
     *  is that compilers running at W4/Wall warning levels will warn that this method is unreferenced in release mode, if validation is not forced.

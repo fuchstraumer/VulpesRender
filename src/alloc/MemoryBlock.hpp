@@ -81,7 +81,7 @@ namespace vpr {
 
         VkDeviceSize Size{ std::numeric_limits<VkDeviceSize>::max() };
         suballocationList Suballocations;
-        Allocator* allocator{ nullptr };
+        Device* device{ nullptr };
         uint32_t MemoryTypeIdx{ std::numeric_limits<uint32_t>::max() };
 
     protected:

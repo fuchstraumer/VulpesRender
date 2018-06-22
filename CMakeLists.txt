@@ -31,7 +31,8 @@ FILE(GLOB COMMAND_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/command/*.cpp" "${CMAKE
 FILE(GLOB CORE "${CMAKE_CURRENT_SOURCE_DIR}/src/core/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/core/*.hpp")
 FILE(GLOB RESOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/resource/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/resource/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/resource/*.inl")
 FILE(GLOB RENDER "${CMAKE_CURRENT_SOURCE_DIR}/src/render/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/render/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/render/*.inl")
-FILE(GLOB ALLOC "${CMAKE_CURRENT_SOURCE_DIR}/src/alloc/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/alloc/*.hpp")
+FILE(GLOB ALLOC "${CMAKE_CURRENT_SOURCE_DIR}/src/alloc/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/alloc/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/alloc/*.hpp")
 FILE(GLOB SYNC "${CMAKE_CURRENT_SOURCE_DIR}/src/sync/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/sync/*.hpp")
 
 SOURCE_GROUP("alloc" FILES ${ALLOC})

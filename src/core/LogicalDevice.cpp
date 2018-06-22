@@ -3,9 +3,27 @@
 #include "core/PhysicalDevice.hpp"
 #include "core/Instance.hpp"
 #include "alloc/Allocator.hpp"
+#include "common/vkAssert.hpp"
+#include "common/CreateInfoBase.hpp"
 #include "easylogging++.h"
+#include <array>
+#include <vector>
+#include <map>
 
 namespace vpr {
+
+    struct DeviceDataMembers {
+        DeviceDataMembers(const Device* p) : device(p) {}
+        std::unique_ptr<Allocator> vkAllocator;
+        std::vector<const char*> enabledExtensions;
+        const Device* device = nullptr;
+        std::map<VkQueueFlags, VkDeviceQueueCreateInfo> queueInfos;
+        bool enableDedicatedAllocations{ false };
+        void prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const;
+        void prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const noexcept;
+        void checkExtensions(std::vector<const char*>& requested_extensions, bool throw_on_error) const;
+        void checkDedicatedAllocExtensions(const std::vector<const char*>& exts);
+    };
 
     constexpr const char* const RECOMMENDED_REQUIRED_EXTENSION = "VK_KHR_swapchain";
 
@@ -41,9 +59,14 @@ namespace vpr {
         create(extensions, layer_names, layer_count);
     }
 
+    Allocator* Device::GetAllocator() const noexcept {
+        return dataMembers->vkAllocator.get();
+    }
+
     void Device::create(const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) {
 
         createInfo = vk_device_create_info_base;
+        dataMembers = std::make_unique<DeviceDataMembers>(this);
         VerifyPresentationSupport();
         setupQueues();
         setupValidation(layers, layer_count);
@@ -51,7 +74,7 @@ namespace vpr {
 
         // This has to be here so that the queue_infos vector persists through device creation.
         std::vector<VkDeviceQueueCreateInfo> queue_infos;
-        for (const auto& queue_info_entry : queueInfos) {
+        for (const auto& queue_info_entry : dataMembers->queueInfos) {
             queue_infos.emplace_back(queue_info_entry.second);
         }
 
@@ -62,7 +85,7 @@ namespace vpr {
         VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, nullptr, &handle);
         VkAssert(result);
 
-        vkAllocator = std::make_unique<Allocator>(this, enableDedicatedAllocations);
+        dataMembers->vkAllocator = std::make_unique<Allocator>(this, dataMembers->enableDedicatedAllocations ? Allocator::allocation_extensions::DedicatedAllocations : Allocator::allocation_extensions::None);
 
     }
 
@@ -95,17 +118,17 @@ namespace vpr {
         
         if (extensions) {
             std::vector<const char*> all_extensions;
-            prepareRequiredExtensions(extensions, all_extensions);
-            prepareOptionalExtensions(extensions, all_extensions);
-            checkDedicatedAllocExtensions(all_extensions);
-            enabledExtensions = all_extensions;
-            createInfo.enabledExtensionCount = static_cast<uint32_t>(enabledExtensions.size());
-            createInfo.ppEnabledExtensionNames = enabledExtensions.data();
+            dataMembers->prepareRequiredExtensions(extensions, all_extensions);
+            dataMembers->prepareOptionalExtensions(extensions, all_extensions);
+            dataMembers->checkDedicatedAllocExtensions(all_extensions);
+            dataMembers->enabledExtensions = all_extensions;
+            createInfo.enabledExtensionCount = static_cast<uint32_t>(dataMembers->enabledExtensions.size());
+            createInfo.ppEnabledExtensionNames = dataMembers->enabledExtensions.data();
         }
         else {
             createInfo.enabledExtensionCount = 0;
             createInfo.ppEnabledExtensionNames = nullptr;
-            enableDedicatedAllocations = false;
+            dataMembers->enableDedicatedAllocations = false;
         }
 
     }
@@ -118,7 +141,7 @@ namespace vpr {
         create_info.queueCount = NumGraphicsQueues;
         queue_priorities.graphics = std::vector<float>(NumGraphicsQueues, 1.0f);
         create_info.pQueuePriorities = queue_priorities.graphics.data();
-        queueInfos.insert(std::make_pair(VK_QUEUE_GRAPHICS_BIT, create_info));
+        dataMembers->queueInfos.insert(std::make_pair(VK_QUEUE_GRAPHICS_BIT, create_info));
     }
 
     void Device::setupComputeQueues() {
@@ -130,7 +153,7 @@ namespace vpr {
             compute_info.queueCount = NumComputeQueues;
             queue_priorities.compute = std::vector<float>(NumComputeQueues, 1.0f);
             compute_info.pQueuePriorities = queue_priorities.compute.data();
-            queueInfos.insert(std::make_pair(VK_QUEUE_COMPUTE_BIT, compute_info));
+            dataMembers->queueInfos.insert(std::make_pair(VK_QUEUE_COMPUTE_BIT, compute_info));
         }
         else {
             auto queue_properties = parent->GetQueueFamilyProperties(VK_QUEUE_COMPUTE_BIT);
@@ -150,7 +173,7 @@ namespace vpr {
             NumTransferQueues = transfer_info.queueCount;
             queue_priorities.transfer = std::vector<float>(NumTransferQueues, 1.0f);
             transfer_info.pQueuePriorities = queue_priorities.transfer.data();
-            queueInfos.insert(std::make_pair(VK_QUEUE_TRANSFER_BIT, transfer_info));
+            dataMembers->queueInfos.insert(std::make_pair(VK_QUEUE_TRANSFER_BIT, transfer_info));
         }
         else {
             auto queue_properties = parent->GetQueueFamilyProperties(VK_QUEUE_TRANSFER_BIT);
@@ -169,7 +192,7 @@ namespace vpr {
             NumSparseBindingQueues = sparse_info.queueCount;
             queue_priorities.sparse_binding = std::vector<float>(NumSparseBindingQueues, 1.0f);
             sparse_info.pQueuePriorities = queue_priorities.sparse_binding.data();
-            queueInfos.insert(std::make_pair(VK_QUEUE_SPARSE_BINDING_BIT, sparse_info));
+            dataMembers->queueInfos.insert(std::make_pair(VK_QUEUE_SPARSE_BINDING_BIT, sparse_info));
         }
         else {
             auto queue_properties = parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT);
@@ -206,7 +229,7 @@ namespace vpr {
     }
 
     Device::~Device(){
-        vkAllocator.reset();
+        dataMembers->vkAllocator.reset();
         vkDestroyDevice(handle, nullptr);
     }
 
@@ -253,7 +276,7 @@ namespace vpr {
 
     VkQueue Device::SparseBindingQueue(const uint32_t & idx) const {
         
-        if (!queueInfos.count(VK_QUEUE_SPARSE_BINDING_BIT)) {
+        if (!dataMembers->queueInfos.count(VK_QUEUE_SPARSE_BINDING_BIT)) {
             LOG(ERROR) << "Current device does not support sparse binding queues!";
             throw std::runtime_error("Requested unsuported queue family (Sparse Binding)");
         }
@@ -346,7 +369,7 @@ namespace vpr {
 
     }
 
-    void Device::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const {
+    void DeviceDataMembers::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const {
         std::vector<const char*> required_extensions{ extensions->RequiredExtensionNames, 
             extensions->RequiredExtensionNames + extensions->RequiredExtensionCount };
         checkExtensions(required_extensions, true);
@@ -356,7 +379,7 @@ namespace vpr {
         }
     }
 
-    void Device::prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const noexcept{
+    void DeviceDataMembers::prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const noexcept{
         std::vector<const char*> optional_extensions{ extensions->OptionalExtensionNames, 
             extensions->OptionalExtensionNames + extensions->OptionalExtensionCount };
         checkExtensions(optional_extensions, false);
@@ -367,11 +390,11 @@ namespace vpr {
 
     }
 
-    void Device::checkExtensions(std::vector<const char*>& extensions, bool throw_on_error) const {
+    void DeviceDataMembers::checkExtensions(std::vector<const char*>& extensions, bool throw_on_error) const {
         uint32_t queried_count = 0;
-        vkEnumerateDeviceExtensionProperties(parent->vkHandle(), nullptr, &queried_count, nullptr);
+        vkEnumerateDeviceExtensionProperties(device->GetPhysicalDevice().vkHandle(), nullptr, &queried_count, nullptr);
         std::vector<VkExtensionProperties> queried_extensions(queried_count);
-        vkEnumerateDeviceExtensionProperties(parent->vkHandle(), nullptr, &queried_count, queried_extensions.data());
+        vkEnumerateDeviceExtensionProperties(device->GetPhysicalDevice().vkHandle(), nullptr, &queried_count, queried_extensions.data());
 
         const auto has_extension = [queried_extensions](const char* name) {
             const auto req_found = std::find_if(queried_extensions.cbegin(), queried_extensions.cend(), [name](const VkExtensionProperties& p) {
@@ -398,7 +421,7 @@ namespace vpr {
         }
     }
     
-    void Device::checkDedicatedAllocExtensions(const std::vector<const char*>& exts) {
+    void DeviceDataMembers::checkDedicatedAllocExtensions(const std::vector<const char*>& exts) {
         constexpr std::array<const char*, 2> mem_extensions{ VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME, VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME };
         auto iter = std::find(exts.cbegin(), exts.cend(), mem_extensions[0]);
         if (iter != exts.cend()) {

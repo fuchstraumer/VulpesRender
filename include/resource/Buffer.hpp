@@ -4,6 +4,7 @@
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 #include "alloc/Allocation.hpp"
+#include <memory>
 
 namespace vpr {
 
@@ -104,7 +105,6 @@ namespace vpr {
         VkBufferUsageFlags Usage() const noexcept;
     protected:
 
-        static std::vector<std::pair<VkBuffer, Allocation>> stagingBuffers;
         void createStagingBuffer(const VkDeviceSize& size, VkBuffer& staging_buffer, Allocation& dest_memory_range);
         void setMappedMemoryRange() const;
 
@@ -112,9 +112,9 @@ namespace vpr {
         const VkAllocationCallbacks* allocators = nullptr;
         VkBuffer handle{ VK_NULL_HANDLE };
         VkBufferView view{ VK_NULL_HANDLE };
-        VkBufferCreateInfo createInfo{ vk_buffer_create_info_base };
+        VkBufferCreateInfo createInfo{ };
         VkBufferViewCreateInfo viewCreateInfo{ VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO, nullptr, 0 };
-        mutable VkMappedMemoryRange mappedMemoryRange{ vk_mapped_memory_base };
+        mutable VkMappedMemoryRange mappedMemoryRange{ };
         Allocation memoryAllocation;
         VkDeviceSize size{ std::numeric_limits<VkDeviceSize>::max() };
         VkDeviceSize dataSize{ std::numeric_limits<VkDeviceSize>::max() };

@@ -2,6 +2,10 @@
 #include "resource/DescriptorPool.hpp"
 #include "core/LogicalDevice.hpp"
 #include "resource/DescriptorSet.hpp"
+#include <vector>
+#include <array>
+#include "common/vkAssert.hpp"
+#include "common/CreateInfoBase.hpp"
 
 namespace vpr {
 

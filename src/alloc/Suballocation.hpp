@@ -5,6 +5,7 @@
 #include "ForwardDecl.hpp"
 #include "AllocCommon.hpp"
 #include <list>
+#include <vector>
 
 namespace vpr {
     

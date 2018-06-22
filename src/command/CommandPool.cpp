@@ -2,14 +2,19 @@
 #include "command/CommandPool.hpp"
 #include "core/Instance.hpp"
 #include "core/LogicalDevice.hpp"
+#include "common/vkAssert.hpp"
+#include "common/CreateInfoBase.hpp"
 #include "easylogging++.h"
-
+#include <vector>
 namespace vpr {
+
+    struct CommandBuffers  {
+        std::vector<VkCommandBuffer> Data;
+    };
 
     CommandPool::CommandPool(const Device * _parent, const VkCommandPoolCreateInfo & create_info) : parent(_parent), handle(VK_NULL_HANDLE) {
         vkCreateCommandPool(parent->vkHandle(), &create_info, nullptr, &handle);
     }
-
 
     void CommandPool::ResetCmdPool(const VkCommandPoolResetFlagBits& command_pool_reset_flags) {
         vkResetCommandPool(parent->vkHandle(), handle, command_pool_reset_flags);
@@ -34,11 +39,8 @@ namespace vpr {
         destroy();
     }
 
-    CommandPool::CommandPool(const Device * _parent) : parent(_parent), handle(VK_NULL_HANDLE) {
-    }
-
     void CommandPool::destroy(){
-        if (!cmdBuffers.empty()) {
+        if (!cmdBuffers->Data.empty()) {
             FreeCommandBuffers();
         }
         if (handle != VK_NULL_HANDLE) {
@@ -50,29 +52,29 @@ namespace vpr {
 
     void CommandPool::AllocateCmdBuffers(const uint32_t & num_buffers, const VkCommandBufferLevel& cmd_buffer_level){
 
-        if (!cmdBuffers.empty()) {
+        if (!cmdBuffers->Data.empty()) {
             return;
         }
 
-        cmdBuffers.resize(num_buffers);
+        cmdBuffers->Data.resize(num_buffers);
         VkCommandBufferAllocateInfo alloc_info = vk_command_buffer_allocate_info_base;
         alloc_info.commandPool = handle;
         alloc_info.commandBufferCount = num_buffers;
         alloc_info.level = cmd_buffer_level;
-        VkResult result = vkAllocateCommandBuffers(parent->vkHandle(), &alloc_info, cmdBuffers.data());
+        VkResult result = vkAllocateCommandBuffers(parent->vkHandle(), &alloc_info, cmdBuffers->Data.data());
         LOG_IF(VERBOSE_LOGGING, INFO) << std::to_string(num_buffers) << " command buffers allocated for command pool " << handle;
         VkAssert(result);
     }
 
     void CommandPool::FreeCommandBuffers(){
-        vkFreeCommandBuffers(parent->vkHandle(), handle, static_cast<uint32_t>(cmdBuffers.size()), cmdBuffers.data());
-        LOG_IF(VERBOSE_LOGGING, INFO) << std::to_string(cmdBuffers.size()) << " command buffers freed.";
-        cmdBuffers.clear();
-        cmdBuffers.shrink_to_fit();
+        vkFreeCommandBuffers(parent->vkHandle(), handle, static_cast<uint32_t>(cmdBuffers->Data.size()), cmdBuffers->Data.data());
+        LOG_IF(VERBOSE_LOGGING, INFO) << std::to_string(cmdBuffers->Data.size()) << " command buffers freed.";
+        cmdBuffers->Data.clear();
+        cmdBuffers->Data.shrink_to_fit();
     }
 
     void CommandPool::ResetCmdBuffer(const size_t & idx, const VkCommandBufferResetFlagBits& command_buffer_reset_flag_bits) {
-        vkResetCommandBuffer(cmdBuffers[idx], command_buffer_reset_flag_bits);
+        vkResetCommandBuffer(cmdBuffers->Data[idx], command_buffer_reset_flag_bits);
     }
     
     const VkCommandPool & CommandPool::vkHandle() const noexcept{
@@ -80,15 +82,15 @@ namespace vpr {
     }
 
     const VkCommandBuffer* CommandPool::GetCommandBuffers(const size_t& offset) const {
-        return &cmdBuffers[offset];
+        return &cmdBuffers->Data[offset];
     }
 
     VkCommandBuffer & CommandPool::operator[](const size_t & idx) {
-        return cmdBuffers[idx];
+        return cmdBuffers->Data[idx];
     }
 
     VkCommandBuffer & CommandPool::GetCmdBuffer(const size_t & idx) {
-        return cmdBuffers[idx];
+        return cmdBuffers->Data[idx];
     }
 
     VkCommandBuffer CommandPool::StartSingleCmdBuffer(){
@@ -129,11 +131,11 @@ namespace vpr {
     }
 
     const size_t CommandPool::size() const noexcept{
-        return cmdBuffers.size();
+        return cmdBuffers->Data.size();
     }
 
-    const VkCommandBuffer * CommandPool::Data() const noexcept {
-        return cmdBuffers.data();
+    const VkCommandBuffer* CommandPool::Data() const noexcept {
+        return cmdBuffers->Data.data();
     }
 
 }

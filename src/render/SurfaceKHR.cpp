@@ -1,6 +1,8 @@
 #include "render/SurfaceKHR.hpp"
 #include "core/Instance.hpp"
 #include "GLFW/glfw3.h"
+#include "common/vkAssert.hpp"
+#include <utility>
 
 namespace vpr {
 

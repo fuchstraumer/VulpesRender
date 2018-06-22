@@ -1,7 +1,7 @@
 #include "vpr_stdafx.h"
-#include "alloc/AllocationCollection.hpp"
+#include "AllocationCollection.hpp"
 #include "alloc/Allocator.hpp"
-#include "alloc/MemoryBlock.hpp"
+#include "MemoryBlock.hpp"
 #include "easylogging++.h"
 
 namespace vpr {

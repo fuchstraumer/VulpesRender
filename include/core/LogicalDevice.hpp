@@ -3,9 +3,11 @@
 #define VULPES_VK_LOGICAL_DEVICE_H
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
-#include <map>
+#include <memory>
 
 namespace vpr {
+
+    struct DeviceDataMembers;
 
     struct VPR_API vkQueueFamilyIndices {
         // indices into queue families.
@@ -100,7 +102,7 @@ namespace vpr {
         uint32_t NumTransferQueues = 0;
         uint32_t NumSparseBindingQueues = 0;
         vkQueueFamilyIndices QueueFamilyIndices;
-        std::unique_ptr<Allocator> vkAllocator;
+        Allocator* GetAllocator() const noexcept;
 
     private:
 
@@ -113,20 +115,13 @@ namespace vpr {
         void setupTransferQueues();
         void setupSparseBindingQueues();
     
-        void prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const;
-        void prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const noexcept;
-        void checkExtensions(std::vector<const char*>& requested_extensions, bool throw_on_error) const;
-        void checkDedicatedAllocExtensions(const std::vector<const char*>& exts);
         VkDevice handle{ VK_NULL_HANDLE };
-        VkDeviceCreateInfo createInfo{ vk_device_create_info_base };
+        VkDeviceCreateInfo createInfo{ };
 
         const PhysicalDevice* parent{ nullptr };
         const Instance* parentInstance{ nullptr };
 
-        bool enableDedicatedAllocations{ false };
-        std::vector<const char*> enabledExtensions;
-        std::map<VkQueueFlags, VkDeviceQueueCreateInfo> queueInfos;
-
+        mutable std::unique_ptr<DeviceDataMembers> dataMembers;
     };
 
 }

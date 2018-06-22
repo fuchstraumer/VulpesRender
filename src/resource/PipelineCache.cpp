@@ -3,6 +3,7 @@
 #include "core/LogicalDevice.hpp"
 #include "core/PhysicalDevice.hpp"
 #include "easylogging++.h"
+#include "common/vkAssert.hpp"
 #ifdef USE_EXPERIMENTAL_FILESYSTEM
 #include <experimental/filesystem>
 #endif
@@ -26,7 +27,7 @@ namespace vpr {
 #endif
             
         std::string fname = cache_dir + std::to_string(hash_id) + std::string(".vkdat");
-        filename = fname;
+        filename = strdup(fname.c_str());
 
         // Attempts to load cache from file: if failed, doesn't matter much.
         LoadCacheFromFile(fname.c_str());
@@ -42,10 +43,17 @@ namespace vpr {
             VkAssert(saved);
             vkDestroyPipelineCache(parent->vkHandle(), handle, nullptr);
         }
+
+        if (filename) {
+            free(filename);
+        }
     }
 
     PipelineCache::PipelineCache(PipelineCache&& other) noexcept : parent(std::move(other.parent)), createInfo(std::move(other.createInfo)),
-        hashID(std::move(other.hashID)), handle(std::move(other.handle)), filename(std::move(other.filename)) { other.handle = VK_NULL_HANDLE; }
+        hashID(std::move(other.hashID)), handle(std::move(other.handle)), filename(std::move(other.filename)) {
+        other.handle = VK_NULL_HANDLE; 
+        other.filename = nullptr;
+    }
 
     PipelineCache& PipelineCache::operator=(PipelineCache&& other) noexcept {
         parent = std::move(other.parent);
@@ -54,6 +62,7 @@ namespace vpr {
         handle = std::move(other.handle);
         other.handle = VK_NULL_HANDLE;
         filename = std::move(other.filename);
+        other.filename = nullptr;
         return *this;
     }
  

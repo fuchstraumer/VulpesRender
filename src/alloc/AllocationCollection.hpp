@@ -3,6 +3,9 @@
 #define VPR_ALLOCATION_COLLECTION_HPP
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
+#include <vector>
+#include <memory>
+#include <mutex>
 
 namespace vpr {
   

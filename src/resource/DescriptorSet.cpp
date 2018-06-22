@@ -3,6 +3,10 @@
 #include "core/LogicalDevice.hpp"
 #include "resource/DescriptorPool.hpp"
 #include "resource/DescriptorSetLayout.hpp"
+#include "common/vkAssert.hpp"
+#include "common/CreateInfoBase.hpp"
+#include <vector>
+
 namespace vpr {
 
     DescriptorSet::DescriptorSet(const Device * parent) : device(parent), handle(VK_NULL_HANDLE) { }

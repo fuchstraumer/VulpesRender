@@ -1,10 +1,18 @@
 #include "vpr_stdafx.h"
 #include "render/GraphicsPipeline.hpp"
 #include "core/LogicalDevice.hpp"
+#include "common/vkAssert.hpp"
+#include "common/CreateInfoBase.hpp"
+#include <vector>
 
 namespace vpr {
 
-    VkGraphicsPipelineCreateInfo GraphicsPipelineInfo::GetPipelineCreateInfo() const {   
+    GraphicsPipelineInfo::GraphicsPipelineInfo() : VertexInfo(vk_pipeline_vertex_input_state_create_info_base), AssemblyInfo(vk_pipeline_input_assembly_create_info_base), 
+        TesselationInfo(vk_pipeline_tesselation_state_create_info_base), ViewportInfo(vk_pipeline_viewport_create_info_base), RasterizationInfo(vk_pipeline_rasterization_create_info_base),
+        MultisampleInfo(vk_pipeline_multisample_create_info_base), DepthStencilInfo(vk_pipeline_depth_stencil_create_info_base), ColorBlendInfo(vk_pipeline_color_blend_create_info_base),
+        DynamicStateInfo(vk_pipeline_dynamic_state_create_info_base) {}
+
+    VkGraphicsPipelineCreateInfo GraphicsPipelineInfo::GetPipelineCreateInfo() const {
         VkGraphicsPipelineCreateInfo create_info = vk_graphics_pipeline_create_info_base;
         create_info.pVertexInputState = &VertexInfo;
         create_info.pInputAssemblyState = &AssemblyInfo;

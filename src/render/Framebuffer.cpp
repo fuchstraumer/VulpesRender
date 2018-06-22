@@ -1,6 +1,7 @@
 #include "vpr_stdafx.h"
 #include "render/Framebuffer.hpp"
 #include "core/LogicalDevice.hpp"
+#include "common/vkAssert.hpp"
 
 namespace vpr {
     

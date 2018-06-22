@@ -1,6 +1,9 @@
 #include "resource/DescriptorSetLayout.hpp"
 #include "core/LogicalDevice.hpp"
+#include "common/vkAssert.hpp"
+#include "common/CreateInfoBase.hpp"
 #include <vector>
+
 namespace vpr {
 
     DescriptorSetLayout::DescriptorSetLayout(const Device* _dvc) : device(_dvc), handle(VK_NULL_HANDLE) {}

@@ -34,7 +34,7 @@ namespace vpr {
 
     private:
         const Device* device{ nullptr };
-        VkPipelineLayoutCreateInfo createInfo{ vk_pipeline_layout_create_info_base };
+        VkPipelineLayoutCreateInfo createInfo{ };
         VkPipelineLayout handle{ VK_NULL_HANDLE };
     };
 

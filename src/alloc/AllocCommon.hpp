@@ -3,6 +3,8 @@
 #define VPR_ALLOCATOR_COMMON_ITEMS_HPP
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
+#include <utility>
+#include <stdexcept>
 
 namespace vpr {
     
@@ -23,20 +25,6 @@ namespace vpr {
 #else 
     constexpr bool VALIDATE_MEMORY = false;
 #endif // !NDEBUG
-
-    /**
-     * Suballocations bound to a single memory block can represent different objects,
-     * though one will usually find that they end up grouped together.
-     * \ingroup Allocation 
-     */
-    enum class SuballocationType : uint8_t {
-        Free = 0, // unused entry
-        Unknown, // could be various cpu storage objects, or extension objects
-        Buffer,
-        ImageUnknown, // image memory without defined tiling - possibly related to extensions
-        ImageLinear,
-        ImageOptimal,
-    };
 
     /** These validation codes are returned by the memory validation routine, giving information on the error encountered. They will also
     *  be printed to the console, if it is enabled, and logged to the log file as well.
@@ -63,33 +51,20 @@ namespace vpr {
         /** Calculated total available size doesn't match stored available size */
         FINAL_FREE_SIZE_MISMATCH,
     };
-
-    /** This struct is the primary item submitted to allocator methods for resource creation.
-     *  \ingroup Allocation
-     */
-    struct VPR_API AllocationRequirements {
-        /** Defaults to false. If true, no new allocations are created beyond
-        * the set created upon initilization of the allocator system. */
-        static VkBool32 noNewAllocations;
-
-        /** True if whatever allocation this belongs to should be in its own device memory object. Don't use this too often, of course. */
-        VkBool32 privateMemory = false;
-
-        /** The memory properties that are absolutely required by the item you are allocating for. */
-        VkMemoryPropertyFlags requiredFlags;
-        /** Additional flags that would be nice/useful to have, but are not required. An attempt to meet these will be 
-         *  made, but not meeting them won't be considered a failure.*/
-        VkMemoryPropertyFlags preferredFlags = VkMemoryPropertyFlags(0);
-
-        bool prefersDedicatedKHR = false;
-        bool requiresDedicatedKHR = false;
-    };
-
     
     template<typename T>
     constexpr static T AlignUp(const T& offset, const T& alignment) {
         return (offset + alignment - 1) / alignment * alignment;
-    }
+    } 
+    
+    enum class SuballocationType : uint8_t {
+        Free = 0, // unused entry
+            Unknown, // could be various cpu storage objects, or extension objects
+            Buffer,
+            ImageUnknown, // image memory without defined tiling - possibly related to extensions
+            ImageLinear,
+            ImageOptimal,
+    };
 
     /**
     *    Taken from the Vulkan specification, section 11.6
@@ -110,6 +85,15 @@ namespace vpr {
         VkDeviceSize item_a_end_page = item_a_end & ~(page_size - 1);
         VkDeviceSize item_b_start_Page = item_b_offset & ~(page_size - 1);
         return item_a_end_page == item_b_start_Page;
+    }
+
+    constexpr static inline uint32_t countBitsSet(const uint32_t& val) {
+        uint32_t count = val - ((val >> 1) & 0x55555555);
+        count = ((count >> 2) & 0x33333333) + (count & 0x33333333);
+        count = ((count >> 4) + count) & 0x0F0F0F0F;
+        count = ((count >> 8) + count) & 0x00FF00FF;
+        count = ((count >> 16) + count) & 0x0000FFFF;
+        return count;
     }
 
     /**
@@ -144,15 +128,6 @@ namespace vpr {
         default:
             throw std::domain_error("Reached invalid case in SuballocationType-based switch statement!");
         }
-    }
-
-    constexpr static inline uint32_t countBitsSet(const uint32_t& val) {
-        uint32_t count = val - ((val >> 1) & 0x55555555);
-        count = ((count >> 2) & 0x33333333) + (count & 0x33333333);
-        count = ((count >> 4) + count) & 0x0F0F0F0F;
-        count = ((count >> 8) + count) & 0x00FF00FF;
-        count = ((count >> 16) + count) & 0x0000FFFF;
-        return count;
     }
 
 }

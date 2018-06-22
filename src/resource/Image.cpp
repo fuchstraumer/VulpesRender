@@ -3,14 +3,16 @@
 #include "core/LogicalDevice.hpp"
 #include "command/CommandPool.hpp"
 #include "alloc/Allocator.hpp"
+#include "alloc/AllocationRequirements.hpp"
+#include "common/vkAssert.hpp"
+#include "common/CreateInfoBase.hpp"
+
 namespace vpr {
 
     Image::Image(const Device * _parent) : parent(_parent), handle(VK_NULL_HANDLE), view(VK_NULL_HANDLE) {}
 
     Image::Image(Image && other) noexcept : handle(std::move(other.handle)), createInfo(std::move(other.createInfo)), view(std::move(other.view)), 
-        memoryAllocation(std::move(other.memoryAllocation)), finalLayout(std::move(other.finalLayout)), extents(std::move(other.extents)), 
-        format(std::move(other.format)), usageFlags(std::move(other.usageFlags)), imageDataSize(std::move(other.imageDataSize)),
-        parent(std::move(other.parent)) {
+        memoryAllocation(std::move(other.memoryAllocation)), finalLayout(std::move(other.finalLayout)), parent(std::move(other.parent)) {
         other.handle = VK_NULL_HANDLE;
         other.view = VK_NULL_HANDLE;
     }
@@ -23,10 +25,6 @@ namespace vpr {
         createInfo = std::move(other.createInfo);
         memoryAllocation = std::move(other.memoryAllocation);
         finalLayout = std::move(other.finalLayout);
-        extents = std::move(other.extents);
-        format = std::move(other.format);
-        usageFlags = std::move(other.usageFlags);
-        imageDataSize = std::move(other.imageDataSize);
         parent = std::move(other.parent);
         return *this;
     }
@@ -43,7 +41,7 @@ namespace vpr {
         }
 
         if (handle != VK_NULL_HANDLE) {
-            parent->vkAllocator->DestroyImage(handle, memoryAllocation);
+            parent->GetAllocator()->DestroyImage(handle, memoryAllocation);
             handle = VK_NULL_HANDLE;
         }
 
@@ -51,9 +49,6 @@ namespace vpr {
 
     void Image::Create(const VkImageCreateInfo & create_info, const VkMemoryPropertyFlagBits& memory_flags) {
         this->createInfo = create_info;
-        format = create_info.format;
-        usageFlags = create_info.usage;
-        extents = create_info.extent;
         CreateImage(handle, memoryAllocation, parent, createInfo, memory_flags);
     }
 
@@ -66,14 +61,14 @@ namespace vpr {
         VkImageViewCreateInfo view_info = vk_image_view_create_info_base;
         view_info.subresourceRange.aspectMask = aspect_flags;
         view_info.image = handle;
-        view_info.format = format;
+        view_info.format = createInfo.format;
         VkResult result = vkCreateImageView(parent->vkHandle(), &view_info, allocators, &view);
         VkAssert(result);
     }
 
     void Image::TransitionLayout(const VkImageLayout & initial, const VkImageLayout & final, CommandPool* pool, VkQueue & queue) {
         VkImageMemoryBarrier barrier = vk_image_memory_barrier_base;
-        barrier = GetMemoryBarrier(handle, format, initial, final);
+        barrier = GetMemoryBarrier(handle, createInfo.format, initial, final);
         VkCommandBuffer cmd = pool->StartSingleCmdBuffer();
             vkCmdPipelineBarrier(cmd, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier);    
         pool->EndSingleCmdBuffer(cmd, queue);
@@ -158,7 +153,7 @@ namespace vpr {
         AllocationRequirements alloc_reqs;
         alloc_reqs.requiredFlags = memory_flags;
 
-        VkResult result = parent->vkAllocator->CreateImage(&dest_image, &create_info, alloc_reqs, dest_alloc);
+        VkResult result = parent->GetAllocator()->CreateImage(&dest_image, &create_info, alloc_reqs, dest_alloc);
         VkAssert(result);
 
     }
@@ -180,11 +175,11 @@ namespace vpr {
     }
     
     VkFormat Image::Format() const noexcept {
-        return format;
+        return createInfo.format;
     }
 
     void Image::SetFormat(VkFormat _format) noexcept {
-        format = std::move(_format);
+        createInfo.format = std::move(_format);
     }
 
     VkImageLayout Image::Layout() const noexcept {

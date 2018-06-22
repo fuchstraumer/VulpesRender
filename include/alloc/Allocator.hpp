@@ -3,10 +3,7 @@
 #define VULPES_VK_ALLOCATOR_H
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
-#include "AllocCommon.hpp"
-#include "AllocationCollection.hpp"
-#include <unordered_set>
-#include <map>
+#include <memory>
 
 namespace vpr {
 
@@ -35,6 +32,16 @@ namespace vpr {
      *  \todo Measure costliness of Validate(), possibly use return codes to fix errors when possible.
      */
 
+    struct AllocatorImpl;
+    struct AllocationRequirements;
+
+    /**
+    * Suballocations bound to a single memory block can represent different objects,
+    * though one will usually find that they end up grouped together.
+    * \ingroup Allocation
+    */
+    enum class SuballocationType : uint8_t;
+
     /** The primary interface and class of this subsystem. This object is responsible for creating resources when requested, managing memory,
      *  checking integrity of memory, and cleaning up after itself and when deallocation has been requested.
      *  \ingroup Allocation
@@ -46,17 +53,15 @@ namespace vpr {
         Allocator& operator=(Allocator&&) = delete;
     public:
 
-        Allocator(const Device* parent_dvc, bool dedicated_alloc_enabled);
+        enum class allocation_extensions {
+            None = 0,
+            DedicatedAllocations = 1
+        };
 
+        Allocator(const Device* parent_dvc, allocation_extensions dedicated_alloc_enabled);
         ~Allocator();
 
         void Recreate();
-
-        VkDeviceSize GetPreferredBlockSize(const uint32_t& memory_type_idx) const noexcept;
-        VkDeviceSize GetBufferImageGranularity() const noexcept;
-
-        uint32_t GetMemoryHeapCount() const noexcept;
-        uint32_t GetMemoryTypeCount() const noexcept;
 
         const VkDevice& DeviceHandle() const noexcept;
 
@@ -83,60 +88,7 @@ namespace vpr {
         void DestroyBuffer(const VkBuffer& buffer_handle, Allocation& allocation_to_free);
 
     private:
-
-        void createAllocationMaps();
-        void clearAllocationMaps();
-
-        // Won't throw: but can return invalid indices. Make sure to handle this.
-        uint32_t findMemoryTypeIdx(const VkMemoryRequirements& mem_reqs, const AllocationRequirements& details) const noexcept;
-
-        // These allocation methods return VkResult's so that we can try different parameters (based partially on return code) in main allocation method.
-        VkResult allocateMemoryType(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const uint32_t& memory_type_idx, const SuballocationType& type, Allocation& dest_allocation);
-        VkResult allocatePrivateMemory(const VkDeviceSize& size, const uint32_t& memory_type_idx, Allocation& dest_allocation);
-
-        // called from "FreeMemory" if memory to free isn't found in the allocation vectors for any of our active memory types.
-        bool freePrivateMemory(const Allocation* memory_to_free);
-
-        void getBufferMemReqs(VkBuffer& handle, VkMemoryRequirements& reqs, bool& requires_dedicated, bool& prefers_dedicated);
-        void getImageMemReqs(VkImage& handle, VkMemoryRequirements& reqs, bool& requires_dedicated, bool& prefers_dedicated);
-
-        enum class AllocationSize {
-            SMALL,
-            MEDIUM,
-            LARGE,
-            EXTRA_LARGE
-        };
-
-        AllocationSize GetAllocSize(const VkDeviceSize& size) const;
-
-        std::map<AllocationSize, std::vector<std::unique_ptr<AllocationCollection>>> allocations;
-        std::map<AllocationSize, std::vector<bool>> emptyAllocations;
-        std::unordered_set<std::unique_ptr<Allocation>> privateAllocations;
-
-        /**Guards the private allocations set, since it's a different object entirely than the main one.
-        */
-        std::mutex privateMutex;
-        std::mutex allocMutex;
-        const Device* parent;
-
-        VkPhysicalDeviceProperties deviceProperties;
-        VkPhysicalDeviceMemoryProperties deviceMemoryProperties;
-
-        VkDeviceSize preferredLargeHeapBlockSize;
-        VkDeviceSize preferredSmallHeapBlockSize;
-        const VkAllocationCallbacks* pAllocationCallbacks = nullptr;
-        bool usingMemoryExtensions;
-
-        /*
-            Used GPU Open allocator impl. hints and this:
-            http://asawicki.info/articles/VK_KHR_dedicated_allocation.php5
-            blogpost to implement support for this extension.
-        */
-        void fetchAllocFunctionPointersKHR();
-        
-        PFN_vkGetBufferMemoryRequirements2KHR pVkGetBufferMemoryRequirements2KHR;
-        PFN_vkGetImageMemoryRequirements2KHR pVkGetImageMemoryRequirements2KHR;
-        PFN_vkGetImageSparseMemoryRequirements2KHR pVkGetImageSparseMemoryRequirements2KHR;
+        std::unique_ptr<AllocatorImpl> impl;
     };
 
 }

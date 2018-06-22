@@ -1,15 +1,31 @@
 #include "vpr_stdafx.h"
 #include "render/Renderpass.hpp"
 #include "core/LogicalDevice.hpp"
+#include "common/vkAssert.hpp"
+#include "common/CreateInfoBase.hpp"
+#include <vector>
 
 namespace vpr {
 
+    struct RenderpassImpl {
+        RenderpassImpl() = default;
+        ~RenderpassImpl() = default;
+        RenderpassImpl(RenderpassImpl&& other) noexcept : clearValues(std::move(other.clearValues)), allocators(nullptr) {}
+        RenderpassImpl& operator=(RenderpassImpl&& other) noexcept {
+            clearValues = std::move(other.clearValues);
+            allocators = other.allocators;
+            return *this;
+        }
+        std::vector<VkClearValue> clearValues;
+        const VkAllocationCallbacks* allocators = nullptr;
+    };
+
     Renderpass::Renderpass(const Device* dvc, const VkRenderPassCreateInfo & create_info) : parent(dvc), createInfo(create_info), beginInfo(vk_renderpass_begin_info_base) {
-        VkResult result = vkCreateRenderPass(dvc->vkHandle(), &create_info, allocators, &handle);
+        VkResult result = vkCreateRenderPass(dvc->vkHandle(), &create_info, impl->allocators, &handle);
         VkAssert(result);
     }
 
-    Renderpass::Renderpass(Renderpass && other) noexcept : beginInfo(std::move(other.beginInfo)), createInfo(std::move(other.createInfo)), handle(std::move(other.handle)), parent(other.parent), allocators(other.allocators) {
+    Renderpass::Renderpass(Renderpass && other) noexcept : beginInfo(std::move(other.beginInfo)), createInfo(std::move(other.createInfo)), handle(std::move(other.handle)), parent(other.parent), impl(std::move(other.impl)) {
         other.handle = VK_NULL_HANDLE;
     }
 
@@ -18,7 +34,8 @@ namespace vpr {
         createInfo = std::move(other.createInfo);
         beginInfo = std::move(other.beginInfo);
         parent = other.parent;
-        allocators = other.allocators;
+        impl = std::move(other.impl);
+        other.impl.reset();
         other.handle = VK_NULL_HANDLE;
         return *this;
     }
@@ -29,8 +46,8 @@ namespace vpr {
 
     void Renderpass::SetupBeginInfo(const VkClearValue* clear_values, const size_t num_values, const VkExtent2D & render_area) {
 
-        clearValues = std::move(std::vector<VkClearValue>{ clear_values, clear_values + num_values });
-        clearValues.shrink_to_fit();
+        impl->clearValues = std::move(std::vector<VkClearValue>{ clear_values, clear_values + num_values });
+        impl->clearValues.shrink_to_fit();
 
         beginInfo = VkRenderPassBeginInfo{
             VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,
@@ -38,8 +55,8 @@ namespace vpr {
             this->vkHandle(),
             VK_NULL_HANDLE,
             VkRect2D{ VkOffset2D{ 0, 0 }, VkExtent2D{ render_area } },
-            static_cast<uint32_t>(clearValues.size()),
-            clearValues.data()
+            static_cast<uint32_t>(impl->clearValues.size()),
+            impl->clearValues.data()
         };
 
     }
@@ -50,7 +67,7 @@ namespace vpr {
 
     void Renderpass::Destroy(){
         if (handle != VK_NULL_HANDLE) {
-            vkDestroyRenderPass(parent->vkHandle(), handle, allocators);
+            vkDestroyRenderPass(parent->vkHandle(), handle, impl->allocators);
             handle = VK_NULL_HANDLE;
         }
     }
