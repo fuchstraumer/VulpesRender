@@ -1,0 +1,6 @@
+[submodule "third_party/easyloggingpp"]
+	path = third_party/easyloggingpp
+	url = http://github.com/muflihun/easyloggingpp
+[submodule "third_party/glfw"]
+	path = third_party/glfw
+	url = http://github.com/glfw/glfw
