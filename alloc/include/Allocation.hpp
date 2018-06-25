@@ -3,9 +3,11 @@
 #define VPR_ALLOCATION_HPP
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
-#include <variant>
+#include <memory>
 
 namespace vpr {
+
+    struct AllocationImpl;
     
     /**    
     *    Allocation class represents a singular allocation: can be a private allocation (i.e, only user
@@ -17,13 +19,14 @@ namespace vpr {
         /** If this is an allocation bound to a smaller region of a larger object, it is a block allocation. 
          *  Otherwise, it has it's own VkDeviceMemory object and is a "PRIVATE_ALLOCATION" type.
         */
-        Allocation() = default;
-        ~Allocation() = default;
-        Allocation(const Allocation&) = default;
-        Allocation& operator=(const Allocation&) = default;
+        Allocation();
+        ~Allocation();
+        Allocation(const Allocation&);
+        Allocation& operator=(const Allocation&);
         Allocation(Allocation&& other) noexcept;
         Allocation& operator=(Allocation&& other) noexcept;
 
+        // user_data can be a pointer to anything, but the lifetime of this pointer has to be managed by the user.
         void Init(MemoryBlock* parent_block, const VkDeviceSize& offset, const VkDeviceSize& alignment, const VkDeviceSize& alloc_size, void* user_data = nullptr);
         void Update(MemoryBlock* new_parent_block, const VkDeviceSize& new_offset);
         /** \param persistently_mapped: If set, this object will be considered to be always mapped. This will remove any worries about mapping/unmapping the object. */
@@ -34,26 +37,14 @@ namespace vpr {
         const VkDeviceMemory& Memory() const;
         VkDeviceSize Offset() const noexcept;
         uint32_t MemoryTypeIdx() const;
+        void SetUserData(void* data) const;
         void* GetUserData() const;
         bool IsPrivateAllocation() const noexcept;
 
         VkDeviceSize Size, Alignment;
     private:
-
-        struct blockAllocation {
-            MemoryBlock* ParentBlock;
-            VkDeviceSize Offset;
-        };
-
-        struct privateAllocation {
-            uint32_t MemoryTypeIdx;
-            VkDeviceMemory DvcMemory;
-            bool PersistentlyMapped;
-            void* MappedData;
-        };
-
-        void* userData = nullptr;
-        std::variant<blockAllocation, privateAllocation> typeData;
+        std::unique_ptr<AllocationImpl> impl;
+        void* userData{ nullptr };
     };
 
 }
