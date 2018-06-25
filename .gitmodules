@@ -1,6 +1,0 @@
-[submodule "glfw"]
-	path = glfw
-	url = https://github.com/glfw/glfw
-[submodule "easyloggingpp"]
-	path = easyloggingpp
-	url = http://github.com/muflihun/easyloggingpp
