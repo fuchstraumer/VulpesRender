@@ -53,7 +53,6 @@ namespace vpr {
 
         const VkInstance& vkHandle() const noexcept;
         const VkSurfaceKHR& vkSurface() const noexcept;
-        const PhysicalDevice* GetPhysicalDevice() const noexcept;
         GLFWwindow* GetGLFWwindow() const noexcept;
         void DebugMessage(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT obj_type, uint64_t obj, size_t location, int32_t msg_code, const char* layer, const char* message);
 
@@ -68,10 +67,8 @@ namespace vpr {
         bool checkValidationSupport(const char* const* layer_names, const uint32_t layer_count) const;
         void checkApiVersionSupport(VkApplicationInfo* info);
         void prepareValidationCallbacks();
-        void setupPhysicalDevice();
         
         mutable GLFWwindow* window;
-        std::unique_ptr<PhysicalDevice> physicalDevice;
         std::unique_ptr<SurfaceKHR> surface;
         std::unique_ptr<InstanceExtensionHandler> extensionHandler;
         VkInstance handle;

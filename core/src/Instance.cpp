@@ -48,7 +48,6 @@ namespace vpr {
             prepareValidationCallbacks();
         }
 
-        setupPhysicalDevice();
         CreateSurfaceKHR();
     }
 
@@ -80,10 +79,6 @@ namespace vpr {
 
     const VkSurfaceKHR& Instance::vkSurface() const noexcept {
         return surface->vkHandle();
-    }
-
-    const PhysicalDevice* Instance::GetPhysicalDevice() const noexcept{
-        return physicalDevice.get();
     }
 
     GLFWwindow * Instance::GetGLFWwindow() const noexcept {
@@ -270,10 +265,6 @@ namespace vpr {
 
     void InstanceExtensionHandler::checkOptionalExtensions(std::vector<const char*>& requested_extensions) const {
         extensionCheck(requested_extensions, false);
-    }
-
-    void Instance::setupPhysicalDevice() {
-        physicalDevice = std::make_unique<PhysicalDevice>(vkHandle());
     }
 
     constexpr const char* const GetObjectTypeStr(VkDebugReportObjectTypeEXT obj) {
