@@ -234,29 +234,25 @@ namespace vpr {
         vkEnumerateInstanceExtensionProperties(nullptr, &queried_extension_count, queried_extensions.data());
 
         const auto has_extension = [queried_extensions](const char* name) {
+            
+        };
+
+        auto iter = std::remove_if(std::begin(extensions), std::end(extensions), [queried_extensions, throw_on_error](const char* name) {
             auto req_found = std::find_if(queried_extensions.cbegin(), queried_extensions.cend(), [name](const VkExtensionProperties& properties) {
                 return strcmp(properties.extensionName, name) == 0;
             });
-            return req_found != queried_extensions.cend();
-        };
+            bool result = (req_found != queried_extensions.cend());
+            if (throw_on_error && !result) {
+                LOG(ERROR) << "Required extension \"" << name << "\" not supported for instance in construction!";
+                throw std::runtime_error("Instance does not support a required extension!");
+            }
+            else if (!result) {
+                LOG(WARNING) << "Extension with name \"" << name << "\" requested but isn't supported. Removing from list attached to Instance's creation info.";
+            }
+            return !result;
+        });
 
-        auto iter = extensions.begin();
-        while (iter != extensions.end()) {
-            if (!has_extension(*iter)) {
-                if (throw_on_error) {
-                    LOG(ERROR) << "Required extension \"" << *iter << "\" not supported for instance in construction!";
-                    throw std::runtime_error("Instance does not support a required extension!");
-                }
-                else {
-                    LOG(WARNING) << "Extension with name \"" << *iter << "\" requested but isn't supported. Removing from list attached to Instance's creation info.";
-                    extensions.erase(iter++);
-                }
-            }
-            else {
-                ++iter;
-            }
-            
-        }
+        extensions.erase(iter, std::end(extensions));
     }
 
     void InstanceExtensionHandler::checkRequiredExtensions(std::vector<const char*>& required_extensions) const {
