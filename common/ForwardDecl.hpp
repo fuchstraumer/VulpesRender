@@ -10,6 +10,7 @@ namespace vpr {
     class MemoryBlock;
     struct Suballocation;
     class AllocationCollection;
+    struct AllocationRequirements;
     class Instance;
     class PhysicalDevice;
     class Device;
