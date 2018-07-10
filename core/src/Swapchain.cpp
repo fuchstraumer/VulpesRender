@@ -228,6 +228,7 @@ namespace vpr {
         createInfo.surface = instance->vkSurface();
         createInfo.imageFormat = surfaceFormat.format;
         createInfo.imageColorSpace = surfaceFormat.colorSpace;
+        colorSpace = surfaceFormat.colorSpace;
         createInfo.imageExtent = extent;
         createInfo.imageArrayLayers = 1;
         createInfo.minImageCount = imageCount;
