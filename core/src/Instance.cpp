@@ -31,7 +31,7 @@ namespace vpr {
     Instance::Instance(instance_layers layers, const VkApplicationInfo*info, GLFWwindow* _window) : Instance(layers, info, _window, nullptr) {}
 
     Instance::Instance(instance_layers layers_flags, const VkApplicationInfo * info, GLFWwindow * _window, const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) :
-        window(_window), extensionHandler(std::make_unique<InstanceExtensionHandler>(layers_flags)), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, nullptr } {
+        window(_window), extensionHandler(new InstanceExtensionHandler(layers_flags)), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, nullptr } {
         VkApplicationInfo our_info = *info;
 
         extensionHandler->extensionSetup(extensions);
@@ -48,7 +48,7 @@ namespace vpr {
             prepareValidationCallbacks();
         }
 
-        CreateSurfaceKHR();
+        createSurfaceKHR();
     }
 
     Instance::~Instance() {
@@ -56,21 +56,26 @@ namespace vpr {
             auto func = (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(handle, "vkDestroyDebugReportCallbackEXT");
             func(handle, debugCallback, nullptr);
         }
-        DestroySurfaceKHR();
+        destroySurfaceKHR();
         vkDestroyInstance(handle, nullptr);
     }
 
-    void Instance::CreateSurfaceKHR() {
+    void Instance::createSurfaceKHR() {
         LOG_IF(surface, WARNING) << "Attempting to create a SurfaceKHR when one might already exist: if it does, this will probably cause swapchain errors!";
-        surface = std::make_unique<SurfaceKHR>(this, window);
+        surface = new SurfaceKHR(this, window);
     }
 
-    void Instance::DestroySurfaceKHR() {
-        surface.reset();
+    void Instance::destroySurfaceKHR() {
+        delete surface;
     }
 
     bool Instance::ValidationEnabled() const noexcept {
         return (extensionHandler->validationLayers != instance_layers::Disabled);
+    }
+
+    void Instance::RecreateSurfaceKHR() {
+        destroySurfaceKHR();
+        createSurfaceKHR();
     }
 
     const VkInstance& Instance::vkHandle() const noexcept {
@@ -93,8 +98,7 @@ namespace vpr {
 
     void RecreateSwapchainAndSurface(Instance * instance, Swapchain * swap) {
         swap->Destroy();
-        instance->DestroySurfaceKHR();
-        instance->CreateSurfaceKHR();
+        instance->RecreateSurfaceKHR();
         swap->Recreate();
     }
 
