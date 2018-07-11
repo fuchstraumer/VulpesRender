@@ -23,19 +23,6 @@ namespace vpr {
         void checkDedicatedAllocExtensions(const std::vector<const char*>& exts);
     };
 
-    struct VkDebugUtilsHandler {
-        PFN_vkSetDebugUtilsObjectNameEXT vkSetDebugUtilsObjectName{ nullptr };
-        PFN_vkSetDebugUtilsObjectTagEXT vkSetDebugUtilsObjectTag{ nullptr };
-        PFN_vkQueueBeginDebugUtilsLabelEXT vkQueueBeginDebugUtilsLabel{ nullptr };
-        PFN_vkQueueEndDebugUtilsLabelEXT vkQueueEndDebugUtilsLabel{ nullptr };
-        PFN_vkCmdBeginDebugUtilsLabelEXT vkCmdBeginDebugUtilsLabel{ nullptr };
-        PFN_vkCmdEndDebugUtilsLabelEXT vkCmdEndDebugUtilsLabel{ nullptr };
-        PFN_vkCmdInsertDebugUtilsLabelEXT vkCmdInsertDebugUtilsLabel{ nullptr };
-        PFN_vkCreateDebugUtilsMessengerEXT vkCreateDebugUtilsMessenger{ nullptr };
-        PFN_vkDestroyDebugUtilsMessengerEXT vkDestroyDebugUtilsMessenger{ nullptr };
-        PFN_vkSubmitDebugUtilsMessageEXT vkSubmitDebugUtilsMessage{ nullptr };
-    };
-
     constexpr const char* const RECOMMENDED_REQUIRED_EXTENSION = "VK_KHR_swapchain";
 
     constexpr static std::array<const char*, 3> RECOMMENDED_OPTIONAL_EXTENSIONS {
@@ -358,9 +345,9 @@ namespace vpr {
         return parent->GetMemoryProperties();
     }
 
-    const VkDebugUtilsHandler& Device::DebugUtilsHandler() const {
+    const VkDebugUtilsFunctions& Device::DebugUtilsHandler() const {
         // In case we don't have member to return, return fully empty struct
-        static const VkDebugUtilsHandler fallback{ nullptr };
+        static const VkDebugUtilsFunctions fallback{ nullptr };
         if (debugUtilsHandler) {
             return *debugUtilsHandler;
         }
@@ -477,7 +464,7 @@ namespace vpr {
         };
 
         if (parentInstance->HasExtension(VK_EXT_DEBUG_UTILS_EXTENSION_NAME)) {
-            debugUtilsHandler = new VkDebugUtilsHandler();
+            debugUtilsHandler = new VkDebugUtilsFunctions();
             debugUtilsHandler->vkSetDebugUtilsObjectName = 
                 reinterpret_cast<PFN_vkSetDebugUtilsObjectNameEXT>(vkGetDeviceProcAddr(handle, "vkSetDebugUtilsObjectNameEXT"));
             check_loaded_pfn((void*)debugUtilsHandler->vkSetDebugUtilsObjectName, "vkSetDebugUtilsObjectName");

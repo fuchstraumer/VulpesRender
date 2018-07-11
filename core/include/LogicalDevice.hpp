@@ -7,15 +7,16 @@
 namespace vpr {
 
     struct DeviceDataMembers;
-    struct VkDebugUtilsHandler;
+    struct VkDebugUtilsFunctions;
     
     struct VPR_API vkQueueFamilyIndices {
+        vkQueueFamilyIndices();
         // indices into queue families.
-        uint32_t Graphics = std::numeric_limits<uint32_t>::max(), 
-                 Compute = std::numeric_limits<uint32_t>::max(), 
-                 Transfer = std::numeric_limits<uint32_t>::max(), 
-                 SparseBinding = std::numeric_limits<uint32_t>::max(), 
-                 Present = std::numeric_limits<uint32_t>::max();
+        uint32_t Graphics;
+        uint32_t Compute;
+        uint32_t Transfer;
+        uint32_t SparseBinding;
+        uint32_t Present;
     };
 
     /**!The Device class is a wrapper around the vkLogicalDevice object. This object is what most Vulkan resources and objects are spawned from,
@@ -41,8 +42,7 @@ namespace vpr {
         };
         
         Device(const Instance* instance, const PhysicalDevice* device, device_extensions extensions_to_use);
-        Device(const Instance* instance, const PhysicalDevice* p_device, const VprExtensionPack* extensions, 
-            const char* const* layer_names = nullptr, const uint32_t layer_count = std::numeric_limits<uint32_t>::max());
+        Device(const Instance* instance, const PhysicalDevice* p_device, const VprExtensionPack* extensions, const char* const* layer_names, const uint32_t layer_count);
         ~Device();
 
         const VkDevice& vkHandle() const;
@@ -89,7 +89,7 @@ namespace vpr {
         const PhysicalDevice& GetPhysicalDevice() const noexcept;
         VkPhysicalDeviceProperties GetPhysicalDeviceProperties() const noexcept;
         VkPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties() const noexcept;
-        const VkDebugUtilsHandler& DebugUtilsHandler() const;
+        const VkDebugUtilsFunctions& DebugUtilsHandler() const;
         
         uint32_t NumGraphicsQueues = 0;
         uint32_t NumComputeQueues = 0;
@@ -114,7 +114,7 @@ namespace vpr {
     
         VkDevice handle{ VK_NULL_HANDLE };
         VkDeviceCreateInfo createInfo{ };
-        VkDebugUtilsHandler* debugUtilsHandler{ nullptr };
+        VkDebugUtilsFunctions* debugUtilsHandler{ nullptr };
         const PhysicalDevice* parent{ nullptr };
         const Instance* parentInstance{ nullptr };
 
