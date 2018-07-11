@@ -358,6 +358,17 @@ namespace vpr {
         return parent->GetMemoryProperties();
     }
 
+    const VkDebugUtilsHandler& Device::DebugUtilsHandler() const {
+        // In case we don't have member to return, return fully empty struct
+        static const VkDebugUtilsHandler fallback{ nullptr };
+        if (debugUtilsHandler) {
+            return *debugUtilsHandler;
+        }
+        else {
+            return fallback;
+        }
+    }
+
     bool Device::HasDedicatedComputeQueues() const {
         if (QueueFamilyIndices.Compute != QueueFamilyIndices.Graphics) {
             return true;
