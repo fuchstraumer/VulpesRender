@@ -433,29 +433,30 @@ namespace vpr {
         std::vector<VkExtensionProperties> queried_extensions(queried_count);
         vkEnumerateDeviceExtensionProperties(device->GetPhysicalDevice().vkHandle(), nullptr, &queried_count, queried_extensions.data());
 
-        const auto has_extension = [queried_extensions](const char* name) {
-            const auto req_found = std::find_if(queried_extensions.cbegin(), queried_extensions.cend(), [name](const VkExtensionProperties& p) {
-                return strcmp(p.extensionName, name) == 0;
-            });
-            return req_found != queried_extensions.end();
-        };
+        auto iter = std::remove_if(std::begin(extensions), std::end(extensions), [queried_extensions, throw_on_error](const char* name) {
+            const auto has_extension = [queried_extensions](const char* name) {
+                const auto req_found = std::find_if(queried_extensions.cbegin(), queried_extensions.cend(), [name](const VkExtensionProperties& p) {
+                    return strcmp(p.extensionName, name) == 0;
+                });
+                return req_found != queried_extensions.end();
+            };
 
-        auto iter = extensions.begin();
-        while (!extensions.empty() && iter != extensions.end()) {
-            if (!has_extension(*iter)) {
+            if (!has_extension(name)) {
                 if (throw_on_error) {
-                    LOG(ERROR) << "Current VkDevice does not support extension \"" << *iter << "\" that is required!";
+                    LOG(ERROR) << "Current VkDevice does not support extension \"" << name << "\" that is required!";
                     throw std::runtime_error("Could not enable/use required extension for the logical device.");
                 }
                 else {
-                    LOG(WARNING) << "Requested device extension with name \"" << *iter << "\" is not available, removing from list.";
-                    extensions.erase(iter++);
+                    LOG(WARNING) << "Requested device extension with name \"" << name << "\" is not available, removing from list.";
                 }
+                return true;
             }
             else {
-                ++iter;
+                return false;
             }
-        }
+        });
+
+        extensions.erase(iter, extensions.end());
     }
     
     void DeviceDataMembers::checkDedicatedAllocExtensions(const std::vector<const char*>& exts) {
