@@ -1,5 +1,6 @@
 #include "vpr_stdafx.h"
 #include "LogicalDevice.hpp"
+#include "VkDebugUtils.hpp"
 #include "PhysicalDevice.hpp"
 #include "Instance.hpp"
 #include "vkAssert.hpp"
@@ -14,11 +15,13 @@ namespace vpr {
     struct DeviceDataMembers {
         DeviceDataMembers(const Device* p) : device(p) {}
         std::vector<const char*> enabledExtensions;
+        // Need to copy some strings, or we'll just end up trying to use the address of passed user strings
+        std::vector<std::string> copiedExtensionStrings;
         const Device* device = nullptr;
         std::map<VkQueueFlags, VkDeviceQueueCreateInfo> queueInfos;
         bool enableDedicatedAllocations{ false };
-        void prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const;
-        void prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const noexcept;
+        void prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output);
+        void prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) noexcept;
         void checkExtensions(std::vector<const char*>& requested_extensions, bool throw_on_error) const;
         void checkDedicatedAllocExtensions(const std::vector<const char*>& exts);
     };
@@ -43,6 +46,10 @@ namespace vpr {
         std::vector<float> compute;
         std::vector<float> sparse_binding;
     } queue_priorities;
+
+
+    vkQueueFamilyIndices::vkQueueFamilyIndices() : Graphics(std::numeric_limits<uint32_t>::max()), Compute(std::numeric_limits<uint32_t>::max()),
+        Transfer(std::numeric_limits<uint32_t>::max()), SparseBinding(std::numeric_limits<uint32_t>::max()), Present(std::numeric_limits<uint32_t>::max()) {}
 
     Device::Device(const Instance* instance, const PhysicalDevice * device, device_extensions extensions_to_use) : parent(device), parentInstance(instance),
         debugUtilsHandler(nullptr), dataMembers(nullptr) {
@@ -385,23 +392,25 @@ namespace vpr {
 
     }
 
-    void DeviceDataMembers::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const {
+    void DeviceDataMembers::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) {
         std::vector<const char*> required_extensions{ extensions->RequiredExtensionNames, 
             extensions->RequiredExtensionNames + extensions->RequiredExtensionCount };
         checkExtensions(required_extensions, true);
 
         for (auto&& elem : required_extensions) {
-            output.emplace_back(std::move(elem));
+            copiedExtensionStrings.emplace_back(std::string(elem));
+            output.emplace_back(copiedExtensionStrings.back().c_str());
         }
     }
 
-    void DeviceDataMembers::prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const noexcept{
+    void DeviceDataMembers::prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) noexcept {
         std::vector<const char*> optional_extensions{ extensions->OptionalExtensionNames, 
             extensions->OptionalExtensionNames + extensions->OptionalExtensionCount };
         checkExtensions(optional_extensions, false);
 
         for (auto&& elem : optional_extensions) {
-            output.emplace_back(std::move(elem));
+            copiedExtensionStrings.emplace_back(std::string(elem));
+            output.emplace_back(copiedExtensionStrings.back().c_str());
         }
 
     }

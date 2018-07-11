@@ -10,6 +10,7 @@ INITIALIZE_EASYLOGGINGPP
 #define GLFW_INCLUDE_VULKAN
 #include "GLFW/glfw3.h"
 #include <vulkan/vulkan.h>
+#include <string>
 
 namespace vpr {
 
@@ -19,10 +20,11 @@ namespace vpr {
     struct InstanceExtensionHandler {
         InstanceExtensionHandler(Instance::instance_layers layers) : validationLayers(layers) {}
         std::vector<const char*> extensionStrings;
+        std::vector<std::string> copiedExtensionStrings;
         Instance::instance_layers validationLayers; 
         void extensionSetup(const VprExtensionPack* extensions);
-        void prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const;
-        void prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const;
+        void prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output);
+        void prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output);
         void extensionCheck(std::vector<const char*>& extensions, bool throw_on_error) const;
         void checkOptionalExtensions(std::vector<const char*>& optional_extensions) const;
         void checkRequiredExtensions(std::vector<const char*>& required_extensions) const;
@@ -80,7 +82,10 @@ namespace vpr {
     }
 
     bool Instance::HasExtension(const char* name) const noexcept {
-        auto iter = std::find(std::cbegin(extensionHandler->extensionStrings), std::cend(extensionHandler->extensionStrings), name);
+        // have to use strcmp or we'll just compare addresses, heh
+        auto iter = std::find_if(std::cbegin(extensionHandler->extensionStrings), std::cend(extensionHandler->extensionStrings), [name](const char* str) {
+            return strcmp(name, str) == 0;
+        });
         if (iter != std::cend(extensionHandler->extensionStrings)) {
             return true;
         }
@@ -201,7 +206,7 @@ namespace vpr {
 
     }
 
-    void InstanceExtensionHandler::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const {
+    void InstanceExtensionHandler::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) {
 
         uint32_t req_ext_cnt = 0;
         const char** req_ext_names = nullptr;
@@ -218,7 +223,8 @@ namespace vpr {
                     extensions->RequiredExtensionNames + extensions->RequiredExtensionCount };
 
                 for (auto&& elem : input_required_extensions) {
-                    output.emplace_back(std::move(elem));
+                    copiedExtensionStrings.emplace_back(std::string(elem));
+                    output.emplace_back(copiedExtensionStrings.back().c_str());
                 }
             }
         }
@@ -230,14 +236,15 @@ namespace vpr {
         checkRequiredExtensions(output);
     }
 
-    void InstanceExtensionHandler::prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const {
+    void InstanceExtensionHandler::prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) {
         std::vector<const char*> optional_extensions{ extensions->OptionalExtensionNames, 
             extensions->OptionalExtensionNames + extensions->OptionalExtensionCount };
 
         checkOptionalExtensions(optional_extensions);
 
-        for(auto&& elem : optional_extensions) {
-            output.emplace_back(std::move(elem));
+        for(auto& elem : optional_extensions) {
+            copiedExtensionStrings.emplace_back(std::string(elem));
+            output.emplace_back(copiedExtensionStrings.back().c_str());
         }
 
     }
@@ -247,10 +254,6 @@ namespace vpr {
         vkEnumerateInstanceExtensionProperties(nullptr, &queried_extension_count, nullptr);
         std::vector<VkExtensionProperties> queried_extensions(queried_extension_count);
         vkEnumerateInstanceExtensionProperties(nullptr, &queried_extension_count, queried_extensions.data());
-
-        const auto has_extension = [queried_extensions](const char* name) {
-            
-        };
 
         auto iter = std::remove_if(std::begin(extensions), std::end(extensions), [queried_extensions, throw_on_error](const char* name) {
             auto req_found = std::find_if(queried_extensions.cbegin(), queried_extensions.cend(), [name](const VkExtensionProperties& properties) {
