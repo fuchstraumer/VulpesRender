@@ -5,21 +5,24 @@
 #include "Instance.hpp"
 #include "PhysicalDevice.hpp"
 #include "LogicalDevice.hpp"
-#define GLFW_INCLUDE_VULKAN
-#include "GLFW/glfw3.h"
 #include <vector>
 #include <algorithm>
+#define GLFW_INCLUDE_VULKAN
+#include "GLFW/glfw3.h"
+#include "easylogging++.h"
 
 namespace vpr {
     
     struct SwapchainImpl {
 
-        SwapchainImpl(const Instance* instance, const Device* device);
+        SwapchainImpl(const Instance* instance, const Device* device, uint32_t mode);
+        ~SwapchainImpl();
 
         /** SwapchainInfo takes care of hiding away much of the setup work required to create a swapchain. However, it does contain some data
         *   that may be useful, like the presentation mode being used or the color format of the surface object being used.
         *   \ingroup Rendering
         */
+
         struct SwapchainInfo {
             SwapchainInfo(const VkPhysicalDevice& dvc, const VkSurfaceKHR& sfc);
             VkSurfaceCapabilitiesKHR Capabilities;
@@ -46,16 +49,23 @@ namespace vpr {
         void setupImageViews();
 
         VkPresentModeKHR presentMode;
+        uint32_t desiredSyncMode;
         VkSurfaceFormatKHR surfaceFormat;
         VkSwapchainCreateInfoKHR createInfo;
         VkSwapchainKHR handle = VK_NULL_HANDLE;
+        VkSwapchainKHR oldHandle = VK_NULL_HANDLE;
         const Instance* instance;
         const PhysicalDevice* phys_device;
         const Device* device;
     };
 
-    SwapchainImpl::SwapchainImpl(const Instance * _instance, const Device * _device) : instance(_instance), device(_device), info(_device->GetPhysicalDevice().vkHandle(), _instance->vkSurface()) {
+    SwapchainImpl::SwapchainImpl(const Instance * _instance, const Device * _device, uint32_t mode) : desiredSyncMode(mode),
+        instance(_instance), device(_device), info(_device->GetPhysicalDevice().vkHandle(), _instance->vkSurface()) {
         create();
+    }
+
+    SwapchainImpl::~SwapchainImpl() {
+        destroy();
     }
 
     void SwapchainImpl::create() {
@@ -140,17 +150,13 @@ namespace vpr {
 
     }
 
-    Swapchain::Swapchain(const Instance * _instance, const Device * _device) : impl(std::make_unique<SwapchainImpl>(_instance, _device)) {}
+    Swapchain::Swapchain(const Instance * _instance, const Device * _device, uint32_t mode) : impl(new SwapchainImpl(_instance, _device, mode)) {}
 
     Swapchain::~Swapchain(){
         Destroy();
     }
 
     void Swapchain::Recreate() {
-        const Instance* inst = impl->instance;
-        const Device* dvc = impl->device;
-        impl.reset();
-        impl = std::make_unique<SwapchainImpl>(inst, dvc);
         impl->imageCount = 0;
         impl->info = SwapchainImpl::SwapchainInfo(impl->device->GetPhysicalDevice().vkHandle(), impl->instance->vkSurface());
         impl->create();
@@ -162,22 +168,62 @@ namespace vpr {
                 vkDestroyImageView(device->vkHandle(), view, nullptr);
             }
         }
+
         if (handle != VK_NULL_HANDLE) {
+            oldHandle = handle;
             vkDestroySwapchainKHR(device->vkHandle(), handle, nullptr);
         }
+
+        imageViews.clear(); imageViews.shrink_to_fit();
+        handle = VK_NULL_HANDLE;
     }
 
     void SwapchainImpl::setParameters() {
 
         surfaceFormat = info.GetBestFormat();
         colorFormat = surfaceFormat.format;
-        presentMode = info.GetBestPresentMode();
         extent = info.ChooseSwapchainExtent(instance->GetGLFWwindow());
 
+        presentMode = info.GetBestPresentMode();
+        VkPresentModeKHR desiredMode = VK_PRESENT_MODE_BEGIN_RANGE_KHR;
+        switch (desiredSyncMode) {
+        case vertical_sync_mode::None:
+            desiredMode = VK_PRESENT_MODE_IMMEDIATE_KHR;
+            break;
+        case vertical_sync_mode::VerticalSync:
+            desiredMode = VK_PRESENT_MODE_FIFO_KHR;
+            break;
+        case vertical_sync_mode::VerticalSyncRelaxed:
+            desiredMode = VK_PRESENT_MODE_FIFO_RELAXED_KHR;
+            break;
+        case vertical_sync_mode::VerticalSyncMailbox:
+            desiredMode = VK_PRESENT_MODE_MAILBOX_KHR;
+            break;
+        default:
+            desiredMode = presentMode;
+            break;
+        }
+
+        if (desiredMode != presentMode) {
+            auto& avail_modes = info.PresentModes;
+            auto iter = std::find(std::begin(avail_modes), std::end(avail_modes), desiredMode);
+            if (iter == std::cend(avail_modes)) {
+                LOG(WARNING) << "Desired vertical sync mode is not available on current hardware!";
+            }
+            else {
+                presentMode = *iter;
+            }
+        }
+
         // Create one more image than minspec to implement triple buffering (in hope we got mailbox present mode)
-        imageCount = info.Capabilities.minImageCount + 1;
-        if (info.Capabilities.maxImageCount > 0 && imageCount > info.Capabilities.maxImageCount) {
-            imageCount = info.Capabilities.maxImageCount;
+        if (presentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
+            imageCount = info.Capabilities.minImageCount + 1;
+            if (info.Capabilities.maxImageCount > 0 && imageCount > info.Capabilities.maxImageCount) {
+                imageCount = info.Capabilities.maxImageCount;
+            }
+        }
+        else {
+            imageCount = info.Capabilities.minImageCount;
         }
 
     }
@@ -188,6 +234,7 @@ namespace vpr {
         createInfo.surface = instance->vkSurface();
         createInfo.imageFormat = surfaceFormat.format;
         createInfo.imageColorSpace = surfaceFormat.colorSpace;
+        colorSpace = surfaceFormat.colorSpace;
         createInfo.imageExtent = extent;
         createInfo.imageArrayLayers = 1;
         createInfo.minImageCount = imageCount;
@@ -245,7 +292,6 @@ namespace vpr {
 
     void Swapchain::Destroy(){
         impl->destroy();
-        impl.reset();
     }
 
     const VkSwapchainKHR& Swapchain::vkHandle() const noexcept {

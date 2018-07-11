@@ -3,11 +3,11 @@
 #define VULPES_VK_INSTANCE_H
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
-#include <memory>
 
 namespace vpr {
 
     struct InstanceExtensionHandler;
+
 
     /** The Core group handles the base Vulkan resources and objects: LogicalDevice, PhysicalDevice, Instance, and Window. It also 
     *   includes the InputHandler class, which is responsible for handling input events and updats from the Window class.
@@ -52,36 +52,38 @@ namespace vpr {
         ~Instance();
 
         const VkInstance& vkHandle() const noexcept;
-        const VkSurfaceKHR& vkSurface() const noexcept;
         GLFWwindow* GetGLFWwindow() const noexcept;
         void DebugMessage(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT obj_type, uint64_t obj, size_t location, int32_t msg_code, const char* layer, const char* message);
-
-        void CreateSurfaceKHR();
-        void DestroySurfaceKHR();
+        const VkSurfaceKHR& vkSurface() const noexcept;
 
         bool ValidationEnabled() const noexcept;
+        void RecreateSurfaceKHR(const Device* dvc);
+        bool HasExtension(const char* extension_name) const noexcept;
 
     private:
 
+        void createSurfaceKHR();
+        void destroySurfaceKHR();
         void prepareValidation(const char* const* layers, const uint32_t layer_count);
         bool checkValidationSupport(const char* const* layer_names, const uint32_t layer_count) const;
         void checkApiVersionSupport(VkApplicationInfo* info);
         void prepareValidationCallbacks();
         
         mutable GLFWwindow* window;
-        std::unique_ptr<SurfaceKHR> surface;
-        std::unique_ptr<InstanceExtensionHandler> extensionHandler;
+        InstanceExtensionHandler* extensionHandler;
+        SurfaceKHR* surface;
         VkInstance handle;
         VkInstanceCreateInfo createInfo;
         VkDebugReportCallbackEXT debugCallback;
         PFN_vkDebugReportMessageEXT debugMessageFn{ nullptr };
+
     };
 
     /** Pass a swapchain and instance pointer to this to have the swapchain and surface destroyed and recreated
     *   in the proper order. If done incorrectly, the validation layers will give you errors about a surface being 
     *   destroyed before it's swapchain is (in the best case), or crash in the worst case
     */
-    void VPR_API RecreateSwapchainAndSurface(Instance* instance, Swapchain* swap);
+    void VPR_API RecreateSwapchainAndSurface(Device* device, Instance* instance, Swapchain* swap);
 
     VKAPI_ATTR VkBool32 VKAPI_CALL VkDebugCallbackFn(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT type, uint64_t object_handle, size_t location, int32_t message_code, const char* layer_prefix,
         const char* message, void* user_data);

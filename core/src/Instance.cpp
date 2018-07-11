@@ -1,6 +1,7 @@
 #include "vpr_stdafx.h"
 #include "Instance.hpp"
 #include "PhysicalDevice.hpp"
+#include "LogicalDevice.hpp"
 #include "SurfaceKHR.hpp"
 #include "Swapchain.hpp"
 #include "vkAssert.hpp"
@@ -10,6 +11,7 @@ INITIALIZE_EASYLOGGINGPP
 #define GLFW_INCLUDE_VULKAN
 #include "GLFW/glfw3.h"
 #include <vulkan/vulkan.h>
+#include <string>
 
 namespace vpr {
 
@@ -19,10 +21,11 @@ namespace vpr {
     struct InstanceExtensionHandler {
         InstanceExtensionHandler(Instance::instance_layers layers) : validationLayers(layers) {}
         std::vector<const char*> extensionStrings;
+        std::vector<std::string> copiedExtensionStrings;
         Instance::instance_layers validationLayers; 
         void extensionSetup(const VprExtensionPack* extensions);
-        void prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const;
-        void prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const;
+        void prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output);
+        void prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output);
         void extensionCheck(std::vector<const char*>& extensions, bool throw_on_error) const;
         void checkOptionalExtensions(std::vector<const char*>& optional_extensions) const;
         void checkRequiredExtensions(std::vector<const char*>& required_extensions) const;
@@ -31,7 +34,8 @@ namespace vpr {
     Instance::Instance(instance_layers layers, const VkApplicationInfo*info, GLFWwindow* _window) : Instance(layers, info, _window, nullptr) {}
 
     Instance::Instance(instance_layers layers_flags, const VkApplicationInfo * info, GLFWwindow * _window, const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) :
-        window(_window), extensionHandler(std::make_unique<InstanceExtensionHandler>(layers_flags)), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, nullptr } {
+        window(_window), extensionHandler(new InstanceExtensionHandler(layers_flags)), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, nullptr },
+        surface(nullptr) {
         VkApplicationInfo our_info = *info;
 
         extensionHandler->extensionSetup(extensions);
@@ -48,7 +52,7 @@ namespace vpr {
             prepareValidationCallbacks();
         }
 
-        CreateSurfaceKHR();
+        createSurfaceKHR();
     }
 
     Instance::~Instance() {
@@ -56,21 +60,57 @@ namespace vpr {
             auto func = (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(handle, "vkDestroyDebugReportCallbackEXT");
             func(handle, debugCallback, nullptr);
         }
-        DestroySurfaceKHR();
+        destroySurfaceKHR();
         vkDestroyInstance(handle, nullptr);
     }
 
-    void Instance::CreateSurfaceKHR() {
+    void Instance::createSurfaceKHR() {
         LOG_IF(surface, WARNING) << "Attempting to create a SurfaceKHR when one might already exist: if it does, this will probably cause swapchain errors!";
-        surface = std::make_unique<SurfaceKHR>(this, window);
+        surface = new SurfaceKHR(this, window);
     }
 
-    void Instance::DestroySurfaceKHR() {
-        surface.reset();
+    void Instance::destroySurfaceKHR() {
+        delete surface;
+        surface = nullptr;
     }
 
     bool Instance::ValidationEnabled() const noexcept {
         return (extensionHandler->validationLayers != instance_layers::Disabled);
+    }
+
+    void VerifyPresentationSupport(VkPhysicalDevice physical_device, VkSurfaceKHR surface) {
+        // Check presentation support
+        VkBool32 present_support = VK_FALSE;
+        for (uint32_t i = 0; i < 3; ++i) {
+            vkGetPhysicalDeviceSurfaceSupportKHR(physical_device, i, surface, &present_support);
+            if (present_support) {
+                break;
+            }
+        }
+
+        if (!present_support) {
+            LOG(ERROR) << "No queues found that support presentation to a surface.";
+            throw std::runtime_error("No queues found that support presentation to a surface!");
+        }
+    }
+
+    void Instance::RecreateSurfaceKHR(const Device* dvc) {
+        destroySurfaceKHR();
+        createSurfaceKHR();
+        VerifyPresentationSupport(dvc->GetPhysicalDevice().vkHandle(), surface->vkHandle());
+    }
+
+    bool Instance::HasExtension(const char* name) const noexcept {
+        // have to use strcmp or we'll just compare addresses, heh
+        auto iter = std::find_if(std::cbegin(extensionHandler->extensionStrings), std::cend(extensionHandler->extensionStrings), [name](const char* str) {
+            return strcmp(name, str) == 0;
+        });
+        if (iter != std::cend(extensionHandler->extensionStrings)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     const VkInstance& Instance::vkHandle() const noexcept {
@@ -91,10 +131,9 @@ namespace vpr {
         }
     }
 
-    void RecreateSwapchainAndSurface(Instance * instance, Swapchain * swap) {
+    void RecreateSwapchainAndSurface(Device* device, Instance * instance, Swapchain * swap) {
         swap->Destroy();
-        instance->DestroySurfaceKHR();
-        instance->CreateSurfaceKHR();
+        instance->RecreateSurfaceKHR(device);
         swap->Recreate();
     }
 
@@ -186,7 +225,7 @@ namespace vpr {
 
     }
 
-    void InstanceExtensionHandler::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const {
+    void InstanceExtensionHandler::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) {
 
         uint32_t req_ext_cnt = 0;
         const char** req_ext_names = nullptr;
@@ -203,7 +242,8 @@ namespace vpr {
                     extensions->RequiredExtensionNames + extensions->RequiredExtensionCount };
 
                 for (auto&& elem : input_required_extensions) {
-                    output.emplace_back(std::move(elem));
+                    copiedExtensionStrings.emplace_back(std::string(elem));
+                    output.emplace_back(copiedExtensionStrings.back().c_str());
                 }
             }
         }
@@ -215,14 +255,15 @@ namespace vpr {
         checkRequiredExtensions(output);
     }
 
-    void InstanceExtensionHandler::prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) const {
+    void InstanceExtensionHandler::prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) {
         std::vector<const char*> optional_extensions{ extensions->OptionalExtensionNames, 
             extensions->OptionalExtensionNames + extensions->OptionalExtensionCount };
 
         checkOptionalExtensions(optional_extensions);
 
-        for(auto&& elem : optional_extensions) {
-            output.emplace_back(std::move(elem));
+        for(auto& elem : optional_extensions) {
+            copiedExtensionStrings.emplace_back(std::string(elem));
+            output.emplace_back(copiedExtensionStrings.back().c_str());
         }
 
     }
@@ -232,10 +273,6 @@ namespace vpr {
         vkEnumerateInstanceExtensionProperties(nullptr, &queried_extension_count, nullptr);
         std::vector<VkExtensionProperties> queried_extensions(queried_extension_count);
         vkEnumerateInstanceExtensionProperties(nullptr, &queried_extension_count, queried_extensions.data());
-
-        const auto has_extension = [queried_extensions](const char* name) {
-            
-        };
 
         auto iter = std::remove_if(std::begin(extensions), std::end(extensions), [queried_extensions, throw_on_error](const char* name) {
             auto req_found = std::find_if(queried_extensions.cbegin(), queried_extensions.cend(), [name](const VkExtensionProperties& properties) {

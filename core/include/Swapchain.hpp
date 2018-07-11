@@ -3,11 +3,19 @@
 #define VULPES_VK_SWAPCHAIN_H
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
-#include <memory>
 
 namespace vpr {
 
     struct SwapchainImpl;
+
+    namespace vertical_sync_mode {
+        enum e : uint32_t {
+            None = 0,
+            VerticalSync = 1,
+            VerticalSyncRelaxed = 2,
+            VerticalSyncMailbox = 3
+        };
+    }
 
     /** This class abstracts away much of the detailed work and boilerplate code required to setup a swapchain in Vulkan. Init() only needs to be called once 
     *   during runtime: recreating the swapchain is easily accomplished using the appropriate recreation method. 
@@ -18,7 +26,7 @@ namespace vpr {
         Swapchain& operator=(const Swapchain&) = delete;
     public:
 
-        Swapchain(const Instance* _instance, const Device* _device);
+        Swapchain(const Instance* _instance, const Device* _device, uint32_t sync_mode);
         ~Swapchain();
         void Recreate();
         void Destroy();
@@ -32,7 +40,7 @@ namespace vpr {
         const VkImageView& ImageView(const size_t& idx) const;
 
     private:
-        std::unique_ptr<SwapchainImpl> impl;
+        SwapchainImpl* impl;
     };
 }
 #endif // !VULPES_VK_SWAPCHAIN_H
