@@ -57,7 +57,7 @@ namespace vpr {
         const VkSurfaceKHR& vkSurface() const noexcept;
 
         bool ValidationEnabled() const noexcept;
-        void RecreateSurfaceKHR();
+        void RecreateSurfaceKHR(const Device* dvc);
         bool HasExtension(const char* extension_name) const noexcept;
 
     private:
@@ -83,7 +83,7 @@ namespace vpr {
     *   in the proper order. If done incorrectly, the validation layers will give you errors about a surface being 
     *   destroyed before it's swapchain is (in the best case), or crash in the worst case
     */
-    void VPR_API RecreateSwapchainAndSurface(Instance* instance, Swapchain* swap);
+    void VPR_API RecreateSwapchainAndSurface(Device* device, Instance* instance, Swapchain* swap);
 
     VKAPI_ATTR VkBool32 VKAPI_CALL VkDebugCallbackFn(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT type, uint64_t object_handle, size_t location, int32_t message_code, const char* layer_prefix,
         const char* message, void* user_data);

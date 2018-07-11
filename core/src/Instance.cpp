@@ -1,6 +1,7 @@
 #include "vpr_stdafx.h"
 #include "Instance.hpp"
 #include "PhysicalDevice.hpp"
+#include "LogicalDevice.hpp"
 #include "SurfaceKHR.hpp"
 #include "Swapchain.hpp"
 #include "vkAssert.hpp"
@@ -70,15 +71,33 @@ namespace vpr {
 
     void Instance::destroySurfaceKHR() {
         delete surface;
+        surface = nullptr;
     }
 
     bool Instance::ValidationEnabled() const noexcept {
         return (extensionHandler->validationLayers != instance_layers::Disabled);
     }
 
-    void Instance::RecreateSurfaceKHR() {
+    void VerifyPresentationSupport(VkPhysicalDevice physical_device, VkSurfaceKHR surface) {
+        // Check presentation support
+        VkBool32 present_support = VK_FALSE;
+        for (uint32_t i = 0; i < 3; ++i) {
+            vkGetPhysicalDeviceSurfaceSupportKHR(physical_device, i, surface, &present_support);
+            if (present_support) {
+                break;
+            }
+        }
+
+        if (!present_support) {
+            LOG(ERROR) << "No queues found that support presentation to a surface.";
+            throw std::runtime_error("No queues found that support presentation to a surface!");
+        }
+    }
+
+    void Instance::RecreateSurfaceKHR(const Device* dvc) {
         destroySurfaceKHR();
         createSurfaceKHR();
+        VerifyPresentationSupport(dvc->GetPhysicalDevice().vkHandle(), surface->vkHandle());
     }
 
     bool Instance::HasExtension(const char* name) const noexcept {
@@ -112,9 +131,9 @@ namespace vpr {
         }
     }
 
-    void RecreateSwapchainAndSurface(Instance * instance, Swapchain * swap) {
+    void RecreateSwapchainAndSurface(Device* device, Instance * instance, Swapchain * swap) {
         swap->Destroy();
-        instance->RecreateSurfaceKHR();
+        instance->RecreateSurfaceKHR(device);
         swap->Recreate();
     }
 
