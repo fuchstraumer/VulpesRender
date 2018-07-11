@@ -429,7 +429,7 @@ namespace vpr {
         };
 
         auto iter = extensions.begin();
-        while (iter != extensions.end()) {
+        while (!extensions.empty() && iter != extensions.end()) {
             if (!has_extension(*iter)) {
                 if (throw_on_error) {
                     LOG(ERROR) << "Current VkDevice does not support extension \"" << *iter << "\" that is required!";
