@@ -16,6 +16,7 @@ namespace vpr {
     struct SwapchainImpl {
 
         SwapchainImpl(const Instance* instance, const Device* device, uint32_t mode);
+        ~SwapchainImpl();
 
         /** SwapchainInfo takes care of hiding away much of the setup work required to create a swapchain. However, it does contain some data
         *   that may be useful, like the presentation mode being used or the color format of the surface object being used.
@@ -52,6 +53,7 @@ namespace vpr {
         VkSurfaceFormatKHR surfaceFormat;
         VkSwapchainCreateInfoKHR createInfo;
         VkSwapchainKHR handle = VK_NULL_HANDLE;
+        VkSwapchainKHR oldHandle = VK_NULL_HANDLE;
         const Instance* instance;
         const PhysicalDevice* phys_device;
         const Device* device;
@@ -60,6 +62,10 @@ namespace vpr {
     SwapchainImpl::SwapchainImpl(const Instance * _instance, const Device * _device, uint32_t mode) : desiredSyncMode(mode),
         instance(_instance), device(_device), info(_device->GetPhysicalDevice().vkHandle(), _instance->vkSurface()) {
         create();
+    }
+
+    SwapchainImpl::~SwapchainImpl() {
+        destroy();
     }
 
     void SwapchainImpl::create() {
@@ -151,11 +157,6 @@ namespace vpr {
     }
 
     void Swapchain::Recreate() {
-        const Instance* inst = impl->instance;
-        const Device* dvc = impl->device;
-        const uint32_t mode = impl->desiredSyncMode;
-        delete impl;
-        impl = new SwapchainImpl(inst, dvc, mode);
         impl->imageCount = 0;
         impl->info = SwapchainImpl::SwapchainInfo(impl->device->GetPhysicalDevice().vkHandle(), impl->instance->vkSurface());
         impl->create();
@@ -167,9 +168,14 @@ namespace vpr {
                 vkDestroyImageView(device->vkHandle(), view, nullptr);
             }
         }
+
         if (handle != VK_NULL_HANDLE) {
+            oldHandle = handle;
             vkDestroySwapchainKHR(device->vkHandle(), handle, nullptr);
         }
+
+        imageViews.clear(); imageViews.shrink_to_fit();
+        handle = VK_NULL_HANDLE;
     }
 
     void SwapchainImpl::setParameters() {
@@ -286,7 +292,6 @@ namespace vpr {
 
     void Swapchain::Destroy(){
         impl->destroy();
-        delete impl;
     }
 
     const VkSwapchainKHR& Swapchain::vkHandle() const noexcept {
