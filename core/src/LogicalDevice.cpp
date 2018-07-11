@@ -23,10 +23,24 @@ namespace vpr {
         void checkDedicatedAllocExtensions(const std::vector<const char*>& exts);
     };
 
+    struct VkDebugUtilsHandler {
+        PFN_vkSetDebugUtilsObjectNameEXT vkSetDebugUtilsObjectName{ nullptr };
+        PFN_vkSetDebugUtilsObjectTagEXT vkSetDebugUtilsObjectTag{ nullptr };
+        PFN_vkQueueBeginDebugUtilsLabelEXT vkQueueBeginDebugUtilsLabel{ nullptr };
+        PFN_vkQueueEndDebugUtilsLabelEXT vkQueueEndDebugUtilsLabel{ nullptr };
+        PFN_vkCmdBeginDebugUtilsLabelEXT vkCmdBeginDebugUtilsLabel{ nullptr };
+        PFN_vkCmdEndDebugUtilsLabelEXT vkCmdEndDebugUtilsLabel{ nullptr };
+        PFN_vkCmdInsertDebugUtilsLabelEXT vkCmdInsertDebugUtilsLabel{ nullptr };
+        PFN_vkCreateDebugUtilsMessengerEXT vkCreateDebugUtilsMessenger{ nullptr };
+        PFN_vkDestroyDebugUtilsMessengerEXT vkDestroyDebugUtilsMessenger{ nullptr };
+        PFN_vkSubmitDebugUtilsMessageEXT vkSubmitDebugUtilsMessage{ nullptr };
+    };
+
     constexpr const char* const RECOMMENDED_REQUIRED_EXTENSION = "VK_KHR_swapchain";
 
-    constexpr static std::array<const char*, 2> RECOMMENDED_OPTIONAL_EXTENSIONS {
-        VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME, VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME
+    constexpr static std::array<const char*, 3> RECOMMENDED_OPTIONAL_EXTENSIONS {
+        VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME, 
+        VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME
     };
 
     constexpr VprExtensionPack RECOMMENDED_EXTENSIONS {
@@ -43,7 +57,8 @@ namespace vpr {
         std::vector<float> sparse_binding;
     } queue_priorities;
 
-    Device::Device(const Instance* instance, const PhysicalDevice * device, device_extensions extensions_to_use) : parent(device), parentInstance(instance) {
+    Device::Device(const Instance* instance, const PhysicalDevice * device, device_extensions extensions_to_use) : parent(device), parentInstance(instance),
+        debugUtilsHandler(nullptr), dataMembers(nullptr) {
         if (extensions_to_use != device_extensions::None) {
             create(&RECOMMENDED_EXTENSIONS, nullptr, 0);
         }
@@ -53,15 +68,25 @@ namespace vpr {
     }
 
     Device::Device(const Instance* instance, const PhysicalDevice* dvc, const VprExtensionPack* extensions, const char* const* layer_names, 
-        const uint32_t layer_count) : parent(dvc), parentInstance(instance) {
+        const uint32_t layer_count) : parent(dvc), parentInstance(instance), debugUtilsHandler(nullptr), dataMembers(nullptr) {
         create(extensions, layer_names, layer_count);
+    }
+
+    Device::~Device(){
+        if (dataMembers) {
+            delete dataMembers;
+        }
+        if (debugUtilsHandler) {
+            delete debugUtilsHandler;
+        }
+        vkDestroyDevice(handle, nullptr);
     }
 
     void Device::create(const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) {
 
         createInfo = vk_device_create_info_base;
-        dataMembers = std::make_unique<DeviceDataMembers>(this);
-        VerifyPresentationSupport();
+        dataMembers = new DeviceDataMembers(this);
+        verifyPresentationSupport();
         setupQueues();
         setupValidation(layers, layer_count);
         setupExtensions(extensions);
@@ -78,6 +103,8 @@ namespace vpr {
 
         VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, nullptr, &handle);
         VkAssert(result);
+
+        setupDebugUtilsHandler();
 
     }
 
@@ -127,7 +154,7 @@ namespace vpr {
 
     void Device::setupGraphicsQueues() {
         QueueFamilyIndices.Graphics = parent->GetQueueFamilyIndex(VK_QUEUE_GRAPHICS_BIT);
-        auto create_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_GRAPHICS_BIT));
+        auto create_info = setupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_GRAPHICS_BIT));
         create_info.queueFamilyIndex = QueueFamilyIndices.Graphics;
         NumGraphicsQueues = 1;
         create_info.queueCount = NumGraphicsQueues;
@@ -139,7 +166,7 @@ namespace vpr {
     void Device::setupComputeQueues() {
         QueueFamilyIndices.Compute = parent->GetQueueFamilyIndex(VK_QUEUE_COMPUTE_BIT);
         if (QueueFamilyIndices.Compute != QueueFamilyIndices.Graphics) {
-            auto compute_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_COMPUTE_BIT));
+            auto compute_info = setupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_COMPUTE_BIT));
             compute_info.queueFamilyIndex = QueueFamilyIndices.Compute;
             NumComputeQueues = compute_info.queueCount;
             compute_info.queueCount = NumComputeQueues;
@@ -160,7 +187,7 @@ namespace vpr {
     void Device::setupTransferQueues() {
         QueueFamilyIndices.Transfer = parent->GetQueueFamilyIndex(VK_QUEUE_TRANSFER_BIT);
         if (QueueFamilyIndices.Transfer != QueueFamilyIndices.Graphics) {
-            auto transfer_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_TRANSFER_BIT));
+            auto transfer_info = setupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_TRANSFER_BIT));
             transfer_info.queueFamilyIndex = QueueFamilyIndices.Transfer;
             NumTransferQueues = transfer_info.queueCount;
             queue_priorities.transfer = std::vector<float>(NumTransferQueues, 1.0f);
@@ -179,7 +206,7 @@ namespace vpr {
     void Device::setupSparseBindingQueues() {
         QueueFamilyIndices.SparseBinding = parent->GetQueueFamilyIndex(VK_QUEUE_SPARSE_BINDING_BIT);
         if (QueueFamilyIndices.SparseBinding != QueueFamilyIndices.Graphics) {
-            auto sparse_info = SetupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT));
+            auto sparse_info = setupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT));
             sparse_info.queueFamilyIndex = QueueFamilyIndices.SparseBinding;
             NumSparseBindingQueues = sparse_info.queueCount;
             queue_priorities.sparse_binding = std::vector<float>(NumSparseBindingQueues, 1.0f);
@@ -195,7 +222,7 @@ namespace vpr {
         }
     }
 
-    void Device::VerifyPresentationSupport() {
+    void Device::verifyPresentationSupport() {
     
         // Check presentation support
         VkBool32 present_support = false;
@@ -214,21 +241,17 @@ namespace vpr {
 
     }
 
-    VkDeviceQueueCreateInfo Device::SetupQueueFamily(const VkQueueFamilyProperties & family_properties) {
+    VkDeviceQueueCreateInfo Device::setupQueueFamily(const VkQueueFamilyProperties & family_properties) {
         VkDeviceQueueCreateInfo result = vk_device_queue_create_info_base;
         result.queueCount = family_properties.queueCount;
         return result;
-    }
-
-    Device::~Device(){
-        vkDestroyDevice(handle, nullptr);
     }
 
     const VkDevice & Device::vkHandle() const{
         return handle;
     }
 
-    void Device::CheckSurfaceSupport(const VkSurfaceKHR& surf) {
+    void Device::checkSurfaceSupport(const VkSurfaceKHR& surf) {
         VkBool32 supported;
         vkGetPhysicalDeviceSurfaceSupportKHR(parent->vkHandle(), QueueFamilyIndices.Present, surf, &supported);
         assert(supported);
@@ -432,6 +455,48 @@ namespace vpr {
         }
         else {
             enableDedicatedAllocations = false;
+        }
+    }
+
+    void Device::setupDebugUtilsHandler() {
+        auto check_loaded_pfn = [](const void* ptr, const char* fname) {
+            if (!ptr) {
+                LOG(ERROR) << "Failed to load function pointer " << fname << "for debug utils extension!";
+            }
+        };
+
+        if (parentInstance->HasExtension(VK_EXT_DEBUG_UTILS_EXTENSION_NAME)) {
+            debugUtilsHandler = new VkDebugUtilsHandler();
+            debugUtilsHandler->vkSetDebugUtilsObjectName = 
+                reinterpret_cast<PFN_vkSetDebugUtilsObjectNameEXT>(vkGetDeviceProcAddr(handle, "vkSetDebugUtilsObjectNameEXT"));
+            check_loaded_pfn((void*)debugUtilsHandler->vkSetDebugUtilsObjectName, "vkSetDebugUtilsObjectName");
+            debugUtilsHandler->vkSetDebugUtilsObjectTag =
+                reinterpret_cast<PFN_vkSetDebugUtilsObjectTagEXT>(vkGetDeviceProcAddr(handle, "vkSetDebugUtilsObjectTagEXT"));
+            check_loaded_pfn((void*)debugUtilsHandler->vkSetDebugUtilsObjectTag, "vkSetDebugUtilsObjectTag");
+            debugUtilsHandler->vkQueueBeginDebugUtilsLabel = 
+                reinterpret_cast<PFN_vkQueueBeginDebugUtilsLabelEXT>(vkGetDeviceProcAddr(handle, "vkQueueBeginDebugUtilsLabelEXT"));
+            check_loaded_pfn((void*)debugUtilsHandler->vkQueueBeginDebugUtilsLabel, "vkQueueBeginDebugUtilsLabel");
+            debugUtilsHandler->vkQueueEndDebugUtilsLabel = 
+                reinterpret_cast<PFN_vkQueueEndDebugUtilsLabelEXT>(vkGetDeviceProcAddr(handle, "vkQueueEndDebugUtilsLabelEXT"));
+            check_loaded_pfn((void*)debugUtilsHandler->vkQueueEndDebugUtilsLabel, "vkQueueEndDebugUtilsLabel");
+            debugUtilsHandler->vkCmdBeginDebugUtilsLabel =
+                reinterpret_cast<PFN_vkCmdBeginDebugUtilsLabelEXT>(vkGetDeviceProcAddr(handle, "vkCmdBeginDebugUtilsLabelEXT"));
+            check_loaded_pfn((void*)debugUtilsHandler->vkCmdBeginDebugUtilsLabel, "vkCmdBeginDebugUtilsLabel");
+            debugUtilsHandler->vkCmdEndDebugUtilsLabel =
+                reinterpret_cast<PFN_vkCmdEndDebugUtilsLabelEXT>(vkGetDeviceProcAddr(handle, "vkCmdEndDebugUtilsLabelEXT"));
+            check_loaded_pfn((void*)debugUtilsHandler->vkCmdEndDebugUtilsLabel, "vkCmdEndDebugUtilsLabel");
+            debugUtilsHandler->vkCmdInsertDebugUtilsLabel =
+                reinterpret_cast<PFN_vkCmdInsertDebugUtilsLabelEXT>(vkGetDeviceProcAddr(handle, "vkCmdInsertDebugUtilsLabelEXT"));
+            check_loaded_pfn((void*)debugUtilsHandler->vkCmdInsertDebugUtilsLabel, "vkCmdInsertDebugUtilsLabel");
+            debugUtilsHandler->vkCreateDebugUtilsMessenger =
+                reinterpret_cast<PFN_vkCreateDebugUtilsMessengerEXT>(vkGetDeviceProcAddr(handle, "vkCreateDebugUtilsMessengerEXT"));
+            check_loaded_pfn((void*)debugUtilsHandler->vkCreateDebugUtilsMessenger, "vkCreateDebugUtilsMessenger");
+            debugUtilsHandler->vkDestroyDebugUtilsMessenger =
+                reinterpret_cast<PFN_vkDestroyDebugUtilsMessengerEXT>(vkGetDeviceProcAddr(handle, "vkDestroyDebugUtilsMessengerEXT"));
+            check_loaded_pfn((void*)debugUtilsHandler->vkDestroyDebugUtilsMessenger, "vkDestroyDebugUtilsMessenger");
+            debugUtilsHandler->vkSubmitDebugUtilsMessage =
+                reinterpret_cast<PFN_vkSubmitDebugUtilsMessageEXT>(vkGetDeviceProcAddr(handle, "vkSubmitDebugUtilsMessageEXT"));
+            check_loaded_pfn((void*)debugUtilsHandler->vkSubmitDebugUtilsMessage, "vkSubmitDebugUtilsMessage");
         }
     }
 

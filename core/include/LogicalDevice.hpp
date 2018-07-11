@@ -3,12 +3,12 @@
 #define VULPES_VK_LOGICAL_DEVICE_H
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
-#include <memory>
 
 namespace vpr {
 
     struct DeviceDataMembers;
-
+    struct VkDebugUtilsHandler;
+    
     struct VPR_API vkQueueFamilyIndices {
         // indices into queue families.
         uint32_t Graphics = std::numeric_limits<uint32_t>::max(), 
@@ -43,20 +43,11 @@ namespace vpr {
         Device(const Instance* instance, const PhysicalDevice* device, device_extensions extensions_to_use);
         Device(const Instance* instance, const PhysicalDevice* p_device, const VprExtensionPack* extensions, 
             const char* const* layer_names = nullptr, const uint32_t layer_count = std::numeric_limits<uint32_t>::max());
-
-        void VerifyPresentationSupport();
-
-        VkDeviceQueueCreateInfo SetupQueueFamily(const VkQueueFamilyProperties& family_properties);
-
         ~Device();
 
         const VkDevice& vkHandle() const;
-
-        void CheckSurfaceSupport(const VkSurfaceKHR& surf);
-
         /**! Returns whether or not the currently active physical device, along with the logical device, supports/has queues dedicated compute operations */
         bool HasDedicatedComputeQueues() const;
-
         bool DedicatedAllocationExtensionsEnabled() const noexcept;
 
         /**! Returns queue that has support for most operation types. First checks for graphics, compute, and transfer. 
@@ -98,6 +89,7 @@ namespace vpr {
         const PhysicalDevice& GetPhysicalDevice() const noexcept;
         VkPhysicalDeviceProperties GetPhysicalDeviceProperties() const noexcept;
         VkPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties() const noexcept;
+        const VkDebugUtilsHandler& DebugUtilsHandler() const;
         
         uint32_t NumGraphicsQueues = 0;
         uint32_t NumComputeQueues = 0;
@@ -107,6 +99,9 @@ namespace vpr {
 
     private:
 
+        void verifyPresentationSupport();        
+        void checkSurfaceSupport(const VkSurfaceKHR& surf);
+        VkDeviceQueueCreateInfo setupQueueFamily(const VkQueueFamilyProperties& family_properties);
         void create(const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count);
         void setupQueues();
         void setupValidation(const char* const* layers, const uint32_t layer_count);
@@ -115,14 +110,15 @@ namespace vpr {
         void setupComputeQueues();
         void setupTransferQueues();
         void setupSparseBindingQueues();
+        void setupDebugUtilsHandler();
     
         VkDevice handle{ VK_NULL_HANDLE };
         VkDeviceCreateInfo createInfo{ };
-
+        VkDebugUtilsHandler* debugUtilsHandler{ nullptr };
         const PhysicalDevice* parent{ nullptr };
         const Instance* parentInstance{ nullptr };
 
-        mutable std::unique_ptr<DeviceDataMembers> dataMembers;
+        mutable DeviceDataMembers* dataMembers;
     };
 
 }

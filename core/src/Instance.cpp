@@ -28,19 +28,6 @@ namespace vpr {
         void checkRequiredExtensions(std::vector<const char*>& required_extensions) const;
     };
 
-    struct VkDebugUtilsHandler {
-        PFN_vkSetDebugUtilsObjectNameEXT vkSetDebugUtilsObjectName{ nullptr };
-        PFN_vkSetDebugUtilsObjectTagEXT vkSetDebugUtilsObjectTag{ nullptr };
-        PFN_vkQueueBeginDebugUtilsLabelEXT vkQueueBeginDebugUtilsLabel{ nullptr };
-        PFN_vkQueueEndDebugUtilsLabelEXT vkQueueEndDebugUtilsLabel{ nullptr };
-        PFN_vkCmdBeginDebugUtilsLabelEXT vkCmdBeginDebugUtilsLabel{ nullptr };
-        PFN_vkCmdEndDebugUtilsLabelEXT vkCmdEndDebugUtilsLabel{ nullptr };
-        PFN_vkCmdInsertDebugUtilsLabelEXT vkCmdInsertDebugUtilsLabel{ nullptr };
-        PFN_vkCreateDebugUtilsMessengerEXT vkCreateDebugUtilsMessenger{ nullptr };
-        PFN_vkDestroyDebugUtilsMessengerEXT vkDestroyDebugUtilsMessenger{ nullptr };
-        PFN_vkSubmitDebugUtilsMessageEXT vkSubmitDebugUtilsMessage{ nullptr };
-    };
-
     Instance::Instance(instance_layers layers, const VkApplicationInfo*info, GLFWwindow* _window) : Instance(layers, info, _window, nullptr) {}
 
     Instance::Instance(instance_layers layers_flags, const VkApplicationInfo * info, GLFWwindow * _window, const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) :
@@ -60,13 +47,6 @@ namespace vpr {
 
         if (extensionHandler->validationLayers != instance_layers::Disabled) {
             prepareValidationCallbacks();
-        }
-        
-        auto iter = std::find(std::begin(extensionHandler->extensionStrings), std::end(extensionHandler->extensionStrings),
-            VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
-
-        if (iter != std::end(extensionHandler->extensionStrings)) {
-            debugUtilsHandler = new VkDebugUtilsHandler();
         }
 
         createSurfaceKHR();
@@ -97,6 +77,16 @@ namespace vpr {
     void Instance::RecreateSurfaceKHR() {
         destroySurfaceKHR();
         createSurfaceKHR();
+    }
+
+    bool Instance::HasExtension(const char* name) const noexcept {
+        auto iter = std::find(std::cbegin(extensionHandler->extensionStrings), std::cend(extensionHandler->extensionStrings), name);
+        if (iter != std::cend(extensionHandler->extensionStrings)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     const VkInstance& Instance::vkHandle() const noexcept {

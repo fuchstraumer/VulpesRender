@@ -7,7 +7,7 @@
 namespace vpr {
 
     struct InstanceExtensionHandler;
-    struct VkDebugUtilsHandler;
+
 
     /** The Core group handles the base Vulkan resources and objects: LogicalDevice, PhysicalDevice, Instance, and Window. It also 
     *   includes the InputHandler class, which is responsible for handling input events and updats from the Window class.
@@ -55,10 +55,10 @@ namespace vpr {
         GLFWwindow* GetGLFWwindow() const noexcept;
         void DebugMessage(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT obj_type, uint64_t obj, size_t location, int32_t msg_code, const char* layer, const char* message);
         const VkSurfaceKHR& vkSurface() const noexcept;
-        const VkDebugUtilsHandler& DebugUtilsHandler() const;
 
         bool ValidationEnabled() const noexcept;
         void RecreateSurfaceKHR();
+        bool HasExtension(const char* extension_name) const noexcept;
 
     private:
 
@@ -71,7 +71,6 @@ namespace vpr {
         
         mutable GLFWwindow* window;
         InstanceExtensionHandler* extensionHandler;
-        VkDebugUtilsHandler* debugUtilsHandler{ nullptr };
         SurfaceKHR* surface;
         VkInstance handle;
         VkInstanceCreateInfo createInfo;
