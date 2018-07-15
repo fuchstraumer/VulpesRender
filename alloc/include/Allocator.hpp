@@ -35,12 +35,13 @@ namespace vpr {
     struct AllocatorImpl;
     struct AllocationRequirements;
 
-    /**
-    * Suballocations bound to a single memory block can represent different objects,
-    * though one will usually find that they end up grouped together.
-    * \ingroup Allocation
-    */
-    enum class SuballocationType : uint8_t;
+    enum class AllocationType : uint32_t {
+        INVALID = 0,
+        Buffer = 1,
+        ImageLinear = 2,
+        ImageTiled = 3,
+        Unknown = 4
+    };
 
     /** The primary interface and class of this subsystem. This object is responsible for creating resources when requested, managing memory,
      *  checking integrity of memory, and cleaning up after itself and when deallocation has been requested.

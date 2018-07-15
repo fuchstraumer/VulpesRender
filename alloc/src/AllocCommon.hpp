@@ -57,14 +57,6 @@ namespace vpr {
         return (offset + alignment - 1) / alignment * alignment;
     } 
     
-    enum class SuballocationType : uint8_t {
-        Free = 0, // unused entry
-            Unknown, // could be various cpu storage objects, or extension objects
-            Buffer,
-            ImageUnknown, // image memory without defined tiling - possibly related to extensions
-            ImageLinear,
-            ImageOptimal,
-    };
 
     /**
     *    Taken from the Vulkan specification, section 11.6
@@ -94,40 +86,6 @@ namespace vpr {
         count = ((count >> 8) + count) & 0x00FF00FF;
         count = ((count >> 16) + count) & 0x0000FFFF;
         return count;
-    }
-
-    /**
-    *    Checks to make sure the two objects of type "type_a" and "type_b" wouldn't cause a conflict with the buffer-image granularity values. Returns true if
-    *    conflict, false if no conflict. This is unlike the CheckBlocksOnSamePage method, in that it doesn't check memory location and alignment values, merely
-    *    comparing the resource types for incompatabilities. This is used to avoid the more detailed checks like CheckBlocksOnSamePage (and the corrections required
-    *    if this also fails)
-    *
-    *    BufferImageGranularity specifies interactions between linear and non-linear resources, so we check based on those.
-    *    \ingroup Allocation
-    */
-    constexpr static inline bool CheckBufferImageGranularityConflict(SuballocationType type_a, SuballocationType type_b) {
-        if (type_a > type_b) {
-            std::swap(type_a, type_b);
-        }
-
-        switch (type_a) {
-        case SuballocationType::Free:
-            return false;
-        case SuballocationType::Unknown:
-            // best be conservative and play it safe: return true
-            return true;
-        case SuballocationType::Buffer:
-            // unknown return is playing it safe again, optimal return is because optimal tiling and linear buffers don't mix
-            return type_b == SuballocationType::ImageUnknown || type_b == SuballocationType::ImageOptimal;
-        case SuballocationType::ImageUnknown:
-            return type_b == SuballocationType::ImageUnknown || type_b == SuballocationType::ImageOptimal || type_b == SuballocationType::ImageLinear;
-        case SuballocationType::ImageLinear:
-            return type_b == SuballocationType::ImageOptimal;
-        case SuballocationType::ImageOptimal:
-            return false;
-        default:
-            throw std::domain_error("Reached invalid case in SuballocationType-based switch statement!");
-        }
     }
 
 }

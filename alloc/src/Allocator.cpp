@@ -17,6 +17,21 @@ INITIALIZE_EASYLOGGINGPP
 
 namespace vpr {
 
+    vpr::SuballocationType suballocTypeFromAllocType(const AllocationType& alloc_type) {
+        switch (alloc_type) {
+        case AllocationType::Buffer:
+            return SuballocationType::Buffer;
+        case AllocationType::ImageLinear:
+            return SuballocationType::ImageLinear;
+        case AllocationType::ImageTiled:
+            return SuballocationType::ImageOptimal;
+        case AllocationType::Unknown:
+            return SuballocationType::Unknown;
+        default:
+            return SuballocationType::Unknown;
+        };
+    }
+
     struct AllocatorImpl {
 
         AllocatorImpl(const VkDevice& dvc, const VkPhysicalDevice& physical_device, Allocator::allocation_extensions extensions);
@@ -186,12 +201,12 @@ namespace vpr {
         return impl->logicalDevice;
     }
 
-    VkResult Allocator::AllocateMemory(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const SuballocationType& suballoc_type, Allocation& dest_allocation) {
+    VkResult Allocator::AllocateMemory(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const AllocationType& alloc_type, Allocation& dest_allocation) {
         
         // find memory type (i.e idx) required for this allocation
         uint32_t memory_type_idx = impl->findMemoryTypeIdx(memory_reqs, alloc_details);
         if (memory_type_idx != std::numeric_limits<uint32_t>::max()) {
-            return impl->allocateMemoryType(memory_reqs, alloc_details, memory_type_idx, suballoc_type, dest_allocation);
+            return impl->allocateMemoryType(memory_reqs, alloc_details, memory_type_idx, suballocTypeFromAllocType(alloc_type), dest_allocation);
         }
         else {
             return VK_ERROR_OUT_OF_DEVICE_MEMORY;
@@ -253,14 +268,14 @@ namespace vpr {
         throw std::runtime_error("Failed to free a memory allocation.");
     }
 
-    VkResult Allocator::AllocateForImage(VkImage & image_handle, const AllocationRequirements & details, const SuballocationType & alloc_type, Allocation& dest_allocation) {
+    VkResult Allocator::AllocateForImage(VkImage & image_handle, const AllocationRequirements & details, const AllocationType& alloc_type, Allocation& dest_allocation) {
         VkMemoryRequirements memreqs;
         AllocationRequirements details2 = details;
         impl->getImageMemReqs(image_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
         return AllocateMemory(memreqs, details2, alloc_type, dest_allocation);  
     }
 
-    VkResult Allocator::AllocateForBuffer(VkBuffer & buffer_handle, const AllocationRequirements & details, const SuballocationType & alloc_type, Allocation& dest_allocation) {
+    VkResult Allocator::AllocateForBuffer(VkBuffer & buffer_handle, const AllocationRequirements & details, const AllocationType& alloc_type, Allocation& dest_allocation) {
         VkMemoryRequirements memreqs;
         AllocationRequirements details2 = details;
         impl->getBufferMemReqs(buffer_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
