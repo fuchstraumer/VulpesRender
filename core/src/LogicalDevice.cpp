@@ -51,8 +51,8 @@ namespace vpr {
     vkQueueFamilyIndices::vkQueueFamilyIndices() : Graphics(std::numeric_limits<uint32_t>::max()), Compute(std::numeric_limits<uint32_t>::max()),
         Transfer(std::numeric_limits<uint32_t>::max()), SparseBinding(std::numeric_limits<uint32_t>::max()), Present(std::numeric_limits<uint32_t>::max()) {}
 
-    Device::Device(const Instance* instance, const PhysicalDevice* dvc, VkSurfaceKHR surface, const VprExtensionPack* extensions, const char* const* layer_names,
-        const uint32_t layer_count) : parent(dvc), parentInstance(instance), debugUtilsHandler(nullptr), dataMembers(nullptr) {
+    Device::Device(const Instance* instance, const PhysicalDevice* dvc, VkSurfaceKHR _surface, const VprExtensionPack* extensions, const char* const* layer_names,
+        const uint32_t layer_count) : parent(dvc), parentInstance(instance), debugUtilsHandler(nullptr), dataMembers(nullptr), surface(_surface) {
         if (extensions != nullptr) {
             create(extensions, layer_names, layer_count);
         }
