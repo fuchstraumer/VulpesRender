@@ -49,6 +49,7 @@ namespace vpr {
         /**! Returns whether or not the currently active physical device, along with the logical device, supports/has queues dedicated compute operations */
         bool HasDedicatedComputeQueues() const;
         bool DedicatedAllocationExtensionsEnabled() const noexcept;
+        bool HasExtension(const char* name) const noexcept;
 
         /**! Returns queue that has support for most operation types. First checks for graphics, compute, and transfer. 
         *    Then proceeds to graphics and compute. Lastly, it will just return a graphics-only queue and log a warning.

@@ -20,7 +20,7 @@ namespace vpr {
      * 
      * \ingroup Synchronization
      */
-    class Event {
+    class VPR_API Event {
         Event(const Event&) = delete;
         Event& operator=(const Event&) = delete;
     public:

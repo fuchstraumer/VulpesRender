@@ -35,12 +35,13 @@ namespace vpr {
     struct AllocatorImpl;
     struct AllocationRequirements;
 
-    /**
-    * Suballocations bound to a single memory block can represent different objects,
-    * though one will usually find that they end up grouped together.
-    * \ingroup Allocation
-    */
-    enum class SuballocationType : uint8_t;
+    enum class AllocationType : uint32_t {
+        INVALID = 0,
+        Buffer = 1,
+        ImageLinear = 2,
+        ImageTiled = 3,
+        Unknown = 4
+    };
 
     /** The primary interface and class of this subsystem. This object is responsible for creating resources when requested, managing memory,
      *  checking integrity of memory, and cleaning up after itself and when deallocation has been requested.
@@ -63,30 +64,14 @@ namespace vpr {
         ~Allocator();
 
         void Recreate();
-
         const VkDevice& DeviceHandle() const noexcept;
-
-        VkResult AllocateMemory(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const SuballocationType& suballoc_type, Allocation& dest_allocation);
-
+        VkResult AllocateMemory(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const AllocationType& suballoc_type, Allocation& dest_allocation);
         void FreeMemory(const Allocation* memory_to_free);
 
         // Allocates memory for an image, using given handle to get requirements. Allocation information is written to dest_memory_range, so it can then be used to bind the resources together.
-        VkResult AllocateForImage(VkImage& image_handle, const AllocationRequirements& details, const SuballocationType& alloc_type, Allocation& dest_allocation);
-
+        VkResult AllocateForImage(VkImage& image_handle, const AllocationRequirements& details, const AllocationType& alloc_type, Allocation& dest_allocation);
         // Much like AllocateForImage: uses given handle to get requirements, writes details of allocation ot given range, making memory valid for binding.
-        VkResult AllocateForBuffer(VkBuffer& buffer_handle, const AllocationRequirements& details, const SuballocationType& alloc_type, Allocation& dest_allocation);
-
-        // Creates an image object using given info. When finished, given handle is a valid image object (so long as the result value is VkSuccess). Also writes details to 
-        // dest_memory_range, but this method will try to bind the memory and image together too
-        VkResult CreateImage(VkImage* image_handle, const VkImageCreateInfo* img_create_info, const AllocationRequirements& alloc_reqs, Allocation& dest_allocation);
-
-        // Creates a buffer object using given info. Given handle is valid for use if method returns VK_SUCCESS, and memory will also have been bound to the object. Details of the 
-        // memory used for this particular object are also written to dest_memory_range, however.
-        VkResult CreateBuffer(VkBuffer* buffer_handle, const VkBufferCreateInfo* buffer_create_info, const AllocationRequirements& alloc_reqs, Allocation& dest_allocation);
-
-        // Destroys image/buffer specified by given handle.
-        void DestroyImage(const VkImage& image_handle, Allocation& allocation_to_free);
-        void DestroyBuffer(const VkBuffer& buffer_handle, Allocation& allocation_to_free);
+        VkResult AllocateForBuffer(VkBuffer& buffer_handle, const AllocationRequirements& details, const AllocationType& alloc_type, Allocation& dest_allocation);
 
     private:
         std::unique_ptr<AllocatorImpl> impl;

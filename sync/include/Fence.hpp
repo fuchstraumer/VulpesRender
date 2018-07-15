@@ -12,7 +12,7 @@ namespace vpr {
      * (requiring full event/pipeline flush), it's still not a cheap operation.
      * \ingroup Synchronization
      */
-    class Fence {
+    class VPR_API Fence {
         Fence(const Fence&) = delete;
         Fence& operator=(const Fence&) = delete;
     public:

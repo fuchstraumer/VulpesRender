@@ -76,6 +76,169 @@ namespace vpr {
         vkDestroyDevice(handle, nullptr);
     }
 
+    const VkDevice & Device::vkHandle() const{
+        return handle;
+    }
+
+    bool Device::HasDedicatedComputeQueues() const {
+        if (QueueFamilyIndices.Compute != QueueFamilyIndices.Graphics) {
+            return true;
+        }
+        return false;
+    }
+
+    bool Device::DedicatedAllocationExtensionsEnabled() const noexcept {
+        return dataMembers->enableDedicatedAllocations;
+    }
+
+    bool Device::HasExtension(const char* name) const noexcept {
+        auto iter = std::find_if(std::cbegin(dataMembers->enabledExtensions), std::cend(dataMembers->enabledExtensions), [name](const char* str) {
+            return strcmp(name, str) == 0;
+        });
+        if (iter != std::cend(dataMembers->enabledExtensions)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    void Device::checkSurfaceSupport(const VkSurfaceKHR& surf) {
+        VkBool32 supported;
+        vkGetPhysicalDeviceSurfaceSupportKHR(parent->vkHandle(), QueueFamilyIndices.Present, surf, &supported);
+        assert(supported);
+    }
+
+    VkQueue Device::GraphicsQueue(const uint32_t & idx) const{
+        assert(idx < NumGraphicsQueues);
+        VkQueue result;
+        vkGetDeviceQueue(vkHandle(), QueueFamilyIndices.Graphics, idx, &result);
+        return result;
+    }
+
+    VkQueue Device::TransferQueue(const uint32_t & idx) const{
+        static bool logged_warning = false;
+        if ((QueueFamilyIndices.Transfer == QueueFamilyIndices.Graphics) && !logged_warning) {
+            LOG(WARNING) << "Retrieving queue that supports transfer ops, but isn't dedicated transfer queue. This warning is only issued once - but retrieval is likely occuring multiple times.";
+            logged_warning = true;
+        }
+        VkQueue result;
+        vkGetDeviceQueue(vkHandle(), QueueFamilyIndices.Transfer, idx, &result);
+        return result;
+
+    }
+
+    VkQueue Device::ComputeQueue(const uint32_t & idx) const{
+        static bool logged_warning = false;
+        if ((QueueFamilyIndices.Compute == QueueFamilyIndices.Graphics) && !logged_warning) {
+            LOG(WARNING) << "Retrieving queue that supports compute ops, but isn't dedicated compute queue. This warning is only issued once - but retrieval is likely occuring multiple times.";
+            logged_warning = true;
+        }
+        VkQueue result;
+        vkGetDeviceQueue(vkHandle(), QueueFamilyIndices.Compute, idx, &result);
+        return result;
+
+    }
+
+    VkQueue Device::SparseBindingQueue(const uint32_t & idx) const {
+        
+        if (!dataMembers->queueInfos.count(VK_QUEUE_SPARSE_BINDING_BIT)) {
+            LOG(ERROR) << "Current device does not support sparse binding queues!";
+            throw std::runtime_error("Requested unsuported queue family (Sparse Binding)");
+        }
+
+        LOG_IF(QueueFamilyIndices.Compute == QueueFamilyIndices.Graphics, INFO) << "Retrieving queue that supports sparse binding, but isn't dedicated sparse binding queue.";
+        VkQueue result;
+        vkGetDeviceQueue(handle, QueueFamilyIndices.SparseBinding, idx, &result);
+        return result;
+
+    }
+
+    VkImageTiling Device::GetFormatTiling(const VkFormat & format, const VkFormatFeatureFlags & flags) const {
+        VkFormatProperties properties;
+        vkGetPhysicalDeviceFormatProperties(parent->vkHandle(), format, &properties);
+        if (properties.optimalTilingFeatures & flags) {
+            return VK_IMAGE_TILING_OPTIMAL;
+        }
+        else {
+            // Check that the device at least supports the desired features for linear tiling
+            if (!(properties.linearTilingFeatures & flags)) {
+                LOG(ERROR) << "Could not retrieve VkImageTiling mode for format, indicating that the format is probably not supported on the current device!";
+                throw std::runtime_error("Requested format is likely not supported on current device!");
+            }
+            return VK_IMAGE_TILING_LINEAR;
+        }
+    }
+
+    VkFormat Device::FindSupportedFormat(const VkFormat* formats, const size_t num_formats, const VkImageTiling & tiling, const VkFormatFeatureFlags & flags) const {
+        for (size_t i = 0; i < num_formats; ++i) {
+            VkFormatProperties properties;
+            vkGetPhysicalDeviceFormatProperties(parent->vkHandle(), formats[i], &properties);
+            if (tiling == VK_IMAGE_TILING_LINEAR && (properties.linearTilingFeatures & flags) == flags) {
+                return formats[i];
+            }
+            else if (tiling == VK_IMAGE_TILING_OPTIMAL && (properties.optimalTilingFeatures & flags) == flags) {
+                return formats[i];
+            }
+        }
+        LOG(ERROR) << "Could not find texture format that supports requested tiling and feature flags: ( " << std::to_string(tiling) << " , " << std::to_string(flags) << " )";
+        throw std::runtime_error("Could not find valid texture format.");
+    }
+
+    VkFormat Device::FindDepthFormat() const{
+        static const std::vector<VkFormat> format_options{ VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT };
+        return FindSupportedFormat(format_options.data(), format_options.size(), VK_IMAGE_TILING_OPTIMAL, VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
+    }
+
+    uint32_t Device::GetMemoryTypeIdx(const uint32_t & type_bitfield, const VkMemoryPropertyFlags & property_flags, VkBool32 * memory_type_found) const{
+        return parent->GetMemoryTypeIdx(type_bitfield, property_flags, memory_type_found);
+    }
+
+    uint32_t Device::GetPhysicalDeviceID() const noexcept{
+        return parent->GetProperties().deviceID;
+    }
+
+    const PhysicalDevice & Device::GetPhysicalDevice() const noexcept{
+        return *parent;
+    }
+
+    VkPhysicalDeviceProperties Device::GetPhysicalDeviceProperties() const noexcept {
+        return parent->GetProperties();
+    }
+
+    VkPhysicalDeviceMemoryProperties Device::GetPhysicalDeviceMemoryProperties() const noexcept {
+        return parent->GetMemoryProperties();
+    }
+
+    const VkDebugUtilsFunctions& Device::DebugUtilsHandler() const {
+        // In case we don't have member to return, return fully empty struct
+        static const VkDebugUtilsFunctions fallback{ nullptr };
+        if (debugUtilsHandler) {
+            return *debugUtilsHandler;
+        }
+        else {
+            return fallback;
+        }
+    }
+
+    VkQueue Device::GeneralQueue(const uint32_t & desired_idx) const {
+        
+        uint32_t idx = parent->GetQueueFamilyIndex(VkQueueFlagBits(VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_TRANSFER_BIT | VK_QUEUE_COMPUTE_BIT));
+        if (idx == std::numeric_limits<uint32_t>::max()) {
+            LOG(WARNING) << "Couldn't find a generalized queue supporting compute, graphics, and transfer: trying graphics and transfer.";
+            idx = parent->GetQueueFamilyIndex(VkQueueFlagBits(VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_TRANSFER_BIT));
+            if (idx == std::numeric_limits<uint32_t>::max()) {
+                LOG(WARNING) << "Couldn't find a generalized queue supporting transfer and graphics operations: just returning a graphics queue.";
+                idx = QueueFamilyIndices.Graphics;
+            }
+        }
+
+        VkQueue result;
+        vkGetDeviceQueue(vkHandle(), idx, desired_idx, &result);
+        return result;
+
+    }
+
     void Device::create(const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) {
 
         createInfo = vk_device_create_info_base;
@@ -241,157 +404,6 @@ namespace vpr {
         return result;
     }
 
-    const VkDevice & Device::vkHandle() const{
-        return handle;
-    }
-
-    void Device::checkSurfaceSupport(const VkSurfaceKHR& surf) {
-        VkBool32 supported;
-        vkGetPhysicalDeviceSurfaceSupportKHR(parent->vkHandle(), QueueFamilyIndices.Present, surf, &supported);
-        assert(supported);
-    }
-
-    VkQueue Device::GraphicsQueue(const uint32_t & idx) const{
-        assert(idx < NumGraphicsQueues);
-        VkQueue result;
-        vkGetDeviceQueue(vkHandle(), QueueFamilyIndices.Graphics, idx, &result);
-        return result;
-    }
-
-    VkQueue Device::TransferQueue(const uint32_t & idx) const{
-        static bool logged_warning = false;
-        if ((QueueFamilyIndices.Transfer == QueueFamilyIndices.Graphics) && !logged_warning) {
-            LOG(WARNING) << "Retrieving queue that supports transfer ops, but isn't dedicated transfer queue. This warning is only issued once - but retrieval is likely occuring multiple times.";
-            logged_warning = true;
-        }
-        VkQueue result;
-        vkGetDeviceQueue(vkHandle(), QueueFamilyIndices.Transfer, idx, &result);
-        return result;
-
-    }
-
-    VkQueue Device::ComputeQueue(const uint32_t & idx) const{
-        static bool logged_warning = false;
-        if ((QueueFamilyIndices.Compute == QueueFamilyIndices.Graphics) && !logged_warning) {
-            LOG(WARNING) << "Retrieving queue that supports compute ops, but isn't dedicated compute queue. This warning is only issued once - but retrieval is likely occuring multiple times.";
-            logged_warning = true;
-        }
-        VkQueue result;
-        vkGetDeviceQueue(vkHandle(), QueueFamilyIndices.Compute, idx, &result);
-        return result;
-
-    }
-
-    VkQueue Device::SparseBindingQueue(const uint32_t & idx) const {
-        
-        if (!dataMembers->queueInfos.count(VK_QUEUE_SPARSE_BINDING_BIT)) {
-            LOG(ERROR) << "Current device does not support sparse binding queues!";
-            throw std::runtime_error("Requested unsuported queue family (Sparse Binding)");
-        }
-
-        LOG_IF(QueueFamilyIndices.Compute == QueueFamilyIndices.Graphics, INFO) << "Retrieving queue that supports sparse binding, but isn't dedicated sparse binding queue.";
-        VkQueue result;
-        vkGetDeviceQueue(handle, QueueFamilyIndices.SparseBinding, idx, &result);
-        return result;
-
-    }
-
-    VkImageTiling Device::GetFormatTiling(const VkFormat & format, const VkFormatFeatureFlags & flags) const {
-        VkFormatProperties properties;
-        vkGetPhysicalDeviceFormatProperties(parent->vkHandle(), format, &properties);
-        if (properties.optimalTilingFeatures & flags) {
-            return VK_IMAGE_TILING_OPTIMAL;
-        }
-        else {
-            // Check that the device at least supports the desired features for linear tiling
-            if (!(properties.linearTilingFeatures & flags)) {
-                LOG(ERROR) << "Could not retrieve VkImageTiling mode for format, indicating that the format is probably not supported on the current device!";
-                throw std::runtime_error("Requested format is likely not supported on current device!");
-            }
-            return VK_IMAGE_TILING_LINEAR;
-        }
-    }
-
-    VkFormat Device::FindSupportedFormat(const VkFormat* formats, const size_t num_formats, const VkImageTiling & tiling, const VkFormatFeatureFlags & flags) const {
-        for (size_t i = 0; i < num_formats; ++i) {
-            VkFormatProperties properties;
-            vkGetPhysicalDeviceFormatProperties(parent->vkHandle(), formats[i], &properties);
-            if (tiling == VK_IMAGE_TILING_LINEAR && (properties.linearTilingFeatures & flags) == flags) {
-                return formats[i];
-            }
-            else if (tiling == VK_IMAGE_TILING_OPTIMAL && (properties.optimalTilingFeatures & flags) == flags) {
-                return formats[i];
-            }
-        }
-        LOG(ERROR) << "Could not find texture format that supports requested tiling and feature flags: ( " << std::to_string(tiling) << " , " << std::to_string(flags) << " )";
-        throw std::runtime_error("Could not find valid texture format.");
-    }
-
-    VkFormat Device::FindDepthFormat() const{
-        static const std::vector<VkFormat> format_options{ VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT };
-        return FindSupportedFormat(format_options.data(), format_options.size(), VK_IMAGE_TILING_OPTIMAL, VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
-    }
-
-    uint32_t Device::GetMemoryTypeIdx(const uint32_t & type_bitfield, const VkMemoryPropertyFlags & property_flags, VkBool32 * memory_type_found) const{
-        return parent->GetMemoryTypeIdx(type_bitfield, property_flags, memory_type_found);
-    }
-
-    uint32_t Device::GetPhysicalDeviceID() const noexcept{
-        return parent->GetProperties().deviceID;
-    }
-
-    const PhysicalDevice & Device::GetPhysicalDevice() const noexcept{
-        return *parent;
-    }
-
-    VkPhysicalDeviceProperties Device::GetPhysicalDeviceProperties() const noexcept {
-        return parent->GetProperties();
-    }
-
-    VkPhysicalDeviceMemoryProperties Device::GetPhysicalDeviceMemoryProperties() const noexcept {
-        return parent->GetMemoryProperties();
-    }
-
-    const VkDebugUtilsFunctions& Device::DebugUtilsHandler() const {
-        // In case we don't have member to return, return fully empty struct
-        static const VkDebugUtilsFunctions fallback{ nullptr };
-        if (debugUtilsHandler) {
-            return *debugUtilsHandler;
-        }
-        else {
-            return fallback;
-        }
-    }
-
-    bool Device::HasDedicatedComputeQueues() const {
-        if (QueueFamilyIndices.Compute != QueueFamilyIndices.Graphics) {
-            return true;
-        }
-        return false;
-    }
-
-    bool Device::DedicatedAllocationExtensionsEnabled() const noexcept {
-        return dataMembers->enableDedicatedAllocations;
-    }
-
-    VkQueue Device::GeneralQueue(const uint32_t & desired_idx) const {
-        
-        uint32_t idx = parent->GetQueueFamilyIndex(VkQueueFlagBits(VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_TRANSFER_BIT | VK_QUEUE_COMPUTE_BIT));
-        if (idx == std::numeric_limits<uint32_t>::max()) {
-            LOG(WARNING) << "Couldn't find a generalized queue supporting compute, graphics, and transfer: trying graphics and transfer.";
-            idx = parent->GetQueueFamilyIndex(VkQueueFlagBits(VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_TRANSFER_BIT));
-            if (idx == std::numeric_limits<uint32_t>::max()) {
-                LOG(WARNING) << "Couldn't find a generalized queue supporting transfer and graphics operations: just returning a graphics queue.";
-                idx = QueueFamilyIndices.Graphics;
-            }
-        }
-
-        VkQueue result;
-        vkGetDeviceQueue(vkHandle(), idx, desired_idx, &result);
-        return result;
-
-    }
-
     void DeviceDataMembers::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) {
         std::vector<const char*> required_extensions{ extensions->RequiredExtensionNames, 
             extensions->RequiredExtensionNames + extensions->RequiredExtensionCount };
@@ -421,29 +433,30 @@ namespace vpr {
         std::vector<VkExtensionProperties> queried_extensions(queried_count);
         vkEnumerateDeviceExtensionProperties(device->GetPhysicalDevice().vkHandle(), nullptr, &queried_count, queried_extensions.data());
 
-        const auto has_extension = [queried_extensions](const char* name) {
-            const auto req_found = std::find_if(queried_extensions.cbegin(), queried_extensions.cend(), [name](const VkExtensionProperties& p) {
-                return strcmp(p.extensionName, name) == 0;
-            });
-            return req_found != queried_extensions.end();
-        };
+        auto iter = std::remove_if(std::begin(extensions), std::end(extensions), [queried_extensions, throw_on_error](const char* name) {
+            const auto has_extension = [queried_extensions](const char* name) {
+                const auto req_found = std::find_if(queried_extensions.cbegin(), queried_extensions.cend(), [name](const VkExtensionProperties& p) {
+                    return strcmp(p.extensionName, name) == 0;
+                });
+                return req_found != queried_extensions.end();
+            };
 
-        auto iter = extensions.begin();
-        while (!extensions.empty() && iter != extensions.end()) {
-            if (!has_extension(*iter)) {
+            if (!has_extension(name)) {
                 if (throw_on_error) {
-                    LOG(ERROR) << "Current VkDevice does not support extension \"" << *iter << "\" that is required!";
+                    LOG(ERROR) << "Current VkDevice does not support extension \"" << name << "\" that is required!";
                     throw std::runtime_error("Could not enable/use required extension for the logical device.");
                 }
                 else {
-                    LOG(WARNING) << "Requested device extension with name \"" << *iter << "\" is not available, removing from list.";
-                    extensions.erase(iter++);
+                    LOG(WARNING) << "Requested device extension with name \"" << name << "\" is not available, removing from list.";
                 }
+                return true;
             }
             else {
-                ++iter;
+                return false;
             }
-        }
+        });
+
+        extensions.erase(iter, extensions.end());
     }
     
     void DeviceDataMembers::checkDedicatedAllocExtensions(const std::vector<const char*>& exts) {

@@ -17,6 +17,21 @@ INITIALIZE_EASYLOGGINGPP
 
 namespace vpr {
 
+    vpr::SuballocationType suballocTypeFromAllocType(const AllocationType& alloc_type) {
+        switch (alloc_type) {
+        case AllocationType::Buffer:
+            return SuballocationType::Buffer;
+        case AllocationType::ImageLinear:
+            return SuballocationType::ImageLinear;
+        case AllocationType::ImageTiled:
+            return SuballocationType::ImageOptimal;
+        case AllocationType::Unknown:
+            return SuballocationType::Unknown;
+        default:
+            return SuballocationType::Unknown;
+        };
+    }
+
     struct AllocatorImpl {
 
         AllocatorImpl(const VkDevice& dvc, const VkPhysicalDevice& physical_device, Allocator::allocation_extensions extensions);
@@ -186,12 +201,12 @@ namespace vpr {
         return impl->logicalDevice;
     }
 
-    VkResult Allocator::AllocateMemory(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const SuballocationType& suballoc_type, Allocation& dest_allocation) {
+    VkResult Allocator::AllocateMemory(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const AllocationType& alloc_type, Allocation& dest_allocation) {
         
         // find memory type (i.e idx) required for this allocation
         uint32_t memory_type_idx = impl->findMemoryTypeIdx(memory_reqs, alloc_details);
         if (memory_type_idx != std::numeric_limits<uint32_t>::max()) {
-            return impl->allocateMemoryType(memory_reqs, alloc_details, memory_type_idx, suballoc_type, dest_allocation);
+            return impl->allocateMemoryType(memory_reqs, alloc_details, memory_type_idx, suballocTypeFromAllocType(alloc_type), dest_allocation);
         }
         else {
             return VK_ERROR_OUT_OF_DEVICE_MEMORY;
@@ -253,79 +268,18 @@ namespace vpr {
         throw std::runtime_error("Failed to free a memory allocation.");
     }
 
-    VkResult Allocator::AllocateForImage(VkImage & image_handle, const AllocationRequirements & details, const SuballocationType & alloc_type, Allocation& dest_allocation) {
+    VkResult Allocator::AllocateForImage(VkImage & image_handle, const AllocationRequirements & details, const AllocationType& alloc_type, Allocation& dest_allocation) {
         VkMemoryRequirements memreqs;
         AllocationRequirements details2 = details;
         impl->getImageMemReqs(image_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
         return AllocateMemory(memreqs, details2, alloc_type, dest_allocation);  
     }
 
-    VkResult Allocator::AllocateForBuffer(VkBuffer & buffer_handle, const AllocationRequirements & details, const SuballocationType & alloc_type, Allocation& dest_allocation) {
+    VkResult Allocator::AllocateForBuffer(VkBuffer & buffer_handle, const AllocationRequirements & details, const AllocationType& alloc_type, Allocation& dest_allocation) {
         VkMemoryRequirements memreqs;
         AllocationRequirements details2 = details;
         impl->getBufferMemReqs(buffer_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
         return AllocateMemory(memreqs, details2, alloc_type, dest_allocation);
-    }
-
-    VkResult Allocator::CreateImage(VkImage * image_handle, const VkImageCreateInfo * img_create_info, const AllocationRequirements & alloc_reqs, Allocation& dest_allocation) {
-
-        // create image object first.
-        LOG_IF(VERBOSE_LOGGING, INFO) << "Creating new image handle.";
-        VkResult result = vkCreateImage(impl->logicalDevice, img_create_info, nullptr, image_handle);
-        VkAssert(result);
-        LOG_IF(VERBOSE_LOGGING, INFO) << "Allocating memory for image.";
-        SuballocationType image_type = img_create_info->tiling == VK_IMAGE_TILING_OPTIMAL ? SuballocationType::ImageOptimal : SuballocationType::ImageLinear;
-        result = AllocateForImage(*image_handle, alloc_reqs, image_type, dest_allocation);
-        VkAssert(result);
-        LOG_IF(VERBOSE_LOGGING, INFO) << "Binding image to memory.";
-        result = vkBindImageMemory(impl->logicalDevice, *image_handle, dest_allocation.Memory(), dest_allocation.Offset());
-        VkAssert(result);
-
-        return VK_SUCCESS;
-
-    }
-
-    VkResult Allocator::CreateBuffer(VkBuffer * buffer_handle, const VkBufferCreateInfo * buffer_create_info, const AllocationRequirements & alloc_reqs, Allocation& dest_allocation) {
-
-        // create buffer object first
-        VkResult result = vkCreateBuffer(impl->logicalDevice, buffer_create_info, nullptr, buffer_handle);
-        VkAssert(result);
-
-        // allocate memory
-        result = AllocateForBuffer(*buffer_handle, alloc_reqs, SuballocationType::Buffer, dest_allocation);
-        VkAssert(result);
-
-        result = vkBindBufferMemory(impl->logicalDevice, *buffer_handle, dest_allocation.Memory(), dest_allocation.Offset());
-        VkAssert(result);
-
-        return VK_SUCCESS;
-    }
-
-    void Allocator::DestroyImage(const VkImage & image_handle, Allocation& allocation_to_free) {
-        
-        if (image_handle == VK_NULL_HANDLE) {
-            LOG(ERROR) << "Tried to destroy null image object.";
-            throw std::runtime_error("Cannot destroy null image objects.");
-        }
-
-        // delete handle.
-        vkDestroyImage(impl->logicalDevice, image_handle, nullptr);
-
-        // Free memory previously tied to handle.
-        FreeMemory(&allocation_to_free);
-    }
-
-    void Allocator::DestroyBuffer(const VkBuffer & buffer_handle, Allocation& allocation_to_free) {
-        
-        if (buffer_handle == VK_NULL_HANDLE) {
-            LOG(ERROR) << "Tried to destroy null buffer object.";
-            throw std::runtime_error("Cannot destroy null buffer objects.");
-        }
-
-        vkDestroyBuffer(impl->logicalDevice, buffer_handle, nullptr);
-
-        FreeMemory(&allocation_to_free);
-
     }
     
     uint32_t AllocatorImpl::findMemoryTypeIdx(const VkMemoryRequirements& mem_reqs, const AllocationRequirements & details) const noexcept {

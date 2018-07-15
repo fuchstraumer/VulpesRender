@@ -8,6 +8,15 @@
 #include <vector>
 
 namespace vpr {
+
+    enum class SuballocationType : uint8_t {
+        Free = 0, // unused entry
+        Unknown, // could be various cpu storage objects, or extension objects
+        Buffer,
+        ImageUnknown, // image memory without defined tiling - possibly related to extensions
+        ImageLinear,
+        ImageOptimal,
+    };
     
     /**During the process of finding a suitable region to bind to, we need to store things like "SuballocationType",
      * which helps keep track of the precise kind of memory we are looking for and lets us know if its optimally/linearly tiled.

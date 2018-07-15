@@ -15,6 +15,7 @@ namespace vpr {
     *   other objects, and several of these of each type can exist (occurs when a memory block is fully used, until no more memory available).
     *   \ingroup Allocation
     */
+
     class VPR_API MemoryBlock {
         MemoryBlock(const MemoryBlock&) = delete;
         MemoryBlock& operator=(const MemoryBlock&) = delete;
