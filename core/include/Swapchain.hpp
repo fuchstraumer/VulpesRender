@@ -26,9 +26,9 @@ namespace vpr {
         Swapchain& operator=(const Swapchain&) = delete;
     public:
 
-        Swapchain(const Instance* _instance, const Device* _device, uint32_t sync_mode);
+        Swapchain(const Device* _device, GLFWwindow* window, VkSurfaceKHR surface, uint32_t sync_mode);
         ~Swapchain();
-        void Recreate();
+        void Recreate(VkSurfaceKHR surface);
         void Destroy();
 
         const VkSwapchainKHR& vkHandle() const noexcept;
@@ -42,5 +42,12 @@ namespace vpr {
     private:
         SwapchainImpl* impl;
     };
+
+    /** Pass a swapchain and instance pointer to this to have the swapchain and surface destroyed and recreated
+    *   in the proper order. If done incorrectly, the validation layers will give you errors about a surface being
+    *   destroyed before it's swapchain is (in the best case), or crash in the worst case
+    */
+    void VPR_API RecreateSwapchainAndSurface(Swapchain* swap, SurfaceKHR* surface);
+
 }
 #endif // !VULPES_VK_SWAPCHAIN_H

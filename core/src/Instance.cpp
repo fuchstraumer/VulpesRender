@@ -2,8 +2,6 @@
 #include "Instance.hpp"
 #include "PhysicalDevice.hpp"
 #include "LogicalDevice.hpp"
-#include "SurfaceKHR.hpp"
-#include "Swapchain.hpp"
 #include "vkAssert.hpp"
 #include "CreateInfoBase.hpp"
 #include "easylogging++.h"
@@ -31,11 +29,10 @@ namespace vpr {
         void checkRequiredExtensions(std::vector<const char*>& required_extensions) const;
     };
 
-    Instance::Instance(instance_layers layers, const VkApplicationInfo*info, GLFWwindow* _window) : Instance(layers, info, _window, nullptr) {}
+    Instance::Instance(instance_layers layers, const VkApplicationInfo* info) : Instance(layers, info, nullptr) {}
 
-    Instance::Instance(instance_layers layers_flags, const VkApplicationInfo * info, GLFWwindow * _window, const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) :
-        window(_window), extensionHandler(new InstanceExtensionHandler(layers_flags)), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, nullptr },
-        surface(nullptr) {
+    Instance::Instance(instance_layers layers_flags, const VkApplicationInfo * info, const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) :
+        extensionHandler(new InstanceExtensionHandler(layers_flags)), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, nullptr } {
         VkApplicationInfo our_info = *info;
 
         extensionHandler->extensionSetup(extensions);
@@ -52,7 +49,6 @@ namespace vpr {
             prepareValidationCallbacks();
         }
 
-        createSurfaceKHR();
     }
 
     Instance::~Instance() {
@@ -60,44 +56,11 @@ namespace vpr {
             auto func = (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(handle, "vkDestroyDebugReportCallbackEXT");
             func(handle, debugCallback, nullptr);
         }
-        destroySurfaceKHR();
         vkDestroyInstance(handle, nullptr);
-    }
-
-    void Instance::createSurfaceKHR() {
-        LOG_IF(surface, WARNING) << "Attempting to create a SurfaceKHR when one might already exist: if it does, this will probably cause swapchain errors!";
-        surface = new SurfaceKHR(this, window);
-    }
-
-    void Instance::destroySurfaceKHR() {
-        delete surface;
-        surface = nullptr;
     }
 
     bool Instance::ValidationEnabled() const noexcept {
         return (extensionHandler->validationLayers != instance_layers::Disabled);
-    }
-
-    void VerifyPresentationSupport(VkPhysicalDevice physical_device, VkSurfaceKHR surface) {
-        // Check presentation support
-        VkBool32 present_support = VK_FALSE;
-        for (uint32_t i = 0; i < 3; ++i) {
-            vkGetPhysicalDeviceSurfaceSupportKHR(physical_device, i, surface, &present_support);
-            if (present_support) {
-                break;
-            }
-        }
-
-        if (!present_support) {
-            LOG(ERROR) << "No queues found that support presentation to a surface.";
-            throw std::runtime_error("No queues found that support presentation to a surface!");
-        }
-    }
-
-    void Instance::RecreateSurfaceKHR(const Device* dvc) {
-        destroySurfaceKHR();
-        createSurfaceKHR();
-        VerifyPresentationSupport(dvc->GetPhysicalDevice().vkHandle(), surface->vkHandle());
     }
 
     bool Instance::HasExtension(const char* name) const noexcept {
@@ -117,24 +80,10 @@ namespace vpr {
         return handle;
     }
 
-    const VkSurfaceKHR& Instance::vkSurface() const noexcept {
-        return surface->vkHandle();
-    }
-
-    GLFWwindow * Instance::GetGLFWwindow() const noexcept {
-        return window;
-    }
-
     void Instance::DebugMessage(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT obj_type, uint64_t obj, size_t location, int32_t msg_code, const char * layer, const char * message) {
         if (debugMessageFn != nullptr) {
             debugMessageFn(handle, flags, obj_type, obj, location, msg_code, layer, message);
         }
-    }
-
-    void RecreateSwapchainAndSurface(Device* device, Instance * instance, Swapchain * swap) {
-        swap->Destroy();
-        instance->RecreateSurfaceKHR(device);
-        swap->Recreate();
     }
 
     void Instance::checkApiVersionSupport(VkApplicationInfo* info) {

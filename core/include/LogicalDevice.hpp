@@ -35,14 +35,7 @@ namespace vpr {
         Device& operator=(Device&&) = delete;
     public:
 
-        enum class device_extensions : uint32_t {
-            None,
-            RecommendedMinRequired,
-            RecommendedAll
-        };
-        
-        Device(const Instance* instance, const PhysicalDevice* device, device_extensions extensions_to_use);
-        Device(const Instance* instance, const PhysicalDevice* p_device, const VprExtensionPack* extensions, const char* const* layer_names, const uint32_t layer_count);
+        Device(const Instance* instance, const PhysicalDevice* p_device, VkSurfaceKHR surface = VK_NULL_HANDLE, const VprExtensionPack* extensions = nullptr, const char* const* layer_names = nullptr, const uint32_t layer_count = 0);
         ~Device();
 
         const VkDevice& vkHandle() const;
@@ -50,6 +43,7 @@ namespace vpr {
         bool HasDedicatedComputeQueues() const;
         bool DedicatedAllocationExtensionsEnabled() const noexcept;
         bool HasExtension(const char* name) const noexcept;
+        void UpdateSurface(VkSurfaceKHR new_surface);
 
         /**! Returns queue that has support for most operation types. First checks for graphics, compute, and transfer. 
         *    Then proceeds to graphics and compute. Lastly, it will just return a graphics-only queue and log a warning.
@@ -118,7 +112,7 @@ namespace vpr {
         VkDebugUtilsFunctions* debugUtilsHandler{ nullptr };
         const PhysicalDevice* parent{ nullptr };
         const Instance* parentInstance{ nullptr };
-
+        VkSurfaceKHR surface;
         mutable DeviceDataMembers* dataMembers;
     };
 

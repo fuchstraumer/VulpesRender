@@ -26,7 +26,7 @@ namespace vpr {
 #endif
             
         std::string fname = cache_dir + std::to_string(hash_id) + std::string(".vkdat");
-        filename = strdup(fname.c_str());
+        filename = _strdup(fname.c_str());
 
         // Attempts to load cache from file: if failed, doesn't matter much.
         LoadCacheFromFile(fname.c_str());
