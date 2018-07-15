@@ -5,6 +5,7 @@
 #include "Instance.hpp"
 #include "PhysicalDevice.hpp"
 #include "LogicalDevice.hpp"
+#include "SurfaceKHR.hpp"
 #include <vector>
 #include <algorithm>
 #define GLFW_INCLUDE_VULKAN
@@ -15,7 +16,7 @@ namespace vpr {
     
     struct SwapchainImpl {
 
-        SwapchainImpl(const Instance* instance, const Device* device, uint32_t mode);
+        SwapchainImpl(const Device* device, GLFWwindow* window, VkSurfaceKHR surface, uint32_t mode);
         ~SwapchainImpl();
 
         /** SwapchainInfo takes care of hiding away much of the setup work required to create a swapchain. However, it does contain some data
@@ -54,13 +55,13 @@ namespace vpr {
         VkSwapchainCreateInfoKHR createInfo;
         VkSwapchainKHR handle = VK_NULL_HANDLE;
         VkSwapchainKHR oldHandle = VK_NULL_HANDLE;
-        const Instance* instance;
-        const PhysicalDevice* phys_device;
+        VkSurfaceKHR surface = VK_NULL_HANDLE;
+        GLFWwindow* window;
         const Device* device;
     };
 
-    SwapchainImpl::SwapchainImpl(const Instance * _instance, const Device * _device, uint32_t mode) : desiredSyncMode(mode),
-        instance(_instance), device(_device), info(_device->GetPhysicalDevice().vkHandle(), _instance->vkSurface()) {
+    SwapchainImpl::SwapchainImpl(const Device * _device, GLFWwindow* _window, VkSurfaceKHR _surface, uint32_t mode) : desiredSyncMode(mode),
+        window(_window), device(_device), surface(_surface), info(_device->GetPhysicalDevice().vkHandle(), _surface) {
         create();
     }
 
@@ -150,15 +151,16 @@ namespace vpr {
 
     }
 
-    Swapchain::Swapchain(const Instance * _instance, const Device * _device, uint32_t mode) : impl(new SwapchainImpl(_instance, _device, mode)) {}
+    Swapchain::Swapchain(const Device * _device, GLFWwindow* window, VkSurfaceKHR surface, uint32_t mode) : impl(new SwapchainImpl(_device, window, surface, mode)) {}
 
     Swapchain::~Swapchain(){
         Destroy();
     }
 
-    void Swapchain::Recreate() {
+    void Swapchain::Recreate(VkSurfaceKHR new_surface) {
         impl->imageCount = 0;
-        impl->info = SwapchainImpl::SwapchainInfo(impl->device->GetPhysicalDevice().vkHandle(), impl->instance->vkSurface());
+        impl->surface = new_surface;
+        impl->info = SwapchainImpl::SwapchainInfo(impl->device->GetPhysicalDevice().vkHandle(), new_surface);
         impl->create();
     }
 
@@ -182,7 +184,7 @@ namespace vpr {
 
         surfaceFormat = info.GetBestFormat();
         colorFormat = surfaceFormat.format;
-        extent = info.ChooseSwapchainExtent(instance->GetGLFWwindow());
+        extent = info.ChooseSwapchainExtent(window);
 
         presentMode = info.GetBestPresentMode();
         VkPresentModeKHR desiredMode = VK_PRESENT_MODE_BEGIN_RANGE_KHR;
@@ -231,7 +233,7 @@ namespace vpr {
     void SwapchainImpl::setupCreateInfo() {
 
         createInfo = vk_swapchain_create_info_base;
-        createInfo.surface = instance->vkSurface();
+        createInfo.surface = surface;
         createInfo.imageFormat = surfaceFormat.format;
         createInfo.imageColorSpace = surfaceFormat.colorSpace;
         colorSpace = surfaceFormat.colorSpace;
@@ -241,7 +243,7 @@ namespace vpr {
         createInfo.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
 
         const uint32_t indices[2] = { static_cast<uint32_t>(device->QueueFamilyIndices.Present), static_cast<uint32_t>(device->QueueFamilyIndices.Graphics) };
-        if (device->QueueFamilyIndices.Present != device->QueueFamilyIndices.Graphics) {
+        if ((device->QueueFamilyIndices.Present != device->QueueFamilyIndices.Graphics) && (device->QueueFamilyIndices.Present != std::numeric_limits<uint32_t>::max())) {
             createInfo.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
             createInfo.queueFamilyIndexCount = 2;
             createInfo.pQueueFamilyIndices = indices;
@@ -261,12 +263,10 @@ namespace vpr {
     }
 
     void SwapchainImpl::setupSwapImages() {
-
         // Setup swap images
         vkGetSwapchainImagesKHR(device->vkHandle(), handle, &imageCount, nullptr);
         images.resize(imageCount);
         vkGetSwapchainImagesKHR(device->vkHandle(), handle, &imageCount, images.data());
-
     }
 
     void SwapchainImpl::setupImageViews() {
@@ -320,6 +320,12 @@ namespace vpr {
 
     const VkImageView & Swapchain::ImageView(const size_t & idx) const {
         return impl->imageViews[idx];
+    }
+
+    void RecreateSwapchainAndSurface(Swapchain* swap, SurfaceKHR* surface) {
+        swap->Destroy();
+        surface->Recreate();
+        swap->Recreate(surface->vkHandle());
     }
 
 }

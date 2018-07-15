@@ -46,44 +46,31 @@ namespace vpr {
             Full,
         };
         
-        Instance(instance_layers layers, const VkApplicationInfo* info, GLFWwindow* window);
-        Instance(instance_layers layers_flags, const VkApplicationInfo* info, GLFWwindow* window, const VprExtensionPack* extensions, 
+        Instance(instance_layers layers, const VkApplicationInfo* info);
+        Instance(instance_layers layers_flags, const VkApplicationInfo* info, const VprExtensionPack* extensions, 
             const char* const* layers = nullptr, const uint32_t layer_count = 0);
         ~Instance();
 
         const VkInstance& vkHandle() const noexcept;
-        GLFWwindow* GetGLFWwindow() const noexcept;
         void DebugMessage(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT obj_type, uint64_t obj, size_t location, int32_t msg_code, const char* layer, const char* message);
-        const VkSurfaceKHR& vkSurface() const noexcept;
 
         bool ValidationEnabled() const noexcept;
-        void RecreateSurfaceKHR(const Device* dvc);
         bool HasExtension(const char* extension_name) const noexcept;
 
     private:
 
-        void createSurfaceKHR();
-        void destroySurfaceKHR();
         void prepareValidation(const char* const* layers, const uint32_t layer_count);
         bool checkValidationSupport(const char* const* layer_names, const uint32_t layer_count) const;
         void checkApiVersionSupport(VkApplicationInfo* info);
         void prepareValidationCallbacks();
         
-        mutable GLFWwindow* window;
         InstanceExtensionHandler* extensionHandler;
-        SurfaceKHR* surface;
         VkInstance handle;
         VkInstanceCreateInfo createInfo;
         VkDebugReportCallbackEXT debugCallback;
         PFN_vkDebugReportMessageEXT debugMessageFn{ nullptr };
 
     };
-
-    /** Pass a swapchain and instance pointer to this to have the swapchain and surface destroyed and recreated
-    *   in the proper order. If done incorrectly, the validation layers will give you errors about a surface being 
-    *   destroyed before it's swapchain is (in the best case), or crash in the worst case
-    */
-    void VPR_API RecreateSwapchainAndSurface(Device* device, Instance* instance, Swapchain* swap);
 
     VKAPI_ATTR VkBool32 VKAPI_CALL VkDebugCallbackFn(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT type, uint64_t object_handle, size_t location, int32_t message_code, const char* layer_prefix,
         const char* message, void* user_data);

@@ -18,17 +18,27 @@ namespace vpr {
         SurfaceKHR& operator=(const SurfaceKHR&) = delete;
     public:
 
-        SurfaceKHR(const Instance* _parent, GLFWwindow* window);
+        SurfaceKHR(const Instance* _parent, VkPhysicalDevice physical_device, GLFWwindow* window);
         SurfaceKHR(SurfaceKHR&& other) noexcept;
         SurfaceKHR& operator=(SurfaceKHR&& other) noexcept;
         ~SurfaceKHR();
 
+        void Recreate();
         const VkSurfaceKHR& vkHandle() const noexcept;
 
+        static VkBool32 VerifyPresentationSupport(VkPhysicalDevice physical_device, VkSurfaceKHR surface);
+
     private:
+
+        void create();
+        void destroy();
+
+        GLFWwindow* window;
         const Instance* parent;
+        VkPhysicalDevice device;
         VkSurfaceKHR handle;
     };
+
 
 }
 

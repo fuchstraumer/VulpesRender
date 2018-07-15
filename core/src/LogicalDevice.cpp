@@ -51,19 +51,14 @@ namespace vpr {
     vkQueueFamilyIndices::vkQueueFamilyIndices() : Graphics(std::numeric_limits<uint32_t>::max()), Compute(std::numeric_limits<uint32_t>::max()),
         Transfer(std::numeric_limits<uint32_t>::max()), SparseBinding(std::numeric_limits<uint32_t>::max()), Present(std::numeric_limits<uint32_t>::max()) {}
 
-    Device::Device(const Instance* instance, const PhysicalDevice * device, device_extensions extensions_to_use) : parent(device), parentInstance(instance),
-        debugUtilsHandler(nullptr), dataMembers(nullptr) {
-        if (extensions_to_use != device_extensions::None) {
-            create(&RECOMMENDED_EXTENSIONS, nullptr, 0);
+    Device::Device(const Instance* instance, const PhysicalDevice* dvc, VkSurfaceKHR _surface, const VprExtensionPack* extensions, const char* const* layer_names,
+        const uint32_t layer_count) : parent(dvc), parentInstance(instance), debugUtilsHandler(nullptr), dataMembers(nullptr), surface(_surface) {
+        if (extensions != nullptr) {
+            create(extensions, layer_names, layer_count);
         }
         else {
-            create(nullptr, nullptr, 0);
+            create(&RECOMMENDED_EXTENSIONS, nullptr, 0);
         }
-    }
-
-    Device::Device(const Instance* instance, const PhysicalDevice* dvc, const VprExtensionPack* extensions, const char* const* layer_names, 
-        const uint32_t layer_count) : parent(dvc), parentInstance(instance), debugUtilsHandler(nullptr), dataMembers(nullptr) {
-        create(extensions, layer_names, layer_count);
     }
 
     Device::~Device(){
@@ -101,6 +96,11 @@ namespace vpr {
         else {
             return false;
         }
+    }
+
+    void Device::UpdateSurface(VkSurfaceKHR new_surface) {
+        surface = new_surface;
+        verifyPresentationSupport();
     }
 
     void Device::checkSurfaceSupport(const VkSurfaceKHR& surf) {
@@ -243,7 +243,9 @@ namespace vpr {
 
         createInfo = vk_device_create_info_base;
         dataMembers = new DeviceDataMembers(this);
-        verifyPresentationSupport();
+        if (surface != VK_NULL_HANDLE) {
+            verifyPresentationSupport();
+        }
         setupQueues();
         setupValidation(layers, layer_count);
         setupExtensions(extensions);
@@ -384,7 +386,7 @@ namespace vpr {
         // Check presentation support
         VkBool32 present_support = false;
         for (uint32_t i = 0; i < 3; ++i) {
-            vkGetPhysicalDeviceSurfaceSupportKHR(parent->vkHandle(), i, parentInstance->vkSurface(), &present_support);
+            vkGetPhysicalDeviceSurfaceSupportKHR(parent->vkHandle(), i, surface, &present_support);
             if (present_support) {
                 QueueFamilyIndices.Present = i;
                 break;
