@@ -11,7 +11,7 @@ namespace vpr {
         std::vector<VkCommandBuffer> Data;
     };
 
-    CommandPool::CommandPool(const VkDevice _parent, const VkCommandPoolCreateInfo & create_info) : parent(_parent), handle(VK_NULL_HANDLE) {
+    CommandPool::CommandPool(const VkDevice _parent, const VkCommandPoolCreateInfo & create_info) : parent(_parent), handle(VK_NULL_HANDLE), cmdBuffers(std::make_unique<CommandBuffers>()) {
         vkCreateCommandPool(parent, &create_info, nullptr, &handle);
     }
 
