@@ -50,7 +50,7 @@ namespace vpr {
 
         // These allocation methods return VkResult's so that we can try different parameters (based partially on return code) in main allocation method.
         VkResult allocateMemoryType(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const uint32_t& memory_type_idx, const SuballocationType& type, Allocation& dest_allocation);
-        VkResult allocatePrivateMemory(const VkDeviceSize& size, const uint32_t& memory_type_idx, Allocation& dest_allocation);
+        VkResult allocatePrivateMemory(const VkDeviceSize& size, const uint32_t& memory_type_idx, Allocation& dest_allocation, const VkMemoryPropertyFlags memory_flags);
 
         // called from "FreeMemory" if memory to free isn't found in the allocation vectors for any of our active memory types.
         bool freePrivateMemory(const Allocation* memory_to_free);
@@ -272,14 +272,18 @@ namespace vpr {
         VkMemoryRequirements memreqs;
         AllocationRequirements details2 = details;
         impl->getImageMemReqs(image_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
-        return AllocateMemory(memreqs, details2, alloc_type, dest_allocation);  
+        VkResult result = AllocateMemory(memreqs, details2, alloc_type, dest_allocation);  
+        vkBindImageMemory(impl->logicalDevice, image_handle, dest_allocation.Memory(), dest_allocation.Offset());
+        return result;
     }
 
     VkResult Allocator::AllocateForBuffer(VkBuffer & buffer_handle, const AllocationRequirements & details, const AllocationType& alloc_type, Allocation& dest_allocation) {
         VkMemoryRequirements memreqs;
         AllocationRequirements details2 = details;
         impl->getBufferMemReqs(buffer_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
-        return AllocateMemory(memreqs, details2, alloc_type, dest_allocation);
+        VkResult result = AllocateMemory(memreqs, details2, alloc_type, dest_allocation);
+        vkBindBufferMemory(impl->logicalDevice, buffer_handle, dest_allocation.Memory(), dest_allocation.Offset());
+        return result;
     }
     
     uint32_t AllocatorImpl::findMemoryTypeIdx(const VkMemoryRequirements& mem_reqs, const AllocationRequirements & details) const noexcept {
@@ -338,7 +342,7 @@ namespace vpr {
             }
             else {
                 LOG_IF((alloc_details.prefersDedicatedKHR || alloc_details.requiresDedicatedKHR),INFO) << "Allocating dedicated memory object using extensions...";
-                return allocatePrivateMemory(memory_reqs.size, memory_type_idx, dest_allocation);
+                return allocatePrivateMemory(memory_reqs.size, memory_type_idx, dest_allocation, alloc_details.requiredFlags);
             }
         }
         else {
@@ -414,7 +418,7 @@ namespace vpr {
                 }
                 // if still not allocated, try allocating private memory (if allowed)
                 if (result != VK_SUCCESS && (private_memory)) {
-                    result = allocatePrivateMemory(memory_reqs.size, memory_type_idx, dest_allocation);
+                    result = allocatePrivateMemory(memory_reqs.size, memory_type_idx, dest_allocation, alloc_details.requiredFlags);
                     if (result == VK_SUCCESS) {
                         LOG_IF(VERBOSE_LOGGING, INFO) << "Allocation of memory succeeded";
                         return VK_SUCCESS;
@@ -430,7 +434,7 @@ namespace vpr {
 
                 {
                     std::lock_guard<std::mutex> new_block_guard(allocMutex);
-                    std::unique_ptr<MemoryBlock> new_block = std::make_unique<MemoryBlock>();
+                    std::unique_ptr<MemoryBlock> new_block = std::make_unique<MemoryBlock>(logicalDevice);
                     // need pointer to initialize child objects, but need to move unique_ptr into container.
                     new_block_idx = alloc_collection->AddMemoryBlock(std::move(new_block));
                 }
@@ -463,14 +467,21 @@ namespace vpr {
 
     }
 
-    VkResult AllocatorImpl::allocatePrivateMemory(const VkDeviceSize & size, const uint32_t & memory_type_idx, Allocation& dest_allocation) {
+    VkResult AllocatorImpl::allocatePrivateMemory(const VkDeviceSize & size, const uint32_t & memory_type_idx, Allocation& dest_allocation, const VkMemoryPropertyFlags memory_flags) {
         VkMemoryAllocateInfo alloc_info{ VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO, nullptr, size, memory_type_idx };
 
         VkDeviceMemory private_memory_handle = VK_NULL_HANDLE;
         VkResult result = vkAllocateMemory(logicalDevice, &alloc_info, nullptr, &private_memory_handle);
         VkAssert(result);
-        
-        dest_allocation.InitPrivate(memory_type_idx, private_memory_handle, false, nullptr, size);
+        if (memory_flags & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) {
+            void* mapped_address = nullptr;
+            result = vkMapMemory(logicalDevice, private_memory_handle, 0, alloc_info.allocationSize, 0, &mapped_address);
+            VkAssert(result);
+            dest_allocation.InitPrivate(memory_type_idx, private_memory_handle, true, mapped_address, size);
+        }
+        else {
+            dest_allocation.InitPrivate(memory_type_idx, private_memory_handle, false, nullptr, size);
+        }
         {
             std::lock_guard<std::mutex> private_guard(privateMutex);
             privateAllocations.insert(std::unique_ptr<Allocation>(&dest_allocation));
