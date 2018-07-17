@@ -41,6 +41,7 @@ namespace vpr {
         void MergeCaches(const uint32_t num_caches, const VkPipelineCache* caches);
 
     private:
+        char* loadedData = nullptr;
         char* filename = nullptr;
         VkResult saveToFile() const;
         size_t hashID{ 0 };
