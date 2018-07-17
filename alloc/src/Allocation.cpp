@@ -21,15 +21,17 @@ namespace vpr {
         std::variant<blockAllocation, privateAllocation> typeData;
     };
 
-    Allocation::Allocation() : impl(std::make_unique<AllocationImpl>()) {}
+    Allocation::Allocation() : impl(std::make_unique<AllocationImpl>()), Size(0), Alignment(0) {}
 
     Allocation::~Allocation() { 
         impl.reset();
     }
 
-    Allocation::Allocation(const Allocation& other) : impl(std::make_unique<AllocationImpl>(*other.impl)) {}
+    Allocation::Allocation(const Allocation& other) : impl(std::make_unique<AllocationImpl>(*other.impl)), Size(other.Size), Alignment(other.Alignment) {}
 
     Allocation& Allocation::operator=(const Allocation& other) {
+        Size = other.Size;
+        Alignment = other.Alignment;
         impl = std::make_unique<AllocationImpl>(*other.impl);
         return *this;
     }
@@ -126,6 +128,12 @@ namespace vpr {
 
     bool Allocation::IsPrivateAllocation() const noexcept {
         return std::holds_alternative<AllocationImpl::privateAllocation>(impl->typeData);
+    }
+
+    bool Allocation::operator==(const Allocation & other) const noexcept {
+        return (Memory() == other.Memory()) && (MemoryTypeIdx() == other.MemoryTypeIdx()) &&
+            (Offset() == other.Offset()) && (Size == other.Size) && (Alignment == other.Alignment) &&
+            (IsPrivateAllocation() == other.IsPrivateAllocation());
     }
     
 }

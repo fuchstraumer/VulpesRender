@@ -43,6 +43,12 @@ namespace vpr {
         };
     }
 
+    struct AllocationHash {
+        size_t operator()(const Allocation& alloc) const noexcept {
+            return (std::hash<uint64_t>()((uint64_t)alloc.Memory()) << 32) ^ (std::hash<VkDeviceSize>()(alloc.Offset()) << 16) ^ (std::hash<VkDeviceSize>()(alloc.Size));
+        }
+    };
+
     struct AllocatorImpl {
 
         AllocatorImpl(const VkDevice& dvc, const VkPhysicalDevice& physical_device, Allocator::allocation_extensions extensions);
@@ -64,7 +70,7 @@ namespace vpr {
         VkResult allocatePrivateMemory(const VkDeviceSize& size, const uint32_t& memory_type_idx, Allocation& dest_allocation, const VkMemoryPropertyFlags memory_flags);
 
         // called from "FreeMemory" if memory to free isn't found in the allocation vectors for any of our active memory types.
-        bool freePrivateMemory(const Allocation* memory_to_free);
+        bool freePrivateMemory(const Allocation& memory_to_free);
 
         void getBufferMemReqs(VkBuffer& handle, VkMemoryRequirements& reqs, bool& requires_dedicated, bool& prefers_dedicated);
         void getImageMemReqs(VkImage& handle, VkMemoryRequirements& reqs, bool& requires_dedicated, bool& prefers_dedicated);
@@ -80,7 +86,7 @@ namespace vpr {
 
         std::map<AllocationSize, std::vector<std::unique_ptr<AllocationCollection>>> allocations;
         std::map<AllocationSize, std::vector<bool>> emptyAllocations;
-        std::unordered_set<std::unique_ptr<Allocation>> privateAllocations;
+        std::unordered_set<Allocation, AllocationHash> privateAllocations;
 
         /**Guards the private allocations set, since it's a different object entirely than the main one.
         */
@@ -110,14 +116,11 @@ namespace vpr {
     };
 
     struct raw_equal_comparator {
-        raw_equal_comparator(const Allocation* _ptr) : ptr(_ptr) {};
-        bool operator()(const Allocation* other) const {
+        raw_equal_comparator(const Allocation& _ptr) : ptr(_ptr) {};
+        bool operator()(const Allocation& other) const {
             return ptr == other;
         }
-        bool operator()(const std::unique_ptr<Allocation>& unique_other) const {
-            return ptr == unique_other.get();
-        }
-        const Allocation* ptr;
+        const Allocation& ptr;
     };
 
     Allocator::Allocator(const VkDevice& logical_device, const VkPhysicalDevice& physical_device, allocation_extensions dedicated_alloc_enabled) : impl(std::make_unique<AllocatorImpl>(logical_device, physical_device, dedicated_alloc_enabled)) {}
@@ -266,11 +269,8 @@ namespace vpr {
             return;
         }
 
-        
-
-
         // memory_to_free not found, possible a privately/singularly allocated memory object
-        if (impl->freePrivateMemory(memory_to_free)) {
+        if (impl->freePrivateMemory(*memory_to_free)) {
             return;
         }
 
@@ -495,15 +495,15 @@ namespace vpr {
         }
         {
             std::lock_guard<std::mutex> private_guard(privateMutex);
-            privateAllocations.insert(std::unique_ptr<Allocation>(&dest_allocation));
+            privateAllocations.emplace(dest_allocation);
         }
         
         return VK_SUCCESS;
     }
     
-    bool AllocatorImpl::freePrivateMemory(const Allocation * alloc_to_free) {
+    bool AllocatorImpl::freePrivateMemory(const Allocation& alloc_to_free) {
 
-        assert(alloc_to_free->IsPrivateAllocation());
+        assert(alloc_to_free.IsPrivateAllocation());
         auto iter = std::find_if(privateAllocations.begin(), privateAllocations.end(), raw_equal_comparator(alloc_to_free));
         if (iter == privateAllocations.end()) {
             LOG(ERROR) << "Couldn't find alloc_to_free in privateAllocations container!";
@@ -511,8 +511,8 @@ namespace vpr {
         }
         else {
             std::lock_guard<std::mutex> private_guard(privateMutex);
-            VkDeviceMemory private_handle = (*iter).get()->Memory();
-            (*iter).get()->Unmap();
+            VkDeviceMemory private_handle = (*iter).Memory();
+            (*iter).Unmap();
             vkFreeMemory(logicalDevice, private_handle, nullptr);
             privateAllocations.erase(iter);
             LOG_IF(VERBOSE_LOGGING, INFO) << "Freed a private memory allocation.";

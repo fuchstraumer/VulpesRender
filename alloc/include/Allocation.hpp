@@ -41,7 +41,10 @@ namespace vpr {
         void* GetUserData() const;
         bool IsPrivateAllocation() const noexcept;
 
-        VkDeviceSize Size, Alignment;
+        bool operator==(const Allocation& other) const noexcept;
+
+        VkDeviceSize Size;
+        VkDeviceSize Alignment;
     private:
         std::unique_ptr<AllocationImpl> impl;
         void* userData{ nullptr };
