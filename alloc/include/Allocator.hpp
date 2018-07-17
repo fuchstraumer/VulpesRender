@@ -77,6 +77,10 @@ namespace vpr {
         std::unique_ptr<AllocatorImpl> impl;
     };
 
+    // Pass in a pointer to the shared_ptr retrieved from el::Helpers::getStorage()
+    VPR_API void SetLoggingRepository_VprAlloc(void* storage_ptr);
+    VPR_API void* GetLoggingRepository_VprAlloc();
+
 }
 
 #endif // !VULPES_VK_ALLOCATOR_H

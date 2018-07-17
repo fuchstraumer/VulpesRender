@@ -50,6 +50,7 @@ namespace vpr {
         VkPipelineCacheCreateInfo createInfo{ };
     };
 
+    VPR_API void SetLoggingRepository_VprResource(void* repo);
 }
 
 #endif // !VULPES_VK_PIPELINE_CACHE_H

@@ -8,6 +8,11 @@ INITIALIZE_EASYLOGGINGPP
 #endif
 
 namespace vpr {
+
+    void SetLoggingRepository_VprResource(void* repo) {
+        LOG(INFO) << "Updating easyloggingpp storage pointer in vpr_resource module...";
+        el::Helpers::setStorage(*(el::base::type::StoragePointer*)repo);
+    }
     
     constexpr static VkPipelineCacheCreateInfo base_create_info{ VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO, nullptr, 0, 0, nullptr };
 

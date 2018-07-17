@@ -11,6 +11,7 @@ ADD_VPR_LIBRARY(
     "src/MemoryBlock.hpp"
     "src/MemoryBlock.cpp"
     "src/Suballocation.hpp"
+    "../third_party/easyloggingpp/src/easylogging++.cc"
 )
 
 TARGET_INCLUDE_DIRECTORIES(vpr_alloc PUBLIC 

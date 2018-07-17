@@ -9,6 +9,7 @@ ADD_VPR_LIBRARY(vpr_core
     "src/PhysicalDevice.cpp"
     "src/SurfaceKHR.cpp"
     "src/Swapchain.cpp"
+    "../third_party/easyloggingpp/src/easylogging++.cc"
 )
 
 TARGET_INCLUDE_DIRECTORIES(vpr_core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")

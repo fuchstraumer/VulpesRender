@@ -17,6 +17,17 @@ INITIALIZE_EASYLOGGINGPP
 
 namespace vpr {
 
+    void SetLoggingRepository_VprAlloc(void* storage_ptr) {
+        el::base::type::StoragePointer* ptr = reinterpret_cast<el::base::type::StoragePointer*>(storage_ptr);
+        el::Helpers::setStorage(*ptr);
+        LOG(INFO) << "Updated easyloggingpp storage pointer in vpr_alloc module...";
+    }
+
+    void* GetLoggingRepository_VprAlloc() {
+        static el::base::type::StoragePointer ptr = el::Helpers::storage();
+        return ptr.get();
+    }
+
     vpr::SuballocationType suballocTypeFromAllocType(const AllocationType& alloc_type) {
         switch (alloc_type) {
         case AllocationType::Buffer:
