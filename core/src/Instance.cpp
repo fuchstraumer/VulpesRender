@@ -86,6 +86,15 @@ namespace vpr {
         }
     }
 
+    void Instance::GetEnabledExtensions(size_t* num_extensions, char** extensions) const {
+        *num_extensions = extensionHandler->extensionStrings.size();
+        if (extensions != nullptr) {
+            for (size_t i = 0; i < *num_extensions; ++i) {
+                extensions[i] = _strdup(extensionHandler->extensionStrings[i]);
+            }
+        }
+    }
+
     const VkInstance& Instance::vkHandle() const noexcept {
         return handle;
     }

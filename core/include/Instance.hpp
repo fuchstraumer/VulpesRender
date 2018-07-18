@@ -56,6 +56,7 @@ namespace vpr {
 
         bool ValidationEnabled() const noexcept;
         bool HasExtension(const char* extension_name) const noexcept;
+        void GetEnabledExtensions(size_t* num_extensions, char** extensions) const;
 
     private:
 
