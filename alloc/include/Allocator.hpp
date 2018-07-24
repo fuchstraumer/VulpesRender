@@ -34,6 +34,8 @@ namespace vpr {
 
     struct AllocatorImpl;
     struct AllocationRequirements;
+    class DebugVisualization;
+    class DebugVisualizationImpl;
 
     enum class AllocationType : uint32_t {
         INVALID = 0,
@@ -74,6 +76,8 @@ namespace vpr {
         VkResult AllocateForBuffer(VkBuffer& buffer_handle, const AllocationRequirements& details, const AllocationType& alloc_type, Allocation& dest_allocation);
 
     private:
+        friend class DebugVisualization;
+        friend class DebugVisualizationImpl;
         std::unique_ptr<AllocatorImpl> impl;
     };
 
