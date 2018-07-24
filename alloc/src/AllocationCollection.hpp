@@ -49,6 +49,8 @@ namespace vpr {
         std::mutex containerMutex;
         std::vector<std::unique_ptr<MemoryBlock>> allocations;
         Allocator* allocator{ nullptr };
+        friend class DebugVisualization;
+        friend class DebugVisualizationImpl;
     };
 
 }

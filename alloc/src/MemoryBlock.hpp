@@ -109,6 +109,9 @@ namespace vpr {
          *  (akin to a pointer), but with more safety and extra convienience when it comes to retrieving, modifying, or even removing the object "pointed" to by the iterator.
         */
         std::vector<suballocationList::iterator> availSuballocations;
+
+        friend class DebugVisualization;
+        friend class DebugVisualizationImpl;
     };
 
     typedef std::vector<MemoryBlock*>::iterator allocation_iterator_t;
