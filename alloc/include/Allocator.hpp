@@ -34,8 +34,6 @@ namespace vpr {
 
     struct AllocatorImpl;
     struct AllocationRequirements;
-    class DebugVisualization;
-    class DebugVisualizationImpl;
 
     enum class AllocationType : uint32_t {
         INVALID = 0,
@@ -77,7 +75,7 @@ namespace vpr {
 
     private:
         friend class DebugVisualization;
-        friend class DebugVisualizationImpl;
+        friend struct DebugVisualizationImpl;
         std::unique_ptr<AllocatorImpl> impl;
     };
 

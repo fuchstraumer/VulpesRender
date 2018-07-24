@@ -88,7 +88,7 @@ namespace vpr {
         PFN_vkGetImageSparseMemoryRequirements2KHR pVkGetImageSparseMemoryRequirements2KHR;
 
         friend class DebugVisualization;
-        friend class DebugVisualizationImpl;
+        friend struct DebugVisualizationImpl;
     };
 
     struct raw_equal_comparator {

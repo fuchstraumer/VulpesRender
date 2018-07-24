@@ -111,7 +111,7 @@ namespace vpr {
         std::vector<suballocationList::iterator> availSuballocations;
 
         friend class DebugVisualization;
-        friend class DebugVisualizationImpl;
+        friend struct DebugVisualizationImpl;
     };
 
     typedef std::vector<MemoryBlock*>::iterator allocation_iterator_t;

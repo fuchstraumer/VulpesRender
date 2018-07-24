@@ -1,6 +1,7 @@
 #include "DebugVisualization.hpp"
 #include "AllocatorImpl.hpp"
 #include "imgui.h"
+
 #include <forward_list>
 namespace vpr {
 
@@ -9,12 +10,12 @@ namespace vpr {
     };
 
     static const std::map<SuballocationType, ImVec4> TypeColors{
-    { SuballocationType::Free, ImVec4(0.0f, 0.1f, 0.9f, 1.0f) },
-    { SuballocationType::Buffer, ImVec4(119.0f / 255.0f, 244.0f / 255.0f, 66.0f / 255.0f, 1.0f) },
-    { SuballocationType::ImageLinear, ImVec4(244.0f / 255.0f, 226.0f / 255.0f, 66.0f / 255.0f, 1.0f) },
-    { SuballocationType::ImageOptimal, ImVec4(244.0f / 255.0f, 179.0f / 255.0f, 66.0f / 255.0f, 1.0f) },   
-    { SuballocationType::Unknown, ImVec4(240.0f / 255.0f, 10.0f / 255.0f, 10.0f / 255.0f, 1.0f) },
-    { SuballocationType::ImageUnknown, ImVec4(1.0f, 220.0f / 255.0f, 30.0f / 255.0f, 1.0f) }
+        { SuballocationType::Free, ImVec4(0.0f, 0.1f, 0.9f, 1.0f) },
+        { SuballocationType::Buffer, ImVec4(119.0f / 255.0f, 244.0f / 255.0f, 66.0f / 255.0f, 1.0f) },
+        { SuballocationType::ImageLinear, ImVec4(244.0f / 255.0f, 226.0f / 255.0f, 66.0f / 255.0f, 1.0f) },
+        { SuballocationType::ImageOptimal, ImVec4(244.0f / 255.0f, 179.0f / 255.0f, 66.0f / 255.0f, 1.0f) },   
+        { SuballocationType::Unknown, ImVec4(240.0f / 255.0f, 10.0f / 255.0f, 10.0f / 255.0f, 1.0f) },
+        { SuballocationType::ImageUnknown, ImVec4(1.0f, 220.0f / 255.0f, 30.0f / 255.0f, 1.0f) }
     };
 
     struct SuballocationDrawCommand {
@@ -38,6 +39,7 @@ namespace vpr {
 
     struct MemoryBlocksGroup {
         MemoryBlocksGroup(const std::vector<std::unique_ptr<vpr::MemoryBlock>>& allocations);
+        MemoryBlocksGroup() {};
         memory_attributes Attributes;
         std::vector<MemoryBlockInfo> Blocks;
     };
@@ -75,7 +77,7 @@ namespace vpr {
     void MemoryBlockInfo::UpdateDrawCommands() {
         DrawCommands.clear();
         for (auto& alloc : *Suballocations) {
-            DrawCommands.emplace_front(SuballocationDrawCommand(TypeColors.at(alloc.Type), ))
+            //DrawCommands.emplace_front(SuballocationDrawCommand(TypeColors.at(alloc.Type), ))
         }
     }
 
