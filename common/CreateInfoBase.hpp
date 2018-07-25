@@ -204,7 +204,7 @@ namespace vpr {
 		std::numeric_limits<uint32_t>::max(),
 		std::numeric_limits<uint32_t>::max(),
 		VK_NULL_HANDLE,
-		VK_NULL_HANDLE,
+        {VK_NULL_HANDLE},
 	};
 
 	// This should be tuned at least slightly before being used: format at the least needs to be set.
@@ -375,7 +375,7 @@ namespace vpr {
 	};
 
 	constexpr static VkRect2D vk_default_viewport_scissor{
-		0, 0, // Offset from zero to cut fragments at
+        {0, 0}, // Offset from zero to cut fragments at
 		VkExtent2D{static_cast<uint32_t>(vk_default_viewport.width), static_cast<uint32_t>(vk_default_viewport.height)}, // Extents to draw in, copied from default viewport.
 	};
 
@@ -494,7 +494,7 @@ namespace vpr {
 		VK_QUEUE_FAMILY_IGNORED,
 		VK_QUEUE_FAMILY_IGNORED,
 		VK_NULL_HANDLE,
-		VK_NULL_HANDLE,
+        VkImageSubresourceRange{},
 	};
 
 	constexpr static VkDescriptorSetLayoutCreateInfo vk_descriptor_set_layout_create_info_base {

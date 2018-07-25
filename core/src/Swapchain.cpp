@@ -60,8 +60,8 @@ namespace vpr {
         const Device* device;
     };
 
-    SwapchainImpl::SwapchainImpl(const Device * _device, GLFWwindow* _window, VkSurfaceKHR _surface, uint32_t mode) : desiredSyncMode(mode),
-        window(_window), device(_device), surface(_surface), info(_device->GetPhysicalDevice().vkHandle(), _surface) {
+    SwapchainImpl::SwapchainImpl(const Device * _device, GLFWwindow* _window, VkSurfaceKHR _surface, uint32_t mode) :
+        info(_device->GetPhysicalDevice().vkHandle(), _surface), desiredSyncMode(mode), surface(_surface), window(_window), device(_device) {
         create();
     }
 

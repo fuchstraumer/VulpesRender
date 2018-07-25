@@ -14,7 +14,7 @@ namespace vpr {
         Destroy();
     }
 
-    Framebuffer::Framebuffer(Framebuffer&& other) noexcept : handle(std::move(other.handle)), parent(std::move(other.parent)) {
+    Framebuffer::Framebuffer(Framebuffer&& other) noexcept : parent(std::move(other.parent)), handle(std::move(other.handle)) {
         other.handle = VK_NULL_HANDLE;
     }
 

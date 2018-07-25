@@ -133,8 +133,7 @@ namespace vpr {
         retrieveQueueFamilyProperties();
     }
 
-    PhysicalDeviceImpl::PhysicalDeviceImpl(PhysicalDeviceImpl && other) noexcept : Properties(std::move(other.Properties)), Features(std::move(other.Features)), MemoryProperties(std::move(other.MemoryProperties)),
-        queueFamilyProperties(std::move(other.queueFamilyProperties)), SubgroupProperties(std::move(other.SubgroupProperties)),
+    PhysicalDeviceImpl::PhysicalDeviceImpl(PhysicalDeviceImpl && other) noexcept : Properties(std::move(other.Properties)), Features(std::move(other.Features)), MemoryProperties(std::move(other.MemoryProperties)), SubgroupProperties(std::move(other.SubgroupProperties)), queueFamilyProperties(std::move(other.queueFamilyProperties)),
         handle(std::move(other.handle)) { other.handle = VK_NULL_HANDLE; }
 
     PhysicalDeviceImpl & PhysicalDeviceImpl::operator=(PhysicalDeviceImpl && other) noexcept {
