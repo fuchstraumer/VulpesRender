@@ -102,7 +102,11 @@ namespace vpr {
         *num_extensions = dataMembers->enabledExtensions.size();
         if (extensions != nullptr) {
             for (size_t i = 0; i < *num_extensions; ++i) {
+#ifdef __APPLE_CC__
+                extensions[i] = strdup(dataMembers->enabledExtensions[i]);
+#else
                 extensions[i] = _strdup(dataMembers->enabledExtensions[i]);
+#endif
             }
         }
     }
