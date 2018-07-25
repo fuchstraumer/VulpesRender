@@ -13,6 +13,7 @@ ADD_VPR_LIBRARY(vpr_resource
     "src/PipelineLayout.cpp"
     "src/Sampler.cpp"
     "src/ShaderModule.cpp"
+    "../third_party/easyloggingpp/src/easylogging++.cc"
 )
 
 TARGET_INCLUDE_DIRECTORIES(vpr_resource PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")

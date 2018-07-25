@@ -59,6 +59,7 @@ namespace vpr {
         VkResult result = vkCreateShaderModule(parent, &createInfo, allocators, &handle);
         VkAssert(result);
 
+        pipelineInfo = vpr::vk_pipeline_shader_stage_create_info_base;
         pipelineInfo.module = handle;
         pipelineInfo.pName = "main";
         pipelineInfo.stage = stages;

@@ -43,6 +43,7 @@ namespace vpr {
         bool HasDedicatedComputeQueues() const;
         bool DedicatedAllocationExtensionsEnabled() const noexcept;
         bool HasExtension(const char* name) const noexcept;
+        void GetEnabledExtensions(size_t* num_extensions, char** extensions) const;
         void UpdateSurface(VkSurfaceKHR new_surface);
 
         /**! Returns queue that has support for most operation types. First checks for graphics, compute, and transfer. 

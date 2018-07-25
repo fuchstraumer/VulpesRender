@@ -21,7 +21,7 @@ namespace vpr {
         MemoryBlock& operator=(const MemoryBlock&) = delete;
     public:
 
-        MemoryBlock(VkDevice parent_device = VK_NULL_HANDLE);
+        MemoryBlock(VkDevice parent_device);
         /** The object should be destroyed via the Destroy method before the destructor is called, but this will call the Destroy method if it hasn't been, and will log a warning that this was done. */
         ~MemoryBlock(); 
 
@@ -58,7 +58,7 @@ namespace vpr {
         /** When we map a suballocation, we are mapping a sub-region of the larger memory object it is bound to. We cannot perform another map until this sub-region
          *  is unmapped. Thus, suballocations actually call their parent's mapping method. This lets us use a mutex to lock off access to this block's VkDeviceMemory object until the memory is unmapped.
          */
-        void Map(const Allocation* alloc_being_mapped, const VkDeviceSize& size_of_map, const VkDeviceSize& offset_to_map_at, void* destination_address);
+        void Map(const Allocation* alloc_being_mapped, const VkDeviceSize& size_of_map, const VkDeviceSize& offset_to_map_at, void** destination_address);
         /** As mentioned for the Map method, due to VkMapMemory functions we must make sure only one sub-region of an object is unmapped at a time, thus requiring the 
          *  parent block to oversee the mapping/unmapping + using a mutex for thread safety.
         */
@@ -109,6 +109,9 @@ namespace vpr {
          *  (akin to a pointer), but with more safety and extra convienience when it comes to retrieving, modifying, or even removing the object "pointed" to by the iterator.
         */
         std::vector<suballocationList::iterator> availSuballocations;
+
+        friend class DebugVisualization;
+        friend struct DebugVisualizationImpl;
     };
 
     typedef std::vector<MemoryBlock*>::iterator allocation_iterator_t;

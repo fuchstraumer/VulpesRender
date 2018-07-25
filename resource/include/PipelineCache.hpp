@@ -41,6 +41,7 @@ namespace vpr {
         void MergeCaches(const uint32_t num_caches, const VkPipelineCache* caches);
 
     private:
+        char* loadedData = nullptr;
         char* filename = nullptr;
         VkResult saveToFile() const;
         size_t hashID{ 0 };
@@ -50,6 +51,7 @@ namespace vpr {
         VkPipelineCacheCreateInfo createInfo{ };
     };
 
+    VPR_API void SetLoggingRepository_VprResource(void* repo);
 }
 
 #endif // !VULPES_VK_PIPELINE_CACHE_H

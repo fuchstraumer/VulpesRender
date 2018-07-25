@@ -98,6 +98,15 @@ namespace vpr {
         }
     }
 
+    void Device::GetEnabledExtensions(size_t * num_extensions, char ** extensions) const {
+        *num_extensions = dataMembers->enabledExtensions.size();
+        if (extensions != nullptr) {
+            for (size_t i = 0; i < *num_extensions; ++i) {
+                extensions[i] = _strdup(dataMembers->enabledExtensions[i]);
+            }
+        }
+    }
+
     void Device::UpdateSurface(VkSurfaceKHR new_surface) {
         surface = new_surface;
         verifyPresentationSupport();
@@ -486,6 +495,11 @@ namespace vpr {
                 LOG(ERROR) << "Failed to load function pointer " << fname << "for debug utils extension!";
             }
         };
+
+        if (!parentInstance->ValidationEnabled()) {
+            LOG(WARNING) << "Cannot load requested VkDebugUtils function pointers, as validation layers are not enabled!";
+            return;
+        }
 
         if (parentInstance->HasExtension(VK_EXT_DEBUG_UTILS_EXTENSION_NAME)) {
             debugUtilsHandler = new VkDebugUtilsFunctions();

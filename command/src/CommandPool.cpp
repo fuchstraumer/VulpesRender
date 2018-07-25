@@ -7,6 +7,11 @@ INITIALIZE_EASYLOGGINGPP
 #include <vector>
 namespace vpr {
 
+    void SetLoggingRepository_VprCommand(void* repo) {
+        el::Helpers::setStorage(*(el::base::type::StoragePointer*)repo);
+        LOG(INFO) << "Updating easyloggingpp storage pointer in vpr_command module...";
+    }
+
     struct CommandBuffers  {
         std::vector<VkCommandBuffer> Data;
     };

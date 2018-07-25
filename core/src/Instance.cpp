@@ -13,6 +13,16 @@ INITIALIZE_EASYLOGGINGPP
 
 namespace vpr {
 
+    void SetLoggingRepository_VprCore(void* repo) {
+        el::Helpers::setStorage(*(el::base::type::StoragePointer*)repo);
+        LOG(INFO) << "Updated easyloggingpp storage pointer in vpr_core module...";
+    }
+
+    void* GetLoggingRepository_VprCore() {
+        static el::base::type::StoragePointer ptr = el::Helpers::storage();
+        return ptr.get();
+    }
+
     VKAPI_ATTR VkBool32 VKAPI_CALL VkDebugCallbackFn(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT type, uint64_t object_handle, 
         size_t location, int32_t message_code, const char * layer_prefix, const char * message, void * user_data);
 
@@ -73,6 +83,15 @@ namespace vpr {
         }
         else {
             return false;
+        }
+    }
+
+    void Instance::GetEnabledExtensions(size_t* num_extensions, char** extensions) const {
+        *num_extensions = extensionHandler->extensionStrings.size();
+        if (extensions != nullptr) {
+            for (size_t i = 0; i < *num_extensions; ++i) {
+                extensions[i] = _strdup(extensionHandler->extensionStrings[i]);
+            }
         }
     }
 

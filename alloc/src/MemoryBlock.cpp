@@ -419,9 +419,9 @@ namespace vpr {
         }
     }
     
-    void MemoryBlock::Map(const Allocation* alloc_being_mapped, const VkDeviceSize& size_of_map, const VkDeviceSize& offset_to_map_at, void* destination_address) {
+    void MemoryBlock::Map(const Allocation* alloc_being_mapped, const VkDeviceSize& size_of_map, const VkDeviceSize& offset_to_map_at, void** destination_address) {
         std::lock_guard<std::mutex> mapping_lock(guardMutex);
-        VkResult result = vkMapMemory(parentDevice, memory, alloc_being_mapped->Offset() + offset_to_map_at, size_of_map, 0, &destination_address);
+        VkResult result = vkMapMemory(parentDevice, memory, alloc_being_mapped->Offset() + offset_to_map_at, size_of_map, 0, destination_address);
         VkAssert(result);
     }
 

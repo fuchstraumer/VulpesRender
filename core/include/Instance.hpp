@@ -56,6 +56,7 @@ namespace vpr {
 
         bool ValidationEnabled() const noexcept;
         bool HasExtension(const char* extension_name) const noexcept;
+        void GetEnabledExtensions(size_t* num_extensions, char** extensions) const;
 
     private:
 
@@ -71,6 +72,9 @@ namespace vpr {
         PFN_vkDebugReportMessageEXT debugMessageFn{ nullptr };
 
     };
+
+    VPR_API void SetLoggingRepository_VprCore(void* logging_repo);
+    VPR_API void* GetLoggingRepository_VprCore();
 
     VKAPI_ATTR VkBool32 VKAPI_CALL VkDebugCallbackFn(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT type, uint64_t object_handle, size_t location, int32_t message_code, const char* layer_prefix,
         const char* message, void* user_data);

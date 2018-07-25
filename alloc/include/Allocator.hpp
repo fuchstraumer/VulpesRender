@@ -74,8 +74,14 @@ namespace vpr {
         VkResult AllocateForBuffer(VkBuffer& buffer_handle, const AllocationRequirements& details, const AllocationType& alloc_type, Allocation& dest_allocation);
 
     private:
+        friend class DebugVisualization;
+        friend struct DebugVisualizationImpl;
         std::unique_ptr<AllocatorImpl> impl;
     };
+
+    // Pass in a pointer to the shared_ptr retrieved from el::Helpers::getStorage()
+    VPR_API void SetLoggingRepository_VprAlloc(void* storage_ptr);
+    VPR_API void* GetLoggingRepository_VprAlloc();
 
 }
 

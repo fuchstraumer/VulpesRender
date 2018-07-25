@@ -36,6 +36,8 @@ namespace vpr {
         VkPipelineLayout handle{ VK_NULL_HANDLE };
     };
 
+    void VPR_API SetLoggingRepository(void* storage_ptr);
+
 }
 
 

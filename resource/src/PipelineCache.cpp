@@ -3,29 +3,29 @@
 #include "easylogging++.h"
 INITIALIZE_EASYLOGGINGPP
 #include "vkAssert.hpp"
-#ifdef USE_EXPERIMENTAL_FILESYSTEM
 #include <experimental/filesystem>
-#endif
 
 namespace vpr {
+
+    void SetLoggingRepository_VprResource(void* repo) {
+        el::Helpers::setStorage(*(el::base::type::StoragePointer*)repo);
+        LOG(INFO) << "Updating easyloggingpp storage pointer in vpr_resource module...";
+    }
     
     constexpr static VkPipelineCacheCreateInfo base_create_info{ VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO, nullptr, 0, 0, nullptr };
 
     PipelineCache::PipelineCache(const VkDevice& _parent, const VkPhysicalDevice& host_device, const size_t hash_id) : parent(_parent), createInfo(base_create_info), 
         hostPhysicalDevice(host_device), hashID(std::move(hash_id)), handle(VK_NULL_HANDLE) {
         
-        std::string cache_dir = std::string("./rsrc/shader_cache/");
-            
-#ifdef USE_EXPERIMENTAL_FILESYSTEM
-        std::experimental::filesystem::path cache_path(cache_dir);
+        std::string cache_dir = std::string("/shader_cache/");
+        std::experimental::filesystem::path cache_path(std::experimental::filesystem::temp_directory_path() / std::experimental::filesystem::path(cache_dir));
 
         if (!std::experimental::filesystem::exists(cache_path)) {
             LOG(INFO) << "Shader cache path didn't exist, creating...";
             std::experimental::filesystem::create_directories(cache_path);
         }
-#endif
-            
-        std::string fname = cache_dir + std::to_string(hash_id) + std::string(".vkdat");
+   
+        std::string fname = cache_path.string() + std::to_string(hash_id) + std::string(".vkdat");
         filename = _strdup(fname.c_str());
 
         // Attempts to load cache from file: if failed, doesn't matter much.
@@ -46,12 +46,17 @@ namespace vpr {
         if (filename) {
             free(filename);
         }
+
+        if (loadedData) {
+            free(loadedData);
+        }
     }
 
     PipelineCache::PipelineCache(PipelineCache&& other) noexcept : parent(std::move(other.parent)), createInfo(std::move(other.createInfo)),
-        hashID(std::move(other.hashID)), handle(std::move(other.handle)), filename(std::move(other.filename)) {
+        hashID(std::move(other.hashID)), handle(std::move(other.handle)), filename(std::move(other.filename)), loadedData(std::move(other.loadedData)) {
         other.handle = VK_NULL_HANDLE; 
         other.filename = nullptr;
+        other.loadedData = nullptr;
     }
 
     PipelineCache& PipelineCache::operator=(PipelineCache&& other) noexcept {
@@ -62,6 +67,8 @@ namespace vpr {
         other.handle = VK_NULL_HANDLE;
         filename = std::move(other.filename);
         other.filename = nullptr;
+        loadedData = std::move(other.loadedData);
+        other.loadedData = nullptr;
         return *this;
     }
  
@@ -112,14 +119,16 @@ namespace vpr {
 
             // Check to see if header data matches current device.
             if (Verify(header.data())) {
-                LOG_IF(VERBOSE_LOGGING, INFO) << "Found valid pipeline cache data with ID # " << std::to_string(hashID) << " .";
+                cache.seekg(0, std::ios::beg);
+                LOG(INFO) << "Found valid pipeline cache data with ID # " << std::to_string(hashID) << " .";
                 std::string cache_str((std::istreambuf_iterator<char>(cache)), std::istreambuf_iterator<char>());
                 uint32_t cache_size = static_cast<uint32_t>(cache_str.size() * sizeof(char));
+                loadedData = _strdup(cache_str.c_str());
                 createInfo.initialDataSize = cache_size;
-                createInfo.pInitialData = cache_str.data();
+                createInfo.pInitialData = loadedData;
             }
             else {
-                LOG_IF(VERBOSE_LOGGING, INFO) << "Pre-existing cache file isn't valid: creating new pipeline cache.";
+                LOG(INFO) << "Pre-existing cache file isn't valid: creating new pipeline cache.";
                 createInfo.initialDataSize = 0;
                 createInfo.pInitialData = nullptr;
             }

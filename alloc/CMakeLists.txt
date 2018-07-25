@@ -3,14 +3,19 @@ ADD_VPR_LIBRARY(
     "include/Allocation.hpp" 
     "include/AllocationRequirements.hpp"
     "include/Allocator.hpp"
+    "include/DebugVisualization.hpp"
     "src/Allocation.cpp"
     "src/AllocationCollection.hpp"
     "src/AllocationCollection.cpp"
     "src/Allocator.cpp"
+    "src/AllocatorImpl.hpp"
+    "src/AllocatorImpl.cpp"
+    "src/DebugVisualization.cpp"
     "src/AllocCommon.hpp"
     "src/MemoryBlock.hpp"
     "src/MemoryBlock.cpp"
     "src/Suballocation.hpp"
+    "../third_party/easyloggingpp/src/easylogging++.cc"
 )
 
 TARGET_INCLUDE_DIRECTORIES(vpr_alloc PUBLIC 
