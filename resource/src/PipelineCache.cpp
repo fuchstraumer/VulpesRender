@@ -120,7 +120,7 @@ namespace vpr {
             // Check to see if header data matches current device.
             if (Verify(header.data())) {
                 cache.seekg(0, std::ios::beg);
-                LOG_IF(VERBOSE_LOGGING, INFO) << "Found valid pipeline cache data with ID # " << std::to_string(hashID) << " .";
+                LOG(INFO) << "Found valid pipeline cache data with ID # " << std::to_string(hashID) << " .";
                 std::string cache_str((std::istreambuf_iterator<char>(cache)), std::istreambuf_iterator<char>());
                 uint32_t cache_size = static_cast<uint32_t>(cache_str.size() * sizeof(char));
                 loadedData = _strdup(cache_str.c_str());
@@ -128,7 +128,7 @@ namespace vpr {
                 createInfo.pInitialData = loadedData;
             }
             else {
-                LOG_IF(VERBOSE_LOGGING, INFO) << "Pre-existing cache file isn't valid: creating new pipeline cache.";
+                LOG(INFO) << "Pre-existing cache file isn't valid: creating new pipeline cache.";
                 createInfo.initialDataSize = 0;
                 createInfo.pInitialData = nullptr;
             }
