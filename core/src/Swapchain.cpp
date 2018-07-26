@@ -8,6 +8,7 @@
 #include "SurfaceKHR.hpp"
 #include <vector>
 #include <algorithm>
+#include <unordered_map>
 #define GLFW_INCLUDE_VULKAN
 #include "GLFW/glfw3.h"
 #include "easylogging++.h"
@@ -125,6 +126,9 @@ namespace vpr {
             if (mode == VK_PRESENT_MODE_MAILBOX_KHR) {
                 return VK_PRESENT_MODE_MAILBOX_KHR;
             }
+            else if (mode == VK_PRESENT_MODE_FIFO_KHR) {
+                return VK_PRESENT_MODE_FIFO_KHR;
+            }
             else if (mode == VK_PRESENT_MODE_IMMEDIATE_KHR) {
                 // FIFO not always supported by driver, in which case this is our best bet.
                 result = VK_PRESENT_MODE_IMMEDIATE_KHR;
@@ -180,6 +184,25 @@ namespace vpr {
         handle = VK_NULL_HANDLE;
     }
 
+    static const std::unordered_map<VkPresentModeKHR, std::string> present_mode_strings{
+        { VK_PRESENT_MODE_IMMEDIATE_KHR, "VK_PRESENT_MODE_IMMEDIATE_KHR" },
+        { VK_PRESENT_MODE_FIFO_KHR, "VK_PRESENT_MODE_FIFO_KHR" },
+        { VK_PRESENT_MODE_FIFO_RELAXED_KHR, "VK_PRESENT_MODE_FIFO_RELAXED_KHR" },
+        { VK_PRESENT_MODE_MAILBOX_KHR, "VK_PRESENT_MODE_MAILBOX_KHR" },
+        { VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR, "VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR" },
+        { VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR, "VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR" }
+    };
+
+    std::string getPresentModeStr(const VkPresentModeKHR& mode) {
+        auto iter = present_mode_strings.find(mode);
+        if (iter != std::cend(present_mode_strings)) {
+            return iter->second;
+        }
+        else {
+            return "INVALID_PRESENT_MODE_ENUM_VALUE";
+        }
+    }
+
     void SwapchainImpl::setParameters() {
 
         surfaceFormat = info.GetBestFormat();
@@ -210,7 +233,8 @@ namespace vpr {
             auto& avail_modes = info.PresentModes;
             auto iter = std::find(std::begin(avail_modes), std::end(avail_modes), desiredMode);
             if (iter == std::cend(avail_modes)) {
-                LOG(WARNING) << "Desired vertical sync mode is not available on current hardware!";
+                LOG(WARNING) << "Desired vertical sync mode is " << getPresentModeStr(desiredMode) << "not available on current hardware!";
+                LOG(INFO) << "Falling back to supported present mode " << getPresentModeStr(presentMode);
             }
             else {
                 presentMode = *iter;
@@ -219,6 +243,12 @@ namespace vpr {
 
         // Create one more image than minspec to implement triple buffering (in hope we got mailbox present mode)
         if (presentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
+            imageCount = info.Capabilities.minImageCount + 1;
+            if (info.Capabilities.maxImageCount > 0 && imageCount > info.Capabilities.maxImageCount) {
+                imageCount = info.Capabilities.maxImageCount;
+            }
+        }
+        else if (presentMode == VK_PRESENT_MODE_FIFO_KHR || presentMode ==  VK_PRESENT_MODE_FIFO_RELAXED_KHR) {
             imageCount = info.Capabilities.minImageCount + 1;
             if (info.Capabilities.maxImageCount > 0 && imageCount > info.Capabilities.maxImageCount) {
                 imageCount = info.Capabilities.maxImageCount;
