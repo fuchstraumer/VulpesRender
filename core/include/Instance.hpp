@@ -52,8 +52,6 @@ namespace vpr {
         ~Instance();
 
         const VkInstance& vkHandle() const noexcept;
-        void DebugMessage(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT obj_type, uint64_t obj, size_t location, int32_t msg_code, const char* layer, const char* message);
-
         bool ValidationEnabled() const noexcept;
         bool HasExtension(const char* extension_name) const noexcept;
         void GetEnabledExtensions(size_t* num_extensions, char** extensions) const;
@@ -63,21 +61,16 @@ namespace vpr {
         void prepareValidation(const char* const* layers, const uint32_t layer_count);
         bool checkValidationSupport(const char* const* layer_names, const uint32_t layer_count) const;
         void checkApiVersionSupport(VkApplicationInfo* info);
-        void prepareValidationCallbacks();
         
         InstanceExtensionHandler* extensionHandler;
         VkInstance handle;
         VkInstanceCreateInfo createInfo;
-        VkDebugReportCallbackEXT debugCallback;
-        PFN_vkDebugReportMessageEXT debugMessageFn{ nullptr };
 
     };
 
     VPR_API void SetLoggingRepository_VprCore(void* logging_repo);
     VPR_API void* GetLoggingRepository_VprCore();
 
-    VKAPI_ATTR VkBool32 VKAPI_CALL VkDebugCallbackFn(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT type, uint64_t object_handle, size_t location, int32_t message_code, const char* layer_prefix,
-        const char* message, void* user_data);
 }
 
 #endif // !INSTANCE_H
