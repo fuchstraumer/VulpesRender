@@ -5,8 +5,8 @@ INITIALIZE_EASYLOGGINGPP
 
 namespace vpr {
 
-    AllocatorImpl::AllocatorImpl(const VkDevice& parent_dvc, const VkPhysicalDevice& phys_device, Allocator::allocation_extensions extensions) : logicalDevice(parent_dvc), physicalDevice(phys_device),
-        usingMemoryExtensions((extensions == Allocator::allocation_extensions::DedicatedAllocations) ? true : false), preferredSmallHeapBlockSize(DefaultSmallHeapBlockSize), preferredLargeHeapBlockSize(DefaultLargeHeapBlockSize) {
+    AllocatorImpl::AllocatorImpl(const VkDevice& parent_dvc, const VkPhysicalDevice& phys_device, Allocator::allocation_extensions extensions) : logicalDevice(parent_dvc), physicalDevice(phys_device), preferredLargeHeapBlockSize(DefaultLargeHeapBlockSize), preferredSmallHeapBlockSize(DefaultSmallHeapBlockSize), 
+        usingMemoryExtensions((extensions == Allocator::allocation_extensions::DedicatedAllocations) ? true : false) {
         vkGetPhysicalDeviceProperties(physicalDevice, &deviceProperties);
         vkGetPhysicalDeviceMemoryProperties(physicalDevice, &deviceMemoryProperties);
 

@@ -28,13 +28,13 @@ namespace vpr {
 #endif
     };
 
-    Allocation::Allocation() : impl(std::make_unique<AllocationImpl>()), Size(0), Alignment(0) {}
+    Allocation::Allocation() : Size(0), Alignment(0), impl(std::make_unique<AllocationImpl>()) {}
 
     Allocation::~Allocation() { 
         impl.reset();
     }
 
-    Allocation::Allocation(const Allocation& other) : impl(std::make_unique<AllocationImpl>(*other.impl)), Size(other.Size), Alignment(other.Alignment) {}
+    Allocation::Allocation(const Allocation& other) : Size(other.Size), Alignment(other.Alignment), impl(std::make_unique<AllocationImpl>(*other.impl)) {}
 
     Allocation& Allocation::operator=(const Allocation& other) {
         Size = other.Size;
