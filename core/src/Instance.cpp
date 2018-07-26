@@ -23,9 +23,6 @@ namespace vpr {
         return ptr.get();
     }
 
-    VKAPI_ATTR VkBool32 VKAPI_CALL VkDebugCallbackFn(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT type, uint64_t object_handle, 
-        size_t location, int32_t message_code, const char * layer_prefix, const char * message, void * user_data);
-
     struct InstanceExtensionHandler {
         InstanceExtensionHandler(Instance::instance_layers layers) : validationLayers(layers) {}
         std::vector<const char*> extensionStrings;
@@ -44,6 +41,11 @@ namespace vpr {
     Instance::Instance(instance_layers layers_flags, const VkApplicationInfo * info, const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) :
         extensionHandler(new InstanceExtensionHandler(layers_flags)), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, nullptr } {
         VkApplicationInfo our_info = *info;
+            
+        if (!glfwVulkanSupported()) {
+            LOG(ERROR) << "Vulkan is not supported on the current hardware!";
+            throw std::runtime_error("Vulkan not supported!");
+        }
 
         extensionHandler->extensionSetup(extensions);
         createInfo.ppEnabledExtensionNames = extensionHandler->extensionStrings.data();
@@ -54,10 +56,6 @@ namespace vpr {
         createInfo.pApplicationInfo = &our_info;
         VkResult err = vkCreateInstance(&createInfo, nullptr, &handle);
         VkAssert(err);
-
-        if (extensionHandler->validationLayers != instance_layers::Disabled) {
-            prepareValidationCallbacks();
-        }
 
     }
 

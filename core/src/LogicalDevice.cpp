@@ -377,7 +377,7 @@ namespace vpr {
 
     void Device::setupSparseBindingQueues() {
         QueueFamilyIndices.SparseBinding = parent->GetQueueFamilyIndex(VK_QUEUE_SPARSE_BINDING_BIT);
-        if (QueueFamilyIndices.SparseBinding != QueueFamilyIndices.Graphics) {
+        if ((QueueFamilyIndices.SparseBinding != QueueFamilyIndices.Graphics) && (QueueFamilyIndices.SparseBinding != std::numeric_limits<uint32_t>::max())) {
             auto sparse_info = setupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT));
             sparse_info.queueFamilyIndex = QueueFamilyIndices.SparseBinding;
             NumSparseBindingQueues = sparse_info.queueCount;
