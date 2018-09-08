@@ -2,7 +2,11 @@
 #include "Allocation.hpp"
 #include "MemoryBlock.hpp"
 #include "easylogging++.h"
+#ifdef __APPLE_CC__
+#include <boost/variant.hpp>
+#else
 #include <variant>
+#endif
 namespace vpr {
 
     struct AllocationImpl {
@@ -17,17 +21,20 @@ namespace vpr {
             bool PersistentlyMapped;
             void* MappedData;
         };
-        
+#ifdef __APPLE_CC__
+        boost::variant<blockAllocation, privateAllocation> typeData;
+#else
         std::variant<blockAllocation, privateAllocation> typeData;
+#endif
     };
 
-    Allocation::Allocation() : impl(std::make_unique<AllocationImpl>()), Size(0), Alignment(0) {}
+    Allocation::Allocation() : Size(0), Alignment(0), impl(std::make_unique<AllocationImpl>()) {}
 
     Allocation::~Allocation() { 
         impl.reset();
     }
 
-    Allocation::Allocation(const Allocation& other) : impl(std::make_unique<AllocationImpl>(*other.impl)), Size(other.Size), Alignment(other.Alignment) {}
+    Allocation::Allocation(const Allocation& other) : Size(other.Size), Alignment(other.Alignment), impl(std::make_unique<AllocationImpl>(*other.impl)) {}
 
     Allocation& Allocation::operator=(const Allocation& other) {
         Size = other.Size;
@@ -56,7 +63,11 @@ namespace vpr {
     }
 
     void Allocation::Update(MemoryBlock * new_parent_block, const VkDeviceSize & new_offset) {
+#ifdef __APPLE_CC__
+        auto& alloc = boost::get<AllocationImpl::blockAllocation>(impl->typeData);
+#else
         auto& alloc = std::get<AllocationImpl::blockAllocation>(impl->typeData);
+#endif
         alloc.ParentBlock = new_parent_block;
         alloc.Offset = new_offset;
     }
@@ -72,6 +83,24 @@ namespace vpr {
     }
 
     void Allocation::Map(const VkDeviceSize& size_to_map, const VkDeviceSize& offset_to_map_at, void** address_to_map_to) const {
+#if __APPLE_CC__
+        auto map_private_alloc = [&](AllocationImpl::privateAllocation& alloc) {
+            if (alloc.PersistentlyMapped) {
+                *address_to_map_to = alloc.MappedData;
+            }
+            else {
+                throw std::runtime_error("Private allocation cannot be mapped!");
+            }
+        };
+        switch (impl->typeData.which()) {
+        case 0:
+            boost::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Map(this, size_to_map, offset_to_map_at, address_to_map_to);
+            break;
+        case 1:
+            map_private_alloc(boost::get<AllocationImpl::privateAllocation>(impl->typeData));
+            break;
+        };
+#else
         if (std::holds_alternative<AllocationImpl::blockAllocation>(impl->typeData)) {
             std::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Map(this, size_to_map, offset_to_map_at, address_to_map_to);
         }
@@ -85,15 +114,36 @@ namespace vpr {
                 throw std::runtime_error("Given private allocation is not mapped.");
             }
         }
+#endif
     }
 
     void Allocation::Unmap() const noexcept {
+#ifdef __APPLE_CC__
+        switch (impl->typeData.which()) {
+        case 0:
+            boost::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Unmap();
+            break;
+        default:
+            break;
+        };
+#else
         if (std::holds_alternative<AllocationImpl::blockAllocation>(impl->typeData)) {
             std::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Unmap();
         }
+#endif
     }
 
     const VkDeviceMemory& Allocation::Memory() const {
+#ifdef __APPLE_CC__
+        switch (impl->typeData.which()) {
+        case 0:
+            return boost::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Memory();
+        case 1:
+            return boost::get<AllocationImpl::privateAllocation>(impl->typeData).DvcMemory;
+        default:
+            throw std::runtime_error("Allocation had invalid type!");
+        };
+#else
         if (std::holds_alternative<AllocationImpl::blockAllocation>(impl->typeData)) {
             return std::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Memory();
         }
@@ -103,18 +153,40 @@ namespace vpr {
         else {
             throw std::runtime_error("Allocation had invalid type or was improperly initialized!");
         }
+#endif
     }
 
     VkDeviceSize Allocation::Offset() const noexcept {
+#ifdef __APPLE_CC__
+        switch (impl->typeData.which()) {
+        case 0:
+            return boost::get<AllocationImpl::blockAllocation>(impl->typeData).Offset;
+        case 1:
+            return VkDeviceSize(0);
+        default:
+            throw std::runtime_error("Allocation had invalid type!");
+        };
+#else
         if (std::holds_alternative<AllocationImpl::blockAllocation>(impl->typeData)) {
             return std::get<AllocationImpl::blockAllocation>(impl->typeData).Offset;
         }
         else {
             return VkDeviceSize(0);
         }
+#endif
     }
 
     uint32_t Allocation::MemoryTypeIdx() const {
+#ifdef __APPLE_CC__
+        switch (impl->typeData.which()) {
+        case 0:
+            return boost::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->MemoryTypeIdx;
+        case 1:
+            return boost::get<AllocationImpl::privateAllocation>(impl->typeData).MemoryTypeIdx;
+        default:
+            throw std::runtime_error("Allocation had invalid type!");
+        };
+#else
         if (std::holds_alternative<AllocationImpl::blockAllocation>(impl->typeData)) {
             return std::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->MemoryTypeIdx;
         }
@@ -124,10 +196,22 @@ namespace vpr {
         else {
             throw std::runtime_error("Allocation had invalid type, or was improperly initialized!");
         }
+#endif
     }
 
     bool Allocation::IsPrivateAllocation() const noexcept {
+#ifdef __APPLE_CC__
+        switch(impl->typeData.which()){
+        case 0:
+            return false;
+        case 1:
+            return true;
+        default:
+            return false;
+        };
+#else
         return std::holds_alternative<AllocationImpl::privateAllocation>(impl->typeData);
+#endif
     }
 
     bool Allocation::operator==(const Allocation & other) const noexcept {

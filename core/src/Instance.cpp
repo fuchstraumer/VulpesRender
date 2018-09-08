@@ -23,9 +23,6 @@ namespace vpr {
         return ptr.get();
     }
 
-    VKAPI_ATTR VkBool32 VKAPI_CALL VkDebugCallbackFn(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT type, uint64_t object_handle, 
-        size_t location, int32_t message_code, const char * layer_prefix, const char * message, void * user_data);
-
     struct InstanceExtensionHandler {
         InstanceExtensionHandler(Instance::instance_layers layers) : validationLayers(layers) {}
         std::vector<const char*> extensionStrings;
@@ -44,6 +41,11 @@ namespace vpr {
     Instance::Instance(instance_layers layers_flags, const VkApplicationInfo * info, const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) :
         extensionHandler(new InstanceExtensionHandler(layers_flags)), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, nullptr } {
         VkApplicationInfo our_info = *info;
+            
+        if (!glfwVulkanSupported()) {
+            LOG(ERROR) << "Vulkan is not supported on the current hardware!";
+            throw std::runtime_error("Vulkan not supported!");
+        }
 
         extensionHandler->extensionSetup(extensions);
         createInfo.ppEnabledExtensionNames = extensionHandler->extensionStrings.data();
@@ -55,17 +57,9 @@ namespace vpr {
         VkResult err = vkCreateInstance(&createInfo, nullptr, &handle);
         VkAssert(err);
 
-        if (extensionHandler->validationLayers != instance_layers::Disabled) {
-            prepareValidationCallbacks();
-        }
-
     }
 
     Instance::~Instance() {
-        if (debugCallback && (extensionHandler->validationLayers != instance_layers::Disabled)) {
-            auto func = (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(handle, "vkDestroyDebugReportCallbackEXT");
-            func(handle, debugCallback, nullptr);
-        }
         vkDestroyInstance(handle, nullptr);
     }
 
@@ -90,19 +84,17 @@ namespace vpr {
         *num_extensions = extensionHandler->extensionStrings.size();
         if (extensions != nullptr) {
             for (size_t i = 0; i < *num_extensions; ++i) {
+#ifdef __APPLE_CC__
+                extensions[i] = strdup(extensionHandler->extensionStrings[i]);
+#else
                 extensions[i] = _strdup(extensionHandler->extensionStrings[i]);
+#endif
             }
         }
     }
 
     const VkInstance& Instance::vkHandle() const noexcept {
         return handle;
-    }
-
-    void Instance::DebugMessage(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT obj_type, uint64_t obj, size_t location, int32_t msg_code, const char * layer, const char * message) {
-        if (debugMessageFn != nullptr) {
-            debugMessageFn(handle, flags, obj_type, obj, location, msg_code, layer, message);
-        }
     }
 
     void Instance::checkApiVersionSupport(VkApplicationInfo* info) {
@@ -162,24 +154,6 @@ namespace vpr {
         return true;
     }
 
-    void Instance::prepareValidationCallbacks() {
-        static const VkDebugReportCallbackCreateInfoEXT create_info{
-            VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,
-            nullptr,
-            VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT | VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT,
-            VkDebugCallbackFn
-        };
-
-        auto func = (PFN_vkCreateDebugReportCallbackEXT)vkGetInstanceProcAddr(handle, "vkCreateDebugReportCallbackEXT");
-        assert(func);
-        VkResult result = func(handle, &create_info, nullptr, &debugCallback);
-        VkAssert(result);
-
-        debugMessageFn = reinterpret_cast<PFN_vkDebugReportMessageEXT>(vkGetInstanceProcAddr(handle, "vkDebugReportMessageEXT"));
-        assert(debugMessageFn);
-
-    }
-
     void InstanceExtensionHandler::extensionSetup(const VprExtensionPack* extensions) {
 
         std::vector<const char*> all_extensions;
@@ -214,10 +188,6 @@ namespace vpr {
                     output.emplace_back(copiedExtensionStrings.back().c_str());
                 }
             }
-        }
-    
-        if (validationLayers != Instance::instance_layers::Disabled) {
-            output.emplace_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
         }
 
         checkRequiredExtensions(output);
@@ -266,111 +236,6 @@ namespace vpr {
 
     void InstanceExtensionHandler::checkOptionalExtensions(std::vector<const char*>& requested_extensions) const {
         extensionCheck(requested_extensions, false);
-    }
-
-    constexpr const char* const GetObjectTypeStr(VkDebugReportObjectTypeEXT obj) {
-        switch (obj) {
-        case VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT:
-            return "Instance";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT:
-            return "PhysicalDevice";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT:
-            return "Device";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT:
-            return "Queue";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT:
-            return "Semaphore";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT:
-            return "CommandBuffer";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT:
-            return "Fence";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT:
-            return "DeviceMemory";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT:
-            return "Buffer";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT:
-            return "Image";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT:
-            return "Event";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT:
-            return "QueryPool";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT:
-            return "BufferView";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT:
-            return "ImageView";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT:
-            return "ShaderModule";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT:
-            return "PipelineCache";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT:
-            return "PipelineLayout";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT:
-            return "RenderPass";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT:
-            return "Pipeline";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT:
-            return "DescriptorSet";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT:
-            return "Sampler";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT:
-            return "DescriptorPool";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT:
-            return "DescriptorSet";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT:
-            return "FrameBuffer";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT:
-            return "CommandPool";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT:
-            return "SurfaceKHR";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT:
-            return "SwapchainKHR";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT:
-            return "DebugReportCallbackEXT";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT:
-            return "DisplayKHR";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT:
-            return "DisplayModeKHR";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT:
-            return "ObjectTableNVX";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT:
-            return "IndirectCommandsLayoutNVX";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT:
-            return "ValidationCacheEXT";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR_EXT:
-            return "DescriptorUpdateTemplateKHR";
-        case VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT:
-            return "SamplerYCBCR_ConversionKHR";
-        default:
-            return "UNDEFINED_OBJECT_TYPE";
-        }
-    }
-
-    VKAPI_ATTR VkBool32 VKAPI_CALL VkDebugCallbackFn(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT type, uint64_t object_handle, 
-        size_t location, int32_t message_code, const char * layer_prefix, const char * message, void * user_data) {
-
-        switch (flags) {
-        case VK_DEBUG_REPORT_ERROR_BIT_EXT:
-            LOG(ERROR) << layer_prefix << "::" << GetObjectTypeStr(type) << "::HANDLE_ID:" << std::to_string(object_handle) << ": Code " << std::to_string(message_code) 
-                << " with message of: " << message << " at location " << std::to_string(location);
-            break;
-        case VK_DEBUG_REPORT_WARNING_BIT_EXT:
-            LOG(WARNING) << layer_prefix << "::" << GetObjectTypeStr(type) << "::HANDLE_ID:" << std::to_string(object_handle) << ": Code " << std::to_string(message_code) 
-                << " with message of: " << message << " at location " << std::to_string(location);
-            break;
-        case VK_DEBUG_REPORT_INFORMATION_BIT_EXT:
-            LOG(INFO) << layer_prefix << "::" << GetObjectTypeStr(type) << "::HANDLE_ID:" << std::to_string(object_handle) << ": Code " << std::to_string(message_code) 
-                << " with message of: " << message << " at location " << std::to_string(location);
-            break;
-        case VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT:
-            LOG(INFO) << layer_prefix << "::" << GetObjectTypeStr(type) << "::HANDLE_ID:" << std::to_string(object_handle) << ": Code " << std::to_string(message_code) 
-                << " with message of: " << message << " at location " << std::to_string(location);
-            break;
-        case VK_DEBUG_REPORT_DEBUG_BIT_EXT:
-            LOG(WARNING) << layer_prefix << "::" << GetObjectTypeStr(type) << "::HANDLE_ID:" << std::to_string(object_handle) << ": Code " << std::to_string(message_code) 
-                << " with message of: " << message << " at location " << std::to_string(location);
-            break;
-        }
-        return VK_FALSE;
     }
 
 }

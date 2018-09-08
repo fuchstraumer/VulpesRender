@@ -102,7 +102,11 @@ namespace vpr {
         *num_extensions = dataMembers->enabledExtensions.size();
         if (extensions != nullptr) {
             for (size_t i = 0; i < *num_extensions; ++i) {
+#ifdef __APPLE_CC__
+                extensions[i] = strdup(dataMembers->enabledExtensions[i]);
+#else
                 extensions[i] = _strdup(dataMembers->enabledExtensions[i]);
+#endif
             }
         }
     }
@@ -373,7 +377,7 @@ namespace vpr {
 
     void Device::setupSparseBindingQueues() {
         QueueFamilyIndices.SparseBinding = parent->GetQueueFamilyIndex(VK_QUEUE_SPARSE_BINDING_BIT);
-        if (QueueFamilyIndices.SparseBinding != QueueFamilyIndices.Graphics) {
+        if ((QueueFamilyIndices.SparseBinding != QueueFamilyIndices.Graphics) && (QueueFamilyIndices.SparseBinding != std::numeric_limits<uint32_t>::max())) {
             auto sparse_info = setupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT));
             sparse_info.queueFamilyIndex = QueueFamilyIndices.SparseBinding;
             NumSparseBindingQueues = sparse_info.queueCount;

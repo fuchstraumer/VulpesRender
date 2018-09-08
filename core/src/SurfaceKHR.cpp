@@ -7,7 +7,7 @@
 
 namespace vpr {
 
-    SurfaceKHR::SurfaceKHR(const Instance* _parent, VkPhysicalDevice _device, GLFWwindow* _window) : parent(_parent), handle(VK_NULL_HANDLE), window(_window), device(_device) {
+    SurfaceKHR::SurfaceKHR(const Instance* _parent, VkPhysicalDevice _device, GLFWwindow* _window) : parent(_parent), window(_window), device(_device), handle(VK_NULL_HANDLE) {
         create();
     }
 

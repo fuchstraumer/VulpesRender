@@ -5,7 +5,7 @@
 #include "ForwardDecl.hpp"
 #include <utility>
 #include <stdexcept>
-
+#include <cassert>
 namespace vpr {
     
     constexpr static size_t vkMaxMemoryTypes = 32;

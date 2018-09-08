@@ -2,7 +2,7 @@
 #ifndef VK_ASSERT_H
 #define VK_ASSERT_H
 #include <iostream>
-#include <string>
+#include <cassert>
 #include "vulkan/vulkan.h"
 #if !defined NDEBUG || defined VK_FORCE_ASSERT
 
@@ -10,9 +10,9 @@
 
 inline void vkErrCheck(VkResult res, const char* file, unsigned line, bool abort = true) {
 	if (res != VK_SUCCESS) {
-		std::cerr << "VkAssert: error " << std::to_string(res) << " at " << file << " line " << std::to_string(line) << "\n";
+		std::cerr << "VkAssert: error " << res << " at " << file << " line " << line << "\n";
 		if (abort) {
-			throw std::runtime_error(std::to_string(res));
+			throw std::runtime_error(res);
 		}
 	}
 }

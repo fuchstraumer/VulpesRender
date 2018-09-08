@@ -3,8 +3,11 @@
 #include "easylogging++.h"
 INITIALIZE_EASYLOGGINGPP
 #include "vkAssert.hpp"
+#ifdef __APPLE_CC__
+#include <boost/filesystem.hpp>
+#else
 #include <experimental/filesystem>
-
+#endif
 namespace vpr {
 
     void SetLoggingRepository_VprResource(void* repo) {
@@ -16,18 +19,26 @@ namespace vpr {
 
     PipelineCache::PipelineCache(const VkDevice& _parent, const VkPhysicalDevice& host_device, const size_t hash_id) : parent(_parent), createInfo(base_create_info), 
         hostPhysicalDevice(host_device), hashID(std::move(hash_id)), handle(VK_NULL_HANDLE) {
+#ifdef __APPLE_CC__
+            namespace fs = boost::filesystem;
+#else
+            namespace fs = std::experimental::filesystem;
+#endif
         
         std::string cache_dir = std::string("/shader_cache/");
-        std::experimental::filesystem::path cache_path(std::experimental::filesystem::temp_directory_path() / std::experimental::filesystem::path(cache_dir));
+        fs::path cache_path(fs::temp_directory_path() / fs::path(cache_dir));
 
-        if (!std::experimental::filesystem::exists(cache_path)) {
+        if (!fs::exists(cache_path)) {
             LOG(INFO) << "Shader cache path didn't exist, creating...";
-            std::experimental::filesystem::create_directories(cache_path);
+            fs::create_directories(cache_path);
         }
    
         std::string fname = cache_path.string() + std::to_string(hash_id) + std::string(".vkdat");
+#ifdef __APPLE_CC__
+        filename = strdup(fname.c_str());
+#else
         filename = _strdup(fname.c_str());
-
+#endif
         // Attempts to load cache from file: if failed, doesn't matter much.
         LoadCacheFromFile(fname.c_str());
 
@@ -123,7 +134,11 @@ namespace vpr {
                 LOG(INFO) << "Found valid pipeline cache data with ID # " << std::to_string(hashID) << " .";
                 std::string cache_str((std::istreambuf_iterator<char>(cache)), std::istreambuf_iterator<char>());
                 uint32_t cache_size = static_cast<uint32_t>(cache_str.size() * sizeof(char));
+#ifdef __APPLE_CC__
+                loadedData = strdup(cache_str.c_str());
+#else
                 loadedData = _strdup(cache_str.c_str());
+#endif
                 createInfo.initialDataSize = cache_size;
                 createInfo.pInitialData = loadedData;
             }
