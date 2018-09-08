@@ -11,6 +11,9 @@
 #include <unordered_map>
 #define GLFW_INCLUDE_VULKAN
 #include "GLFW/glfw3.h"
+#ifdef APIENTRY
+#undef APIENTRY
+#endif
 #include "easylogging++.h"
 
 namespace vpr {
