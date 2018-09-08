@@ -12,7 +12,7 @@ inline void vkErrCheck(VkResult res, const char* file, unsigned line, bool abort
 	if (res != VK_SUCCESS) {
 		std::cerr << "VkAssert: error " << res << " at " << file << " line " << line << "\n";
 		if (abort) {
-			throw std::runtime_error(res);
+			throw std::runtime_error("VkAssert failure!");
 		}
 	}
 }
