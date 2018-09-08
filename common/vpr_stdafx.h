@@ -1,10 +1,5 @@
 #pragma once
 
-#ifdef _WIN32
-#define NOMINMAX
-#endif //!_WIN32
-
-#include <cassert>
 #include <vulkan/vulkan.h>
 
 #if defined(__GNUC__)
