@@ -43,7 +43,7 @@ namespace vpr {
         SwapchainImpl* impl;
     };
 
-    /** Pass a swapchain and instance pointer to this to have the swapchain and surface destroyed and recreated
+    /** Pass a swapchain and surface pointer to this to have the swapchain and surface destroyed and recreated
     *   in the proper order. If done incorrectly, the validation layers will give you errors about a surface being
     *   destroyed before it's swapchain is (in the best case), or crash in the worst case
     */
