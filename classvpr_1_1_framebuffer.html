@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -44,6 +51,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classvpr_1_1_framebuffer.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -58,11 +80,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespacevpr.html">vpr</a></li><li class="navelem"><a class="el" href="classvpr_1_1_framebuffer.html">Framebuffer</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -78,19 +95,13 @@ $(function() {
  <a href="classvpr_1_1_framebuffer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_framebuffer_8hpp_source.html">Framebuffer.hpp</a>&gt;</code></p>
-<div class="dynheader">
-Collaboration diagram for vpr::Framebuffer:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_framebuffer__coll__graph.svg" width="100%" height="563"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a10b367c640cfc74accc13409e6992711"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_framebuffer.html#a10b367c640cfc74accc13409e6992711">~Framebuffer</a> ()</td></tr>
 <tr class="separator:a10b367c640cfc74accc13409e6992711"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cf274dc80a20abf85fc130c937bd61c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_framebuffer.html#a8cf274dc80a20abf85fc130c937bd61c">Framebuffer</a> (const <a class="el" href="classvpr_1_1_device.html">Device</a> *<a class="el" href="classvpr_1_1_framebuffer.html#af5c7e34203f83487000057ee222422aa">parent</a>, const VkFramebufferCreateInfo &amp;create_info)</td></tr>
-<tr class="separator:a8cf274dc80a20abf85fc130c937bd61c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89f0568cd606dcb2b9a2210bacc2fbae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_framebuffer.html#a89f0568cd606dcb2b9a2210bacc2fbae">Framebuffer</a> (const VkDevice &amp;<a class="el" href="classvpr_1_1_framebuffer.html#ab8c4f8727b5342ba063631190310340b">parent</a>, const VkFramebufferCreateInfo &amp;create_info)</td></tr>
+<tr class="separator:a89f0568cd606dcb2b9a2210bacc2fbae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4808260af29009f42e171613159754d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvpr_1_1_framebuffer.html">Framebuffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_framebuffer.html#a4808260af29009f42e171613159754d0">operator=</a> (<a class="el" href="classvpr_1_1_framebuffer.html">Framebuffer</a> &amp;&amp;other) noexcept</td></tr>
 <tr class="separator:a4808260af29009f42e171613159754d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98f307d1821e9734d607d8194c635cff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_framebuffer.html#a98f307d1821e9734d607d8194c635cff">Framebuffer</a> (<a class="el" href="classvpr_1_1_framebuffer.html">Framebuffer</a> &amp;&amp;other) noexcept</td></tr>
@@ -102,8 +113,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:af5c7e34203f83487000057ee222422aa"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classvpr_1_1_device.html">Device</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_framebuffer.html#af5c7e34203f83487000057ee222422aa">parent</a></td></tr>
-<tr class="separator:af5c7e34203f83487000057ee222422aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8c4f8727b5342ba063631190310340b"><td class="memItemLeft" align="right" valign="top">VkDevice&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_framebuffer.html#ab8c4f8727b5342ba063631190310340b">parent</a></td></tr>
+<tr class="separator:ab8c4f8727b5342ba063631190310340b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab95929c5bd9ef0d51ac83ea3c298b4ea"><td class="memItemLeft" align="right" valign="top">VkFramebuffer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">handle</a></td></tr>
 <tr class="separator:ab95929c5bd9ef0d51ac83ea3c298b4ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -173,17 +184,19 @@ Private Member Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="_framebuffer_8cpp_source.html#l00032">Destroy()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;                              {</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <a class="code" href="classvpr_1_1_framebuffer.html#a23680b07a937e5dc08995dc88ebeb091">Destroy</a>();</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_framebuffer_html_a23680b07a937e5dc08995dc88ebeb091"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#a23680b07a937e5dc08995dc88ebeb091">vpr::Framebuffer::Destroy</a></div><div class="ttdeci">void Destroy()</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8cpp_source.html#l00032">Framebuffer.cpp:32</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_framebuffer_a10b367c640cfc74accc13409e6992711_cgraph.svg" width="540" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div><!-- fragment --><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_framebuffer_a10b367c640cfc74accc13409e6992711_cgraph.svg" width="348" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
 </div>
 </div>
-<a id="a8cf274dc80a20abf85fc130c937bd61c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8cf274dc80a20abf85fc130c937bd61c">&#9670;&nbsp;</a></span>Framebuffer() <span class="overload">[2/3]</span></h2>
+<a id="a89f0568cd606dcb2b9a2210bacc2fbae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89f0568cd606dcb2b9a2210bacc2fbae">&#9670;&nbsp;</a></span>Framebuffer() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -191,7 +204,7 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">vpr::Framebuffer::Framebuffer </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classvpr_1_1_device.html">Device</a> *&#160;</td>
+          <td class="paramtype">const VkDevice &amp;&#160;</td>
           <td class="paramname"><em>parent</em>, </td>
         </tr>
         <tr>
@@ -210,18 +223,11 @@ Here is the call graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_framebuffer_8cpp_source.html#l00007">7</a> of file <a class="el" href="_framebuffer_8cpp_source.html">Framebuffer.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_framebuffer_8hpp_source.html#l00030">handle</a>, <a class="el" href="_framebuffer_8hpp_source.html#l00029">parent</a>, <a class="el" href="vk_assert_8hpp_source.html#l00009">VkAssert</a>, and <a class="el" href="_logical_device_8cpp_source.html#l00209">vpr::Device::vkHandle()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;                                                                                                : <a class="code" href="classvpr_1_1_framebuffer.html#af5c7e34203f83487000057ee222422aa">parent</a>(_parent),</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        <a class="code" href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">handle</a>(VK_NULL_HANDLE) {</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        VkResult result = vkCreateFramebuffer(<a class="code" href="classvpr_1_1_framebuffer.html#af5c7e34203f83487000057ee222422aa">parent</a>-&gt;<a class="code" href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vkHandle</a>(), &amp;create_info, <span class="keyword">nullptr</span>, &amp;<a class="code" href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">handle</a>);</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        <a class="code" href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a>(result);</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    }</div><div class="ttc" id="vk_assert_8hpp_html_a92c2e07b0d021fc331be70a65c61dacc"><div class="ttname"><a href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a></div><div class="ttdeci">#define VkAssert(expression)</div><div class="ttdef"><b>Definition:</b> <a href="vk_assert_8hpp_source.html#l00009">vkAssert.hpp:9</a></div></div>
-<div class="ttc" id="classvpr_1_1_framebuffer_html_af5c7e34203f83487000057ee222422aa"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#af5c7e34203f83487000057ee222422aa">vpr::Framebuffer::parent</a></div><div class="ttdeci">const Device * parent</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8hpp_source.html#l00029">Framebuffer.hpp:29</a></div></div>
+<p class="reference">References <a class="el" href="_framebuffer_8hpp_source.html#l00030">handle</a>, <a class="el" href="_framebuffer_8hpp_source.html#l00029">parent</a>, and <a class="el" href="vk_assert_8hpp_source.html#l00009">VkAssert</a>.</p>
+<div class="fragment"><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;                                                                                                 : <a class="code" href="classvpr_1_1_framebuffer.html#ab8c4f8727b5342ba063631190310340b">parent</a>(_parent),</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        <a class="code" href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">handle</a>(VK_NULL_HANDLE) {</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        VkResult result = vkCreateFramebuffer(<a class="code" href="classvpr_1_1_framebuffer.html#ab8c4f8727b5342ba063631190310340b">parent</a>, &amp;create_info, <span class="keyword">nullptr</span>, &amp;<a class="code" href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">handle</a>);</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        <a class="code" href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a>(result);</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    }</div><div class="ttc" id="vk_assert_8hpp_html_a92c2e07b0d021fc331be70a65c61dacc"><div class="ttname"><a href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a></div><div class="ttdeci">#define VkAssert(expression)</div><div class="ttdef"><b>Definition:</b> <a href="vk_assert_8hpp_source.html#l00009">vkAssert.hpp:9</a></div></div>
 <div class="ttc" id="classvpr_1_1_framebuffer_html_ab95929c5bd9ef0d51ac83ea3c298b4ea"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">vpr::Framebuffer::handle</a></div><div class="ttdeci">VkFramebuffer handle</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8hpp_source.html#l00030">Framebuffer.hpp:30</a></div></div>
-<div class="ttc" id="classvpr_1_1_device_html_a59882855173bef0b13a17b376ea01d45"><div class="ttname"><a href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vpr::Device::vkHandle</a></div><div class="ttdeci">const VkDevice &amp; vkHandle() const</div><div class="ttdef"><b>Definition:</b> <a href="_logical_device_8cpp_source.html#l00209">LogicalDevice.cpp:209</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_framebuffer_a8cf274dc80a20abf85fc130c937bd61c_cgraph.svg" width="394" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
+<div class="ttc" id="classvpr_1_1_framebuffer_html_ab8c4f8727b5342ba063631190310340b"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#ab8c4f8727b5342ba063631190310340b">vpr::Framebuffer::parent</a></div><div class="ttdeci">VkDevice parent</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8hpp_source.html#l00029">Framebuffer.hpp:29</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a98f307d1821e9734d607d8194c635cff"></a>
@@ -249,11 +255,8 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_framebuffer_8cpp_source.html#l00017">17</a> of file <a class="el" href="_framebuffer_8cpp_source.html">Framebuffer.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="_logical_device_8hpp_source.html#l00111">vpr::Device::handle</a>.</p>
-<div class="fragment"><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                                                         : <a class="code" href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">handle</a>(std::move(other.handle)), <a class="code" href="classvpr_1_1_framebuffer.html#af5c7e34203f83487000057ee222422aa">parent</a>(std::move(other.parent)) {</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        other.<a class="code" href="classvpr_1_1_device.html#a5e6c89cf59912690370c11d4c7c2648a">handle</a> = VK_NULL_HANDLE;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_framebuffer_html_af5c7e34203f83487000057ee222422aa"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#af5c7e34203f83487000057ee222422aa">vpr::Framebuffer::parent</a></div><div class="ttdeci">const Device * parent</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8hpp_source.html#l00029">Framebuffer.hpp:29</a></div></div>
-<div class="ttc" id="classvpr_1_1_device_html_a5e6c89cf59912690370c11d4c7c2648a"><div class="ttname"><a href="classvpr_1_1_device.html#a5e6c89cf59912690370c11d4c7c2648a">vpr::Device::handle</a></div><div class="ttdeci">VkDevice handle</div><div class="ttdef"><b>Definition:</b> <a href="_logical_device_8hpp_source.html#l00111">LogicalDevice.hpp:111</a></div></div>
-<div class="ttc" id="classvpr_1_1_framebuffer_html_ab95929c5bd9ef0d51ac83ea3c298b4ea"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">vpr::Framebuffer::handle</a></div><div class="ttdeci">VkFramebuffer handle</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8hpp_source.html#l00030">Framebuffer.hpp:30</a></div></div>
+<div class="fragment"><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                                                         : <a class="code" href="classvpr_1_1_framebuffer.html#ab8c4f8727b5342ba063631190310340b">parent</a>(std::move(other.parent)), <a class="code" href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">handle</a>(std::move(other.handle)) {</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        other.handle = VK_NULL_HANDLE;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_framebuffer_html_ab95929c5bd9ef0d51ac83ea3c298b4ea"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">vpr::Framebuffer::handle</a></div><div class="ttdeci">VkFramebuffer handle</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8hpp_source.html#l00030">Framebuffer.hpp:30</a></div></div>
+<div class="ttc" id="classvpr_1_1_framebuffer_html_ab8c4f8727b5342ba063631190310340b"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#ab8c4f8727b5342ba063631190310340b">vpr::Framebuffer::parent</a></div><div class="ttdeci">VkDevice parent</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8hpp_source.html#l00029">Framebuffer.hpp:29</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -275,21 +278,16 @@ Here is the call graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_framebuffer_8cpp_source.html#l00032">32</a> of file <a class="el" href="_framebuffer_8cpp_source.html">Framebuffer.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_framebuffer_8hpp_source.html#l00030">handle</a>, <a class="el" href="_framebuffer_8hpp_source.html#l00029">parent</a>, and <a class="el" href="_logical_device_8cpp_source.html#l00209">vpr::Device::vkHandle()</a>.</p>
+<p class="reference">References <a class="el" href="_framebuffer_8hpp_source.html#l00030">handle</a>, and <a class="el" href="_framebuffer_8hpp_source.html#l00029">parent</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_framebuffer_8cpp_source.html#l00013">~Framebuffer()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                              {</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">handle</a> != VK_NULL_HANDLE) {</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            vkDestroyFramebuffer(<a class="code" href="classvpr_1_1_framebuffer.html#af5c7e34203f83487000057ee222422aa">parent</a>-&gt;<a class="code" href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vkHandle</a>(), <a class="code" href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">handle</a>, <span class="keyword">nullptr</span>);</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        }</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_framebuffer_html_af5c7e34203f83487000057ee222422aa"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#af5c7e34203f83487000057ee222422aa">vpr::Framebuffer::parent</a></div><div class="ttdeci">const Device * parent</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8hpp_source.html#l00029">Framebuffer.hpp:29</a></div></div>
-<div class="ttc" id="classvpr_1_1_framebuffer_html_ab95929c5bd9ef0d51ac83ea3c298b4ea"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">vpr::Framebuffer::handle</a></div><div class="ttdeci">VkFramebuffer handle</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8hpp_source.html#l00030">Framebuffer.hpp:30</a></div></div>
-<div class="ttc" id="classvpr_1_1_device_html_a59882855173bef0b13a17b376ea01d45"><div class="ttname"><a href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vpr::Device::vkHandle</a></div><div class="ttdeci">const VkDevice &amp; vkHandle() const</div><div class="ttdef"><b>Definition:</b> <a href="_logical_device_8cpp_source.html#l00209">LogicalDevice.cpp:209</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_framebuffer_a23680b07a937e5dc08995dc88ebeb091_cgraph.svg" width="370" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="fragment"><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                              {</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">handle</a> != VK_NULL_HANDLE) {</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            vkDestroyFramebuffer(<a class="code" href="classvpr_1_1_framebuffer.html#ab8c4f8727b5342ba063631190310340b">parent</a>, <a class="code" href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">handle</a>, <span class="keyword">nullptr</span>);</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        }</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_framebuffer_html_ab95929c5bd9ef0d51ac83ea3c298b4ea"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">vpr::Framebuffer::handle</a></div><div class="ttdeci">VkFramebuffer handle</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8hpp_source.html#l00030">Framebuffer.hpp:30</a></div></div>
+<div class="ttc" id="classvpr_1_1_framebuffer_html_ab8c4f8727b5342ba063631190310340b"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#ab8c4f8727b5342ba063631190310340b">vpr::Framebuffer::parent</a></div><div class="ttdeci">VkDevice parent</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8hpp_source.html#l00029">Framebuffer.hpp:29</a></div></div>
+</div><!-- fragment --><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_framebuffer_a23680b07a937e5dc08995dc88ebeb091_icgraph.svg" width="348" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
@@ -349,8 +347,8 @@ Here is the caller graph for this function:</div>
 <p class="definition">Definition at line <a class="el" href="_framebuffer_8cpp_source.html#l00021">21</a> of file <a class="el" href="_framebuffer_8cpp_source.html">Framebuffer.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="_framebuffer_8hpp_source.html#l00030">handle</a>, and <a class="el" href="_framebuffer_8hpp_source.html#l00029">parent</a>.</p>
-<div class="fragment"><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                                                                    {</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">handle</a> = std::move(other.handle);</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classvpr_1_1_framebuffer.html#af5c7e34203f83487000057ee222422aa">parent</a> = std::move(other.parent);</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        other.handle = VK_NULL_HANDLE;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_framebuffer_html_af5c7e34203f83487000057ee222422aa"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#af5c7e34203f83487000057ee222422aa">vpr::Framebuffer::parent</a></div><div class="ttdeci">const Device * parent</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8hpp_source.html#l00029">Framebuffer.hpp:29</a></div></div>
-<div class="ttc" id="classvpr_1_1_framebuffer_html_ab95929c5bd9ef0d51ac83ea3c298b4ea"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">vpr::Framebuffer::handle</a></div><div class="ttdeci">VkFramebuffer handle</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8hpp_source.html#l00030">Framebuffer.hpp:30</a></div></div>
+<div class="fragment"><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                                                                    {</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">handle</a> = std::move(other.handle);</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classvpr_1_1_framebuffer.html#ab8c4f8727b5342ba063631190310340b">parent</a> = std::move(other.parent);</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        other.handle = VK_NULL_HANDLE;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_framebuffer_html_ab95929c5bd9ef0d51ac83ea3c298b4ea"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#ab95929c5bd9ef0d51ac83ea3c298b4ea">vpr::Framebuffer::handle</a></div><div class="ttdeci">VkFramebuffer handle</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8hpp_source.html#l00030">Framebuffer.hpp:30</a></div></div>
+<div class="ttc" id="classvpr_1_1_framebuffer_html_ab8c4f8727b5342ba063631190310340b"><div class="ttname"><a href="classvpr_1_1_framebuffer.html#ab8c4f8727b5342ba063631190310340b">vpr::Framebuffer::parent</a></div><div class="ttdeci">VkDevice parent</div><div class="ttdef"><b>Definition:</b> <a href="_framebuffer_8hpp_source.html#l00029">Framebuffer.hpp:29</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -411,8 +409,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="af5c7e34203f83487000057ee222422aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5c7e34203f83487000057ee222422aa">&#9670;&nbsp;</a></span>parent</h2>
+<a id="ab8c4f8727b5342ba063631190310340b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8c4f8727b5342ba063631190310340b">&#9670;&nbsp;</a></span>parent</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -421,7 +419,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classvpr_1_1_device.html">Device</a>* vpr::Framebuffer::parent</td>
+          <td class="memname">VkDevice vpr::Framebuffer::parent</td>
         </tr>
       </table>
   </td>
@@ -438,15 +436,19 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/include/render/<a class="el" href="_framebuffer_8hpp_source.html">Framebuffer.hpp</a></li>
-<li>C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/src/render/<a class="el" href="_framebuffer_8cpp_source.html">Framebuffer.cpp</a></li>
+<li>render/include/<a class="el" href="_framebuffer_8hpp_source.html">Framebuffer.hpp</a></li>
+<li>render/src/<a class="el" href="_framebuffer_8cpp_source.html">Framebuffer.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacevpr.html">vpr</a></li><li class="navelem"><a class="el" href="classvpr_1_1_framebuffer.html">Framebuffer</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

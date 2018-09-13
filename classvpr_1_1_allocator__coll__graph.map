@@ -1,7 +1,9 @@
 <map id="vpr::Allocator" name="vpr::Allocator">
-<area shape="rect" id="node5" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="1632,203,1716,230"/>
-<area shape="rect" id="node7" href="$namespacevpr.html#structvpr_1_1vk_queue_family_indices" title="vpr::vkQueueFamilyIndices" alt="" coords="1279,71,1455,98"/>
-<area shape="rect" id="node12" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="1320,203,1415,230"/>
-<area shape="rect" id="node9" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="639,269,773,295"/>
-<area shape="rect" id="node17" href="$classvpr_1_1_allocation.html" title="Allocation class represents a singular allocation: can be a private allocation (i.e, only user of attached DeviceMemory) or a block allocation (bound to sub&#45;region of device memory) " alt="" coords="32,343,135,370"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_allocation_collection.html" title="An allocation collection is just a vector of MemoryBlocks of the same type. " alt="" coords="1323,76,1483,103"/>
+<area shape="rect" id="node3" href="$structvpr_1_1_allocator_impl.html" title="vpr::AllocatorImpl" alt="" coords="2520,115,2641,141"/>
+<area shape="rect" id="node10" href="$classvpr_1_1_memory_block.html" title="A MemoryBlock is a large contiguous region of Vulkan memory of a uniform type (device local..." alt="" coords="588,87,715,113"/>
+<area shape="rect" id="node12" href="$structvpr_1_1_suballocation.html" title="During the process of finding a suitable region to bind to, we need to store things like &quot;Suballocati..." alt="" coords="15,59,139,85"/>
+<area shape="rect" id="node14" title="STL iterator class. " alt="" coords="5,117,149,144"/>
+<area shape="rect" id="node18" href="$classvpr_1_1_allocation.html" title="Allocation class represents a singular allocation: can be a private allocation (i.e, only user of attached DeviceMemory) or a block allocation (bound to sub&#45;region of device memory) " alt="" coords="1870,220,1973,247"/>
+<area shape="rect" id="node20" href="$namespacevpr.html#structvpr_1_1_allocation_impl" title="vpr::AllocationImpl" alt="" coords="1339,220,1466,247"/>
 </map>

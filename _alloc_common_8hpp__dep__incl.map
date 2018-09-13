@@ -1,12 +1,11 @@
-<map id="C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/include/alloc/AllocCommon.hpp" name="C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/include/alloc/AllocCommon.hpp">
-<area shape="rect" id="node2" href="$_allocator_8hpp.html" title="C:/Users/kjones/Documents\l/SoftwareDev/VulpesSceneKit\l/third_party/vulpesrender\l/include/alloc/Allocator.hpp" alt="" coords="688,243,883,313"/>
-<area shape="rect" id="node9" href="$_memory_block_8hpp.html" title="C:/Users/kjones/Documents\l/SoftwareDev/VulpesSceneKit\l/third_party/vulpesrender\l/include/alloc/MemoryBlock.hpp" alt="" coords="457,243,663,313"/>
-<area shape="rect" id="node11" href="$_suballocation_8hpp.html" title="C:/Users/kjones/Documents\l/SoftwareDev/VulpesSceneKit\l/third_party/vulpesrender\l/include/alloc/Suballocation.hpp" alt="" coords="457,124,663,195"/>
-<area shape="rect" id="node3" href="$_allocation_collection_8cpp.html" title="C:/Users/kjones/Documents\l/SoftwareDev/VulpesSceneKit\l/third_party/vulpesrender\l/src/alloc/AllocationCollection.cpp" alt="" coords="224,361,443,432"/>
-<area shape="rect" id="node4" href="$_allocator_8cpp.html" title="C:/Users/kjones/Documents\l/SoftwareDev/VulpesSceneKit\l/third_party/vulpesrender\l/src/alloc/Allocator.cpp" alt="" coords="467,361,661,432"/>
-<area shape="rect" id="node5" href="$_memory_block_8cpp.html" title="C:/Users/kjones/Documents\l/SoftwareDev/VulpesSceneKit\l/third_party/vulpesrender\l/src/alloc/MemoryBlock.cpp" alt="" coords="685,361,880,432"/>
-<area shape="rect" id="node6" href="$_logical_device_8cpp.html" title="C:/Users/kjones/Documents\l/SoftwareDev/VulpesSceneKit\l/third_party/vulpesrender\l/src/core/LogicalDevice.cpp" alt="" coords="904,361,1099,432"/>
-<area shape="rect" id="node7" href="$_buffer_8cpp.html" title="C:/Users/kjones/Documents\l/SoftwareDev/VulpesSceneKit\l/third_party/vulpesrender\l/src/resource/Buffer.cpp" alt="" coords="1123,361,1317,432"/>
-<area shape="rect" id="node8" href="$_image_8cpp.html" title="C:/Users/kjones/Documents\l/SoftwareDev/VulpesSceneKit\l/third_party/vulpesrender\l/src/resource/Image.cpp" alt="" coords="1341,361,1536,432"/>
-<area shape="rect" id="node10" href="$_allocation_8cpp.html" title="C:/Users/kjones/Documents\l/SoftwareDev/VulpesSceneKit\l/third_party/vulpesrender\l/src/alloc/Allocation.cpp" alt="" coords="5,361,200,432"/>
+<map id="alloc/src/AllocCommon.hpp" name="alloc/src/AllocCommon.hpp">
+<area shape="rect" id="node2" href="$_memory_block_8hpp.html" title="alloc/src/MemoryBlock.hpp" alt="" coords="242,155,422,181"/>
+<area shape="rect" id="node5" href="$_allocator_impl_8hpp.html" title="alloc/src/AllocatorImpl.hpp" alt="" coords="426,229,601,256"/>
+<area shape="rect" id="node9" href="$_memory_block_8cpp.html" title="alloc/src/MemoryBlock.cpp" alt="" coords="625,229,805,256"/>
+<area shape="rect" id="node10" href="$_suballocation_8hpp.html" title="alloc/src/Suballocation.hpp" alt="" coords="352,80,531,107"/>
+<area shape="rect" id="node3" href="$_allocation_8cpp.html" title="alloc/src/Allocation.cpp" alt="" coords="5,229,163,256"/>
+<area shape="rect" id="node4" href="$_allocation_collection_8cpp.html" title="alloc/src/AllocationCollection.cpp" alt="" coords="187,229,402,256"/>
+<area shape="rect" id="node6" href="$_allocator_8cpp.html" title="alloc/src/Allocator.cpp" alt="" coords="251,304,402,331"/>
+<area shape="rect" id="node7" href="$_allocator_impl_8cpp.html" title="alloc/src/AllocatorImpl.cpp" alt="" coords="426,304,601,331"/>
+<area shape="rect" id="node8" href="$_debug_visualization_8cpp.html" title="alloc/src/DebugVisualization.cpp" alt="" coords="625,304,836,331"/>
 </map>

@@ -1,8 +1,0 @@
-<map id="el::Configurations::unsafeSet" name="el::Configurations::unsafeSet">
-<area shape="rect" id="node2" href="$classel_1_1base_1_1utils_1_1_registry_with_pred.html#a811d9cc011d945bc7237e6ae1cf2f096" title="Gets pointer from repository with speicifed arguments. " alt="" coords="176,5,379,61"/>
-<area shape="rect" id="node3" href="$classel_1_1base_1_1utils_1_1_registry_with_pred.html#a561a5d418106a16473ff94d43a4b6b04" title="el::base::utils::Registry\lWithPred\&lt; Configuration,\l Configuration::Predicate\l \&gt;::registerNew" alt="" coords="194,86,361,157"/>
-<area shape="rect" id="node4" href="$classel_1_1_configuration.html#a04755de11422d7570869433ea157b705" title="Set string based configuration value. " alt="" coords="216,181,339,222"/>
-<area shape="rect" id="node5" href="$classel_1_1_configurations.html#a800efb58724eb771027135b282eae512" title="Sets configurations (Unsafely) for all levels including Level::Global if includeGlobalLevel is true..." alt="" coords="210,246,345,287"/>
-<area shape="rect" id="node6" href="$classel_1_1_level_helper.html#a7f0dbfceb2354a72c2802d02c300430d" title="Applies specified function to each level starting from startIndex. " alt="" coords="439,217,597,258"/>
-<area shape="rect" id="node7" href="$classel_1_1_level_helper.html#a1279f27df29a003df5ecc3d0bf4dacbb" title="Casts int(ushort) to level, useful for iterating through enum. " alt="" coords="427,283,609,309"/>
-</map>

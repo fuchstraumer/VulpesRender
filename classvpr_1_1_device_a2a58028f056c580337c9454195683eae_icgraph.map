@@ -1,4 +1,3 @@
 <map id="vpr::Device::FindSupportedFormat" name="vpr::Device::FindSupportedFormat">
 <area shape="rect" id="node2" href="$classvpr_1_1_device.html#a4820a276bf1258c8ad6a5718fc7cd6fb" title="! Finds a Vulkan image format suitable for use in the depth buffer " alt="" coords="229,13,421,39"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_depth_stencil.html#a60db9461fc6823407301ce103e941348" title="vpr::DepthStencil::\lDepthStencil" alt="" coords="469,5,597,47"/>
 </map>

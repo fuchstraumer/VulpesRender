@@ -1,5 +1,0 @@
-<map id="vpr::TransferPool::completeTransfer" name="vpr::TransferPool::completeTransfer">
-<area shape="rect" id="node2" href="$classvpr_1_1_transfer_pool.html#adf716e4802b14d551e52fdfd72fdf966" title="Calls VkEndCommandBuffer on this object&#39;s command buffer, then proceeds to submit it..." alt="" coords="180,5,307,47"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_transfer_pool.html#a7beaebc99032ffd31b540ec06395c774" title="Submits all command buffers contained by this transfer pool. " alt="" coords="180,71,307,112"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_transfer_pool.html#a39f6998201261adf5420a6faa2a744a6" title="Submits but waits for the given semaphore to be signalled. " alt="" coords="180,136,307,177"/>
-</map>

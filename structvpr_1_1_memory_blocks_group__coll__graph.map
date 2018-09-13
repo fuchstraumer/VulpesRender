@@ -1,0 +1,5 @@
+<map id="vpr::MemoryBlocksGroup" name="vpr::MemoryBlocksGroup">
+<area shape="rect" id="node3" href="$structvpr_1_1_memory_block_info.html" title="vpr::MemoryBlockInfo" alt="" coords="699,41,845,67"/>
+<area shape="rect" id="node5" href="$structvpr_1_1_suballocation_draw_command.html" title="vpr::SuballocationDrawCommand" alt="" coords="5,13,217,39"/>
+<area shape="rect" id="node7" href="$structvpr_1_1_suballocation.html" title="During the process of finding a suitable region to bind to, we need to store things like &quot;Suballocati..." alt="" coords="49,71,173,98"/>
+</map>

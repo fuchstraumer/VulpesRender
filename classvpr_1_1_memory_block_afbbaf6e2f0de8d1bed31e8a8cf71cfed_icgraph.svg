@@ -48,55 +48,55 @@ if (edges && edges.length) {
 <script type="text/javascript">
 var viewWidth = 506;
 var viewHeight = 66;
-var sectionId = 'dynsection-11';
+var sectionId = 'dynsection-10';
 </script>
 <script xlink:href="svgpan.js"/>
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>vpr::MemoryBlock::removeFreeSuballocation</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-62 502,-62 502,4 -4,4"/>
-<!-- Node85 -->
-<g id="node1" class="node"><title>Node85</title>
+<!-- Node79 -->
+<g id="node1" class="node"><title>Node79</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-14 0,-44 131,-44 131,-14 0,-14"/>
 <text text-anchor="start" x="8" y="-32" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::MemoryBlock::remove</text>
 <text text-anchor="middle" x="65.5" y="-21" font-family="Helvetica,sans-Serif" font-size="10.00">FreeSuballocation</text>
 </g>
-<!-- Node86 -->
-<g id="node2" class="node"><title>Node86</title>
+<!-- Node80 -->
+<g id="node2" class="node"><title>Node80</title>
 <g id="a_node2"><a xlink:href="classvpr_1_1_memory_block.html#a3bc214b56eafefb43b33e7c8c197d9ca" target="_top" xlink:title="Performs the actual allocation, once &quot;request&quot; has been checked and made valid. ">
 <polygon fill="white" stroke="black" points="186.5,-38.5 186.5,-57.5 322.5,-57.5 322.5,-38.5 186.5,-38.5"/>
 <text text-anchor="middle" x="254.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::MemoryBlock::Allocate</text>
 </a>
 </g>
 </g>
-<!-- Node85&#45;&gt;Node86 -->
-<g id="edge1" class="edge"><title>Node85&#45;&gt;Node86</title>
+<!-- Node79&#45;&gt;Node80 -->
+<g id="edge1" class="edge"><title>Node79&#45;&gt;Node80</title>
 <path fill="none" stroke="midnightblue" d="M141.297,-36.5997C156.182,-38.1121 171.727,-39.6915 186.337,-41.1759"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="141.419,-33.0942 131.117,-35.5653 140.712,-40.0583 141.419,-33.0942"/>
 </g>
-<!-- Node87 -->
-<g id="node3" class="node"><title>Node87</title>
+<!-- Node81 -->
+<g id="node3" class="node"><title>Node81</title>
 <g id="a_node3"><a xlink:href="classvpr_1_1_memory_block.html#a3aa9297d61b2cd0d71588c7bf8e7b47e" target="_top" xlink:title="Changes the item pointed to by the iterator to be a free type, then adds the now&#45;available size to av...">
 <polygon fill="white" stroke="black" points="167,-0.5 167,-19.5 342,-19.5 342,-0.5 167,-0.5"/>
 <text text-anchor="middle" x="254.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::MemoryBlock::freeSuballocation</text>
 </a>
 </g>
 </g>
-<!-- Node85&#45;&gt;Node87 -->
-<g id="edge2" class="edge"><title>Node85&#45;&gt;Node87</title>
+<!-- Node79&#45;&gt;Node81 -->
+<g id="edge2" class="edge"><title>Node79&#45;&gt;Node81</title>
 <path fill="none" stroke="midnightblue" d="M141.238,-21.4063C149.638,-20.5528 158.248,-19.678 166.782,-18.8109"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="140.712,-17.9417 131.117,-22.4347 141.419,-24.9058 140.712,-17.9417"/>
 </g>
-<!-- Node88 -->
-<g id="node4" class="node"><title>Node88</title>
+<!-- Node82 -->
+<g id="node4" class="node"><title>Node82</title>
 <g id="a_node4"><a xlink:href="classvpr_1_1_memory_block.html#a88cde43def4e7d21b8a782554497b064" target="_top" xlink:title="Frees memory in region specified (i.e frees/destroys a suballocation) ">
 <polygon fill="white" stroke="black" points="378,-0.5 378,-19.5 498,-19.5 498,-0.5 378,-0.5"/>
 <text text-anchor="middle" x="438" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::MemoryBlock::Free</text>
 </a>
 </g>
 </g>
-<!-- Node87&#45;&gt;Node88 -->
-<g id="edge3" class="edge"><title>Node87&#45;&gt;Node88</title>
+<!-- Node81&#45;&gt;Node82 -->
+<g id="edge3" class="edge"><title>Node81&#45;&gt;Node82</title>
 <path fill="none" stroke="midnightblue" d="M352.417,-10C361.054,-10 369.616,-10 377.788,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="352.263,-6.5001 342.263,-10 352.263,-13.5001 352.263,-6.5001"/>
 </g>

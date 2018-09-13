@@ -1,4 +1,31 @@
 var searchData=
 [
-  ['zero_5fmemory_5fsize',['ZERO_MEMORY_SIZE',['../group___allocation.html#ggaba421ef06b1d6b910602d0180c9eff78a2ceb3550d64b57a93e2896bcf767112c',1,'vpr']]]
+  ['_7eallocation',['~Allocation',['../classvpr_1_1_allocation.html#afbf44280b9503d91a56d91479619e6cb',1,'vpr::Allocation']]],
+  ['_7eallocationcollection',['~AllocationCollection',['../classvpr_1_1_allocation_collection.html#ad0d7f2d163ab8031eb9126fe25f3d896',1,'vpr::AllocationCollection']]],
+  ['_7eallocator',['~Allocator',['../classvpr_1_1_allocator.html#a9db2082e4275074f63a5e1257a89825f',1,'vpr::Allocator']]],
+  ['_7ebuffer',['~Buffer',['../classvpr_1_1_buffer.html#a7540498f21ea184173975560ff9e6327',1,'vpr::Buffer']]],
+  ['_7ecommandpool',['~CommandPool',['../classvpr_1_1_command_pool.html#a726585b12ac4f21b74de94c757136c4c',1,'vpr::CommandPool']]],
+  ['_7edescriptorpool',['~DescriptorPool',['../classvpr_1_1_descriptor_pool.html#ab67c7a158963b72bb9b844cda238b61b',1,'vpr::DescriptorPool']]],
+  ['_7edescriptorset',['~DescriptorSet',['../classvpr_1_1_descriptor_set.html#a20cf3ef633ecfbf46b38d32653bad0d6',1,'vpr::DescriptorSet']]],
+  ['_7edescriptorsetlayout',['~DescriptorSetLayout',['../classvpr_1_1_descriptor_set_layout.html#ad1d8e86cd2660799258dcc5d077d3b04',1,'vpr::DescriptorSetLayout']]],
+  ['_7edevice',['~Device',['../classvpr_1_1_device.html#a1e717b4e39da77afd6658b9df6393ee2',1,'vpr::Device']]],
+  ['_7eevent',['~Event',['../classvpr_1_1_event.html#a751e895a90d66ce635ce8479dec8e92f',1,'vpr::Event']]],
+  ['_7efence',['~Fence',['../classvpr_1_1_fence.html#aa710f8426f0a3d057908c7a79cd0a7b1',1,'vpr::Fence']]],
+  ['_7eframebuffer',['~Framebuffer',['../classvpr_1_1_framebuffer.html#a10b367c640cfc74accc13409e6992711',1,'vpr::Framebuffer']]],
+  ['_7egraphicspipeline',['~GraphicsPipeline',['../classvpr_1_1_graphics_pipeline.html#afcea60d9bb59d7b3613e76f18d4ca763',1,'vpr::GraphicsPipeline']]],
+  ['_7eimage',['~Image',['../classvpr_1_1_image.html#a1287ebb37a0b59f2084e6aed31203c35',1,'vpr::Image']]],
+  ['_7einstance',['~Instance',['../classvpr_1_1_instance.html#a2d0e68a86ecbbceb024dee48885c28d1',1,'vpr::Instance']]],
+  ['_7ememoryblock',['~MemoryBlock',['../classvpr_1_1_memory_block.html#a78760d0be641bf2e3f679b42cf41742b',1,'vpr::MemoryBlock']]],
+  ['_7ephysicaldevice',['~PhysicalDevice',['../classvpr_1_1_physical_device.html#a90f3c207c76cc8ecd39eb80cf2b74050',1,'vpr::PhysicalDevice']]],
+  ['_7ephysicaldeviceimpl',['~PhysicalDeviceImpl',['../classvpr_1_1_physical_device_impl.html#a6168130477087e7bc3aeed40d214cc0a',1,'vpr::PhysicalDeviceImpl']]],
+  ['_7epipelinecache',['~PipelineCache',['../classvpr_1_1_pipeline_cache.html#a4a492a5e4baa390c5c1ff6d137b74ea9',1,'vpr::PipelineCache']]],
+  ['_7epipelinelayout',['~PipelineLayout',['../classvpr_1_1_pipeline_layout.html#a20cb2cc8b360a65d0d8454a70580c6f2',1,'vpr::PipelineLayout']]],
+  ['_7erenderpass',['~Renderpass',['../classvpr_1_1_renderpass.html#a4b30aa3fa710beef536db91a95e97a0d',1,'vpr::Renderpass']]],
+  ['_7erenderpassimpl',['~RenderpassImpl',['../structvpr_1_1_renderpass_impl.html#a15bfdd0df421e2f3cf316744542404df',1,'vpr::RenderpassImpl']]],
+  ['_7esampler',['~Sampler',['../classvpr_1_1_sampler.html#a0d152bb179afc601677a3ceff69b31b5',1,'vpr::Sampler']]],
+  ['_7esemaphore',['~Semaphore',['../classvpr_1_1_semaphore.html#a5d3e88cdff0fd3fe9d6ccfdddf39420e',1,'vpr::Semaphore']]],
+  ['_7eshadermodule',['~ShaderModule',['../classvpr_1_1_shader_module.html#a692db07eaecd64c280cbdacfc37440ec',1,'vpr::ShaderModule']]],
+  ['_7esurfacekhr',['~SurfaceKHR',['../classvpr_1_1_surface_k_h_r.html#ae87cbdf79cb326650e1b146f53d6d394',1,'vpr::SurfaceKHR']]],
+  ['_7eswapchain',['~Swapchain',['../classvpr_1_1_swapchain.html#a2dc442a2b5f947c65a9be8278200faa6',1,'vpr::Swapchain']]],
+  ['_7eswapchainimpl',['~SwapchainImpl',['../structvpr_1_1_swapchain_impl.html#acf2d556e0718c579a98f3a3311ff641f',1,'vpr::SwapchainImpl']]]
 ];

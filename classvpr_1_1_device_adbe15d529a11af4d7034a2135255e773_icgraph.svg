@@ -48,55 +48,55 @@ if (edges && edges.length) {
 <script type="text/javascript">
 var viewWidth = 569;
 var viewHeight = 39;
-var sectionId = 'dynsection-33';
+var sectionId = 'dynsection-23';
 </script>
 <script xlink:href="svgpan.js"/>
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>vpr::Device::setupGraphicsQueues</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-35 565,-35 565,4 -4,4"/>
-<!-- Node173 -->
-<g id="node1" class="node"><title>Node173</title>
+<!-- Node136 -->
+<g id="node1" class="node"><title>Node136</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-30.5 132,-30.5 132,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::setupGraphics</text>
 <text text-anchor="middle" x="66" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Queues</text>
 </g>
-<!-- Node174 -->
-<g id="node2" class="node"><title>Node174</title>
+<!-- Node137 -->
+<g id="node2" class="node"><title>Node137</title>
 <g id="a_node2"><a xlink:href="classvpr_1_1_device.html#af52c3b24f6bca1308a5170eb3acfeb11" target="_top" xlink:title="vpr::Device::setupQueues">
 <polygon fill="white" stroke="black" points="168,-6 168,-25 295,-25 295,-6 168,-6"/>
 <text text-anchor="middle" x="231.5" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::setupQueues</text>
 </a>
 </g>
 </g>
-<!-- Node173&#45;&gt;Node174 -->
-<g id="edge1" class="edge"><title>Node173&#45;&gt;Node174</title>
+<!-- Node136&#45;&gt;Node137 -->
+<g id="edge1" class="edge"><title>Node136&#45;&gt;Node137</title>
 <path fill="none" stroke="midnightblue" d="M142.099,-15.5C150.683,-15.5 159.366,-15.5 167.765,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="142.089,-12.0001 132.089,-15.5 142.089,-19.0001 142.089,-12.0001"/>
 </g>
-<!-- Node175 -->
-<g id="node3" class="node"><title>Node175</title>
+<!-- Node138 -->
+<g id="node3" class="node"><title>Node138</title>
 <g id="a_node3"><a xlink:href="classvpr_1_1_device.html#a3b0734cd598d9a64f3c459e9dc4e84ce" target="_top" xlink:title="vpr::Device::create">
 <polygon fill="white" stroke="black" points="331,-6 331,-25 427,-25 427,-6 331,-6"/>
 <text text-anchor="middle" x="379" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::create</text>
 </a>
 </g>
 </g>
-<!-- Node174&#45;&gt;Node175 -->
-<g id="edge2" class="edge"><title>Node174&#45;&gt;Node175</title>
+<!-- Node137&#45;&gt;Node138 -->
+<g id="edge2" class="edge"><title>Node137&#45;&gt;Node138</title>
 <path fill="none" stroke="midnightblue" d="M305.248,-15.5C313.96,-15.5 322.673,-15.5 330.886,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="305.05,-12.0001 295.05,-15.5 305.049,-19.0001 305.05,-12.0001"/>
 </g>
-<!-- Node176 -->
-<g id="node4" class="node"><title>Node176</title>
-<g id="a_node4"><a xlink:href="classvpr_1_1_device.html#a870f832d4e57cf09fc0705718a498aff" target="_top" xlink:title="vpr::Device::Device">
+<!-- Node139 -->
+<g id="node4" class="node"><title>Node139</title>
+<g id="a_node4"><a xlink:href="classvpr_1_1_device.html#ad1a8ebd06d5d8b3de5ce0c8d1ce93277" target="_top" xlink:title="vpr::Device::Device">
 <polygon fill="white" stroke="black" points="463,-6 463,-25 561,-25 561,-6 463,-6"/>
 <text text-anchor="middle" x="512" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::Device</text>
 </a>
 </g>
 </g>
-<!-- Node175&#45;&gt;Node176 -->
-<g id="edge3" class="edge"><title>Node175&#45;&gt;Node176</title>
+<!-- Node138&#45;&gt;Node139 -->
+<g id="edge3" class="edge"><title>Node138&#45;&gt;Node139</title>
 <path fill="none" stroke="midnightblue" d="M437.503,-15.5C445.979,-15.5 454.636,-15.5 462.895,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="437.294,-12.0001 427.294,-15.5 437.294,-19.0001 437.294,-12.0001"/>
 </g>

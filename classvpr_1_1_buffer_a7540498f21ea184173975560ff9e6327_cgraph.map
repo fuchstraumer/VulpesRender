@@ -1,4 +1,3 @@
 <map id="vpr::Buffer::~Buffer" name="vpr::Buffer::~Buffer">
 <area shape="rect" id="node2" href="$classvpr_1_1_buffer.html#ab832b022c0ae579386133a23844ee5e5" title="Destroys handles belonging to this object and attempts to free/unbind the memory region it used..." alt="" coords="181,5,313,32"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" title="vpr::Device::vkHandle" alt="" coords="361,5,505,32"/>
 </map>

@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +52,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_s.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -69,78 +90,23 @@ $(function() {
 <li>saveToFile()
 : <a class="el" href="classvpr_1_1_pipeline_cache.html#a5f5d17b3c6d668d22932ef2b3c6a6122">vpr::PipelineCache</a>
 </li>
-<li>ScopedAddFlag()
-: <a class="el" href="classel_1_1_loggers_1_1_scoped_add_flag.html#a13e0b1052cd1a7a15fae63fd6454d598">el::Loggers::ScopedAddFlag</a>
-</li>
-<li>ScopedRemoveFlag()
-: <a class="el" href="classel_1_1_loggers_1_1_scoped_remove_flag.html#a7ae9a1cde34e1145d8b90b639cc12dc1">el::Loggers::ScopedRemoveFlag</a>
-</li>
 <li>Semaphore()
-: <a class="el" href="classvpr_1_1_semaphore.html#aed2124cef1297f6f742b8c7a81eaf8ed">vpr::Semaphore</a>
-</li>
-<li>set()
-: <a class="el" href="classel_1_1_configurations.html#a332717de96efc851a202b7afcc5e395c">el::Configurations</a>
+: <a class="el" href="classvpr_1_1_semaphore.html#abafcf48c972601525447cd31a8ed965b">vpr::Semaphore</a>
 </li>
 <li>Set()
 : <a class="el" href="classvpr_1_1_event.html#a0089000d7e4ffd39efab590059c52ca5">vpr::Event</a>
 </li>
-<li>setApplicationArguments()
-: <a class="el" href="classel_1_1base_1_1_storage.html#addc88a3c2b5720871d4a9ca954f47aa6">el::base::Storage</a>
-</li>
-<li>setArgs()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_command_line_args.html#a2d59b4184e0a6a314ef1c9a4c6d946e6">el::base::utils::CommandLineArgs</a>
-, <a class="el" href="classel_1_1_helpers.html#a68748f618a0c2840b96dc12532b09bf0">el::Helpers</a>
-</li>
-<li>setDefaultConfigurations()
-: <a class="el" href="classel_1_1base_1_1_registered_loggers.html#a28e1f955ad55d89a4ae91fa74545ee4f">el::base::RegisteredLoggers</a>
-, <a class="el" href="classel_1_1_loggers.html#a3f478b619f82cab39244ed8cde4778e2">el::Loggers</a>
-</li>
-<li>setDefaultLogBuilder()
-: <a class="el" href="classel_1_1base_1_1_registered_loggers.html#afccc4cf83c77e97cf7377513094b61a6">el::base::RegisteredLoggers</a>
-, <a class="el" href="classel_1_1_loggers.html#aca42e781a0be67431880756711bed7f8">el::Loggers</a>
-</li>
 <li>setDescriptorInfo()
 : <a class="el" href="classvpr_1_1_buffer.html#afbe401f3002cb40c4751ac8653aa9c64">vpr::Buffer</a>
-</li>
-<li>setDispatchAction()
-: <a class="el" href="classel_1_1_log_dispatch_data.html#ae85d1d70f93b81ec57f058cf4bda27d4">el::LogDispatchData</a>
-</li>
-<li>setEnabled()
-: <a class="el" href="classel_1_1_callback.html#a05e68cb0b5ea4423913fa2ec4ea306b4">el::Callback&lt; T &gt;</a>
 </li>
 <li>SetFinalLayout()
 : <a class="el" href="classvpr_1_1_image.html#a8b343c8f58a050829e477ddffe4807d5">vpr::Image</a>
 </li>
-<li>setFlags()
-: <a class="el" href="classel_1_1base_1_1_storage.html#a5df88c56b8d923c20568e50ceb0bdd64">el::base::Storage</a>
-</li>
 <li>SetFormat()
 : <a class="el" href="classvpr_1_1_image.html#af3f95bd510a2bddce98e2932ff9840c2">vpr::Image</a>
 </li>
-<li>setFromArgs()
-: <a class="el" href="classel_1_1base_1_1_v_registry.html#a811e62d7d016a0714b4363f47216a9da">el::base::VRegistry</a>
-</li>
-<li>setFromBase()
-: <a class="el" href="classel_1_1_configurations.html#a4c6db218908b39d23cc09b1a16a18e83">el::Configurations</a>
-</li>
-<li>setGlobally()
-: <a class="el" href="classel_1_1_configurations.html#a56c82c15ea39cc230a5c85ec2c41cbfd">el::Configurations</a>
-</li>
 <li>setLayout
-: <a class="el" href="classvpr_1_1_descriptor_set.html#a350ca5bcfb3726cd7841437a29ab677e">vpr::DescriptorSet</a>
-</li>
-<li>setLevel()
-: <a class="el" href="classel_1_1base_1_1_v_registry.html#aea4fb84a03363080ee2501193084f71f">el::base::VRegistry</a>
-</li>
-<li>setLogBuilder()
-: <a class="el" href="classel_1_1_logger.html#a737340322cc9d9d20febd7131c1e262f">el::Logger</a>
-</li>
-<li>setLoggingLevel()
-: <a class="el" href="classel_1_1base_1_1_storage.html#a163473357c32184769e8edd993c8b440">el::base::Storage</a>
-, <a class="el" href="classel_1_1_loggers.html#afbee019d722fef5148d8355f45ba7993">el::Loggers</a>
-</li>
-<li>setLogMessage()
-: <a class="el" href="classel_1_1_log_dispatch_data.html#a09fcf704874e1f0a9d9061fafdaa0ce8">el::LogDispatchData</a>
+: <a class="el" href="namespacevpr.html#ae0541511e5c293b52e21ca7df98dfbea">vpr::DescriptorSetImpl</a>
 </li>
 <li>SetMappedMemory()
 : <a class="el" href="classvpr_1_1_buffer.html#af8411e6c6a353e03d6223c5c991832b1">vpr::Buffer</a>
@@ -148,30 +114,8 @@ $(function() {
 <li>setMappedMemoryRange()
 : <a class="el" href="classvpr_1_1_buffer.html#a07d786f45ff6d6712962da7910f6280c">vpr::Buffer</a>
 </li>
-<li>setModules()
-: <a class="el" href="classel_1_1base_1_1_v_registry.html#a65e202cc547cd11231d3ea0fb70765d0">el::base::VRegistry</a>
-</li>
 <li>setParameters()
-: <a class="el" href="classvpr_1_1_swapchain.html#a72f010b980cf7b7c49bfd63d1548114e">vpr::Swapchain</a>
-</li>
-<li>setParentApplicationName()
-: <a class="el" href="classel_1_1_logger.html#a6890af8910adba26b01ef029429c4f15">el::Logger</a>
-</li>
-<li>setPreRollOutCallback()
-: <a class="el" href="classel_1_1base_1_1_storage.html#a626165bc5c8808b733707294ce2a0dc8">el::base::Storage</a>
-</li>
-<li>setRemainingToDefault()
-: <a class="el" href="classel_1_1_configurations.html#ad89b7d2dd750e4d1b3deff800e278fdb">el::Configurations</a>
-</li>
-<li>setStorage()
-: <a class="el" href="classel_1_1_helpers.html#af78fd39725281e3dddd7c0fbdc14f11f">el::Helpers</a>
-</li>
-<li>setThreadName()
-: <a class="el" href="classel_1_1base_1_1_storage.html#a1800a786d72b003997dd8d2599b040e0">el::base::Storage</a>
-, <a class="el" href="classel_1_1_helpers.html#a315250270334214c2749398feba08863">el::Helpers</a>
-</li>
-<li>setToDefault()
-: <a class="el" href="classel_1_1_configurations.html#ab34fa2ed4ac77f47b41e464c2d186239">el::Configurations</a>
+: <a class="el" href="structvpr_1_1_swapchain_impl.html#afdf0ef2711d213b7020b37785a62a7ad">vpr::SwapchainImpl</a>
 </li>
 <li>SetupBeginInfo()
 : <a class="el" href="classvpr_1_1_renderpass.html#a407631faefbac783a79519160205f927">vpr::Renderpass</a>
@@ -180,7 +124,10 @@ $(function() {
 : <a class="el" href="classvpr_1_1_device.html#abdb29331fbcc15a242b3f0e82b02beef">vpr::Device</a>
 </li>
 <li>setupCreateInfo()
-: <a class="el" href="classvpr_1_1_swapchain.html#ab96b4ceb2bb9b542dcb7645e9bcddf42">vpr::Swapchain</a>
+: <a class="el" href="structvpr_1_1_swapchain_impl.html#a455468d3084cd9503a64f02d3b53956d">vpr::SwapchainImpl</a>
+</li>
+<li>setupDebugUtilsHandler()
+: <a class="el" href="classvpr_1_1_device.html#aca69dbf04470b2119a9960047035dc57">vpr::Device</a>
 </li>
 <li>setupExtensions()
 : <a class="el" href="classvpr_1_1_device.html#a165976c19ab59de329855485a9dab5aa">vpr::Device</a>
@@ -189,13 +136,10 @@ $(function() {
 : <a class="el" href="classvpr_1_1_device.html#adbe15d529a11af4d7034a2135255e773">vpr::Device</a>
 </li>
 <li>setupImageViews()
-: <a class="el" href="classvpr_1_1_swapchain.html#a045b42094a13f95a236b123584e1924a">vpr::Swapchain</a>
+: <a class="el" href="structvpr_1_1_swapchain_impl.html#aaded5613928f1e39c1a61ac25be8bf88">vpr::SwapchainImpl</a>
 </li>
-<li>setupPhysicalDevice()
-: <a class="el" href="classvpr_1_1_instance.html#aa1b18feac92f797ece4ea81a32f9a1d1">vpr::Instance</a>
-</li>
-<li>SetupQueueFamily()
-: <a class="el" href="classvpr_1_1_device.html#af043c9b7994791cc4ae4b8a76a8d8918">vpr::Device</a>
+<li>setupQueueFamily()
+: <a class="el" href="classvpr_1_1_device.html#a4884447888b9c8aacc288591056db19d">vpr::Device</a>
 </li>
 <li>setupQueues()
 : <a class="el" href="classvpr_1_1_device.html#af52c3b24f6bca1308a5170eb3acfeb11">vpr::Device</a>
@@ -204,7 +148,7 @@ $(function() {
 : <a class="el" href="classvpr_1_1_device.html#a22ee8e6517d4898282d9d6385545100a">vpr::Device</a>
 </li>
 <li>setupSwapImages()
-: <a class="el" href="classvpr_1_1_swapchain.html#a4fcc08dbfa54e99092e0ded1dd2cdca7">vpr::Swapchain</a>
+: <a class="el" href="structvpr_1_1_swapchain_impl.html#acc94e08e83ec3857bffdea08e9b4bf65">vpr::SwapchainImpl</a>
 </li>
 <li>setupTransferQueues()
 : <a class="el" href="classvpr_1_1_device.html#aa64b2412561fa0950722c2dc4997da9f">vpr::Device</a>
@@ -212,34 +156,28 @@ $(function() {
 <li>setupValidation()
 : <a class="el" href="classvpr_1_1_device.html#a158d56e75fab365778e07a84d090b3f7">vpr::Device</a>
 </li>
-<li>setValue()
-: <a class="el" href="classel_1_1base_1_1_typed_configurations.html#ad56715c5dcbb8480319f0909c98cfbea">el::base::TypedConfigurations</a>
-, <a class="el" href="classel_1_1_configuration.html#a04755de11422d7570869433ea157b705">el::Configuration</a>
-</li>
-<li>setVerboseLevel()
-: <a class="el" href="classel_1_1_loggers.html#a6526e948f62d7dc77e06b77d355770d6">el::Loggers</a>
-</li>
-<li>setVModules()
-: <a class="el" href="classel_1_1_loggers.html#a564a41ac785a34c57f00b9d8def2f966">el::Loggers</a>
+<li>SetUserData()
+: <a class="el" href="classvpr_1_1_allocation.html#aba0b6e2e6c71e801603e6b81c2218f89">vpr::Allocation</a>
 </li>
 <li>ShaderModule()
-: <a class="el" href="classvpr_1_1_shader_module.html#a12bd4a698a41ca2d94793e2f6326eadc">vpr::ShaderModule</a>
-</li>
-<li>size()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_abstract_registry.html#a58a7b8ea964bdf6008701dcfb6609ca5">el::base::utils::AbstractRegistry&lt; T_Ptr, Container &gt;</a>
-, <a class="el" href="classel_1_1base_1_1utils_1_1_command_line_args.html#a1f7125d74bf8e88d0e51dd6d12af0000">el::base::utils::CommandLineArgs</a>
+: <a class="el" href="classvpr_1_1_shader_module.html#a81a356eaa1be4738eb2e059af9e1d394">vpr::ShaderModule</a>
 </li>
 <li>Size
 : <a class="el" href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">vpr::Allocation</a>
-, <a class="el" href="classvpr_1_1_buffer.html#a05392d328541adc298ff9b5283a9c6ed">vpr::Buffer</a>
 </li>
 <li>size
 : <a class="el" href="classvpr_1_1_buffer.html#a9b69d98c01a256db2adc7878f4bed830">vpr::Buffer</a>
-, <a class="el" href="classvpr_1_1_command_pool.html#afc12541bb9b26e7fd4e35b7ad92f3f33">vpr::CommandPool</a>
+</li>
+<li>Size()
+: <a class="el" href="classvpr_1_1_buffer.html#a05392d328541adc298ff9b5283a9c6ed">vpr::Buffer</a>
+</li>
+<li>size()
+: <a class="el" href="classvpr_1_1_command_pool.html#afc12541bb9b26e7fd4e35b7ad92f3f33">vpr::CommandPool</a>
 </li>
 <li>Size
 : <a class="el" href="classvpr_1_1_memory_block.html#a394e565967332b7b6809cf8b94295832">vpr::MemoryBlock</a>
 , <a class="el" href="structvpr_1_1_suballocation.html#a692b3dfe078a5d701bbdda192d6cf4c8">vpr::Suballocation</a>
+, <a class="el" href="structvpr_1_1_suballocation_draw_command.html#ab63fef7000899aa4f148271525c4501d">vpr::SuballocationDrawCommand</a>
 </li>
 <li>SortAllocations()
 : <a class="el" href="classvpr_1_1_allocation_collection.html#a2da5a9d137c84fe3f6739de5fdb7fddc">vpr::AllocationCollection</a>
@@ -248,7 +186,7 @@ $(function() {
 : <a class="el" href="namespacevpr.html#a821fc74d08d8df5bec19d8e85496a797">vpr::queue_priorities_t</a>
 </li>
 <li>SparseBinding
-: <a class="el" href="namespacevpr.html#ae0e29d580f2551312fdfcc2f1c1f104b">vpr::vkQueueFamilyIndices</a>
+: <a class="el" href="structvpr_1_1vk_queue_family_indices.html#ae0e29d580f2551312fdfcc2f1c1f104b">vpr::vkQueueFamilyIndices</a>
 </li>
 <li>SparseBindingQueue()
 : <a class="el" href="classvpr_1_1_device.html#a33f34c1c36dc71aa2905bce9e48b3c3f">vpr::Device</a>
@@ -259,41 +197,18 @@ $(function() {
 <li>stages
 : <a class="el" href="classvpr_1_1_shader_module.html#a945152a93bf4647196b4ea234fe980db">vpr::ShaderModule</a>
 </li>
-<li>stagingBuffers
-: <a class="el" href="classvpr_1_1_buffer.html#a5eabdd01d6efa86d36be012e2a601560">vpr::Buffer</a>
-</li>
 <li>StartSingleCmdBuffer()
 : <a class="el" href="classvpr_1_1_command_pool.html#a27e9ae2e084faaffe032cb9b92ad2fa4">vpr::CommandPool</a>
 </li>
-<li>startsWith()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_str.html#a87b8a192300657c907b0678a8d715da2">el::base::utils::Str</a>
-</li>
-<li>StaticClass()
-: <a class="el" href="classel_1_1base_1_1_static_class.html#a8394b09c1ed81a3c1b9cb7fec8736115">el::base::StaticClass</a>
-</li>
-<li>Storage()
-: <a class="el" href="classel_1_1base_1_1_storage.html#a4932a8f8a55c3b00467cf2feed6acf59">el::base::Storage</a>
-</li>
-<li>storage()
-: <a class="el" href="classel_1_1_helpers.html#a13a5365de36b3af27660cf9b358829d3">el::Helpers</a>
-</li>
-<li>stream()
-: <a class="el" href="classel_1_1_logger.html#add143e52020c9df44b0d40cd6006a65f">el::Logger</a>
+<li>SuballocationDrawCommand()
+: <a class="el" href="structvpr_1_1_suballocation_draw_command.html#ab80eb00a96cfa38ff22d6d3b3112a567">vpr::SuballocationDrawCommand</a>
 </li>
 <li>Suballocations
 : <a class="el" href="classvpr_1_1_memory_block.html#afeb7274f3b113e063b85e83f588dc76d">vpr::MemoryBlock</a>
+, <a class="el" href="structvpr_1_1_memory_block_info.html#a2f4f2177d856ab14ba1a00c592f24e78">vpr::MemoryBlockInfo</a>
 </li>
 <li>SubgroupProperties
 : <a class="el" href="classvpr_1_1_physical_device_impl.html#af9378d82682afa3c123dfe2ca1100394">vpr::PhysicalDeviceImpl</a>
-</li>
-<li>Submit()
-: <a class="el" href="classvpr_1_1_transfer_pool.html#adf716e4802b14d551e52fdfd72fdf966">vpr::TransferPool</a>
-</li>
-<li>SubmitAll()
-: <a class="el" href="classvpr_1_1_transfer_pool.html#a7beaebc99032ffd31b540ec06395c774">vpr::TransferPool</a>
-</li>
-<li>SubmitWait()
-: <a class="el" href="classvpr_1_1_transfer_pool.html#a39f6998201261adf5420a6faa2a744a6">vpr::TransferPool</a>
 </li>
 <li>subresource
 : <a class="el" href="classvpr_1_1_image.html#aa336162079dd8413ff1fc5dc91a83c01">vpr::Image</a>
@@ -301,37 +216,35 @@ $(function() {
 <li>subresourceLayout
 : <a class="el" href="classvpr_1_1_image.html#af0af766a544e64872a04a90cba0aca99">vpr::Image</a>
 </li>
-<li>SubsecondPrecision()
-: <a class="el" href="classel_1_1base_1_1_subsecond_precision.html#a7b6681bcf8457b97da6d2ad5da4b45c3">el::base::SubsecondPrecision</a>
-</li>
-<li>subsecondPrecision()
-: <a class="el" href="classel_1_1base_1_1_typed_configurations.html#a674125948caf78b836a5b4f38561c8cc">el::base::TypedConfigurations</a>
-</li>
 <li>surface
-: <a class="el" href="classvpr_1_1_instance.html#af1214d85bfc80316e91aa4dc02a52ef3">vpr::Instance</a>
+: <a class="el" href="classvpr_1_1_device.html#a7447e429a7fbed43cf2d7ff8df0c2d1a">vpr::Device</a>
+, <a class="el" href="structvpr_1_1_swapchain_impl.html#a7ac3954e02fcc657d549df73501050d5">vpr::SwapchainImpl</a>
 </li>
 <li>surfaceFormat
-: <a class="el" href="classvpr_1_1_swapchain.html#a0d53acbaa3ff58de1fb21cbca5d5e635">vpr::Swapchain</a>
+: <a class="el" href="structvpr_1_1_swapchain_impl.html#aa630021e70194a7a44636a679dc9d159">vpr::SwapchainImpl</a>
 </li>
 <li>SurfaceKHR()
-: <a class="el" href="classvpr_1_1_surface_k_h_r.html#a66e05e1412b75a278cb3e7d9c8fe1bb1">vpr::SurfaceKHR</a>
+: <a class="el" href="classvpr_1_1_surface_k_h_r.html#a808e0928d34255a1cbe80f963c0f92de">vpr::SurfaceKHR</a>
 </li>
 <li>Swapchain()
-: <a class="el" href="classvpr_1_1_swapchain.html#a49bc91a7423fe49320b0375e78653439">vpr::Swapchain</a>
+: <a class="el" href="classvpr_1_1_swapchain.html#a8e0684af1f9196c026b48ab553118758">vpr::Swapchain</a>
+</li>
+<li>SwapchainImpl()
+: <a class="el" href="structvpr_1_1_swapchain_impl.html#aa1b6cf08451eb2e7bebdbf5ce10a09ed">vpr::SwapchainImpl</a>
 </li>
 <li>SwapchainInfo()
-: <a class="el" href="structvpr_1_1_swapchain_1_1_swapchain_info.html#a00f502392f933e52a56972cda97a4664">vpr::Swapchain::SwapchainInfo</a>
-</li>
-<li>SysLogInitializer()
-: <a class="el" href="classel_1_1_sys_log_initializer.html#aae71ee83f45c4cf770fbc6c6e87d9406">el::SysLogInitializer</a>
+: <a class="el" href="structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#aa3a0386fc6544df198499eecac30bc4a">vpr::SwapchainImpl::SwapchainInfo</a>
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

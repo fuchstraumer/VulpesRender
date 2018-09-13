@@ -1,9 +1,0 @@
-<map id="el::base::TypedConfigurations::logFormat" name="el::base::TypedConfigurations::logFormat">
-<area shape="rect" id="node2" href="$classel_1_1base_1_1_default_log_builder.html#a9ee7983bc51f1fac887806e909ecbbbd" title="el::base::DefaultLogBuilder\l::build" alt="" coords="247,24,424,65"/>
-<area shape="rect" id="node3" href="$classel_1_1_logger.html#acfb9ef869b9b4dc3efd78d7f64b8bebd" title="el::Logger::resolveLogger\lFormatSpec" alt="" coords="252,89,419,131"/>
-<area shape="rect" id="node4" href="$classel_1_1_logger.html#ad9db621dbf8977bf814dc7baea8dcee4" title="Configures the logger using specified configurations. " alt="" coords="472,97,611,123"/>
-<area shape="rect" id="node5" href="$classel_1_1_loggers.html#adedfcc17831fe3d3f14026c91e8df88c" title="Sets configurations from global configuration file. " alt="" coords="659,5,835,47"/>
-<area shape="rect" id="node6" href="$classel_1_1_logger.html#a43abea8865d7316f05c8a676a8c04896" title="el::Logger::Logger" alt="" coords="683,71,810,98"/>
-<area shape="rect" id="node7" href="$classel_1_1_logger.html#adfd57ab27fb398cc980a3edfab92927e" title="Reconfigures logger using existing configurations. " alt="" coords="671,122,822,149"/>
-<area shape="rect" id="node8" href="$classel_1_1_loggers.html#a02223004494a404a2c3e7cd0c4380d3b" title="Reconfigures specified logger with new configurations. " alt="" coords="668,173,825,215"/>
-</map>

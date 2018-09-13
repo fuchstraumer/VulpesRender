@@ -9,13 +9,13 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 133)">
 <title>vpr::MemoryBlock::freeSuballocation</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-133 362,-133 362,4 -4,4"/>
-<!-- Node54 -->
-<g id="node1" class="node"><title>Node54</title>
+<!-- Node50 -->
+<g id="node1" class="node"><title>Node50</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-55 0,-74 175,-74 175,-55 0,-55"/>
 <text text-anchor="middle" x="87.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::MemoryBlock::freeSuballocation</text>
 </g>
-<!-- Node55 -->
-<g id="node2" class="node"><title>Node55</title>
+<!-- Node51 -->
+<g id="node2" class="node"><title>Node51</title>
 <g id="a_node2"><a xlink:href="classvpr_1_1_memory_block.html#aca430805fb87da6c9f14facd22166d5f" target="_top" xlink:title="Registers a free suballocation, inserting it into the proper location to keep the sorting intact (via...">
 <polygon fill="white" stroke="black" points="222,-98.5 222,-128.5 347,-128.5 347,-98.5 222,-98.5"/>
 <text text-anchor="start" x="230" y="-116.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::MemoryBlock::insert</text>
@@ -23,13 +23,13 @@
 </a>
 </g>
 </g>
-<!-- Node54&#45;&gt;Node55 -->
-<g id="edge1" class="edge"><title>Node54&#45;&gt;Node55</title>
+<!-- Node50&#45;&gt;Node51 -->
+<g id="edge1" class="edge"><title>Node50&#45;&gt;Node51</title>
 <path fill="none" stroke="midnightblue" d="M126.561,-74.064C151.356,-80.2947 184.445,-88.6094 213.847,-95.9974"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="213.108,-99.4204 223.659,-98.463 214.814,-92.6314 213.108,-99.4204"/>
 </g>
-<!-- Node56 -->
-<g id="node3" class="node"><title>Node56</title>
+<!-- Node52 -->
+<g id="node3" class="node"><title>Node52</title>
 <g id="a_node3"><a xlink:href="classvpr_1_1_memory_block.html#a37eea135267c92dcac0fc70e7c6f9ad1" target="_top" xlink:title="Effectively reduces fragmentation by merging two free allocations that are adjacent in memory into on...">
 <polygon fill="white" stroke="black" points="211,-49.5 211,-79.5 358,-79.5 358,-49.5 211,-49.5"/>
 <text text-anchor="start" x="219" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::MemoryBlock::mergeFree</text>
@@ -37,13 +37,13 @@
 </a>
 </g>
 </g>
-<!-- Node54&#45;&gt;Node56 -->
-<g id="edge2" class="edge"><title>Node54&#45;&gt;Node56</title>
+<!-- Node50&#45;&gt;Node52 -->
+<g id="edge2" class="edge"><title>Node50&#45;&gt;Node52</title>
 <path fill="none" stroke="midnightblue" d="M175.165,-64.5C183.626,-64.5 192.197,-64.5 200.62,-64.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="200.802,-68.0001 210.801,-64.5 200.801,-61.0001 200.802,-68.0001"/>
 </g>
-<!-- Node57 -->
-<g id="node4" class="node"><title>Node57</title>
+<!-- Node53 -->
+<g id="node4" class="node"><title>Node53</title>
 <g id="a_node4"><a xlink:href="classvpr_1_1_memory_block.html#afbbaf6e2f0de8d1bed31e8a8cf71cfed" target="_top" xlink:title="Removes a free suballocation, usually indicating that it is about to be made active and used by an ob...">
 <polygon fill="white" stroke="black" points="219,-0.5 219,-30.5 350,-30.5 350,-0.5 219,-0.5"/>
 <text text-anchor="start" x="227" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::MemoryBlock::remove</text>
@@ -51,8 +51,8 @@
 </a>
 </g>
 </g>
-<!-- Node54&#45;&gt;Node57 -->
-<g id="edge3" class="edge"><title>Node54&#45;&gt;Node57</title>
+<!-- Node50&#45;&gt;Node53 -->
+<g id="edge3" class="edge"><title>Node50&#45;&gt;Node53</title>
 <path fill="none" stroke="midnightblue" d="M126.561,-54.936C151.356,-48.7053 184.445,-40.3906 213.847,-33.0026"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="214.814,-36.3686 223.659,-30.537 213.108,-29.5796 214.814,-36.3686"/>
 </g>

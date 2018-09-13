@@ -1,8 +1,11 @@
 <map id="vpr::Device" name="vpr::Device">
-<area shape="rect" id="node9" href="$classvpr_1_1_allocator.html" title="The primary interface and class of this subsystem. " alt="" coords="1727,161,1825,188"/>
-<area shape="rect" id="node3" href="$namespacevpr.html#structvpr_1_1vk_queue_family_indices" title="vpr::vkQueueFamilyIndices" alt="" coords="971,244,1147,271"/>
-<area shape="rect" id="node13" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="1012,375,1107,401"/>
-<area shape="rect" id="node5" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="464,196,599,223"/>
-<area shape="rect" id="node7" href="$classvpr_1_1_physical_device_impl.html" title="vpr::PhysicalDeviceImpl" alt="" coords="5,196,164,223"/>
-<area shape="rect" id="node16" href="$classvpr_1_1_surface_k_h_r.html" title="The bare&#45;minimum required to wrap a VkSurfaceKHR object. " alt="" coords="1381,436,1498,463"/>
+<area shape="rect" id="node2" href="$structvpr_1_1_device_data_members.html" title="vpr::DeviceDataMembers" alt="" coords="1928,159,2093,185"/>
+<area shape="rect" id="node15" href="$structvpr_1_1_instance_extension_handler.html" title="vpr::InstanceExtensionHandler" alt="" coords="907,159,1104,185"/>
+<area shape="rect" id="node6" title="STL class. " alt="" coords="235,265,315,292"/>
+<area shape="rect" id="node7" title="STL class. " alt="" coords="5,258,132,299"/>
+<area shape="rect" id="node8" href="$structvpr_1_1vk_queue_family_indices.html" title="Simple wrapper struct for storing queue family indices. " alt="" coords="1261,107,1437,133"/>
+<area shape="rect" id="node9" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="1281,56,1416,83"/>
+<area shape="rect" id="node11" href="$classvpr_1_1_physical_device_impl.html" title="vpr::PhysicalDeviceImpl" alt="" coords="556,56,715,83"/>
+<area shape="rect" id="node13" href="$group___core.html#structvpr_1_1_vk_debug_utils_functions" title="This structure will be populated with function pointers used to call the functions (as named) when av..." alt="" coords="1257,5,1440,32"/>
+<area shape="rect" id="node14" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="1301,157,1396,184"/>
 </map>

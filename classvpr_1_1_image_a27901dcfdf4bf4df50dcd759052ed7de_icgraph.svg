@@ -9,21 +9,21 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>vpr::Image::GetMemoryBarrier</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-24 324,-24 324,4 -4,4"/>
-<!-- Node36 -->
-<g id="node1" class="node"><title>Node36</title>
+<!-- Node31 -->
+<g id="node1" class="node"><title>Node31</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-19.5 146,-19.5 146,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="73" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Image::GetMemoryBarrier</text>
 </g>
-<!-- Node37 -->
-<g id="node2" class="node"><title>Node37</title>
+<!-- Node32 -->
+<g id="node2" class="node"><title>Node32</title>
 <g id="a_node2"><a xlink:href="classvpr_1_1_image.html#af859b6a324c843f53bc822fcb90fdf33" target="_top" xlink:title="Uses a memory barrier to enforce an image layout change. ">
 <polygon fill="white" stroke="black" points="182,-0.5 182,-19.5 320,-19.5 320,-0.5 182,-0.5"/>
 <text text-anchor="middle" x="251" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Image::TransitionLayout</text>
 </a>
 </g>
 </g>
-<!-- Node36&#45;&gt;Node37 -->
-<g id="edge1" class="edge"><title>Node36&#45;&gt;Node37</title>
+<!-- Node31&#45;&gt;Node32 -->
+<g id="edge1" class="edge"><title>Node31&#45;&gt;Node32</title>
 <path fill="none" stroke="midnightblue" d="M156.181,-10C164.82,-10 173.534,-10 181.988,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="156.094,-6.5001 146.094,-10 156.094,-13.5001 156.094,-6.5001"/>
 </g>

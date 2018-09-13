@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -44,6 +51,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classvpr_1_1_shader_module.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -58,11 +80,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespacevpr.html">vpr</a></li><li class="navelem"><a class="el" href="classvpr_1_1_shader_module.html">ShaderModule</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">vpr::ShaderModule Member List</div>  </div>
@@ -72,33 +89,33 @@ $(function() {
 <p>This is the complete list of members for <a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a>, including all inherited members.</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#ab9cbfc46a30a41bab28956d4175de38a">allocators</a></td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a7805d9587fc351593fa94d6e31340f8f">code</a></td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a3027d061128a04cc631956204f786c2c">codeSize</a></td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a4b56c37231c31ddff973e5987f753e13">CreateInfo</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a682b809c2972eaf2a0a0401ab62c57dc">createInfo</a></td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#aed80d0bf55bbe0d86ec887eb2720cea9">handle</a></td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#aa646242c3cd1873e5f6c42f090b05c15">LoadCodeFromFile</a>(const char *filename)</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a682b809c2972eaf2a0a0401ab62c57dc">createInfo</a></td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a4b56c37231c31ddff973e5987f753e13">CreateInfo</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#ae499f64191c5e8f866eb4d158ff11dae">fileLoader</a></td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#aed80d0bf55bbe0d86ec887eb2720cea9">handle</a></td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a43d7836b4e19879023dd43d6cb3e22f4">operator=</a>(const ShaderModule &amp;)=delete</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#af8cab7f3fa2555557cd96c6788ed69bb">operator=</a>(ShaderModule &amp;&amp;other) noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a0c9d01765756dc2e5c1ed5872b2f7e51">parent</a></td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a65d9a62a6f638bce51839e244dcd0c1c">PipelineInfo</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a388c1ef1a0b86a4e34f1c455dc6c0d99">pipelineInfo</a></td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#ae4774b0393c91e856ef23679d4fe5cbc">parent</a></td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a388c1ef1a0b86a4e34f1c455dc6c0d99">pipelineInfo</a></td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a65d9a62a6f638bce51839e244dcd0c1c">PipelineInfo</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a12bd4a698a41ca2d94793e2f6326eadc">ShaderModule</a>(const ShaderModule &amp;)=delete</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#ad4f9c9b04f6be4cfd628061347d56b5b">ShaderModule</a>(const Device *device, const char *filename, const VkShaderStageFlagBits &amp;stages, const char *shader_name=nullptr)</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#ac81a685370a9fd1443b550c5b0ce85d7">ShaderModule</a>(const Device *device, const std::string &amp;filename, const VkShaderStageFlagBits &amp;stages, const char *shader_entry_point=nullptr)</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a8678f8a4d9217061068e7f5e5e28f5b0">ShaderModule</a>(const Device *device, const VkShaderStageFlagBits &amp;stages, const uint32_t *binary_source, const uint32_t &amp;binary_source_length)</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a576717be39aa5bc6c4ef705f03993b06">ShaderModule</a>(const Device *device, const char *filename, VkPipelineShaderStageCreateInfo &amp;create_info)</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#aa1f62437461e5b9d59247ecdd85fe4de">ShaderModule</a>(ShaderModule &amp;&amp;other) noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a955322640b91687826230a6af5956621">StageBits</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a945152a93bf4647196b4ea234fe980db">stages</a></td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a4c798e81970ffb6d5b4d201e920b9c3e">vkHandle</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a692db07eaecd64c280cbdacfc37440ec">~ShaderModule</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a81a356eaa1be4738eb2e059af9e1d394">ShaderModule</a>(const VkDevice &amp;device, const char *filename, const VkShaderStageFlagBits &amp;stages, const char *shader_name=nullptr)</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#abc93a8112697e4990bbd74d2c4100769">ShaderModule</a>(const VkDevice &amp;device, const VkShaderStageFlagBits &amp;stages, const uint32_t *binary_source, const uint32_t &amp;binary_source_length)</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a1972ed580d171dddaaf3f2555fd4b0ca">ShaderModule</a>(const VkDevice &amp;device, const char *filename, VkPipelineShaderStageCreateInfo &amp;create_info)</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#aa1f62437461e5b9d59247ecdd85fe4de">ShaderModule</a>(ShaderModule &amp;&amp;other) noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a955322640b91687826230a6af5956621">StageBits</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a945152a93bf4647196b4ea234fe980db">stages</a></td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a4c798e81970ffb6d5b4d201e920b9c3e">vkHandle</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html#a692db07eaecd64c280cbdacfc37440ec">~ShaderModule</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_shader_module.html">vpr::ShaderModule</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

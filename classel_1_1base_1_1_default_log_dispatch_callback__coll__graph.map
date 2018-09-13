@@ -1,9 +1,0 @@
-<map id="el::base::DefaultLogDispatchCallback" name="el::base::DefaultLogDispatchCallback">
-<area shape="rect" id="node2" href="$classel_1_1_log_dispatch_callback.html" title="el::LogDispatchCallback" alt="" coords="14,308,177,335"/>
-<area shape="rect" id="node3" href="$classel_1_1_callback.html" title="el::Callback\&lt; LogDispatch\lData \&gt;" alt="" coords="5,192,180,233"/>
-<area shape="rect" id="node4" href="$classel_1_1base_1_1threading_1_1_thread_safe.html" title="Base of thread safe class, this class is inheritable&#45;only. " alt="" coords="44,5,173,47"/>
-<area shape="rect" id="node8" href="$classel_1_1_logger.html" title="Represents a logger holding ID and configurations we need to write logs. " alt="" coords="131,133,209,159"/>
-<area shape="rect" id="node5" href="$classel_1_1_log_dispatch_data.html" title="el::LogDispatchData" alt="" coords="137,359,275,385"/>
-<area shape="rect" id="node6" href="$classel_1_1_log_message.html" title="el::LogMessage" alt="" coords="154,257,269,284"/>
-<area shape="rect" id="node7" title="STL class. " alt="" coords="253,13,333,39"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="el::Configurations::unsafeSetGlobally" name="el::Configurations::unsafeSetGlobally">
-<area shape="rect" id="node2" href="$classel_1_1_configurations.html#a332717de96efc851a202b7afcc5e395c" title="Sets value of configuration for specified level. " alt="" coords="359,111,507,138"/>
-<area shape="rect" id="node6" href="$classel_1_1_configurations.html#a05c373510ca513e4f61999c84d512831" title="Thread unsafe set. " alt="" coords="188,163,311,204"/>
-<area shape="rect" id="node3" href="$classel_1_1_configurations_1_1_parser.html#a70e0d8b27e7c1b5dd94e6838c304a751" title="el::Configurations\l::Parser::parseLine" alt="" coords="570,5,702,47"/>
-<area shape="rect" id="node4" href="$classel_1_1_loggers.html#a396b601e204ede36f5a9acc76a8c5585" title="Reconfigures single configuration for all the loggers for specified level. " alt="" coords="557,71,715,112"/>
-<area shape="rect" id="node5" href="$classel_1_1_loggers.html#a89ec21259cfcfee3f761fca68c4ec043" title="Reconfigures logger&#39;s single configuration. " alt="" coords="557,136,715,177"/>
-<area shape="rect" id="node7" href="$classel_1_1_configurations.html#a84c06d47e550b5eda3060f399698ec28" title="Unsafely sets configuration if does not already exist. " alt="" coords="361,165,505,207"/>
-<area shape="rect" id="node8" href="$classel_1_1_configurations.html#ad89b7d2dd750e4d1b3deff800e278fdb" title="Lets you set the remaining configurations to default. " alt="" coords="555,201,717,243"/>
-</map>

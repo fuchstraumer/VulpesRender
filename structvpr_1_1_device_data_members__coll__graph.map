@@ -1,0 +1,11 @@
+<map id="vpr::DeviceDataMembers" name="vpr::DeviceDataMembers">
+<area shape="rect" id="node2" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="1632,161,1716,188"/>
+<area shape="rect" id="node3" href="$structvpr_1_1vk_queue_family_indices.html" title="Simple wrapper struct for storing queue family indices. " alt="" coords="1285,135,1461,161"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="1305,299,1440,325"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_physical_device_impl.html" title="vpr::PhysicalDeviceImpl" alt="" coords="568,299,727,325"/>
+<area shape="rect" id="node8" href="$group___core.html#structvpr_1_1_vk_debug_utils_functions" title="This structure will be populated with function pointers used to call the functions (as named) when av..." alt="" coords="1281,248,1464,275"/>
+<area shape="rect" id="node9" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="1325,21,1420,48"/>
+<area shape="rect" id="node10" href="$structvpr_1_1_instance_extension_handler.html" title="vpr::InstanceExtensionHandler" alt="" coords="931,21,1128,48"/>
+<area shape="rect" id="node13" title="STL class. " alt="" coords="235,19,315,45"/>
+<area shape="rect" id="node14" title="STL class. " alt="" coords="5,11,132,53"/>
+</map>

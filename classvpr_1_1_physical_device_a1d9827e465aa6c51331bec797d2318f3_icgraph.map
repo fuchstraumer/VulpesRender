@@ -1,4 +1,3 @@
 <map id="vpr::PhysicalDevice::GetMemoryProperties" name="vpr::PhysicalDevice::GetMemoryProperties">
-<area shape="rect" id="node2" href="$classvpr_1_1_device.html#adf45896758bbbbe38a3b2011c29b568c" title="vpr::Device::GetPhysical\lDeviceMemoryProperties" alt="" coords="211,5,377,47"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_allocator.html#af15a36e630af2769ee8e1700ca1230f0" title="vpr::Allocator::Allocator" alt="" coords="425,13,581,39"/>
+<area shape="rect" id="node2" href="$classvpr_1_1_device.html#a3298bf1002853c3cd5b17fba4abc721d" title="vpr::Device::GetPhysical\lDeviceMemoryProperties" alt="" coords="211,5,377,47"/>
 </map>

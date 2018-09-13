@@ -1,8 +1,0 @@
-<map id="vpr::DepthStencil" name="vpr::DepthStencil">
-<area shape="rect" id="node2" href="$classvpr_1_1_image.html" title="Wraps the common image creation, transfer, and staging methods. " alt="" coords="913,167,995,194"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="663,141,747,167"/>
-<area shape="rect" id="node5" href="$namespacevpr.html#structvpr_1_1vk_queue_family_indices" title="vpr::vkQueueFamilyIndices" alt="" coords="301,71,477,98"/>
-<area shape="rect" id="node9" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="341,185,436,211"/>
-<area shape="rect" id="node7" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="321,235,456,262"/>
-<area shape="rect" id="node10" href="$classvpr_1_1_allocation.html" title="Allocation class represents a singular allocation: can be a private allocation (i.e, only user of attached DeviceMemory) or a block allocation (bound to sub&#45;region of device memory) " alt="" coords="653,191,756,218"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="el::Helpers::convertTemplateToStdString" name="el::Helpers::convertTemplateToStdString">
-<area shape="rect" id="node2" href="$classel_1_1base_1_1threading_1_1_thread_safe.html#a59db719b214f7118f0919846a85077bf" title="el::base::threading\l::ThreadSafe::acquireLock" alt="" coords="240,5,413,47"/>
-<area shape="rect" id="node3" href="$classel_1_1base_1_1_message_builder.html#a61729d9b620eb7b3e6ac1af69364553c" title="el::base::MessageBuilder\l::initialize" alt="" coords="242,71,411,112"/>
-<area shape="rect" id="node4" href="$classel_1_1base_1_1threading_1_1_thread_safe.html#a95bb166242b9691f861274a9b8ced2d9" title="el::base::threading\l::ThreadSafe::releaseLock" alt="" coords="240,136,413,177"/>
-<area shape="rect" id="node5" href="$classel_1_1_logger.html#add143e52020c9df44b0d40cd6006a65f" title="el::Logger::stream" alt="" coords="263,202,390,229"/>
-</map>

@@ -9,14 +9,14 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 73.5)">
 <title>vpr::MemoryBlock::RequestSuballocation</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-73.5 499,-73.5 499,4 -4,4"/>
-<!-- Node89 -->
-<g id="node1" class="node"><title>Node89</title>
+<!-- Node83 -->
+<g id="node1" class="node"><title>Node83</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-22.5 0,-52.5 137,-52.5 137,-22.5 0,-22.5"/>
 <text text-anchor="start" x="8" y="-40.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::MemoryBlock::Request</text>
 <text text-anchor="middle" x="68.5" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">Suballocation</text>
 </g>
-<!-- Node90 -->
-<g id="node2" class="node"><title>Node90</title>
+<!-- Node84 -->
+<g id="node2" class="node"><title>Node84</title>
 <g id="a_node2"><a xlink:href="classvpr_1_1_memory_block.html#a3eb796b49ef07360203e2fe8c099809b" target="_top" xlink:title="Verifies that requested suballocation can be added to this object, and sets dest_offset to reflect of...">
 <polygon fill="white" stroke="black" points="173,-22.5 173,-52.5 298,-52.5 298,-22.5 173,-22.5"/>
 <text text-anchor="start" x="181" y="-40.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::MemoryBlock::Verify</text>
@@ -24,26 +24,26 @@
 </a>
 </g>
 </g>
-<!-- Node89&#45;&gt;Node90 -->
-<g id="edge1" class="edge"><title>Node89&#45;&gt;Node90</title>
+<!-- Node83&#45;&gt;Node84 -->
+<g id="edge1" class="edge"><title>Node83&#45;&gt;Node84</title>
 <path fill="none" stroke="midnightblue" d="M137.088,-37.5C145.503,-37.5 154.132,-37.5 162.61,-37.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="162.85,-41.0001 172.85,-37.5 162.85,-34.0001 162.85,-41.0001"/>
 </g>
-<!-- Node91 -->
-<g id="node3" class="node"><title>Node91</title>
+<!-- Node85 -->
+<g id="node3" class="node"><title>Node85</title>
 <g id="a_node3"><a xlink:href="group___allocation.html#ga8cf57df2fccbbe7a68b713d93db023c1" target="_top" xlink:title="Taken from the Vulkan specification, section 11.6 Essentially, we need to ensure that linear and non&#45;...">
 <polygon fill="white" stroke="black" points="338,-50 338,-69 491,-69 491,-50 338,-50"/>
 <text text-anchor="middle" x="414.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::CheckBlocksOnSamePage</text>
 </a>
 </g>
 </g>
-<!-- Node90&#45;&gt;Node91 -->
-<g id="edge2" class="edge"><title>Node90&#45;&gt;Node91</title>
+<!-- Node84&#45;&gt;Node85 -->
+<g id="edge2" class="edge"><title>Node84&#45;&gt;Node85</title>
 <path fill="none" stroke="midnightblue" d="M298.406,-45.1945C307.976,-46.3841 318.004,-47.6304 327.981,-48.8705"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="327.567,-52.3459 337.923,-50.1062 328.431,-45.3994 327.567,-52.3459"/>
 </g>
-<!-- Node92 -->
-<g id="node4" class="node"><title>Node92</title>
+<!-- Node86 -->
+<g id="node4" class="node"><title>Node86</title>
 <g id="a_node4"><a xlink:href="group___allocation.html#ga568ec6e09a10a255e22519e4e1a4f2e3" target="_top" xlink:title="Checks to make sure the two objects of type &quot;type_a&quot; and &quot;type_b&quot; wouldn&#39;t cause a conflict with the ...">
 <polygon fill="white" stroke="black" points="334,-0.5 334,-30.5 495,-30.5 495,-0.5 334,-0.5"/>
 <text text-anchor="start" x="342" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::CheckBufferImageGranularity</text>
@@ -51,8 +51,8 @@
 </a>
 </g>
 </g>
-<!-- Node90&#45;&gt;Node92 -->
-<g id="edge3" class="edge"><title>Node90&#45;&gt;Node92</title>
+<!-- Node84&#45;&gt;Node86 -->
+<g id="edge3" class="edge"><title>Node84&#45;&gt;Node86</title>
 <path fill="none" stroke="midnightblue" d="M298.406,-29.8055C306.646,-28.7813 315.225,-27.7149 323.819,-26.6468"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="324.403,-30.1012 333.895,-25.3944 323.54,-23.1546 324.403,-30.1012"/>
 </g>

@@ -9,21 +9,21 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>vpr::MemoryBlock::Validate</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-24 296,-24 296,4 -4,4"/>
-<!-- Node99 -->
-<g id="node1" class="node"><title>Node99</title>
+<!-- Node91 -->
+<g id="node1" class="node"><title>Node91</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-19.5 136,-19.5 136,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="68" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::MemoryBlock::Validate</text>
 </g>
-<!-- Node100 -->
-<g id="node2" class="node"><title>Node100</title>
+<!-- Node92 -->
+<g id="node2" class="node"><title>Node92</title>
 <g id="a_node2"><a xlink:href="classvpr_1_1_memory_block.html#a88cde43def4e7d21b8a782554497b064" target="_top" xlink:title="Frees memory in region specified (i.e frees/destroys a suballocation) ">
 <polygon fill="white" stroke="black" points="172,-0.5 172,-19.5 292,-19.5 292,-0.5 172,-0.5"/>
 <text text-anchor="middle" x="232" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::MemoryBlock::Free</text>
 </a>
 </g>
 </g>
-<!-- Node99&#45;&gt;Node100 -->
-<g id="edge1" class="edge"><title>Node99&#45;&gt;Node100</title>
+<!-- Node91&#45;&gt;Node92 -->
+<g id="edge1" class="edge"><title>Node91&#45;&gt;Node92</title>
 <path fill="none" stroke="midnightblue" d="M146.343,-10C154.943,-10 163.598,-10 171.92,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="146.295,-6.5001 136.295,-10 146.295,-13.5001 146.295,-6.5001"/>
 </g>

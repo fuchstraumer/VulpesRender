@@ -1,4 +1,0 @@
-<map id="vpr::TransferPool::SubmitWait" name="vpr::TransferPool::SubmitWait">
-<area shape="rect" id="node2" href="$classvpr_1_1_transfer_pool.html#a21dbdc92b013cb98a85241abd5d913dc" title="Just a convienience method wrapping the command code required to reset the fence, reset the command b..." alt="" coords="180,5,307,47"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" title="vpr::Device::vkHandle" alt="" coords="355,13,499,39"/>
-</map>

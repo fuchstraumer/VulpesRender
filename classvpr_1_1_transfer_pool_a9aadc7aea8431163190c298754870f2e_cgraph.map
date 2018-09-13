@@ -1,6 +1,0 @@
-<map id="vpr::TransferPool::TransferPool" name="vpr::TransferPool::TransferPool">
-<area shape="rect" id="node2" href="$classvpr_1_1_command_pool.html#a3df787753ace292c1b295907754172a3" title="vpr::CommandPool::Allocate\lCmdBuffers" alt="" coords="180,5,367,47"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_transfer_pool.html#abfc01a76420de30d30666813bfbdf693" title="vpr::TransferPool::\lcreateFence" alt="" coords="210,71,337,112"/>
-<area shape="rect" id="node5" href="$classvpr_1_1_transfer_pool.html#ad94b1e9b103873f2df3f3c8c6a038faa" title="vpr::TransferPool::\lcreatePool" alt="" coords="210,136,337,177"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" title="vpr::Device::vkHandle" alt="" coords="415,78,559,105"/>
-</map>

@@ -1,12 +1,5 @@
 var searchData=
 [
-  ['large',['LARGE',['../classvpr_1_1_allocator.html#aef2c1b448d0e2afd1b5de1b9bed4b538a71726adf0ff60cd03eaf3c515883eeb8',1,'vpr::Allocator']]],
-  ['level',['Level',['../namespaceel_1_1base.html#a28939c5a884e67fcf12259f4b8848e00aa0db49ba470c1c9ae2128c3470339153',1,'el::base']]],
-  ['levelshort',['LevelShort',['../namespaceel_1_1base.html#a28939c5a884e67fcf12259f4b8848e00a9d8794d3178b4df3b87654adbed5c846',1,'el::base']]],
-  ['line',['Line',['../namespaceel_1_1base.html#a28939c5a884e67fcf12259f4b8848e00a4803e6b9e63dabf04de980788d6a13c4',1,'el::base']]],
-  ['location',['Location',['../namespaceel_1_1base.html#a28939c5a884e67fcf12259f4b8848e00ace5bf551379459c1c61d2a204061c455',1,'el::base']]],
-  ['logdetailedcrashreason',['LogDetailedCrashReason',['../namespaceel.html#a2784aacd04cb7816ac1c0b20fcbf83cba81ac37ef3ee37a01bf853be6abeb4ede',1,'el']]],
-  ['logflushthreshold',['LogFlushThreshold',['../namespaceel.html#a281f5db6d6163678bc68a8b23b59e124ac1b4aae5c168e64292c9aa87a124ae86',1,'el']]],
-  ['loggerid',['LoggerId',['../namespaceel_1_1base.html#a28939c5a884e67fcf12259f4b8848e00a1bfb431e0c673464b7a57c135e5fe861',1,'el::base']]],
-  ['logmessage',['LogMessage',['../namespaceel_1_1base.html#a28939c5a884e67fcf12259f4b8848e00a80672412fb77a287c9c90cbacf039fc7',1,'el::base']]]
+  ['unknown',['Unknown',['../namespacevpr.html#a494552c6fdda99313008c4a5e61a79fca88183b946cc5f0e8c96b2e66e1c74a7e',1,'vpr::Unknown()'],['../namespacevpr.html#a729c04888e8a0b67bdb473c36221615ea88183b946cc5f0e8c96b2e66e1c74a7e',1,'vpr::Unknown()']]],
+  ['used_5fsuballoc_5fin_5ffree_5flist',['USED_SUBALLOC_IN_FREE_LIST',['../group___allocation.html#ggaba421ef06b1d6b910602d0180c9eff78a99db430a4a1b654dc0c46b77a028d4a5',1,'vpr']]]
 ];

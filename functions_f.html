@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +52,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_f.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -67,24 +88,16 @@ $(function() {
 : <a class="el" href="classvpr_1_1_physical_device_impl.html#a8c2c49d40d45147a3e70a305e843a9dd">vpr::PhysicalDeviceImpl</a>
 </li>
 <li>Fence()
-: <a class="el" href="classvpr_1_1_fence.html#aee4fb1dfd27513d6274f7995642fd480">vpr::Fence</a>
-</li>
-<li>fence
-: <a class="el" href="classvpr_1_1_transfer_pool.html#adfe610bb8954aa8f52e4701a3697912e">vpr::TransferPool</a>
+: <a class="el" href="classvpr_1_1_fence.html#a65415778511c1da4b9ded51aec7f445a">vpr::Fence</a>
 </li>
 <li>fetchAllocFunctionPointersKHR()
-: <a class="el" href="classvpr_1_1_allocator.html#a5babc9b4c2391bea64a4f9f26ea04257">vpr::Allocator</a>
+: <a class="el" href="structvpr_1_1_allocator_impl.html#a86f11d286906668192d79d69bedda96b">vpr::AllocatorImpl</a>
 </li>
-<li>file()
-: <a class="el" href="classel_1_1_log_message.html#adcced1cf014f9dde378c58e0f993640e">el::LogMessage</a>
+<li>fileLoader
+: <a class="el" href="classvpr_1_1_shader_module.html#ae499f64191c5e8f866eb4d158ff11dae">vpr::ShaderModule</a>
 </li>
-<li>filename()
-: <a class="el" href="classel_1_1base_1_1_hit_counter.html#a47876995665d4f6389ac150ac8a80b89">el::base::HitCounter</a>
-, <a class="el" href="classel_1_1base_1_1_typed_configurations.html#a6e989a8496b9e08e6e8c9ac4d3fe5b1e">el::base::TypedConfigurations</a>
-, <a class="el" href="classvpr_1_1_pipeline_cache.html#a66889a270e023b25572d98a04259954d">vpr::PipelineCache</a>
-</li>
-<li>fileStream()
-: <a class="el" href="classel_1_1base_1_1_typed_configurations.html#af39c020c90e67b5f817f318fcb11e611">el::base::TypedConfigurations</a>
+<li>filename
+: <a class="el" href="classvpr_1_1_pipeline_cache.html#a90a35bb2c1214d085c876b015961f19f">vpr::PipelineCache</a>
 </li>
 <li>Fill()
 : <a class="el" href="classvpr_1_1_buffer.html#ab4f798aaec92861e165cff4e7a12cc18">vpr::Buffer</a>
@@ -96,49 +109,22 @@ $(function() {
 : <a class="el" href="classvpr_1_1_device.html#a4820a276bf1258c8ad6a5718fc7cd6fb">vpr::Device</a>
 </li>
 <li>findMemoryTypeIdx()
-: <a class="el" href="classvpr_1_1_allocator.html#a12b2ce29d3b6b28131cc9c5a331d2286">vpr::Allocator</a>
+: <a class="el" href="structvpr_1_1_allocator_impl.html#a5990c518d05b0fad50f65d11df659a39">vpr::AllocatorImpl</a>
 </li>
 <li>FindSupportedFormat()
 : <a class="el" href="classvpr_1_1_device.html#a2a58028f056c580337c9454195683eae">vpr::Device</a>
 </li>
-<li>flags()
-: <a class="el" href="classel_1_1base_1_1_log_format.html#ae4fc4ce8c79267d8e50161e0f5f27e46">el::base::LogFormat</a>
-, <a class="el" href="classel_1_1base_1_1_storage.html#aef58f703540d1cd21942d487ba56a686">el::base::Storage</a>
-</li>
-<li>flush()
-: <a class="el" href="classel_1_1_logger.html#a9a89d454008b1ee1a197eec4b92ce22a">el::Logger</a>
-</li>
 <li>Flush()
 : <a class="el" href="classvpr_1_1_buffer.html#a805e50dbbed7233718d366a9742d3246">vpr::Buffer</a>
-</li>
-<li>flushAll()
-: <a class="el" href="classel_1_1base_1_1_registered_loggers.html#abe6fdac67d9d4c35fb48c9fd88a49c2e">el::base::RegisteredLoggers</a>
-, <a class="el" href="classel_1_1_loggers.html#a47e5eca4ee2f6cfbdccb2efabd2c4f12">el::Loggers</a>
-</li>
-<li>forEachConfigType()
-: <a class="el" href="classel_1_1_configuration_type_helper.html#a0b91c3c00c57483cbddca2748f477582">el::ConfigurationTypeHelper</a>
-</li>
-<li>forEachLevel()
-: <a class="el" href="classel_1_1_level_helper.html#a7f0dbfceb2354a72c2802d02c300430d">el::LevelHelper</a>
-</li>
-<li>format()
-: <a class="el" href="classel_1_1base_1_1_log_format.html#a303f2232c995032146d6e820c6018a4e">el::base::LogFormat</a>
-, <a class="el" href="classvpr_1_1_image.html#ae5c379db5c2ba76a4cd8b3641b4cac88">vpr::Image</a>
 </li>
 <li>Format()
 : <a class="el" href="classvpr_1_1_image.html#a646c4b32dcd65ab4c8a345aca1773288">vpr::Image</a>
 </li>
 <li>Formats
-: <a class="el" href="structvpr_1_1_swapchain_1_1_swapchain_info.html#a67403792bb94d95397dde5a03e51a9b5">vpr::Swapchain::SwapchainInfo</a>
-</li>
-<li>formatSpecifier()
-: <a class="el" href="classel_1_1_custom_format_specifier.html#a471026e281855795db7df0193e43fa5a">el::CustomFormatSpecifier</a>
-</li>
-<li>formatTime()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_date_time.html#a9f19da20362c685d32be922a06faf586">el::base::utils::DateTime</a>
+: <a class="el" href="structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#a178e1eecd43f691102ba9f6f56161826">vpr::SwapchainImpl::SwapchainInfo</a>
 </li>
 <li>Framebuffer()
-: <a class="el" href="classvpr_1_1_framebuffer.html#a98f307d1821e9734d607d8194c635cff">vpr::Framebuffer</a>
+: <a class="el" href="classvpr_1_1_framebuffer.html#a57bd522a4ff0c33d9796be19408b3e6d">vpr::Framebuffer</a>
 </li>
 <li>Free()
 : <a class="el" href="classvpr_1_1_memory_block.html#a88cde43def4e7d21b8a782554497b064">vpr::MemoryBlock</a>
@@ -153,7 +139,7 @@ $(function() {
 : <a class="el" href="classvpr_1_1_allocator.html#a438bbd88a3f18c741f7de90f528300b1">vpr::Allocator</a>
 </li>
 <li>freePrivateMemory()
-: <a class="el" href="classvpr_1_1_allocator.html#ab9d7b854a663fa66385938506f0676d3">vpr::Allocator</a>
+: <a class="el" href="structvpr_1_1_allocator_impl.html#a4d132f78ac784684f0384127ff5c8624">vpr::AllocatorImpl</a>
 </li>
 <li>freeSuballocation()
 : <a class="el" href="classvpr_1_1_memory_block.html#a3aa9297d61b2cd0d71588c7bf8e7b47e">vpr::MemoryBlock</a>
@@ -161,16 +147,16 @@ $(function() {
 <li>FreeSuballocation
 : <a class="el" href="group___allocation.html#abec7089fbabe06aa9c849d7c9b165382">vpr::SuballocationRequest</a>
 </li>
-<li>func()
-: <a class="el" href="classel_1_1_log_message.html#a6b77bd14c0f79ab8a9157a3be6a414af">el::LogMessage</a>
-</li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -44,6 +51,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classvpr_1_1_allocation.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -58,14 +80,8 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespacevpr.html">vpr</a></li><li class="navelem"><a class="el" href="classvpr_1_1_allocation.html">Allocation</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
@@ -79,25 +95,26 @@ $(function() {
  <a href="classvpr_1_1_allocation.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_allocation_8hpp_source.html">Allocation.hpp</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for vpr::Allocation:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_allocation__coll__graph.svg" width="147" height="231"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:structvpr_1_1_allocation_1_1block_allocation"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___allocation.html#structvpr_1_1_allocation_1_1block_allocation">blockAllocation</a></td></tr>
-<tr class="separator:structvpr_1_1_allocation_1_1block_allocation"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:structvpr_1_1_allocation_1_1private_allocation"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___allocation.html#structvpr_1_1_allocation_1_1private_allocation">privateAllocation</a></td></tr>
-<tr class="separator:structvpr_1_1_allocation_1_1private_allocation"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6333d2037183209fd4e04fc833359567"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#a6333d2037183209fd4e04fc833359567">Allocation</a> ()=default</td></tr>
-<tr class="memdesc:a6333d2037183209fd4e04fc833359567"><td class="mdescLeft">&#160;</td><td class="mdescRight">If this is an allocation bound to a smaller region of a larger object, it is a block allocation.  <a href="#a6333d2037183209fd4e04fc833359567">More...</a><br /></td></tr>
-<tr class="separator:a6333d2037183209fd4e04fc833359567"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2a1160fcac8b581acae22d18e13837b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#af2a1160fcac8b581acae22d18e13837b">~Allocation</a> ()=default</td></tr>
-<tr class="separator:af2a1160fcac8b581acae22d18e13837b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a031676bd4c338e36adf0e2d84fe7b0e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#a031676bd4c338e36adf0e2d84fe7b0e7">Allocation</a> (const <a class="el" href="classvpr_1_1_allocation.html">Allocation</a> &amp;)=default</td></tr>
-<tr class="separator:a031676bd4c338e36adf0e2d84fe7b0e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6355d4f330ab946d69b6d7be5f87abb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvpr_1_1_allocation.html">Allocation</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#aa6355d4f330ab946d69b6d7be5f87abb">operator=</a> (const <a class="el" href="classvpr_1_1_allocation.html">Allocation</a> &amp;)=default</td></tr>
-<tr class="separator:aa6355d4f330ab946d69b6d7be5f87abb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af49216f0d72f038145500587f84d30dd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#af49216f0d72f038145500587f84d30dd">Allocation</a> ()</td></tr>
+<tr class="memdesc:af49216f0d72f038145500587f84d30dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">If this is an allocation bound to a smaller region of a larger object, it is a block allocation.  <a href="#af49216f0d72f038145500587f84d30dd">More...</a><br /></td></tr>
+<tr class="separator:af49216f0d72f038145500587f84d30dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbf44280b9503d91a56d91479619e6cb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#afbf44280b9503d91a56d91479619e6cb">~Allocation</a> ()</td></tr>
+<tr class="separator:afbf44280b9503d91a56d91479619e6cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ffd3690b3172c28d0e080739bd83e31"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#a4ffd3690b3172c28d0e080739bd83e31">Allocation</a> (const <a class="el" href="classvpr_1_1_allocation.html">Allocation</a> &amp;)</td></tr>
+<tr class="separator:a4ffd3690b3172c28d0e080739bd83e31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16abc6fd06477544c4a34a012be850b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvpr_1_1_allocation.html">Allocation</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#a16abc6fd06477544c4a34a012be850b5">operator=</a> (const <a class="el" href="classvpr_1_1_allocation.html">Allocation</a> &amp;)</td></tr>
+<tr class="separator:a16abc6fd06477544c4a34a012be850b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4055730036d8cb2032234def146766ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#a4055730036d8cb2032234def146766ba">Allocation</a> (<a class="el" href="classvpr_1_1_allocation.html">Allocation</a> &amp;&amp;other) noexcept</td></tr>
 <tr class="separator:a4055730036d8cb2032234def146766ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75408587e6fce6988e0cc1b0dcb58af1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvpr_1_1_allocation.html">Allocation</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#a75408587e6fce6988e0cc1b0dcb58af1">operator=</a> (<a class="el" href="classvpr_1_1_allocation.html">Allocation</a> &amp;&amp;other) noexcept</td></tr>
@@ -108,8 +125,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aaa942129013583bd9c1858217e5d5126"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad680abfd77facfe5efcc222b154b595d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#ad680abfd77facfe5efcc222b154b595d">InitPrivate</a> (const uint32_t &amp;type_idx, VkDeviceMemory &amp;dvc_memory, bool persistently_mapped, void *mapped_data, const VkDeviceSize &amp;data_size, void *user_data=nullptr)</td></tr>
 <tr class="separator:ad680abfd77facfe5efcc222b154b595d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf7219e8441b1f7781a6d01c7b6c9811"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#adf7219e8441b1f7781a6d01c7b6c9811">Map</a> (const VkDeviceSize &amp;size_to_map, const VkDeviceSize &amp;offset_to_map_at, void *address_to_map_to) const</td></tr>
-<tr class="separator:adf7219e8441b1f7781a6d01c7b6c9811"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52b6b1170c2ecf99175ca809d5e89e75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#a52b6b1170c2ecf99175ca809d5e89e75">Map</a> (const VkDeviceSize &amp;size_to_map, const VkDeviceSize &amp;offset_to_map_at, void **address_to_map_to) const</td></tr>
+<tr class="separator:a52b6b1170c2ecf99175ca809d5e89e75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50c9f0b8277412ee7478939ade2025b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#a50c9f0b8277412ee7478939ade2025b8">Unmap</a> () const noexcept</td></tr>
 <tr class="separator:a50c9f0b8277412ee7478939ade2025b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a223e41ca865271544ece71d18edce2"><td class="memItemLeft" align="right" valign="top">const VkDeviceMemory &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#a1a223e41ca865271544ece71d18edce2">Memory</a> () const</td></tr>
@@ -118,10 +135,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:acb642a53c185ac6530ed60959b0e4397"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab07876bad87d1c3e085ab02c1c608179"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#ab07876bad87d1c3e085ab02c1c608179">MemoryTypeIdx</a> () const</td></tr>
 <tr class="separator:ab07876bad87d1c3e085ab02c1c608179"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba0b6e2e6c71e801603e6b81c2218f89"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#aba0b6e2e6c71e801603e6b81c2218f89">SetUserData</a> (void *data) const</td></tr>
+<tr class="separator:aba0b6e2e6c71e801603e6b81c2218f89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4991454fa12026f1e25fc56c6791be2d"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#a4991454fa12026f1e25fc56c6791be2d">GetUserData</a> () const</td></tr>
 <tr class="separator:a4991454fa12026f1e25fc56c6791be2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad23615cd9f84e8e2354cf1f1e7e8f162"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#ad23615cd9f84e8e2354cf1f1e7e8f162">IsPrivateAllocation</a> () const noexcept</td></tr>
 <tr class="separator:ad23615cd9f84e8e2354cf1f1e7e8f162"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add3be5fd7fee67744d380e74b0c5bfb3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#add3be5fd7fee67744d380e74b0c5bfb3">operator==</a> (const <a class="el" href="classvpr_1_1_allocation.html">Allocation</a> &amp;other) const noexcept</td></tr>
+<tr class="separator:add3be5fd7fee67744d380e74b0c5bfb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -132,24 +153,21 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:ac55862fc872fc1e9276210eddec744ca"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#ac55862fc872fc1e9276210eddec744ca">userData</a> = nullptr</td></tr>
+<tr class="memitem:afd91b0a36dce93976913fb2c0859684a"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="namespacevpr.html#structvpr_1_1_allocation_impl">AllocationImpl</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a></td></tr>
+<tr class="separator:afd91b0a36dce93976913fb2c0859684a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac55862fc872fc1e9276210eddec744ca"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#ac55862fc872fc1e9276210eddec744ca">userData</a> { nullptr }</td></tr>
 <tr class="separator:ac55862fc872fc1e9276210eddec744ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe2dff1a32b57788e46af02d0ebe866d"><td class="memItemLeft" align="right" valign="top">std::variant&lt; <a class="el" href="group___allocation.html#structvpr_1_1_allocation_1_1block_allocation">blockAllocation</a>, <a class="el" href="group___allocation.html#structvpr_1_1_allocation_1_1private_allocation">privateAllocation</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a></td></tr>
-<tr class="separator:afe2dff1a32b57788e46af02d0ebe866d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classvpr_1_1_allocation.html" title="Allocation class represents a singular allocation: can be a private allocation (i.e, only user of attached DeviceMemory) or a block allocation (bound to sub-region of device memory) ">Allocation</a> class represents a singular allocation: can be a private allocation (i.e, only user of attached DeviceMemory) or a block allocation (bound to sub-region of device memory) </p>
 
-<p class="definition">Definition at line <a class="el" href="_allocation_8hpp_source.html#l00015">15</a> of file <a class="el" href="_allocation_8hpp_source.html">Allocation.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_8hpp_source.html#l00017">17</a> of file <a class="el" href="_allocation_8hpp_source.html">Allocation.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a6333d2037183209fd4e04fc833359567"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6333d2037183209fd4e04fc833359567">&#9670;&nbsp;</a></span>Allocation() <span class="overload">[1/3]</span></h2>
+<a id="af49216f0d72f038145500587f84d30dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af49216f0d72f038145500587f84d30dd">&#9670;&nbsp;</a></span>Allocation() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">vpr::Allocation::Allocation </td>
@@ -158,26 +176,23 @@ Private Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>If this is an allocation bound to a smaller region of a larger object, it is a block allocation. </p>
 <p>Otherwise, it has it's own VkDeviceMemory object and is a "PRIVATE_ALLOCATION" type. </p>
 
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00032">32</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;: <a class="code" href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">Size</a>(0), <a class="code" href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">Alignment</a>(0), <a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>(std::make_unique&lt;AllocationImpl&gt;()) {}</div><div class="ttc" id="classvpr_1_1_allocation_html_afd91b0a36dce93976913fb2c0859684a"><div class="ttname"><a href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">vpr::Allocation::impl</a></div><div class="ttdeci">std::unique_ptr&lt; AllocationImpl &gt; impl</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00049">Allocation.hpp:49</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_afa15c9bbc5bbf40d3416f7f5d85bb752"><div class="ttname"><a href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">vpr::Allocation::Alignment</a></div><div class="ttdeci">VkDeviceSize Alignment</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00047">Allocation.hpp:47</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_aa1c4b67be8e0f44155dcd26ca93f6ec2"><div class="ttname"><a href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">vpr::Allocation::Size</a></div><div class="ttdeci">VkDeviceSize Size</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00046">Allocation.hpp:46</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
-<a id="af2a1160fcac8b581acae22d18e13837b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2a1160fcac8b581acae22d18e13837b">&#9670;&nbsp;</a></span>~Allocation()</h2>
+<a id="afbf44280b9503d91a56d91479619e6cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbf44280b9503d91a56d91479619e6cb">&#9670;&nbsp;</a></span>~Allocation()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">vpr::Allocation::~Allocation </td>
@@ -186,39 +201,36 @@ Private Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00034">34</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00049">impl</a>.</p>
+<div class="fragment"><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                            { </div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>.reset();</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afd91b0a36dce93976913fb2c0859684a"><div class="ttname"><a href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">vpr::Allocation::impl</a></div><div class="ttdeci">std::unique_ptr&lt; AllocationImpl &gt; impl</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00049">Allocation.hpp:49</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
-<a id="a031676bd4c338e36adf0e2d84fe7b0e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a031676bd4c338e36adf0e2d84fe7b0e7">&#9670;&nbsp;</a></span>Allocation() <span class="overload">[2/3]</span></h2>
+<a id="a4ffd3690b3172c28d0e080739bd83e31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ffd3690b3172c28d0e080739bd83e31">&#9670;&nbsp;</a></span>Allocation() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">vpr::Allocation::Allocation </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classvpr_1_1_allocation.html">Allocation</a> &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00038">38</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;: <a class="code" href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">Size</a>(other.Size), <a class="code" href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">Alignment</a>(other.Alignment), <a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>(std::make_unique&lt;AllocationImpl&gt;(*other.impl)) {}</div><div class="ttc" id="classvpr_1_1_allocation_html_afd91b0a36dce93976913fb2c0859684a"><div class="ttname"><a href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">vpr::Allocation::impl</a></div><div class="ttdeci">std::unique_ptr&lt; AllocationImpl &gt; impl</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00049">Allocation.hpp:49</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_afa15c9bbc5bbf40d3416f7f5d85bb752"><div class="ttname"><a href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">vpr::Allocation::Alignment</a></div><div class="ttdeci">VkDeviceSize Alignment</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00047">Allocation.hpp:47</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_aa1c4b67be8e0f44155dcd26ca93f6ec2"><div class="ttname"><a href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">vpr::Allocation::Size</a></div><div class="ttdeci">VkDeviceSize Size</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00046">Allocation.hpp:46</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a4055730036d8cb2032234def146766ba"></a>
@@ -245,10 +257,10 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00008">8</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;                                                       : <a class="code" href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">Size</a>(std::move(other.Size)), <a class="code" href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">Alignment</a>(std::move(other.Alignment)),</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>(std::move(other.typeData)) {}</div><div class="ttc" id="classvpr_1_1_allocation_html_afe2dff1a32b57788e46af02d0ebe866d"><div class="ttname"><a href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">vpr::Allocation::typeData</a></div><div class="ttdeci">std::variant&lt; blockAllocation, privateAllocation &gt; typeData</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00056">Allocation.hpp:56</a></div></div>
-<div class="ttc" id="classvpr_1_1_allocation_html_afa15c9bbc5bbf40d3416f7f5d85bb752"><div class="ttname"><a href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">vpr::Allocation::Alignment</a></div><div class="ttdeci">VkDeviceSize Alignment</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00040">Allocation.hpp:40</a></div></div>
-<div class="ttc" id="classvpr_1_1_allocation_html_aa1c4b67be8e0f44155dcd26ca93f6ec2"><div class="ttname"><a href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">vpr::Allocation::Size</a></div><div class="ttdeci">VkDeviceSize Size</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00040">Allocation.hpp:40</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00047">47</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                                                       : <a class="code" href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">Size</a>(std::move(other.Size)), <a class="code" href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">Alignment</a>(std::move(other.Alignment)),</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>(std::move(other.impl)) {}</div><div class="ttc" id="classvpr_1_1_allocation_html_afd91b0a36dce93976913fb2c0859684a"><div class="ttname"><a href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">vpr::Allocation::impl</a></div><div class="ttdeci">std::unique_ptr&lt; AllocationImpl &gt; impl</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00049">Allocation.hpp:49</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_afa15c9bbc5bbf40d3416f7f5d85bb752"><div class="ttname"><a href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">vpr::Allocation::Alignment</a></div><div class="ttdeci">VkDeviceSize Alignment</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00047">Allocation.hpp:47</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_aa1c4b67be8e0f44155dcd26ca93f6ec2"><div class="ttname"><a href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">vpr::Allocation::Size</a></div><div class="ttdeci">VkDeviceSize Size</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00046">Allocation.hpp:46</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -314,18 +326,20 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00018">18</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00057">57</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00040">Alignment</a>, <a class="el" href="_allocation_8hpp_source.html#l00045">vpr::Allocation::blockAllocation::Offset</a>, <a class="el" href="_allocation_8hpp_source.html#l00044">vpr::Allocation::blockAllocation::ParentBlock</a>, <a class="el" href="_allocation_8hpp_source.html#l00040">Size</a>, and <a class="el" href="_allocation_8hpp_source.html#l00056">typeData</a>.</p>
+<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00047">Alignment</a>, <a class="el" href="_allocation_8hpp_source.html#l00049">impl</a>, <a class="el" href="_allocation_8cpp_source.html#l00015">vpr::AllocationImpl::blockAllocation::Offset</a>, <a class="el" href="_allocation_8cpp_source.html#l00014">vpr::AllocationImpl::blockAllocation::ParentBlock</a>, and <a class="el" href="_allocation_8hpp_source.html#l00046">Size</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_allocator_8cpp_source.html#l00297">vpr::Allocator::allocateMemoryType()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                                                                                                                                                                   {</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        blockAllocation alloc;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        alloc.ParentBlock = parent_block;</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        alloc.Offset = offset;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">Size</a> = alloc_size;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">Alignment</a> = alignment;</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a> = alloc;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afe2dff1a32b57788e46af02d0ebe866d"><div class="ttname"><a href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">vpr::Allocation::typeData</a></div><div class="ttdeci">std::variant&lt; blockAllocation, privateAllocation &gt; typeData</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00056">Allocation.hpp:56</a></div></div>
-<div class="ttc" id="classvpr_1_1_allocation_html_afa15c9bbc5bbf40d3416f7f5d85bb752"><div class="ttname"><a href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">vpr::Allocation::Alignment</a></div><div class="ttdeci">VkDeviceSize Alignment</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00040">Allocation.hpp:40</a></div></div>
-<div class="ttc" id="classvpr_1_1_allocation_html_aa1c4b67be8e0f44155dcd26ca93f6ec2"><div class="ttname"><a href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">vpr::Allocation::Size</a></div><div class="ttdeci">VkDeviceSize Size</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00040">Allocation.hpp:40</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_allocation_ad5d461398f23e593c58f70a8cac78922_icgraph.svg" width="100%" height="388"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="reference">Referenced by <a class="el" href="_allocator_impl_8cpp_source.html#l00127">vpr::AllocatorImpl::allocateMemoryType()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                                                                                                                                                                   {</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        AllocationImpl::blockAllocation alloc;</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        alloc.ParentBlock = parent_block;</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        alloc.Offset = offset;</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">Size</a> = alloc_size;</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">Alignment</a> = alignment;</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData = std::move(alloc);</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;userData = user_data;</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afd91b0a36dce93976913fb2c0859684a"><div class="ttname"><a href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">vpr::Allocation::impl</a></div><div class="ttdeci">std::unique_ptr&lt; AllocationImpl &gt; impl</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00049">Allocation.hpp:49</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_afa15c9bbc5bbf40d3416f7f5d85bb752"><div class="ttname"><a href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">vpr::Allocation::Alignment</a></div><div class="ttdeci">VkDeviceSize Alignment</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00047">Allocation.hpp:47</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_aa1c4b67be8e0f44155dcd26ca93f6ec2"><div class="ttname"><a href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">vpr::Allocation::Size</a></div><div class="ttdeci">VkDeviceSize Size</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00046">Allocation.hpp:46</a></div></div>
+</div><!-- fragment --><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_allocation_ad5d461398f23e593c58f70a8cac78922_icgraph.svg" width="338" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -387,17 +401,19 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00033">33</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00077">77</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00050">vpr::Allocation::privateAllocation::DvcMemory</a>, <a class="el" href="_allocation_8hpp_source.html#l00052">vpr::Allocation::privateAllocation::MappedData</a>, <a class="el" href="_allocation_8hpp_source.html#l00049">vpr::Allocation::privateAllocation::MemoryTypeIdx</a>, <a class="el" href="_allocation_8hpp_source.html#l00051">vpr::Allocation::privateAllocation::PersistentlyMapped</a>, <a class="el" href="_allocation_8hpp_source.html#l00040">Size</a>, and <a class="el" href="_allocation_8hpp_source.html#l00056">typeData</a>.</p>
+<p class="reference">References <a class="el" href="_allocation_8cpp_source.html#l00020">vpr::AllocationImpl::privateAllocation::DvcMemory</a>, <a class="el" href="_allocation_8hpp_source.html#l00049">impl</a>, <a class="el" href="_allocation_8cpp_source.html#l00022">vpr::AllocationImpl::privateAllocation::MappedData</a>, <a class="el" href="_allocation_8cpp_source.html#l00019">vpr::AllocationImpl::privateAllocation::MemoryTypeIdx</a>, <a class="el" href="_allocation_8cpp_source.html#l00021">vpr::AllocationImpl::privateAllocation::PersistentlyMapped</a>, and <a class="el" href="_allocation_8hpp_source.html#l00046">Size</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_allocator_8cpp_source.html#l00436">vpr::Allocator::allocatePrivateMemory()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                                                                                                                                                                                      {</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">Size</a> = data_size;</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        privateAllocation p_alloc;</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        p_alloc.DvcMemory = dvc_memory;</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        p_alloc.MemoryTypeIdx = type_idx;</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        p_alloc.PersistentlyMapped = persistently_mapped;</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        p_alloc.MappedData = mapped_data;</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a> = p_alloc;</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afe2dff1a32b57788e46af02d0ebe866d"><div class="ttname"><a href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">vpr::Allocation::typeData</a></div><div class="ttdeci">std::variant&lt; blockAllocation, privateAllocation &gt; typeData</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00056">Allocation.hpp:56</a></div></div>
-<div class="ttc" id="classvpr_1_1_allocation_html_aa1c4b67be8e0f44155dcd26ca93f6ec2"><div class="ttname"><a href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">vpr::Allocation::Size</a></div><div class="ttdeci">VkDeviceSize Size</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00040">Allocation.hpp:40</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_allocation_ad680abfd77facfe5efcc222b154b595d_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="reference">Referenced by <a class="el" href="_allocator_impl_8cpp_source.html#l00266">vpr::AllocatorImpl::allocatePrivateMemory()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                                                                                                                                                                                      {</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">Size</a> = data_size;</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        AllocationImpl::privateAllocation p_alloc;</div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        p_alloc.DvcMemory = dvc_memory;</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        p_alloc.MemoryTypeIdx = type_idx;</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        p_alloc.PersistentlyMapped = persistently_mapped;</div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        p_alloc.MappedData = mapped_data;</div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData = std::move(p_alloc);</div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;userData = user_data;</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afd91b0a36dce93976913fb2c0859684a"><div class="ttname"><a href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">vpr::Allocation::impl</a></div><div class="ttdeci">std::unique_ptr&lt; AllocationImpl &gt; impl</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00049">Allocation.hpp:49</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_aa1c4b67be8e0f44155dcd26ca93f6ec2"><div class="ttname"><a href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">vpr::Allocation::Size</a></div><div class="ttdeci">VkDeviceSize Size</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00046">Allocation.hpp:46</a></div></div>
+</div><!-- fragment --><div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_allocation_ad680abfd77facfe5efcc222b154b595d_icgraph.svg" width="586" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -426,23 +442,25 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00092">92</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00205">205</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00056">typeData</a>.</p>
+<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00049">impl</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_allocator_8cpp_source.html#l00126">vpr::Allocator::FreeMemory()</a>, and <a class="el" href="_allocator_8cpp_source.html#l00452">vpr::Allocator::freePrivateMemory()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                                                        {</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">return</span> std::holds_alternative&lt;privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>);</div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afe2dff1a32b57788e46af02d0ebe866d"><div class="ttname"><a href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">vpr::Allocation::typeData</a></div><div class="ttdeci">std::variant&lt; blockAllocation, privateAllocation &gt; typeData</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00056">Allocation.hpp:56</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_allocation_ad23615cd9f84e8e2354cf1f1e7e8f162_icgraph.svg" width="100%" height="375"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="reference">Referenced by <a class="el" href="_allocator_8cpp_source.html#l00062">vpr::Allocator::FreeMemory()</a>, <a class="el" href="_allocator_impl_8cpp_source.html#l00289">vpr::AllocatorImpl::freePrivateMemory()</a>, and <a class="el" href="_allocation_8cpp_source.html#l00220">operator==()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                                                        {</div><div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="preprocessor">#ifdef __APPLE_CC__</span></div><div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="keywordflow">switch</span>(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData.which()){</div><div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        <span class="keywordflow">case</span> 0:</div><div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div><div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <span class="keywordflow">case</span> 1:</div><div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div><div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        <span class="keywordflow">default</span>:</div><div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div><div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        };</div><div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="preprocessor">#else</span></div><div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <span class="keywordflow">return</span> std::holds_alternative&lt;AllocationImpl::privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData);</div><div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afd91b0a36dce93976913fb2c0859684a"><div class="ttname"><a href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">vpr::Allocation::impl</a></div><div class="ttdeci">std::unique_ptr&lt; AllocationImpl &gt; impl</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00049">Allocation.hpp:49</a></div></div>
+</div><!-- fragment --><div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_allocation_ad23615cd9f84e8e2354cf1f1e7e8f162_icgraph.svg" width="398" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
 </div>
 </div>
-<a id="adf7219e8441b1f7781a6d01c7b6c9811"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf7219e8441b1f7781a6d01c7b6c9811">&#9670;&nbsp;</a></span>Map()</h2>
+<a id="a52b6b1170c2ecf99175ca809d5e89e75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52b6b1170c2ecf99175ca809d5e89e75">&#9670;&nbsp;</a></span>Map()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -462,7 +480,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype">void **&#160;</td>
           <td class="paramname"><em>address_to_map_to</em>&#160;</td>
         </tr>
         <tr>
@@ -473,11 +491,11 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00043">43</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00088">88</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="easylogging_09_09_8h_source.html#l04288">LOG</a>, and <a class="el" href="_allocation_8hpp_source.html#l00056">typeData</a>.</p>
-<div class="fragment"><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                                                                                                                             {</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">if</span> (std::holds_alternative&lt;blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>)) {</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            std::get&lt;blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>).ParentBlock-&gt;Map(<span class="keyword">this</span>, size_to_map, offset_to_map_at, address_to_map_to);</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        }</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (std::holds_alternative&lt;privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>)) {</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <a class="code" href="easylogging_09_09_8h.html#acecfb113caaa2f52fe8e764fe04476bc">LOG</a>(INFO) &lt;&lt; <span class="stringliteral">&quot;Attempted to map private allocation, setting given address_to_map_to to permanently mapped address.&quot;</span>;</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            address_to_map_to = std::get&lt;privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>).MappedData;</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        }</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afe2dff1a32b57788e46af02d0ebe866d"><div class="ttname"><a href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">vpr::Allocation::typeData</a></div><div class="ttdeci">std::variant&lt; blockAllocation, privateAllocation &gt; typeData</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00056">Allocation.hpp:56</a></div></div>
-<div class="ttc" id="easylogging_09_09_8h_html_acecfb113caaa2f52fe8e764fe04476bc"><div class="ttname"><a href="easylogging_09_09_8h.html#acecfb113caaa2f52fe8e764fe04476bc">LOG</a></div><div class="ttdeci">#define LOG(LEVEL)</div><div class="ttdef"><b>Definition:</b> <a href="easylogging_09_09_8h_source.html#l04288">easylogging++.h:4288</a></div></div>
+<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00049">impl</a>, and <a class="el" href="vpr__stdafx_8h_source.html#l00031">vpr::VERBOSE_LOGGING</a>.</p>
+<div class="fragment"><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                                                                                                                              {</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#if __APPLE_CC__</span></div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keyword">auto</span> map_private_alloc = [&amp;](AllocationImpl::privateAllocation&amp; alloc) {</div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="keywordflow">if</span> (alloc.PersistentlyMapped) {</div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                *address_to_map_to = alloc.MappedData;</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            }</div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keywordflow">else</span> {</div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Private allocation cannot be mapped!&quot;</span>);</div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            }</div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        };</div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">switch</span> (<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData.which()) {</div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordflow">case</span> 0:</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            boost::get&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData).ParentBlock-&gt;Map(<span class="keyword">this</span>, size_to_map, offset_to_map_at, address_to_map_to);</div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="keywordflow">break</span>;</div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordflow">case</span> 1:</div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            map_private_alloc(boost::get&lt;AllocationImpl::privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData));</div><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordflow">break</span>;</div><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        };</div><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#else</span></div><div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">if</span> (std::holds_alternative&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData)) {</div><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            std::get&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData).ParentBlock-&gt;Map(<span class="keyword">this</span>, size_to_map, offset_to_map_at, address_to_map_to);</div><div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        }</div><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (std::holds_alternative&lt;AllocationImpl::privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData)) {</div><div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keyword">auto</span>&amp; p_alloc = std::get&lt;AllocationImpl::privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData);</div><div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keywordflow">if</span> (p_alloc.PersistentlyMapped) {</div><div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                LOG_IF(<a class="code" href="namespacevpr.html#a85a5d8c5ba83b162eda5df835a7e6e4d">VERBOSE_LOGGING</a>, INFO) &lt;&lt; <span class="stringliteral">&quot;Attempted to map private allocation, setting given address_to_map_to to permanently mapped address.&quot;</span>;</div><div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                *address_to_map_to = std::get&lt;AllocationImpl::privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData).MappedData;</div><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            }</div><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="keywordflow">else</span> {</div><div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Given private allocation is not mapped.&quot;</span>);</div><div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            }</div><div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        }</div><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afd91b0a36dce93976913fb2c0859684a"><div class="ttname"><a href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">vpr::Allocation::impl</a></div><div class="ttdeci">std::unique_ptr&lt; AllocationImpl &gt; impl</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00049">Allocation.hpp:49</a></div></div>
+<div class="ttc" id="namespacevpr_html_a85a5d8c5ba83b162eda5df835a7e6e4d"><div class="ttname"><a href="namespacevpr.html#a85a5d8c5ba83b162eda5df835a7e6e4d">vpr::VERBOSE_LOGGING</a></div><div class="ttdeci">constexpr bool VERBOSE_LOGGING</div><div class="ttdef"><b>Definition:</b> <a href="vpr__stdafx_8h_source.html#l00031">vpr_stdafx.h:31</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -496,16 +514,18 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00059">59</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00139">139</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00056">typeData</a>.</p>
+<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00049">impl</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_buffer_8cpp_source.html#l00094">vpr::Buffer::CopyTo()</a>, <a class="el" href="_allocator_8cpp_source.html#l00212">vpr::Allocator::CreateBuffer()</a>, <a class="el" href="_allocator_8cpp_source.html#l00194">vpr::Allocator::CreateImage()</a>, <a class="el" href="_buffer_8cpp_source.html#l00174">vpr::Buffer::Map()</a>, and <a class="el" href="_buffer_8cpp_source.html#l00180">vpr::Buffer::Unmap()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                                                    {</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">if</span> (std::holds_alternative&lt;blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>)) {</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keywordflow">return</span> std::get&lt;blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>).ParentBlock-&gt;Memory();</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (std::holds_alternative&lt;privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>)) {</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordflow">return</span> std::get&lt;privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>).DvcMemory;</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        }</div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">else</span> {</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Allocation had invalid type or was improperly initialized!&quot;</span>);</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        }</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afe2dff1a32b57788e46af02d0ebe866d"><div class="ttname"><a href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">vpr::Allocation::typeData</a></div><div class="ttdeci">std::variant&lt; blockAllocation, privateAllocation &gt; typeData</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00056">Allocation.hpp:56</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_allocation_a1a223e41ca865271544ece71d18edce2_icgraph.svg" width="622" height="240"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<p class="reference">Referenced by <a class="el" href="_allocator_8cpp_source.html#l00122">vpr::Allocator::AllocateForBuffer()</a>, <a class="el" href="_allocator_8cpp_source.html#l00113">vpr::Allocator::AllocateForImage()</a>, <a class="el" href="_buffer_deprecated_8cpp_source.html#l00099">vpr::Buffer::CopyTo()</a>, <a class="el" href="_buffer_deprecated_8cpp_source.html#l00179">vpr::Buffer::Map()</a>, <a class="el" href="_allocation_8cpp_source.html#l00220">operator==()</a>, <a class="el" href="_buffer_deprecated_8cpp_source.html#l00284">vpr::Buffer::setMappedMemoryRange()</a>, and <a class="el" href="_buffer_deprecated_8cpp_source.html#l00185">vpr::Buffer::Unmap()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                                                   {</div><div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="preprocessor">#ifdef __APPLE_CC__</span></div><div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordflow">switch</span> (<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData.which()) {</div><div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        <span class="keywordflow">case</span> 0:</div><div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="keywordflow">return</span> boost::get&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData).ParentBlock-&gt;Memory();</div><div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keywordflow">case</span> 1:</div><div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <span class="keywordflow">return</span> boost::get&lt;AllocationImpl::privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData).DvcMemory;</div><div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keywordflow">default</span>:</div><div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Allocation had invalid type!&quot;</span>);</div><div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        };</div><div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">#else</span></div><div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keywordflow">if</span> (std::holds_alternative&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData)) {</div><div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="keywordflow">return</span> std::get&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData).ParentBlock-&gt;Memory();</div><div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        }</div><div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (std::holds_alternative&lt;AllocationImpl::privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData)) {</div><div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <span class="keywordflow">return</span> std::get&lt;AllocationImpl::privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData).DvcMemory;</div><div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        }</div><div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        <span class="keywordflow">else</span> {</div><div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Allocation had invalid type or was improperly initialized!&quot;</span>);</div><div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        }</div><div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afd91b0a36dce93976913fb2c0859684a"><div class="ttname"><a href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">vpr::Allocation::impl</a></div><div class="ttdeci">std::unique_ptr&lt; AllocationImpl &gt; impl</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00049">Allocation.hpp:49</a></div></div>
+</div><!-- fragment --><div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_allocation_a1a223e41ca865271544ece71d18edce2_icgraph.svg" width="642" height="387"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -526,17 +546,19 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00080">80</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00182">182</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00056">typeData</a>.</p>
+<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00049">impl</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_allocator_8cpp_source.html#l00126">vpr::Allocator::FreeMemory()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                                             {</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">if</span> (std::holds_alternative&lt;blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>)) {</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordflow">return</span> std::get&lt;blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>).ParentBlock-&gt;MemoryTypeIdx;</div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        }</div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (std::holds_alternative&lt;privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>)) {</div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordflow">return</span> std::get&lt;privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>).<a class="code" href="classvpr_1_1_allocation.html#ab07876bad87d1c3e085ab02c1c608179">MemoryTypeIdx</a>;</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        }</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordflow">else</span> {</div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Allocation had invalid type, or was improperly initialized!&quot;</span>);</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        }</div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afe2dff1a32b57788e46af02d0ebe866d"><div class="ttname"><a href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">vpr::Allocation::typeData</a></div><div class="ttdeci">std::variant&lt; blockAllocation, privateAllocation &gt; typeData</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00056">Allocation.hpp:56</a></div></div>
-<div class="ttc" id="classvpr_1_1_allocation_html_ab07876bad87d1c3e085ab02c1c608179"><div class="ttname"><a href="classvpr_1_1_allocation.html#ab07876bad87d1c3e085ab02c1c608179">vpr::Allocation::MemoryTypeIdx</a></div><div class="ttdeci">uint32_t MemoryTypeIdx() const</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8cpp_source.html#l00080">Allocation.cpp:80</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_allocation_ab07876bad87d1c3e085ab02c1c608179_icgraph.svg" width="100%" height="366"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="reference">Referenced by <a class="el" href="_allocator_8cpp_source.html#l00062">vpr::Allocator::FreeMemory()</a>, and <a class="el" href="_allocation_8cpp_source.html#l00220">operator==()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                                             {</div><div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="preprocessor">#ifdef __APPLE_CC__</span></div><div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keywordflow">switch</span> (<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData.which()) {</div><div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">case</span> 0:</div><div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            <span class="keywordflow">return</span> boost::get&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData).ParentBlock-&gt;MemoryTypeIdx;</div><div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordflow">case</span> 1:</div><div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            <span class="keywordflow">return</span> boost::get&lt;AllocationImpl::privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData).MemoryTypeIdx;</div><div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keywordflow">default</span>:</div><div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Allocation had invalid type!&quot;</span>);</div><div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        };</div><div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="preprocessor">#else</span></div><div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="keywordflow">if</span> (std::holds_alternative&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData)) {</div><div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            <span class="keywordflow">return</span> std::get&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData).ParentBlock-&gt;MemoryTypeIdx;</div><div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        }</div><div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (std::holds_alternative&lt;AllocationImpl::privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData)) {</div><div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            <span class="keywordflow">return</span> std::get&lt;AllocationImpl::privateAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData).<a class="code" href="classvpr_1_1_allocation.html#ab07876bad87d1c3e085ab02c1c608179">MemoryTypeIdx</a>;</div><div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        }</div><div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        <span class="keywordflow">else</span> {</div><div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Allocation had invalid type, or was improperly initialized!&quot;</span>);</div><div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        }</div><div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_ab07876bad87d1c3e085ab02c1c608179"><div class="ttname"><a href="classvpr_1_1_allocation.html#ab07876bad87d1c3e085ab02c1c608179">vpr::Allocation::MemoryTypeIdx</a></div><div class="ttdeci">uint32_t MemoryTypeIdx() const</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8cpp_source.html#l00182">Allocation.cpp:182</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_afd91b0a36dce93976913fb2c0859684a"><div class="ttname"><a href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">vpr::Allocation::impl</a></div><div class="ttdeci">std::unique_ptr&lt; AllocationImpl &gt; impl</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00049">Allocation.hpp:49</a></div></div>
+</div><!-- fragment --><div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_allocation_ab07876bad87d1c3e085ab02c1c608179_icgraph.svg" width="440" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -565,46 +587,47 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00071">71</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00162">162</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00056">typeData</a>.</p>
+<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00049">impl</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_buffer_8cpp_source.html#l00094">vpr::Buffer::CopyTo()</a>, <a class="el" href="_allocator_8cpp_source.html#l00212">vpr::Allocator::CreateBuffer()</a>, <a class="el" href="_allocator_8cpp_source.html#l00194">vpr::Allocator::CreateImage()</a>, <a class="el" href="_buffer_8cpp_source.html#l00155">vpr::Buffer::CreateMemoryBarrier()</a>, <a class="el" href="_memory_block_8cpp_source.html#l00371">vpr::MemoryBlock::Free()</a>, <a class="el" href="_memory_block_8cpp_source.html#l00388">vpr::MemoryBlock::Map()</a>, and <a class="el" href="_buffer_8cpp_source.html#l00174">vpr::Buffer::Map()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                                   {</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">if</span> (std::holds_alternative&lt;blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>)) {</div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">return</span> std::get&lt;blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>).<a class="code" href="classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397">Offset</a>;</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        }</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">else</span> {</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keywordflow">return</span> VkDeviceSize(0);</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        }</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afe2dff1a32b57788e46af02d0ebe866d"><div class="ttname"><a href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">vpr::Allocation::typeData</a></div><div class="ttdeci">std::variant&lt; blockAllocation, privateAllocation &gt; typeData</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00056">Allocation.hpp:56</a></div></div>
-<div class="ttc" id="classvpr_1_1_allocation_html_acb642a53c185ac6530ed60959b0e4397"><div class="ttname"><a href="classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397">vpr::Allocation::Offset</a></div><div class="ttdeci">VkDeviceSize Offset() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8cpp_source.html#l00071">Allocation.cpp:71</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_allocation_acb642a53c185ac6530ed60959b0e4397_icgraph.svg" width="608" height="358"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<p class="reference">Referenced by <a class="el" href="_allocator_8cpp_source.html#l00122">vpr::Allocator::AllocateForBuffer()</a>, <a class="el" href="_allocator_8cpp_source.html#l00113">vpr::Allocator::AllocateForImage()</a>, <a class="el" href="_buffer_deprecated_8cpp_source.html#l00099">vpr::Buffer::CopyTo()</a>, <a class="el" href="_buffer_deprecated_8cpp_source.html#l00160">vpr::Buffer::CreateMemoryBarrier()</a>, <a class="el" href="_memory_block_8cpp_source.html#l00405">vpr::MemoryBlock::Free()</a>, <a class="el" href="_memory_block_8cpp_source.html#l00422">vpr::MemoryBlock::Map()</a>, <a class="el" href="_buffer_deprecated_8cpp_source.html#l00179">vpr::Buffer::Map()</a>, <a class="el" href="_allocation_8cpp_source.html#l00220">operator==()</a>, and <a class="el" href="_buffer_deprecated_8cpp_source.html#l00284">vpr::Buffer::setMappedMemoryRange()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                                                   {</div><div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="preprocessor">#ifdef __APPLE_CC__</span></div><div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keywordflow">switch</span> (<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData.which()) {</div><div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keywordflow">case</span> 0:</div><div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            <span class="keywordflow">return</span> boost::get&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData).<a class="code" href="classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397">Offset</a>;</div><div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="keywordflow">case</span> 1:</div><div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <span class="keywordflow">return</span> VkDeviceSize(0);</div><div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <span class="keywordflow">default</span>:</div><div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Allocation had invalid type!&quot;</span>);</div><div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        };</div><div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">#else</span></div><div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="keywordflow">if</span> (std::holds_alternative&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData)) {</div><div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            <span class="keywordflow">return</span> std::get&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData).<a class="code" href="classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397">Offset</a>;</div><div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        }</div><div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <span class="keywordflow">else</span> {</div><div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            <span class="keywordflow">return</span> VkDeviceSize(0);</div><div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        }</div><div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afd91b0a36dce93976913fb2c0859684a"><div class="ttname"><a href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">vpr::Allocation::impl</a></div><div class="ttdeci">std::unique_ptr&lt; AllocationImpl &gt; impl</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00049">Allocation.hpp:49</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_acb642a53c185ac6530ed60959b0e4397"><div class="ttname"><a href="classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397">vpr::Allocation::Offset</a></div><div class="ttdeci">VkDeviceSize Offset() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8cpp_source.html#l00162">Allocation.cpp:162</a></div></div>
+</div><!-- fragment --><div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_allocation_acb642a53c185ac6530ed60959b0e4397_icgraph.svg" width="628" height="504"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
 </div>
 </div>
-<a id="aa6355d4f330ab946d69b6d7be5f87abb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6355d4f330ab946d69b6d7be5f87abb">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a16abc6fd06477544c4a34a012be850b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16abc6fd06477544c4a34a012be850b5">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvpr_1_1_allocation.html">Allocation</a>&amp; vpr::Allocation::operator= </td>
+          <td class="memname"><a class="el" href="classvpr_1_1_allocation.html">Allocation</a> &amp; vpr::Allocation::operator= </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classvpr_1_1_allocation.html">Allocation</a> &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00040">40</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00047">Alignment</a>, <a class="el" href="_allocation_8hpp_source.html#l00049">impl</a>, and <a class="el" href="_allocation_8hpp_source.html#l00046">Size</a>.</p>
+<div class="fragment"><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                                                             {</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">Size</a> = other.Size;</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">Alignment</a> = other.Alignment;</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a> = std::make_unique&lt;AllocationImpl&gt;(*other.impl);</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afd91b0a36dce93976913fb2c0859684a"><div class="ttname"><a href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">vpr::Allocation::impl</a></div><div class="ttdeci">std::unique_ptr&lt; AllocationImpl &gt; impl</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00049">Allocation.hpp:49</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_afa15c9bbc5bbf40d3416f7f5d85bb752"><div class="ttname"><a href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">vpr::Allocation::Alignment</a></div><div class="ttdeci">VkDeviceSize Alignment</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00047">Allocation.hpp:47</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_aa1c4b67be8e0f44155dcd26ca93f6ec2"><div class="ttname"><a href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">vpr::Allocation::Size</a></div><div class="ttdeci">VkDeviceSize Size</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00046">Allocation.hpp:46</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a75408587e6fce6988e0cc1b0dcb58af1"></a>
@@ -631,11 +654,75 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00011">11</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;                                                                  {</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">Size</a> = std::move(other.Size);</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">Alignment</a> = std::move(other.Alignment);</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a> = std::move(other.typeData);</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afe2dff1a32b57788e46af02d0ebe866d"><div class="ttname"><a href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">vpr::Allocation::typeData</a></div><div class="ttdeci">std::variant&lt; blockAllocation, privateAllocation &gt; typeData</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00056">Allocation.hpp:56</a></div></div>
-<div class="ttc" id="classvpr_1_1_allocation_html_afa15c9bbc5bbf40d3416f7f5d85bb752"><div class="ttname"><a href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">vpr::Allocation::Alignment</a></div><div class="ttdeci">VkDeviceSize Alignment</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00040">Allocation.hpp:40</a></div></div>
-<div class="ttc" id="classvpr_1_1_allocation_html_aa1c4b67be8e0f44155dcd26ca93f6ec2"><div class="ttname"><a href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">vpr::Allocation::Size</a></div><div class="ttdeci">VkDeviceSize Size</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00040">Allocation.hpp:40</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00050">50</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00047">Alignment</a>, <a class="el" href="_allocation_8hpp_source.html#l00049">impl</a>, and <a class="el" href="_allocation_8hpp_source.html#l00046">Size</a>.</p>
+<div class="fragment"><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                                                                  {</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">Size</a> = std::move(other.Size);</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">Alignment</a> = std::move(other.Alignment);</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a> = std::move(other.impl);</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afd91b0a36dce93976913fb2c0859684a"><div class="ttname"><a href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">vpr::Allocation::impl</a></div><div class="ttdeci">std::unique_ptr&lt; AllocationImpl &gt; impl</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00049">Allocation.hpp:49</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_afa15c9bbc5bbf40d3416f7f5d85bb752"><div class="ttname"><a href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">vpr::Allocation::Alignment</a></div><div class="ttdeci">VkDeviceSize Alignment</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00047">Allocation.hpp:47</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_aa1c4b67be8e0f44155dcd26ca93f6ec2"><div class="ttname"><a href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">vpr::Allocation::Size</a></div><div class="ttdeci">VkDeviceSize Size</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00046">Allocation.hpp:46</a></div></div>
 </div><!-- fragment -->
+</div>
+</div>
+<a id="add3be5fd7fee67744d380e74b0c5bfb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add3be5fd7fee67744d380e74b0c5bfb3">&#9670;&nbsp;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool vpr::Allocation::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classvpr_1_1_allocation.html">Allocation</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00220">220</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00047">Alignment</a>, <a class="el" href="_allocation_8cpp_source.html#l00205">IsPrivateAllocation()</a>, <a class="el" href="_allocation_8cpp_source.html#l00139">Memory()</a>, <a class="el" href="_allocation_8cpp_source.html#l00182">MemoryTypeIdx()</a>, <a class="el" href="_allocation_8cpp_source.html#l00162">Offset()</a>, and <a class="el" href="_allocation_8hpp_source.html#l00046">Size</a>.</p>
+<div class="fragment"><div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                                                                       {</div><div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <span class="keywordflow">return</span> (<a class="code" href="classvpr_1_1_allocation.html#a1a223e41ca865271544ece71d18edce2">Memory</a>() == other.Memory()) &amp;&amp; (<a class="code" href="classvpr_1_1_allocation.html#ab07876bad87d1c3e085ab02c1c608179">MemoryTypeIdx</a>() == other.MemoryTypeIdx()) &amp;&amp;</div><div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            (<a class="code" href="classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397">Offset</a>() == other.Offset()) &amp;&amp; (<a class="code" href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">Size</a> == other.Size) &amp;&amp; (<a class="code" href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">Alignment</a> == other.Alignment) &amp;&amp;</div><div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            (<a class="code" href="classvpr_1_1_allocation.html#ad23615cd9f84e8e2354cf1f1e7e8f162">IsPrivateAllocation</a>() == other.IsPrivateAllocation());</div><div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_a1a223e41ca865271544ece71d18edce2"><div class="ttname"><a href="classvpr_1_1_allocation.html#a1a223e41ca865271544ece71d18edce2">vpr::Allocation::Memory</a></div><div class="ttdeci">const VkDeviceMemory &amp; Memory() const</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8cpp_source.html#l00139">Allocation.cpp:139</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_ab07876bad87d1c3e085ab02c1c608179"><div class="ttname"><a href="classvpr_1_1_allocation.html#ab07876bad87d1c3e085ab02c1c608179">vpr::Allocation::MemoryTypeIdx</a></div><div class="ttdeci">uint32_t MemoryTypeIdx() const</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8cpp_source.html#l00182">Allocation.cpp:182</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_ad23615cd9f84e8e2354cf1f1e7e8f162"><div class="ttname"><a href="classvpr_1_1_allocation.html#ad23615cd9f84e8e2354cf1f1e7e8f162">vpr::Allocation::IsPrivateAllocation</a></div><div class="ttdeci">bool IsPrivateAllocation() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8cpp_source.html#l00205">Allocation.cpp:205</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_afa15c9bbc5bbf40d3416f7f5d85bb752"><div class="ttname"><a href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">vpr::Allocation::Alignment</a></div><div class="ttdeci">VkDeviceSize Alignment</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00047">Allocation.hpp:47</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_acb642a53c185ac6530ed60959b0e4397"><div class="ttname"><a href="classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397">vpr::Allocation::Offset</a></div><div class="ttdeci">VkDeviceSize Offset() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8cpp_source.html#l00162">Allocation.cpp:162</a></div></div>
+<div class="ttc" id="classvpr_1_1_allocation_html_aa1c4b67be8e0f44155dcd26ca93f6ec2"><div class="ttname"><a href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">vpr::Allocation::Size</a></div><div class="ttdeci">VkDeviceSize Size</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00046">Allocation.hpp:46</a></div></div>
+</div><!-- fragment --><div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_allocation_add3be5fd7fee67744d380e74b0c5bfb3_cgraph.svg" width="436" height="206"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="aba0b6e2e6c71e801603e6b81c2218f89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba0b6e2e6c71e801603e6b81c2218f89">&#9670;&nbsp;</a></span>SetUserData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void vpr::Allocation::SetUserData </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a id="a50c9f0b8277412ee7478939ade2025b8"></a>
@@ -661,10 +748,10 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00053">53</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00123">123</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00056">typeData</a>.</p>
-<div class="fragment"><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                                          {</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">if</span> (std::holds_alternative&lt;blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>)) {</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            std::get&lt;blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>).ParentBlock-&gt;Unmap();</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        }</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afe2dff1a32b57788e46af02d0ebe866d"><div class="ttname"><a href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">vpr::Allocation::typeData</a></div><div class="ttdeci">std::variant&lt; blockAllocation, privateAllocation &gt; typeData</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00056">Allocation.hpp:56</a></div></div>
+<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00049">impl</a>.</p>
+<div class="fragment"><div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                                          {</div><div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">#ifdef __APPLE_CC__</span></div><div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordflow">switch</span> (<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData.which()) {</div><div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordflow">case</span> 0:</div><div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            boost::get&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData).ParentBlock-&gt;Unmap();</div><div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            <span class="keywordflow">break</span>;</div><div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordflow">default</span>:</div><div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            <span class="keywordflow">break</span>;</div><div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        };</div><div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#else</span></div><div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordflow">if</span> (std::holds_alternative&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData)) {</div><div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            std::get&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData).ParentBlock-&gt;Unmap();</div><div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        }</div><div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afd91b0a36dce93976913fb2c0859684a"><div class="ttname"><a href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">vpr::Allocation::impl</a></div><div class="ttdeci">std::unique_ptr&lt; AllocationImpl &gt; impl</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00049">Allocation.hpp:49</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -694,10 +781,10 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00027">27</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_8cpp_source.html#l00067">67</a> of file <a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00056">typeData</a>.</p>
-<div class="fragment"><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                                                                                           {</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">auto</span>&amp; alloc = std::get&lt;blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a>);</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        alloc.ParentBlock = new_parent_block;</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        alloc.Offset = new_offset;</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afe2dff1a32b57788e46af02d0ebe866d"><div class="ttname"><a href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">vpr::Allocation::typeData</a></div><div class="ttdeci">std::variant&lt; blockAllocation, privateAllocation &gt; typeData</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00056">Allocation.hpp:56</a></div></div>
+<p class="reference">References <a class="el" href="_allocation_8hpp_source.html#l00049">impl</a>.</p>
+<div class="fragment"><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                                                                                           {</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#ifdef __APPLE_CC__</span></div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keyword">auto</span>&amp; alloc = boost::get&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData);</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#else</span></div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keyword">auto</span>&amp; alloc = std::get&lt;AllocationImpl::blockAllocation&gt;(<a class="code" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a>-&gt;typeData);</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        alloc.ParentBlock = new_parent_block;</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        alloc.Offset = new_offset;</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_allocation_html_afd91b0a36dce93976913fb2c0859684a"><div class="ttname"><a href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">vpr::Allocation::impl</a></div><div class="ttdeci">std::unique_ptr&lt; AllocationImpl &gt; impl</div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00049">Allocation.hpp:49</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -714,9 +801,35 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_allocation_8hpp_source.html#l00040">40</a> of file <a class="el" href="_allocation_8hpp_source.html">Allocation.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_8hpp_source.html#l00047">47</a> of file <a class="el" href="_allocation_8hpp_source.html">Allocation.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_allocation_8cpp_source.html#l00018">Init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_allocation_8cpp_source.html#l00057">Init()</a>, <a class="el" href="_allocation_8cpp_source.html#l00040">operator=()</a>, and <a class="el" href="_allocation_8cpp_source.html#l00220">operator==()</a>.</p>
+
+</div>
+</div>
+<a id="afd91b0a36dce93976913fb2c0859684a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd91b0a36dce93976913fb2c0859684a">&#9670;&nbsp;</a></span>impl</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="namespacevpr.html#structvpr_1_1_allocation_impl">AllocationImpl</a>&gt; vpr::Allocation::impl</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_allocation_8hpp_source.html#l00049">49</a> of file <a class="el" href="_allocation_8hpp_source.html">Allocation.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_allocation_8cpp_source.html#l00057">Init()</a>, <a class="el" href="_allocation_8cpp_source.html#l00077">InitPrivate()</a>, <a class="el" href="_allocation_8cpp_source.html#l00205">IsPrivateAllocation()</a>, <a class="el" href="_allocation_8cpp_source.html#l00088">Map()</a>, <a class="el" href="_allocation_8cpp_source.html#l00139">Memory()</a>, <a class="el" href="_allocation_8cpp_source.html#l00182">MemoryTypeIdx()</a>, <a class="el" href="_allocation_8cpp_source.html#l00162">Offset()</a>, <a class="el" href="_allocation_8cpp_source.html#l00040">operator=()</a>, <a class="el" href="_allocation_8cpp_source.html#l00123">Unmap()</a>, <a class="el" href="_allocation_8cpp_source.html#l00067">Update()</a>, and <a class="el" href="_allocation_8cpp_source.html#l00034">~Allocation()</a>.</p>
 
 </div>
 </div>
@@ -732,35 +845,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_allocation_8hpp_source.html#l00040">40</a> of file <a class="el" href="_allocation_8hpp_source.html">Allocation.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_8hpp_source.html#l00046">46</a> of file <a class="el" href="_allocation_8hpp_source.html">Allocation.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_buffer_8cpp_source.html#l00042">vpr::Buffer::CreateBuffer()</a>, <a class="el" href="_allocator_8cpp_source.html#l00126">vpr::Allocator::FreeMemory()</a>, <a class="el" href="_allocation_8cpp_source.html#l00018">Init()</a>, <a class="el" href="_allocation_8cpp_source.html#l00033">InitPrivate()</a>, and <a class="el" href="_buffer_8cpp_source.html#l00174">vpr::Buffer::Map()</a>.</p>
-
-</div>
-</div>
-<a id="afe2dff1a32b57788e46af02d0ebe866d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe2dff1a32b57788e46af02d0ebe866d">&#9670;&nbsp;</a></span>typeData</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::variant&lt;<a class="el" href="group___allocation.html#structvpr_1_1_allocation_1_1block_allocation">blockAllocation</a>, <a class="el" href="group___allocation.html#structvpr_1_1_allocation_1_1private_allocation">privateAllocation</a>&gt; vpr::Allocation::typeData</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_allocation_8hpp_source.html#l00056">56</a> of file <a class="el" href="_allocation_8hpp_source.html">Allocation.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="_allocation_8cpp_source.html#l00018">Init()</a>, <a class="el" href="_allocation_8cpp_source.html#l00033">InitPrivate()</a>, <a class="el" href="_allocation_8cpp_source.html#l00092">IsPrivateAllocation()</a>, <a class="el" href="_allocation_8cpp_source.html#l00043">Map()</a>, <a class="el" href="_allocation_8cpp_source.html#l00059">Memory()</a>, <a class="el" href="_allocation_8cpp_source.html#l00080">MemoryTypeIdx()</a>, <a class="el" href="_allocation_8cpp_source.html#l00071">Offset()</a>, <a class="el" href="_allocation_8cpp_source.html#l00053">Unmap()</a>, and <a class="el" href="_allocation_8cpp_source.html#l00027">Update()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_buffer_deprecated_8cpp_source.html#l00040">vpr::Buffer::CreateBuffer()</a>, <a class="el" href="_allocator_8cpp_source.html#l00062">vpr::Allocator::FreeMemory()</a>, <a class="el" href="_allocation_8cpp_source.html#l00057">Init()</a>, <a class="el" href="_allocation_8cpp_source.html#l00077">InitPrivate()</a>, <a class="el" href="_buffer_deprecated_8cpp_source.html#l00179">vpr::Buffer::Map()</a>, <a class="el" href="_allocation_8cpp_source.html#l00040">operator=()</a>, <a class="el" href="_allocation_8cpp_source.html#l00220">operator==()</a>, and <a class="el" href="_buffer_deprecated_8cpp_source.html#l00284">vpr::Buffer::setMappedMemoryRange()</a>.</p>
 
 </div>
 </div>
@@ -774,7 +861,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void* vpr::Allocation::userData = nullptr</td>
+          <td class="memname">void* vpr::Allocation::userData { nullptr }</td>
         </tr>
       </table>
   </td>
@@ -784,20 +871,24 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_allocation_8hpp_source.html#l00055">55</a> of file <a class="el" href="_allocation_8hpp_source.html">Allocation.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_8hpp_source.html#l00050">50</a> of file <a class="el" href="_allocation_8hpp_source.html">Allocation.hpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/include/alloc/<a class="el" href="_allocation_8hpp_source.html">Allocation.hpp</a></li>
-<li>C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/src/alloc/<a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a></li>
+<li>alloc/include/<a class="el" href="_allocation_8hpp_source.html">Allocation.hpp</a></li>
+<li>alloc/src/<a class="el" href="_allocation_8cpp_source.html">Allocation.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacevpr.html">vpr</a></li><li class="navelem"><a class="el" href="classvpr_1_1_allocation.html">Allocation</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

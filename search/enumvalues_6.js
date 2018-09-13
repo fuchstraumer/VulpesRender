@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['global',['Global',['../namespaceel.html#ab0ac6091262344c52dd2d3ad099e8e36a4cc6684df7b4a92b1dec6fce3264fac8',1,'el']]]
+  ['medium',['MEDIUM',['../structvpr_1_1_allocator_impl.html#ac0e602f636913c7510718091629032f2ac87f3be66ffc3c0d4249f1c2cc5f3cce',1,'vpr::AllocatorImpl']]],
+  ['minimal',['Minimal',['../classvpr_1_1_instance.html#ac131eec23cc4eba7cd68bc67de9d8c09a30fc6bbba82125243ecf4ddb27fee645',1,'vpr::Instance']]]
 ];

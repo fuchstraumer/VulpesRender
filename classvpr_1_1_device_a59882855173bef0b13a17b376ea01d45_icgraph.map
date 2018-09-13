@@ -1,0 +1,13 @@
+<map id="vpr::Device::vkHandle" name="vpr::Device::vkHandle">
+<area shape="rect" id="node2" href="$classvpr_1_1_device.html#a6a2bdc1c9de2b94e330ba75cb4a0a87b" title="vpr::Device::ComputeQueue" alt="" coords="197,5,380,32"/>
+<area shape="rect" id="node3" href="$structvpr_1_1_swapchain_impl.html#a26979c4e9803da67ef61bf098377b341" title="vpr::SwapchainImpl\l::create" alt="" coords="222,57,355,98"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_image.html#a9f06292f9e5c640e706783f5dffdbb7d" title="vpr::Image::CreateView" alt="" coords="211,123,366,149"/>
+<area shape="rect" id="node8" href="$classvpr_1_1_image.html#a873f753f67d45583eee998d59885d8c5" title="vpr::Image::Destroy" alt="" coords="221,173,356,200"/>
+<area shape="rect" id="node10" href="$classvpr_1_1_device.html#a6914a8dd1054f00fbdc3454e55b3c14b" title="! Returns queue that has support for most operation types. " alt="" coords="201,224,376,251"/>
+<area shape="rect" id="node11" href="$classvpr_1_1_device.html#ab4de02f4fcdb84f487c8e8f598cc3a77" title="vpr::Device::GraphicsQueue" alt="" coords="197,275,380,301"/>
+<area shape="rect" id="node12" href="$classvpr_1_1_device.html#af7b303fd1d3a080aa4d160f7c3f10ad5" title="vpr::Device::TransferQueue" alt="" coords="201,325,377,352"/>
+<area shape="rect" id="node4" href="$structvpr_1_1_swapchain_impl.html#aa1b6cf08451eb2e7bebdbf5ce10a09ed" title="vpr::SwapchainImpl\l::SwapchainImpl" alt="" coords="446,27,579,69"/>
+<area shape="rect" id="node5" href="$classvpr_1_1_swapchain.html#a34c3d73db1e99d3a395398fc0dbb5dc6" title="vpr::Swapchain::Recreate" alt="" coords="428,93,597,120"/>
+<area shape="rect" id="node6" href="$namespacevpr.html#a812ad3570ad63ddcbc18e03988bd60bd" title="Pass a swapchain and surface pointer to this to have the swapchain and surface destroyed and recreate..." alt="" coords="645,86,829,127"/>
+<area shape="rect" id="node9" href="$classvpr_1_1_image.html#a1287ebb37a0b59f2084e6aed31203c35" title="vpr::Image::~Image" alt="" coords="447,173,579,200"/>
+</map>

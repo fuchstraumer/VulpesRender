@@ -1,6 +1,0 @@
-<map id="vpr::DescriptorPool::vkHandle" name="vpr::DescriptorPool::vkHandle">
-<area shape="rect" id="node2" href="$classvpr_1_1_descriptor_set.html#ae7839494bdc4ad213b6f200d8957d0a5" title="vpr::DescriptorSet\l::allocate" alt="" coords="184,37,309,79"/>
-<area shape="rect" id="node5" href="$classvpr_1_1_descriptor_set.html#a20cf3ef633ecfbf46b38d32653bad0d6" title="vpr::DescriptorSet\l::~DescriptorSet" alt="" coords="184,103,309,144"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_descriptor_set.html#a6e2329db70462daabad9be5a29b8caeb" title="Call after all descriptor bindings and infos required have been added, and make sure you have enough ..." alt="" coords="357,5,483,47"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_descriptor_set.html#a10bd2e1ea290ca2a02a8b878d92d47dd" title="vpr::DescriptorSet\l::vkHandle" alt="" coords="357,71,483,112"/>
-</map>

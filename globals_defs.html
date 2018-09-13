@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +52,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('globals_defs.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,251 +83,148 @@ $(function() {
 <div class="contents">
 &#160;
 
-<h3><a id="index_c"></a>- c -</h3><ul>
-<li>CCHECK
-: <a class="el" href="easylogging_09_09_8h.html#aac3c8d2c09a5e8e979df9251e98b3c09">easylogging++.h</a>
+<h3><a id="index_e"></a>- e -</h3><ul>
+<li>EXPORT
+: <a class="el" href="vpr__stdafx_8h.html#a3472d8cdbb788d5f1815b3522595bc49">vpr_stdafx.h</a>
 </li>
-<li>CCHECK_BOUNDS
-: <a class="el" href="easylogging_09_09_8h.html#a60b615b884d827fe3a92ed835e42616f">easylogging++.h</a>
+</ul>
+
+
+<h3><a id="index_g"></a>- g -</h3><ul>
+<li>GLFW_INCLUDE_VULKAN
+: <a class="el" href="_instance_8cpp.html#ab91f325a54d3e35fe831a86d6382c2a9">Instance.cpp</a>
+, <a class="el" href="_surface_k_h_r_8cpp.html#ab91f325a54d3e35fe831a86d6382c2a9">SurfaceKHR.cpp</a>
+, <a class="el" href="_swapchain_8cpp.html#ab91f325a54d3e35fe831a86d6382c2a9">Swapchain.cpp</a>
 </li>
-<li>CCHECK_EQ
-: <a class="el" href="easylogging_09_09_8h.html#ae0997856d7cfa806c16ae42518631e54">easylogging++.h</a>
+</ul>
+
+
+<h3><a id="index_i"></a>- i -</h3><ul>
+<li>IMPORT
+: <a class="el" href="vpr__stdafx_8h.html#a773175d74e73776d69c3e538f17de1ee">vpr_stdafx.h</a>
 </li>
-<li>CCHECK_GE
-: <a class="el" href="easylogging_09_09_8h.html#aec0477a8d1679719ffc7bcd7e0e2bfc4">easylogging++.h</a>
+</ul>
+
+
+<h3><a id="index_v"></a>- v -</h3><ul>
+<li>VK_ASSERT_H
+: <a class="el" href="vk_assert_8hpp.html#a0225c47fa83b48a34a0b5de62e7d0961">vkAssert.hpp</a>
 </li>
-<li>CCHECK_GT
-: <a class="el" href="easylogging_09_09_8h.html#a80584d841f7da80dd8d63ad2488d6d45">easylogging++.h</a>
+<li>VkAssert
+: <a class="el" href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">vkAssert.hpp</a>
 </li>
-<li>CCHECK_LE
-: <a class="el" href="easylogging_09_09_8h.html#a3260d8373818db105d3bdac9293faf81">easylogging++.h</a>
+<li>VPR_ALLOC_DEBUG_VISUALIZATION_HPP
+: <a class="el" href="_debug_visualization_8hpp.html#ad0b1bc068c3fa53679ec61837028e981">DebugVisualization.hpp</a>
 </li>
-<li>CCHECK_LT
-: <a class="el" href="easylogging_09_09_8h.html#a8026de632a5e43d100d6fbaba40063dd">easylogging++.h</a>
+<li>VPR_ALLOCATION_COLLECTION_HPP
+: <a class="el" href="_allocation_collection_8hpp.html#aaf2c2582e836c75d8c578cf360e9f79f">AllocationCollection.hpp</a>
 </li>
-<li>CCHECK_NE
-: <a class="el" href="easylogging_09_09_8h.html#a59b41ed25c916cae38ab0b5f15b0994c">easylogging++.h</a>
+<li>VPR_ALLOCATION_HPP
+: <a class="el" href="_allocation_8hpp.html#aa5f59a981de3111f8aa9f8c48521db78">Allocation.hpp</a>
 </li>
-<li>CCHECK_NOTNULL
-: <a class="el" href="easylogging_09_09_8h.html#a9196909d7235022edc356abff3b491a7">easylogging++.h</a>
+<li>VPR_ALLOCATION_REQUIREMENTS_HPP
+: <a class="el" href="_allocation_requirements_8hpp.html#acd09439b8d9a4742916d2a7d955eec25">AllocationRequirements.hpp</a>
 </li>
-<li>CCHECK_STRCASEEQ
-: <a class="el" href="easylogging_09_09_8h.html#ad65568d72b6771125ce220e3a3645500">easylogging++.h</a>
+<li>VPR_ALLOCATOR_COMMON_ITEMS_HPP
+: <a class="el" href="_alloc_common_8hpp.html#a58df9e053a4c17141caaa896685a5efc">AllocCommon.hpp</a>
 </li>
-<li>CCHECK_STRCASENE
-: <a class="el" href="easylogging_09_09_8h.html#a5aee3fad1f6d04ebe412efcaee5065d2">easylogging++.h</a>
+<li>VPR_ALLOCATOR_IMPL_HPP
+: <a class="el" href="_allocator_impl_8hpp.html#af28e8ddd058e7d671c7a8dce63ec6fe1">AllocatorImpl.hpp</a>
 </li>
-<li>CCHECK_STREQ
-: <a class="el" href="easylogging_09_09_8h.html#a59c6e578bf3867d5ec56b583073476cf">easylogging++.h</a>
+<li>VPR_API
+: <a class="el" href="vpr__stdafx_8h.html#a4b940ef35de523c8e5f22898d34635f1">vpr_stdafx.h</a>
 </li>
-<li>CCHECK_STRNE
-: <a class="el" href="easylogging_09_09_8h.html#ae432fd423bdb12cddc85199a8650ca03">easylogging++.h</a>
+<li>VPR_DESCRIPTOR_SET_LAYOUT_HPP
+: <a class="el" href="_descriptor_set_layout_8hpp.html#a755f7f6f653dd87686ac87645285c39b">DescriptorSetLayout.hpp</a>
 </li>
-<li>CDEBUG
-: <a class="el" href="easylogging_09_09_8h.html#ac25fdcd0c895b0f2f45a2dfeed4cf9e5">easylogging++.h</a>
+<li>VPR_EVENT_HPP
+: <a class="el" href="_event_8hpp.html#ac847a293c49e7214be82a7c0697bbb5e">Event.hpp</a>
 </li>
-<li>CDEBUG_AFTER_N
-: <a class="el" href="easylogging_09_09_8h.html#a1237b45c6fd1b1cb7e5c31ca61a5741a">easylogging++.h</a>
+<li>VPR_FENCE_HPP
+: <a class="el" href="_fence_8hpp.html#ac1c30d463444d65f71e24b60cef55210">Fence.hpp</a>
 </li>
-<li>CDEBUG_EVERY_N
-: <a class="el" href="easylogging_09_09_8h.html#a2c8bf9213466e93adc5633226968fb5a">easylogging++.h</a>
+<li>VPR_MEMORY_BLOCK_HPP
+: <a class="el" href="_memory_block_8hpp.html#a51a565dc220a0b7236fe4acf5347b4f0">MemoryBlock.hpp</a>
 </li>
-<li>CDEBUG_IF
-: <a class="el" href="easylogging_09_09_8h.html#a0bbd1f7c9d6a28ff80c9826b5ab4f0e9">easylogging++.h</a>
+<li>VPR_SAMPLER_HPP
+: <a class="el" href="_sampler_8hpp.html#ae0335a647fc69a1207b02f99fedd14c4">Sampler.hpp</a>
 </li>
-<li>CDEBUG_N_TIMES
-: <a class="el" href="easylogging_09_09_8h.html#aaaa7d02a5f02a5184b3c4103c333aadd">easylogging++.h</a>
+<li>VPR_SEMAPHORE_HPP
+: <a class="el" href="_semaphore_8hpp.html#a3b806b30f0ba5734a091237f3da04ca7">Semaphore.hpp</a>
 </li>
-<li>CERROR
-: <a class="el" href="easylogging_09_09_8h.html#af9954855056afd2f484c53b6db501865">easylogging++.h</a>
+<li>VPR_SUBALLOCATION_HPP
+: <a class="el" href="_suballocation_8hpp.html#aab0b4c3d2b85f534eae0ce6c997edabf">Suballocation.hpp</a>
 </li>
-<li>CERROR_AFTER_N
-: <a class="el" href="easylogging_09_09_8h.html#a6746902b26818f20d8e9700bf15140f3">easylogging++.h</a>
+<li>VULKAN_DEBUG_UTILS_FN_POINTER_STRUCT_HPP
+: <a class="el" href="_vk_debug_utils_8hpp.html#a9a644ea902e2cacc6e072839459335b1">VkDebugUtils.hpp</a>
 </li>
-<li>CERROR_EVERY_N
-: <a class="el" href="easylogging_09_09_8h.html#a7d9f21a527e11c499ba11eb1ac842142">easylogging++.h</a>
+<li>VULPES_VK_ALLOCATOR_H
+: <a class="el" href="_allocator_8hpp.html#af95f6730cbfe9e1614e8e4886da79f71">Allocator.hpp</a>
 </li>
-<li>CERROR_IF
-: <a class="el" href="easylogging_09_09_8h.html#a3d369956668829bfb391112af367f520">easylogging++.h</a>
+<li>VULPES_VK_BUFFER_H
+: <a class="el" href="_buffer_deprecated_8hpp.html#aa7c87e8140a19bfa731e4e717f50f39d">BufferDeprecated.hpp</a>
 </li>
-<li>CERROR_N_TIMES
-: <a class="el" href="easylogging_09_09_8h.html#a4ac4b98dc9bb25be9604dc7a203ed5a0">easylogging++.h</a>
+<li>VULPES_VK_COMMAND_POOL_H
+: <a class="el" href="_command_pool_8hpp.html#a74f9e587aeff293bdbbe870af5822672">CommandPool.hpp</a>
 </li>
-<li>CFATAL
-: <a class="el" href="easylogging_09_09_8h.html#adec8a84bf0f132ae906f18839b7190ea">easylogging++.h</a>
+<li>VULPES_VK_CREATE_INFO_BASE_H
+: <a class="el" href="_create_info_base_8hpp.html#ac0577ffd133137ebd744b22496fc99e6">CreateInfoBase.hpp</a>
 </li>
-<li>CFATAL_AFTER_N
-: <a class="el" href="easylogging_09_09_8h.html#a64dd1e8efe4e13e9e9b493c6259eac91">easylogging++.h</a>
+<li>VULPES_VK_DESCRIPTOR_POOL_H
+: <a class="el" href="_descriptor_pool_8hpp.html#ae7f505be0050990bf26b55f4d6bee6d3">DescriptorPool.hpp</a>
 </li>
-<li>CFATAL_EVERY_N
-: <a class="el" href="easylogging_09_09_8h.html#a1fa366004931b9e23a693e946fc87139">easylogging++.h</a>
+<li>VULPES_VK_DESCRIPTOR_SET_H
+: <a class="el" href="_descriptor_set_8hpp.html#a1fa14a9901736de3d38916168afcd45f">DescriptorSet.hpp</a>
 </li>
-<li>CFATAL_IF
-: <a class="el" href="easylogging_09_09_8h.html#ab8218c57420c89bd0c7a5ac0dd44b67e">easylogging++.h</a>
+<li>VULPES_VK_FORWARD_DECL_HPP
+: <a class="el" href="_forward_decl_8hpp.html#ab56d175c4a6f52774d1110b7418eb77a">ForwardDecl.hpp</a>
 </li>
-<li>CFATAL_N_TIMES
-: <a class="el" href="easylogging_09_09_8h.html#a147c0b986270e1882d99fe17a8b2ed76">easylogging++.h</a>
+<li>VULPES_VK_FRAMEBUFFER_H
+: <a class="el" href="_framebuffer_8hpp.html#a886163ef577ef669878dd8a37b927abb">Framebuffer.hpp</a>
 </li>
-<li>CHECK
-: <a class="el" href="easylogging_09_09_8h.html#a3e1cfef60e774a81f30eaddf26a3a274">easylogging++.h</a>
+<li>VULPES_VK_GRAPHICS_PIPELINE_H
+: <a class="el" href="_graphics_pipeline_8hpp.html#a50f3a09b6298eff2faaaa85759a483bc">GraphicsPipeline.hpp</a>
 </li>
-<li>CHECK_BOUNDS
-: <a class="el" href="easylogging_09_09_8h.html#a875ee6f8b5d59402fdfc13784944f5c3">easylogging++.h</a>
+<li>VULPES_VK_IMAGE_H
+: <a class="el" href="_image_deprecated_8hpp.html#afc61b1ffc6e6314f8d8858a9ed98ea2f">ImageDeprecated.hpp</a>
 </li>
-<li>CHECK_EQ
-: <a class="el" href="easylogging_09_09_8h.html#abc966756c9622b65c37a842ea9159f44">easylogging++.h</a>
+<li>VULPES_VK_INSTANCE_H
+: <a class="el" href="_instance_8hpp.html#aa170be298f20dea0632e4515d9ddc9e9">Instance.hpp</a>
 </li>
-<li>CHECK_GE
-: <a class="el" href="easylogging_09_09_8h.html#a54b4a23953fc7a4f455e4fc47e05c215">easylogging++.h</a>
+<li>VULPES_VK_LOGICAL_DEVICE_H
+: <a class="el" href="_logical_device_8hpp.html#aa86b7190ec5ee21a33dba2e44a0bf0e9">LogicalDevice.hpp</a>
 </li>
-<li>CHECK_GT
-: <a class="el" href="easylogging_09_09_8h.html#ad5a1a3bc35696ef5a1070bca3a419c99">easylogging++.h</a>
+<li>VULPES_VK_PHYSICAL_DEVICE_H
+: <a class="el" href="_physical_device_8hpp.html#a5f7afd20976d57ce04227354e7cefbee">PhysicalDevice.hpp</a>
 </li>
-<li>CHECK_LE
-: <a class="el" href="easylogging_09_09_8h.html#a90b329b303c3a01760b7ad27fe92733f">easylogging++.h</a>
+<li>VULPES_VK_PIPELINE_CACHE_H
+: <a class="el" href="_pipeline_cache_8hpp.html#a8c413752ba90bb1a6d08a5f17f466c96">PipelineCache.hpp</a>
 </li>
-<li>CHECK_LT
-: <a class="el" href="easylogging_09_09_8h.html#a2929b40885e8516ac074f2b53e033402">easylogging++.h</a>
+<li>VULPES_VK_PIPELINE_LAYOUT_H
+: <a class="el" href="_pipeline_layout_8hpp.html#a485ae1c43bcef6ea0282a1b9f3e827cf">PipelineLayout.hpp</a>
 </li>
-<li>CHECK_NE
-: <a class="el" href="easylogging_09_09_8h.html#a3f103a87cb04be2cf7e55e1fb5f1504c">easylogging++.h</a>
+<li>VULPES_VK_RENDER_PASS_H
+: <a class="el" href="_renderpass_8hpp.html#aae90b3680a41fd5377719cded1cbd01c">Renderpass.hpp</a>
 </li>
-<li>CHECK_NOTNULL
-: <a class="el" href="easylogging_09_09_8h.html#aa69713f9544ed49aca58c786d4a62d90">easylogging++.h</a>
+<li>VULPES_VK_SHADER_MODULE_H
+: <a class="el" href="_shader_module_8hpp.html#a1fe261cc3667e174a7fe41a772432b5c">ShaderModule.hpp</a>
 </li>
-<li>CHECK_STRCASEEQ
-: <a class="el" href="easylogging_09_09_8h.html#ad8723caa5eab91543565a5bdcb5d313d">easylogging++.h</a>
+<li>VULPES_VK_SURFACE_KHR_HPP
+: <a class="el" href="_surface_k_h_r_8hpp.html#a59186ef93ecae4f9acfbc224306b517f">SurfaceKHR.hpp</a>
 </li>
-<li>CHECK_STRCASENE
-: <a class="el" href="easylogging_09_09_8h.html#ad3284447946b113198ac87dd92cc85d5">easylogging++.h</a>
-</li>
-<li>CHECK_STREQ
-: <a class="el" href="easylogging_09_09_8h.html#a6ef61675c2fd3e74bfeb6ab2ac988c7b">easylogging++.h</a>
-</li>
-<li>CHECK_STRNE
-: <a class="el" href="easylogging_09_09_8h.html#a17afd415d134efa5643bab77fcce7056">easylogging++.h</a>
-</li>
-<li>CINFO
-: <a class="el" href="easylogging_09_09_8h.html#a06188346e55221dd1e45baad72b34f0e">easylogging++.h</a>
-</li>
-<li>CINFO_AFTER_N
-: <a class="el" href="easylogging_09_09_8h.html#a0fb4301ed2cb00041691613323ec27fe">easylogging++.h</a>
-</li>
-<li>CINFO_EVERY_N
-: <a class="el" href="easylogging_09_09_8h.html#a417d83e4e2f1091f7bf852e686af7995">easylogging++.h</a>
-</li>
-<li>CINFO_IF
-: <a class="el" href="easylogging_09_09_8h.html#a481d92883c8296bac54cd7130dd96abb">easylogging++.h</a>
-</li>
-<li>CINFO_N_TIMES
-: <a class="el" href="easylogging_09_09_8h.html#a4cc1773b7818fbb25c99059799c23c94">easylogging++.h</a>
-</li>
-<li>CLOG
-: <a class="el" href="easylogging_09_09_8h.html#a3c17f662e2aed619fd54481d91646329">easylogging++.h</a>
-</li>
-<li>CLOG_AFTER_N
-: <a class="el" href="easylogging_09_09_8h.html#a3d41155893224dc8c91367f1081a17fb">easylogging++.h</a>
-</li>
-<li>CLOG_EVERY_N
-: <a class="el" href="easylogging_09_09_8h.html#afee706f74b2f0adebd4c69c275f29ef3">easylogging++.h</a>
-</li>
-<li>CLOG_IF
-: <a class="el" href="easylogging_09_09_8h.html#ad670e1c27eb03da58596dabceaa1916a">easylogging++.h</a>
-</li>
-<li>CLOG_N_TIMES
-: <a class="el" href="easylogging_09_09_8h.html#a701da651932ad9eff8d32cac02bd5912">easylogging++.h</a>
-</li>
-<li>CPCHECK
-: <a class="el" href="easylogging_09_09_8h.html#aba5b2bb7bfd655766a8012f1a0bb8469">easylogging++.h</a>
-</li>
-<li>CPLOG
-: <a class="el" href="easylogging_09_09_8h.html#acbdb5292181db8cbd44c5d1499b87335">easylogging++.h</a>
-</li>
-<li>CPLOG_IF
-: <a class="el" href="easylogging_09_09_8h.html#aed8c7b5b1a85d05145a0075b20e081b1">easylogging++.h</a>
-</li>
-<li>CSYSLOG
-: <a class="el" href="easylogging_09_09_8h.html#a6018924cecb51318c7e56922a325e48d">easylogging++.h</a>
-</li>
-<li>CSYSLOG_AFTER_N
-: <a class="el" href="easylogging_09_09_8h.html#a98b9553985a6d9ea86f0ba7f4da146a7">easylogging++.h</a>
-</li>
-<li>CSYSLOG_EVERY_N
-: <a class="el" href="easylogging_09_09_8h.html#a564930b86dd9320f1ced70df843a7632">easylogging++.h</a>
-</li>
-<li>CSYSLOG_IF
-: <a class="el" href="easylogging_09_09_8h.html#a59fdd039e6888eb696032d88233aa1de">easylogging++.h</a>
-</li>
-<li>CSYSLOG_N_TIMES
-: <a class="el" href="easylogging_09_09_8h.html#a9d3113fc1a4a8c50fd279f088fc8a1ae">easylogging++.h</a>
-</li>
-<li>CTRACE
-: <a class="el" href="easylogging_09_09_8h.html#a52d73bcbbb714bf9e96906dd442d7366">easylogging++.h</a>
-</li>
-<li>CTRACE_AFTER_N
-: <a class="el" href="easylogging_09_09_8h.html#a9b63eae0d9b53652cba630f81a93114f">easylogging++.h</a>
-</li>
-<li>CTRACE_EVERY_N
-: <a class="el" href="easylogging_09_09_8h.html#a5a8c0f7f9039b5858042ea0b7d3d10a3">easylogging++.h</a>
-</li>
-<li>CTRACE_IF
-: <a class="el" href="easylogging_09_09_8h.html#af0d839f755380e946db6d2e2f9c50210">easylogging++.h</a>
-</li>
-<li>CTRACE_N_TIMES
-: <a class="el" href="easylogging_09_09_8h.html#a10ef43e4ff8ae67dd062922d2dd7647e">easylogging++.h</a>
-</li>
-<li>CVERBOSE
-: <a class="el" href="easylogging_09_09_8h.html#adb6ea5144e3759d1e4168406c129222f">easylogging++.h</a>
-</li>
-<li>CVERBOSE_AFTER_N
-: <a class="el" href="easylogging_09_09_8h.html#a77e46c4f8e0f17cd014ee95a30dbbe96">easylogging++.h</a>
-</li>
-<li>CVERBOSE_EVERY_N
-: <a class="el" href="easylogging_09_09_8h.html#a227221530a666367a33dfc91bc6f50b7">easylogging++.h</a>
-</li>
-<li>CVERBOSE_IF
-: <a class="el" href="easylogging_09_09_8h.html#a7d4d7334ec8a42f965ed05850af91be8">easylogging++.h</a>
-</li>
-<li>CVERBOSE_N_TIMES
-: <a class="el" href="easylogging_09_09_8h.html#a2f039d86442793800e6bc305948be428">easylogging++.h</a>
-</li>
-<li>CVLOG
-: <a class="el" href="easylogging_09_09_8h.html#aa506b5f339c97867e3c2f7323b9524ba">easylogging++.h</a>
-</li>
-<li>CVLOG_AFTER_N
-: <a class="el" href="easylogging_09_09_8h.html#aaf4030498596dde861b8596f33bd1344">easylogging++.h</a>
-</li>
-<li>CVLOG_EVERY_N
-: <a class="el" href="easylogging_09_09_8h.html#abeddcb8d8ef4af4e34569670d545066a">easylogging++.h</a>
-</li>
-<li>CVLOG_IF
-: <a class="el" href="easylogging_09_09_8h.html#aedf61a5f16c01c26c2f7d28cebe2554e">easylogging++.h</a>
-</li>
-<li>CVLOG_N_TIMES
-: <a class="el" href="easylogging_09_09_8h.html#ab866e66b738d63674c5c15bca25f1e22">easylogging++.h</a>
-</li>
-<li>CWARNING
-: <a class="el" href="easylogging_09_09_8h.html#a21ae98616935dcd0ab8f359be11cd460">easylogging++.h</a>
-</li>
-<li>CWARNING_AFTER_N
-: <a class="el" href="easylogging_09_09_8h.html#a75b6a305d9b48180fcdbea2e3785893d">easylogging++.h</a>
-</li>
-<li>CWARNING_EVERY_N
-: <a class="el" href="easylogging_09_09_8h.html#a9e9786cc0480efa89700aa7e281ca179">easylogging++.h</a>
-</li>
-<li>CWARNING_IF
-: <a class="el" href="easylogging_09_09_8h.html#a35d8c4387aa75d4a32008d2d448c0e72">easylogging++.h</a>
-</li>
-<li>CWARNING_N_TIMES
-: <a class="el" href="easylogging_09_09_8h.html#a70c84c9548a50ea0cdabba3c527e60c8">easylogging++.h</a>
+<li>VULPES_VK_SWAPCHAIN_H
+: <a class="el" href="_swapchain_8hpp.html#a0c8f927372192bdf1e8635e10fca197a">Swapchain.hpp</a>
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,0 +1,5 @@
+<map id="vpr::suballocTypeFromAllocType" name="vpr::suballocTypeFromAllocType">
+<area shape="rect" id="node2" href="$classvpr_1_1_allocator.html#ab5457af65cbb081b295f323c13a7843a" title="vpr::Allocator::Allocate\lMemory" alt="" coords="263,39,415,80"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_allocator.html#a74d845e760e100129d83bc40cd4fb12e" title="vpr::Allocator::Allocate\lForImage" alt="" coords="463,5,615,47"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_allocator.html#ae8c982057f90fad764d25d8b081e5603" title="vpr::Allocator::Allocate\lForBuffer" alt="" coords="463,71,615,112"/>
+</map>

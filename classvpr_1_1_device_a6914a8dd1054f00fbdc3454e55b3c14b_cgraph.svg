@@ -9,13 +9,13 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 73.5)">
 <title>vpr::Device::GeneralQueue</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-73.5 290,-73.5 290,4 -4,4"/>
-<!-- Node101 -->
-<g id="node1" class="node"><title>Node101</title>
+<!-- Node68 -->
+<g id="node1" class="node"><title>Node68</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-22.5 0,-41.5 131,-41.5 131,-22.5 0,-22.5"/>
 <text text-anchor="middle" x="65.5" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::GeneralQueue</text>
 </g>
-<!-- Node102 -->
-<g id="node2" class="node"><title>Node102</title>
+<!-- Node69 -->
+<g id="node2" class="node"><title>Node69</title>
 <g id="a_node2"><a xlink:href="classvpr_1_1_physical_device.html#af443c2a585d182166c464f252782a57b" target="_top" xlink:title="! Attempts to find a Queue family that supports the full bitfield given: this can be multiple types...">
 <polygon fill="white" stroke="black" points="167,-39 167,-69 286,-69 286,-39 167,-39"/>
 <text text-anchor="start" x="175" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::PhysicalDevice</text>
@@ -23,21 +23,21 @@
 </a>
 </g>
 </g>
-<!-- Node101&#45;&gt;Node102 -->
-<g id="edge1" class="edge"><title>Node101&#45;&gt;Node102</title>
+<!-- Node68&#45;&gt;Node69 -->
+<g id="edge1" class="edge"><title>Node68&#45;&gt;Node69</title>
 <path fill="none" stroke="midnightblue" d="M131.171,-40.9482C139.637,-42.1196 148.336,-43.3232 156.865,-44.5033"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="156.389,-47.9707 166.774,-45.8744 157.348,-41.0368 156.389,-47.9707"/>
 </g>
-<!-- Node103 -->
-<g id="node3" class="node"><title>Node103</title>
+<!-- Node70 -->
+<g id="node3" class="node"><title>Node70</title>
 <g id="a_node3"><a xlink:href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" target="_top" xlink:title="vpr::Device::vkHandle">
 <polygon fill="white" stroke="black" points="172.5,-0.5 172.5,-19.5 280.5,-19.5 280.5,-0.5 172.5,-0.5"/>
 <text text-anchor="middle" x="226.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::vkHandle</text>
 </a>
 </g>
 </g>
-<!-- Node101&#45;&gt;Node103 -->
-<g id="edge2" class="edge"><title>Node101&#45;&gt;Node103</title>
+<!-- Node68&#45;&gt;Node70 -->
+<g id="edge2" class="edge"><title>Node68&#45;&gt;Node70</title>
 <path fill="none" stroke="midnightblue" d="M131.171,-23.0518C141.36,-21.6421 151.885,-20.1858 162.045,-18.7799"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="162.632,-22.2322 172.058,-17.3945 161.672,-15.2982 162.632,-22.2322"/>
 </g>

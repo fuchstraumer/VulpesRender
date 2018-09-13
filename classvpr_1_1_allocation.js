@@ -1,0 +1,25 @@
+var classvpr_1_1_allocation =
+[
+    [ "Allocation", "classvpr_1_1_allocation.html#af49216f0d72f038145500587f84d30dd", null ],
+    [ "~Allocation", "classvpr_1_1_allocation.html#afbf44280b9503d91a56d91479619e6cb", null ],
+    [ "Allocation", "classvpr_1_1_allocation.html#a4ffd3690b3172c28d0e080739bd83e31", null ],
+    [ "Allocation", "classvpr_1_1_allocation.html#a4055730036d8cb2032234def146766ba", null ],
+    [ "GetUserData", "classvpr_1_1_allocation.html#a4991454fa12026f1e25fc56c6791be2d", null ],
+    [ "Init", "classvpr_1_1_allocation.html#ad5d461398f23e593c58f70a8cac78922", null ],
+    [ "InitPrivate", "classvpr_1_1_allocation.html#ad680abfd77facfe5efcc222b154b595d", null ],
+    [ "IsPrivateAllocation", "classvpr_1_1_allocation.html#ad23615cd9f84e8e2354cf1f1e7e8f162", null ],
+    [ "Map", "classvpr_1_1_allocation.html#a52b6b1170c2ecf99175ca809d5e89e75", null ],
+    [ "Memory", "classvpr_1_1_allocation.html#a1a223e41ca865271544ece71d18edce2", null ],
+    [ "MemoryTypeIdx", "classvpr_1_1_allocation.html#ab07876bad87d1c3e085ab02c1c608179", null ],
+    [ "Offset", "classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397", null ],
+    [ "operator=", "classvpr_1_1_allocation.html#a16abc6fd06477544c4a34a012be850b5", null ],
+    [ "operator=", "classvpr_1_1_allocation.html#a75408587e6fce6988e0cc1b0dcb58af1", null ],
+    [ "operator==", "classvpr_1_1_allocation.html#add3be5fd7fee67744d380e74b0c5bfb3", null ],
+    [ "SetUserData", "classvpr_1_1_allocation.html#aba0b6e2e6c71e801603e6b81c2218f89", null ],
+    [ "Unmap", "classvpr_1_1_allocation.html#a50c9f0b8277412ee7478939ade2025b8", null ],
+    [ "Update", "classvpr_1_1_allocation.html#aaa942129013583bd9c1858217e5d5126", null ],
+    [ "Alignment", "classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752", null ],
+    [ "impl", "classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a", null ],
+    [ "Size", "classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2", null ],
+    [ "userData", "classvpr_1_1_allocation.html#ac55862fc872fc1e9276210eddec744ca", null ]
+];

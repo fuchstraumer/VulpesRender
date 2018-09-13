@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +52,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_func_r.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -64,67 +85,24 @@ $(function() {
 
 <h3><a id="index_r"></a>- r -</h3><ul>
 <li>raw_equal_comparator()
-: <a class="el" href="structvpr_1_1raw__equal__comparator.html#a73b22721f942a82aed7319d6a423b8f9">vpr::raw_equal_comparator</a>
-</li>
-<li>reconfigure()
-: <a class="el" href="classel_1_1_logger.html#adfd57ab27fb398cc980a3edfab92927e">el::Logger</a>
-</li>
-<li>reconfigureAllLoggers()
-: <a class="el" href="classel_1_1_loggers.html#a1ebd33bc0208b430f41508e34509c7c9">el::Loggers</a>
-</li>
-<li>reconfigureLogger()
-: <a class="el" href="classel_1_1_loggers.html#a89ec21259cfcfee3f761fca68c4ec043">el::Loggers</a>
+: <a class="el" href="structvpr_1_1raw__equal__comparator.html#ac2194f856f4295554c43ebdbc0e552ca">vpr::raw_equal_comparator</a>
 </li>
 <li>Recreate()
 : <a class="el" href="classvpr_1_1_allocator.html#a4fb24600d3edbff034389a4ea111513f">vpr::Allocator</a>
-, <a class="el" href="classvpr_1_1_swapchain.html#acf014a8530f47418adba1c9e62c0c78e">vpr::Swapchain</a>
-</li>
-<li>RegisteredLoggers()
-: <a class="el" href="classel_1_1base_1_1_registered_loggers.html#ae52ec336770d33fef86f234e4e68dce5">el::base::RegisteredLoggers</a>
-</li>
-<li>registeredLoggers()
-: <a class="el" href="classel_1_1base_1_1_storage.html#a85a9d9149a545b0eec16783f409ab697">el::base::Storage</a>
-</li>
-<li>registerNew()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_registry.html#ab10b3dd25ff0df036e7a015635a15dee">el::base::utils::Registry&lt; T_Ptr, T_Key &gt;</a>
-, <a class="el" href="classel_1_1base_1_1utils_1_1_registry_with_pred.html#a561a5d418106a16473ff94d43a4b6b04">el::base::utils::RegistryWithPred&lt; T_Ptr, Pred &gt;</a>
-</li>
-<li>Registry()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_registry.html#adf5e97aa801be3b93e116ad645304759">el::base::utils::Registry&lt; T_Ptr, T_Key &gt;</a>
-</li>
-<li>RegistryWithPred()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_registry_with_pred.html#a564214aff7fdbd5370e777dd0c15e615">el::base::utils::RegistryWithPred&lt; T_Ptr, Pred &gt;</a>
-</li>
-<li>reinitDeepCopy()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_abstract_registry.html#a529677fb42e78d03c36cdea49f8877c9">el::base::utils::AbstractRegistry&lt; T_Ptr, Container &gt;</a>
-</li>
-<li>releaseDate()
-: <a class="el" href="classel_1_1_version_info.html#a9347b5c0f386117f1cf78dae99bb1752">el::VersionInfo</a>
-</li>
-<li>releaseLock()
-: <a class="el" href="classel_1_1base_1_1threading_1_1_thread_safe.html#a95bb166242b9691f861274a9b8ced2d9">el::base::threading::ThreadSafe</a>
-</li>
-<li>remove()
-: <a class="el" href="classel_1_1base_1_1_registered_loggers.html#a4d17dc9673f6aa6216571e182097400a">el::base::RegisteredLoggers</a>
+, <a class="el" href="classvpr_1_1_surface_k_h_r.html#a35b9db127a998f70bea3ebbdeef97f5d">vpr::SurfaceKHR</a>
+, <a class="el" href="classvpr_1_1_swapchain.html#a34c3d73db1e99d3a395398fc0dbb5dc6">vpr::Swapchain</a>
 </li>
 <li>RemoveBlock()
 : <a class="el" href="classvpr_1_1_allocation_collection.html#a8a66b73729415adc78507ace1a938f8c">vpr::AllocationCollection</a>
-</li>
-<li>removeFlag()
-: <a class="el" href="classel_1_1base_1_1_storage.html#aaecbb6ae954d0bf748ac7f3c980a9173">el::base::Storage</a>
-, <a class="el" href="classel_1_1_loggers.html#a23fcb4b492f70a34285c45c0b5e2e515">el::Loggers</a>
 </li>
 <li>removeFreeSuballocation()
 : <a class="el" href="classvpr_1_1_memory_block.html#afbbaf6e2f0de8d1bed31e8a8cf71cfed">vpr::MemoryBlock</a>
 </li>
 <li>Renderpass()
-: <a class="el" href="classvpr_1_1_renderpass.html#a330c9817c56db50bd08767407681a4eb">vpr::Renderpass</a>
+: <a class="el" href="classvpr_1_1_renderpass.html#a5979cfebed3d030c2718a476c429709c">vpr::Renderpass</a>
 </li>
-<li>replaceAll()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_str.html#a5f424d54390059c0a6a6f81a74ee846b">el::base::utils::Str</a>
-</li>
-<li>replaceFirstWithEscape()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_str.html#a0f271d7da2bb3c1f2fa062219c0e0ba2">el::base::utils::Str</a>
+<li>RenderpassImpl()
+: <a class="el" href="structvpr_1_1_renderpass_impl.html#a05dd2dfeb75e5123ab2ee277525b30c7">vpr::RenderpassImpl</a>
 </li>
 <li>RequestSuballocation()
 : <a class="el" href="classvpr_1_1_memory_block.html#acd06cfdc8c15616243b296be79e7a63f">vpr::MemoryBlock</a>
@@ -139,31 +117,19 @@ $(function() {
 <li>ResetCmdPool()
 : <a class="el" href="classvpr_1_1_command_pool.html#aa016e75a990a46203a0b75de317e6f1e">vpr::CommandPool</a>
 </li>
-<li>resetLocation()
-: <a class="el" href="classel_1_1base_1_1_hit_counter.html#a56f5a7450080d31b8d54c2be877b8597">el::base::HitCounter</a>
-</li>
-<li>resolveFilename()
-: <a class="el" href="classel_1_1base_1_1_typed_configurations.html#a38c9262f6d645459d8f22bec4d47200e">el::base::TypedConfigurations</a>
-</li>
-<li>resolveLoggerFormatSpec()
-: <a class="el" href="classel_1_1_logger.html#acfb9ef869b9b4dc3efd78d7f64b8bebd">el::Logger</a>
-</li>
-<li>resolver()
-: <a class="el" href="classel_1_1_custom_format_specifier.html#a9e388356717597849bc3902835370ece">el::CustomFormatSpecifier</a>
-</li>
 <li>retrieveQueueFamilyProperties()
 : <a class="el" href="classvpr_1_1_physical_device_impl.html#a69d80ff2220466001ff60b2703152b66">vpr::PhysicalDeviceImpl</a>
 </li>
-<li>rtrim()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_str.html#a2192df38f98b1d9547ff0e339e33f486">el::base::utils::Str</a>
-</li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

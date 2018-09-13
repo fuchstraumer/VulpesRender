@@ -1,5 +1,0 @@
-<map id="el::Configurations::set" name="el::Configurations::set">
-<area shape="rect" id="node2" href="$classel_1_1_configuration.html#abd69269de9fa62e0052aeaca35814dc0" title="Gets configuration type of current configuration. " alt="" coords="201,5,324,47"/>
-<area shape="rect" id="node3" href="$classel_1_1_configuration.html#a4f7015eb299c0250dadc9eb15be76c31" title="Gets level of current configuration. " alt="" coords="201,71,324,112"/>
-<area shape="rect" id="node4" href="$classel_1_1_configuration.html#a17acf05de64478fa6f54b9ddbbc248e5" title="Gets string based configuration value. " alt="" coords="201,136,324,177"/>
-</map>

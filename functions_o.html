@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +52,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_o.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -63,23 +84,19 @@ $(function() {
 <div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
 
 <h3><a id="index_o"></a>- o -</h3><ul>
-<li>Offset
-: <a class="el" href="group___allocation.html#a2e910e41ac3c7b7d269dda693e736ce8">vpr::Allocation::blockAllocation</a>
-, <a class="el" href="classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397">vpr::Allocation</a>
+<li>Offset()
+: <a class="el" href="classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397">vpr::Allocation</a>
+, <a class="el" href="namespacevpr.html#aefc5312d57bb46a0decb787d60f5d877">vpr::AllocationImpl::blockAllocation</a>
 , <a class="el" href="structvpr_1_1_suballocation.html#ab65ef9ae13c57aee65403240ff1aa0ac">vpr::Suballocation</a>
+, <a class="el" href="structvpr_1_1_suballocation_draw_command.html#a6689efc2837f25480ff458f2934ddbdf">vpr::SuballocationDrawCommand</a>
 , <a class="el" href="group___allocation.html#aa0b7cc608718008b543cea33aab059c3">vpr::SuballocationRequest</a>
 </li>
-<li>operator bool()
-: <a class="el" href="classel_1_1base_1_1_null_writer.html#a0d1313fd900f548bb67bc1a1785a4048">el::base::NullWriter</a>
-, <a class="el" href="classel_1_1base_1_1_writer.html#ac518e6b23327127f63c6d26ee83ecbf9">el::base::Writer</a>
-</li>
-<li>operator!=()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_abstract_registry.html#a35de8807521651c85acb26532a2623e1">el::base::utils::AbstractRegistry&lt; T_Ptr, Container &gt;</a>
+<li>oldHandle
+: <a class="el" href="structvpr_1_1_swapchain_impl.html#ae2165262ed1575747787c0c89987e3b8">vpr::SwapchainImpl</a>
 </li>
 <li>operator()()
-: <a class="el" href="classel_1_1base_1_1_hit_counter_1_1_predicate.html#ae07b1562a3c0ed38457401e60b80b0c5">el::base::HitCounter::Predicate</a>
-, <a class="el" href="classel_1_1_configuration_1_1_predicate.html#a961e7b14fc7541eefb04cbdcbc074e6e">el::Configuration::Predicate</a>
-, <a class="el" href="structvpr_1_1raw__equal__comparator.html#a27ff54fa5f5bc50c3f0d3bed538a10e8">vpr::raw_equal_comparator</a>
+: <a class="el" href="structvpr_1_1_allocation_hash.html#ade2e057ec37776fd84e814f8a9e540f3">vpr::AllocationHash</a>
+, <a class="el" href="structvpr_1_1raw__equal__comparator.html#a13bfbd46bbc4e26bc60cf0b2ff29c652">vpr::raw_equal_comparator</a>
 , <a class="el" href="structvpr_1_1suballoc_iter_compare.html#a0185c52b301ef57868a73e221d49bb7f">vpr::suballocIterCompare</a>
 , <a class="el" href="structvpr_1_1suballoc_offset_compare.html#ac608176696badd00001aaba864a51088">vpr::suballocOffsetCompare</a>
 </li>
@@ -87,57 +104,38 @@ $(function() {
 : <a class="el" href="classvpr_1_1_memory_block.html#ad2e69f41347a21089e37266fe24afe88">vpr::MemoryBlock</a>
 , <a class="el" href="structvpr_1_1_suballocation.html#a78bbba6098426eb4c463b630a767bf2a">vpr::Suballocation</a>
 </li>
-<li>operator&lt;&lt;()
-: <a class="el" href="classel_1_1base_1_1_message_builder.html#a740a968d7f2901d49a2e1c348cfea7bf">el::base::MessageBuilder</a>
-, <a class="el" href="classel_1_1base_1_1_null_writer.html#a39cb7d47986d70c2b4e9d78d1482da7d">el::base::NullWriter</a>
-, <a class="el" href="classel_1_1base_1_1utils_1_1_command_line_args.html#aee5ba4c037136cd1d54026dd75927b10">el::base::utils::CommandLineArgs</a>
-, <a class="el" href="classel_1_1base_1_1utils_1_1_registry_with_pred.html#a71b45d148b62604847fe06f7addda779">el::base::utils::RegistryWithPred&lt; T_Ptr, Pred &gt;</a>
-, <a class="el" href="classel_1_1base_1_1_writer.html#ab94f0d920c6465a57937e893aa9f5ada">el::base::Writer</a>
-, <a class="el" href="classel_1_1_loggable.html#a00722a386f498be3ebece2e266fb0f05">el::Loggable</a>
-</li>
 <li>operator=()
-: <a class="el" href="classel_1_1base_1_1_hit_counter.html#ad32a5e5c2a63ff30fa9d298613d746d1">el::base::HitCounter</a>
-, <a class="el" href="classel_1_1base_1_1_log_format.html#a3ee763fae4bb3e268374b93b457f7b9f">el::base::LogFormat</a>
-, <a class="el" href="classel_1_1base_1_1_no_copy.html#a9c20bf24f41ce8cdbd8093f49a84d5e9">el::base::NoCopy</a>
-, <a class="el" href="classel_1_1base_1_1_static_class.html#aa00586abd362062c36ec2752e433c698">el::base::StaticClass</a>
-, <a class="el" href="classel_1_1base_1_1utils_1_1_abstract_registry.html#a5727a3cadeee6a2b10d8f46fb91956e7">el::base::utils::AbstractRegistry&lt; T_Ptr, Container &gt;</a>
-, <a class="el" href="classel_1_1base_1_1utils_1_1_registry.html#a80e0ce12b7d0c24462b385fc7b3149e0">el::base::utils::Registry&lt; T_Ptr, T_Key &gt;</a>
-, <a class="el" href="classel_1_1base_1_1utils_1_1_registry_with_pred.html#adb7e568c8cb084589467b937eab86b86">el::base::utils::RegistryWithPred&lt; T_Ptr, Pred &gt;</a>
-, <a class="el" href="classel_1_1_configuration.html#a4cb51dcb3f995e7c259252493690cbd4">el::Configuration</a>
-, <a class="el" href="classel_1_1_logger.html#a467df515136bf1183919fbf7a2cc8559">el::Logger</a>
-, <a class="el" href="classvpr_1_1_allocation.html#aa6355d4f330ab946d69b6d7be5f87abb">vpr::Allocation</a>
+: <a class="el" href="classvpr_1_1_allocation.html#a16abc6fd06477544c4a34a012be850b5">vpr::Allocation</a>
 , <a class="el" href="classvpr_1_1_allocation_collection.html#a1e9894a592cdafc75b397b732dd5b853">vpr::AllocationCollection</a>
 , <a class="el" href="classvpr_1_1_allocator.html#a769efe2787e5153c716f7334cdd85d45">vpr::Allocator</a>
 , <a class="el" href="classvpr_1_1_buffer.html#a9d1cc3aef09675b1d5104916b91f174d">vpr::Buffer</a>
 , <a class="el" href="classvpr_1_1_command_pool.html#a751041197c520a69652ec0df6ce6385b">vpr::CommandPool</a>
-, <a class="el" href="classvpr_1_1_depth_stencil.html#a95a352820426feaa4885722f3332fd65">vpr::DepthStencil</a>
+, <a class="el" href="classvpr_1_1_debug_visualization.html#a726289e55640f364be47d0262f899398">vpr::DebugVisualization</a>
 , <a class="el" href="classvpr_1_1_descriptor_pool.html#a8a84e04be795635b02ca4370478e99a6">vpr::DescriptorPool</a>
-, <a class="el" href="classvpr_1_1_descriptor_set.html#aca37137b7bac707565b8250f95c58ca2">vpr::DescriptorSet</a>
-, <a class="el" href="classvpr_1_1_descriptor_set_layout.html#af24634c627f1b4fe1bfa0207f3e704a0">vpr::DescriptorSetLayout</a>
+, <a class="el" href="classvpr_1_1_descriptor_set.html#a18f85f7d39829d83dd2c4b2c2451b015">vpr::DescriptorSet</a>
+, <a class="el" href="classvpr_1_1_descriptor_set_layout.html#a5000286a06dc67a0e2d398129644240c">vpr::DescriptorSetLayout</a>
 , <a class="el" href="classvpr_1_1_device.html#aebfab03ee3950f6e85579d0988c659c3">vpr::Device</a>
 , <a class="el" href="classvpr_1_1_event.html#a6581a8a04a35539bbc44e52fcd022b4d">vpr::Event</a>
-, <a class="el" href="classvpr_1_1_fence.html#a2943affff40b67c90e4e0e8e73a4bf56">vpr::Fence</a>
+, <a class="el" href="classvpr_1_1_fence.html#a715632e77683a203d22bc717a91bcdde">vpr::Fence</a>
 , <a class="el" href="classvpr_1_1_framebuffer.html#a4d28318492b272461a3ed7604f527000">vpr::Framebuffer</a>
-, <a class="el" href="classvpr_1_1_graphics_pipeline.html#adea1fd57e923759603b0f6f16b64a636">vpr::GraphicsPipeline</a>
+, <a class="el" href="classvpr_1_1_graphics_pipeline.html#a91c924b5f981aa1c11fabd93b8bd0293">vpr::GraphicsPipeline</a>
 , <a class="el" href="classvpr_1_1_image.html#a610003672980e0c8c2b1e830cfea6d6a">vpr::Image</a>
 , <a class="el" href="classvpr_1_1_instance.html#aca395bdc50c5191872bcdffcd223ccb9">vpr::Instance</a>
 , <a class="el" href="classvpr_1_1_memory_block.html#ad77c40afbc66e75b164a88e305deb066">vpr::MemoryBlock</a>
 , <a class="el" href="classvpr_1_1_physical_device.html#a2314cb016c95404ae4c11b4cb4777544">vpr::PhysicalDevice</a>
-, <a class="el" href="classvpr_1_1_physical_device_impl.html#a87891e2247f80651e2a7c1c5892b6218">vpr::PhysicalDeviceImpl</a>
+, <a class="el" href="classvpr_1_1_physical_device_impl.html#a4fd7907cfe2a054358875ccd83cdf90b">vpr::PhysicalDeviceImpl</a>
 , <a class="el" href="classvpr_1_1_pipeline_cache.html#a33ea3e0b57606be603bb49db0119ccb2">vpr::PipelineCache</a>
 , <a class="el" href="classvpr_1_1_pipeline_layout.html#afcea5dcf6d858441c93fea6154a52e00">vpr::PipelineLayout</a>
 , <a class="el" href="classvpr_1_1_renderpass.html#ad614063be705dff2a38018527ee9b73e">vpr::Renderpass</a>
-, <a class="el" href="classvpr_1_1_sampler.html#a2bcc30e668ba0887b4f070cdaa4cf3c8">vpr::Sampler</a>
+, <a class="el" href="structvpr_1_1_renderpass_impl.html#a5d37571029174d290c9849dcdac272c2">vpr::RenderpassImpl</a>
+, <a class="el" href="classvpr_1_1_sampler.html#a1f87df788b0b481346cd33b84f0df5c9">vpr::Sampler</a>
 , <a class="el" href="classvpr_1_1_semaphore.html#a91a695abe81f52dedb2f7105e476bdcc">vpr::Semaphore</a>
-, <a class="el" href="classvpr_1_1_shader_module.html#a43d7836b4e19879023dd43d6cb3e22f4">vpr::ShaderModule</a>
+, <a class="el" href="classvpr_1_1_shader_module.html#af8cab7f3fa2555557cd96c6788ed69bb">vpr::ShaderModule</a>
+, <a class="el" href="classvpr_1_1_surface_k_h_r.html#aef09d838497579b7e069da3f543cc865">vpr::SurfaceKHR</a>
 , <a class="el" href="classvpr_1_1_swapchain.html#abe10399ef8345a026c2888d0ae5f8376">vpr::Swapchain</a>
-, <a class="el" href="classvpr_1_1_transfer_pool.html#ab78ec1e94450a669ca83dca550de7c97">vpr::TransferPool</a>
 </li>
 <li>operator==()
-: <a class="el" href="classel_1_1base_1_1_log_format.html#a31e85c6f74da6fe36d156a89a6c7fb91">el::base::LogFormat</a>
-, <a class="el" href="classel_1_1base_1_1_subsecond_precision.html#a5bb2fe83619b7007aac61252e4dc5186">el::base::SubsecondPrecision</a>
-, <a class="el" href="classel_1_1base_1_1utils_1_1_abstract_registry.html#ac3e648dc0caa8914f8604650f00bc94b">el::base::utils::AbstractRegistry&lt; T_Ptr, Container &gt;</a>
-, <a class="el" href="classel_1_1_custom_format_specifier.html#ae17a9fbf8c5a28867308fcb8966a3aa0">el::CustomFormatSpecifier</a>
+: <a class="el" href="classvpr_1_1_allocation.html#add3be5fd7fee67744d380e74b0c5bfb3">vpr::Allocation</a>
 </li>
 <li>operator[]()
 : <a class="el" href="classvpr_1_1_allocation_collection.html#a46ab8c77bb2397e34eea28fcd55cb8dd">vpr::AllocationCollection</a>
@@ -151,11 +149,14 @@ $(function() {
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

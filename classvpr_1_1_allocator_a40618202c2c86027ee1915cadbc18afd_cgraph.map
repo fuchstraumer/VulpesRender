@@ -1,9 +1,0 @@
-<map id="vpr::Allocator::allocateMemoryType" name="vpr::Allocator::allocateMemoryType">
-<area shape="rect" id="node2" href="$classvpr_1_1_allocator.html#ad4d7daf9b55d81a4fab0cb4a657d6508" title="vpr::Allocator::allocate\lPrivateMemory" alt="" coords="219,53,370,94"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" title="vpr::Device::vkHandle" alt="" coords="445,5,589,32"/>
-<area shape="rect" id="node5" href="$classvpr_1_1_allocator.html#a32c2e59911a888c64b7d56005014865b" title="vpr::Allocator::GetAllocSize" alt="" coords="204,119,385,145"/>
-<area shape="rect" id="node6" href="$classvpr_1_1_allocator.html#af89f4383e7e9eb534e1ddc76081c43fd" title="vpr::Allocator::GetBuffer\lImageGranularity" alt="" coords="215,170,374,211"/>
-<area shape="rect" id="node7" href="$classvpr_1_1_allocator.html#aee9903438ded8311fd11f757f80002d6" title="vpr::Allocator::GetPreferred\lBlockSize" alt="" coords="205,235,384,277"/>
-<area shape="rect" id="node8" href="$classvpr_1_1_allocation.html#ad5d461398f23e593c58f70a8cac78922" title="vpr::Allocation::Init" alt="" coords="231,301,359,328"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_allocation.html#ad680abfd77facfe5efcc222b154b595d" title="vpr::Allocation::InitPrivate" alt="" coords="433,60,600,87"/>
-</map>

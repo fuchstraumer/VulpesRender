@@ -1,5 +1,0 @@
-<map id="el::LoggerRegistrationCallback" name="el::LoggerRegistrationCallback">
-<area shape="rect" id="node2" href="$classel_1_1_callback.html" title="el::Callback\&lt; Logger \&gt;" alt="" coords="28,200,181,227"/>
-<area shape="rect" id="node3" href="$classel_1_1base_1_1threading_1_1_thread_safe.html" title="Base of thread safe class, this class is inheritable&#45;only. " alt="" coords="40,109,169,151"/>
-<area shape="rect" id="node4" href="$classel_1_1base_1_1threading_1_1internal_1_1_no_mutex.html" title="Mutex wrapper used when multi&#45;threading is disabled. " alt="" coords="39,5,171,47"/>
-</map>

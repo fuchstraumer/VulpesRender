@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +52,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('namespacemembers_type.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -67,9 +88,6 @@ $(function() {
 <li>avail_suballocation_iterator_t
 : <a class="el" href="namespacevpr.html#ae45fb55dc24425884ab5770dfdb39cdb">vpr</a>
 </li>
-<li>char_t
-: <a class="el" href="namespaceel_1_1base_1_1type.html#ae9fe1ba101c2444b8cad9a2484b54907">el::base::type</a>
-</li>
 <li>const_allocation_iterator_t
 : <a class="el" href="namespacevpr.html#a5e5c4f19e6c891c34199ef44be0e8cca">vpr</a>
 </li>
@@ -79,79 +97,22 @@ $(function() {
 <li>const_suballocation_iterator_t
 : <a class="el" href="namespacevpr.html#ab423494fb93a04bbd6bd02f5b3b4b393">vpr</a>
 </li>
-<li>EnumType
-: <a class="el" href="namespaceel_1_1base_1_1type.html#aa7dbdfaaff779b8e3d338e1b31707098">el::base::type</a>
-</li>
-<li>FileStreamPtr
-: <a class="el" href="namespaceel_1_1base.html#a8b10bcfd674533f8340cd8c39fbf5233">el::base</a>
-</li>
-<li>FormatSpecifierValueResolver
-: <a class="el" href="namespaceel.html#a7127f2de2769e2a199a3665f42028a16">el</a>
-</li>
-<li>fstream_t
-: <a class="el" href="namespaceel_1_1base_1_1type.html#a620c830ead75d26b45c060c211ee2685">el::base::type</a>
-</li>
-<li>LineNumber
-: <a class="el" href="namespaceel_1_1base_1_1type.html#a7be44abab4288b1ea29962a059737347">el::base::type</a>
-</li>
-<li>LogBuilderPtr
-: <a class="el" href="namespaceel.html#ad4c4b2f7d70a4b02568a9f70724a6b39">el</a>
-</li>
-<li>LogDispatchCallbackPtr
-: <a class="el" href="namespaceel_1_1base_1_1type.html#a887283511935c7a6d5ca99df8099f33f">el::base::type</a>
-</li>
-<li>LoggerRegistrationCallbackPtr
-: <a class="el" href="namespaceel_1_1base_1_1type.html#ab9e009b0511ba22eed263c8ced700bb6">el::base::type</a>
-</li>
-<li>LogStreamsReferenceMap
-: <a class="el" href="namespaceel_1_1base.html#af7602da9fe1d6c75985184fb0e39fd11">el::base</a>
-</li>
-<li>MillisecondsWidth
-: <a class="el" href="namespaceel_1_1base.html#abbc234f4907eccec2673dfc6efaa5925">el::base</a>
-</li>
-<li>Mutex
-: <a class="el" href="namespaceel_1_1base_1_1threading.html#ab9400eb234a82878e8458a65f9774320">el::base::threading</a>
-</li>
-<li>ostream_t
-: <a class="el" href="namespaceel_1_1base_1_1type.html#a74ea109bf34d1c44926837fb0830f445">el::base::type</a>
-</li>
-<li>PerformanceTrackerPtr
-: <a class="el" href="namespaceel_1_1base_1_1type.html#a095751e8dd68ae28d07a548f47d31d31">el::base::type</a>
-</li>
-<li>PerformanceTrackingCallbackPtr
-: <a class="el" href="namespaceel_1_1base_1_1type.html#a01a715419060d65c31b71fd8d067abdd">el::base::type</a>
-</li>
-<li>PreRollOutCallback
-: <a class="el" href="namespaceel.html#aeb764b890a6f3cd41d2726bcd4e9c0cf">el</a>
-</li>
-<li>ScopedLock
-: <a class="el" href="namespaceel_1_1base_1_1threading.html#a84bb1940fe98386c8907c1f4ceac5718">el::base::threading</a>
-</li>
-<li>StoragePointer
-: <a class="el" href="namespaceel_1_1base_1_1type.html#a3c34822c3825018aca1526f2289b7976">el::base::type</a>
-</li>
-<li>string_t
-: <a class="el" href="namespaceel_1_1base_1_1type.html#a67e406cd213c231f1d135b5a4eda64b5">el::base::type</a>
-</li>
-<li>stringstream_t
-: <a class="el" href="namespaceel_1_1base_1_1type.html#a3492908c4b80f97b6c4b346d394f1302">el::base::type</a>
-</li>
 <li>suballocation_iterator_t
 : <a class="el" href="namespacevpr.html#a43160a49c54463723cf97f5d8c51e1f2">vpr</a>
 </li>
 <li>suballocationList
 : <a class="el" href="namespacevpr.html#a699fcbdac72f032ac918ffa160703c20">vpr</a>
 </li>
-<li>VerboseLevel
-: <a class="el" href="namespaceel_1_1base_1_1type.html#a379652fdd9386faa5e26bf1f2493bffa">el::base::type</a>
-</li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

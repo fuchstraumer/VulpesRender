@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +52,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_vars_d.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -63,11 +84,21 @@ $(function() {
 &#160;
 
 <h3><a id="index_d"></a>- d -</h3><ul>
+<li>Data
+: <a class="el" href="namespacevpr.html#a51b52b51eede276e7aeabc5a9cb21278">vpr::CommandBuffers</a>
+, <a class="el" href="structvpr_1_1_debug_visualization_impl.html#a7acb06b4ffd4730e4b9cefbba5846d8f">vpr::DebugVisualizationImpl</a>
+</li>
+<li>data
+: <a class="el" href="classvpr_1_1_descriptor_set_layout.html#aed5ff96a518362d581fd44e44f5e4ddd">vpr::DescriptorSetLayout</a>
+</li>
+<li>dataMembers
+: <a class="el" href="classvpr_1_1_device.html#a18421f8e6be40e60ffb5e436b6693658">vpr::Device</a>
+</li>
 <li>dataSize
 : <a class="el" href="classvpr_1_1_buffer.html#ae153d808e4e2c669e5a925f166aa3e56">vpr::Buffer</a>
 </li>
-<li>debugCallback
-: <a class="el" href="classvpr_1_1_instance.html#a9cfd9941aa80f6776f6d74c3950b57ba">vpr::Instance</a>
+<li>debugUtilsHandler
+: <a class="el" href="classvpr_1_1_device.html#a8545ca31dfd6a35a0370c7de5b0cc64c">vpr::Device</a>
 </li>
 <li>DepthStencilInfo
 : <a class="el" href="structvpr_1_1_graphics_pipeline_info.html#a8f4b01f4c7440cf6be64e30bb4f47942">vpr::GraphicsPipelineInfo</a>
@@ -78,39 +109,47 @@ $(function() {
 <li>descriptorInfoSet
 : <a class="el" href="classvpr_1_1_buffer.html#a10eaeb5b9ea147bc00ca1b58653cdf69">vpr::Buffer</a>
 </li>
-<li>descriptorPool
-: <a class="el" href="classvpr_1_1_descriptor_set.html#a56f324442bd9a1c653c889128e094797">vpr::DescriptorSet</a>
+<li>desiredSyncMode
+: <a class="el" href="structvpr_1_1_swapchain_impl.html#a20ec41d1ba4829802c339716b7ddb609">vpr::SwapchainImpl</a>
 </li>
 <li>device
-: <a class="el" href="classvpr_1_1_descriptor_pool.html#a0ee8da0b374f4606b00eab0d62c9dbf9">vpr::DescriptorPool</a>
-, <a class="el" href="classvpr_1_1_descriptor_set.html#aaa93f454255f66ae3c357871533a129c">vpr::DescriptorSet</a>
-, <a class="el" href="classvpr_1_1_descriptor_set_layout.html#af7895bc2666bb7b9cfdc473b83de0425">vpr::DescriptorSetLayout</a>
-, <a class="el" href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">vpr::Event</a>
-, <a class="el" href="classvpr_1_1_fence.html#a072675c17ac6a9787d132e95874bc2b5">vpr::Fence</a>
-, <a class="el" href="classvpr_1_1_pipeline_layout.html#a5a0beeea8a75ce0d959e30ce8484a4d3">vpr::PipelineLayout</a>
-, <a class="el" href="classvpr_1_1_sampler.html#a9b4a653e42efcdbe530752d1839da3e4">vpr::Sampler</a>
-, <a class="el" href="classvpr_1_1_semaphore.html#a2f885754279bd54d8e5b9de20f074bb3">vpr::Semaphore</a>
-, <a class="el" href="classvpr_1_1_swapchain.html#ada41a211f8bd4e84c5f31221b5456f06">vpr::Swapchain</a>
+: <a class="el" href="classvpr_1_1_descriptor_pool.html#aba83382992c9afa3f1c80b8af7cae020">vpr::DescriptorPool</a>
+, <a class="el" href="classvpr_1_1_descriptor_set.html#a13fbd330e1749a7b60444526799adb97">vpr::DescriptorSet</a>
+, <a class="el" href="classvpr_1_1_descriptor_set_layout.html#a5f778734388912af4202bd741f648d99">vpr::DescriptorSetLayout</a>
+, <a class="el" href="structvpr_1_1_device_data_members.html#a9ec824eaad8a92d25ebd9d431a00143d">vpr::DeviceDataMembers</a>
+, <a class="el" href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">vpr::Event</a>
+, <a class="el" href="classvpr_1_1_fence.html#a953bbb86eaa9e15c00255153a09aa992">vpr::Fence</a>
+, <a class="el" href="classvpr_1_1_pipeline_layout.html#a6bade07d0e3c4e70f199e9679c6159c3">vpr::PipelineLayout</a>
+, <a class="el" href="classvpr_1_1_sampler.html#abe11a09a1866b47f180918a1be18271a">vpr::Sampler</a>
+, <a class="el" href="classvpr_1_1_semaphore.html#aaa6537fc68271eb5f84db347505621de">vpr::Semaphore</a>
+, <a class="el" href="classvpr_1_1_surface_k_h_r.html#afd00bb9d80680f5f52ebbb1bf3f8858b">vpr::SurfaceKHR</a>
+, <a class="el" href="structvpr_1_1_swapchain_impl.html#aeba57cfc9c3adf9076e82df56393850e">vpr::SwapchainImpl</a>
 </li>
 <li>deviceMemoryProperties
-: <a class="el" href="classvpr_1_1_allocator.html#a22905217f341eaaec4788f71034dbab5">vpr::Allocator</a>
+: <a class="el" href="structvpr_1_1_allocator_impl.html#a08588041240a23937c472696c50ca38e">vpr::AllocatorImpl</a>
 </li>
 <li>deviceProperties
-: <a class="el" href="classvpr_1_1_allocator.html#ad14908372af93e06ddcaee4f97185fcf">vpr::Allocator</a>
+: <a class="el" href="structvpr_1_1_allocator_impl.html#a0e6f55fc74957e9fbb1eece6951b80ff">vpr::AllocatorImpl</a>
+</li>
+<li>DrawCommands
+: <a class="el" href="structvpr_1_1_memory_block_info.html#a7fb520e9567f5d2ffcf8b7b6c172e1b9">vpr::MemoryBlockInfo</a>
 </li>
 <li>DvcMemory
-: <a class="el" href="group___allocation.html#a6aca57626ceb41add82d17be604e2b42">vpr::Allocation::privateAllocation</a>
+: <a class="el" href="namespacevpr.html#a694df8b0667613a5cc03732ee459c178">vpr::AllocationImpl::privateAllocation</a>
 </li>
 <li>DynamicStateInfo
 : <a class="el" href="structvpr_1_1_graphics_pipeline_info.html#aec220e52f813d1d8420ba6006bbaa15b">vpr::GraphicsPipelineInfo</a>
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

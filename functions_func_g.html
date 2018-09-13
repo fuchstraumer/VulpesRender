@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +52,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_func_g.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -66,32 +87,23 @@ $(function() {
 <li>GeneralQueue()
 : <a class="el" href="classvpr_1_1_device.html#a6914a8dd1054f00fbdc3454e55b3c14b">vpr::Device</a>
 </li>
-<li>get()
-: <a class="el" href="classel_1_1base_1_1_registered_loggers.html#a1ca66763d892f3d2dc62926eb9dc56d3">el::base::RegisteredLoggers</a>
-, <a class="el" href="classel_1_1base_1_1utils_1_1_registry.html#a18c332267f2acbe78c97a611dec2e5c2">el::base::utils::Registry&lt; T_Ptr, T_Key &gt;</a>
-, <a class="el" href="classel_1_1base_1_1utils_1_1_registry_with_pred.html#a811d9cc011d945bc7237e6ae1cf2f096">el::base::utils::RegistryWithPred&lt; T_Ptr, Pred &gt;</a>
-, <a class="el" href="classel_1_1_configurations.html#a6da4bc9bd6a14dc44feaf25163e998ca">el::Configurations</a>
-</li>
 <li>GetAllocSize()
-: <a class="el" href="classvpr_1_1_allocator.html#a32c2e59911a888c64b7d56005014865b">vpr::Allocator</a>
+: <a class="el" href="structvpr_1_1_allocator_impl.html#af2ca13cb9b36bb5dd5d937d1ecd8aa78">vpr::AllocatorImpl</a>
 </li>
 <li>getAttributes()
 : <a class="el" href="classvpr_1_1_physical_device_impl.html#af87fd9143013fabf4df17ca888d541fb">vpr::PhysicalDeviceImpl</a>
 </li>
-<li>getBashOutput()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_o_s.html#a58c32a7c4c30342b6cdf2ee04d540d0f">el::base::utils::OS</a>
-</li>
 <li>GetBestFormat()
-: <a class="el" href="structvpr_1_1_swapchain_1_1_swapchain_info.html#a4c2ad2b59c261d0d9d6fe67af3d80a6d">vpr::Swapchain::SwapchainInfo</a>
+: <a class="el" href="structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#abb595502d0bc940da0c710b0e5a7393e">vpr::SwapchainImpl::SwapchainInfo</a>
 </li>
 <li>GetBestPresentMode()
-: <a class="el" href="structvpr_1_1_swapchain_1_1_swapchain_info.html#a592ca88f80fa410d788ace4014ade438">vpr::Swapchain::SwapchainInfo</a>
+: <a class="el" href="structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#ac01356957b4cfc44060dc3adf071eecb">vpr::SwapchainImpl::SwapchainInfo</a>
 </li>
 <li>GetBufferImageGranularity()
-: <a class="el" href="classvpr_1_1_allocator.html#af89f4383e7e9eb534e1ddc76081c43fd">vpr::Allocator</a>
+: <a class="el" href="structvpr_1_1_allocator_impl.html#af4cde12705894f4ac76aa4d1eeeec6e7">vpr::AllocatorImpl</a>
 </li>
 <li>getBufferMemReqs()
-: <a class="el" href="classvpr_1_1_allocator.html#a9e7a1ff1daa157cd1f74d1437a8384de">vpr::Allocator</a>
+: <a class="el" href="structvpr_1_1_allocator_impl.html#a28efd3faba024a98f8248ed47ccf16e0">vpr::AllocatorImpl</a>
 </li>
 <li>GetCmdBuffer()
 : <a class="el" href="classvpr_1_1_command_pool.html#af5b53194b4ee68edad5290595623f3bb">vpr::CommandPool</a>
@@ -99,26 +111,12 @@ $(function() {
 <li>GetCommandBuffers()
 : <a class="el" href="classvpr_1_1_command_pool.html#a7645594e0dd6952515f1240c75ae248b">vpr::CommandPool</a>
 </li>
-<li>getConfigByRef()
-: <a class="el" href="classel_1_1base_1_1_typed_configurations.html#a69d062c9af597171adb5f4c7c60ba0ed">el::base::TypedConfigurations</a>
-</li>
-<li>getConfigByVal()
-: <a class="el" href="classel_1_1base_1_1_typed_configurations.html#a244b0b96547dad5d38e25c3eb88ce69d">el::base::TypedConfigurations</a>
-</li>
-<li>getCounter()
-: <a class="el" href="classel_1_1base_1_1_registered_hit_counters.html#ae97474e9e70bcbbde91fb6d6c89cc406">el::base::RegisteredHitCounters</a>
-</li>
-<li>getDateTime()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_date_time.html#acc31fad280188b0b0e8f04dec0e21310">el::base::utils::DateTime</a>
-</li>
 <li>GetDescriptor()
 : <a class="el" href="classvpr_1_1_buffer.html#a567f2f27453fe745111b34344549ca14">vpr::Buffer</a>
 </li>
-<li>getEnvironmentVariable()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_o_s.html#a34bf91e851eed1d4264cd594bb621b78">el::base::utils::OS</a>
-</li>
-<li>GetExtents()
-: <a class="el" href="classvpr_1_1_image.html#a0d536d179e9b4aa19fb19191427f5863">vpr::Image</a>
+<li>GetEnabledExtensions()
+: <a class="el" href="classvpr_1_1_device.html#a2c0889e41254c4778c73ab2a6ff6f1ce">vpr::Device</a>
+, <a class="el" href="classvpr_1_1_instance.html#a6b61b801c27856790ab59513f66ce11c">vpr::Instance</a>
 </li>
 <li>GetFeatures()
 : <a class="el" href="classvpr_1_1_physical_device.html#addc7471aceef1ca343cc1b6e5c242278">vpr::PhysicalDevice</a>
@@ -126,53 +124,40 @@ $(function() {
 <li>GetFormatTiling()
 : <a class="el" href="classvpr_1_1_device.html#ad9c1f7de10b5e4b0816bbd8233fa4987">vpr::Device</a>
 </li>
-<li>GetGLFWwindow()
-: <a class="el" href="classvpr_1_1_instance.html#a6409855c39056544050766847f937602">vpr::Instance</a>
-</li>
 <li>getImageMemReqs()
-: <a class="el" href="classvpr_1_1_allocator.html#a526196279f36a8fe91524f2bbde9386f">vpr::Allocator</a>
-</li>
-<li>getLogger()
-: <a class="el" href="classel_1_1_loggers.html#a53ebc2f38cf05bcffa6e1a5550ea5d02">el::Loggers</a>
+: <a class="el" href="structvpr_1_1_allocator_impl.html#a6c291f049e194c616fba17b070dacd0a">vpr::AllocatorImpl</a>
 </li>
 <li>GetMemoryBarrier()
 : <a class="el" href="classvpr_1_1_image.html#a27901dcfdf4bf4df50dcd759052ed7de">vpr::Image</a>
 </li>
 <li>GetMemoryHeapCount()
-: <a class="el" href="classvpr_1_1_allocator.html#a7cb910e5db04c436abedbabd3f2385e1">vpr::Allocator</a>
+: <a class="el" href="structvpr_1_1_allocator_impl.html#a90517febe6d9f3841cdb924d019d11b6">vpr::AllocatorImpl</a>
 </li>
 <li>GetMemoryProperties()
 : <a class="el" href="classvpr_1_1_physical_device.html#a1d9827e465aa6c51331bec797d2318f3">vpr::PhysicalDevice</a>
 </li>
 <li>GetMemoryTypeCount()
-: <a class="el" href="classvpr_1_1_allocator.html#a4277250f2867fd5b729bc78e7dc5eb6f">vpr::Allocator</a>
+: <a class="el" href="structvpr_1_1_allocator_impl.html#a7848aa696f40eef78c8e380dd578b8ef">vpr::AllocatorImpl</a>
 </li>
 <li>GetMemoryTypeIdx()
 : <a class="el" href="classvpr_1_1_device.html#a3c72a3cb6c48025c77a2e5029ff3718c">vpr::Device</a>
 , <a class="el" href="classvpr_1_1_physical_device.html#ac374493c59bb13f5300d1c96b87b8380">vpr::PhysicalDevice</a>
 , <a class="el" href="classvpr_1_1_physical_device_impl.html#a228761ffdb770f4690168e2f0e47a0d1">vpr::PhysicalDeviceImpl</a>
 </li>
-<li>getParamValue()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_command_line_args.html#aaf9b11a61b3e1445c81408fdc4d6cc9d">el::base::utils::CommandLineArgs</a>
-</li>
 <li>GetPhysicalDevice()
 : <a class="el" href="classvpr_1_1_device.html#a25e0b05bb662b335ec214295c46654cc">vpr::Device</a>
-, <a class="el" href="classvpr_1_1_instance.html#a762ee74135f79bc6e46a749b3b83abad">vpr::Instance</a>
-</li>
-<li>GetPhysicalDeviceID()
-: <a class="el" href="classvpr_1_1_device.html#aa9e1248673bd8c2742317d7de9084f5e">vpr::Device</a>
 </li>
 <li>GetPhysicalDeviceMemoryProperties()
-: <a class="el" href="classvpr_1_1_device.html#adf45896758bbbbe38a3b2011c29b568c">vpr::Device</a>
+: <a class="el" href="classvpr_1_1_device.html#a3298bf1002853c3cd5b17fba4abc721d">vpr::Device</a>
 </li>
 <li>GetPhysicalDeviceProperties()
-: <a class="el" href="classvpr_1_1_device.html#a1280b60865e8685bd670543e53291622">vpr::Device</a>
+: <a class="el" href="classvpr_1_1_device.html#a75b50a9b7b72d42932981ad2c8c9318c">vpr::Device</a>
 </li>
 <li>GetPipelineCreateInfo()
 : <a class="el" href="structvpr_1_1_graphics_pipeline_info.html#a65a7a63d7097bd86f0967d84a1fbde3c">vpr::GraphicsPipelineInfo</a>
 </li>
 <li>GetPreferredBlockSize()
-: <a class="el" href="classvpr_1_1_allocator.html#aee9903438ded8311fd11f757f80002d6">vpr::Allocator</a>
+: <a class="el" href="structvpr_1_1_allocator_impl.html#af42f00943ffa38d2f02d24886f549911">vpr::AllocatorImpl</a>
 </li>
 <li>GetProperties()
 : <a class="el" href="classvpr_1_1_physical_device.html#a395785af128c95f3098203a0b32f99ed">vpr::PhysicalDevice</a>
@@ -184,33 +169,17 @@ $(function() {
 <li>GetQueueFamilyProperties()
 : <a class="el" href="classvpr_1_1_physical_device.html#a2ee4f96b16a9762953ecad3b658d84e6">vpr::PhysicalDevice</a>
 </li>
-<li>getSizeOfFile()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_file.html#a9d6a7a5203667fffcbba62fc9ddd40c4">el::base::utils::File</a>
-</li>
 <li>GetStatus()
 : <a class="el" href="classvpr_1_1_event.html#ac3ba488b1703ded001e55af5ada50849">vpr::Event</a>
 </li>
 <li>GetSubgroupProperties()
 : <a class="el" href="classvpr_1_1_physical_device.html#a95acb634567ba94471f0e5f6ad5fb4a0">vpr::PhysicalDevice</a>
 </li>
-<li>getThreadName()
-: <a class="el" href="classel_1_1base_1_1_storage.html#aefa8cd1b921eab81d233ae8c5a79f3ee">el::base::Storage</a>
-, <a class="el" href="classel_1_1_helpers.html#ae19cb3baa6d8081a9e922736a384f70b">el::Helpers</a>
-</li>
-<li>getTimeDifference()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_date_time.html#a6635a2a31d6f3d79d47012ea3ccf9d31">el::base::utils::DateTime</a>
-</li>
-<li>gettimeofday()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_date_time.html#a7197976eff45378efdca75ae070492e7">el::base::utils::DateTime</a>
-</li>
-<li>getULong()
-: <a class="el" href="classel_1_1base_1_1_typed_configurations.html#a9fe66d8b0c001d3651bff2fc31bd2883">el::base::TypedConfigurations</a>
-</li>
 <li>GetUserData()
 : <a class="el" href="classvpr_1_1_allocation.html#a4991454fa12026f1e25fc56c6791be2d">vpr::Allocation</a>
 </li>
 <li>GraphicsPipeline()
-: <a class="el" href="classvpr_1_1_graphics_pipeline.html#ae8f3df9f7786d3bee0ebe8981bdc1e91">vpr::GraphicsPipeline</a>
+: <a class="el" href="classvpr_1_1_graphics_pipeline.html#a646166a0760f6860f719f646753c5a4c">vpr::GraphicsPipeline</a>
 </li>
 <li>GraphicsPipelineInfo()
 : <a class="el" href="structvpr_1_1_graphics_pipeline_info.html#ac2f843fbface7718bbecb798c8baf11d">vpr::GraphicsPipelineInfo</a>
@@ -220,11 +189,14 @@ $(function() {
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

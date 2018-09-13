@@ -1,5 +1,0 @@
-<map id="el::Logger::Logger" name="el::Logger::Logger">
-<area shape="rect" id="node2" href="$classel_1_1_logger.html#ae7c1d538f6163b6be5d37dafcaf24610" title="el::Logger::initUnflushed\lCount" alt="" coords="180,35,341,76"/>
-<area shape="rect" id="node3" href="$classel_1_1_level_helper.html#a7f0dbfceb2354a72c2802d02c300430d" title="Applies specified function to each level starting from startIndex. " alt="" coords="401,5,560,47"/>
-<area shape="rect" id="node4" href="$classel_1_1_level_helper.html#a1279f27df29a003df5ecc3d0bf4dacbb" title="Casts int(ushort) to level, useful for iterating through enum. " alt="" coords="389,71,572,98"/>
-</map>

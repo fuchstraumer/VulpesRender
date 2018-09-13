@@ -1,6 +1,0 @@
-<map id="vpr::Allocator::DeviceHandle" name="vpr::Allocator::DeviceHandle">
-<area shape="rect" id="node2" href="$classvpr_1_1_memory_block.html#a3d1d4492ecdb7855569025fe1089f78c" title="Cleans up resources and prepares object to be safely destroyed. " alt="" coords="236,13,415,39"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_memory_block.html#a7a429e3be46b6f748e687450aa524e09" title="When we map a suballocation, we are mapping a sub&#45;region of the larger memory object it is bound to..." alt="" coords="246,63,405,90"/>
-<area shape="rect" id="node5" href="$classvpr_1_1_memory_block.html#a5aabce50e3026fe98ec6054a37c516b5" title="As mentioned for the Map method, due to VkMapMemory functions we must make sure only one sub&#45;region o..." alt="" coords="238,114,413,141"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_memory_block.html#a78760d0be641bf2e3f679b42cf41742b" title="The object should be destroyed via the Destroy method before the destructor is called, but this will call the Destroy method if it hasn&#39;t been, and will log a warning that this was done. " alt="" coords="463,5,597,47"/>
-</map>

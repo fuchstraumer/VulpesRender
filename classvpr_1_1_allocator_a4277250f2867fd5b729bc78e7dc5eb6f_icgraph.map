@@ -1,9 +1,0 @@
-<map id="vpr::Allocator::GetMemoryTypeCount" name="vpr::Allocator::GetMemoryTypeCount">
-<area shape="rect" id="node2" href="$classvpr_1_1_allocator.html#ae35a57af9edd668c0bd7e135de1973f8" title="vpr::Allocator::createAllocationMaps" alt="" coords="227,56,457,83"/>
-<area shape="rect" id="node5" href="$classvpr_1_1_allocator.html#a12b2ce29d3b6b28131cc9c5a331d2286" title="vpr::Allocator::findMemory\lTypeIdx" alt="" coords="256,107,428,149"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_allocator.html#af15a36e630af2769ee8e1700ca1230f0" title="vpr::Allocator::Allocator" alt="" coords="506,5,662,32"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_allocator.html#a4fb24600d3edbff034389a4ea111513f" title="vpr::Allocator::Recreate" alt="" coords="505,56,663,83"/>
-<area shape="rect" id="node6" href="$classvpr_1_1_allocator.html#a1d36e3567e4fd7ef8bf1395942f6c714" title="vpr::Allocator::Allocate\lMemory" alt="" coords="508,107,660,149"/>
-<area shape="rect" id="node7" href="$classvpr_1_1_allocator.html#aa8aad8539721142d8dfa92a3196ab90b" title="vpr::Allocator::Allocate\lForBuffer" alt="" coords="711,74,863,115"/>
-<area shape="rect" id="node8" href="$classvpr_1_1_allocator.html#a79b5ace2d3d620783793593c99d50d4e" title="vpr::Allocator::Allocate\lForImage" alt="" coords="711,139,863,181"/>
-</map>

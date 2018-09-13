@@ -1,8 +1,10 @@
 var searchData=
 [
+  ['data',['data',['../classvpr_1_1_descriptor_set_layout.html#aed5ff96a518362d581fd44e44f5e4ddd',1,'vpr::DescriptorSetLayout::data()'],['../structvpr_1_1_debug_visualization_impl.html#a7acb06b4ffd4730e4b9cefbba5846d8f',1,'vpr::DebugVisualizationImpl::Data()'],['../namespacevpr.html#a51b52b51eede276e7aeabc5a9cb21278',1,'vpr::CommandBuffers::Data()']]],
+  ['datamembers',['dataMembers',['../classvpr_1_1_device.html#a18421f8e6be40e60ffb5e436b6693658',1,'vpr::Device']]],
   ['datasize',['dataSize',['../classvpr_1_1_buffer.html#ae153d808e4e2c669e5a925f166aa3e56',1,'vpr::Buffer']]],
   ['debug_5fpadding',['DEBUG_PADDING',['../namespacevpr.html#a386b8228079a9d82883cb1b818fec3e9',1,'vpr']]],
-  ['debugcallback',['debugCallback',['../classvpr_1_1_instance.html#a9cfd9941aa80f6776f6d74c3950b57ba',1,'vpr::Instance']]],
+  ['debugutilshandler',['debugUtilsHandler',['../classvpr_1_1_device.html#a8545ca31dfd6a35a0370c7de5b0cc64c',1,'vpr::Device']]],
   ['default_5fpriorityf',['default_priorityf',['../namespacevpr.html#a1f4584791e4f10ebfe800bfa1c8f47f5',1,'vpr']]],
   ['defaultlargeheapblocksize',['DefaultLargeHeapBlockSize',['../namespacevpr.html#a252c3121a6d349509e2184d4d4641152',1,'vpr']]],
   ['defaultmediumheapblocksize',['DefaultMediumHeapBlockSize',['../namespacevpr.html#a5bba3da651d451dc432584c42b9e4ef2',1,'vpr']]],
@@ -11,10 +13,11 @@ var searchData=
   ['descriptor',['descriptor',['../classvpr_1_1_buffer.html#a96bfe91f86798bdd5c4caafd5d03e0ad',1,'vpr::Buffer']]],
   ['descriptor_5ftypes',['descriptor_types',['../namespacevpr.html#ab21fa0d40941a97c77d37f00adde7af1',1,'vpr']]],
   ['descriptorinfoset',['descriptorInfoSet',['../classvpr_1_1_buffer.html#a10eaeb5b9ea147bc00ca1b58653cdf69',1,'vpr::Buffer']]],
-  ['descriptorpool',['descriptorPool',['../classvpr_1_1_descriptor_set.html#a56f324442bd9a1c653c889128e094797',1,'vpr::DescriptorSet']]],
-  ['device',['device',['../classvpr_1_1_swapchain.html#ada41a211f8bd4e84c5f31221b5456f06',1,'vpr::Swapchain::device()'],['../classvpr_1_1_descriptor_pool.html#a0ee8da0b374f4606b00eab0d62c9dbf9',1,'vpr::DescriptorPool::device()'],['../classvpr_1_1_descriptor_set.html#aaa93f454255f66ae3c357871533a129c',1,'vpr::DescriptorSet::device()'],['../classvpr_1_1_descriptor_set_layout.html#af7895bc2666bb7b9cfdc473b83de0425',1,'vpr::DescriptorSetLayout::device()'],['../classvpr_1_1_pipeline_layout.html#a5a0beeea8a75ce0d959e30ce8484a4d3',1,'vpr::PipelineLayout::device()'],['../classvpr_1_1_sampler.html#a9b4a653e42efcdbe530752d1839da3e4',1,'vpr::Sampler::device()'],['../classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8',1,'vpr::Event::device()'],['../classvpr_1_1_fence.html#a072675c17ac6a9787d132e95874bc2b5',1,'vpr::Fence::device()'],['../classvpr_1_1_semaphore.html#a2f885754279bd54d8e5b9de20f074bb3',1,'vpr::Semaphore::device()']]],
-  ['devicememoryproperties',['deviceMemoryProperties',['../classvpr_1_1_allocator.html#a22905217f341eaaec4788f71034dbab5',1,'vpr::Allocator']]],
-  ['deviceproperties',['deviceProperties',['../classvpr_1_1_allocator.html#ad14908372af93e06ddcaee4f97185fcf',1,'vpr::Allocator']]],
-  ['dvcmemory',['DvcMemory',['../group___allocation.html#a6aca57626ceb41add82d17be604e2b42',1,'vpr::Allocation::privateAllocation']]],
+  ['desiredsyncmode',['desiredSyncMode',['../structvpr_1_1_swapchain_impl.html#a20ec41d1ba4829802c339716b7ddb609',1,'vpr::SwapchainImpl']]],
+  ['device',['device',['../classvpr_1_1_surface_k_h_r.html#afd00bb9d80680f5f52ebbb1bf3f8858b',1,'vpr::SurfaceKHR::device()'],['../structvpr_1_1_device_data_members.html#a9ec824eaad8a92d25ebd9d431a00143d',1,'vpr::DeviceDataMembers::device()'],['../structvpr_1_1_swapchain_impl.html#aeba57cfc9c3adf9076e82df56393850e',1,'vpr::SwapchainImpl::device()'],['../classvpr_1_1_descriptor_pool.html#aba83382992c9afa3f1c80b8af7cae020',1,'vpr::DescriptorPool::device()'],['../classvpr_1_1_descriptor_set.html#a13fbd330e1749a7b60444526799adb97',1,'vpr::DescriptorSet::device()'],['../classvpr_1_1_descriptor_set_layout.html#a5f778734388912af4202bd741f648d99',1,'vpr::DescriptorSetLayout::device()'],['../classvpr_1_1_pipeline_layout.html#a6bade07d0e3c4e70f199e9679c6159c3',1,'vpr::PipelineLayout::device()'],['../classvpr_1_1_sampler.html#abe11a09a1866b47f180918a1be18271a',1,'vpr::Sampler::device()'],['../classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59',1,'vpr::Event::device()'],['../classvpr_1_1_fence.html#a953bbb86eaa9e15c00255153a09aa992',1,'vpr::Fence::device()'],['../classvpr_1_1_semaphore.html#aaa6537fc68271eb5f84db347505621de',1,'vpr::Semaphore::device()']]],
+  ['devicememoryproperties',['deviceMemoryProperties',['../structvpr_1_1_allocator_impl.html#a08588041240a23937c472696c50ca38e',1,'vpr::AllocatorImpl']]],
+  ['deviceproperties',['deviceProperties',['../structvpr_1_1_allocator_impl.html#a0e6f55fc74957e9fbb1eece6951b80ff',1,'vpr::AllocatorImpl']]],
+  ['drawcommands',['DrawCommands',['../structvpr_1_1_memory_block_info.html#a7fb520e9567f5d2ffcf8b7b6c172e1b9',1,'vpr::MemoryBlockInfo']]],
+  ['dvcmemory',['DvcMemory',['../namespacevpr.html#a694df8b0667613a5cc03732ee459c178',1,'vpr::AllocationImpl::privateAllocation']]],
   ['dynamicstateinfo',['DynamicStateInfo',['../structvpr_1_1_graphics_pipeline_info.html#aec220e52f813d1d8420ba6006bbaa15b',1,'vpr::GraphicsPipelineInfo']]]
 ];

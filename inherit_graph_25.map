@@ -1,4 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classvpr_1_1_command_pool.html" title="The CommandPool class is the primary interface through which one will acquire VkCommandBuffer objects..." alt="" coords="5,5,136,32"/>
-<area shape="rect" id="node2" href="$classvpr_1_1_transfer_pool.html" title="Transfer pool is just a specialized command pool with certain flags pre&#45;set, along with a fence prote..." alt="" coords="184,5,303,32"/>
-</map>

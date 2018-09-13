@@ -1,0 +1,8 @@
+<map id="vpr::SwapchainImpl::create" name="vpr::SwapchainImpl::create">
+<area shape="rect" id="node2" href="$structvpr_1_1_swapchain_impl.html#afdf0ef2711d213b7020b37785a62a7ad" title="vpr::SwapchainImpl\l::setParameters" alt="" coords="192,5,325,47"/>
+<area shape="rect" id="node4" href="$structvpr_1_1_swapchain_impl.html#a455468d3084cd9503a64f02d3b53956d" title="vpr::SwapchainImpl\l::setupCreateInfo" alt="" coords="192,71,325,112"/>
+<area shape="rect" id="node5" href="$structvpr_1_1_swapchain_impl.html#aaded5613928f1e39c1a61ac25be8bf88" title="vpr::SwapchainImpl\l::setupImageViews" alt="" coords="192,136,325,177"/>
+<area shape="rect" id="node6" href="$structvpr_1_1_swapchain_impl.html#acc94e08e83ec3857bffdea08e9b4bf65" title="vpr::SwapchainImpl\l::setupSwapImages" alt="" coords="191,201,327,243"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" title="vpr::Device::vkHandle" alt="" coords="187,267,331,294"/>
+<area shape="rect" id="node3" href="$namespacevpr.html#afa4d7a5ad29cbfc728d5c355d990d242" title="vpr::getPresentModeStr" alt="" coords="379,13,537,39"/>
+</map>

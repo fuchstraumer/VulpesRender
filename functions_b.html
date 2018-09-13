@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +52,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_b.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -63,26 +84,9 @@ $(function() {
 <div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
 
 <h3><a id="index_b"></a>- b -</h3><ul>
-<li>base::LogDispatcher
-: <a class="el" href="classel_1_1_log_dispatch_callback.html#a84d22f9ad5b796e49ff5f15a8c32773d">el::LogDispatchCallback</a>
-, <a class="el" href="classel_1_1_log_dispatch_data.html#a84d22f9ad5b796e49ff5f15a8c32773d">el::LogDispatchData</a>
-</li>
-<li>base::PerformanceTracker
-: <a class="el" href="classel_1_1_performance_tracking_callback.html#a05f271f9cc2531409fe682c6ce0d9feb">el::PerformanceTrackingCallback</a>
-</li>
-<li>base::RegisteredLoggers
-: <a class="el" href="classel_1_1_logger_registration_callback.html#a5b2ecdd0901cd8ea80e03a3a6e2a9f17">el::LoggerRegistrationCallback</a>
-</li>
 <li>begin()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_abstract_registry.html#a4ad971b1dddff996d327452d852e55b2">el::base::utils::AbstractRegistry&lt; T_Ptr, Container &gt;</a>
-, <a class="el" href="classvpr_1_1_allocation_collection.html#ad6739a1338114724c29dbfd9245fb78c">vpr::AllocationCollection</a>
+: <a class="el" href="classvpr_1_1_allocation_collection.html#ad6739a1338114724c29dbfd9245fb78c">vpr::AllocationCollection</a>
 , <a class="el" href="classvpr_1_1_memory_block.html#aad18b96027f7ce38f482292f25eaa4ad">vpr::MemoryBlock</a>
-</li>
-<li>Begin()
-: <a class="el" href="classvpr_1_1_transfer_pool.html#af7d9f16eef6123513ffe2bb6955f29c9">vpr::TransferPool</a>
-</li>
-<li>BeginAll()
-: <a class="el" href="classvpr_1_1_transfer_pool.html#aba9d355858ceffe88534475ac00a821c">vpr::TransferPool</a>
 </li>
 <li>beginInfo
 : <a class="el" href="classvpr_1_1_renderpass.html#a9d97ce989c62c9b73cd7024e8f984c06">vpr::Renderpass</a>
@@ -91,38 +95,33 @@ $(function() {
 : <a class="el" href="classvpr_1_1_renderpass.html#a2832b3cafd860a23cc223a1410c7935e">vpr::Renderpass</a>
 </li>
 <li>bindings
-: <a class="el" href="classvpr_1_1_descriptor_set_layout.html#afc144fa01b55e1efad1255f0d5128dad">vpr::DescriptorSetLayout</a>
+: <a class="el" href="namespacevpr.html#a34243756b0b62b2fb4aa117f39e3923e">vpr::LayoutBindings</a>
+</li>
+<li>Blocks
+: <a class="el" href="structvpr_1_1_memory_blocks_group.html#a1620ec39272d7761a4b33e5b19cdc1d7">vpr::MemoryBlocksGroup</a>
 </li>
 <li>Buffer()
-: <a class="el" href="classvpr_1_1_buffer.html#a8d3d46c89201e471dc10534eb3471a9a">vpr::Buffer</a>
+: <a class="el" href="classvpr_1_1_buffer.html#a7ab2098cefe7698b330aa2268b24ba4b">vpr::Buffer</a>
+</li>
+<li>BufferImageGranularity
+: <a class="el" href="structvpr_1_1_memory_block_info.html#a06e6af232c6a386b40fc65e441b473e8">vpr::MemoryBlockInfo</a>
 </li>
 <li>bufferInfos
-: <a class="el" href="classvpr_1_1_descriptor_set.html#afc50a2a101518847ced5338510e20f84">vpr::DescriptorSet</a>
+: <a class="el" href="namespacevpr.html#a2bf5452f0944bfa221213ad325d64082">vpr::DescriptorSetImpl</a>
 </li>
 <li>bufferViews
-: <a class="el" href="classvpr_1_1_descriptor_set.html#a9804d9f29dbddab45aff38fa230e3947">vpr::DescriptorSet</a>
-</li>
-<li>build()
-: <a class="el" href="classel_1_1base_1_1_default_log_builder.html#a9ee7983bc51f1fac887806e909ecbbbd">el::base::DefaultLogBuilder</a>
-, <a class="el" href="classel_1_1base_1_1_typed_configurations.html#ac61af29d843691ac60aa34000183b2d8">el::base::TypedConfigurations</a>
-, <a class="el" href="classel_1_1_log_builder.html#a633b373a3bb9d3e17bdd664aeba4dbc8">el::LogBuilder</a>
-</li>
-<li>buildBaseFilename()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_file.html#a6e259e600e50f4d72d44f75c9ce77e27">el::base::utils::File</a>
-</li>
-<li>buildStrippedFilename()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_file.html#a294f6e18eb32d1c3e9c6a654ae970b5d">el::base::utils::File</a>
-</li>
-<li>buildTimeInfo()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_date_time.html#ad0b327f1a8512fbccaee6788f942e717">el::base::utils::DateTime</a>
+: <a class="el" href="namespacevpr.html#af15e44980c3229a2995725e62be27116">vpr::DescriptorSetImpl</a>
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

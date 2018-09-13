@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -44,6 +51,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classvpr_1_1_pipeline_layout.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -58,11 +80,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespacevpr.html">vpr</a></li><li class="navelem"><a class="el" href="classvpr_1_1_pipeline_layout.html">PipelineLayout</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">vpr::PipelineLayout Member List</div>  </div>
@@ -74,23 +91,25 @@ $(function() {
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a042b645d2129f5b28693b2b6050acf60">Create</a>(const VkPushConstantRange *push_constants, const size_t num_push_constants)</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a2c4bbc5672bcf9da5a74dcbe7b59537c">Create</a>(const VkDescriptorSetLayout *set_layouts, const size_t num_layouts)</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#aeb4bc0b607d521484b60f69166dfb39d">Create</a>(const VkPushConstantRange *push_constants, const size_t num_push_constants, const VkDescriptorSetLayout *set_layouts, const size_t num_layouts)</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a3dd4f3aef0c6c8bbf923185a36a86054">createInfo</a></td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#acf61dd67033f427f1bc0d109973c8835">Destroy</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a5a0beeea8a75ce0d959e30ce8484a4d3">device</a></td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a3b17e4849d80b7072e5b3a782d498261">handle</a></td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a866abe69acabb93f1ca1620a2afa4252">operator=</a>(const PipelineLayout &amp;)=delete</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#afcea5dcf6d858441c93fea6154a52e00">operator=</a>(PipelineLayout &amp;&amp;other) noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a9d728a47905de179f963bed057d30799">PipelineLayout</a>(const PipelineLayout &amp;)=delete</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a4be02e2ce041a1e56b85f8336f5bbf95">PipelineLayout</a>(const Device *device)</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a71be4dc4eef49f6fbfc025bfa14a88c3">PipelineLayout</a>(PipelineLayout &amp;&amp;other) noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a066d49e71c647c759ce2d258ce1963ab">vkHandle</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a20cb2cc8b360a65d0d8454a70580c6f2">~PipelineLayout</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#acf61dd67033f427f1bc0d109973c8835">Destroy</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a6bade07d0e3c4e70f199e9679c6159c3">device</a></td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a3b17e4849d80b7072e5b3a782d498261">handle</a></td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a866abe69acabb93f1ca1620a2afa4252">operator=</a>(const PipelineLayout &amp;)=delete</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#afcea5dcf6d858441c93fea6154a52e00">operator=</a>(PipelineLayout &amp;&amp;other) noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a9d728a47905de179f963bed057d30799">PipelineLayout</a>(const PipelineLayout &amp;)=delete</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a5508313b0a3275b3281c80f4e0cf3626">PipelineLayout</a>(const VkDevice &amp;device)</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a71be4dc4eef49f6fbfc025bfa14a88c3">PipelineLayout</a>(PipelineLayout &amp;&amp;other) noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a066d49e71c647c759ce2d258ce1963ab">vkHandle</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html#a20cb2cc8b360a65d0d8454a70580c6f2">~PipelineLayout</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_pipeline_layout.html">vpr::PipelineLayout</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

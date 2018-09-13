@@ -1,9 +1,0 @@
-<map id="el::base::TypedConfigurations::insertFile" name="el::base::TypedConfigurations::insertFile">
-<area shape="rect" id="node2" href="$classel_1_1_level_helper.html#ad8a9958d58a2912ef58d00ab0ade7587" title="Converts level to associated const char*. " alt="" coords="259,5,414,47"/>
-<area shape="rect" id="node3" href="$classel_1_1base_1_1utils_1_1_file.html#a9a8445ed13931bbdeedc9bcee6b1370e" title="Creates specified path on file system. " alt="" coords="272,71,401,112"/>
-<area shape="rect" id="node5" href="$classel_1_1base_1_1utils_1_1_file.html#aeb03bbb8d34b7ac37bcec1ab493926e6" title="Extracts path of filename with leading slash. " alt="" coords="247,136,427,177"/>
-<area shape="rect" id="node6" href="$classel_1_1base_1_1_log_format.html#aeacb2c9d313ce5713b3e85e03a4baab5" title="el::base::LogFormat\l::level" alt="" coords="267,201,406,243"/>
-<area shape="rect" id="node7" href="$classel_1_1base_1_1utils_1_1_file.html#a0fabd4453ec4df237bbc9cca63bf6f13" title="Creates new out file stream for specified filename. " alt="" coords="272,267,401,308"/>
-<area shape="rect" id="node4" href="$classel_1_1base_1_1utils_1_1_file.html#a43ffda98fdd01d23af20459fa1a65cac" title="Determines whether or not provided path exist in current file system. " alt="" coords="495,71,624,112"/>
-<area shape="rect" id="node8" href="$namespaceel_1_1base_1_1utils.html#a8cad5c357a7913cdbe69add3d6a4e8ac" title="Deletes memory safely and points to null. " alt="" coords="475,274,644,301"/>
-</map>

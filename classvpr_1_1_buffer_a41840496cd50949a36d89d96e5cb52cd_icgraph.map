@@ -1,3 +1,3 @@
 <map id="vpr::Buffer::vkHandle" name="vpr::Buffer::vkHandle">
-<area shape="rect" id="node2" href="$classvpr_1_1_buffer.html#ae44f3e3a2bcb922d522088c102147663" title="vpr::Buffer::Invalidate" alt="" coords="192,5,332,32"/>
+<area shape="rect" id="node2" href="$classvpr_1_1_buffer.html#a9c05fd68db6222e85e09f0a1a56f62b9" title="Copies the data in the given Buffer pointer to this object. " alt="" coords="192,5,323,32"/>
 </map>

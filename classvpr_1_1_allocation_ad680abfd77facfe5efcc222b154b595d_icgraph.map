@@ -1,5 +1,4 @@
 <map id="vpr::Allocation::InitPrivate" name="vpr::Allocation::InitPrivate">
-<area shape="rect" id="node2" href="$classvpr_1_1_allocator.html#ad4d7daf9b55d81a4fab0cb4a657d6508" title="vpr::Allocator::allocate\lPrivateMemory" alt="" coords="220,5,371,47"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_allocator.html#a40618202c2c86027ee1915cadbc18afd" title="vpr::Allocator::allocate\lMemoryType" alt="" coords="419,5,569,47"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_allocator.html#a1d36e3567e4fd7ef8bf1395942f6c714" title="vpr::Allocator::Allocate\lMemory" alt="" coords="617,5,769,47"/>
+<area shape="rect" id="node2" href="$structvpr_1_1_allocator_impl.html#a2ec18969e688b4cb472a16535482208d" title="vpr::AllocatorImpl\l::allocatePrivateMemory" alt="" coords="220,5,381,47"/>
+<area shape="rect" id="node3" href="$structvpr_1_1_allocator_impl.html#a25d6e4d4fe1d7c4adf83e95915a0a810" title="vpr::AllocatorImpl\l::allocateMemoryType" alt="" coords="429,5,580,47"/>
 </map>

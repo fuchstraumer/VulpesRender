@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -44,6 +51,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classvpr_1_1_buffer.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -58,11 +80,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespacevpr.html">vpr</a></li><li class="navelem"><a class="el" href="classvpr_1_1_buffer.html">Buffer</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">vpr::Buffer Member List</div>  </div>
@@ -71,10 +88,10 @@ $(function() {
 
 <p>This is the complete list of members for <a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a6ba9a08ecbdebd851be251a2cd111b74">allocators</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a24dae3446fe85a6f29004853cf5c728a">Buffer</a>(const Buffer &amp;)=delete</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a8d3d46c89201e471dc10534eb3471a9a">Buffer</a>(const Device *parent)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a7ab2098cefe7698b330aa2268b24ba4b">Buffer</a>(Buffer &amp;&amp;other) noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a24dae3446fe85a6f29004853cf5c728a">Buffer</a>(const Buffer &amp;)=delete</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#ac0c82ee1769d0de860e0dc8b25c2d1fa">Buffer</a>(const VkDevice &amp;parent)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a7ab2098cefe7698b330aa2268b24ba4b">Buffer</a>(Buffer &amp;&amp;other) noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a9c05fd68db6222e85e09f0a1a56f62b9">CopyTo</a>(const Buffer *other_buffer, const VkCommandBuffer &amp;cmd, const VkDeviceSize offset)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a843cf452ecc4aed63fef2915d40ab9c4">CopyTo</a>(const void *data, const VkCommandBuffer &amp;transfer_cmd, const VkDeviceSize &amp;copy_size, const VkDeviceSize &amp;copy_offset)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a3a369873112eb478f3dfdf7b1549d2f6">CopyTo</a>(const void *data, CommandPool *cmd_pool, const VkQueue &amp;transfer_queue, const VkDeviceSize &amp;size, const VkDeviceSize &amp;offset)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#ae38678b302a270b3716b43505e2f7e96">CopyToMapped</a>(const void *data, const VkDeviceSize &amp;size, const VkDeviceSize &amp;offset)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
@@ -83,13 +100,13 @@ $(function() {
   <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a4c5f396675e349cac8fb6fca7ad6cd80">createInfo</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a51dacf22b4cbfcf0224c467e1f7ba7ac">CreateMemoryBarrier</a>(VkAccessFlags src, VkAccessFlags dst, uint32_t src_idx, uint32_t dst_idx, VkDeviceSize sz) const</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#add8b2dbfd79028bedfd30b5c5f48b3b2">CreateStagingBuffer</a>(const Device *dvc, const VkDeviceSize &amp;size, VkBuffer &amp;dest, Allocation &amp;dest_memory_range)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#ac367138a3788a0a6df49c5c2ad890774">createStagingBuffer</a>(const VkDeviceSize &amp;size, VkBuffer &amp;staging_buffer, Allocation &amp;dest_memory_range)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a8c9624441b1de2b79940cd8cc802b7e2">CreateView</a>(const VkFormat format, const VkDeviceSize range, const VkDeviceSize offset)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#ae153d808e4e2c669e5a925f166aa3e56">dataSize</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a96bfe91f86798bdd5c4caafd5d03e0ad">descriptor</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">mutable</span><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a10eaeb5b9ea147bc00ca1b58653cdf69">descriptorInfoSet</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">mutable</span><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#ab832b022c0ae579386133a23844ee5e5">Destroy</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a2f997dcc7525b9bbb71c236545ea4c32">DestroyStagingResources</a>(const Device *device)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a14a5f04157433460a41b94ffd1ef7525">CreateStagingBuffer</a>(const Device *dvc, void *data, const size_t data_size)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#ac367138a3788a0a6df49c5c2ad890774">createStagingBuffer</a>(const VkDeviceSize &amp;size, VkBuffer &amp;staging_buffer, Allocation &amp;dest_memory_range)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a8c9624441b1de2b79940cd8cc802b7e2">CreateView</a>(const VkFormat format, const VkDeviceSize range, const VkDeviceSize offset)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#ae153d808e4e2c669e5a925f166aa3e56">dataSize</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a96bfe91f86798bdd5c4caafd5d03e0ad">descriptor</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">mutable</span><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a10eaeb5b9ea147bc00ca1b58653cdf69">descriptorInfoSet</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">mutable</span><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#ab832b022c0ae579386133a23844ee5e5">Destroy</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#ab4f798aaec92861e165cff4e7a12cc18">Fill</a>(const VkCommandBuffer &amp;cmd, const VkDeviceSize sz, const VkDeviceSize offset, const uint32_t value)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a805e50dbbed7233718d366a9742d3246">Flush</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a567f2f27453fe745111b34344549ca14">GetDescriptor</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
@@ -97,33 +114,35 @@ $(function() {
   <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#ae44f3e3a2bcb922d522088c102147663">Invalidate</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a4c04d59a27d4c3471bdf90eda1c8b662">Map</a>(const VkDeviceSize &amp;offset=0)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#aa3dff6309040e420e748c8b6fc79d345">mappedMemory</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#af9dcb09ccc1d047250a579a94827c2fd">MappedMemoryRange</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a8b5196067a89499585f01e629b7f8b55">mappedMemoryRange</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">mutable</span><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a8b5196067a89499585f01e629b7f8b55">mappedMemoryRange</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">mutable</span><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#af9dcb09ccc1d047250a579a94827c2fd">MappedMemoryRange</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a5dd595b4b93d33d49a15e9852381d307">memoryAllocation</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a9d1cc3aef09675b1d5104916b91f174d">operator=</a>(const Buffer &amp;)=delete</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#ae5359de9bb68e064331174620d3493e8">operator=</a>(Buffer &amp;&amp;other) noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#abf2884ec3d29dd503c47298c18c5b988">parent</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#ae8f9c59d2eff06decbf4853a8c22ed49">parent</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#afbe401f3002cb40c4751ac8653aa9c64">setDescriptorInfo</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#af8411e6c6a353e03d6223c5c991832b1">SetMappedMemory</a>(void *mapping_destination)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a07d786f45ff6d6712962da7910f6280c">setMappedMemoryRange</a>() const</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a05392d328541adc298ff9b5283a9c6ed">Size</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a9b69d98c01a256db2adc7878f4bed830">size</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a5eabdd01d6efa86d36be012e2a601560">stagingBuffers</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">static</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a780ba4c43b7f1a8ec88a5990a76a3cd0">Unmap</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a9ecbb5e39195c842b83008ca22e3dc10">Update</a>(const VkCommandBuffer &amp;cmd, const VkDeviceSize &amp;data_sz, const VkDeviceSize &amp;offset, const void *data)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a7956ffcc00fd58b07d6a140cd2563c5d">Usage</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a608136242a4072d8c74f5d36868fb72e">View</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a899072855c6876154374aa5f3f6f9930">view</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#aaf2339590cf74eac281d09f22af0d8a5">viewCreateInfo</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a41840496cd50949a36d89d96e5cb52cd">vkHandle</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a786d565bbd6e968395d470fe51f02cde">vkHandle</a>() noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a7540498f21ea184173975560ff9e6327">~Buffer</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a780ba4c43b7f1a8ec88a5990a76a3cd0">Unmap</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a9ecbb5e39195c842b83008ca22e3dc10">Update</a>(const VkCommandBuffer &amp;cmd, const VkDeviceSize &amp;data_sz, const VkDeviceSize &amp;offset, const void *data)</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a7956ffcc00fd58b07d6a140cd2563c5d">Usage</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a608136242a4072d8c74f5d36868fb72e">View</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a899072855c6876154374aa5f3f6f9930">view</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#aaf2339590cf74eac281d09f22af0d8a5">viewCreateInfo</a></td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a41840496cd50949a36d89d96e5cb52cd">vkHandle</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a786d565bbd6e968395d470fe51f02cde">vkHandle</a>() noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_buffer.html#a7540498f21ea184173975560ff9e6327">~Buffer</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_buffer.html">vpr::Buffer</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

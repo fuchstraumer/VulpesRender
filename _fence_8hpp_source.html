@@ -5,10 +5,17 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>VulpesRender: C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/include/sync/Fence.hpp Source File</title>
+<title>VulpesRender: sync/include/Fence.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -44,6 +51,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('_fence_8hpp_source.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -58,33 +80,26 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_5540bc73877c3e47893b63debdd0706f.html">sync</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">Fence.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_fence_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef VPR_FENCE_HPP</span></div><div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="_fence_8hpp.html#ac1c30d463444d65f71e24b60cef55210">    3</a></span>&#160;<span class="preprocessor">#define VPR_FENCE_HPP</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="vpr__stdafx_8h.html">vpr_stdafx.h</a>&quot;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_forward_decl_8hpp.html">ForwardDecl.hpp</a>&quot;</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacevpr.html">vpr</a> {</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div><div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classvpr_1_1_fence.html">   15</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classvpr_1_1_fence.html">Fence</a> {</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="classvpr_1_1_fence.html#a65415778511c1da4b9ded51aec7f445a">Fence</a>(<span class="keyword">const</span> <a class="code" href="classvpr_1_1_fence.html">Fence</a>&amp;) = <span class="keyword">delete</span>;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <a class="code" href="classvpr_1_1_fence.html">Fence</a>&amp; <a class="code" href="classvpr_1_1_fence.html#a2943affff40b67c90e4e0e8e73a4bf56">operator=</a>(<span class="keyword">const</span> <a class="code" href="classvpr_1_1_fence.html">Fence</a>&amp;) = <span class="keyword">delete</span>;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="classvpr_1_1_fence.html#a65415778511c1da4b9ded51aec7f445a">Fence</a>(<span class="keyword">const</span> <a class="code" href="classvpr_1_1_device.html">Device</a>* dvc, VkFenceCreateFlags flags);</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="classvpr_1_1_fence.html#a65415778511c1da4b9ded51aec7f445a">Fence</a>(<a class="code" href="classvpr_1_1_fence.html">Fence</a>&amp;&amp; other) noexcept;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classvpr_1_1_fence.html">Fence</a>&amp; <a class="code" href="classvpr_1_1_fence.html#a2943affff40b67c90e4e0e8e73a4bf56">operator=</a>(<a class="code" href="classvpr_1_1_fence.html">Fence</a>&amp;&amp; other) noexcept;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classvpr_1_1_fence.html#aa710f8426f0a3d057908c7a79cd0a7b1">~Fence</a>();</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">const</span> VkFence&amp; <a class="code" href="classvpr_1_1_fence.html#af162b4facd36841eb6dfd005f5cc5852">vkHandle</a>() <span class="keyword">const</span> noexcept;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">private</span>:</div><div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classvpr_1_1_fence.html#a072675c17ac6a9787d132e95874bc2b5">   28</a></span>&#160;        <span class="keyword">const</span> <a class="code" href="classvpr_1_1_device.html">Device</a>* <a class="code" href="classvpr_1_1_fence.html#a072675c17ac6a9787d132e95874bc2b5">device</a>;</div><div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classvpr_1_1_fence.html#ac9af2a4f00f65f4f52a692b6a6865c36">   29</a></span>&#160;        VkFence <a class="code" href="classvpr_1_1_fence.html#ac9af2a4f00f65f4f52a692b6a6865c36">handle</a>;</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    };</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif </span></div><div class="ttc" id="classvpr_1_1_device_html"><div class="ttname"><a href="classvpr_1_1_device.html">vpr::Device</a></div><div class="ttdoc">!The Device class is a wrapper around the vkLogicalDevice object. </div><div class="ttdef"><b>Definition:</b> <a href="_logical_device_8hpp_source.html#l00028">LogicalDevice.hpp:28</a></div></div>
-<div class="ttc" id="classvpr_1_1_fence_html_ac9af2a4f00f65f4f52a692b6a6865c36"><div class="ttname"><a href="classvpr_1_1_fence.html#ac9af2a4f00f65f4f52a692b6a6865c36">vpr::Fence::handle</a></div><div class="ttdeci">VkFence handle</div><div class="ttdef"><b>Definition:</b> <a href="_fence_8hpp_source.html#l00029">Fence.hpp:29</a></div></div>
-<div class="ttc" id="vpr__stdafx_8h_html"><div class="ttname"><a href="vpr__stdafx_8h.html">vpr_stdafx.h</a></div></div>
-<div class="ttc" id="classvpr_1_1_fence_html_a072675c17ac6a9787d132e95874bc2b5"><div class="ttname"><a href="classvpr_1_1_fence.html#a072675c17ac6a9787d132e95874bc2b5">vpr::Fence::device</a></div><div class="ttdeci">const Device * device</div><div class="ttdef"><b>Definition:</b> <a href="_fence_8hpp_source.html#l00028">Fence.hpp:28</a></div></div>
+<a href="_fence_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef VPR_FENCE_HPP</span></div><div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="_fence_8hpp.html#ac1c30d463444d65f71e24b60cef55210">    3</a></span>&#160;<span class="preprocessor">#define VPR_FENCE_HPP</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="vpr__stdafx_8h.html">vpr_stdafx.h</a>&quot;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_forward_decl_8hpp.html">ForwardDecl.hpp</a>&quot;</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacevpr.html">vpr</a> {</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div><div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classvpr_1_1_fence.html">   15</a></span>&#160;    <span class="keyword">class </span><a class="code" href="vpr__stdafx_8h.html#a4b940ef35de523c8e5f22898d34635f1">VPR_API</a> <a class="code" href="classvpr_1_1_fence.html">Fence</a> {</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="classvpr_1_1_fence.html">Fence</a>(<span class="keyword">const</span> <a class="code" href="classvpr_1_1_fence.html">Fence</a>&amp;) = <span class="keyword">delete</span>;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <a class="code" href="classvpr_1_1_fence.html">Fence</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classvpr_1_1_fence.html">Fence</a>&amp;) = <span class="keyword">delete</span>;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="classvpr_1_1_fence.html">Fence</a>(<span class="keyword">const</span> VkDevice&amp; dvc, VkFenceCreateFlags flags);</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="classvpr_1_1_fence.html">Fence</a>(<a class="code" href="classvpr_1_1_fence.html">Fence</a>&amp;&amp; other) noexcept;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classvpr_1_1_fence.html">Fence</a>&amp; operator=(<a class="code" href="classvpr_1_1_fence.html">Fence</a>&amp;&amp; other) noexcept;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        ~<a class="code" href="classvpr_1_1_fence.html">Fence</a>();</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">const</span> VkFence&amp; vkHandle() <span class="keyword">const</span> noexcept;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">private</span>:</div><div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classvpr_1_1_fence.html#a953bbb86eaa9e15c00255153a09aa992">   28</a></span>&#160;        VkDevice device{ VK_NULL_HANDLE };</div><div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classvpr_1_1_fence.html#ac9af2a4f00f65f4f52a692b6a6865c36">   29</a></span>&#160;        VkFence handle{ VK_NULL_HANDLE };</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    };</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif </span></div><div class="ttc" id="vpr__stdafx_8h_html"><div class="ttname"><a href="vpr__stdafx_8h.html">vpr_stdafx.h</a></div></div>
+<div class="ttc" id="vpr__stdafx_8h_html_a4b940ef35de523c8e5f22898d34635f1"><div class="ttname"><a href="vpr__stdafx_8h.html#a4b940ef35de523c8e5f22898d34635f1">VPR_API</a></div><div class="ttdeci">#define VPR_API</div><div class="ttdef"><b>Definition:</b> <a href="vpr__stdafx_8h_source.html#l00018">vpr_stdafx.h:18</a></div></div>
 <div class="ttc" id="_forward_decl_8hpp_html"><div class="ttname"><a href="_forward_decl_8hpp.html">ForwardDecl.hpp</a></div></div>
-<div class="ttc" id="classvpr_1_1_fence_html_af162b4facd36841eb6dfd005f5cc5852"><div class="ttname"><a href="classvpr_1_1_fence.html#af162b4facd36841eb6dfd005f5cc5852">vpr::Fence::vkHandle</a></div><div class="ttdeci">const VkFence &amp; vkHandle() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_fence_8cpp_source.html#l00029">Fence.cpp:29</a></div></div>
-<div class="ttc" id="classvpr_1_1_fence_html_aa710f8426f0a3d057908c7a79cd0a7b1"><div class="ttname"><a href="classvpr_1_1_fence.html#aa710f8426f0a3d057908c7a79cd0a7b1">vpr::Fence::~Fence</a></div><div class="ttdeci">~Fence()</div><div class="ttdef"><b>Definition:</b> <a href="_fence_8cpp_source.html#l00023">Fence.cpp:23</a></div></div>
-<div class="ttc" id="classvpr_1_1_fence_html_a2943affff40b67c90e4e0e8e73a4bf56"><div class="ttname"><a href="classvpr_1_1_fence.html#a2943affff40b67c90e4e0e8e73a4bf56">vpr::Fence::operator=</a></div><div class="ttdeci">Fence &amp; operator=(const Fence &amp;)=delete</div></div>
 <div class="ttc" id="namespacevpr_html"><div class="ttname"><a href="namespacevpr.html">vpr</a></div><div class="ttdef"><b>Definition:</b> <a href="_allocation_8hpp_source.html#l00008">Allocation.hpp:8</a></div></div>
-<div class="ttc" id="classvpr_1_1_fence_html_a65415778511c1da4b9ded51aec7f445a"><div class="ttname"><a href="classvpr_1_1_fence.html#a65415778511c1da4b9ded51aec7f445a">vpr::Fence::Fence</a></div><div class="ttdeci">Fence(const Fence &amp;)=delete</div></div>
 <div class="ttc" id="classvpr_1_1_fence_html"><div class="ttname"><a href="classvpr_1_1_fence.html">vpr::Fence</a></div><div class="ttdoc">A fence is the most heavyweight of Vulkan synchronization primitives, and is for explicitly synchroni...</div><div class="ttdef"><b>Definition:</b> <a href="_fence_8hpp_source.html#l00015">Fence.hpp:15</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_60f2dbb6714164eb829ccd5e05ded1f4.html">sync</a></li><li class="navelem"><a class="el" href="dir_cdca6beb3e98f91c543628435b6839a4.html">include</a></li><li class="navelem"><a class="el" href="_fence_8hpp.html">Fence.hpp</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

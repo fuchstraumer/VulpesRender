@@ -1,7 +1,0 @@
-<map id="el::base::LogFormat::hasFlag" name="el::base::LogFormat::hasFlag">
-<area shape="rect" id="node2" href="$classel_1_1base_1_1_default_log_builder.html#a9ee7983bc51f1fac887806e909ecbbbd" title="el::base::DefaultLogBuilder\l::build" alt="" coords="192,5,369,47"/>
-<area shape="rect" id="node3" href="$classel_1_1base_1_1_log_format.html#ab7c1b15cfdad24cfbc6dbced8b9d66eb" title="Updates format to be used while logging. " alt="" coords="417,123,556,164"/>
-<area shape="rect" id="node5" href="$classel_1_1base_1_1_log_format.html#a966bed1ee6f8597152d08d4ed70a5855" title="Updates date time format if available in currFormat. " alt="" coords="211,123,350,164"/>
-<area shape="rect" id="node6" href="$classel_1_1base_1_1_log_format.html#aa3c2ddecf237d0ec3eca4b2a3a442e67" title="Updates level from format. This is so that we dont have to do it at log&#45;writing&#45;time. It uses m_format and m_level. " alt="" coords="211,188,351,229"/>
-<area shape="rect" id="node4" href="$classel_1_1base_1_1_log_format.html#a746a49231f1b046803dd2144ae2a2c76" title="el::base::LogFormat\l::LogFormat" alt="" coords="604,123,743,164"/>
-</map>

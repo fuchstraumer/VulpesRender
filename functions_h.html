@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +52,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_h.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -63,10 +84,8 @@ $(function() {
 <div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
 
 <h3><a id="index_h"></a>- h -</h3><ul>
-<li>handle()
-: <a class="el" href="classel_1_1base_1_1_default_log_dispatch_callback.html#acdac30f202c245500e6d94c55eee6d95">el::base::DefaultLogDispatchCallback</a>
-, <a class="el" href="classel_1_1_callback.html#a8997c7971d65062c374ef24e653061be">el::Callback&lt; T &gt;</a>
-, <a class="el" href="classvpr_1_1_buffer.html#a6365cf8380f808b6377e1d6fd5a8dabc">vpr::Buffer</a>
+<li>handle
+: <a class="el" href="classvpr_1_1_buffer.html#a6365cf8380f808b6377e1d6fd5a8dabc">vpr::Buffer</a>
 , <a class="el" href="classvpr_1_1_command_pool.html#a72066e2fd4dbc0f3320a43d8b90db9fa">vpr::CommandPool</a>
 , <a class="el" href="classvpr_1_1_descriptor_pool.html#a008d675ccf359562a672178104dbae52">vpr::DescriptorPool</a>
 , <a class="el" href="classvpr_1_1_descriptor_set.html#af9e83408f10cec5654a6e512493d2f97">vpr::DescriptorSet</a>
@@ -81,60 +100,36 @@ $(function() {
 , <a class="el" href="classvpr_1_1_physical_device_impl.html#af7b08a7cf734338ee787e015534cfc69">vpr::PhysicalDeviceImpl</a>
 , <a class="el" href="classvpr_1_1_pipeline_cache.html#a3a335caf23b04122f33ea94b505dd1cc">vpr::PipelineCache</a>
 , <a class="el" href="classvpr_1_1_pipeline_layout.html#a3b17e4849d80b7072e5b3a782d498261">vpr::PipelineLayout</a>
-, <a class="el" href="classvpr_1_1_queue.html#a9da304887e05fa7e372d2e8f5ad21b19">vpr::Queue</a>
 , <a class="el" href="classvpr_1_1_renderpass.html#aeb5950eb1e8e1adebd502940533bdc51">vpr::Renderpass</a>
 , <a class="el" href="classvpr_1_1_sampler.html#a46d094a7b9ff505d4d18b84fb31457f9">vpr::Sampler</a>
 , <a class="el" href="classvpr_1_1_semaphore.html#a613a6915ff3dc3e7f286c1d40ee285d9">vpr::Semaphore</a>
 , <a class="el" href="classvpr_1_1_shader_module.html#aed80d0bf55bbe0d86ec887eb2720cea9">vpr::ShaderModule</a>
 , <a class="el" href="classvpr_1_1_surface_k_h_r.html#a06a6277b08e3a4733de323b2e2c9a3d9">vpr::SurfaceKHR</a>
-, <a class="el" href="classvpr_1_1_swapchain.html#a690b9c72c712392428f91a18afc317e4">vpr::Swapchain</a>
-</li>
-<li>has()
-: <a class="el" href="classel_1_1base_1_1_registered_loggers.html#a85916925e2c53d1ebf9865625132a0be">el::base::RegisteredLoggers</a>
-</li>
-<li>hasConfiguration()
-: <a class="el" href="classel_1_1_configurations.html#a5313557efac3b0c78f973a5a1d685277">el::Configurations</a>
-</li>
-<li>hasCustomFormatSpecifier()
-: <a class="el" href="classel_1_1base_1_1_storage.html#ae953cb6e8acafa96c5c1ab2f4826a4a5">el::base::Storage</a>
-, <a class="el" href="classel_1_1_helpers.html#a154ce041890564d1ae5f87184e24f13d">el::Helpers</a>
+, <a class="el" href="structvpr_1_1_swapchain_impl.html#aac62079e0f9815e341043173834585f8">vpr::SwapchainImpl</a>
 </li>
 <li>HasDedicatedComputeQueues()
 : <a class="el" href="classvpr_1_1_device.html#af97db14ae016b678dcb2be6061cac5bd">vpr::Device</a>
 </li>
-<li>hasFlag()
-: <a class="el" href="classel_1_1base_1_1_log_format.html#ab52a480241cd721b553f43bd75686a80">el::base::LogFormat</a>
-, <a class="el" href="classel_1_1base_1_1_storage.html#a20531a7be4a1aae3d5233a5aec3eb520">el::base::Storage</a>
-, <a class="el" href="classel_1_1_loggers.html#a591a45565c1eb7073ec3a979df8b5a4c">el::Loggers</a>
+<li>HasExtension()
+: <a class="el" href="classvpr_1_1_device.html#a2f4378c92e12f529df785293c3a3a40f">vpr::Device</a>
+, <a class="el" href="classvpr_1_1_instance.html#ab9f92d523b1cc59715c6d1b237be3cea">vpr::Instance</a>
 </li>
 <li>hashID
 : <a class="el" href="classvpr_1_1_pipeline_cache.html#a82cc192df08e771e1cc9edc6348ff095">vpr::PipelineCache</a>
 </li>
-<li>hasLogger()
-: <a class="el" href="classel_1_1_loggers.html#ac4fa5e65054824e81de6f1fe111b920c">el::Loggers</a>
-</li>
-<li>hasParam()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_command_line_args.html#a77ceaf1c151c30f6362cfbac5ddbdaa6">el::base::utils::CommandLineArgs</a>
-</li>
-<li>hasParamWithValue()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_command_line_args.html#a4028414c53fbd2ebffbc2b88c6d13b09">el::base::utils::CommandLineArgs</a>
-</li>
-<li>HitCounter()
-: <a class="el" href="classel_1_1base_1_1_hit_counter.html#a2d32056aa55d080c2a2c534713b9a9a7">el::base::HitCounter</a>
-</li>
-<li>hitCounters()
-: <a class="el" href="classel_1_1base_1_1_storage.html#ac2893476e885bb859006c8ec2be39d68">el::base::Storage</a>
-</li>
-<li>hitCounts()
-: <a class="el" href="classel_1_1base_1_1_hit_counter.html#ac2b3af741dc18e7839f4211af26a2887">el::base::HitCounter</a>
+<li>hostPhysicalDevice
+: <a class="el" href="classvpr_1_1_pipeline_cache.html#aca1ef75ae2239a380a1a4d97c338be9c">vpr::PipelineCache</a>
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

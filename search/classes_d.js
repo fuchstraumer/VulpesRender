@@ -1,12 +1,16 @@
 var searchData=
 [
-  ['parser',['Parser',['../classel_1_1_configurations_1_1_parser.html',1,'el::Configurations']]],
-  ['performancetrackingcallback',['PerformanceTrackingCallback',['../classel_1_1_performance_tracking_callback.html',1,'el']]],
-  ['perrorwriter',['PErrorWriter',['../classel_1_1base_1_1_p_error_writer.html',1,'el::base']]],
-  ['physicaldevice',['PhysicalDevice',['../classvpr_1_1_physical_device.html',1,'vpr']]],
-  ['physicaldeviceimpl',['PhysicalDeviceImpl',['../classvpr_1_1_physical_device_impl.html',1,'vpr']]],
-  ['pipelinecache',['PipelineCache',['../classvpr_1_1_pipeline_cache.html',1,'vpr']]],
-  ['pipelinelayout',['PipelineLayout',['../classvpr_1_1_pipeline_layout.html',1,'vpr']]],
-  ['predicate',['Predicate',['../classel_1_1_configuration_1_1_predicate.html',1,'el::Configuration::Predicate'],['../classel_1_1base_1_1_hit_counter_1_1_predicate.html',1,'el::base::HitCounter::Predicate']]],
-  ['privateallocation',['privateAllocation',['../group___allocation.html#structvpr_1_1_allocation_1_1private_allocation',1,'vpr::Allocation']]]
+  ['sampler',['Sampler',['../classvpr_1_1_sampler.html',1,'vpr']]],
+  ['semaphore',['Semaphore',['../classvpr_1_1_semaphore.html',1,'vpr']]],
+  ['shadercodefileloader',['ShaderCodeFileLoader',['../structvpr_1_1_shader_code_file_loader.html',1,'vpr']]],
+  ['shadermodule',['ShaderModule',['../classvpr_1_1_shader_module.html',1,'vpr']]],
+  ['suballocation',['Suballocation',['../structvpr_1_1_suballocation.html',1,'vpr']]],
+  ['suballocationdrawcommand',['SuballocationDrawCommand',['../structvpr_1_1_suballocation_draw_command.html',1,'vpr']]],
+  ['suballocationrequest',['SuballocationRequest',['../group___allocation.html#structvpr_1_1_suballocation_request',1,'vpr']]],
+  ['suballocitercompare',['suballocIterCompare',['../structvpr_1_1suballoc_iter_compare.html',1,'vpr']]],
+  ['suballocoffsetcompare',['suballocOffsetCompare',['../structvpr_1_1suballoc_offset_compare.html',1,'vpr']]],
+  ['surfacekhr',['SurfaceKHR',['../classvpr_1_1_surface_k_h_r.html',1,'vpr']]],
+  ['swapchain',['Swapchain',['../classvpr_1_1_swapchain.html',1,'vpr']]],
+  ['swapchainimpl',['SwapchainImpl',['../structvpr_1_1_swapchain_impl.html',1,'vpr']]],
+  ['swapchaininfo',['SwapchainInfo',['../structvpr_1_1_swapchain_impl_1_1_swapchain_info.html',1,'vpr::SwapchainImpl']]]
 ];

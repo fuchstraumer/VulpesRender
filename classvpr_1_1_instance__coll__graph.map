@@ -1,4 +1,5 @@
 <map id="vpr::Instance" name="vpr::Instance">
-<area shape="rect" id="node7" href="$classvpr_1_1_surface_k_h_r.html" title="The bare&#45;minimum required to wrap a VkSurfaceKHR object. " alt="" coords="923,21,1040,47"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="237,13,372,39"/>
+<area shape="rect" id="node2" href="$structvpr_1_1_instance_extension_handler.html" title="vpr::InstanceExtensionHandler" alt="" coords="45,289,242,316"/>
+<area shape="rect" id="node5" title="STL class. " alt="" coords="198,96,278,123"/>
+<area shape="rect" id="node6" title="STL class. " alt="" coords="175,5,301,47"/>
 </map>

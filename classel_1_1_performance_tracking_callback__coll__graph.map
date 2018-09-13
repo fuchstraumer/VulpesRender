@@ -1,5 +1,0 @@
-<map id="el::PerformanceTrackingCallback" name="el::PerformanceTrackingCallback">
-<area shape="rect" id="node2" href="$classel_1_1_callback.html" title="el::Callback\&lt; Performance\lTrackingData \&gt;" alt="" coords="24,200,199,241"/>
-<area shape="rect" id="node3" href="$classel_1_1base_1_1threading_1_1_thread_safe.html" title="Base of thread safe class, this class is inheritable&#45;only. " alt="" coords="47,109,176,151"/>
-<area shape="rect" id="node4" href="$classel_1_1base_1_1threading_1_1internal_1_1_no_mutex.html" title="Mutex wrapper used when multi&#45;threading is disabled. " alt="" coords="45,5,177,47"/>
-</map>

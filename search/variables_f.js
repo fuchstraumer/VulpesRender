@@ -1,9 +1,13 @@
 var searchData=
 [
-  ['queue',['queue',['../classvpr_1_1_transfer_pool.html#ae07a500b8bb4e3e083baefab375b33da',1,'vpr::TransferPool']]],
-  ['queue_5fpriorities',['queue_priorities',['../namespacevpr.html#a41f4e9004d0d504471306d39072c24e0',1,'vpr']]],
-  ['queuefamilyindices',['QueueFamilyIndices',['../classvpr_1_1_device.html#aa6945b37d50683451ab230f40b6c8671',1,'vpr::Device']]],
-  ['queuefamilyproperties',['queueFamilyProperties',['../classvpr_1_1_physical_device_impl.html#a6d26bb1eb93008f04a8fc885f1460e32',1,'vpr::PhysicalDeviceImpl']]],
-  ['queueinfos',['queueInfos',['../classvpr_1_1_device.html#a8d35a192c8e4c07fc1eaa20c7c2b95c9',1,'vpr::Device']]],
-  ['queuemutex',['queueMutex',['../classvpr_1_1_queue.html#af45ae81ed203a0f1442f2c7dd8015ad9',1,'vpr::Queue']]]
+  ['rasterizationinfo',['RasterizationInfo',['../structvpr_1_1_graphics_pipeline_info.html#a0f00200c8f085bbd8d58ec7573851b18',1,'vpr::GraphicsPipelineInfo']]],
+  ['ready',['ready',['../classvpr_1_1_descriptor_set_layout.html#ae47b4f4a55fcc84ecaaa2b7dc18b7f43',1,'vpr::DescriptorSetLayout']]],
+  ['recommended_5fextensions',['RECOMMENDED_EXTENSIONS',['../namespacevpr.html#a4bf381588c8fc655f17c38e1fd78739e',1,'vpr']]],
+  ['recommended_5foptional_5fextensions',['RECOMMENDED_OPTIONAL_EXTENSIONS',['../namespacevpr.html#aec73dccfad949403c3a61b7bb4def901',1,'vpr']]],
+  ['recommended_5frequired_5fextension',['RECOMMENDED_REQUIRED_EXTENSION',['../namespacevpr.html#a783133e45fba2121d3007dd6a34112f2',1,'vpr']]],
+  ['requiredextensioncount',['RequiredExtensionCount',['../group___core.html#aa0e225ff9a10af737f99d9568c7de3eb',1,'vpr::VprExtensionPack']]],
+  ['requiredextensionnames',['RequiredExtensionNames',['../group___core.html#a54203e2016f033125ec96249d0cc4720',1,'vpr::VprExtensionPack']]],
+  ['requiredflags',['requiredFlags',['../structvpr_1_1_allocation_requirements.html#ac090af25414224c2fcb36baae16f3265',1,'vpr::AllocationRequirements']]],
+  ['requiresdedicatedkhr',['requiresDedicatedKHR',['../structvpr_1_1_allocation_requirements.html#a84e600ef433ac8a3c3964bdc579cd0ee',1,'vpr::AllocationRequirements']]],
+  ['resources',['Resources',['../namespacevpr.html#a9e31ab2f2de50a7b38592624bd7a0c92',1,'vpr::ResourceTypeMap']]]
 ];

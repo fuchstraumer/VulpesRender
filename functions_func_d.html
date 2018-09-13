@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +52,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_func_d.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -66,32 +87,23 @@ $(function() {
 <li>Data()
 : <a class="el" href="classvpr_1_1_command_pool.html#a1434a842101a0354902fe53140be34ef">vpr::CommandPool</a>
 </li>
-<li>dateTimeFormat()
-: <a class="el" href="classel_1_1base_1_1_log_format.html#aad379ea4c614d747da4461eebc72efba">el::base::LogFormat</a>
+<li>DebugUtilsHandler()
+: <a class="el" href="classvpr_1_1_device.html#a37104872c409608aac9b91363ce71fc7">vpr::Device</a>
 </li>
-<li>deepCopy()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_abstract_registry.html#aaf42dab7089a9b1198e2920983ca82bb">el::base::utils::AbstractRegistry&lt; T_Ptr, Container &gt;</a>
-, <a class="el" href="classel_1_1base_1_1utils_1_1_registry.html#a9c12e79a7951bc77ce2be606b928476f">el::base::utils::Registry&lt; T_Ptr, T_Key &gt;</a>
-, <a class="el" href="classel_1_1base_1_1utils_1_1_registry_with_pred.html#ac11791213df197f0c03b32e67eba54b1">el::base::utils::RegistryWithPred&lt; T_Ptr, Pred &gt;</a>
+<li>DebugVisualization()
+: <a class="el" href="classvpr_1_1_debug_visualization.html#a6aac1aab63deb3a6ab3496cf8e46ce0b">vpr::DebugVisualization</a>
 </li>
-<li>defaultConfigurations()
-: <a class="el" href="classel_1_1base_1_1_registered_loggers.html#acb38f67cf5e297f4be3efa5312e09914">el::base::RegisteredLoggers</a>
-, <a class="el" href="classel_1_1_loggers.html#ac40ea77b26a058b8f820be7a119ce69f">el::Loggers</a>
+<li>DebugVisualizationImpl()
+: <a class="el" href="structvpr_1_1_debug_visualization_impl.html#a7aeacec82a52138405f20ebf237ed136">vpr::DebugVisualizationImpl</a>
 </li>
-<li>defaultTypedConfigurations()
-: <a class="el" href="classel_1_1_loggers.html#a592324bd539ea075101031c14cd9fd41">el::Loggers</a>
-</li>
-<li>DepthAttachment()
-: <a class="el" href="classvpr_1_1_depth_stencil.html#aa1f85e0017a659b62206ab4a71b5602a">vpr::DepthStencil</a>
-</li>
-<li>DepthStencil()
-: <a class="el" href="classvpr_1_1_depth_stencil.html#a947979e6929c78b1f96c6a0898c68652">vpr::DepthStencil</a>
+<li>DedicatedAllocationExtensionsEnabled()
+: <a class="el" href="classvpr_1_1_device.html#a8aa0caf9975fd8eb2948156ee1418044">vpr::Device</a>
 </li>
 <li>DescriptorPool()
-: <a class="el" href="classvpr_1_1_descriptor_pool.html#a591d689c1ccc50fb97961e744c3c214c">vpr::DescriptorPool</a>
+: <a class="el" href="classvpr_1_1_descriptor_pool.html#a06083280be32e9ae0c6a1834371b241e">vpr::DescriptorPool</a>
 </li>
 <li>DescriptorSet()
-: <a class="el" href="classvpr_1_1_descriptor_set.html#abbcecad466fdd8c41bb4cd1aa5caf1c2">vpr::DescriptorSet</a>
+: <a class="el" href="classvpr_1_1_descriptor_set.html#ab28671946745e441f9d1f66bccdabf76">vpr::DescriptorSet</a>
 </li>
 <li>DescriptorSetLayout()
 : <a class="el" href="classvpr_1_1_descriptor_set_layout.html#a4d1f8d5ced9cf60a6e61765e822cb8bb">vpr::DescriptorSetLayout</a>
@@ -106,43 +118,43 @@ $(function() {
 : <a class="el" href="classvpr_1_1_framebuffer.html#a23680b07a937e5dc08995dc88ebeb091">vpr::Framebuffer</a>
 , <a class="el" href="classvpr_1_1_graphics_pipeline.html#aea7b8f3af0fb2b0a508f362a791fe957">vpr::GraphicsPipeline</a>
 , <a class="el" href="classvpr_1_1_image.html#a873f753f67d45583eee998d59885d8c5">vpr::Image</a>
-, <a class="el" href="classvpr_1_1_memory_block.html#a3d1d4492ecdb7855569025fe1089f78c">vpr::MemoryBlock</a>
+, <a class="el" href="classvpr_1_1_memory_block.html#a7e2257b40f455628483cda1e2303f2a3">vpr::MemoryBlock</a>
 , <a class="el" href="classvpr_1_1_pipeline_layout.html#acf61dd67033f427f1bc0d109973c8835">vpr::PipelineLayout</a>
 , <a class="el" href="classvpr_1_1_renderpass.html#a1b2c2f7ebdd9a287a2ad894f626678bb">vpr::Renderpass</a>
-, <a class="el" href="classvpr_1_1_swapchain.html#af29e2c4245bd5694afadc579783e5432">vpr::Swapchain</a>
 </li>
-<li>DestroyBuffer()
-: <a class="el" href="classvpr_1_1_allocator.html#aba5e7b8623bceb91e2eb3551d55afb86">vpr::Allocator</a>
+<li>destroy()
+: <a class="el" href="classvpr_1_1_surface_k_h_r.html#a1083d46de78e533a1cabba07b62e1950">vpr::SurfaceKHR</a>
 </li>
-<li>DestroyImage()
-: <a class="el" href="classvpr_1_1_allocator.html#a9c04f050d22a383fd21f02e036bf2572">vpr::Allocator</a>
+<li>Destroy()
+: <a class="el" href="classvpr_1_1_swapchain.html#af29e2c4245bd5694afadc579783e5432">vpr::Swapchain</a>
 </li>
-<li>DestroyStagingResources()
-: <a class="el" href="classvpr_1_1_buffer.html#a2f997dcc7525b9bbb71c236545ea4c32">vpr::Buffer</a>
-</li>
-<li>DestroySurfaceKHR()
-: <a class="el" href="classvpr_1_1_instance.html#a00e467ab91c86a7fca3af4332fdcb767">vpr::Instance</a>
+<li>destroy()
+: <a class="el" href="structvpr_1_1_swapchain_impl.html#a3c2995780e90567ea32d6b6f72c5d891">vpr::SwapchainImpl</a>
 </li>
 <li>Device()
-: <a class="el" href="classvpr_1_1_device.html#a9b90a786a5125f158805de055930e36f">vpr::Device</a>
+: <a class="el" href="classvpr_1_1_device.html#ad1a8ebd06d5d8b3de5ce0c8d1ce93277">vpr::Device</a>
+</li>
+<li>DeviceDataMembers()
+: <a class="el" href="structvpr_1_1_device_data_members.html#a027813afb6fb9a971001026c54e3e691">vpr::DeviceDataMembers</a>
 </li>
 <li>DeviceHandle()
 : <a class="el" href="classvpr_1_1_allocator.html#a1be30aa02991f0323def73b9be9a3c44">vpr::Allocator</a>
 </li>
-<li>dispatch()
-: <a class="el" href="classel_1_1base_1_1_default_log_dispatch_callback.html#adc7c200395c99534d55cb23cfabafcb1">el::base::DefaultLogDispatchCallback</a>
-, <a class="el" href="classel_1_1base_1_1_log_dispatcher.html#a88d4a644364bb454136c85338f05da7a">el::base::LogDispatcher</a>
-</li>
-<li>dispatchAction()
-: <a class="el" href="classel_1_1_log_dispatch_data.html#aa7f834fbd4c8440d25ba1958ccf51ea7">el::LogDispatchData</a>
+<li>Draw()
+: <a class="el" href="classvpr_1_1_debug_visualization.html#a28e3bac78687a88025fb986b34fe27b1">vpr::DebugVisualization</a>
+, <a class="el" href="structvpr_1_1_memory_block_info.html#a4c85370f5805bd10e954f2f28dc11732">vpr::MemoryBlockInfo</a>
+, <a class="el" href="structvpr_1_1_suballocation_draw_command.html#a1d4f3453e45463972a4d830e20584028">vpr::SuballocationDrawCommand</a>
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

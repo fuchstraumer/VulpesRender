@@ -1,4 +1,3 @@
 <map id="vpr::Event::IsSet" name="vpr::Event::IsSet">
 <area shape="rect" id="node2" href="$classvpr_1_1_event.html#ac3ba488b1703ded001e55af5ada50849" title="Retrieves current status of the event &#45; either VK_EVENT_SET or VK_EVENT_RESET. " alt="" coords="169,5,315,32"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" title="vpr::Device::vkHandle" alt="" coords="363,5,507,32"/>
 </map>

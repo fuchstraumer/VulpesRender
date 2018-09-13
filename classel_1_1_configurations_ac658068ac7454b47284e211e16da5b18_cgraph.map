@@ -1,4 +1,0 @@
-<map id="el::Configurations::setGlobally" name="el::Configurations::setGlobally">
-<area shape="rect" id="node2" href="$classel_1_1_level_helper.html#a1279f27df29a003df5ecc3d0bf4dacbb" title="Casts int(ushort) to level, useful for iterating through enum. " alt="" coords="176,5,359,32"/>
-<area shape="rect" id="node3" href="$classel_1_1_level_helper.html#a7f0dbfceb2354a72c2802d02c300430d" title="Applies specified function to each level starting from startIndex. " alt="" coords="188,57,347,98"/>
-</map>

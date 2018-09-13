@@ -1,7 +1,0 @@
-<map id="el::base::PErrorWriter" name="el::base::PErrorWriter">
-<area shape="rect" id="node2" href="$classel_1_1base_1_1_writer.html" title="Main entry point of each logging. " alt="" coords="173,300,283,327"/>
-<area shape="rect" id="node3" href="$classel_1_1base_1_1_no_copy.html" title="Internal helper class that prevent copy constructor for class. " alt="" coords="5,211,128,237"/>
-<area shape="rect" id="node4" href="$classel_1_1base_1_1_message_builder.html" title="el::base::MessageBuilder" alt="" coords="258,211,427,237"/>
-<area shape="rect" id="node5" href="$classel_1_1_logger.html" title="Represents a logger holding ID and configurations we need to write logs. " alt="" coords="249,109,327,136"/>
-<area shape="rect" id="node6" title="STL class. " alt="" coords="341,5,421,32"/>
-</map>

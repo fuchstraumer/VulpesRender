@@ -1,6 +1,0 @@
-<map id="el::base::VRegistry::level" name="el::base::VRegistry::level">
-<area shape="rect" id="node2" href="$classel_1_1base_1_1_v_registry.html#aea4fb84a03363080ee2501193084f71f" title="Sets verbose level. Accepted range is 0&#45;9. " alt="" coords="194,5,327,47"/>
-<area shape="rect" id="node4" href="$classel_1_1base_1_1_v_registry.html#a65e202cc547cd11231d3ea0fb70765d0" title="el::base::VRegistry\l::setModules" alt="" coords="194,71,327,112"/>
-<area shape="rect" id="node5" href="$classel_1_1base_1_1_p_error_writer.html#adc8b5fe696977395f0e8b0ee5d5caf60" title="el::base::PErrorWriter\l::~PErrorWriter" alt="" coords="187,136,335,177"/>
-<area shape="rect" id="node3" href="$classel_1_1base_1_1_v_registry.html#a811e62d7d016a0714b4363f47216a9da" title="el::base::VRegistry\l::setFromArgs" alt="" coords="383,39,516,80"/>
-</map>

@@ -9,98 +9,80 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 100)">
 <title>vpr::Buffer::CopyToMapped</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-100 424,-100 424,4 -4,4"/>
-<!-- Node24 -->
-<g id="node1" class="node"><title>Node24</title>
+<!-- Node25 -->
+<g id="node1" class="node"><title>Node25</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-38.5 0,-57.5 133,-57.5 133,-38.5 0,-38.5"/>
 <text text-anchor="middle" x="66.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Buffer::CopyToMapped</text>
 </g>
-<!-- Node25 -->
-<g id="node2" class="node"><title>Node25</title>
-<g id="a_node2"><a xlink:href="classvpr_1_1_buffer.html#a4c04d59a27d4c3471bdf90eda1c8b662" target="_top" xlink:title="vpr::Buffer::Map">
-<polygon fill="white" stroke="black" points="175,-38.5 175,-57.5 259,-57.5 259,-38.5 175,-38.5"/>
-<text text-anchor="middle" x="217" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Buffer::Map</text>
-</a>
-</g>
-</g>
-<!-- Node24&#45;&gt;Node25 -->
-<g id="edge1" class="edge"><title>Node24&#45;&gt;Node25</title>
-<path fill="none" stroke="midnightblue" d="M133.067,-48C143.562,-48 154.292,-48 164.402,-48"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="164.678,-51.5001 174.678,-48 164.678,-44.5001 164.678,-51.5001"/>
-</g>
-<!-- Node29 -->
-<g id="node6" class="node"><title>Node29</title>
-<g id="a_node6"><a xlink:href="classvpr_1_1_buffer.html#a05392d328541adc298ff9b5283a9c6ed" target="_top" xlink:title="vpr::Buffer::Size">
-<polygon fill="white" stroke="black" points="174.5,-0.5 174.5,-19.5 259.5,-19.5 259.5,-0.5 174.5,-0.5"/>
-<text text-anchor="middle" x="217" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Buffer::Size</text>
-</a>
-</g>
-</g>
-<!-- Node24&#45;&gt;Node29 -->
-<g id="edge5" class="edge"><title>Node24&#45;&gt;Node29</title>
-<path fill="none" stroke="midnightblue" d="M104.973,-38.411C124.392,-33.4417 148.302,-27.3233 168.954,-22.0387"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="169.976,-25.3899 178.797,-19.5201 168.241,-18.6084 169.976,-25.3899"/>
-</g>
-<!-- Node30 -->
-<g id="node7" class="node"><title>Node30</title>
-<g id="a_node7"><a xlink:href="classvpr_1_1_buffer.html#a780ba4c43b7f1a8ec88a5990a76a3cd0" target="_top" xlink:title="vpr::Buffer::Unmap">
-<polygon fill="white" stroke="black" points="169,-76.5 169,-95.5 265,-95.5 265,-76.5 169,-76.5"/>
-<text text-anchor="middle" x="217" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Buffer::Unmap</text>
-</a>
-</g>
-</g>
-<!-- Node24&#45;&gt;Node30 -->
-<g id="edge6" class="edge"><title>Node24&#45;&gt;Node30</title>
-<path fill="none" stroke="midnightblue" d="M104.973,-57.589C124.392,-62.5583 148.302,-68.6767 168.954,-73.9613"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="168.241,-77.3916 178.797,-76.4799 169.976,-70.6101 168.241,-77.3916"/>
-</g>
 <!-- Node26 -->
-<g id="node3" class="node"><title>Node26</title>
-<g id="a_node3"><a xlink:href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" target="_top" xlink:title="vpr::Device::vkHandle">
-<polygon fill="white" stroke="black" points="306.5,-38.5 306.5,-57.5 414.5,-57.5 414.5,-38.5 306.5,-38.5"/>
-<text text-anchor="middle" x="360.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::vkHandle</text>
+<g id="node2" class="node"><title>Node26</title>
+<g id="a_node2"><a xlink:href="classvpr_1_1_buffer.html#a4c04d59a27d4c3471bdf90eda1c8b662" target="_top" xlink:title="vpr::Buffer::Map">
+<polygon fill="white" stroke="black" points="175,-76.5 175,-95.5 259,-95.5 259,-76.5 175,-76.5"/>
+<text text-anchor="middle" x="217" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Buffer::Map</text>
 </a>
 </g>
 </g>
 <!-- Node25&#45;&gt;Node26 -->
-<g id="edge2" class="edge"><title>Node25&#45;&gt;Node26</title>
-<path fill="none" stroke="midnightblue" d="M259.308,-48C270.779,-48 283.507,-48 295.937,-48"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="296.273,-51.5001 306.273,-48 296.273,-44.5001 296.273,-51.5001"/>
+<g id="edge1" class="edge"><title>Node25&#45;&gt;Node26</title>
+<path fill="none" stroke="midnightblue" d="M104.973,-57.589C124.392,-62.5583 148.302,-68.6767 168.954,-73.9613"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="168.241,-77.3916 178.797,-76.4799 169.976,-70.6101 168.241,-77.3916"/>
+</g>
+<!-- Node29 -->
+<g id="node5" class="node"><title>Node29</title>
+<g id="a_node5"><a xlink:href="classvpr_1_1_buffer.html#a05392d328541adc298ff9b5283a9c6ed" target="_top" xlink:title="vpr::Buffer::Size">
+<polygon fill="white" stroke="black" points="174.5,-38.5 174.5,-57.5 259.5,-57.5 259.5,-38.5 174.5,-38.5"/>
+<text text-anchor="middle" x="217" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Buffer::Size</text>
+</a>
+</g>
+</g>
+<!-- Node25&#45;&gt;Node29 -->
+<g id="edge4" class="edge"><title>Node25&#45;&gt;Node29</title>
+<path fill="none" stroke="midnightblue" d="M133.067,-48C143.446,-48 154.056,-48 164.068,-48"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="164.252,-51.5001 174.252,-48 164.252,-44.5001 164.252,-51.5001"/>
+</g>
+<!-- Node30 -->
+<g id="node6" class="node"><title>Node30</title>
+<g id="a_node6"><a xlink:href="classvpr_1_1_buffer.html#a780ba4c43b7f1a8ec88a5990a76a3cd0" target="_top" xlink:title="vpr::Buffer::Unmap">
+<polygon fill="white" stroke="black" points="169,-0.5 169,-19.5 265,-19.5 265,-0.5 169,-0.5"/>
+<text text-anchor="middle" x="217" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Buffer::Unmap</text>
+</a>
+</g>
+</g>
+<!-- Node25&#45;&gt;Node30 -->
+<g id="edge5" class="edge"><title>Node25&#45;&gt;Node30</title>
+<path fill="none" stroke="midnightblue" d="M104.973,-38.411C124.392,-33.4417 148.302,-27.3233 168.954,-22.0387"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="169.976,-25.3899 178.797,-19.5201 168.241,-18.6084 169.976,-25.3899"/>
 </g>
 <!-- Node27 -->
-<g id="node4" class="node"><title>Node27</title>
-<g id="a_node4"><a xlink:href="classvpr_1_1_allocation.html#a1a223e41ca865271544ece71d18edce2" target="_top" xlink:title="vpr::Allocation::Memory">
-<polygon fill="white" stroke="black" points="301,-76.5 301,-95.5 420,-95.5 420,-76.5 301,-76.5"/>
-<text text-anchor="middle" x="360.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Allocation::Memory</text>
+<g id="node3" class="node"><title>Node27</title>
+<g id="a_node3"><a xlink:href="classvpr_1_1_allocation.html#a1a223e41ca865271544ece71d18edce2" target="_top" xlink:title="vpr::Allocation::Memory">
+<polygon fill="white" stroke="black" points="301,-19.5 301,-38.5 420,-38.5 420,-19.5 301,-19.5"/>
+<text text-anchor="middle" x="360.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Allocation::Memory</text>
 </a>
 </g>
 </g>
-<!-- Node25&#45;&gt;Node27 -->
-<g id="edge3" class="edge"><title>Node25&#45;&gt;Node27</title>
-<path fill="none" stroke="midnightblue" d="M253.706,-57.589C271.973,-62.4944 294.408,-68.5196 313.911,-73.7571"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="313.239,-77.2006 323.805,-76.4141 315.055,-70.4401 313.239,-77.2006"/>
+<!-- Node26&#45;&gt;Node27 -->
+<g id="edge2" class="edge"><title>Node26&#45;&gt;Node27</title>
+<path fill="none" stroke="midnightblue" d="M241.684,-76.4595C264.845,-67.1295 300.322,-52.8384 326.295,-42.3758"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="327.771,-45.5547 335.739,-38.5716 325.155,-39.0617 327.771,-45.5547"/>
 </g>
 <!-- Node28 -->
-<g id="node5" class="node"><title>Node28</title>
-<g id="a_node5"><a xlink:href="classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397" target="_top" xlink:title="vpr::Allocation::Offset">
-<polygon fill="white" stroke="black" points="306,-0.5 306,-19.5 415,-19.5 415,-0.5 306,-0.5"/>
-<text text-anchor="middle" x="360.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Allocation::Offset</text>
+<g id="node4" class="node"><title>Node28</title>
+<g id="a_node4"><a xlink:href="classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397" target="_top" xlink:title="vpr::Allocation::Offset">
+<polygon fill="white" stroke="black" points="306,-76.5 306,-95.5 415,-95.5 415,-76.5 306,-76.5"/>
+<text text-anchor="middle" x="360.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Allocation::Offset</text>
 </a>
 </g>
 </g>
-<!-- Node25&#45;&gt;Node28 -->
-<g id="edge4" class="edge"><title>Node25&#45;&gt;Node28</title>
-<path fill="none" stroke="midnightblue" d="M253.706,-38.411C271.973,-33.5056 294.408,-27.4804 313.911,-22.2429"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="315.055,-25.5599 323.805,-19.5859 313.239,-18.7994 315.055,-25.5599"/>
-</g>
-<!-- Node30&#45;&gt;Node26 -->
-<g id="edge7" class="edge"><title>Node30&#45;&gt;Node26</title>
-<path fill="none" stroke="midnightblue" d="M253.706,-76.411C271.973,-71.5056 294.408,-65.4804 313.911,-60.2429"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="315.055,-63.5599 323.805,-57.5859 313.239,-56.7994 315.055,-63.5599"/>
+<!-- Node26&#45;&gt;Node28 -->
+<g id="edge3" class="edge"><title>Node26&#45;&gt;Node28</title>
+<path fill="none" stroke="midnightblue" d="M259.308,-86C270.652,-86 283.225,-86 295.522,-86"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="295.754,-89.5001 305.754,-86 295.754,-82.5001 295.754,-89.5001"/>
 </g>
 <!-- Node30&#45;&gt;Node27 -->
-<g id="edge8" class="edge"><title>Node30&#45;&gt;Node27</title>
-<path fill="none" stroke="midnightblue" d="M265.117,-86C273.323,-86 282.007,-86 290.654,-86"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="290.756,-89.5001 300.756,-86 290.756,-82.5001 290.756,-89.5001"/>
+<g id="edge6" class="edge"><title>Node30&#45;&gt;Node27</title>
+<path fill="none" stroke="midnightblue" d="M265.117,-16.3267C273.323,-17.4285 282.007,-18.5946 290.654,-19.7556"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="290.379,-23.25 300.756,-21.1121 291.31,-16.3123 290.379,-23.25"/>
 </g>
 </g>
 </svg>

@@ -9,48 +9,48 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 35)">
 <title>vpr::Device::setupComputeQueues</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-35 565,-35 565,4 -4,4"/>
-<!-- Node156 -->
-<g id="node1" class="node"><title>Node156</title>
+<!-- Node115 -->
+<g id="node1" class="node"><title>Node115</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-30.5 132,-30.5 132,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::setupCompute</text>
 <text text-anchor="middle" x="66" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Queues</text>
 </g>
-<!-- Node157 -->
-<g id="node2" class="node"><title>Node157</title>
+<!-- Node116 -->
+<g id="node2" class="node"><title>Node116</title>
 <g id="a_node2"><a xlink:href="classvpr_1_1_device.html#af52c3b24f6bca1308a5170eb3acfeb11" target="_top" xlink:title="vpr::Device::setupQueues">
 <polygon fill="white" stroke="black" points="168,-6 168,-25 295,-25 295,-6 168,-6"/>
 <text text-anchor="middle" x="231.5" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::setupQueues</text>
 </a>
 </g>
 </g>
-<!-- Node156&#45;&gt;Node157 -->
-<g id="edge1" class="edge"><title>Node156&#45;&gt;Node157</title>
+<!-- Node115&#45;&gt;Node116 -->
+<g id="edge1" class="edge"><title>Node115&#45;&gt;Node116</title>
 <path fill="none" stroke="midnightblue" d="M142.099,-15.5C150.683,-15.5 159.366,-15.5 167.765,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="142.089,-12.0001 132.089,-15.5 142.089,-19.0001 142.089,-12.0001"/>
 </g>
-<!-- Node158 -->
-<g id="node3" class="node"><title>Node158</title>
+<!-- Node117 -->
+<g id="node3" class="node"><title>Node117</title>
 <g id="a_node3"><a xlink:href="classvpr_1_1_device.html#a3b0734cd598d9a64f3c459e9dc4e84ce" target="_top" xlink:title="vpr::Device::create">
 <polygon fill="white" stroke="black" points="331,-6 331,-25 427,-25 427,-6 331,-6"/>
 <text text-anchor="middle" x="379" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::create</text>
 </a>
 </g>
 </g>
-<!-- Node157&#45;&gt;Node158 -->
-<g id="edge2" class="edge"><title>Node157&#45;&gt;Node158</title>
+<!-- Node116&#45;&gt;Node117 -->
+<g id="edge2" class="edge"><title>Node116&#45;&gt;Node117</title>
 <path fill="none" stroke="midnightblue" d="M305.248,-15.5C313.96,-15.5 322.673,-15.5 330.886,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="305.05,-12.0001 295.05,-15.5 305.049,-19.0001 305.05,-12.0001"/>
 </g>
-<!-- Node159 -->
-<g id="node4" class="node"><title>Node159</title>
-<g id="a_node4"><a xlink:href="classvpr_1_1_device.html#a870f832d4e57cf09fc0705718a498aff" target="_top" xlink:title="vpr::Device::Device">
+<!-- Node118 -->
+<g id="node4" class="node"><title>Node118</title>
+<g id="a_node4"><a xlink:href="classvpr_1_1_device.html#ad1a8ebd06d5d8b3de5ce0c8d1ce93277" target="_top" xlink:title="vpr::Device::Device">
 <polygon fill="white" stroke="black" points="463,-6 463,-25 561,-25 561,-6 463,-6"/>
 <text text-anchor="middle" x="512" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::Device</text>
 </a>
 </g>
 </g>
-<!-- Node158&#45;&gt;Node159 -->
-<g id="edge3" class="edge"><title>Node158&#45;&gt;Node159</title>
+<!-- Node117&#45;&gt;Node118 -->
+<g id="edge3" class="edge"><title>Node117&#45;&gt;Node118</title>
 <path fill="none" stroke="midnightblue" d="M437.503,-15.5C445.979,-15.5 454.636,-15.5 462.895,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="437.294,-12.0001 427.294,-15.5 437.294,-19.0001 437.294,-12.0001"/>
 </g>

@@ -9,35 +9,35 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 62)">
 <title>vpr::CommandPool::StartSingleCmdBuffer</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-62 330,-62 330,4 -4,4"/>
-<!-- Node72 -->
-<g id="node1" class="node"><title>Node72</title>
+<!-- Node43 -->
+<g id="node1" class="node"><title>Node43</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-14 0,-44 152,-44 152,-14 0,-14"/>
 <text text-anchor="start" x="8" y="-32" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::CommandPool::StartSingle</text>
 <text text-anchor="middle" x="76" y="-21" font-family="Helvetica,sans-Serif" font-size="10.00">CmdBuffer</text>
 </g>
-<!-- Node73 -->
-<g id="node2" class="node"><title>Node73</title>
+<!-- Node44 -->
+<g id="node2" class="node"><title>Node44</title>
 <g id="a_node2"><a xlink:href="classvpr_1_1_buffer.html#a3a369873112eb478f3dfdf7b1549d2f6" target="_top" xlink:title="Copies data using a single command buffer submission form the given pool to the given queue...">
 <polygon fill="white" stroke="black" points="208,-38.5 208,-57.5 306,-57.5 306,-38.5 208,-38.5"/>
 <text text-anchor="middle" x="257" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Buffer::CopyTo</text>
 </a>
 </g>
 </g>
-<!-- Node72&#45;&gt;Node73 -->
-<g id="edge1" class="edge"><title>Node72&#45;&gt;Node73</title>
+<!-- Node43&#45;&gt;Node44 -->
+<g id="edge1" class="edge"><title>Node43&#45;&gt;Node44</title>
 <path fill="none" stroke="midnightblue" d="M162.359,-38.0604C177.985,-39.7191 193.781,-41.3957 207.834,-42.8874"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="162.448,-34.5503 152.134,-36.9751 161.709,-41.5112 162.448,-34.5503"/>
 </g>
-<!-- Node74 -->
-<g id="node3" class="node"><title>Node74</title>
+<!-- Node45 -->
+<g id="node3" class="node"><title>Node45</title>
 <g id="a_node3"><a xlink:href="classvpr_1_1_image.html#af859b6a324c843f53bc822fcb90fdf33" target="_top" xlink:title="Uses a memory barrier to enforce an image layout change. ">
 <polygon fill="white" stroke="black" points="188,-0.5 188,-19.5 326,-19.5 326,-0.5 188,-0.5"/>
 <text text-anchor="middle" x="257" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Image::TransitionLayout</text>
 </a>
 </g>
 </g>
-<!-- Node72&#45;&gt;Node74 -->
-<g id="edge2" class="edge"><title>Node72&#45;&gt;Node74</title>
+<!-- Node43&#45;&gt;Node45 -->
+<g id="edge2" class="edge"><title>Node43&#45;&gt;Node45</title>
 <path fill="none" stroke="midnightblue" d="M162.207,-19.9557C170.825,-19.041 179.495,-18.1206 187.899,-17.2286"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="161.709,-16.4888 152.134,-21.0249 162.448,-23.4497 161.709,-16.4888"/>
 </g>

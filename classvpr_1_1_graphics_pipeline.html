@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -44,6 +51,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classvpr_1_1_graphics_pipeline.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -58,14 +80,10 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespacevpr.html">vpr</a></li><li class="navelem"><a class="el" href="classvpr_1_1_graphics_pipeline.html">GraphicsPipeline</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classvpr_1_1_graphics_pipeline-members.html">List of all members</a>  </div>
@@ -78,19 +96,13 @@ $(function() {
  <a href="classvpr_1_1_graphics_pipeline.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_graphics_pipeline_8hpp_source.html">GraphicsPipeline.hpp</a>&gt;</code></p>
-<div class="dynheader">
-Collaboration diagram for vpr::GraphicsPipeline:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_graphics_pipeline__coll__graph.svg" width="100%" height="563"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a80394703e8c478e29f480e4b3811d185"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_graphics_pipeline.html#a80394703e8c478e29f480e4b3811d185">GraphicsPipeline</a> (const <a class="el" href="classvpr_1_1_device.html">Device</a> *<a class="el" href="classvpr_1_1_graphics_pipeline.html#a955c4e18e4f2f3fa2a31d6389bdbec80">parent</a>, VkGraphicsPipelineCreateInfo create_info, VkPipeline <a class="el" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a>)</td></tr>
-<tr class="separator:a80394703e8c478e29f480e4b3811d185"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8f3df9f7786d3bee0ebe8981bdc1e91"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_graphics_pipeline.html#ae8f3df9f7786d3bee0ebe8981bdc1e91">GraphicsPipeline</a> (const <a class="el" href="classvpr_1_1_device.html">Device</a> *<a class="el" href="classvpr_1_1_graphics_pipeline.html#a955c4e18e4f2f3fa2a31d6389bdbec80">parent</a>)</td></tr>
-<tr class="separator:ae8f3df9f7786d3bee0ebe8981bdc1e91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a646166a0760f6860f719f646753c5a4c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_graphics_pipeline.html#a646166a0760f6860f719f646753c5a4c">GraphicsPipeline</a> (const VkDevice &amp;<a class="el" href="classvpr_1_1_graphics_pipeline.html#a6f4e75798fa5be8be83768cc1c1caa9e">parent</a>, VkGraphicsPipelineCreateInfo create_info, VkPipeline <a class="el" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a>)</td></tr>
+<tr class="separator:a646166a0760f6860f719f646753c5a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a464e53ae6209d6bed77c8be843d9680a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_graphics_pipeline.html#a464e53ae6209d6bed77c8be843d9680a">GraphicsPipeline</a> (const VkDevice &amp;<a class="el" href="classvpr_1_1_graphics_pipeline.html#a6f4e75798fa5be8be83768cc1c1caa9e">parent</a>)</td></tr>
+<tr class="separator:a464e53ae6209d6bed77c8be843d9680a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcea60d9bb59d7b3613e76f18d4ca763"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_graphics_pipeline.html#afcea60d9bb59d7b3613e76f18d4ca763">~GraphicsPipeline</a> ()</td></tr>
 <tr class="separator:afcea60d9bb59d7b3613e76f18d4ca763"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3baddf705601751e9041ea3c36253e5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_graphics_pipeline.html#ab3baddf705601751e9041ea3c36253e5">GraphicsPipeline</a> (<a class="el" href="classvpr_1_1_graphics_pipeline.html">GraphicsPipeline</a> &amp;&amp;other) noexcept</td></tr>
@@ -104,6 +116,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8252999b7a7b7310172ac585782f31a4"><td class="memItemLeft" align="right" valign="top">const VkPipeline &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_graphics_pipeline.html#a8252999b7a7b7310172ac585782f31a4">vkHandle</a> () const noexcept</td></tr>
 <tr class="separator:a8252999b7a7b7310172ac585782f31a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a1ab47d7151b320c07f6bee0fc2ac3ff8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_graphics_pipeline.html#a1ab47d7151b320c07f6bee0fc2ac3ff8">CreateMultiple</a> (const VkDevice &amp;device, const VkGraphicsPipelineCreateInfo *infos, const size_t num_infos, VkPipelineCache cache, <a class="el" href="classvpr_1_1_graphics_pipeline.html">GraphicsPipeline</a> **dest_pipelines_array)</td></tr>
+<tr class="separator:a1ab47d7151b320c07f6bee0fc2ac3ff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:aa64ec5438a3f77ef4b0900dedd088dc3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_graphics_pipeline.html#aa64ec5438a3f77ef4b0900dedd088dc3">GraphicsPipeline</a> (const <a class="el" href="classvpr_1_1_graphics_pipeline.html">GraphicsPipeline</a> &amp;)=delete</td></tr>
@@ -115,8 +132,8 @@ Private Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a15a2a7ccca9c23a508220ef2450bcb3d"><td class="memItemLeft" align="right" valign="top">const VkAllocationCallbacks *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_graphics_pipeline.html#a15a2a7ccca9c23a508220ef2450bcb3d">allocators</a> = nullptr</td></tr>
 <tr class="separator:a15a2a7ccca9c23a508220ef2450bcb3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a955c4e18e4f2f3fa2a31d6389bdbec80"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classvpr_1_1_device.html">Device</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_graphics_pipeline.html#a955c4e18e4f2f3fa2a31d6389bdbec80">parent</a></td></tr>
-<tr class="separator:a955c4e18e4f2f3fa2a31d6389bdbec80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f4e75798fa5be8be83768cc1c1caa9e"><td class="memItemLeft" align="right" valign="top">VkDevice&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_graphics_pipeline.html#a6f4e75798fa5be8be83768cc1c1caa9e">parent</a></td></tr>
+<tr class="separator:a6f4e75798fa5be8be83768cc1c1caa9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7026f50b8f3b75bbbc16891a97eb71d4"><td class="memItemLeft" align="right" valign="top">VkPipeline&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a></td></tr>
 <tr class="separator:a7026f50b8f3b75bbbc16891a97eb71d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0dd80a9ad43c36eaf6d0be88ff240264"><td class="memItemLeft" align="right" valign="top">VkGraphicsPipelineCreateInfo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">createInfo</a></td></tr>
@@ -126,7 +143,7 @@ Private Attributes</h2></td></tr>
 <div class="textblock"><p>The <a class="el" href="classvpr_1_1_graphics_pipeline.html" title="The GraphicsPipeline object is an RAII wrapper around a vkGraphicsPipeline object, handling construction and destruction alone. ">GraphicsPipeline</a> object is an RAII wrapper around a vkGraphicsPipeline object, handling construction and destruction alone. </p>
 <p>The <a class="el" href="structvpr_1_1_graphics_pipeline_info.html" title="This struct is used to define most of the pipeline state for a Vulkan vkGraphicsPipeline object...">GraphicsPipelineInfo</a> structure is, truthfully, much more important and much complex than this class is. </p>
 
-<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8hpp_source.html#l00059">59</a> of file <a class="el" href="_graphics_pipeline_8hpp_source.html">GraphicsPipeline.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8hpp_source.html#l00058">58</a> of file <a class="el" href="_graphics_pipeline_8hpp_source.html">GraphicsPipeline.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa64ec5438a3f77ef4b0900dedd088dc3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa64ec5438a3f77ef4b0900dedd088dc3">&#9670;&nbsp;</a></span>GraphicsPipeline() <span class="overload">[1/4]</span></h2>
@@ -152,18 +169,20 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="_graphics_pipeline_8cpp_source.html#l00059">vpr::CreateMultiple()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_graphics_pipeline_aa64ec5438a3f77ef4b0900dedd088dc3_icgraph.svg" width="332" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<p class="reference">Referenced by <a class="el" href="_graphics_pipeline_8cpp_source.html#l00064">CreateMultiple()</a>.</p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_graphics_pipeline_aa64ec5438a3f77ef4b0900dedd088dc3_icgraph.svg" width="347" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
 </div>
 </div>
-<a id="a80394703e8c478e29f480e4b3811d185"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80394703e8c478e29f480e4b3811d185">&#9670;&nbsp;</a></span>GraphicsPipeline() <span class="overload">[2/4]</span></h2>
+<a id="a646166a0760f6860f719f646753c5a4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a646166a0760f6860f719f646753c5a4c">&#9670;&nbsp;</a></span>GraphicsPipeline() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -171,7 +190,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">vpr::GraphicsPipeline::GraphicsPipeline </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classvpr_1_1_device.html">Device</a> *&#160;</td>
+          <td class="paramtype">const VkDevice &amp;&#160;</td>
           <td class="paramname"><em>parent</em>, </td>
         </tr>
         <tr>
@@ -194,15 +213,15 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00023">23</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;: <a class="code" href="classvpr_1_1_graphics_pipeline.html#a955c4e18e4f2f3fa2a31d6389bdbec80">parent</a>(_d), <a class="code" href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">createInfo</a>(std::move(info)), <a class="code" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a>(_handle) {}</div><div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a955c4e18e4f2f3fa2a31d6389bdbec80"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a955c4e18e4f2f3fa2a31d6389bdbec80">vpr::GraphicsPipeline::parent</a></div><div class="ttdeci">const Device * parent</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00078">GraphicsPipeline.hpp:78</a></div></div>
-<div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a7026f50b8f3b75bbbc16891a97eb71d4"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">vpr::GraphicsPipeline::handle</a></div><div class="ttdeci">VkPipeline handle</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00079">GraphicsPipeline.hpp:79</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00028">28</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;: <a class="code" href="classvpr_1_1_graphics_pipeline.html#a6f4e75798fa5be8be83768cc1c1caa9e">parent</a>(_parent), <a class="code" href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">createInfo</a>(std::move(info)), <a class="code" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a>(_handle) {}</div><div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a7026f50b8f3b75bbbc16891a97eb71d4"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">vpr::GraphicsPipeline::handle</a></div><div class="ttdeci">VkPipeline handle</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00079">GraphicsPipeline.hpp:79</a></div></div>
+<div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a6f4e75798fa5be8be83768cc1c1caa9e"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a6f4e75798fa5be8be83768cc1c1caa9e">vpr::GraphicsPipeline::parent</a></div><div class="ttdeci">VkDevice parent</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00078">GraphicsPipeline.hpp:78</a></div></div>
 <div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a0dd80a9ad43c36eaf6d0be88ff240264"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">vpr::GraphicsPipeline::createInfo</a></div><div class="ttdeci">VkGraphicsPipelineCreateInfo createInfo</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00080">GraphicsPipeline.hpp:80</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="ae8f3df9f7786d3bee0ebe8981bdc1e91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8f3df9f7786d3bee0ebe8981bdc1e91">&#9670;&nbsp;</a></span>GraphicsPipeline() <span class="overload">[3/4]</span></h2>
+<a id="a464e53ae6209d6bed77c8be843d9680a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a464e53ae6209d6bed77c8be843d9680a">&#9670;&nbsp;</a></span>GraphicsPipeline() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,17 +229,18 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">vpr::GraphicsPipeline::GraphicsPipeline </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classvpr_1_1_device.html">Device</a> *&#160;</td>
+          <td class="paramtype">const VkDevice &amp;&#160;</td>
           <td class="paramname"><em>parent</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00025">25</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;: <a class="code" href="classvpr_1_1_graphics_pipeline.html#a955c4e18e4f2f3fa2a31d6389bdbec80">parent</a>(_parent), <a class="code" href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">createInfo</a>(<a class="code" href="namespacevpr.html#a673fde58ee3e106b03264c62ae5dc5ac">vk_graphics_pipeline_create_info_base</a>) {}</div><div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a955c4e18e4f2f3fa2a31d6389bdbec80"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a955c4e18e4f2f3fa2a31d6389bdbec80">vpr::GraphicsPipeline::parent</a></div><div class="ttdeci">const Device * parent</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00078">GraphicsPipeline.hpp:78</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00030">30</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;: <a class="code" href="classvpr_1_1_graphics_pipeline.html#a6f4e75798fa5be8be83768cc1c1caa9e">parent</a>(_parent), <a class="code" href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">createInfo</a>(<a class="code" href="namespacevpr.html#a673fde58ee3e106b03264c62ae5dc5ac">vk_graphics_pipeline_create_info_base</a>), <a class="code" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a>(VK_NULL_HANDLE) {}</div><div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a7026f50b8f3b75bbbc16891a97eb71d4"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">vpr::GraphicsPipeline::handle</a></div><div class="ttdeci">VkPipeline handle</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00079">GraphicsPipeline.hpp:79</a></div></div>
+<div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a6f4e75798fa5be8be83768cc1c1caa9e"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a6f4e75798fa5be8be83768cc1c1caa9e">vpr::GraphicsPipeline::parent</a></div><div class="ttdeci">VkDevice parent</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00078">GraphicsPipeline.hpp:78</a></div></div>
 <div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a0dd80a9ad43c36eaf6d0be88ff240264"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">vpr::GraphicsPipeline::createInfo</a></div><div class="ttdeci">VkGraphicsPipelineCreateInfo createInfo</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00080">GraphicsPipeline.hpp:80</a></div></div>
-<div class="ttc" id="namespacevpr_html_a673fde58ee3e106b03264c62ae5dc5ac"><div class="ttname"><a href="namespacevpr.html#a673fde58ee3e106b03264c62ae5dc5ac">vpr::vk_graphics_pipeline_create_info_base</a></div><div class="ttdeci">constexpr VkGraphicsPipelineCreateInfo vk_graphics_pipeline_create_info_base</div><div class="ttdef"><b>Definition:</b> <a href="_create_info_base_8hpp_source.html#l00422">CreateInfoBase.hpp:422</a></div></div>
+<div class="ttc" id="namespacevpr_html_a673fde58ee3e106b03264c62ae5dc5ac"><div class="ttname"><a href="namespacevpr.html#a673fde58ee3e106b03264c62ae5dc5ac">vpr::vk_graphics_pipeline_create_info_base</a></div><div class="ttdeci">static constexpr VkGraphicsPipelineCreateInfo vk_graphics_pipeline_create_info_base</div><div class="ttdef"><b>Definition:</b> <a href="_create_info_base_8hpp_source.html#l00422">CreateInfoBase.hpp:422</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -239,14 +259,16 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00039">39</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00044">44</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_graphics_pipeline_8cpp_source.html#l00049">Destroy()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                                       {</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="classvpr_1_1_graphics_pipeline.html#aea7b8f3af0fb2b0a508f362a791fe957">Destroy</a>();</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_graphics_pipeline_html_aea7b8f3af0fb2b0a508f362a791fe957"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#aea7b8f3af0fb2b0a508f362a791fe957">vpr::GraphicsPipeline::Destroy</a></div><div class="ttdeci">void Destroy()</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8cpp_source.html#l00049">GraphicsPipeline.cpp:49</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_graphics_pipeline_afcea60d9bb59d7b3613e76f18d4ca763_cgraph.svg" width="539" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<p class="reference">References <a class="el" href="_graphics_pipeline_8cpp_source.html#l00054">Destroy()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                                       {</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="classvpr_1_1_graphics_pipeline.html#aea7b8f3af0fb2b0a508f362a791fe957">Destroy</a>();</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_graphics_pipeline_html_aea7b8f3af0fb2b0a508f362a791fe957"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#aea7b8f3af0fb2b0a508f362a791fe957">vpr::GraphicsPipeline::Destroy</a></div><div class="ttdeci">void Destroy()</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8cpp_source.html#l00054">GraphicsPipeline.cpp:54</a></div></div>
+</div><!-- fragment --><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_graphics_pipeline_afcea60d9bb59d7b3613e76f18d4ca763_cgraph.svg" width="347" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -276,14 +298,82 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00027">27</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                                                                        : <a class="code" href="classvpr_1_1_graphics_pipeline.html#a955c4e18e4f2f3fa2a31d6389bdbec80">parent</a>(std::move(other.parent)), <a class="code" href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">createInfo</a>(std::move(other.createInfo)), <a class="code" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a>(std::move(other.handle)) {</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        other.handle = VK_NULL_HANDLE;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a955c4e18e4f2f3fa2a31d6389bdbec80"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a955c4e18e4f2f3fa2a31d6389bdbec80">vpr::GraphicsPipeline::parent</a></div><div class="ttdeci">const Device * parent</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00078">GraphicsPipeline.hpp:78</a></div></div>
-<div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a7026f50b8f3b75bbbc16891a97eb71d4"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">vpr::GraphicsPipeline::handle</a></div><div class="ttdeci">VkPipeline handle</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00079">GraphicsPipeline.hpp:79</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00032">32</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                                                                        : <a class="code" href="classvpr_1_1_graphics_pipeline.html#a6f4e75798fa5be8be83768cc1c1caa9e">parent</a>(std::move(other.parent)), <a class="code" href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">createInfo</a>(other.createInfo), <a class="code" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a>(std::move(other.handle)) {</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        other.handle = VK_NULL_HANDLE;</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a7026f50b8f3b75bbbc16891a97eb71d4"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">vpr::GraphicsPipeline::handle</a></div><div class="ttdeci">VkPipeline handle</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00079">GraphicsPipeline.hpp:79</a></div></div>
+<div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a6f4e75798fa5be8be83768cc1c1caa9e"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a6f4e75798fa5be8be83768cc1c1caa9e">vpr::GraphicsPipeline::parent</a></div><div class="ttdeci">VkDevice parent</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00078">GraphicsPipeline.hpp:78</a></div></div>
 <div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a0dd80a9ad43c36eaf6d0be88ff240264"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">vpr::GraphicsPipeline::createInfo</a></div><div class="ttdeci">VkGraphicsPipelineCreateInfo createInfo</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00080">GraphicsPipeline.hpp:80</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1ab47d7151b320c07f6bee0fc2ac3ff8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ab47d7151b320c07f6bee0fc2ac3ff8">&#9670;&nbsp;</a></span>CreateMultiple()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void vpr::GraphicsPipeline::CreateMultiple </td>
+          <td>(</td>
+          <td class="paramtype">const VkDevice &amp;&#160;</td>
+          <td class="paramname"><em>device</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const VkGraphicsPipelineCreateInfo *&#160;</td>
+          <td class="paramname"><em>infos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>num_infos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VkPipelineCache&#160;</td>
+          <td class="paramname"><em>cache</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classvpr_1_1_graphics_pipeline.html">GraphicsPipeline</a> **&#160;</td>
+          <td class="paramname"><em>dest_pipelines_array</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00064">64</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="classvpr_1_1_graphics_pipeline.html#aa64ec5438a3f77ef4b0900dedd088dc3">GraphicsPipeline()</a>, and <a class="el" href="vk_assert_8hpp_source.html#l00009">VkAssert</a>.</p>
+<div class="fragment"><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                                                                                                                                                                                   {</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        std::vector&lt;VkPipeline&gt; handles(num_infos);</div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        VkResult result = vkCreateGraphicsPipelines(dvc, cache, static_cast&lt;uint32_t&gt;(num_infos), infos, <span class="keyword">nullptr</span>, handles.data());</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a>(result);</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; handles.size(); ++i) {</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            results[i] = <span class="keyword">new</span> <a class="code" href="classvpr_1_1_graphics_pipeline.html#aa64ec5438a3f77ef4b0900dedd088dc3">GraphicsPipeline</a>(dvc, infos[i], handles[i]);</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div><div class="ttc" id="vk_assert_8hpp_html_a92c2e07b0d021fc331be70a65c61dacc"><div class="ttname"><a href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a></div><div class="ttdeci">#define VkAssert(expression)</div><div class="ttdef"><b>Definition:</b> <a href="vk_assert_8hpp_source.html#l00009">vkAssert.hpp:9</a></div></div>
+<div class="ttc" id="classvpr_1_1_graphics_pipeline_html_aa64ec5438a3f77ef4b0900dedd088dc3"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#aa64ec5438a3f77ef4b0900dedd088dc3">vpr::GraphicsPipeline::GraphicsPipeline</a></div><div class="ttdeci">GraphicsPipeline(const GraphicsPipeline &amp;)=delete</div></div>
+</div><!-- fragment --><div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_graphics_pipeline_a1ab47d7151b320c07f6bee0fc2ac3ff8_cgraph.svg" width="347" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 <a id="aea7b8f3af0fb2b0a508f362a791fe957"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aea7b8f3af0fb2b0a508f362a791fe957">&#9670;&nbsp;</a></span>Destroy()</h2>
 
@@ -299,24 +389,19 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00049">49</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00054">54</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_graphics_pipeline_8hpp_source.html#l00077">allocators</a>, <a class="el" href="_graphics_pipeline_8hpp_source.html#l00079">handle</a>, <a class="el" href="_graphics_pipeline_8hpp_source.html#l00078">parent</a>, and <a class="el" href="_logical_device_8cpp_source.html#l00209">vpr::Device::vkHandle()</a>.</p>
+<p class="reference">References <a class="el" href="_graphics_pipeline_8hpp_source.html#l00077">allocators</a>, <a class="el" href="_graphics_pipeline_8hpp_source.html#l00079">handle</a>, and <a class="el" href="_graphics_pipeline_8hpp_source.html#l00078">parent</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_graphics_pipeline_8cpp_source.html#l00039">~GraphicsPipeline()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                                   {</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a> != VK_NULL_HANDLE) {</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            vkDestroyPipeline(<a class="code" href="classvpr_1_1_graphics_pipeline.html#a955c4e18e4f2f3fa2a31d6389bdbec80">parent</a>-&gt;<a class="code" href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vkHandle</a>(), <a class="code" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a>, <a class="code" href="classvpr_1_1_graphics_pipeline.html#a15a2a7ccca9c23a508220ef2450bcb3d">allocators</a>);</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        }</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a955c4e18e4f2f3fa2a31d6389bdbec80"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a955c4e18e4f2f3fa2a31d6389bdbec80">vpr::GraphicsPipeline::parent</a></div><div class="ttdeci">const Device * parent</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00078">GraphicsPipeline.hpp:78</a></div></div>
-<div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a7026f50b8f3b75bbbc16891a97eb71d4"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">vpr::GraphicsPipeline::handle</a></div><div class="ttdeci">VkPipeline handle</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00079">GraphicsPipeline.hpp:79</a></div></div>
-<div class="ttc" id="classvpr_1_1_device_html_a59882855173bef0b13a17b376ea01d45"><div class="ttname"><a href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vpr::Device::vkHandle</a></div><div class="ttdeci">const VkDevice &amp; vkHandle() const</div><div class="ttdef"><b>Definition:</b> <a href="_logical_device_8cpp_source.html#l00209">LogicalDevice.cpp:209</a></div></div>
+<p class="reference">Referenced by <a class="el" href="_graphics_pipeline_8cpp_source.html#l00044">~GraphicsPipeline()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                                   {</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a> != VK_NULL_HANDLE) {</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            vkDestroyPipeline(<a class="code" href="classvpr_1_1_graphics_pipeline.html#a6f4e75798fa5be8be83768cc1c1caa9e">parent</a>, <a class="code" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a>, <a class="code" href="classvpr_1_1_graphics_pipeline.html#a15a2a7ccca9c23a508220ef2450bcb3d">allocators</a>);</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a7026f50b8f3b75bbbc16891a97eb71d4"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">vpr::GraphicsPipeline::handle</a></div><div class="ttdeci">VkPipeline handle</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00079">GraphicsPipeline.hpp:79</a></div></div>
+<div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a6f4e75798fa5be8be83768cc1c1caa9e"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a6f4e75798fa5be8be83768cc1c1caa9e">vpr::GraphicsPipeline::parent</a></div><div class="ttdeci">VkDevice parent</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00078">GraphicsPipeline.hpp:78</a></div></div>
 <div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a15a2a7ccca9c23a508220ef2450bcb3d"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a15a2a7ccca9c23a508220ef2450bcb3d">vpr::GraphicsPipeline::allocators</a></div><div class="ttdeci">const VkAllocationCallbacks * allocators</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00077">GraphicsPipeline.hpp:77</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_graphics_pipeline_aea7b8f3af0fb2b0a508f362a791fe957_cgraph.svg" width="347" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div><!-- fragment --><div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_graphics_pipeline_aea7b8f3af0fb2b0a508f362a791fe957_icgraph.svg" width="347" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
@@ -349,21 +434,14 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00043">43</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00048">48</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_graphics_pipeline_8hpp_source.html#l00080">createInfo</a>, <a class="el" href="_graphics_pipeline_8hpp_source.html#l00079">handle</a>, <a class="el" href="_graphics_pipeline_8hpp_source.html#l00078">parent</a>, <a class="el" href="vk_assert_8hpp_source.html#l00009">VkAssert</a>, and <a class="el" href="_logical_device_8cpp_source.html#l00209">vpr::Device::vkHandle()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                                                                                                       {</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        VkResult result = vkCreateGraphicsPipelines(<a class="code" href="classvpr_1_1_graphics_pipeline.html#a955c4e18e4f2f3fa2a31d6389bdbec80">parent</a>-&gt;<a class="code" href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vkHandle</a>(), cache, 1, &amp;create_info, <span class="keyword">nullptr</span>, &amp;<a class="code" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a>);</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a>(result);</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">createInfo</a> = std::move(create_info);</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div><div class="ttc" id="vk_assert_8hpp_html_a92c2e07b0d021fc331be70a65c61dacc"><div class="ttname"><a href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a></div><div class="ttdeci">#define VkAssert(expression)</div><div class="ttdef"><b>Definition:</b> <a href="vk_assert_8hpp_source.html#l00009">vkAssert.hpp:9</a></div></div>
-<div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a955c4e18e4f2f3fa2a31d6389bdbec80"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a955c4e18e4f2f3fa2a31d6389bdbec80">vpr::GraphicsPipeline::parent</a></div><div class="ttdeci">const Device * parent</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00078">GraphicsPipeline.hpp:78</a></div></div>
+<p class="reference">References <a class="el" href="_graphics_pipeline_8hpp_source.html#l00080">createInfo</a>, <a class="el" href="_graphics_pipeline_8hpp_source.html#l00079">handle</a>, <a class="el" href="_graphics_pipeline_8hpp_source.html#l00078">parent</a>, and <a class="el" href="vk_assert_8hpp_source.html#l00009">VkAssert</a>.</p>
+<div class="fragment"><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                                                                                                       {</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        VkResult result = vkCreateGraphicsPipelines(<a class="code" href="classvpr_1_1_graphics_pipeline.html#a6f4e75798fa5be8be83768cc1c1caa9e">parent</a>, cache, 1, &amp;create_info, <span class="keyword">nullptr</span>, &amp;<a class="code" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a>);</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a>(result);</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">createInfo</a> = std::move(create_info);</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div><div class="ttc" id="vk_assert_8hpp_html_a92c2e07b0d021fc331be70a65c61dacc"><div class="ttname"><a href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a></div><div class="ttdeci">#define VkAssert(expression)</div><div class="ttdef"><b>Definition:</b> <a href="vk_assert_8hpp_source.html#l00009">vkAssert.hpp:9</a></div></div>
 <div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a7026f50b8f3b75bbbc16891a97eb71d4"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">vpr::GraphicsPipeline::handle</a></div><div class="ttdeci">VkPipeline handle</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00079">GraphicsPipeline.hpp:79</a></div></div>
+<div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a6f4e75798fa5be8be83768cc1c1caa9e"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a6f4e75798fa5be8be83768cc1c1caa9e">vpr::GraphicsPipeline::parent</a></div><div class="ttdeci">VkDevice parent</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00078">GraphicsPipeline.hpp:78</a></div></div>
 <div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a0dd80a9ad43c36eaf6d0be88ff240264"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">vpr::GraphicsPipeline::createInfo</a></div><div class="ttdeci">VkGraphicsPipelineCreateInfo createInfo</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00080">GraphicsPipeline.hpp:80</a></div></div>
-<div class="ttc" id="classvpr_1_1_device_html_a59882855173bef0b13a17b376ea01d45"><div class="ttname"><a href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vpr::Device::vkHandle</a></div><div class="ttdeci">const VkDevice &amp; vkHandle() const</div><div class="ttdef"><b>Definition:</b> <a href="_logical_device_8cpp_source.html#l00209">LogicalDevice.cpp:209</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_graphics_pipeline_a6b28822784f8e49222cdaacef49f29de_cgraph.svg" width="347" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a91c924b5f981aa1c11fabd93b8bd0293"></a>
@@ -416,11 +494,11 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00031">31</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00036">36</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="_graphics_pipeline_8hpp_source.html#l00080">createInfo</a>, <a class="el" href="_graphics_pipeline_8hpp_source.html#l00079">handle</a>, and <a class="el" href="_graphics_pipeline_8hpp_source.html#l00078">parent</a>.</p>
-<div class="fragment"><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                                                                                   {</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="classvpr_1_1_graphics_pipeline.html#a955c4e18e4f2f3fa2a31d6389bdbec80">parent</a> = std::move(other.parent);</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">createInfo</a> = std::move(other.createInfo);</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a> = std::move(other.handle);</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        other.handle = VK_NULL_HANDLE;</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a955c4e18e4f2f3fa2a31d6389bdbec80"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a955c4e18e4f2f3fa2a31d6389bdbec80">vpr::GraphicsPipeline::parent</a></div><div class="ttdeci">const Device * parent</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00078">GraphicsPipeline.hpp:78</a></div></div>
-<div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a7026f50b8f3b75bbbc16891a97eb71d4"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">vpr::GraphicsPipeline::handle</a></div><div class="ttdeci">VkPipeline handle</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00079">GraphicsPipeline.hpp:79</a></div></div>
+<div class="fragment"><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                                                                                   {</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="classvpr_1_1_graphics_pipeline.html#a6f4e75798fa5be8be83768cc1c1caa9e">parent</a> = std::move(other.parent);</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">createInfo</a> = other.createInfo;</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a> = std::move(other.handle);</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        other.handle = VK_NULL_HANDLE;</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a7026f50b8f3b75bbbc16891a97eb71d4"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">vpr::GraphicsPipeline::handle</a></div><div class="ttdeci">VkPipeline handle</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00079">GraphicsPipeline.hpp:79</a></div></div>
+<div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a6f4e75798fa5be8be83768cc1c1caa9e"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a6f4e75798fa5be8be83768cc1c1caa9e">vpr::GraphicsPipeline::parent</a></div><div class="ttdeci">VkDevice parent</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00078">GraphicsPipeline.hpp:78</a></div></div>
 <div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a0dd80a9ad43c36eaf6d0be88ff240264"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a0dd80a9ad43c36eaf6d0be88ff240264">vpr::GraphicsPipeline::createInfo</a></div><div class="ttdeci">VkGraphicsPipelineCreateInfo createInfo</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00080">GraphicsPipeline.hpp:80</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -448,10 +526,10 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00055">55</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8cpp_source.html#l00060">60</a> of file <a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="_graphics_pipeline_8hpp_source.html#l00079">handle</a>.</p>
-<div class="fragment"><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                                                                 {</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a>;</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a7026f50b8f3b75bbbc16891a97eb71d4"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">vpr::GraphicsPipeline::handle</a></div><div class="ttdeci">VkPipeline handle</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00079">GraphicsPipeline.hpp:79</a></div></div>
+<div class="fragment"><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                                                                 {</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">handle</a>;</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_graphics_pipeline_html_a7026f50b8f3b75bbbc16891a97eb71d4"><div class="ttname"><a href="classvpr_1_1_graphics_pipeline.html#a7026f50b8f3b75bbbc16891a97eb71d4">vpr::GraphicsPipeline::handle</a></div><div class="ttdeci">VkPipeline handle</div><div class="ttdef"><b>Definition:</b> <a href="_graphics_pipeline_8hpp_source.html#l00079">GraphicsPipeline.hpp:79</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -478,7 +556,7 @@ Here is the call graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8hpp_source.html#l00077">77</a> of file <a class="el" href="_graphics_pipeline_8hpp_source.html">GraphicsPipeline.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_graphics_pipeline_8cpp_source.html#l00049">Destroy()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_graphics_pipeline_8cpp_source.html#l00054">Destroy()</a>.</p>
 
 </div>
 </div>
@@ -504,7 +582,7 @@ Here is the call graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8hpp_source.html#l00080">80</a> of file <a class="el" href="_graphics_pipeline_8hpp_source.html">GraphicsPipeline.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_graphics_pipeline_8cpp_source.html#l00043">Init()</a>, and <a class="el" href="_graphics_pipeline_8cpp_source.html#l00031">operator=()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_graphics_pipeline_8cpp_source.html#l00048">Init()</a>, and <a class="el" href="_graphics_pipeline_8cpp_source.html#l00036">operator=()</a>.</p>
 
 </div>
 </div>
@@ -530,12 +608,12 @@ Here is the call graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8hpp_source.html#l00079">79</a> of file <a class="el" href="_graphics_pipeline_8hpp_source.html">GraphicsPipeline.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_graphics_pipeline_8cpp_source.html#l00049">Destroy()</a>, <a class="el" href="_graphics_pipeline_8cpp_source.html#l00043">Init()</a>, <a class="el" href="_graphics_pipeline_8cpp_source.html#l00031">operator=()</a>, and <a class="el" href="_graphics_pipeline_8cpp_source.html#l00055">vkHandle()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_graphics_pipeline_8cpp_source.html#l00054">Destroy()</a>, <a class="el" href="_graphics_pipeline_8cpp_source.html#l00048">Init()</a>, <a class="el" href="_graphics_pipeline_8cpp_source.html#l00036">operator=()</a>, and <a class="el" href="_graphics_pipeline_8cpp_source.html#l00060">vkHandle()</a>.</p>
 
 </div>
 </div>
-<a id="a955c4e18e4f2f3fa2a31d6389bdbec80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a955c4e18e4f2f3fa2a31d6389bdbec80">&#9670;&nbsp;</a></span>parent</h2>
+<a id="a6f4e75798fa5be8be83768cc1c1caa9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f4e75798fa5be8be83768cc1c1caa9e">&#9670;&nbsp;</a></span>parent</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -544,7 +622,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classvpr_1_1_device.html">Device</a>* vpr::GraphicsPipeline::parent</td>
+          <td class="memname">VkDevice vpr::GraphicsPipeline::parent</td>
         </tr>
       </table>
   </td>
@@ -556,20 +634,24 @@ Here is the call graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_graphics_pipeline_8hpp_source.html#l00078">78</a> of file <a class="el" href="_graphics_pipeline_8hpp_source.html">GraphicsPipeline.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_graphics_pipeline_8cpp_source.html#l00049">Destroy()</a>, <a class="el" href="_graphics_pipeline_8cpp_source.html#l00043">Init()</a>, and <a class="el" href="_graphics_pipeline_8cpp_source.html#l00031">operator=()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_graphics_pipeline_8cpp_source.html#l00054">Destroy()</a>, <a class="el" href="_graphics_pipeline_8cpp_source.html#l00048">Init()</a>, and <a class="el" href="_graphics_pipeline_8cpp_source.html#l00036">operator=()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/include/render/<a class="el" href="_graphics_pipeline_8hpp_source.html">GraphicsPipeline.hpp</a></li>
-<li>C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/src/render/<a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a></li>
+<li>render/include/<a class="el" href="_graphics_pipeline_8hpp_source.html">GraphicsPipeline.hpp</a></li>
+<li>render/src/<a class="el" href="_graphics_pipeline_8cpp_source.html">GraphicsPipeline.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacevpr.html">vpr</a></li><li class="navelem"><a class="el" href="classvpr_1_1_graphics_pipeline.html">GraphicsPipeline</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

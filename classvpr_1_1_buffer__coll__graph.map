@@ -1,8 +1,4 @@
 <map id="vpr::Buffer" name="vpr::Buffer">
-<area shape="rect" id="node2" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="1153,122,1237,149"/>
-<area shape="rect" id="node9" href="$classvpr_1_1_allocator.html" title="The primary interface and class of this subsystem. " alt="" coords="1451,135,1548,162"/>
-<area shape="rect" id="node4" href="$namespacevpr.html#structvpr_1_1vk_queue_family_indices" title="vpr::vkQueueFamilyIndices" alt="" coords="745,71,921,98"/>
-<area shape="rect" id="node10" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="785,245,880,271"/>
-<area shape="rect" id="node6" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="237,162,372,189"/>
-<area shape="rect" id="node13" href="$classvpr_1_1_allocation.html" title="Allocation class represents a singular allocation: can be a private allocation (i.e, only user of attached DeviceMemory) or a block allocation (bound to sub&#45;region of device memory) " alt="" coords="1144,213,1247,239"/>
+<area shape="rect" id="node2" href="$classvpr_1_1_allocation.html" title="Allocation class represents a singular allocation: can be a private allocation (i.e, only user of attached DeviceMemory) or a block allocation (bound to sub&#45;region of device memory) " alt="" coords="22,199,125,225"/>
+<area shape="rect" id="node4" href="$namespacevpr.html#structvpr_1_1_allocation_impl" title="vpr::AllocationImpl" alt="" coords="10,5,137,32"/>
 </map>

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['image',['Image',['../classvpr_1_1_image.html',1,'vpr']]],
-  ['instance',['Instance',['../classvpr_1_1_instance.html',1,'vpr']]]
+  ['layoutbindings',['LayoutBindings',['../namespacevpr.html#structvpr_1_1_layout_bindings',1,'vpr']]]
 ];

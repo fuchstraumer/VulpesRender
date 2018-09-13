@@ -1,6 +1,0 @@
-<map id="vpr::Swapchain::SwapchainInfo::GetBestFormat" name="vpr::Swapchain::SwapchainInfo::GetBestFormat">
-<area shape="rect" id="node2" href="$classvpr_1_1_swapchain.html#a72f010b980cf7b7c49bfd63d1548114e" title="vpr::Swapchain::setParameters" alt="" coords="233,31,436,57"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_swapchain.html#ad75f5394aaa57d86286a71e5d54ab3c6" title="vpr::Swapchain::create" alt="" coords="484,31,637,57"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_swapchain.html#acf014a8530f47418adba1c9e62c0c78e" title="vpr::Swapchain::Recreate" alt="" coords="691,5,860,32"/>
-<area shape="rect" id="node5" href="$classvpr_1_1_swapchain.html#a49bc91a7423fe49320b0375e78653439" title="vpr::Swapchain::Swapchain" alt="" coords="685,56,865,83"/>
-</map>

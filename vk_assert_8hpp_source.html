@@ -5,10 +5,17 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>VulpesRender: C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/include/common/vkAssert.hpp Source File</title>
+<title>VulpesRender: common/vkAssert.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -44,6 +51,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('vk_assert_8hpp_source.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -58,24 +80,22 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_0966d06610f72609fd9aa4979c2b5a92.html">common</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">vkAssert.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="vk_assert_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef VK_ASSERT_H</span></div><div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="vk_assert_8hpp.html#a0225c47fa83b48a34a0b5de62e7d0961">    3</a></span>&#160;<span class="preprocessor">#define VK_ASSERT_H</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;vulkan/vulkan.h&quot;</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#if !defined NDEBUG || defined VK_FORCE_ASSERT</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div><div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">    9</a></span>&#160;<span class="preprocessor">#define VkAssert(expression) { vkErrCheck((expression), __FILE__, __LINE__); }</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div><div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="vk_assert_8hpp.html#ae69ba6233e866a87c7427b71d4be0563">   11</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="vk_assert_8hpp.html#ae69ba6233e866a87c7427b71d4be0563">vkErrCheck</a>(VkResult res, <span class="keyword">const</span> <span class="keywordtype">char</span>* file, <span class="keywordtype">unsigned</span> line, <span class="keywordtype">bool</span> <a class="code" href="namespaceel_1_1base_1_1utils.html#a8428f6e3f88dd08153bd99ed77f40084">abort</a> = <span class="keyword">true</span>) {</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordflow">if</span> (res != VK_SUCCESS) {</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        std::cerr &lt;&lt; <span class="stringliteral">&quot;VkAssert: error &quot;</span> &lt;&lt; std::to_string(res) &lt;&lt; <span class="stringliteral">&quot; at &quot;</span> &lt;&lt; file &lt;&lt; <span class="stringliteral">&quot; line &quot;</span> &lt;&lt; std::to_string(line) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="namespaceel_1_1base_1_1utils.html#a8428f6e3f88dd08153bd99ed77f40084">abort</a>) {</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            <span class="keywordflow">throw</span> std::runtime_error(std::to_string(res));</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        }</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    }</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#else </span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define VkAssert(expression) ((void)(0))</span></div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif // ndef NDEBUG || defined VK_FORCE_ASSERT</span></div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif // !VK_ASSERT_H</span></div><div class="ttc" id="namespaceel_1_1base_1_1utils_html_a8428f6e3f88dd08153bd99ed77f40084"><div class="ttname"><a href="namespaceel_1_1base_1_1utils.html#a8428f6e3f88dd08153bd99ed77f40084">el::base::utils::abort</a></div><div class="ttdeci">static void abort(int status, const std::string &amp;reason)</div><div class="ttdoc">Aborts application due with user-defined status. </div><div class="ttdef"><b>Definition:</b> <a href="easylogging_09_09_8cc_source.html#l00030">easylogging++.cc:30</a></div></div>
-<div class="ttc" id="vk_assert_8hpp_html_ae69ba6233e866a87c7427b71d4be0563"><div class="ttname"><a href="vk_assert_8hpp.html#ae69ba6233e866a87c7427b71d4be0563">vkErrCheck</a></div><div class="ttdeci">void vkErrCheck(VkResult res, const char *file, unsigned line, bool abort=true)</div><div class="ttdef"><b>Definition:</b> <a href="vk_assert_8hpp_source.html#l00011">vkAssert.hpp:11</a></div></div>
+<a href="vk_assert_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef VK_ASSERT_H</span></div><div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="vk_assert_8hpp.html#a0225c47fa83b48a34a0b5de62e7d0961">    3</a></span>&#160;<span class="preprocessor">#define VK_ASSERT_H</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;vulkan/vulkan.h&quot;</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#if !defined NDEBUG || defined VK_FORCE_ASSERT</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div><div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">    9</a></span>&#160;<span class="preprocessor">#define VkAssert(expression) { vkErrCheck((expression), __FILE__, __LINE__); }</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div><div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="vk_assert_8hpp.html#ae69ba6233e866a87c7427b71d4be0563">   11</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="vk_assert_8hpp.html#ae69ba6233e866a87c7427b71d4be0563">vkErrCheck</a>(VkResult res, <span class="keyword">const</span> <span class="keywordtype">char</span>* file, <span class="keywordtype">unsigned</span> line, <span class="keywordtype">bool</span> abort = <span class="keyword">true</span>) {</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordflow">if</span> (res != VK_SUCCESS) {</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        std::cerr &lt;&lt; <span class="stringliteral">&quot;VkAssert: error &quot;</span> &lt;&lt; res &lt;&lt; <span class="stringliteral">&quot; at &quot;</span> &lt;&lt; file &lt;&lt; <span class="stringliteral">&quot; line &quot;</span> &lt;&lt; line &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keywordflow">if</span> (abort) {</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;VkAssert failure!&quot;</span>);</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        }</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    }</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#else </span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define VkAssert(expression) ((void)(0))</span></div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif // ndef NDEBUG || defined VK_FORCE_ASSERT</span></div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif // !VK_ASSERT_H</span></div><div class="ttc" id="vk_assert_8hpp_html_ae69ba6233e866a87c7427b71d4be0563"><div class="ttname"><a href="vk_assert_8hpp.html#ae69ba6233e866a87c7427b71d4be0563">vkErrCheck</a></div><div class="ttdeci">void vkErrCheck(VkResult res, const char *file, unsigned line, bool abort=true)</div><div class="ttdef"><b>Definition:</b> <a href="vk_assert_8hpp_source.html#l00011">vkAssert.hpp:11</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_bdd9a5d540de89e9fe90efdfc6973a4f.html">common</a></li><li class="navelem"><a class="el" href="vk_assert_8hpp.html">vkAssert.hpp</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

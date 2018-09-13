@@ -1,0 +1,22 @@
+<map id="vpr::Device::Device" name="vpr::Device::Device">
+<area shape="rect" id="node2" href="$classvpr_1_1_device.html#a3b0734cd598d9a64f3c459e9dc4e84ce" title="vpr::Device::create" alt="" coords="184,310,312,337"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_device.html#ac71413f7f9988d9479e27f51fc6de197" title="vpr::Device::verifyPresentation\lSupport" alt="" coords="360,28,555,69"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_physical_device.html#a00de7d3556d98b1cfda28d1f769f8fa8" title="vpr::PhysicalDevice\l::vkHandle" alt="" coords="644,5,779,47"/>
+<area shape="rect" id="node5" href="$classvpr_1_1_device.html#af52c3b24f6bca1308a5170eb3acfeb11" title="vpr::Device::setupQueues" alt="" coords="373,209,542,235"/>
+<area shape="rect" id="node13" href="$classvpr_1_1_device.html#a158d56e75fab365778e07a84d090b3f7" title="vpr::Device::setupValidation" alt="" coords="367,310,548,337"/>
+<area shape="rect" id="node15" href="$classvpr_1_1_device.html#a165976c19ab59de329855485a9dab5aa" title="vpr::Device::setupExtensions" alt="" coords="363,457,552,483"/>
+<area shape="rect" id="node19" href="$classvpr_1_1_physical_device.html#addc7471aceef1ca343cc1b6e5c242278" title="vpr::PhysicalDevice\l::GetFeatures" alt="" coords="390,508,525,549"/>
+<area shape="rect" id="node20" href="$classvpr_1_1_device.html#aca69dbf04470b2119a9960047035dc57" title="vpr::Device::setupDebugUtils\lHandler" alt="" coords="364,361,551,403"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_device.html#adbe15d529a11af4d7034a2135255e773" title="vpr::Device::setupGraphics\lQueues" alt="" coords="623,136,799,177"/>
+<area shape="rect" id="node10" href="$classvpr_1_1_device.html#abdb29331fbcc15a242b3f0e82b02beef" title="vpr::Device::setupCompute\lQueues" alt="" coords="623,201,799,243"/>
+<area shape="rect" id="node11" href="$classvpr_1_1_device.html#aa64b2412561fa0950722c2dc4997da9f" title="vpr::Device::setupTransfer\lQueues" alt="" coords="626,267,797,308"/>
+<area shape="rect" id="node12" href="$classvpr_1_1_device.html#a22ee8e6517d4898282d9d6385545100a" title="vpr::Device::setupSparse\lBindingQueues" alt="" coords="629,71,794,112"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_physical_device.html#af443c2a585d182166c464f252782a57b" title="! Attempts to find a Queue family that supports the full bitfield given: this can be multiple types..." alt="" coords="1117,197,1276,239"/>
+<area shape="rect" id="node8" href="$classvpr_1_1_device.html#a4884447888b9c8aacc288591056db19d" title="vpr::Device::setupQueueFamily" alt="" coords="868,146,1069,173"/>
+<area shape="rect" id="node9" href="$classvpr_1_1_physical_device.html#a2ee4f96b16a9762953ecad3b658d84e6" title="vpr::PhysicalDevice\l::GetQueueFamilyProperties" alt="" coords="875,197,1062,239"/>
+<area shape="rect" id="node14" href="$classvpr_1_1_instance.html#a34466d6fcc286ef1281b7bdb091ea754" title="vpr::Instance::Validation\lEnabled" alt="" coords="631,332,791,373"/>
+<area shape="rect" id="node16" href="$structvpr_1_1_device_data_members.html#a3d083fd1add161c9cc785e0a57aa6583" title="vpr::DeviceDataMembers\l::prepareRequiredExtensions" alt="" coords="617,449,806,491"/>
+<area shape="rect" id="node17" href="$structvpr_1_1_device_data_members.html#a9e4b2ed2f540350ec9642dbf2e24b1d4" title="vpr::DeviceDataMembers\l::prepareOptionalExtensions" alt="" coords="618,515,805,556"/>
+<area shape="rect" id="node18" href="$structvpr_1_1_device_data_members.html#a74aa0fff140d4e0d31d913975a186f31" title="vpr::DeviceDataMembers\l::checkDedicatedAllocExtensions" alt="" coords="603,580,820,621"/>
+<area shape="rect" id="node21" href="$classvpr_1_1_instance.html#ab9f92d523b1cc59715c6d1b237be3cea" title="vpr::Instance::HasExtension" alt="" coords="619,398,803,425"/>
+</map>

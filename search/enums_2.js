@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dispatchaction',['DispatchAction',['../namespaceel_1_1base.html#a3aa2563d38e47388ba242a1694fc2839',1,'el::base']]]
+  ['instance_5flayers',['instance_layers',['../classvpr_1_1_instance.html#ac131eec23cc4eba7cd68bc67de9d8c09',1,'vpr::Instance']]]
 ];

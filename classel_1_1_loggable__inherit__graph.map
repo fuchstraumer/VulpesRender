@@ -1,5 +1,0 @@
-<map id="el::Loggable" name="el::Loggable">
-<area shape="rect" id="node2" href="$classel_1_1base_1_1_log_format.html" title="Represents log format containing flags and date format. This is used internally to start initial log..." alt="" coords="5,80,144,107"/>
-<area shape="rect" id="node3" href="$classel_1_1_configuration.html" title="Represents single configuration that has representing level, configuration type and a string based va..." alt="" coords="168,80,283,107"/>
-<area shape="rect" id="node4" href="$classel_1_1_logger.html" title="Represents a logger holding ID and configurations we need to write logs. " alt="" coords="307,80,386,107"/>
-</map>

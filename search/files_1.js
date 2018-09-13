@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['buffer_2ecpp',['Buffer.cpp',['../_buffer_8cpp.html',1,'']]],
-  ['buffer_2ehpp',['Buffer.hpp',['../_buffer_8hpp.html',1,'']]]
+  ['bufferdeprecated_2ecpp',['BufferDeprecated.cpp',['../_buffer_deprecated_8cpp.html',1,'']]],
+  ['bufferdeprecated_2ehpp',['BufferDeprecated.hpp',['../_buffer_deprecated_8hpp.html',1,'']]]
 ];

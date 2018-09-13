@@ -1,7 +1,0 @@
-<map id="vpr::Instance::extensionSetup" name="vpr::Instance::extensionSetup">
-<area shape="rect" id="node2" href="$classvpr_1_1_instance.html#adaf88c2f093cb1f2fe411c07233f1004" title="vpr::Instance::prepareOptional\lExtensions" alt="" coords="213,5,408,47"/>
-<area shape="rect" id="node5" href="$classvpr_1_1_instance.html#a7d3ba80f5dbf37ed8acacc1625ee41c7" title="vpr::Instance::prepareRequired\lExtensions" alt="" coords="212,71,409,112"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_instance.html#a768d30a4546bc9401107839450a4ce23" title="vpr::Instance::checkOptional\lExtensions" alt="" coords="459,5,645,47"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_instance.html#a1a17389930d2c5ae9c95227480879354" title="vpr::Instance::extension\lCheck" alt="" coords="695,39,853,80"/>
-<area shape="rect" id="node6" href="$classvpr_1_1_instance.html#afd2bf68c4ad36c3cd7d43207f3663870" title="vpr::Instance::checkRequired\lExtensions" alt="" coords="457,71,647,112"/>
-</map>

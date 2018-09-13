@@ -1,7 +1,0 @@
-<map id="vpr::Allocation::blockAllocation" name="vpr::Allocation::blockAllocation">
-<area shape="rect" id="node2" href="$classvpr_1_1_memory_block.html" title="A MemoryBlock is a large contiguous region of Vulkan memory of a uniform type (device local..." alt="" coords="723,65,849,92"/>
-<area shape="rect" id="node4" href="$structvpr_1_1_suballocation.html" title="During the process of finding a suitable region to bind to, we need to store things like &quot;Suballocati..." alt="" coords="59,7,183,33"/>
-<area shape="rect" id="node6" title="STL iterator class. " alt="" coords="49,61,193,88"/>
-<area shape="rect" id="node7" href="$classvpr_1_1_allocator.html" title="The primary interface and class of this subsystem. " alt="" coords="426,192,523,219"/>
-<area shape="rect" id="node9" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="79,192,163,219"/>
-</map>

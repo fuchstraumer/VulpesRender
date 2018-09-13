@@ -1,0 +1,5 @@
+<map id="vpr::AllocationImpl::blockAllocation" name="vpr::AllocationImpl::blockAllocation">
+<area shape="rect" id="node2" href="$classvpr_1_1_memory_block.html" title="A MemoryBlock is a large contiguous region of Vulkan memory of a uniform type (device local..." alt="" coords="131,199,257,225"/>
+<area shape="rect" id="node4" href="$structvpr_1_1_suballocation.html" title="During the process of finding a suitable region to bind to, we need to store things like &quot;Suballocati..." alt="" coords="27,5,151,32"/>
+<area shape="rect" id="node6" title="STL iterator class. " alt="" coords="210,5,354,32"/>
+</map>

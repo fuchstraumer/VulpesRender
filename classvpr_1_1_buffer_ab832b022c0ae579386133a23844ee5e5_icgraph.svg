@@ -9,21 +9,21 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>vpr::Buffer::Destroy</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-24 235,-24 235,4 -4,4"/>
-<!-- Node51 -->
-<g id="node1" class="node"><title>Node51</title>
+<!-- Node55 -->
+<g id="node1" class="node"><title>Node55</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-19.5 99,-19.5 99,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="49.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Buffer::Destroy</text>
 </g>
-<!-- Node52 -->
-<g id="node2" class="node"><title>Node52</title>
+<!-- Node56 -->
+<g id="node2" class="node"><title>Node56</title>
 <g id="a_node2"><a xlink:href="classvpr_1_1_buffer.html#a7540498f21ea184173975560ff9e6327" target="_top" xlink:title="vpr::Buffer::~Buffer">
 <polygon fill="white" stroke="black" points="135,-0.5 135,-19.5 231,-19.5 231,-0.5 135,-0.5"/>
 <text text-anchor="middle" x="183" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Buffer::~Buffer</text>
 </a>
 </g>
 </g>
-<!-- Node51&#45;&gt;Node52 -->
-<g id="edge1" class="edge"><title>Node51&#45;&gt;Node52</title>
+<!-- Node55&#45;&gt;Node56 -->
+<g id="edge1" class="edge"><title>Node55&#45;&gt;Node56</title>
 <path fill="none" stroke="midnightblue" d="M109.118,-10C117.754,-10 126.557,-10 134.92,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="109.092,-6.5001 99.0921,-10 109.092,-13.5001 109.092,-6.5001"/>
 </g>

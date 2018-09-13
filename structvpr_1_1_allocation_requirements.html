@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -44,6 +51,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('structvpr_1_1_allocation_requirements.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -58,11 +80,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespacevpr.html">vpr</a></li><li class="navelem"><a class="el" href="structvpr_1_1_allocation_requirements.html">AllocationRequirements</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
@@ -76,7 +93,7 @@ $(function() {
 <p>This struct is the primary item submitted to allocator methods for resource creation.  
  <a href="structvpr_1_1_allocation_requirements.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_alloc_common_8hpp_source.html">AllocCommon.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_allocation_requirements_8hpp_source.html">AllocationRequirements.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -96,14 +113,14 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a728999a7c098d84b06ab2ba4373472d0"><td class="memItemLeft" align="right" valign="top">static VkBool32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvpr_1_1_allocation_requirements.html#a728999a7c098d84b06ab2ba4373472d0">noNewAllocations</a> = false</td></tr>
+<tr class="memitem:a728999a7c098d84b06ab2ba4373472d0"><td class="memItemLeft" align="right" valign="top">static VkBool32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvpr_1_1_allocation_requirements.html#a728999a7c098d84b06ab2ba4373472d0">noNewAllocations</a> = VK_FALSE</td></tr>
 <tr class="memdesc:a728999a7c098d84b06ab2ba4373472d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defaults to false.  <a href="#a728999a7c098d84b06ab2ba4373472d0">More...</a><br /></td></tr>
 <tr class="separator:a728999a7c098d84b06ab2ba4373472d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This struct is the primary item submitted to allocator methods for resource creation. </p>
 
-<p class="definition">Definition at line <a class="el" href="_alloc_common_8hpp_source.html#l00070">70</a> of file <a class="el" href="_alloc_common_8hpp_source.html">AllocCommon.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_requirements_8hpp_source.html#l00010">10</a> of file <a class="el" href="_allocation_requirements_8hpp_source.html">AllocationRequirements.hpp</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a728999a7c098d84b06ab2ba4373472d0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a728999a7c098d84b06ab2ba4373472d0">&#9670;&nbsp;</a></span>noNewAllocations</h2>
@@ -115,12 +132,12 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">VkBool32 vpr::AllocationRequirements::noNewAllocations = false</td>
+          <td class="memname">VkBool32 vpr::AllocationRequirements::noNewAllocations = VK_FALSE</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -128,9 +145,9 @@ Static Public Attributes</h2></td></tr>
 <p>Defaults to false. </p>
 <p>If true, no new allocations are created beyond the set created upon initilization of the allocator system. </p>
 
-<p class="definition">Definition at line <a class="el" href="_alloc_common_8hpp_source.html#l00073">73</a> of file <a class="el" href="_alloc_common_8hpp_source.html">AllocCommon.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_requirements_8hpp_source.html#l00013">13</a> of file <a class="el" href="_allocation_requirements_8hpp_source.html">AllocationRequirements.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_allocator_8cpp_source.html#l00297">vpr::Allocator::allocateMemoryType()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_allocator_impl_8cpp_source.html#l00127">vpr::AllocatorImpl::allocateMemoryType()</a>.</p>
 
 </div>
 </div>
@@ -149,9 +166,9 @@ Static Public Attributes</h2></td></tr>
 <p>Additional flags that would be nice/useful to have, but are not required. </p>
 <p>An attempt to meet these will be made, but not meeting them won't be considered a failure. </p>
 
-<p class="definition">Definition at line <a class="el" href="_alloc_common_8hpp_source.html#l00082">82</a> of file <a class="el" href="_alloc_common_8hpp_source.html">AllocCommon.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_requirements_8hpp_source.html#l00022">22</a> of file <a class="el" href="_allocation_requirements_8hpp_source.html">AllocationRequirements.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_buffer_8cpp_source.html#l00042">vpr::Buffer::CreateBuffer()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_buffer_deprecated_8cpp_source.html#l00040">vpr::Buffer::CreateBuffer()</a>.</p>
 
 </div>
 </div>
@@ -167,9 +184,9 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_alloc_common_8hpp_source.html#l00084">84</a> of file <a class="el" href="_alloc_common_8hpp_source.html">AllocCommon.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_requirements_8hpp_source.html#l00024">24</a> of file <a class="el" href="_allocation_requirements_8hpp_source.html">AllocationRequirements.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_allocator_8cpp_source.html#l00187">vpr::Allocator::AllocateForBuffer()</a>, <a class="el" href="_allocator_8cpp_source.html#l00180">vpr::Allocator::AllocateForImage()</a>, and <a class="el" href="_allocator_8cpp_source.html#l00297">vpr::Allocator::allocateMemoryType()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_allocator_8cpp_source.html#l00122">vpr::Allocator::AllocateForBuffer()</a>, <a class="el" href="_allocator_8cpp_source.html#l00113">vpr::Allocator::AllocateForImage()</a>, and <a class="el" href="_allocator_impl_8cpp_source.html#l00127">vpr::AllocatorImpl::allocateMemoryType()</a>.</p>
 
 </div>
 </div>
@@ -188,9 +205,9 @@ Static Public Attributes</h2></td></tr>
 <p>True if whatever allocation this belongs to should be in its own device memory object. </p>
 <p>Don't use this too often, of course. </p>
 
-<p class="definition">Definition at line <a class="el" href="_alloc_common_8hpp_source.html#l00076">76</a> of file <a class="el" href="_alloc_common_8hpp_source.html">AllocCommon.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_requirements_8hpp_source.html#l00016">16</a> of file <a class="el" href="_allocation_requirements_8hpp_source.html">AllocationRequirements.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_buffer_8cpp_source.html#l00042">vpr::Buffer::CreateBuffer()</a>, <a class="el" href="_buffer_8cpp_source.html#l00226">vpr::Buffer::CreateStagingBuffer()</a>, and <a class="el" href="_buffer_8cpp_source.html#l00262">vpr::Buffer::createStagingBuffer()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_buffer_deprecated_8cpp_source.html#l00040">vpr::Buffer::CreateBuffer()</a>, <a class="el" href="_buffer_deprecated_8cpp_source.html#l00231">vpr::Buffer::CreateStagingBuffer()</a>, and <a class="el" href="_buffer_deprecated_8cpp_source.html#l00264">vpr::Buffer::createStagingBuffer()</a>.</p>
 
 </div>
 </div>
@@ -208,9 +225,9 @@ Static Public Attributes</h2></td></tr>
 
 <p>The memory properties that are absolutely required by the item you are allocating for. </p>
 
-<p class="definition">Definition at line <a class="el" href="_alloc_common_8hpp_source.html#l00079">79</a> of file <a class="el" href="_alloc_common_8hpp_source.html">AllocCommon.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_requirements_8hpp_source.html#l00019">19</a> of file <a class="el" href="_allocation_requirements_8hpp_source.html">AllocationRequirements.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_buffer_8cpp_source.html#l00042">vpr::Buffer::CreateBuffer()</a>, <a class="el" href="_image_8cpp_source.html#l00156">vpr::Image::CreateImage()</a>, <a class="el" href="_buffer_8cpp_source.html#l00226">vpr::Buffer::CreateStagingBuffer()</a>, and <a class="el" href="_buffer_8cpp_source.html#l00262">vpr::Buffer::createStagingBuffer()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_allocator_impl_8cpp_source.html#l00127">vpr::AllocatorImpl::allocateMemoryType()</a>, <a class="el" href="_buffer_deprecated_8cpp_source.html#l00040">vpr::Buffer::CreateBuffer()</a>, <a class="el" href="_image_deprecated_8cpp_source.html#l00151">vpr::Image::CreateImage()</a>, <a class="el" href="_buffer_deprecated_8cpp_source.html#l00231">vpr::Buffer::CreateStagingBuffer()</a>, and <a class="el" href="_buffer_deprecated_8cpp_source.html#l00264">vpr::Buffer::createStagingBuffer()</a>.</p>
 
 </div>
 </div>
@@ -226,22 +243,25 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_alloc_common_8hpp_source.html#l00085">85</a> of file <a class="el" href="_alloc_common_8hpp_source.html">AllocCommon.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_allocation_requirements_8hpp_source.html#l00025">25</a> of file <a class="el" href="_allocation_requirements_8hpp_source.html">AllocationRequirements.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_allocator_8cpp_source.html#l00187">vpr::Allocator::AllocateForBuffer()</a>, <a class="el" href="_allocator_8cpp_source.html#l00180">vpr::Allocator::AllocateForImage()</a>, and <a class="el" href="_allocator_8cpp_source.html#l00297">vpr::Allocator::allocateMemoryType()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_allocator_8cpp_source.html#l00122">vpr::Allocator::AllocateForBuffer()</a>, <a class="el" href="_allocator_8cpp_source.html#l00113">vpr::Allocator::AllocateForImage()</a>, and <a class="el" href="_allocator_impl_8cpp_source.html#l00127">vpr::AllocatorImpl::allocateMemoryType()</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following files:<ul>
-<li>C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/include/alloc/<a class="el" href="_alloc_common_8hpp_source.html">AllocCommon.hpp</a></li>
-<li>C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/src/alloc/<a class="el" href="_memory_block_8cpp_source.html">MemoryBlock.cpp</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>alloc/include/<a class="el" href="_allocation_requirements_8hpp_source.html">AllocationRequirements.hpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacevpr.html">vpr</a></li><li class="navelem"><a class="el" href="structvpr_1_1_allocation_requirements.html">AllocationRequirements</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

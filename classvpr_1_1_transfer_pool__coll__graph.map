@@ -1,7 +1,0 @@
-<map id="vpr::TransferPool" name="vpr::TransferPool">
-<area shape="rect" id="node2" href="$classvpr_1_1_command_pool.html" title="The CommandPool class is the primary interface through which one will acquire VkCommandBuffer objects..." alt="" coords="985,167,1116,194"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="719,141,803,167"/>
-<area shape="rect" id="node5" href="$namespacevpr.html#structvpr_1_1vk_queue_family_indices" title="vpr::vkQueueFamilyIndices" alt="" coords="301,71,477,98"/>
-<area shape="rect" id="node9" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="341,185,436,211"/>
-<area shape="rect" id="node7" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="321,235,456,262"/>
-</map>

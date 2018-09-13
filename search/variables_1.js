@@ -1,9 +1,11 @@
 var searchData=
 [
   ['base_5fcreate_5finfo',['base_create_info',['../namespacevpr.html#ab813db0f97b6fc66b92e763f94952eda',1,'vpr']]],
-  ['base_5fview_5finfo',['base_view_info',['../namespacevpr.html#a1b4c52e7e6826b47623fc3f4097be4e1',1,'vpr']]],
+  ['base_5fview_5finfo',['base_view_info',['../namespacevpr.html#a2156abb1c1cc42fde7b0a0755491f539',1,'vpr']]],
   ['begininfo',['beginInfo',['../classvpr_1_1_renderpass.html#a9d97ce989c62c9b73cd7024e8f984c06',1,'vpr::Renderpass']]],
-  ['bindings',['bindings',['../classvpr_1_1_descriptor_set_layout.html#afc144fa01b55e1efad1255f0d5128dad',1,'vpr::DescriptorSetLayout']]],
-  ['bufferinfos',['bufferInfos',['../classvpr_1_1_descriptor_set.html#afc50a2a101518847ced5338510e20f84',1,'vpr::DescriptorSet']]],
-  ['bufferviews',['bufferViews',['../classvpr_1_1_descriptor_set.html#a9804d9f29dbddab45aff38fa230e3947',1,'vpr::DescriptorSet']]]
+  ['bindings',['bindings',['../namespacevpr.html#a34243756b0b62b2fb4aa117f39e3923e',1,'vpr::LayoutBindings']]],
+  ['blocks',['Blocks',['../structvpr_1_1_memory_blocks_group.html#a1620ec39272d7761a4b33e5b19cdc1d7',1,'vpr::MemoryBlocksGroup']]],
+  ['bufferimagegranularity',['BufferImageGranularity',['../structvpr_1_1_memory_block_info.html#a06e6af232c6a386b40fc65e441b473e8',1,'vpr::MemoryBlockInfo']]],
+  ['bufferinfos',['bufferInfos',['../namespacevpr.html#a2bf5452f0944bfa221213ad325d64082',1,'vpr::DescriptorSetImpl']]],
+  ['bufferviews',['bufferViews',['../namespacevpr.html#af15e44980c3229a2995725e62be27116',1,'vpr::DescriptorSetImpl']]]
 ];

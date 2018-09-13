@@ -1,9 +1,4 @@
 <map id="vpr::MemoryBlock" name="vpr::MemoryBlock">
-<area shape="rect" id="node3" href="$structvpr_1_1_suballocation.html" title="During the process of finding a suitable region to bind to, we need to store things like &quot;Suballocati..." alt="" coords="383,7,507,33"/>
-<area shape="rect" id="node5" title="STL iterator class. " alt="" coords="373,61,517,88"/>
-<area shape="rect" id="node6" href="$classvpr_1_1_allocator.html" title="The primary interface and class of this subsystem. " alt="" coords="750,179,847,205"/>
-<area shape="rect" id="node9" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="1405,325,1489,352"/>
-<area shape="rect" id="node11" href="$namespacevpr.html#structvpr_1_1vk_queue_family_indices" title="vpr::vkQueueFamilyIndices" alt="" coords="1053,273,1229,300"/>
-<area shape="rect" id="node15" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="1093,500,1188,527"/>
-<area shape="rect" id="node13" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="1073,387,1208,413"/>
+<area shape="rect" id="node3" href="$structvpr_1_1_suballocation.html" title="During the process of finding a suitable region to bind to, we need to store things like &quot;Suballocati..." alt="" coords="27,5,151,32"/>
+<area shape="rect" id="node5" title="STL iterator class. " alt="" coords="210,5,354,32"/>
 </map>

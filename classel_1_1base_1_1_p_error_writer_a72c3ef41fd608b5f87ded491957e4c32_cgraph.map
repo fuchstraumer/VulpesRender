@@ -1,6 +1,0 @@
-<map id="el::base::PErrorWriter::PErrorWriter" name="el::base::PErrorWriter::PErrorWriter">
-<area shape="rect" id="node2" href="$classel_1_1base_1_1_writer.html#ab1678300b6c7144041e09be423821682" title="el::base::Writer::construct" alt="" coords="201,5,375,32"/>
-<area shape="rect" id="node4" href="$classel_1_1base_1_1_message_builder.html#a61729d9b620eb7b3e6ac1af69364553c" title="el::base::MessageBuilder\l::initialize" alt="" coords="203,57,373,98"/>
-<area shape="rect" id="node5" href="$classel_1_1_logger.html#aadc2ebf63de0e578d37d3cc02ecccaf7" title="el::Logger::log" alt="" coords="236,123,340,149"/>
-<area shape="rect" id="node3" href="$classel_1_1_logger.html#a8583bfdeea4cb781396fd635addd64e9" title="el::Logger::id" alt="" coords="423,5,520,32"/>
-</map>

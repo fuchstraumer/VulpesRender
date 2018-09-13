@@ -1,11 +1,9 @@
 var searchData=
 [
-  ['imagecount',['imageCount',['../classvpr_1_1_swapchain.html#afd2d94100cc20679dbc72306471afcac',1,'vpr::Swapchain']]],
-  ['imagedatasize',['imageDataSize',['../classvpr_1_1_image.html#aa43a836e2a59f8787dd444b687794a15',1,'vpr::Image']]],
-  ['imageinfos',['imageInfos',['../classvpr_1_1_descriptor_set.html#a222fea53f968f86020a5305a2d9509b3',1,'vpr::DescriptorSet']]],
-  ['images',['images',['../classvpr_1_1_swapchain.html#ab4012f44dbeb6e01bff346d2294d58b8',1,'vpr::Swapchain']]],
-  ['imageviews',['imageViews',['../classvpr_1_1_swapchain.html#a8798326969c3034282ec3fefaacf0b06',1,'vpr::Swapchain']]],
-  ['impl',['impl',['../classvpr_1_1_physical_device.html#ae26356b60563a33796338ff0d9f5e65f',1,'vpr::PhysicalDevice']]],
-  ['info',['info',['../group___rendering.html#ga7b797f46e7cba0c1df21619a6a568360',1,'vpr::Swapchain']]],
-  ['instance',['instance',['../classvpr_1_1_swapchain.html#a1a7123f85d9549c1005f7f3d1bc8ee1f',1,'vpr::Swapchain']]]
+  ['imagecount',['imageCount',['../structvpr_1_1_swapchain_impl.html#a16472b860e896076f573b5133b16ef55',1,'vpr::SwapchainImpl']]],
+  ['imageinfos',['imageInfos',['../namespacevpr.html#a9904ac7f91930f9cd80c99a2dcfe51f1',1,'vpr::DescriptorSetImpl']]],
+  ['images',['images',['../structvpr_1_1_swapchain_impl.html#a041a418f78d24b287337e76f21d54d0a',1,'vpr::SwapchainImpl']]],
+  ['imageviews',['imageViews',['../structvpr_1_1_swapchain_impl.html#a8970acfa427e8dfa0dc92680438f5d12',1,'vpr::SwapchainImpl']]],
+  ['impl',['impl',['../classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a',1,'vpr::Allocation::impl()'],['../classvpr_1_1_allocator.html#aa125427dc233b7a116ae75f58bd56431',1,'vpr::Allocator::impl()'],['../classvpr_1_1_debug_visualization.html#afa5be028ba774ddfe8caf4a6f901a87d',1,'vpr::DebugVisualization::impl()'],['../classvpr_1_1_physical_device.html#ae26356b60563a33796338ff0d9f5e65f',1,'vpr::PhysicalDevice::impl()'],['../classvpr_1_1_swapchain.html#a9ceed497afe401162921dfcc26d1f635',1,'vpr::Swapchain::impl()'],['../classvpr_1_1_renderpass.html#a99dd8bab237385dc139d3f75585371cc',1,'vpr::Renderpass::impl()'],['../classvpr_1_1_descriptor_set.html#aced538b46c1034b5fe6d6a3bb39ab7df',1,'vpr::DescriptorSet::impl()']]],
+  ['info',['info',['../group___rendering.html#ga53b8864a06225b92d1a4cf46ea333fbb',1,'vpr::SwapchainImpl']]]
 ];

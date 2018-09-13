@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +52,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_func_v.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -66,52 +87,20 @@ $(function() {
 <li>Validate()
 : <a class="el" href="classvpr_1_1_memory_block.html#ac05d7c8692b9d305726c1d948a3ec6d9">vpr::MemoryBlock</a>
 </li>
-<li>validateAfterN()
-: <a class="el" href="classel_1_1base_1_1_registered_hit_counters.html#ad17bfabd59d2142b57282156483708ef">el::base::RegisteredHitCounters</a>
-</li>
-<li>validateAfterNCounter()
-: <a class="el" href="classel_1_1base_1_1_storage.html#ad09c13eed65ec6d2248d0693357b1e60">el::base::Storage</a>
-</li>
-<li>validateEveryN()
-: <a class="el" href="classel_1_1base_1_1_registered_hit_counters.html#a586bb8c5e2722e08a255039bb41e03fa">el::base::RegisteredHitCounters</a>
-</li>
-<li>validateEveryNCounter()
-: <a class="el" href="classel_1_1base_1_1_storage.html#a74e5fe30c93b535ee7a1fb20e29bcaf3">el::base::Storage</a>
-</li>
-<li>validateFileRolling()
-: <a class="el" href="classel_1_1base_1_1_typed_configurations.html#af371459159951b76f7f138a0580cfb3c">el::base::TypedConfigurations</a>
-, <a class="el" href="classel_1_1_helpers.html#aea3fcde8a07e6f7278574e9563d8ab6b">el::Helpers</a>
-</li>
-<li>validateHitCounts()
-: <a class="el" href="classel_1_1base_1_1_hit_counter.html#a04dcca0a3f1b1f9a0ef8d812f00cecf0">el::base::HitCounter</a>
-</li>
-<li>validateNTimes()
-: <a class="el" href="classel_1_1base_1_1_registered_hit_counters.html#acc7e50a6b720a90714e60d2710fdfbe6">el::base::RegisteredHitCounters</a>
-</li>
-<li>validateNTimesCounter()
-: <a class="el" href="classel_1_1base_1_1_storage.html#af6f26975aa70c01ab7f64b2568b2164e">el::base::Storage</a>
-</li>
 <li>ValidationEnabled()
-: <a class="el" href="classvpr_1_1_instance.html#a4cb7ce54d256a75fe52ffc465daddba2">vpr::Instance</a>
-</li>
-<li>value()
-: <a class="el" href="classel_1_1_configuration.html#a17acf05de64478fa6f54b9ddbbc248e5">el::Configuration</a>
-</li>
-<li>verboseLevel()
-: <a class="el" href="classel_1_1_loggers.html#a319ed41034f683fe42542e9c0280246b">el::Loggers</a>
-, <a class="el" href="classel_1_1_log_message.html#a6a576d3c2c325173baa7177fe9aacf3b">el::LogMessage</a>
+: <a class="el" href="classvpr_1_1_instance.html#a34466d6fcc286ef1281b7bdb091ea754">vpr::Instance</a>
 </li>
 <li>Verify()
 : <a class="el" href="classvpr_1_1_pipeline_cache.html#a21856493d10e08b915ce8278c2bc08b0">vpr::PipelineCache</a>
 </li>
+<li>verifyPresentationSupport()
+: <a class="el" href="classvpr_1_1_device.html#ac71413f7f9988d9479e27f51fc6de197">vpr::Device</a>
+</li>
 <li>VerifyPresentationSupport()
-: <a class="el" href="classvpr_1_1_device.html#ad468caae9ccd5b6b2f9dd00bd32faca3">vpr::Device</a>
+: <a class="el" href="classvpr_1_1_surface_k_h_r.html#a0ef5949ff27a03d9281576b1b5c99c35">vpr::SurfaceKHR</a>
 </li>
 <li>VerifySuballocation()
 : <a class="el" href="classvpr_1_1_memory_block.html#a3eb796b49ef07360203e2fe8c099809b">vpr::MemoryBlock</a>
-</li>
-<li>version()
-: <a class="el" href="classel_1_1_version_info.html#a07250d64dcc52a58cab6d3c6eb9e6f2a">el::VersionInfo</a>
 </li>
 <li>View()
 : <a class="el" href="classvpr_1_1_buffer.html#a608136242a4072d8c74f5d36868fb72e">vpr::Buffer</a>
@@ -133,7 +122,6 @@ $(function() {
 , <a class="el" href="classvpr_1_1_physical_device.html#a00de7d3556d98b1cfda28d1f769f8fa8">vpr::PhysicalDevice</a>
 , <a class="el" href="classvpr_1_1_pipeline_cache.html#ae6188934cb00eac8de97550c82869b06">vpr::PipelineCache</a>
 , <a class="el" href="classvpr_1_1_pipeline_layout.html#a066d49e71c647c759ce2d258ce1963ab">vpr::PipelineLayout</a>
-, <a class="el" href="classvpr_1_1_queue.html#a0d948d5d74c6664cd373f6b919f34b6d">vpr::Queue</a>
 , <a class="el" href="classvpr_1_1_renderpass.html#ac68d0fca04ae6d061ae08689474e9f33">vpr::Renderpass</a>
 , <a class="el" href="classvpr_1_1_sampler.html#a610a015db087592726db70564caec056">vpr::Sampler</a>
 , <a class="el" href="classvpr_1_1_semaphore.html#a7bef04a6c02e7d2b03bc20cf10ade2cc">vpr::Semaphore</a>
@@ -141,25 +129,19 @@ $(function() {
 , <a class="el" href="classvpr_1_1_surface_k_h_r.html#a07171777b06b36cb0e6874cdcb2f9e4e">vpr::SurfaceKHR</a>
 , <a class="el" href="classvpr_1_1_swapchain.html#aeabe8989b29a1d38dd151160946c26fa">vpr::Swapchain</a>
 </li>
-<li>vkSurface()
-: <a class="el" href="classvpr_1_1_instance.html#aa8afd0e70a5fd70ee82daba6c179be8d">vpr::Instance</a>
-</li>
-<li>vModulesEnabled()
-: <a class="el" href="classel_1_1base_1_1_v_registry.html#ad7a8e939daf6b3d6b949def0a9f65a1f">el::base::VRegistry</a>
-</li>
-<li>vRegistry()
-: <a class="el" href="classel_1_1base_1_1_storage.html#a7fd4cf506308fa85c4b0559daa89555d">el::base::Storage</a>
-</li>
-<li>VRegistry()
-: <a class="el" href="classel_1_1base_1_1_v_registry.html#ac4b36d32d3722238024480ce66c52ad0">el::base::VRegistry</a>
+<li>vkQueueFamilyIndices()
+: <a class="el" href="structvpr_1_1vk_queue_family_indices.html#a73c62adbcc7ed0b43eb87080e2a45cd4">vpr::vkQueueFamilyIndices</a>
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

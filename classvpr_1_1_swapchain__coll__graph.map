@@ -1,8 +1,14 @@
 <map id="vpr::Swapchain" name="vpr::Swapchain">
-<area shape="rect" id="node2" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="1162,111,1246,137"/>
-<area shape="rect" id="node9" href="$classvpr_1_1_allocator.html" title="The primary interface and class of this subsystem. " alt="" coords="1433,131,1530,157"/>
-<area shape="rect" id="node4" href="$namespacevpr.html#structvpr_1_1vk_queue_family_indices" title="vpr::vkQueueFamilyIndices" alt="" coords="748,5,924,32"/>
-<area shape="rect" id="node10" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="789,236,883,263"/>
-<area shape="rect" id="node6" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="237,277,372,304"/>
-<area shape="rect" id="node15" href="$structvpr_1_1_swapchain_1_1_swapchain_info.html" title="SwapchainInfo takes care of hiding away much of the setup work required to create a swapchain..." alt="" coords="1104,325,1304,352"/>
+<area shape="rect" id="node2" href="$structvpr_1_1_swapchain_impl.html" title="vpr::SwapchainImpl" alt="" coords="1956,390,2089,417"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_device.html" title="!The Device class is a wrapper around the vkLogicalDevice object. " alt="" coords="1672,275,1756,302"/>
+<area shape="rect" id="node4" href="$structvpr_1_1_device_data_members.html" title="vpr::DeviceDataMembers" alt="" coords="1940,195,2105,222"/>
+<area shape="rect" id="node17" href="$structvpr_1_1_instance_extension_handler.html" title="vpr::InstanceExtensionHandler" alt="" coords="907,143,1104,170"/>
+<area shape="rect" id="node8" title="STL class. " alt="" coords="235,181,315,207"/>
+<area shape="rect" id="node9" title="STL class. " alt="" coords="5,173,132,215"/>
+<area shape="rect" id="node10" href="$structvpr_1_1vk_queue_family_indices.html" title="Simple wrapper struct for storing queue family indices. " alt="" coords="1267,257,1443,283"/>
+<area shape="rect" id="node11" href="$classvpr_1_1_physical_device.html" title="! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle repre..." alt="" coords="1287,307,1422,334"/>
+<area shape="rect" id="node13" href="$classvpr_1_1_physical_device_impl.html" title="vpr::PhysicalDeviceImpl" alt="" coords="556,307,715,334"/>
+<area shape="rect" id="node15" href="$group___core.html#structvpr_1_1_vk_debug_utils_functions" title="This structure will be populated with function pointers used to call the functions (as named) when av..." alt="" coords="1263,358,1446,385"/>
+<area shape="rect" id="node16" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="1307,143,1402,170"/>
+<area shape="rect" id="node20" href="$structvpr_1_1_swapchain_impl_1_1_swapchain_info.html" title="SwapchainInfo takes care of hiding away much of the setup work required to create a swapchain..." alt="" coords="1647,465,1781,507"/>
 </map>

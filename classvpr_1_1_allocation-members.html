@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -44,6 +51,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classvpr_1_1_allocation.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -58,11 +80,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespacevpr.html">vpr</a></li><li class="navelem"><a class="el" href="classvpr_1_1_allocation.html">Allocation</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">vpr::Allocation Member List</div>  </div>
@@ -72,31 +89,36 @@ $(function() {
 <p>This is the complete list of members for <a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a>, including all inherited members.</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#afa15c9bbc5bbf40d3416f7f5d85bb752">Alignment</a></td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#a6333d2037183209fd4e04fc833359567">Allocation</a>()=default</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#a031676bd4c338e36adf0e2d84fe7b0e7">Allocation</a>(const Allocation &amp;)=default</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#af49216f0d72f038145500587f84d30dd">Allocation</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#a4ffd3690b3172c28d0e080739bd83e31">Allocation</a>(const Allocation &amp;)</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#a4055730036d8cb2032234def146766ba">Allocation</a>(Allocation &amp;&amp;other) noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#a4991454fa12026f1e25fc56c6791be2d">GetUserData</a>() const</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#ad5d461398f23e593c58f70a8cac78922">Init</a>(MemoryBlock *parent_block, const VkDeviceSize &amp;offset, const VkDeviceSize &amp;alignment, const VkDeviceSize &amp;alloc_size, void *user_data=nullptr)</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#ad680abfd77facfe5efcc222b154b595d">InitPrivate</a>(const uint32_t &amp;type_idx, VkDeviceMemory &amp;dvc_memory, bool persistently_mapped, void *mapped_data, const VkDeviceSize &amp;data_size, void *user_data=nullptr)</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#ad23615cd9f84e8e2354cf1f1e7e8f162">IsPrivateAllocation</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#adf7219e8441b1f7781a6d01c7b6c9811">Map</a>(const VkDeviceSize &amp;size_to_map, const VkDeviceSize &amp;offset_to_map_at, void *address_to_map_to) const</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#a1a223e41ca865271544ece71d18edce2">Memory</a>() const</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#ab07876bad87d1c3e085ab02c1c608179">MemoryTypeIdx</a>() const</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397">Offset</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#aa6355d4f330ab946d69b6d7be5f87abb">operator=</a>(const Allocation &amp;)=default</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#a75408587e6fce6988e0cc1b0dcb58af1">operator=</a>(Allocation &amp;&amp;other) noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">Size</a></td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#afe2dff1a32b57788e46af02d0ebe866d">typeData</a></td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#afd91b0a36dce93976913fb2c0859684a">impl</a></td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#ad5d461398f23e593c58f70a8cac78922">Init</a>(MemoryBlock *parent_block, const VkDeviceSize &amp;offset, const VkDeviceSize &amp;alignment, const VkDeviceSize &amp;alloc_size, void *user_data=nullptr)</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#ad680abfd77facfe5efcc222b154b595d">InitPrivate</a>(const uint32_t &amp;type_idx, VkDeviceMemory &amp;dvc_memory, bool persistently_mapped, void *mapped_data, const VkDeviceSize &amp;data_size, void *user_data=nullptr)</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#ad23615cd9f84e8e2354cf1f1e7e8f162">IsPrivateAllocation</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#a52b6b1170c2ecf99175ca809d5e89e75">Map</a>(const VkDeviceSize &amp;size_to_map, const VkDeviceSize &amp;offset_to_map_at, void **address_to_map_to) const</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#a1a223e41ca865271544ece71d18edce2">Memory</a>() const</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#ab07876bad87d1c3e085ab02c1c608179">MemoryTypeIdx</a>() const</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397">Offset</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#a16abc6fd06477544c4a34a012be850b5">operator=</a>(const Allocation &amp;)</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#a75408587e6fce6988e0cc1b0dcb58af1">operator=</a>(Allocation &amp;&amp;other) noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#add3be5fd7fee67744d380e74b0c5bfb3">operator==</a>(const Allocation &amp;other) const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#aba0b6e2e6c71e801603e6b81c2218f89">SetUserData</a>(void *data) const</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#aa1c4b67be8e0f44155dcd26ca93f6ec2">Size</a></td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#a50c9f0b8277412ee7478939ade2025b8">Unmap</a>() const noexcept</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#aaa942129013583bd9c1858217e5d5126">Update</a>(MemoryBlock *new_parent_block, const VkDeviceSize &amp;new_offset)</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#ac55862fc872fc1e9276210eddec744ca">userData</a></td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#af2a1160fcac8b581acae22d18e13837b">~Allocation</a>()=default</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classvpr_1_1_allocation.html#afbf44280b9503d91a56d91479619e6cb">~Allocation</a>()</td><td class="entry"><a class="el" href="classvpr_1_1_allocation.html">vpr::Allocation</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

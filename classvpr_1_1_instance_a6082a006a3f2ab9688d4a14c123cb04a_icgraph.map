@@ -1,6 +1,8 @@
 <map id="vpr::Instance::vkHandle" name="vpr::Instance::vkHandle">
-<area shape="rect" id="node2" href="$classvpr_1_1_instance.html#aa1b18feac92f797ece4ea81a32f9a1d1" title="vpr::Instance::setupPhysical\lDevice" alt="" coords="217,5,403,47"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_surface_k_h_r.html#a66e05e1412b75a278cb3e7d9c8fe1bb1" title="vpr::SurfaceKHR::SurfaceKHR" alt="" coords="212,71,408,98"/>
-<area shape="rect" id="node5" href="$classvpr_1_1_surface_k_h_r.html#ae87cbdf79cb326650e1b146f53d6d394" title="vpr::SurfaceKHR::~SurfaceKHR" alt="" coords="208,122,412,149"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_instance.html#a875cd0ca8909a26c346b9d83b85280a2" title="vpr::Instance::Instance" alt="" coords="460,13,612,39"/>
+<area shape="rect" id="node2" href="$classvpr_1_1_surface_k_h_r.html#a2c27a5198682d3069e0936dbeb0f24b4" title="vpr::SurfaceKHR::create" alt="" coords="211,31,373,57"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_surface_k_h_r.html#a1083d46de78e533a1cabba07b62e1950" title="vpr::SurfaceKHR::destroy" alt="" coords="208,81,376,108"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_surface_k_h_r.html#a8b7186af8af5eac045a42acb6e6302b6" title="vpr::SurfaceKHR::SurfaceKHR" alt="" coords="428,5,624,32"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_surface_k_h_r.html#a35b9db127a998f70bea3ebbdeef97f5d" title="vpr::SurfaceKHR::Recreate" alt="" coords="437,56,615,83"/>
+<area shape="rect" id="node5" href="$namespacevpr.html#a812ad3570ad63ddcbc18e03988bd60bd" title="Pass a swapchain and surface pointer to this to have the swapchain and surface destroyed and recreate..." alt="" coords="676,49,860,90"/>
+<area shape="rect" id="node7" href="$classvpr_1_1_surface_k_h_r.html#ae87cbdf79cb326650e1b146f53d6d394" title="vpr::SurfaceKHR::~SurfaceKHR" alt="" coords="424,107,628,133"/>
 </map>

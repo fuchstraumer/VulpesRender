@@ -9,34 +9,34 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 62)">
 <title>vpr::Event::GetStatus</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-62 247,-62 247,4 -4,4"/>
-<!-- Node12 -->
-<g id="node1" class="node"><title>Node12</title>
+<!-- Node9 -->
+<g id="node1" class="node"><title>Node9</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-19.5 0,-38.5 109,-38.5 109,-19.5 0,-19.5"/>
 <text text-anchor="middle" x="54.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Event::GetStatus</text>
 </g>
-<!-- Node13 -->
-<g id="node2" class="node"><title>Node13</title>
+<!-- Node10 -->
+<g id="node2" class="node"><title>Node10</title>
 <g id="a_node2"><a xlink:href="classvpr_1_1_event.html#a136668a70c07e1e3f3801184e6bc80d1" target="_top" xlink:title="vpr::Event::IsReset">
 <polygon fill="white" stroke="black" points="145,-38.5 145,-57.5 243,-57.5 243,-38.5 145,-38.5"/>
 <text text-anchor="middle" x="194" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Event::IsReset</text>
 </a>
 </g>
 </g>
-<!-- Node12&#45;&gt;Node13 -->
-<g id="edge1" class="edge"><title>Node12&#45;&gt;Node13</title>
+<!-- Node9&#45;&gt;Node10 -->
+<g id="edge1" class="edge"><title>Node9&#45;&gt;Node10</title>
 <path fill="none" stroke="midnightblue" d="M119.096,-37.7878C127.719,-38.9794 136.452,-40.1861 144.746,-41.3322"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="119.44,-34.3021 109.055,-36.4003 118.482,-41.2363 119.44,-34.3021"/>
 </g>
-<!-- Node14 -->
-<g id="node3" class="node"><title>Node14</title>
+<!-- Node11 -->
+<g id="node3" class="node"><title>Node11</title>
 <g id="a_node3"><a xlink:href="classvpr_1_1_event.html#a065551f41d822e7fe5d371d96f23282a" target="_top" xlink:title="vpr::Event::IsSet">
 <polygon fill="white" stroke="black" points="150.5,-0.5 150.5,-19.5 237.5,-19.5 237.5,-0.5 150.5,-0.5"/>
 <text text-anchor="middle" x="194" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Event::IsSet</text>
 </a>
 </g>
 </g>
-<!-- Node12&#45;&gt;Node14 -->
-<g id="edge2" class="edge"><title>Node12&#45;&gt;Node14</title>
+<!-- Node9&#45;&gt;Node11 -->
+<g id="edge2" class="edge"><title>Node9&#45;&gt;Node11</title>
 <path fill="none" stroke="midnightblue" d="M119.142,-20.2058C129.751,-18.7399 140.522,-17.2515 150.439,-15.8812"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="118.482,-16.7637 109.055,-21.5997 119.44,-23.6979 118.482,-16.7637"/>
 </g>

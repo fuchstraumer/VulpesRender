@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +52,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_e.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -63,123 +84,57 @@ $(function() {
 <div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
 
 <h3><a id="index_e"></a>- e -</h3><ul>
-<li>el::base::DefaultLogDispatchCallback
-: <a class="el" href="classel_1_1base_1_1_storage.html#a42b1de96d584ae4fecbfc2b9aff95052">el::base::Storage</a>
-, <a class="el" href="classel_1_1base_1_1_typed_configurations.html#a42b1de96d584ae4fecbfc2b9aff95052">el::base::TypedConfigurations</a>
-, <a class="el" href="classel_1_1_log_builder.html#a42b1de96d584ae4fecbfc2b9aff95052">el::LogBuilder</a>
-, <a class="el" href="classel_1_1_logger.html#a42b1de96d584ae4fecbfc2b9aff95052">el::Logger</a>
-</li>
-<li>el::base::LogDispatcher
-: <a class="el" href="classel_1_1base_1_1_storage.html#a9b37b28ea1c5f8f862cc89f135711d92">el::base::Storage</a>
-, <a class="el" href="classel_1_1base_1_1_typed_configurations.html#a9b37b28ea1c5f8f862cc89f135711d92">el::base::TypedConfigurations</a>
-, <a class="el" href="classel_1_1_logger.html#a9b37b28ea1c5f8f862cc89f135711d92">el::Logger</a>
-</li>
-<li>el::base::MessageBuilder
-: <a class="el" href="classel_1_1base_1_1_storage.html#a81bbf6fe31fab133d182efa8367304f1">el::base::Storage</a>
-, <a class="el" href="classel_1_1base_1_1_typed_configurations.html#a81bbf6fe31fab133d182efa8367304f1">el::base::TypedConfigurations</a>
-, <a class="el" href="classel_1_1_logger.html#a81bbf6fe31fab133d182efa8367304f1">el::Logger</a>
-</li>
-<li>el::base::PerformanceTracker
-: <a class="el" href="classel_1_1base_1_1_storage.html#a6a4d7851e1984800be3c230f06a79528">el::base::Storage</a>
-, <a class="el" href="classel_1_1_logger.html#a6a4d7851e1984800be3c230f06a79528">el::Logger</a>
-</li>
-<li>el::base::PErrorWriter
-: <a class="el" href="classel_1_1_logger.html#a2a368b9be1b8d6a29d4bb92a11807f39">el::Logger</a>
-</li>
-<li>el::base::RegisteredLoggers
-: <a class="el" href="classel_1_1_logger.html#a574ecee25e8d578f76060a95a2fe7c9e">el::Logger</a>
-</li>
-<li>el::base::Storage
-: <a class="el" href="classel_1_1base_1_1_registered_loggers.html#acc1efd1b8a3fc5e0028dab98b02e550a">el::base::RegisteredLoggers</a>
-, <a class="el" href="classel_1_1_logger.html#acc1efd1b8a3fc5e0028dab98b02e550a">el::Logger</a>
-</li>
-<li>el::base::Writer
-: <a class="el" href="classel_1_1base_1_1_storage.html#a7a728edbb2761d151832daa74d5b2736">el::base::Storage</a>
-, <a class="el" href="classel_1_1base_1_1_typed_configurations.html#a7a728edbb2761d151832daa74d5b2736">el::base::TypedConfigurations</a>
-, <a class="el" href="classel_1_1_logger.html#a7a728edbb2761d151832daa74d5b2736">el::Logger</a>
-</li>
-<li>el::Helpers
-: <a class="el" href="classel_1_1base_1_1_storage.html#a2fb8a2c02cbf86247f093c118bed877a">el::base::Storage</a>
-, <a class="el" href="classel_1_1base_1_1_typed_configurations.html#a2fb8a2c02cbf86247f093c118bed877a">el::base::TypedConfigurations</a>
-, <a class="el" href="classel_1_1base_1_1_writer.html#a2fb8a2c02cbf86247f093c118bed877a">el::base::Writer</a>
-, <a class="el" href="classel_1_1_logger.html#a2fb8a2c02cbf86247f093c118bed877a">el::Logger</a>
-</li>
-<li>el::LogBuilder
-: <a class="el" href="classel_1_1base_1_1_storage.html#a8c584bcf767a4d007311a7408b22ad62">el::base::Storage</a>
-</li>
-<li>el::Logger
-: <a class="el" href="classel_1_1base_1_1_log_format.html#aa78553f3fecc0d9551408dfd7aa7f737">el::base::LogFormat</a>
-</li>
-<li>el::Loggers
-: <a class="el" href="classel_1_1_configurations.html#a6efe246b312d02731fb0e1d120c0331d">el::Configurations</a>
-, <a class="el" href="classel_1_1_configurations_1_1_parser.html#a6efe246b312d02731fb0e1d120c0331d">el::Configurations::Parser</a>
-, <a class="el" href="classel_1_1_logger.html#a6efe246b312d02731fb0e1d120c0331d">el::Logger</a>
-</li>
-<li>el::LogMessage
-: <a class="el" href="classel_1_1_logger.html#a22965b691242a9f61d443ba03fce3e35">el::Logger</a>
-</li>
-<li>empty()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_abstract_registry.html#a43ff6484b778c298416c482c07a4df3f">el::base::utils::AbstractRegistry&lt; T_Ptr, Container &gt;</a>
-, <a class="el" href="classel_1_1base_1_1utils_1_1_command_line_args.html#ae00284742272d75321a2e8ebe232b963">el::base::utils::CommandLineArgs</a>
-</li>
 <li>Empty()
 : <a class="el" href="classvpr_1_1_allocation_collection.html#ad0078fb962f01a4245c8b33a094d3f87">vpr::AllocationCollection</a>
 , <a class="el" href="classvpr_1_1_memory_block.html#add8139b1ac10a12da486a216ffd26a78">vpr::MemoryBlock</a>
 </li>
 <li>emptyAllocations
-: <a class="el" href="classvpr_1_1_allocator.html#a5c9e6d733fc82bf45a9e1ad2ebbab7ae">vpr::Allocator</a>
-</li>
-<li>enabled()
-: <a class="el" href="classel_1_1base_1_1_typed_configurations.html#a924b35df988103c737907cc7993c3c1c">el::base::TypedConfigurations</a>
-, <a class="el" href="classel_1_1_callback.html#aab4afe42d3f4b6282e69e90efdaa8ea7">el::Callback&lt; T &gt;</a>
-, <a class="el" href="classel_1_1_logger.html#aa577392f6bd9f3a48b447fc0c7e5f8dc">el::Logger</a>
+: <a class="el" href="structvpr_1_1_allocator_impl.html#ae80941f43777e8872bb2feb19ebe82a0">vpr::AllocatorImpl</a>
 </li>
 <li>enableDedicatedAllocations
-: <a class="el" href="classvpr_1_1_device.html#acf511f5f9dc4df10e933fdd22d7287db">vpr::Device</a>
+: <a class="el" href="structvpr_1_1_device_data_members.html#afdb20df24cdc3a4d75ba41f3677e4f3f">vpr::DeviceDataMembers</a>
 </li>
 <li>enabledExtensions
-: <a class="el" href="classvpr_1_1_device.html#a180aa3e87a6058ead627d8496f8f9937">vpr::Device</a>
-, <a class="el" href="classvpr_1_1_instance.html#ae265268b34c32b2e43f2a84db04b7341">vpr::Instance</a>
+: <a class="el" href="structvpr_1_1_device_data_members.html#a449cf695be146d6e160a8976221fc58a">vpr::DeviceDataMembers</a>
 </li>
 <li>end()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_abstract_registry.html#a67c40207c171f23ad50a71db819e84f9">el::base::utils::AbstractRegistry&lt; T_Ptr, Container &gt;</a>
-, <a class="el" href="classvpr_1_1_allocation_collection.html#a9285cc70c50e9380ecb8dc5667eff759">vpr::AllocationCollection</a>
+: <a class="el" href="classvpr_1_1_allocation_collection.html#a9285cc70c50e9380ecb8dc5667eff759">vpr::AllocationCollection</a>
 , <a class="el" href="classvpr_1_1_memory_block.html#a7d2d5cc6cef21285c6c4eafd7179ccf7">vpr::MemoryBlock</a>
 </li>
 <li>EndSingleCmdBuffer()
 : <a class="el" href="classvpr_1_1_command_pool.html#ac46b6fae9d0650041a4929698d59508a">vpr::CommandPool</a>
 </li>
-<li>endsWith()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_str.html#a8116fdf0f0308f78a42989da9df52377">el::base::utils::Str</a>
-</li>
 <li>Event()
 : <a class="el" href="classvpr_1_1_event.html#ac8c4a4985a5121dcb9cf3d7fb2d85b2f">vpr::Event</a>
 </li>
 <li>extensionCheck()
-: <a class="el" href="classvpr_1_1_instance.html#a1a17389930d2c5ae9c95227480879354">vpr::Instance</a>
+: <a class="el" href="structvpr_1_1_instance_extension_handler.html#af3fa989227d2da5a214fcb2314b9885f">vpr::InstanceExtensionHandler</a>
+</li>
+<li>extensionHandler
+: <a class="el" href="classvpr_1_1_instance.html#a0992653af0dbc106f0bec63cdc5925cb">vpr::Instance</a>
 </li>
 <li>extensionSetup()
-: <a class="el" href="classvpr_1_1_instance.html#ad1fadb1385b0906b157ed42ff392d59e">vpr::Instance</a>
+: <a class="el" href="structvpr_1_1_instance_extension_handler.html#a05d1f04435599c61498469a134d239e2">vpr::InstanceExtensionHandler</a>
 </li>
-<li>extent
-: <a class="el" href="classvpr_1_1_swapchain.html#a6a533156d73989b32741eaf3005c4539">vpr::Swapchain</a>
+<li>extensionStrings
+: <a class="el" href="structvpr_1_1_instance_extension_handler.html#a8d32e1d9c0746bd09330bbb6555d31b3">vpr::InstanceExtensionHandler</a>
 </li>
 <li>Extent()
 : <a class="el" href="classvpr_1_1_swapchain.html#a913d385f9a2a0e1d7c11c2bc04902411">vpr::Swapchain</a>
 </li>
-<li>extents
-: <a class="el" href="classvpr_1_1_image.html#a2f2f3b591b756e2780a95cda0fefbc1d">vpr::Image</a>
-</li>
-<li>extractPathFromFilename()
-: <a class="el" href="classel_1_1base_1_1utils_1_1_file.html#aeb03bbb8d34b7ac37bcec1ab493926e6">el::base::utils::File</a>
+<li>extent
+: <a class="el" href="structvpr_1_1_swapchain_impl.html#a4a34f9862f04c466ebbe4659e904ed5b">vpr::SwapchainImpl</a>
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

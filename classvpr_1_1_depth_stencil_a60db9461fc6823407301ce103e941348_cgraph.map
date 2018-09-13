@@ -1,9 +1,0 @@
-<map id="vpr::DepthStencil::DepthStencil" name="vpr::DepthStencil::DepthStencil">
-<area shape="rect" id="node2" href="$classvpr_1_1_image.html#aad7662ab3a1496171a826473f9ff98cf" title="vpr::Image::Create" alt="" coords="214,5,341,32"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_image.html#a9f06292f9e5c640e706783f5dffdbb7d" title="vpr::Image::CreateView" alt="" coords="200,56,355,83"/>
-<area shape="rect" id="node6" href="$classvpr_1_1_device.html#a4820a276bf1258c8ad6a5718fc7cd6fb" title="! Finds a Vulkan image format suitable for use in the depth buffer " alt="" coords="181,111,373,137"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_image.html#a7f1db39dbc01e0775d8ba7adcb8507fa" title="Simplified version of the other CreateImage method, that takes an already setup VkImageCreateInfo str..." alt="" coords="428,5,591,32"/>
-<area shape="rect" id="node5" href="$classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" title="vpr::Device::vkHandle" alt="" coords="437,56,581,83"/>
-<area shape="rect" id="node7" href="$classvpr_1_1_device.html#a2a58028f056c580337c9454195683eae" title="! Checks a collection of possible formats, returning the one that supports the given tiling and featu..." alt="" coords="421,107,597,149"/>
-<area shape="rect" id="node8" href="$classvpr_1_1_physical_device.html#a00de7d3556d98b1cfda28d1f769f8fa8" title="vpr::PhysicalDevice\l::vkHandle" alt="" coords="645,107,780,149"/>
-</map>

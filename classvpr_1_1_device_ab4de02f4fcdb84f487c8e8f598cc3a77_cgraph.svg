@@ -9,21 +9,21 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>vpr::Device::GraphicsQueue</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-24 285,-24 285,4 -4,4"/>
-<!-- Node129 -->
-<g id="node1" class="node"><title>Node129</title>
+<!-- Node90 -->
+<g id="node1" class="node"><title>Node90</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-19.5 137,-19.5 137,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="68.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::GraphicsQueue</text>
 </g>
-<!-- Node130 -->
-<g id="node2" class="node"><title>Node130</title>
+<!-- Node91 -->
+<g id="node2" class="node"><title>Node91</title>
 <g id="a_node2"><a xlink:href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45" target="_top" xlink:title="vpr::Device::vkHandle">
 <polygon fill="white" stroke="black" points="173,-0.5 173,-19.5 281,-19.5 281,-0.5 173,-0.5"/>
 <text text-anchor="middle" x="227" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">vpr::Device::vkHandle</text>
 </a>
 </g>
 </g>
-<!-- Node129&#45;&gt;Node130 -->
-<g id="edge1" class="edge"><title>Node129&#45;&gt;Node130</title>
+<!-- Node90&#45;&gt;Node91 -->
+<g id="edge1" class="edge"><title>Node90&#45;&gt;Node91</title>
 <path fill="none" stroke="midnightblue" d="M137.233,-10C145.69,-10 154.314,-10 162.7,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="162.784,-13.5001 172.784,-10 162.784,-6.5001 162.784,-13.5001"/>
 </g>

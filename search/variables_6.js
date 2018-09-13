@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['graphics',['Graphics',['../namespacevpr.html#ad7def5d08c30d9fcb6992455de1c868a',1,'vpr::vkQueueFamilyIndices::Graphics()'],['../namespacevpr.html#ad917c2184f8cdeef1b9b298aee35090a',1,'vpr::queue_priorities_t::graphics()']]],
+  ['graphics',['Graphics',['../structvpr_1_1vk_queue_family_indices.html#ad7def5d08c30d9fcb6992455de1c868a',1,'vpr::vkQueueFamilyIndices::Graphics()'],['../namespacevpr.html#ad917c2184f8cdeef1b9b298aee35090a',1,'vpr::queue_priorities_t::graphics()']]],
   ['guardmutex',['guardMutex',['../classvpr_1_1_memory_block.html#ae043175ee50b0fdfccd461fef6d91ea5',1,'vpr::MemoryBlock']]]
 ];

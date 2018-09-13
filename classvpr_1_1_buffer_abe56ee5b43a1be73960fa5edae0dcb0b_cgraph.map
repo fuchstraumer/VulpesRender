@@ -1,3 +1,5 @@
 <map id="vpr::Buffer::CreateBuffer" name="vpr::Buffer::CreateBuffer">
-<area shape="rect" id="node2" href="$classvpr_1_1_buffer.html#a07d786f45ff6d6712962da7910f6280c" title="vpr::Buffer::setMappedMemory\lRange" alt="" coords="212,5,411,47"/>
+<area shape="rect" id="node2" href="$classvpr_1_1_buffer.html#a07d786f45ff6d6712962da7910f6280c" title="vpr::Buffer::setMappedMemory\lRange" alt="" coords="212,23,411,65"/>
+<area shape="rect" id="node3" href="$classvpr_1_1_allocation.html#a1a223e41ca865271544ece71d18edce2" title="vpr::Allocation::Memory" alt="" coords="459,5,617,32"/>
+<area shape="rect" id="node4" href="$classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397" title="vpr::Allocation::Offset" alt="" coords="465,56,611,83"/>
 </map>

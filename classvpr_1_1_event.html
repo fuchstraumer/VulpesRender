@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -22,9 +29,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">VulpesRender
-   &#160;<span id="projectnumber">v0.8.7</span>
+   &#160;<span id="projectnumber">v0.9.3</span>
    </div>
-   <div id="projectbrief">A library of Vulkan Primitives</div>
+   <div id="projectbrief">Vulkan Primitives Library</div>
   </td>
  </tr>
  </tbody>
@@ -44,6 +51,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classvpr_1_1_event.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -58,11 +80,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespacevpr.html">vpr</a></li><li class="navelem"><a class="el" href="classvpr_1_1_event.html">Event</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -78,17 +95,11 @@ $(function() {
  <a href="classvpr_1_1_event.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_event_8hpp_source.html">Event.hpp</a>&gt;</code></p>
-<div class="dynheader">
-Collaboration diagram for vpr::Event:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_event__coll__graph.svg" width="100%" height="563"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abbc5436d7e577e1e198326b40c0e11b4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_event.html#abbc5436d7e577e1e198326b40c0e11b4">Event</a> (const <a class="el" href="classvpr_1_1_device.html">Device</a> *dvc)</td></tr>
-<tr class="separator:abbc5436d7e577e1e198326b40c0e11b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0caf00452e301cb6220e2394b102084"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_event.html#aa0caf00452e301cb6220e2394b102084">Event</a> (const VkDevice &amp;dvc)</td></tr>
+<tr class="separator:aa0caf00452e301cb6220e2394b102084"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a751e895a90d66ce635ce8479dec8e92f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_event.html#a751e895a90d66ce635ce8479dec8e92f">~Event</a> ()</td></tr>
 <tr class="separator:a751e895a90d66ce635ce8479dec8e92f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e559677956dfabb3a4b612490c437b5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_event.html#a5e559677956dfabb3a4b612490c437b5">Event</a> (<a class="el" href="classvpr_1_1_event.html">Event</a> &amp;&amp;other) noexcept</td></tr>
@@ -129,9 +140,9 @@ Private Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a8d008f2fb2d2d551ee4ef928528028a8"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classvpr_1_1_device.html">Device</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">device</a></td></tr>
-<tr class="separator:a8d008f2fb2d2d551ee4ef928528028a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40c5e09a133ea869f45bde3d184d0e08"><td class="memItemLeft" align="right" valign="top">VkEvent&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a></td></tr>
+<tr class="memitem:ad84628d3da32bfa347f385b84124bc59"><td class="memItemLeft" align="right" valign="top">VkDevice&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">device</a> { VK_NULL_HANDLE }</td></tr>
+<tr class="separator:ad84628d3da32bfa347f385b84124bc59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40c5e09a133ea869f45bde3d184d0e08"><td class="memItemLeft" align="right" valign="top">VkEvent&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a> { VK_NULL_HANDLE }</td></tr>
 <tr class="separator:a40c5e09a133ea869f45bde3d184d0e08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -168,8 +179,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="abbc5436d7e577e1e198326b40c0e11b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbc5436d7e577e1e198326b40c0e11b4">&#9670;&nbsp;</a></span>Event() <span class="overload">[2/3]</span></h2>
+<a id="aa0caf00452e301cb6220e2394b102084"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0caf00452e301cb6220e2394b102084">&#9670;&nbsp;</a></span>Event() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,28 +188,21 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">vpr::Event::Event </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classvpr_1_1_device.html">Device</a> *&#160;</td>
+          <td class="paramtype">const VkDevice &amp;&#160;</td>
           <td class="paramname"><em>dvc</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00006">6</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00007">7</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00058">device</a>, <a class="el" href="_event_8hpp_source.html#l00059">handle</a>, <a class="el" href="_create_info_base_8hpp_source.html#l00568">vpr::vk_event_create_info_base</a>, <a class="el" href="vk_assert_8hpp_source.html#l00009">VkAssert</a>, and <a class="el" href="_logical_device_8cpp_source.html#l00209">vpr::Device::vkHandle()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;                                  : <a class="code" href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">device</a>(dvc), <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>(VK_NULL_HANDLE) {</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        VkResult result = vkCreateEvent(<a class="code" href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">device</a>-&gt;<a class="code" href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vkHandle</a>(), &amp;<a class="code" href="namespacevpr.html#a9afd956451263d552a1d9e90a4d8676e">vk_event_create_info_base</a>, <span class="keyword">nullptr</span>, &amp;<a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>);</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        <a class="code" href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a>(result);</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a8d008f2fb2d2d551ee4ef928528028a8"><div class="ttname"><a href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">vpr::Event::device</a></div><div class="ttdeci">const Device * device</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
-<div class="ttc" id="vk_assert_8hpp_html_a92c2e07b0d021fc331be70a65c61dacc"><div class="ttname"><a href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a></div><div class="ttdeci">#define VkAssert(expression)</div><div class="ttdef"><b>Definition:</b> <a href="vk_assert_8hpp_source.html#l00009">vkAssert.hpp:9</a></div></div>
-<div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00059">Event.hpp:59</a></div></div>
-<div class="ttc" id="namespacevpr_html_a9afd956451263d552a1d9e90a4d8676e"><div class="ttname"><a href="namespacevpr.html#a9afd956451263d552a1d9e90a4d8676e">vpr::vk_event_create_info_base</a></div><div class="ttdeci">constexpr VkEventCreateInfo vk_event_create_info_base</div><div class="ttdef"><b>Definition:</b> <a href="_create_info_base_8hpp_source.html#l00568">CreateInfoBase.hpp:568</a></div></div>
-<div class="ttc" id="classvpr_1_1_device_html_a59882855173bef0b13a17b376ea01d45"><div class="ttname"><a href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vpr::Device::vkHandle</a></div><div class="ttdeci">const VkDevice &amp; vkHandle() const</div><div class="ttdef"><b>Definition:</b> <a href="_logical_device_8cpp_source.html#l00209">LogicalDevice.cpp:209</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_event_abbc5436d7e577e1e198326b40c0e11b4_cgraph.svg" width="322" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
+<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00057">device</a>, <a class="el" href="_event_8hpp_source.html#l00058">handle</a>, <a class="el" href="_create_info_base_8hpp_source.html#l00568">vpr::vk_event_create_info_base</a>, and <a class="el" href="vk_assert_8hpp_source.html#l00009">VkAssert</a>.</p>
+<div class="fragment"><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;                                    : <a class="code" href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">device</a>(dvc), <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>(VK_NULL_HANDLE) {</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        VkResult result = vkCreateEvent(<a class="code" href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">device</a>, &amp;<a class="code" href="namespacevpr.html#a9afd956451263d552a1d9e90a4d8676e">vk_event_create_info_base</a>, <span class="keyword">nullptr</span>, &amp;<a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>);</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        <a class="code" href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a>(result);</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    }</div><div class="ttc" id="vk_assert_8hpp_html_a92c2e07b0d021fc331be70a65c61dacc"><div class="ttname"><a href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a></div><div class="ttdeci">#define VkAssert(expression)</div><div class="ttdef"><b>Definition:</b> <a href="vk_assert_8hpp_source.html#l00009">vkAssert.hpp:9</a></div></div>
+<div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
+<div class="ttc" id="namespacevpr_html_a9afd956451263d552a1d9e90a4d8676e"><div class="ttname"><a href="namespacevpr.html#a9afd956451263d552a1d9e90a4d8676e">vpr::vk_event_create_info_base</a></div><div class="ttdeci">static constexpr VkEventCreateInfo vk_event_create_info_base</div><div class="ttdef"><b>Definition:</b> <a href="_create_info_base_8hpp_source.html#l00568">CreateInfoBase.hpp:568</a></div></div>
+<div class="ttc" id="classvpr_1_1_event_html_ad84628d3da32bfa347f385b84124bc59"><div class="ttname"><a href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">vpr::Event::device</a></div><div class="ttdeci">VkDevice device</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00057">Event.hpp:57</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a751e895a90d66ce635ce8479dec8e92f"></a>
@@ -216,19 +220,12 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00011">11</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00012">12</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00058">device</a>, <a class="el" href="_event_8hpp_source.html#l00059">handle</a>, and <a class="el" href="_logical_device_8cpp_source.html#l00209">vpr::Device::vkHandle()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;                  {</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a> != VK_NULL_HANDLE) {</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            vkDestroyEvent(<a class="code" href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">device</a>-&gt;<a class="code" href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vkHandle</a>(), <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>, <span class="keyword">nullptr</span>);</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        }</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a8d008f2fb2d2d551ee4ef928528028a8"><div class="ttname"><a href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">vpr::Event::device</a></div><div class="ttdeci">const Device * device</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
-<div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00059">Event.hpp:59</a></div></div>
-<div class="ttc" id="classvpr_1_1_device_html_a59882855173bef0b13a17b376ea01d45"><div class="ttname"><a href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vpr::Device::vkHandle</a></div><div class="ttdeci">const VkDevice &amp; vkHandle() const</div><div class="ttdef"><b>Definition:</b> <a href="_logical_device_8cpp_source.html#l00209">LogicalDevice.cpp:209</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_event_a751e895a90d66ce635ce8479dec8e92f_cgraph.svg" width="330" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
+<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00057">device</a>, and <a class="el" href="_event_8hpp_source.html#l00058">handle</a>.</p>
+<div class="fragment"><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;                  {</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a> != VK_NULL_HANDLE) {</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;            vkDestroyEvent(<a class="code" href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">device</a>, <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>, <span class="keyword">nullptr</span>);</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        }</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
+<div class="ttc" id="classvpr_1_1_event_html_ad84628d3da32bfa347f385b84124bc59"><div class="ttname"><a href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">vpr::Event::device</a></div><div class="ttdeci">VkDevice device</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00057">Event.hpp:57</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a5e559677956dfabb3a4b612490c437b5"></a>
@@ -255,9 +252,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00017">17</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                                       : <a class="code" href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">device</a>(std::move(other.device)), <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>(std::move(other.handle)) {</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        other.handle = VK_NULL_HANDLE;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a8d008f2fb2d2d551ee4ef928528028a8"><div class="ttname"><a href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">vpr::Event::device</a></div><div class="ttdeci">const Device * device</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
-<div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00059">Event.hpp:59</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00018">18</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                                       : <a class="code" href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">device</a>(std::move(other.device)), <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>(std::move(other.handle)) {</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        other.handle = VK_NULL_HANDLE;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
+<div class="ttc" id="classvpr_1_1_event_html_ad84628d3da32bfa347f385b84124bc59"><div class="ttname"><a href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">vpr::Event::device</a></div><div class="ttdeci">VkDevice device</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00057">Event.hpp:57</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -287,23 +284,18 @@ Here is the call graph for this function:</div>
 
 <p>Retrieves current status of the event - either VK_EVENT_SET or VK_EVENT_RESET. </p>
 
-<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00038">38</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00039">39</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00058">device</a>, <a class="el" href="_event_8hpp_source.html#l00059">handle</a>, and <a class="el" href="_logical_device_8cpp_source.html#l00209">vpr::Device::vkHandle()</a>.</p>
+<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00057">device</a>, and <a class="el" href="_event_8hpp_source.html#l00058">handle</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_event_8cpp_source.html#l00047">IsReset()</a>, and <a class="el" href="_event_8cpp_source.html#l00042">IsSet()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                                             {</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">return</span> vkGetEventStatus(<a class="code" href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">device</a>-&gt;<a class="code" href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vkHandle</a>(), <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>);</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a8d008f2fb2d2d551ee4ef928528028a8"><div class="ttname"><a href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">vpr::Event::device</a></div><div class="ttdeci">const Device * device</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
-<div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00059">Event.hpp:59</a></div></div>
-<div class="ttc" id="classvpr_1_1_device_html_a59882855173bef0b13a17b376ea01d45"><div class="ttname"><a href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vpr::Device::vkHandle</a></div><div class="ttdeci">const VkDevice &amp; vkHandle() const</div><div class="ttdef"><b>Definition:</b> <a href="_logical_device_8cpp_source.html#l00209">LogicalDevice.cpp:209</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_event_ac3ba488b1703ded001e55af5ada50849_cgraph.svg" width="348" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<p class="reference">Referenced by <a class="el" href="_event_8cpp_source.html#l00048">IsReset()</a>, and <a class="el" href="_event_8cpp_source.html#l00043">IsSet()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                                             {</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">return</span> vkGetEventStatus(<a class="code" href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">device</a>, <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>);</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
+<div class="ttc" id="classvpr_1_1_event_html_ad84628d3da32bfa347f385b84124bc59"><div class="ttname"><a href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">vpr::Event::device</a></div><div class="ttdeci">VkDevice device</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00057">Event.hpp:57</a></div></div>
+</div><!-- fragment --><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_event_ac3ba488b1703ded001e55af5ada50849_icgraph.svg" width="335" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
@@ -333,14 +325,16 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00047">47</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00048">48</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_event_8cpp_source.html#l00038">GetStatus()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                                       {</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        VkResult result = <a class="code" href="classvpr_1_1_event.html#ac3ba488b1703ded001e55af5ada50849">GetStatus</a>();</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">return</span> result == VK_EVENT_RESET;</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_ac3ba488b1703ded001e55af5ada50849"><div class="ttname"><a href="classvpr_1_1_event.html#ac3ba488b1703ded001e55af5ada50849">vpr::Event::GetStatus</a></div><div class="ttdeci">VkResult GetStatus() const noexcept</div><div class="ttdoc">Retrieves current status of the event - either VK_EVENT_SET or VK_EVENT_RESET. </div><div class="ttdef"><b>Definition:</b> <a href="_event_8cpp_source.html#l00038">Event.cpp:38</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_event_a136668a70c07e1e3f3801184e6bc80d1_cgraph.svg" width="527" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<p class="reference">References <a class="el" href="_event_8cpp_source.html#l00039">GetStatus()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                                       {</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        VkResult result = <a class="code" href="classvpr_1_1_event.html#ac3ba488b1703ded001e55af5ada50849">GetStatus</a>();</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">return</span> result == VK_EVENT_RESET;</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_ac3ba488b1703ded001e55af5ada50849"><div class="ttname"><a href="classvpr_1_1_event.html#ac3ba488b1703ded001e55af5ada50849">vpr::Event::GetStatus</a></div><div class="ttdeci">VkResult GetStatus() const noexcept</div><div class="ttdoc">Retrieves current status of the event - either VK_EVENT_SET or VK_EVENT_RESET. </div><div class="ttdef"><b>Definition:</b> <a href="_event_8cpp_source.html#l00039">Event.cpp:39</a></div></div>
+</div><!-- fragment --><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_event_a136668a70c07e1e3f3801184e6bc80d1_cgraph.svg" width="335" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -369,14 +363,16 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00042">42</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00043">43</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_event_8cpp_source.html#l00038">GetStatus()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                                     {</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        VkResult result = <a class="code" href="classvpr_1_1_event.html#ac3ba488b1703ded001e55af5ada50849">GetStatus</a>();</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">return</span> result == VK_EVENT_SET;</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_ac3ba488b1703ded001e55af5ada50849"><div class="ttname"><a href="classvpr_1_1_event.html#ac3ba488b1703ded001e55af5ada50849">vpr::Event::GetStatus</a></div><div class="ttdeci">VkResult GetStatus() const noexcept</div><div class="ttdoc">Retrieves current status of the event - either VK_EVENT_SET or VK_EVENT_RESET. </div><div class="ttdef"><b>Definition:</b> <a href="_event_8cpp_source.html#l00038">Event.cpp:38</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_event_a065551f41d822e7fe5d371d96f23282a_cgraph.svg" width="512" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<p class="reference">References <a class="el" href="_event_8cpp_source.html#l00039">GetStatus()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                                     {</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        VkResult result = <a class="code" href="classvpr_1_1_event.html#ac3ba488b1703ded001e55af5ada50849">GetStatus</a>();</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">return</span> result == VK_EVENT_SET;</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_ac3ba488b1703ded001e55af5ada50849"><div class="ttname"><a href="classvpr_1_1_event.html#ac3ba488b1703ded001e55af5ada50849">vpr::Event::GetStatus</a></div><div class="ttdeci">VkResult GetStatus() const noexcept</div><div class="ttdoc">Retrieves current status of the event - either VK_EVENT_SET or VK_EVENT_RESET. </div><div class="ttdef"><b>Definition:</b> <a href="_event_8cpp_source.html#l00039">Event.cpp:39</a></div></div>
+</div><!-- fragment --><div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_event_a065551f41d822e7fe5d371d96f23282a_cgraph.svg" width="320" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -432,11 +428,11 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00021">21</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00022">22</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00058">device</a>, and <a class="el" href="_event_8hpp_source.html#l00059">handle</a>.</p>
-<div class="fragment"><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                                                  {</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">device</a> = std::move(other.device);</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a> = std::move(other.handle);</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        other.handle = VK_NULL_HANDLE;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a8d008f2fb2d2d551ee4ef928528028a8"><div class="ttname"><a href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">vpr::Event::device</a></div><div class="ttdeci">const Device * device</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
-<div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00059">Event.hpp:59</a></div></div>
+<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00057">device</a>, and <a class="el" href="_event_8hpp_source.html#l00058">handle</a>.</p>
+<div class="fragment"><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                                                  {</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">device</a> = std::move(other.device);</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a> = std::move(other.handle);</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        other.handle = VK_NULL_HANDLE;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
+<div class="ttc" id="classvpr_1_1_event_html_ad84628d3da32bfa347f385b84124bc59"><div class="ttname"><a href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">vpr::Event::device</a></div><div class="ttdeci">VkDevice device</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00057">Event.hpp:57</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -465,20 +461,13 @@ Here is the call graph for this function:</div>
 
 <p>Resets the event unsignaled/"reset" on the <em>host</em> </p>
 
-<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00033">33</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00034">34</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00058">device</a>, <a class="el" href="_event_8hpp_source.html#l00059">handle</a>, <a class="el" href="vk_assert_8hpp_source.html#l00009">VkAssert</a>, and <a class="el" href="_logical_device_8cpp_source.html#l00209">vpr::Device::vkHandle()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                               {</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        VkResult result = vkResetEvent(<a class="code" href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">device</a>-&gt;<a class="code" href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vkHandle</a>(), <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>);</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="code" href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a>(result);</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a8d008f2fb2d2d551ee4ef928528028a8"><div class="ttname"><a href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">vpr::Event::device</a></div><div class="ttdeci">const Device * device</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
-<div class="ttc" id="vk_assert_8hpp_html_a92c2e07b0d021fc331be70a65c61dacc"><div class="ttname"><a href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a></div><div class="ttdeci">#define VkAssert(expression)</div><div class="ttdef"><b>Definition:</b> <a href="vk_assert_8hpp_source.html#l00009">vkAssert.hpp:9</a></div></div>
-<div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00059">Event.hpp:59</a></div></div>
-<div class="ttc" id="classvpr_1_1_device_html_a59882855173bef0b13a17b376ea01d45"><div class="ttname"><a href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vpr::Device::vkHandle</a></div><div class="ttdeci">const VkDevice &amp; vkHandle() const</div><div class="ttdef"><b>Definition:</b> <a href="_logical_device_8cpp_source.html#l00209">LogicalDevice.cpp:209</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_event_abf78b8b9982c506d3e85ba5f75c8285c_cgraph.svg" width="323" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
+<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00057">device</a>, <a class="el" href="_event_8hpp_source.html#l00058">handle</a>, and <a class="el" href="vk_assert_8hpp_source.html#l00009">VkAssert</a>.</p>
+<div class="fragment"><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                               {</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        VkResult result = vkResetEvent(<a class="code" href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">device</a>, <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>);</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a>(result);</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div><div class="ttc" id="vk_assert_8hpp_html_a92c2e07b0d021fc331be70a65c61dacc"><div class="ttname"><a href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a></div><div class="ttdeci">#define VkAssert(expression)</div><div class="ttdef"><b>Definition:</b> <a href="vk_assert_8hpp_source.html#l00009">vkAssert.hpp:9</a></div></div>
+<div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
+<div class="ttc" id="classvpr_1_1_event_html_ad84628d3da32bfa347f385b84124bc59"><div class="ttname"><a href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">vpr::Event::device</a></div><div class="ttdeci">VkDevice device</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00057">Event.hpp:57</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a2b3891c61c0b78ed8abedef27658aa27"></a>
@@ -509,10 +498,10 @@ Here is the call graph for this function:</div>
 
 <p>Resets this event at the given pipeline stage upon execution of the passed command buffer. </p>
 
-<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00056">56</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00057">57</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00059">handle</a>.</p>
-<div class="fragment"><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                                                                                               {</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        vkCmdResetEvent(cmd, <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>, stages_to_reset_at);</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00059">Event.hpp:59</a></div></div>
+<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00058">handle</a>.</p>
+<div class="fragment"><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                                                                                               {</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        vkCmdResetEvent(cmd, <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>, stages_to_reset_at);</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -541,20 +530,13 @@ Here is the call graph for this function:</div>
 
 <p>Sets the event to signaled/"set" on the <em>host</em>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00028">28</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00029">29</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00058">device</a>, <a class="el" href="_event_8hpp_source.html#l00059">handle</a>, <a class="el" href="vk_assert_8hpp_source.html#l00009">VkAssert</a>, and <a class="el" href="_logical_device_8cpp_source.html#l00209">vpr::Device::vkHandle()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                             {</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        VkResult result = vkSetEvent(<a class="code" href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">device</a>-&gt;<a class="code" href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vkHandle</a>(), <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>);</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a>(result);</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a8d008f2fb2d2d551ee4ef928528028a8"><div class="ttname"><a href="classvpr_1_1_event.html#a8d008f2fb2d2d551ee4ef928528028a8">vpr::Event::device</a></div><div class="ttdeci">const Device * device</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
-<div class="ttc" id="vk_assert_8hpp_html_a92c2e07b0d021fc331be70a65c61dacc"><div class="ttname"><a href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a></div><div class="ttdeci">#define VkAssert(expression)</div><div class="ttdef"><b>Definition:</b> <a href="vk_assert_8hpp_source.html#l00009">vkAssert.hpp:9</a></div></div>
-<div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00059">Event.hpp:59</a></div></div>
-<div class="ttc" id="classvpr_1_1_device_html_a59882855173bef0b13a17b376ea01d45"><div class="ttname"><a href="classvpr_1_1_device.html#a59882855173bef0b13a17b376ea01d45">vpr::Device::vkHandle</a></div><div class="ttdeci">const VkDevice &amp; vkHandle() const</div><div class="ttdef"><b>Definition:</b> <a href="_logical_device_8cpp_source.html#l00209">LogicalDevice.cpp:209</a></div></div>
-</div><!-- fragment --><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classvpr_1_1_event_a0089000d7e4ffd39efab590059c52ca5_cgraph.svg" width="310" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
+<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00057">device</a>, <a class="el" href="_event_8hpp_source.html#l00058">handle</a>, and <a class="el" href="vk_assert_8hpp_source.html#l00009">VkAssert</a>.</p>
+<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                             {</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        VkResult result = vkSetEvent(<a class="code" href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">device</a>, <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>);</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a>(result);</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    }</div><div class="ttc" id="vk_assert_8hpp_html_a92c2e07b0d021fc331be70a65c61dacc"><div class="ttname"><a href="vk_assert_8hpp.html#a92c2e07b0d021fc331be70a65c61dacc">VkAssert</a></div><div class="ttdeci">#define VkAssert(expression)</div><div class="ttdef"><b>Definition:</b> <a href="vk_assert_8hpp_source.html#l00009">vkAssert.hpp:9</a></div></div>
+<div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
+<div class="ttc" id="classvpr_1_1_event_html_ad84628d3da32bfa347f385b84124bc59"><div class="ttname"><a href="classvpr_1_1_event.html#ad84628d3da32bfa347f385b84124bc59">vpr::Event::device</a></div><div class="ttdeci">VkDevice device</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00057">Event.hpp:57</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a4a02a4dbd5693ca95254074ada52286a"></a>
@@ -585,10 +567,10 @@ Here is the call graph for this function:</div>
 
 <p>Sets this event to signaled at the given stage of the pipeline, upon execution of the passed command buffer. </p>
 
-<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00052">52</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00053">53</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00059">handle</a>.</p>
-<div class="fragment"><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                                                                                           {</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        vkCmdSetEvent(cmd, <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>, stages_to_set_at);</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00059">Event.hpp:59</a></div></div>
+<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00058">handle</a>.</p>
+<div class="fragment"><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                                                                                           {</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        vkCmdSetEvent(cmd, <a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>, stages_to_set_at);</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -658,16 +640,16 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00060">60</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_event_8cpp_source.html#l00061">61</a> of file <a class="el" href="_event_8cpp_source.html">Event.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00059">handle</a>.</p>
-<div class="fragment"><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                                                                                                                                                 {</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        vkCmdWaitEvents(cmd, 1, &amp;<a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>, potential_signal_stages, stages_to_wait_at, 0, <span class="keyword">nullptr</span>, 0, <span class="keyword">nullptr</span>, 0, <span class="keyword">nullptr</span>);</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00059">Event.hpp:59</a></div></div>
+<p class="reference">References <a class="el" href="_event_8hpp_source.html#l00058">handle</a>.</p>
+<div class="fragment"><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                                                                                                                                                 {</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        vkCmdWaitEvents(cmd, 1, &amp;<a class="code" href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">handle</a>, potential_signal_stages, stages_to_wait_at, 0, <span class="keyword">nullptr</span>, 0, <span class="keyword">nullptr</span>, 0, <span class="keyword">nullptr</span>);</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div><div class="ttc" id="classvpr_1_1_event_html_a40c5e09a133ea869f45bde3d184d0e08"><div class="ttname"><a href="classvpr_1_1_event.html#a40c5e09a133ea869f45bde3d184d0e08">vpr::Event::handle</a></div><div class="ttdeci">VkEvent handle</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00058">Event.hpp:58</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a8d008f2fb2d2d551ee4ef928528028a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d008f2fb2d2d551ee4ef928528028a8">&#9670;&nbsp;</a></span>device</h2>
+<a id="ad84628d3da32bfa347f385b84124bc59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad84628d3da32bfa347f385b84124bc59">&#9670;&nbsp;</a></span>device</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -676,7 +658,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classvpr_1_1_device.html">Device</a>* vpr::Event::device</td>
+          <td class="memname">VkDevice vpr::Event::device { VK_NULL_HANDLE }</td>
         </tr>
       </table>
   </td>
@@ -686,9 +668,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_event_8hpp_source.html#l00058">58</a> of file <a class="el" href="_event_8hpp_source.html">Event.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_event_8hpp_source.html#l00057">57</a> of file <a class="el" href="_event_8hpp_source.html">Event.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_event_8cpp_source.html#l00006">Event()</a>, <a class="el" href="_event_8cpp_source.html#l00038">GetStatus()</a>, <a class="el" href="_event_8cpp_source.html#l00021">operator=()</a>, <a class="el" href="_event_8cpp_source.html#l00033">Reset()</a>, <a class="el" href="_event_8cpp_source.html#l00028">Set()</a>, and <a class="el" href="_event_8cpp_source.html#l00011">~Event()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_event_8cpp_source.html#l00007">Event()</a>, <a class="el" href="_event_8cpp_source.html#l00039">GetStatus()</a>, <a class="el" href="_event_8cpp_source.html#l00022">operator=()</a>, <a class="el" href="_event_8cpp_source.html#l00034">Reset()</a>, <a class="el" href="_event_8cpp_source.html#l00029">Set()</a>, and <a class="el" href="_event_8cpp_source.html#l00012">~Event()</a>.</p>
 
 </div>
 </div>
@@ -702,7 +684,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">VkEvent vpr::Event::handle</td>
+          <td class="memname">VkEvent vpr::Event::handle { VK_NULL_HANDLE }</td>
         </tr>
       </table>
   </td>
@@ -712,22 +694,26 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_event_8hpp_source.html#l00059">59</a> of file <a class="el" href="_event_8hpp_source.html">Event.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_event_8hpp_source.html#l00058">58</a> of file <a class="el" href="_event_8hpp_source.html">Event.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_event_8cpp_source.html#l00006">Event()</a>, <a class="el" href="_event_8cpp_source.html#l00038">GetStatus()</a>, <a class="el" href="_event_8cpp_source.html#l00021">operator=()</a>, <a class="el" href="_event_8cpp_source.html#l00033">Reset()</a>, <a class="el" href="_event_8cpp_source.html#l00028">Set()</a>, <a class="el" href="_event_8cpp_source.html#l00060">Wait()</a>, and <a class="el" href="_event_8cpp_source.html#l00011">~Event()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_event_8cpp_source.html#l00007">Event()</a>, <a class="el" href="_event_8cpp_source.html#l00039">GetStatus()</a>, <a class="el" href="_event_8cpp_source.html#l00022">operator=()</a>, <a class="el" href="_event_8cpp_source.html#l00034">Reset()</a>, <a class="el" href="_event_8cpp_source.html#l00029">Set()</a>, <a class="el" href="_event_8cpp_source.html#l00061">Wait()</a>, and <a class="el" href="_event_8cpp_source.html#l00012">~Event()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/include/sync/<a class="el" href="_event_8hpp_source.html">Event.hpp</a></li>
-<li>C:/Users/kjones/Documents/SoftwareDev/VulpesSceneKit/third_party/vulpesrender/src/sync/<a class="el" href="_event_8cpp_source.html">Event.cpp</a></li>
+<li>sync/include/<a class="el" href="_event_8hpp_source.html">Event.hpp</a></li>
+<li>sync/src/<a class="el" href="_event_8cpp_source.html">Event.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacevpr.html">vpr</a></li><li class="navelem"><a class="el" href="classvpr_1_1_event.html">Event</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

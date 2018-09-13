@@ -1,6 +1,0 @@
-<map id="el::Configurations::parseFromText" name="el::Configurations::parseFromText">
-<area shape="rect" id="node2" href="$classel_1_1_configurations_1_1_parser.html#ae4efa4823ce108eb35bc69442155a037" title="Parse configurations from configuration string. " alt="" coords="176,39,339,80"/>
-<area shape="rect" id="node3" href="$classel_1_1_configurations.html#a4c6db218908b39d23cc09b1a16a18e83" title="Sets configuration based&#45;off an existing configurations. " alt="" coords="387,39,509,80"/>
-<area shape="rect" id="node4" href="$classel_1_1base_1_1threading_1_1_thread_safe.html#affb45b35790a7305d0a659562c8104fc" title="el::base::threading\l::ThreadSafe::lock" alt="" coords="571,5,701,47"/>
-<area shape="rect" id="node5" href="$classel_1_1base_1_1utils_1_1_abstract_registry.html#a072859d3728a75f910c2898f62fd12da" title="Returns underlying container by reference. " alt="" coords="557,71,715,112"/>
-</map>

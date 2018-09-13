@@ -1,0 +1,9 @@
+<map id="vpr::AllocatorImpl" name="vpr::AllocatorImpl">
+<area shape="rect" id="node5" href="$classvpr_1_1_allocation_collection.html" title="An allocation collection is just a vector of MemoryBlocks of the same type. " alt="" coords="1732,120,1892,147"/>
+<area shape="rect" id="node6" href="$classvpr_1_1_allocator.html" title="The primary interface and class of this subsystem. " alt="" coords="1477,120,1574,147"/>
+<area shape="rect" id="node10" href="$classvpr_1_1_memory_block.html" title="A MemoryBlock is a large contiguous region of Vulkan memory of a uniform type (device local..." alt="" coords="997,55,1124,81"/>
+<area shape="rect" id="node12" href="$structvpr_1_1_suballocation.html" title="During the process of finding a suitable region to bind to, we need to store things like &quot;Suballocati..." alt="" coords="423,7,547,33"/>
+<area shape="rect" id="node14" title="STL iterator class. " alt="" coords="413,65,557,92"/>
+<area shape="rect" id="node18" href="$classvpr_1_1_allocation.html" title="Allocation class represents a singular allocation: can be a private allocation (i.e, only user of attached DeviceMemory) or a block allocation (bound to sub&#45;region of device memory) " alt="" coords="434,211,537,237"/>
+<area shape="rect" id="node20" href="$namespacevpr.html#structvpr_1_1_allocation_impl" title="vpr::AllocationImpl" alt="" coords="5,211,132,237"/>
+</map>

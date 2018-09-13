@@ -1,6 +1,0 @@
-<map id="el::base::RegisteredLoggers::remove" name="el::base::RegisteredLoggers::remove">
-<area shape="rect" id="node2" href="$classel_1_1base_1_1utils_1_1_registry.html#a18c332267f2acbe78c97a611dec2e5c2" title="Gets pointer from repository. If none found, nullptr is returned. " alt="" coords="238,5,421,32"/>
-<area shape="rect" id="node3" href="$classel_1_1base_1_1_registered_loggers.html#ad8fa8f829fdb6a03e6f5a38704811e7b" title="el::base::RegisteredLoggers\l::unregister" alt="" coords="237,57,421,98"/>
-<area shape="rect" id="node4" href="$classel_1_1base_1_1utils_1_1_registry.html#aab6f0ce3a99feff11add0bd8b869fcb8" title="Unregisters single entry mapped to specified unique key. " alt="" coords="469,27,625,69"/>
-<area shape="rect" id="node5" href="$classel_1_1_logger.html#a8583bfdeea4cb781396fd635addd64e9" title="el::Logger::id" alt="" coords="499,93,596,120"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="vpr::Swapchain::setParameters" name="vpr::Swapchain::setParameters">
-<area shape="rect" id="node2" href="$structvpr_1_1_swapchain_1_1_swapchain_info.html#a8e5ec662e23f85142cffed5e97522628" title="vpr::Swapchain::Swapchain\lInfo::ChooseSwapchainExtent" alt="" coords="261,5,455,47"/>
-<area shape="rect" id="node3" href="$structvpr_1_1_swapchain_1_1_swapchain_info.html#a4c2ad2b59c261d0d9d6fe67af3d80a6d" title="vpr::Swapchain::Swapchain\lInfo::GetBestFormat" alt="" coords="268,71,448,112"/>
-<area shape="rect" id="node4" href="$structvpr_1_1_swapchain_1_1_swapchain_info.html#a592ca88f80fa410d788ace4014ade438" title="vpr::Swapchain::Swapchain\lInfo::GetBestPresentMode" alt="" coords="268,136,448,177"/>
-<area shape="rect" id="node5" href="$classvpr_1_1_instance.html#a6409855c39056544050766847f937602" title="vpr::Instance::GetGLFWwindow" alt="" coords="256,202,460,229"/>
-</map>

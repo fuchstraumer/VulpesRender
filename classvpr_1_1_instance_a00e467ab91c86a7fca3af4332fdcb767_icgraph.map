@@ -1,4 +1,0 @@
-<map id="vpr::Instance::DestroySurfaceKHR" name="vpr::Instance::DestroySurfaceKHR">
-<area shape="rect" id="node2" href="$namespacevpr.html#a94afd8081f855771118d14af569f9bba" title="Pass a swapchain and instance pointer to this to have the swapchain and surface destroyed and recreat..." alt="" coords="272,5,456,47"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_instance.html#a2d0e68a86ecbbceb024dee48885c28d1" title="vpr::Instance::~Instance" alt="" coords="284,71,444,98"/>
-</map>

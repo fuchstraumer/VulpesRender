@@ -1,5 +1,0 @@
-<map id="el::Loggers::setDefaultConfigurations" name="el::Loggers::setDefaultConfigurations">
-<area shape="rect" id="node2" href="$classel_1_1_loggers.html#a42f99e79d72d391df563df8d09272194" title="Reconfigures all the existing loggers with new configurations. " alt="" coords="288,5,445,47"/>
-<area shape="rect" id="node3" href="$classel_1_1_loggers.html#a02223004494a404a2c3e7cd0c4380d3b" title="Reconfigures specified logger with new configurations. " alt="" coords="493,5,651,47"/>
-<area shape="rect" id="node4" href="$classel_1_1_logger.html#ad9db621dbf8977bf814dc7baea8dcee4" title="Configures the logger using specified configurations. " alt="" coords="699,13,837,39"/>
-</map>

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['logdispatcher',['LogDispatcher',['../classel_1_1_log_dispatch_data.html#a84d22f9ad5b796e49ff5f15a8c32773d',1,'el::LogDispatchData::LogDispatcher()'],['../classel_1_1_log_dispatch_callback.html#a84d22f9ad5b796e49ff5f15a8c32773d',1,'el::LogDispatchCallback::LogDispatcher()']]],
-  ['performancetracker',['PerformanceTracker',['../classel_1_1_performance_tracking_callback.html#a05f271f9cc2531409fe682c6ce0d9feb',1,'el::PerformanceTrackingCallback']]],
-  ['registeredloggers',['RegisteredLoggers',['../classel_1_1_logger_registration_callback.html#a5b2ecdd0901cd8ea80e03a3a6e2a9f17',1,'el::LoggerRegistrationCallback']]]
+  ['debugvisualization',['DebugVisualization',['../classvpr_1_1_allocator.html#a619ce3b614015e030bea8a3239d60fe2',1,'vpr::Allocator::DebugVisualization()'],['../classvpr_1_1_allocation_collection.html#a619ce3b614015e030bea8a3239d60fe2',1,'vpr::AllocationCollection::DebugVisualization()'],['../structvpr_1_1_allocator_impl.html#a619ce3b614015e030bea8a3239d60fe2',1,'vpr::AllocatorImpl::DebugVisualization()'],['../classvpr_1_1_memory_block.html#a619ce3b614015e030bea8a3239d60fe2',1,'vpr::MemoryBlock::DebugVisualization()']]],
+  ['debugvisualizationimpl',['DebugVisualizationImpl',['../classvpr_1_1_allocator.html#aa54730353079686243fbe5f8545267d0',1,'vpr::Allocator::DebugVisualizationImpl()'],['../classvpr_1_1_allocation_collection.html#aa54730353079686243fbe5f8545267d0',1,'vpr::AllocationCollection::DebugVisualizationImpl()'],['../structvpr_1_1_allocator_impl.html#aa54730353079686243fbe5f8545267d0',1,'vpr::AllocatorImpl::DebugVisualizationImpl()'],['../classvpr_1_1_memory_block.html#aa54730353079686243fbe5f8545267d0',1,'vpr::MemoryBlock::DebugVisualizationImpl()']]]
 ];

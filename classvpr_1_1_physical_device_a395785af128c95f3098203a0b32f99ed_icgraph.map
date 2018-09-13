@@ -1,5 +1,3 @@
 <map id="vpr::PhysicalDevice::GetProperties" name="vpr::PhysicalDevice::GetProperties">
-<area shape="rect" id="node2" href="$classvpr_1_1_device.html#aa9e1248673bd8c2742317d7de9084f5e" title="vpr::Device::GetPhysical\lDeviceID" alt="" coords="188,5,351,47"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_device.html#a1280b60865e8685bd670543e53291622" title="vpr::Device::GetPhysical\lDeviceProperties" alt="" coords="188,71,351,112"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_allocator.html#af15a36e630af2769ee8e1700ca1230f0" title="vpr::Allocator::Allocator" alt="" coords="399,78,555,105"/>
+<area shape="rect" id="node2" href="$classvpr_1_1_device.html#a75b50a9b7b72d42932981ad2c8c9318c" title="vpr::Device::GetPhysical\lDeviceProperties" alt="" coords="188,5,351,47"/>
 </map>

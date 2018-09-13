@@ -1,5 +1,0 @@
-<map id="el::base::threading::getCurrentThreadId" name="el::base::threading::getCurrentThreadId">
-<area shape="rect" id="node2" href="$classel_1_1base_1_1_default_log_builder.html#a9ee7983bc51f1fac887806e909ecbbbd" title="el::base::DefaultLogBuilder\l::build" alt="" coords="195,5,372,47"/>
-<area shape="rect" id="node3" href="$classel_1_1_helpers.html#ae19cb3baa6d8081a9e922736a384f70b" title="el::Helpers::getThreadName" alt="" coords="192,71,375,98"/>
-<area shape="rect" id="node4" href="$classel_1_1base_1_1_storage.html#a1800a786d72b003997dd8d2599b040e0" title="Sets thread name for current thread. Requires std::thread. " alt="" coords="219,123,348,164"/>
-</map>
