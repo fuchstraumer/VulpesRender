@@ -5,6 +5,11 @@
 
 namespace vpr {
 
+    /** This structure will be populated with function pointers used to call the functions (as named)
+     *  when available, or requested. The extension required to support these functions will not be loaded
+     *  by default, and must be requested. Additionally, it requires the validation layers to load successfully.
+     * \ingroup Core
+     */
     struct VkDebugUtilsFunctions {
         PFN_vkSetDebugUtilsObjectNameEXT vkSetDebugUtilsObjectName{ nullptr };
         PFN_vkSetDebugUtilsObjectTagEXT vkSetDebugUtilsObjectTag{ nullptr };

@@ -7,7 +7,8 @@
 
 namespace vpr {
 
-    /**Wraps the common image creation, transfer, and staging methods. Texture derives from this, and so does DepthStencil. Also provides
+    /**\deprecated{No longer recommended for use: unmaintained and not updated. }
+     * Wraps the common image creation, transfer, and staging methods. Texture derives from this, and so does DepthStencil. Also provides
      * static functions to initialize a passed VkImage handle and Allocation object. 
     *  \ingroup Resources
     */
