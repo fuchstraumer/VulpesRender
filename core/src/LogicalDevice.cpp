@@ -207,19 +207,15 @@ namespace vpr {
         return parent->GetMemoryTypeIdx(type_bitfield, property_flags, memory_type_found);
     }
 
-    uint32_t Device::GetPhysicalDeviceID() const noexcept{
-        return parent->GetProperties().deviceID;
-    }
-
     const PhysicalDevice & Device::GetPhysicalDevice() const noexcept{
         return *parent;
     }
 
-    VkPhysicalDeviceProperties Device::GetPhysicalDeviceProperties() const noexcept {
+    const VkPhysicalDeviceProperties& Device::GetPhysicalDeviceProperties() const noexcept {
         return parent->GetProperties();
     }
 
-    VkPhysicalDeviceMemoryProperties Device::GetPhysicalDeviceMemoryProperties() const noexcept {
+    const VkPhysicalDeviceMemoryProperties& Device::GetPhysicalDeviceMemoryProperties() const noexcept {
         return parent->GetMemoryProperties();
     }
 
