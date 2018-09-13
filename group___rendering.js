@@ -1,14 +1,5 @@
 var group___rendering =
 [
-    [ "SwapchainInfo", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html", [
-      [ "SwapchainInfo", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#aa3a0386fc6544df198499eecac30bc4a", null ],
-      [ "ChooseSwapchainExtent", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#ad518f786e370f0e0a026b8cdab3daff8", null ],
-      [ "GetBestFormat", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#abb595502d0bc940da0c710b0e5a7393e", null ],
-      [ "GetBestPresentMode", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#ac01356957b4cfc44060dc3adf071eecb", null ],
-      [ "Capabilities", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#a497b156087d82550b32ca99c18e357a6", null ],
-      [ "Formats", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#a178e1eecd43f691102ba9f6f56161826", null ],
-      [ "PresentModes", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#acf50374bf2ed6e17282bfabc8f46754c", null ]
-    ] ],
     [ "Framebuffer", "classvpr_1_1_framebuffer.html", [
       [ "Framebuffer", "classvpr_1_1_framebuffer.html#a57bd522a4ff0c33d9796be19408b3e6d", null ],
       [ "~Framebuffer", "classvpr_1_1_framebuffer.html#a10b367c640cfc74accc13409e6992711", null ],
@@ -69,6 +60,5 @@ var group___rendering =
       [ "handle", "classvpr_1_1_renderpass.html#aeb5950eb1e8e1adebd502940533bdc51", null ],
       [ "impl", "classvpr_1_1_renderpass.html#a99dd8bab237385dc139d3f75585371cc", null ],
       [ "parent", "classvpr_1_1_renderpass.html#aa0ccc9fb68cf722909ac3d97b5203a0f", null ]
-    ] ],
-    [ "info", "group___rendering.html#ga53b8864a06225b92d1a4cf46ea333fbb", null ]
+    ] ]
 ];

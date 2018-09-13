@@ -153,5 +153,15 @@ var group___core =
       [ "vkSetDebugUtilsObjectName", "group___core.html#a5b6d7096f776b8666bbfedfacb45eeac", null ],
       [ "vkSetDebugUtilsObjectTag", "group___core.html#ac46e3a6b7520cc394f858c7e4929a587", null ],
       [ "vkSubmitDebugUtilsMessage", "group___core.html#a318aa2ff1139e618c89725fa17664737", null ]
-    ] ]
+    ] ],
+    [ "SwapchainInfo", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html", [
+      [ "SwapchainInfo", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#aa3a0386fc6544df198499eecac30bc4a", null ],
+      [ "ChooseSwapchainExtent", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#ad518f786e370f0e0a026b8cdab3daff8", null ],
+      [ "GetBestFormat", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#abb595502d0bc940da0c710b0e5a7393e", null ],
+      [ "GetBestPresentMode", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#ac01356957b4cfc44060dc3adf071eecb", null ],
+      [ "Capabilities", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#a497b156087d82550b32ca99c18e357a6", null ],
+      [ "Formats", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#a178e1eecd43f691102ba9f6f56161826", null ],
+      [ "PresentModes", "structvpr_1_1_swapchain_impl_1_1_swapchain_info.html#acf50374bf2ed6e17282bfabc8f46754c", null ]
+    ] ],
+    [ "info", "group___core.html#ga53b8864a06225b92d1a4cf46ea333fbb", null ]
 ];

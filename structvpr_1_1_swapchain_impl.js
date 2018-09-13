@@ -18,7 +18,7 @@ var structvpr_1_1_swapchain_impl =
     [ "imageCount", "structvpr_1_1_swapchain_impl.html#a16472b860e896076f573b5133b16ef55", null ],
     [ "images", "structvpr_1_1_swapchain_impl.html#a041a418f78d24b287337e76f21d54d0a", null ],
     [ "imageViews", "structvpr_1_1_swapchain_impl.html#a8970acfa427e8dfa0dc92680438f5d12", null ],
-    [ "info", "group___rendering.html#ga53b8864a06225b92d1a4cf46ea333fbb", null ],
+    [ "info", "group___core.html#ga53b8864a06225b92d1a4cf46ea333fbb", null ],
     [ "oldHandle", "structvpr_1_1_swapchain_impl.html#ae2165262ed1575747787c0c89987e3b8", null ],
     [ "presentMode", "structvpr_1_1_swapchain_impl.html#a1a07f34fccc495abbacbcb9304f4991c", null ],
     [ "surface", "structvpr_1_1_swapchain_impl.html#a7ac3954e02fcc657d549df73501050d5", null ],
