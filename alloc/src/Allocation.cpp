@@ -26,6 +26,7 @@ namespace vpr {
 #else
         std::variant<blockAllocation, privateAllocation> typeData;
 #endif
+        void* userData;
     };
 
     Allocation::Allocation() : Size(0), Alignment(0), impl(std::make_unique<AllocationImpl>()) {}
@@ -60,6 +61,7 @@ namespace vpr {
         Size = alloc_size;
         Alignment = alignment;
         impl->typeData = std::move(alloc);
+        impl->userData = user_data;
     }
 
     void Allocation::Update(MemoryBlock * new_parent_block, const VkDeviceSize & new_offset) {
@@ -80,6 +82,7 @@ namespace vpr {
         p_alloc.PersistentlyMapped = persistently_mapped;
         p_alloc.MappedData = mapped_data;
         impl->typeData = std::move(p_alloc);
+        impl->userData = user_data;
     }
 
     void Allocation::Map(const VkDeviceSize& size_to_map, const VkDeviceSize& offset_to_map_at, void** address_to_map_to) const {

@@ -50,7 +50,7 @@ namespace vpr {
     }
 
     ShaderModule::ShaderModule(const VkDevice& device, const VkShaderStageFlagBits& stages, const uint32_t* binary_source, const uint32_t& len) :
-        parent(device), handle(VK_NULL_HANDLE) {
+        parent(device), handle(VK_NULL_HANDLE), fileLoader(nullptr) {
 
         createInfo = vk_shader_module_create_info_base;
         createInfo.codeSize = len;
@@ -67,7 +67,8 @@ namespace vpr {
     }
 
     ShaderModule::ShaderModule(const VkDevice& device, const char * filename, VkPipelineShaderStageCreateInfo & create_info) : 
-        pipelineInfo(create_info), createInfo(vk_shader_module_create_info_base), parent(device), handle(VK_NULL_HANDLE) {
+        pipelineInfo(create_info), createInfo(vk_shader_module_create_info_base), parent(device), handle(VK_NULL_HANDLE),
+        fileLoader(std::make_unique<ShaderCodeFileLoader>()) {
         
         std::vector<uint32_t> binary_src;
         fileLoader->LoadCodeFromFile(filename, binary_src, createInfo);
