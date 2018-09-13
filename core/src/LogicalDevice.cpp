@@ -76,7 +76,7 @@ namespace vpr {
     }
 
     bool Device::HasDedicatedComputeQueues() const {
-        if (QueueFamilyIndices.Compute != QueueFamilyIndices.Graphics) {
+        if (queueFamilyIndices.Compute != queueFamilyIndices.Graphics) {
             return true;
         }
         return false;
@@ -118,37 +118,37 @@ namespace vpr {
 
     void Device::checkSurfaceSupport(const VkSurfaceKHR& surf) {
         VkBool32 supported;
-        vkGetPhysicalDeviceSurfaceSupportKHR(parent->vkHandle(), QueueFamilyIndices.Present, surf, &supported);
+        vkGetPhysicalDeviceSurfaceSupportKHR(parent->vkHandle(), queueFamilyIndices.Present, surf, &supported);
         assert(supported);
     }
 
     VkQueue Device::GraphicsQueue(const uint32_t & idx) const{
-        assert(idx < NumGraphicsQueues);
+        assert(idx < numGraphicsQueues);
         VkQueue result;
-        vkGetDeviceQueue(vkHandle(), QueueFamilyIndices.Graphics, idx, &result);
+        vkGetDeviceQueue(vkHandle(), queueFamilyIndices.Graphics, idx, &result);
         return result;
     }
 
     VkQueue Device::TransferQueue(const uint32_t & idx) const{
         static bool logged_warning = false;
-        if ((QueueFamilyIndices.Transfer == QueueFamilyIndices.Graphics) && !logged_warning) {
+        if ((queueFamilyIndices.Transfer == queueFamilyIndices.Graphics) && !logged_warning) {
             LOG(WARNING) << "Retrieving queue that supports transfer ops, but isn't dedicated transfer queue. This warning is only issued once - but retrieval is likely occuring multiple times.";
             logged_warning = true;
         }
         VkQueue result;
-        vkGetDeviceQueue(vkHandle(), QueueFamilyIndices.Transfer, idx, &result);
+        vkGetDeviceQueue(vkHandle(), queueFamilyIndices.Transfer, idx, &result);
         return result;
 
     }
 
     VkQueue Device::ComputeQueue(const uint32_t & idx) const{
         static bool logged_warning = false;
-        if ((QueueFamilyIndices.Compute == QueueFamilyIndices.Graphics) && !logged_warning) {
+        if ((queueFamilyIndices.Compute == queueFamilyIndices.Graphics) && !logged_warning) {
             LOG(WARNING) << "Retrieving queue that supports compute ops, but isn't dedicated compute queue. This warning is only issued once - but retrieval is likely occuring multiple times.";
             logged_warning = true;
         }
         VkQueue result;
-        vkGetDeviceQueue(vkHandle(), QueueFamilyIndices.Compute, idx, &result);
+        vkGetDeviceQueue(vkHandle(), queueFamilyIndices.Compute, idx, &result);
         return result;
 
     }
@@ -160,9 +160,9 @@ namespace vpr {
             throw std::runtime_error("Requested unsuported queue family (Sparse Binding)");
         }
 
-        LOG_IF(QueueFamilyIndices.Compute == QueueFamilyIndices.Graphics, INFO) << "Retrieving queue that supports sparse binding, but isn't dedicated sparse binding queue.";
+        LOG_IF(queueFamilyIndices.Compute == queueFamilyIndices.Graphics, INFO) << "Retrieving queue that supports sparse binding, but isn't dedicated sparse binding queue.";
         VkQueue result;
-        vkGetDeviceQueue(handle, QueueFamilyIndices.SparseBinding, idx, &result);
+        vkGetDeviceQueue(handle, queueFamilyIndices.SparseBinding, idx, &result);
         return result;
 
     }
@@ -242,7 +242,7 @@ namespace vpr {
             idx = parent->GetQueueFamilyIndex(VkQueueFlagBits(VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_TRANSFER_BIT));
             if (idx == std::numeric_limits<uint32_t>::max()) {
                 LOG(WARNING) << "Couldn't find a generalized queue supporting transfer and graphics operations: just returning a graphics queue.";
-                idx = QueueFamilyIndices.Graphics;
+                idx = queueFamilyIndices.Graphics;
             }
         }
 
@@ -252,6 +252,26 @@ namespace vpr {
 
     }
 
+    const uint32_t& Device::NumGraphicsQueues() const noexcept {
+        return numGraphicsQueues;
+    }
+
+    const uint32_t& Device::NumComputeQueues() const noexcept {
+        return numComputeQueues;
+    }
+
+    const uint32_t& Device::NumTransferQueues() const noexcept {
+        return numTransferQueues;
+    }
+
+    const uint32_t& Device::NumSparseBindingQueues() const noexcept {
+        return numSparseBindingQueues;
+    }
+
+    const vkQueueFamilyIndices& Device::QueueFamilyIndices() const noexcept {
+        return queueFamilyIndices;
+    }
+    
     void Device::create(const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) {
 
         createInfo = vk_device_create_info_base;
@@ -325,71 +345,71 @@ namespace vpr {
     }
 
     void Device::setupGraphicsQueues() {
-        QueueFamilyIndices.Graphics = parent->GetQueueFamilyIndex(VK_QUEUE_GRAPHICS_BIT);
+        queueFamilyIndices.Graphics = parent->GetQueueFamilyIndex(VK_QUEUE_GRAPHICS_BIT);
         auto create_info = setupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_GRAPHICS_BIT));
-        create_info.queueFamilyIndex = QueueFamilyIndices.Graphics;
-        NumGraphicsQueues = 1;
-        create_info.queueCount = NumGraphicsQueues;
-        queue_priorities.graphics = std::vector<float>(NumGraphicsQueues, 1.0f);
+        create_info.queueFamilyIndex = queueFamilyIndices.Graphics;
+        numGraphicsQueues = 1;
+        create_info.queueCount = numGraphicsQueues;
+        queue_priorities.graphics = std::vector<float>(numGraphicsQueues, 1.0f);
         create_info.pQueuePriorities = queue_priorities.graphics.data();
         dataMembers->queueInfos.insert(std::make_pair(VK_QUEUE_GRAPHICS_BIT, create_info));
     }
 
     void Device::setupComputeQueues() {
-        QueueFamilyIndices.Compute = parent->GetQueueFamilyIndex(VK_QUEUE_COMPUTE_BIT);
-        if (QueueFamilyIndices.Compute != QueueFamilyIndices.Graphics) {
+        queueFamilyIndices.Compute = parent->GetQueueFamilyIndex(VK_QUEUE_COMPUTE_BIT);
+        if (queueFamilyIndices.Compute != queueFamilyIndices.Graphics) {
             auto compute_info = setupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_COMPUTE_BIT));
-            compute_info.queueFamilyIndex = QueueFamilyIndices.Compute;
-            NumComputeQueues = compute_info.queueCount;
-            compute_info.queueCount = NumComputeQueues;
-            queue_priorities.compute = std::vector<float>(NumComputeQueues, 1.0f);
+            compute_info.queueFamilyIndex = queueFamilyIndices.Compute;
+            numComputeQueues = compute_info.queueCount;
+            compute_info.queueCount = numComputeQueues;
+            queue_priorities.compute = std::vector<float>(numComputeQueues, 1.0f);
             compute_info.pQueuePriorities = queue_priorities.compute.data();
             dataMembers->queueInfos.insert(std::make_pair(VK_QUEUE_COMPUTE_BIT, compute_info));
         }
         else {
             auto queue_properties = parent->GetQueueFamilyProperties(VK_QUEUE_COMPUTE_BIT);
             if (queue_properties.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
-                QueueFamilyIndices.Compute = QueueFamilyIndices.Graphics;
-                NumComputeQueues = NumGraphicsQueues;
+                queueFamilyIndices.Compute = queueFamilyIndices.Graphics;
+                numComputeQueues = numGraphicsQueues;
 
             }
         }
     }
 
     void Device::setupTransferQueues() {
-        QueueFamilyIndices.Transfer = parent->GetQueueFamilyIndex(VK_QUEUE_TRANSFER_BIT);
-        if (QueueFamilyIndices.Transfer != QueueFamilyIndices.Graphics) {
+        queueFamilyIndices.Transfer = parent->GetQueueFamilyIndex(VK_QUEUE_TRANSFER_BIT);
+        if (queueFamilyIndices.Transfer != queueFamilyIndices.Graphics) {
             auto transfer_info = setupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_TRANSFER_BIT));
-            transfer_info.queueFamilyIndex = QueueFamilyIndices.Transfer;
-            NumTransferQueues = transfer_info.queueCount;
-            queue_priorities.transfer = std::vector<float>(NumTransferQueues, 1.0f);
+            transfer_info.queueFamilyIndex = queueFamilyIndices.Transfer;
+            numTransferQueues = transfer_info.queueCount;
+            queue_priorities.transfer = std::vector<float>(numTransferQueues, 1.0f);
             transfer_info.pQueuePriorities = queue_priorities.transfer.data();
             dataMembers->queueInfos.insert(std::make_pair(VK_QUEUE_TRANSFER_BIT, transfer_info));
         }
         else {
             auto queue_properties = parent->GetQueueFamilyProperties(VK_QUEUE_TRANSFER_BIT);
             if (queue_properties.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
-                QueueFamilyIndices.Transfer = QueueFamilyIndices.Graphics;
-                NumTransferQueues = NumGraphicsQueues;
+                queueFamilyIndices.Transfer = queueFamilyIndices.Graphics;
+                numTransferQueues = numGraphicsQueues;
             }
         }
     }
 
     void Device::setupSparseBindingQueues() {
-        QueueFamilyIndices.SparseBinding = parent->GetQueueFamilyIndex(VK_QUEUE_SPARSE_BINDING_BIT);
-        if ((QueueFamilyIndices.SparseBinding != QueueFamilyIndices.Graphics) && (QueueFamilyIndices.SparseBinding != std::numeric_limits<uint32_t>::max())) {
+        queueFamilyIndices.SparseBinding = parent->GetQueueFamilyIndex(VK_QUEUE_SPARSE_BINDING_BIT);
+        if ((queueFamilyIndices.SparseBinding != queueFamilyIndices.Graphics) && (queueFamilyIndices.SparseBinding != std::numeric_limits<uint32_t>::max())) {
             auto sparse_info = setupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT));
-            sparse_info.queueFamilyIndex = QueueFamilyIndices.SparseBinding;
-            NumSparseBindingQueues = sparse_info.queueCount;
-            queue_priorities.sparse_binding = std::vector<float>(NumSparseBindingQueues, 1.0f);
+            sparse_info.queueFamilyIndex = queueFamilyIndices.SparseBinding;
+            numSparseBindingQueues = sparse_info.queueCount;
+            queue_priorities.sparse_binding = std::vector<float>(numSparseBindingQueues, 1.0f);
             sparse_info.pQueuePriorities = queue_priorities.sparse_binding.data();
             dataMembers->queueInfos.insert(std::make_pair(VK_QUEUE_SPARSE_BINDING_BIT, sparse_info));
         }
         else {
             auto queue_properties = parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT);
             if (queue_properties.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
-                QueueFamilyIndices.SparseBinding = QueueFamilyIndices.Graphics;
-                NumSparseBindingQueues = NumGraphicsQueues;
+                queueFamilyIndices.SparseBinding = queueFamilyIndices.Graphics;
+                numSparseBindingQueues = numGraphicsQueues;
             }
         }
     }
@@ -401,7 +421,7 @@ namespace vpr {
         for (uint32_t i = 0; i < 3; ++i) {
             vkGetPhysicalDeviceSurfaceSupportKHR(parent->vkHandle(), i, surface, &present_support);
             if (present_support) {
-                QueueFamilyIndices.Present = i;
+                queueFamilyIndices.Present = i;
                 break;
             }
         }

@@ -35,7 +35,7 @@ namespace vpr {
         Device& operator=(Device&&) = delete;
     public:
 
-        Device(const Instance* instance, const PhysicalDevice* p_device, VkSurfaceKHR surface = VK_NULL_HANDLE, const VprExtensionPack* extensions = nullptr, const char* const* layer_names = nullptr, const uint32_t layer_count = 0);
+        Device(const Instance* instance, const PhysicalDevice* p_device, VkSurfaceKHR surface = VK_NULL_HANDLE, const VprExtensionPack* extensions = nullptr, const         char* const* layer_names = nullptr, const uint32_t layer_count = 0);
         ~Device();
 
         const VkDevice& vkHandle() const;
@@ -52,7 +52,9 @@ namespace vpr {
         */
         VkQueue GeneralQueue(const uint32_t& idx = 0) const;
 
-        // Attempts to find queue that only does requested operation first, then returns omni-purpose queues.
+        /* Note: While most hardware presents support fpr multiple graphics queues, this is almost certainly not the actual case. 
+         * Instead, it is likely the driver is doing some kind of multiplexing of it's singular graphics queue. By default
+        */
         VkQueue GraphicsQueue(const uint32_t & idx = 0) const;
         VkQueue TransferQueue(const uint32_t & idx = 0) const;
         VkQueue ComputeQueue(const uint32_t & idx = 0) const;
@@ -87,14 +89,13 @@ namespace vpr {
         VkPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties() const noexcept;
         const VkDebugUtilsFunctions& DebugUtilsHandler() const;
         
-        uint32_t NumGraphicsQueues = 0;
-        uint32_t NumComputeQueues = 0;
-        uint32_t NumTransferQueues = 0;
-        uint32_t NumSparseBindingQueues = 0;
-        vkQueueFamilyIndices QueueFamilyIndices;
+        const uint32_t& NumGraphicsQueues() const noexcept;
+        const uint32_t& NumComputeQueues() const noexcept;
+        const uint32_t& NumTransferQueues() const noexcept;
+        const uint32_t& NumSparseBindingQueues() const noexcept;
+        const vkQueueFamilyIndices& QueueFamilyIndices() const noexcept;
 
     private:
-
         void verifyPresentationSupport();        
         void checkSurfaceSupport(const VkSurfaceKHR& surf);
         VkDeviceQueueCreateInfo setupQueueFamily(const VkQueueFamilyProperties& family_properties);
@@ -108,6 +109,11 @@ namespace vpr {
         void setupSparseBindingQueues();
         void setupDebugUtilsHandler();
     
+        uint32_t numGraphicsQueues{ 0 };
+        uint32_t numComputeQueues{ 0 };
+        uint32_t numTransferQueues{ 0 };
+        uint32_t numSparseBindingQueues{ 0 };
+        vkQueueFamilyIndices queueFamilyIndices;
         VkDevice handle{ VK_NULL_HANDLE };
         VkDeviceCreateInfo createInfo{ };
         VkDebugUtilsFunctions* debugUtilsHandler{ nullptr };
