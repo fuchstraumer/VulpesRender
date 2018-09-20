@@ -34,10 +34,10 @@ namespace vpr {
         }
    
         std::string fname = cache_path.string() + std::to_string(hash_id) + std::string(".vkdat");
-#ifdef __APPLE_CC__
-        filename = strdup(fname.c_str());
-#else
+#ifdef _MSC_VER
         filename = _strdup(fname.c_str());
+#else
+        filename = strdup(fname.c_str());
 #endif
         // Attempts to load cache from file: if failed, doesn't matter much.
         LoadCacheFromFile(fname.c_str());
@@ -134,10 +134,10 @@ namespace vpr {
                 LOG(INFO) << "Found valid pipeline cache data with ID # " << std::to_string(hashID) << " .";
                 std::string cache_str((std::istreambuf_iterator<char>(cache)), std::istreambuf_iterator<char>());
                 uint32_t cache_size = static_cast<uint32_t>(cache_str.size() * sizeof(char));
-#ifdef __APPLE_CC__
-                loadedData = strdup(cache_str.c_str());
-#else
+#ifdef _MSC_VER
                 loadedData = _strdup(cache_str.c_str());
+#else
+                loadedData = strdup(cache_str.c_str());
 #endif
                 createInfo.initialDataSize = cache_size;
                 createInfo.pInitialData = loadedData;
