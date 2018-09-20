@@ -84,10 +84,10 @@ namespace vpr {
         *num_extensions = extensionHandler->extensionStrings.size();
         if (extensions != nullptr) {
             for (size_t i = 0; i < *num_extensions; ++i) {
-#ifdef __APPLE_CC__
-                extensions[i] = strdup(extensionHandler->extensionStrings[i]);
-#else
+#ifdef _MSC_VER
                 extensions[i] = _strdup(extensionHandler->extensionStrings[i]);
+#else
+                extensions[i] = strdup(extensionHandler->extensionStrings[i]);
 #endif
             }
         }
