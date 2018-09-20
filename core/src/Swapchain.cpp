@@ -275,8 +275,8 @@ namespace vpr {
         createInfo.minImageCount = imageCount;
         createInfo.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
 
-        const uint32_t indices[2] = { static_cast<uint32_t>(device->QueueFamilyIndices.Present), static_cast<uint32_t>(device->QueueFamilyIndices.Graphics) };
-        if ((device->QueueFamilyIndices.Present != device->QueueFamilyIndices.Graphics) && (device->QueueFamilyIndices.Present != std::numeric_limits<uint32_t>::max())) {
+        const uint32_t indices[2] = { static_cast<uint32_t>(device->QueueFamilyIndices().Present), static_cast<uint32_t>(device->QueueFamilyIndices().Graphics) };
+        if ((device->QueueFamilyIndices().Present != device->QueueFamilyIndices().Graphics) && (device->QueueFamilyIndices().Present != std::numeric_limits<uint32_t>::max())) {
             createInfo.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
             createInfo.queueFamilyIndexCount = 2;
             createInfo.pQueueFamilyIndices = indices;
