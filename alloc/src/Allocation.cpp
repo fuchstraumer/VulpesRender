@@ -11,7 +11,6 @@ namespace vpr {
 
     struct AllocationImpl {
         struct blockAllocation {
-            blockAllocation() : ParentBlock(nullptr), Offset(std::numeric_limits<VkDeviceSize>::max()) {}
             MemoryBlock* ParentBlock;
             VkDeviceSize Offset;
         };
