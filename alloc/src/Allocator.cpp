@@ -114,7 +114,8 @@ namespace vpr {
         VkMemoryRequirements memreqs;
         AllocationRequirements details2 = details;
         impl->getImageMemReqs(image_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
-        VkResult result = AllocateMemory(memreqs, details2, alloc_type, dest_allocation);  
+        VkResult result = AllocateMemory(memreqs, details2, alloc_type, dest_allocation);
+        VkAssert(result);
         vkBindImageMemory(impl->logicalDevice, image_handle, dest_allocation.Memory(), dest_allocation.Offset());
         return result;
     }
@@ -124,6 +125,7 @@ namespace vpr {
         AllocationRequirements details2 = details;
         impl->getBufferMemReqs(buffer_handle, memreqs, details2.requiresDedicatedKHR, details2.prefersDedicatedKHR);
         VkResult result = AllocateMemory(memreqs, details2, alloc_type, dest_allocation);
+        VkAssert(result);
         vkBindBufferMemory(impl->logicalDevice, buffer_handle, dest_allocation.Memory(), dest_allocation.Offset());
         return result;
     }
