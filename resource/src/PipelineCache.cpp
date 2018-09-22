@@ -1,7 +1,9 @@
 #include "vpr_stdafx.h"
 #include "PipelineCache.hpp"
 #include "easylogging++.h"
+#if !defined(VPR_BUILD_STATIC)
 INITIALIZE_EASYLOGGINGPP
+#endif
 #include "vkAssert.hpp"
 #ifdef __APPLE_CC__
 #include <boost/filesystem.hpp>

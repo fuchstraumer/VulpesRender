@@ -1,6 +1,8 @@
 #include "AllocatorImpl.hpp"
 #include "easylogging++.h"
+#if !defined(VPR_BUILD_STATIC)
 INITIALIZE_EASYLOGGINGPP
+#endif
 #include <sstream>
 
 namespace vpr {
