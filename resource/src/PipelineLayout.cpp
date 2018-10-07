@@ -29,15 +29,15 @@ namespace vpr {
         }
     }
 
-    void PipelineLayout::Create(const VkPushConstantRange * push_constants, const size_t num_push_constants) {
-        Create(push_constants, num_push_constants, nullptr, 0);
+    void PipelineLayout::Create(const size_t num_push_constants, const VkPushConstantRange * push_constants) {
+        Create(num_push_constants, push_constants, 0, nullptr);
     }
 
-    void PipelineLayout::Create(const VkDescriptorSetLayout * set_layouts, const size_t num_layouts) {
-        Create(nullptr, 0, set_layouts, num_layouts);
+    void PipelineLayout::Create(const size_t num_layouts, const VkDescriptorSetLayout * set_layouts) {
+        Create(0, nullptr, num_layouts, set_layouts);
     }
 
-    void PipelineLayout::Create(const VkPushConstantRange* ranges, const size_t num_ranges, const VkDescriptorSetLayout* set_layouts, const size_t num_layouts) {
+    void PipelineLayout::Create(const size_t num_ranges, const VkPushConstantRange* ranges, const size_t num_layouts, const VkDescriptorSetLayout* set_layouts) {
         VkPipelineLayoutCreateInfo createInfo = vk_pipeline_layout_create_info_base;
         createInfo = vk_pipeline_layout_create_info_base;
         createInfo.setLayoutCount = static_cast<uint32_t>(num_layouts);
