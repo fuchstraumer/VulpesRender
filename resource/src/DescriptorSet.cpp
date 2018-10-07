@@ -89,6 +89,21 @@ namespace vpr {
         });
     }
 
+    void DescriptorSet::AddSamplerBinding(const size_t & idx) {
+        impl->writeDescriptors.emplace(idx, VkWriteDescriptorSet{
+            VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+            nullptr,
+            handle, 
+            static_cast<uint32_t>(idx),
+            0,
+            1,
+            VK_DESCRIPTOR_TYPE_SAMPLER,
+            nullptr,
+            nullptr,
+            nullptr
+        });
+    }
+
     void DescriptorSet::Init(const VkDescriptorPool& parent_pool, const VkDescriptorSetLayout& set_layout) {
         allocate(parent_pool, set_layout);
         update();

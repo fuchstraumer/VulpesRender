@@ -29,6 +29,8 @@ namespace vpr {
         /* Add info for a texel buffer. */
         void AddDescriptorInfo(VkDescriptorBufferInfo info, const VkBufferView& view, const VkDescriptorType& type, const size_t& idx);
 
+        void AddSamplerBinding(const size_t& idx);
+
         /**Call after all descriptor bindings and infos required have been added, 
         *  and make sure you have enough space in the given pool for all of these resources. 
         */
