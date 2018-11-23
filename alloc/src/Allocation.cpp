@@ -13,27 +13,25 @@ namespace vpr {
 
     struct AllocationImpl {
 
-        AllocationImpl() = default;
-        AllocationImpl(const AllocationImpl& other) : typeData(other.typeData), userData(other.userData) {}
+        AllocationImpl() : typeData{ blockAllocation{} } {}
 
         struct blockAllocation {
-            blockAllocation() : ParentBlock{ nullptr }, Offset{ std::numeric_limits<VkDeviceSize>::max() } {}
-            MemoryBlock* ParentBlock;
-            VkDeviceSize Offset;
+            MemoryBlock* ParentBlock{ nullptr };
+            VkDeviceSize Offset{ std::numeric_limits<VkDeviceSize>::max() };
         };
 
         struct privateAllocation {
-            uint32_t MemoryTypeIdx;
-            VkDeviceMemory DvcMemory;
-            bool PersistentlyMapped;
-            void* MappedData;
+            uint32_t MemoryTypeIdx{ std::numeric_limits<uint32_t>::max() };
+            VkDeviceMemory DvcMemory{ VK_NULL_HANDLE };
+            bool PersistentlyMapped{ false };
+            void* MappedData{ nullptr };
         };
 #if defined(__APPLE_CC__) || defined(__linux__)
         boost::variant<blockAllocation, privateAllocation> typeData;
 #else
         std::variant<blockAllocation, privateAllocation> typeData;
 #endif
-        void* userData;
+        void* userData{ nullptr };
     };
 
     Allocation::Allocation() : Size(0), Alignment(0), impl(std::make_unique<AllocationImpl>()) {}
@@ -62,12 +60,9 @@ namespace vpr {
     }
 
     void Allocation::Init(MemoryBlock * parent_block, const VkDeviceSize & offset, const VkDeviceSize & alignment, const VkDeviceSize & alloc_size, void* user_data) {
-        AllocationImpl::blockAllocation alloc;
-        alloc.ParentBlock = parent_block;
-        alloc.Offset = offset;
         Size = alloc_size;
         Alignment = alignment;
-        impl->typeData = std::move(alloc);
+        impl->typeData = AllocationImpl::blockAllocation{ parent_block, offset };
         impl->userData = user_data;
     }
 
