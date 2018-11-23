@@ -5,6 +5,8 @@ PROJECT(vpr)
 OPTION(BUILD_DYNAMIC_LIBRARY "Build VPR as a dynamic library" ON)
 OPTION(VERBOSE_LOGGING "Enable extra output from easyloggingpp" OFF)
 
+SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 SET(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation")
 SET(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs")
 SET(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs")
@@ -50,6 +52,3 @@ ADD_SUBDIRECTORY(core)
 ADD_SUBDIRECTORY(render)
 ADD_SUBDIRECTORY(resource)
 ADD_SUBDIRECTORY(sync)
-
-
-

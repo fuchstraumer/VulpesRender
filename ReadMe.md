@@ -24,7 +24,7 @@ This also means the old docs are broken, so I'll have to find a time and way to 
 
 The primary dependencies, glfw and easyloggingpp, are included as submodules and will need to be cloned before building. If building to a shared library, make sure that `BUILD_SHARED_LIBS` is enabled as glfw behaves oddly when linked to statically then used across multiple shared libraries (unsurprisingly).
 
-For Mac OSX, `boost::variant` is required for the `variant` used for the `AllocatorImpl` struct. Using brew to acquire this is your best bet, as `FIND_BOOST` will then be able to find it and link to it just fine. This is primarily intended for usage with XCode: the AppleClang version used in XCode doesn't yet fully support all of C++17, but if you have a user install of a recent clang release you won't end up needing to use boost at all.
+For Mac OSX and Ubuntu, `boost::variant` is required for the `variant` used for the `AllocatorImpl` struct. On Mac OSX, using brew to acquire this is your best bet, as `FIND_BOOST` will then be able to find it and link to it just fine. This is primarily intended for usage with XCode: the AppleClang version used in XCode doesn't yet fully support all of C++17, and on Ubuntu I was having issues with the library implementation of `std::variant` unfortunately. On these platforms, having at least Boost 1.62 installed should be good enough to work with.
 
 ### easyloggingpp and Shared Libraries
 

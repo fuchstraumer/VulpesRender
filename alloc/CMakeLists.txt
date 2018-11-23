@@ -20,9 +20,9 @@ TARGET_INCLUDE_DIRECTORIES(vpr_alloc PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
 
-IF(APPLE)
+IF(UNIX)
 # Needed to support Boost variant
-set(boost_min_ver 1.67.0)
+set(boost_min_ver 1.62.0)
 find_package(Boost ${boost_min_ver})
 ENDIF()
 
