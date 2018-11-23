@@ -1,13 +1,23 @@
 #include "SurfaceKHR.hpp"
 #include "Instance.hpp"
+#ifndef __ANDROID__
 #define GLFW_INCLUDE_VULKAN
 #include "GLFW/glfw3.h"
+#else 
+
+#endif
 #include "vkAssert.hpp"
 #include <utility>
 
 namespace vpr {
 
-    SurfaceKHR::SurfaceKHR(const Instance* _parent, VkPhysicalDevice _device, GLFWwindow* _window) : parent(_parent), window(_window), device(_device), handle(VK_NULL_HANDLE) {
+#ifndef __ANDOIRD__
+    using platform_window_type = GLFWwindow;
+#else
+    using platform_window_type = ANativeWindow;
+#endif
+
+    SurfaceKHR::SurfaceKHR(const Instance* _parent, VkPhysicalDevice _device, void* _window) : parent(_parent), window(reinterpret_cast<platform_window_type*>(_window)), device(_device), handle(VK_NULL_HANDLE) {
         create();
     }
 
@@ -35,6 +45,7 @@ namespace vpr {
         return handle;
     }
 
+#ifndef __ANDROID__
     void SurfaceKHR::create() {
         VkResult err = glfwCreateWindowSurface(parent->vkHandle(), window, nullptr, &handle);
         VkAssert(err);
@@ -42,6 +53,20 @@ namespace vpr {
             throw std::runtime_error("Surfaces are not supported on current physical device!");
         }
     }
+#else
+    void SurfaceKHR::create() {
+        VkAndroidSurfaceCreateInfoKHR surface_create_info{
+            VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR,
+            nullptr,
+            window
+        };
+        VkResult err = vkCreateAndroidSurfaceKHR(instance, &surface_create_info, nullptr, &handle);
+        VkAssert(err);
+        if (!VerifyPresentationSupport(device, handle)) {
+            throw std::runtime_error("Surfaces are not support on the current physical device!");
+        }
+    }
+#endif
 
     void SurfaceKHR::destroy() {
         if (handle != VK_NULL_HANDLE) {

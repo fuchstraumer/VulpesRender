@@ -17,7 +17,7 @@ namespace vpr {
         SurfaceKHR& operator=(const SurfaceKHR&) = delete;
     public:
 
-        SurfaceKHR(const Instance* _parent, VkPhysicalDevice physical_device, GLFWwindow* window);
+        SurfaceKHR(const Instance* _parent, VkPhysicalDevice physical_device, void* window);
         SurfaceKHR(SurfaceKHR&& other) noexcept;
         SurfaceKHR& operator=(SurfaceKHR&& other) noexcept;
         ~SurfaceKHR();
@@ -31,11 +31,14 @@ namespace vpr {
 
         void create();
         void destroy();
-
-        GLFWwindow* window;
-        const Instance* parent;
-        VkPhysicalDevice device;
-        VkSurfaceKHR handle;
+#ifndef __ANDROID__
+        GLFWwindow* window{ nullptr };
+#else
+        struct ANativeWindow* window{ nullptr };
+#endif 
+        const Instance* parent{ nullptr };
+        VkPhysicalDevice device{ VK_NULL_HANDLE };
+        VkSurfaceKHR handle{ VK_NULL_HANDLE };
     };
 
 

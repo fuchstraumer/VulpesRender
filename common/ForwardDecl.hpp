@@ -21,22 +21,19 @@ namespace vpr {
     class Framebuffer;
     class Renderpass;
     class CommandPool;
-    class TransferPool;
     class GraphicsPipeline;
     class PipelineCache;
     class DescriptorSet;
     class DescriptorPool;
     class PipelineLayout;
-    class DepthStencil;
     class SurfaceKHR;
     class DescriptorSetLayout;
     class Sampler;
     class Fence;
     class Semaphore;
-    class Event;
-    class Sampler;
     class Queue;
     struct GraphicsPipelineInfo;
     struct VprExtensionPack;
 }
+
 #endif // !VULPES_VK_FORWARD_DECL_H
