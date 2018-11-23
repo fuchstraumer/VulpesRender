@@ -1,6 +1,5 @@
 #include "vpr_stdafx.h"
 #include "DescriptorPool.hpp"
-#include "DescriptorSet.hpp"
 #include "vkAssert.hpp"
 #include "CreateInfoBase.hpp"
 #include <vector>

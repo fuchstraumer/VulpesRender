@@ -1,7 +1,4 @@
-#include "vpr_stdafx.h"
 #include "DescriptorSet.hpp"
-#include "DescriptorPool.hpp"
-#include "DescriptorSetLayout.hpp"
 #include "vkAssert.hpp"
 #include "CreateInfoBase.hpp"
 #include <vector>
@@ -10,6 +7,8 @@
 namespace vpr {
 
     struct DescriptorSetImpl {
+        DescriptorSetImpl() = default;
+        ~DescriptorSetImpl() = default;
         VkDescriptorPool pool{ VK_NULL_HANDLE };
         VkDescriptorSetLayout setLayout{ VK_NULL_HANDLE };
         bool updated{ false };

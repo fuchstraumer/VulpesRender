@@ -6,8 +6,6 @@
 
 namespace vpr {
 
-    struct DescriptorSetImpl;
-
     /** RAII wrapper around a descriptor set, simplifying adding individual descriptor bindings for whatever stage they're required at.
     *   \ingroup Resources
     */
@@ -50,7 +48,7 @@ namespace vpr {
 
         VkDevice device{ VK_NULL_HANDLE };
         mutable VkDescriptorSet handle{ VK_NULL_HANDLE };
-        mutable std::unique_ptr<DescriptorSetImpl> impl{ nullptr };
+        mutable std::unique_ptr<struct DescriptorSetImpl> impl{ nullptr };
     };
 
 }
