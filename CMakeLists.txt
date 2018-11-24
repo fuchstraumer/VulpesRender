@@ -4,6 +4,7 @@ PROJECT(vpr)
 
 OPTION(BUILD_DYNAMIC_LIBRARY "Build VPR as a dynamic library" ON)
 OPTION(VERBOSE_LOGGING "Enable extra output from easyloggingpp" OFF)
+OPTION(VPR_BUILD_ANDROID "Build for Android platform" OFF)
 
 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
