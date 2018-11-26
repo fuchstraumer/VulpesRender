@@ -8,8 +8,10 @@
 #if !defined(VPR_BUILD_STATIC)
 INITIALIZE_EASYLOGGINGPP
 #endif
+#ifndef __ANDROID__
 #define GLFW_INCLUDE_VULKAN
 #include "GLFW/glfw3.h"
+#endif
 #include <vulkan/vulkan.h>
 #include <string>
 
@@ -32,6 +34,7 @@ namespace vpr {
         Instance::instance_layers validationLayers; 
         void extensionSetup(const VprExtensionPack* extensions);
         void prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output);
+        void addPlatformRequiredExtensions(std::vector<const char*>& output) const;
         void prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output);
         void extensionCheck(std::vector<const char*>& extensions, bool throw_on_error) const;
         void checkOptionalExtensions(std::vector<const char*>& optional_extensions) const;
@@ -43,11 +46,14 @@ namespace vpr {
     Instance::Instance(instance_layers layers_flags, const VkApplicationInfo * info, const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) :
         extensionHandler(new InstanceExtensionHandler(layers_flags)), createInfo{ VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, nullptr } {
         VkApplicationInfo our_info = *info;
-            
+
+#ifndef __ANDROID__
+        // How could we do this on Android?
         if (!glfwVulkanSupported()) {
             LOG(ERROR) << "Vulkan is not supported on the current hardware!";
             throw std::runtime_error("Vulkan not supported!");
         }
+#endif //__ANDROID__
 
         extensionHandler->extensionSetup(extensions);
         createInfo.ppEnabledExtensionNames = extensionHandler->extensionStrings.data();
@@ -169,8 +175,8 @@ namespace vpr {
 
     }
 
-    void InstanceExtensionHandler::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) {
-
+#ifndef __ANDROID__
+    void InstanceExtensionHandler::addPlatformRequiredExtensions(std::vector<const char*>& output) const {
         uint32_t req_ext_cnt = 0;
         const char** req_ext_names = nullptr;
         req_ext_names = glfwGetRequiredInstanceExtensions(&req_ext_cnt);
@@ -179,6 +185,22 @@ namespace vpr {
         for (auto&& elem : glfw_required_extensions) {
             output.emplace_back(std::move(elem));
         }
+    }
+#else
+    void InstanceExtensionHandler::addPlatformRequiredExtensions(std::vector<const char*>& output) const {
+        constexpr static const char* ANDROID_EXTENSIONS[2]{
+            VK_KHR_SURFACE_EXTENSION_NAME,
+            VK_KHR_ANDROID_SURFACE_EXTENSION_NAME
+        };
+
+        for (size_t i = 0; i < 2; ++i) {
+            output.emplace_back(ANDROID_EXTENSIONS[i]);
+        }
+    }
+#endif
+
+    void InstanceExtensionHandler::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) {
+        addPlatformRequiredExtensions(output);
         
         if (extensions != nullptr) {
             if (extensions->RequiredExtensionNames != nullptr) {
