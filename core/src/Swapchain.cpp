@@ -157,20 +157,24 @@ namespace vpr {
     }
 
 #ifdef __ANDROID__
-    VkExtent2D getBestExtentPlatform(platform_window_type* window) {
+    VkExtent2D getBestExtentPlatform(platform_window_type* window, const VkSurfaceCapabilitiesKHR& Capabilities) {
         ANativeWindow* window_native = reinterpret_cast<ANativeWindow*>(window);
         int width = ANativeWindow_getWidth(window_native);
         int height = ANativeWindow_getHeight(window_native);
-        return VkExtent2D{ width, height };
+        VkExtent2D actual_extent{ width, height };
+        actual_extent.width = std::max(Capabilities.minImageExtent.width, std::min(Capabilities.maxImageExtent.width, actual_extent.width));
+        actual_extent.height = std::max(Capabilities.minImageExtent.height, std::min(Capabilities.maxImageExtent.height, actual_extent.height));
+        return actual_extent;
     }
 #else
-    VkExtent2D getBestExtentPlatform(platform_window_type* window) {
+    VkExtent2D getBestExtentPlatform(platform_window_type* window, const VkSurfaceCapabilitiesKHR& Capabilities) {
         int wx{ -1 };
         int wy{ -1 };
         glfwGetWindowSize(reinterpret_cast<GLFWwindow*>(window), &wx, &wy);
         VkExtent2D actual_extent = { static_cast<uint32_t>(wx), static_cast<uint32_t>(wy) };
         actual_extent.width = std::max(Capabilities.minImageExtent.width, std::min(Capabilities.maxImageExtent.width, actual_extent.width));
         actual_extent.height = std::max(Capabilities.minImageExtent.height, std::min(Capabilities.maxImageExtent.height, actual_extent.height));
+        return actual_extent;
     }
 #endif 
 
@@ -180,7 +184,7 @@ namespace vpr {
             return Capabilities.currentExtent;
         }
         else {
-            return getBestExtentPlatform(window);
+            return getBestExtentPlatform(window, Capabilities);
         }
 
     }
