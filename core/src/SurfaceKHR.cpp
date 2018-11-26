@@ -4,14 +4,14 @@
 #define GLFW_INCLUDE_VULKAN
 #include "GLFW/glfw3.h"
 #else 
-
+#include <vulkan/vulkan_android.h>
 #endif
 #include "vkAssert.hpp"
 #include <utility>
 
 namespace vpr {
 
-#ifndef __ANDOIRD__
+#ifndef __ANDROID__
     using platform_window_type = GLFWwindow;
 #else
     using platform_window_type = ANativeWindow;
@@ -58,9 +58,10 @@ namespace vpr {
         VkAndroidSurfaceCreateInfoKHR surface_create_info{
             VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR,
             nullptr,
+            0,
             window
         };
-        VkResult err = vkCreateAndroidSurfaceKHR(instance, &surface_create_info, nullptr, &handle);
+        VkResult err = vkCreateAndroidSurfaceKHR(parent->vkHandle(), &surface_create_info, nullptr, &handle);
         VkAssert(err);
         if (!VerifyPresentationSupport(device, handle)) {
             throw std::runtime_error("Surfaces are not support on the current physical device!");
