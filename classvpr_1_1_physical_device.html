@@ -53,12 +53,22 @@
             <li>
               Reference
               <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </div>
-<p>This class stores the relevant VkPhysicalDeviceProperties, VkPhysicalDeviceFeatures, and VkPhysicalDeviceMemoryProperties that can be freely queried from anywhere in the program. This can/should be used to check for limits on things like texture and buffer size, supported memory types, supported rendering modes, and supported texture types like cubemaps.</p><p>As each computer can have multiple physical devices, the class uses a simplistic scoring system to find the &quot;best&quot; hardware on the current system.</p>
+<p>This class stores the relevant VkPhysicalDeviceProperties, VkPhysicalDeviceFeatures, and VkPhysicalDeviceMemoryProperties that can be freely queried from anywhere in the program. This can/should be used to check for limits on things like texture and buffer size, supported memory types, supported rendering modes, and supported texture types like cubemaps.</p>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-dox">
+            <dt>
+              <span class="m-dox-wrap-bumper"><a href="#a31404c17e2cc00ed679f13eba689bb1a" class="m-dox">PhysicalDevice</a>(</span><span class="m-dox-wrap">const VkInstance&amp; instance_handle)</span>
+            </dt>
+            <dd>Automated setup - uses the given instance handle to find the &quot;best&quot; available GPU on a system.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-dox">
@@ -76,6 +86,13 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-dox-details" id="a31404c17e2cc00ed679f13eba689bb1a"><div>
+            <h3>
+              <span class="m-dox-wrap-bumper"> vpr::<wbr />PhysicalDevice::<wbr /></span><span class="m-dox-wrap"><span class="m-dox-wrap-bumper"><a href="#a31404c17e2cc00ed679f13eba689bb1a" class="m-dox-self">PhysicalDevice</a>(</span><span class="m-dox-wrap">const VkInstance&amp; instance_handle)</span></span>
+            </h3>
+            <p>Automated setup - uses the given instance handle to find the &quot;best&quot; available GPU on a system.</p>
+<p>This will prefer dedicated cards first, and uses some other parameters to &quot;score&quot; devices from there.</p>
+          </div></section>
           <section class="m-dox-details" id="ac374493c59bb13f5300d1c96b87b8380"><div>
             <h3>
               <span class="m-dox-wrap-bumper">uint32_t vpr::<wbr />PhysicalDevice::<wbr /></span><span class="m-dox-wrap"><span class="m-dox-wrap-bumper"><a href="#ac374493c59bb13f5300d1c96b87b8380" class="m-dox-self">GetMemoryTypeIdx</a>(</span><span class="m-dox-wrap">const uint32_t&amp; type_bitfield,

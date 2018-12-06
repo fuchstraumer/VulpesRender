@@ -54,11 +54,13 @@
               Reference
               <ul>
                 <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </div>
-<p>The VkInstanceCreateInfo struct passed to the constructor contains information about the current layers enabled, and which Vulkan <a href="classvpr_1_1_instance.html" class="m-dox">Instance</a> extensions to enable. By default, this should/will contain extensions required to support the creation of a window surface (VkSurfaceKHR).</p><p>This class also contains a Window object, which it is responsible for creating and destroying as necessary, along with a <a href="classvpr_1_1_physical_device.html" class="m-dox">PhysicalDevice</a> object. These can both be retrieved through the relevant methods.</p>
+<p>The VkInstanceCreateInfo struct passed to the constructor contains information about the current layers enabled, and which Vulkan <a href="classvpr_1_1_instance.html" class="m-dox">Instance</a> extensions to enable. By default, this should/will contain extensions required to support the creation of a window surface (done by calling a glfw function to retrieve required extensions on glfw-enabled platforms)</p>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-dox">
@@ -68,6 +70,38 @@
               <a href="#ac131eec23cc4eba7cd68bc67de9d8c09abbd47109890259c0127154db1af26c75" class="m-dox">Full</a> }</span>
             </dt>
             <dd>Currently both minimal and full layers are the same: need some time to better decide what the &quot;minimal&quot; layer setup could look like.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-dox">
+            <dt>
+              <span class="m-dox-wrap-bumper"><a href="#a89fd4838948bb8ab8eea8337ce1e3cbd" class="m-dox-self" name="a89fd4838948bb8ab8eea8337ce1e3cbd">Instance</a>(</span><span class="m-dox-wrap"><a href="classvpr_1_1_instance.html#ac131eec23cc4eba7cd68bc67de9d8c09" class="m-dox">instance_<wbr />layers</a> layers,
+              const VkApplicationInfo* info)</span>
+            </dt>
+            <dd>Sets the layer status as specified, and changes the minor state/informational info attached to the instance as specified by the info parameter.</dd>
+            <dt>
+              <span class="m-dox-wrap-bumper"><a href="#a1b8c98d92b5f5ad0a607b5e80db2c30d" class="m-dox-self" name="a1b8c98d92b5f5ad0a607b5e80db2c30d">Instance</a>(</span><span class="m-dox-wrap"><a href="classvpr_1_1_instance.html#ac131eec23cc4eba7cd68bc67de9d8c09" class="m-dox">instance_<wbr />layers</a> layers_flags,
+              const VkApplicationInfo* info,
+              const <a href="structvpr_1_1_vpr_extension_pack.html" class="m-dox">VprExtensionPack</a>* extensions,
+              const char*const* layers = nullptr,
+              const uint32_t layer_count = 0)</span>
+            </dt>
+            <dd>Uses an extensions list, compared to the other constructor that simply uses what glfw says is required.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-dox">
+            <dt>
+              <span class="m-dox-wrap-bumper">auto <a href="#ab9f92d523b1cc59715c6d1b237be3cea" class="m-dox-self" name="ab9f92d523b1cc59715c6d1b237be3cea">HasExtension</a>(</span><span class="m-dox-wrap">const char* extension_name) const -&gt; bool <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>For the best chance of matching extension names properly, use the Vulkan macros for extension names.</dd>
+            <dt>
+              <span class="m-dox-wrap-bumper">void <a href="#a6b61b801c27856790ab59513f66ce11c" class="m-dox-self" name="a6b61b801c27856790ab59513f66ce11c">GetEnabledExtensions</a>(</span><span class="m-dox-wrap">size_t* num_extensions,
+              char** extensions) const</span>
+            </dt>
+            <dd>The extensions parameter is set using strdup, so the user MUST be sure to free this memory when finished reading it.</dd>
           </dl>
         </section>
       </div>

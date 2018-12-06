@@ -47,7 +47,27 @@
           <span class="m-breadcrumb"><a href="namespacevpr.html">vpr</a>::<wbr/></span>VprExtensionPack <span class="m-thin">struct</span>
         </h1>
         <p>The <a href="structvpr_1_1_vpr_extension_pack.html" class="m-dox">VprExtensionPack</a> structure makes requesting extensions in the device and instance constructors easier and more robust, by allowing the specification of required and optional extensions.</p>
-<p>The inability or failure to enable a required extension will cause an exception ot be thrown, while issues with optional extensions will log the extension unable (at a WARNING level) to be enabled or used - then it will be removed from the list of extensions submitted to the constructor.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<p>The inability or failure to enable a required extension will cause an exception to be thrown, while issues with optional extensions will log the extension unable (at a WARNING level) to be enabled or used - then it will be removed from the list of extensions submitted to the constructor.</p>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-dox">
+            <dt>const char*const * <a href="#a54203e2016f033125ec96249d0cc4720" class="m-dox-self" name="a54203e2016f033125ec96249d0cc4720">RequiredExtensionNames</a></dt>
+            <dd>These extension names specify what must be loaded - failure to do so results in an exception.</dd>
+            <dt>const char*const * <a href="#ae20618455255f6895bd391d046c2e055" class="m-dox-self" name="ae20618455255f6895bd391d046c2e055">OptionalExtensionNames</a></dt>
+            <dd>These are &quot;nice to have&quot; extensions that will not compromise required functionality, so failing to load them is a non-issue.</dd>
+          </dl>
+        </section>
       </div>
     </div>
   </div>
