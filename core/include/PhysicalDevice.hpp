@@ -12,8 +12,6 @@ namespace vpr {
     *    hardware device in a user's system. This class stores the relevant VkPhysicalDeviceProperties, VkPhysicalDeviceFeatures, and 
     *    VkPhysicalDeviceMemoryProperties that can be freely queried from anywhere in the program. This can/should be used to check for
     *    limits on things like texture and buffer size, supported memory types, supported rendering modes, and supported texture types like cubemaps.
-    *
-    *    As each computer can have multiple physical devices, the class uses a simplistic scoring system to find the "best" hardware on the current system.
     *    \ingroup Core
     */
     class VPR_API PhysicalDevice {
@@ -21,6 +19,9 @@ namespace vpr {
         PhysicalDevice& operator=(const PhysicalDevice& other) = delete;
     public:
 
+        /**Automated setup - uses the given instance handle to find the "best" available GPU on a system. This will prefer dedicated cards first, and uses 
+         * some other parameters to "score" devices from there.
+         */
         PhysicalDevice(const VkInstance& instance_handle);
         PhysicalDevice(PhysicalDevice&& other) noexcept;
         PhysicalDevice& operator=(PhysicalDevice&& other) noexcept;
