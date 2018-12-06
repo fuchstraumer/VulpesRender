@@ -3,7 +3,9 @@
 #include "vkAssert.hpp"
 #include "CreateInfoBase.hpp"
 #include "easylogging++.h"
+#if !defined(VPR_BUILD_STATIC)
 INITIALIZE_EASYLOGGINGPP
+#endif
 #include <vector>
 namespace vpr {
 

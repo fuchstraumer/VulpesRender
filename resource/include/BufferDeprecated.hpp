@@ -14,7 +14,8 @@ namespace vpr {
     *   \defgroup Resources
     */
 
-    /** RAII wrapper around a VkBuffer object. Can be used for anything from VBOs+EBOs to compute storage buffers to uniform buffers. No initialization
+    /** \deprecated{No longer recommended for use: unmaintained and not updated. }
+     *  RAII wrapper around a VkBuffer object. Can be used for anything from VBOs+EBOs to compute storage buffers to uniform buffers. No initialization
     *   or resource creation is done until the CreateBuffer method is called: at this point, the size of the object must be submitted as this size is fixed
     *   after creating the VkBuffer object.
     *   \ingroup Resources

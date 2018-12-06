@@ -3,6 +3,7 @@
 #define VULPES_VK_SWAPCHAIN_H
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
+#include <memory>
 
 namespace vpr {
 
@@ -17,16 +18,16 @@ namespace vpr {
         };
     }
 
-    /** This class abstracts away much of the detailed work and boilerplate code required to setup a swapchain in Vulkan. Init() only needs to be called once 
-    *   during runtime: recreating the swapchain is easily accomplished using the appropriate recreation method. 
-    *   \ingroup Rendering
+    /** This class abstracts away much of the detailed work and boilerplate code required to setup a swapchain in Vulkan. Swapchain recreation
+     *  can be done by calling the suitable method, or by using the static method as well.
+    *   \ingroup Core
     */
     class VPR_API Swapchain {
         Swapchain(const Swapchain&) = delete;
         Swapchain& operator=(const Swapchain&) = delete;
     public:
 
-        Swapchain(const Device* _device, GLFWwindow* window, VkSurfaceKHR surface, uint32_t sync_mode);
+        Swapchain(const Device* _device, void* platform_window, VkSurfaceKHR surface, uint32_t sync_mode);
         ~Swapchain();
         void Recreate(VkSurfaceKHR surface);
         void Destroy();
@@ -40,7 +41,7 @@ namespace vpr {
         const VkImageView& ImageView(const size_t& idx) const;
 
     private:
-        SwapchainImpl* impl;
+        std::unique_ptr<SwapchainImpl> impl;
     };
 
     /** Pass a swapchain and surface pointer to this to have the swapchain and surface destroyed and recreated

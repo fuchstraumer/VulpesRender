@@ -3,14 +3,12 @@ ADD_VPR_LIBRARY(
     "include/Allocation.hpp" 
     "include/AllocationRequirements.hpp"
     "include/Allocator.hpp"
-    "include/DebugVisualization.hpp"
     "src/Allocation.cpp"
     "src/AllocationCollection.hpp"
     "src/AllocationCollection.cpp"
     "src/Allocator.cpp"
     "src/AllocatorImpl.hpp"
     "src/AllocatorImpl.cpp"
-    "src/DebugVisualization.cpp"
     "src/AllocCommon.hpp"
     "src/MemoryBlock.hpp"
     "src/MemoryBlock.cpp"
@@ -22,9 +20,9 @@ TARGET_INCLUDE_DIRECTORIES(vpr_alloc PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
 
-IF(APPLE)
+IF(UNIX)
 # Needed to support Boost variant
-set(boost_min_ver 1.67.0)
+set(boost_min_ver 1.62.0)
 find_package(Boost ${boost_min_ver})
 ENDIF()
 

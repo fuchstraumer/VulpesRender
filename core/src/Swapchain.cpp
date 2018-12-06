@@ -9,23 +9,34 @@
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
+#include "easylogging++.h"
+#ifndef __ANDROID__
 #define GLFW_INCLUDE_VULKAN
 #include "GLFW/glfw3.h"
 #ifdef APIENTRY
 #undef APIENTRY
 #endif
-#include "easylogging++.h"
+#else 
+#include <android/log.h>
+#include <android/native_window_jni.h>
+#endif 
 
 namespace vpr {
     
+#ifndef __ANDROID__
+    using platform_window_type = GLFWwindow;
+#else
+    using platform_window_type = ANativeWindow;
+#endif
+
     struct SwapchainImpl {
 
-        SwapchainImpl(const Device* device, GLFWwindow* window, VkSurfaceKHR surface, uint32_t mode);
+        SwapchainImpl(const Device* device, void* window, VkSurfaceKHR surface, uint32_t mode);
         ~SwapchainImpl();
 
         /** SwapchainInfo takes care of hiding away much of the setup work required to create a swapchain. However, it does contain some data
         *   that may be useful, like the presentation mode being used or the color format of the surface object being used.
-        *   \ingroup Rendering
+        *   \ingroup Core
         */
 
         struct SwapchainInfo {
@@ -35,7 +46,7 @@ namespace vpr {
             std::vector<VkPresentModeKHR> PresentModes;
             VkSurfaceFormatKHR GetBestFormat() const;
             VkPresentModeKHR GetBestPresentMode() const;
-            VkExtent2D ChooseSwapchainExtent(GLFWwindow* win) const;
+            VkExtent2D ChooseSwapchainExtent(platform_window_type* win) const;
         } info;
 
         void destroy();
@@ -60,12 +71,13 @@ namespace vpr {
         VkSwapchainKHR handle = VK_NULL_HANDLE;
         VkSwapchainKHR oldHandle = VK_NULL_HANDLE;
         VkSurfaceKHR surface = VK_NULL_HANDLE;
-        GLFWwindow* window;
+        platform_window_type* window;
         const Device* device;
     };
 
-    SwapchainImpl::SwapchainImpl(const Device * _device, GLFWwindow* _window, VkSurfaceKHR _surface, uint32_t mode) :
-        info(_device->GetPhysicalDevice().vkHandle(), _surface), desiredSyncMode(mode), surface(_surface), window(_window), device(_device) {
+    SwapchainImpl::SwapchainImpl(const Device * _device, void* _window, VkSurfaceKHR _surface, uint32_t mode) :
+        info(_device->GetPhysicalDevice().vkHandle(), _surface), desiredSyncMode(mode), surface(_surface), 
+        window(reinterpret_cast<platform_window_type*>(_window)), device(_device) {
         create();
     }
 
@@ -126,6 +138,8 @@ namespace vpr {
         VkPresentModeKHR result = VK_PRESENT_MODE_FIFO_KHR;
         for (const auto& mode : PresentModes) {
             // Best mix of all modes.
+            // TODO: Quantify this better! Seems like it may not actually 
+            // be the best mode. Certainly not as power efficient on mobile.
             if (mode == VK_PRESENT_MODE_MAILBOX_KHR) {
                 return VK_PRESENT_MODE_MAILBOX_KHR;
             }
@@ -142,26 +156,45 @@ namespace vpr {
 
     }
 
-    VkExtent2D SwapchainImpl::SwapchainInfo::ChooseSwapchainExtent(GLFWwindow* window) const{
+#ifdef __ANDROID__
+    VkExtent2D getBestExtentPlatform(platform_window_type* window, const VkSurfaceCapabilitiesKHR& Capabilities) {
+        ANativeWindow* window_native = reinterpret_cast<ANativeWindow*>(window);
+        int width = ANativeWindow_getWidth(window_native);
+        int height = ANativeWindow_getHeight(window_native);
+        VkExtent2D actual_extent{ width, height };
+        actual_extent.width = std::max(Capabilities.minImageExtent.width, std::min(Capabilities.maxImageExtent.width, actual_extent.width));
+        actual_extent.height = std::max(Capabilities.minImageExtent.height, std::min(Capabilities.maxImageExtent.height, actual_extent.height));
+        return actual_extent;
+    }
+#else
+    VkExtent2D getBestExtentPlatform(platform_window_type* window, const VkSurfaceCapabilitiesKHR& Capabilities) {
+        int wx{ -1 };
+        int wy{ -1 };
+        glfwGetWindowSize(reinterpret_cast<GLFWwindow*>(window), &wx, &wy);
+        VkExtent2D actual_extent = { static_cast<uint32_t>(wx), static_cast<uint32_t>(wy) };
+        actual_extent.width = std::max(Capabilities.minImageExtent.width, std::min(Capabilities.maxImageExtent.width, actual_extent.width));
+        actual_extent.height = std::max(Capabilities.minImageExtent.height, std::min(Capabilities.maxImageExtent.height, actual_extent.height));
+        return actual_extent;
+    }
+#endif 
+
+    VkExtent2D SwapchainImpl::SwapchainInfo::ChooseSwapchainExtent(platform_window_type* window) const{
         
         if (Capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max()) {
             return Capabilities.currentExtent;
         }
         else {
-            int wx, wy;
-            glfwGetWindowSize(window, &wx, &wy);
-            VkExtent2D actual_extent = { static_cast<uint32_t>(wx), static_cast<uint32_t>(wy) };
-            actual_extent.width = std::max(Capabilities.minImageExtent.width, std::min(Capabilities.maxImageExtent.width, actual_extent.width));
-            actual_extent.height = std::max(Capabilities.minImageExtent.height, std::min(Capabilities.maxImageExtent.height, actual_extent.height));
-            return actual_extent;
+            return getBestExtentPlatform(window, Capabilities);
         }
 
     }
 
-    Swapchain::Swapchain(const Device * _device, GLFWwindow* window, VkSurfaceKHR surface, uint32_t mode) : impl(new SwapchainImpl(_device, window, surface, mode)) {}
+    Swapchain::Swapchain(const Device * _device, void* window, VkSurfaceKHR surface, uint32_t mode) : impl(std::make_unique<SwapchainImpl>(_device, window, surface, mode)) {}
 
     Swapchain::~Swapchain(){
         Destroy();
+        impl.reset();
+        impl = nullptr;
     }
 
     void Swapchain::Recreate(VkSurfaceKHR new_surface) {
@@ -275,8 +308,8 @@ namespace vpr {
         createInfo.minImageCount = imageCount;
         createInfo.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
 
-        const uint32_t indices[2] = { static_cast<uint32_t>(device->QueueFamilyIndices.Present), static_cast<uint32_t>(device->QueueFamilyIndices.Graphics) };
-        if ((device->QueueFamilyIndices.Present != device->QueueFamilyIndices.Graphics) && (device->QueueFamilyIndices.Present != std::numeric_limits<uint32_t>::max())) {
+        const uint32_t indices[2] = { static_cast<uint32_t>(device->QueueFamilyIndices().Present), static_cast<uint32_t>(device->QueueFamilyIndices().Graphics) };
+        if ((device->QueueFamilyIndices().Present != device->QueueFamilyIndices().Graphics) && (device->QueueFamilyIndices().Present != std::numeric_limits<uint32_t>::max())) {
             createInfo.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
             createInfo.queueFamilyIndexCount = 2;
             createInfo.pQueueFamilyIndices = indices;

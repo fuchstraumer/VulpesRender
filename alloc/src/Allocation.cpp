@@ -2,31 +2,36 @@
 #include "Allocation.hpp"
 #include "MemoryBlock.hpp"
 #include "easylogging++.h"
-#ifdef __APPLE_CC__
+#if defined(__APPLE_CC__) || defined(__linux__)
 #include <boost/variant.hpp>
 #else
 #include <variant>
 #endif
+#include <limits>
+
 namespace vpr {
 
     struct AllocationImpl {
+
+        AllocationImpl() : typeData{ blockAllocation{} } {}
+
         struct blockAllocation {
-            MemoryBlock* ParentBlock;
-            VkDeviceSize Offset;
+            MemoryBlock* ParentBlock{ nullptr };
+            VkDeviceSize Offset{ std::numeric_limits<VkDeviceSize>::max() };
         };
 
         struct privateAllocation {
-            uint32_t MemoryTypeIdx;
-            VkDeviceMemory DvcMemory;
-            bool PersistentlyMapped;
-            void* MappedData;
+            uint32_t MemoryTypeIdx{ std::numeric_limits<uint32_t>::max() };
+            VkDeviceMemory DvcMemory{ VK_NULL_HANDLE };
+            bool PersistentlyMapped{ false };
+            void* MappedData{ nullptr };
         };
-#ifdef __APPLE_CC__
+#if defined(__APPLE_CC__) || defined(__linux__)
         boost::variant<blockAllocation, privateAllocation> typeData;
 #else
         std::variant<blockAllocation, privateAllocation> typeData;
 #endif
-        void* userData;
+        void* userData{ nullptr };
     };
 
     Allocation::Allocation() : Size(0), Alignment(0), impl(std::make_unique<AllocationImpl>()) {}
@@ -55,17 +60,14 @@ namespace vpr {
     }
 
     void Allocation::Init(MemoryBlock * parent_block, const VkDeviceSize & offset, const VkDeviceSize & alignment, const VkDeviceSize & alloc_size, void* user_data) {
-        AllocationImpl::blockAllocation alloc;
-        alloc.ParentBlock = parent_block;
-        alloc.Offset = offset;
         Size = alloc_size;
         Alignment = alignment;
-        impl->typeData = std::move(alloc);
+        impl->typeData = AllocationImpl::blockAllocation{ parent_block, offset };
         impl->userData = user_data;
     }
 
     void Allocation::Update(MemoryBlock * new_parent_block, const VkDeviceSize & new_offset) {
-#ifdef __APPLE_CC__
+#if defined(__APPLE_CC__) || defined(__linux__)
         auto& alloc = boost::get<AllocationImpl::blockAllocation>(impl->typeData);
 #else
         auto& alloc = std::get<AllocationImpl::blockAllocation>(impl->typeData);
@@ -86,7 +88,7 @@ namespace vpr {
     }
 
     void Allocation::Map(const VkDeviceSize& size_to_map, const VkDeviceSize& offset_to_map_at, void** address_to_map_to) const {
-#if __APPLE_CC__
+#if defined(__APPLE_CC__) || defined(__linux__)
         auto map_private_alloc = [&](AllocationImpl::privateAllocation& alloc) {
             if (alloc.PersistentlyMapped) {
                 *address_to_map_to = alloc.MappedData;
@@ -121,7 +123,7 @@ namespace vpr {
     }
 
     void Allocation::Unmap() const noexcept {
-#ifdef __APPLE_CC__
+#if defined(__APPLE_CC__) || defined(__linux__)
         switch (impl->typeData.which()) {
         case 0:
             boost::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Unmap();
@@ -137,7 +139,7 @@ namespace vpr {
     }
 
     const VkDeviceMemory& Allocation::Memory() const {
-#ifdef __APPLE_CC__
+#if defined(__APPLE_CC__) || defined(__linux__)
         switch (impl->typeData.which()) {
         case 0:
             return boost::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Memory();
@@ -160,7 +162,7 @@ namespace vpr {
     }
 
     VkDeviceSize Allocation::Offset() const noexcept {
-#ifdef __APPLE_CC__
+#if defined(__APPLE_CC__) || defined(__linux__)
         switch (impl->typeData.which()) {
         case 0:
             return boost::get<AllocationImpl::blockAllocation>(impl->typeData).Offset;
@@ -180,7 +182,7 @@ namespace vpr {
     }
 
     uint32_t Allocation::MemoryTypeIdx() const {
-#ifdef __APPLE_CC__
+#if defined(__APPLE_CC__) || defined(__linux__)
         switch (impl->typeData.which()) {
         case 0:
             return boost::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->MemoryTypeIdx;
@@ -203,7 +205,7 @@ namespace vpr {
     }
 
     bool Allocation::IsPrivateAllocation() const noexcept {
-#ifdef __APPLE_CC__
+#if defined(__APPLE_CC__) || defined(__linux__)
         switch(impl->typeData.which()){
         case 0:
             return false;

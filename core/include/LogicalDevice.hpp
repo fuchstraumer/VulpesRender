@@ -9,6 +9,9 @@ namespace vpr {
     struct DeviceDataMembers;
     struct VkDebugUtilsFunctions;
     
+    /**Simple wrapper struct for storing queue family indices. Retrieved from Device instance.
+     * \ingroup Core
+     */
     struct VPR_API vkQueueFamilyIndices {
         vkQueueFamilyIndices();
         // indices into queue families.
@@ -21,7 +24,7 @@ namespace vpr {
 
     /**!The Device class is a wrapper around the vkLogicalDevice object. This object is what most Vulkan resources and objects are spawned from,
     *   and is then responsible for managing these resources. Most Vulkan functions relating to resource creation, binding, or updating will take
-    *   a VkDevice reference as a parameter. This is considered to be a "Logical Device" as it represents a non-physical device and each physical
+    *   a VkDevice reference as a parameter. This is considered to be a "Logical device" as it represents a non-physical device and each physical
     *   device can actually store and handle multiple logical devices.
     *   
     *   The vast majority of classes in this codebase contain a private const Device pointer, for use in their internal functions requiring this object's
@@ -35,7 +38,7 @@ namespace vpr {
         Device& operator=(Device&&) = delete;
     public:
 
-        Device(const Instance* instance, const PhysicalDevice* p_device, VkSurfaceKHR surface = VK_NULL_HANDLE, const VprExtensionPack* extensions = nullptr, const char* const* layer_names = nullptr, const uint32_t layer_count = 0);
+        Device(const Instance* instance, const PhysicalDevice* p_device, VkSurfaceKHR surface = VK_NULL_HANDLE, const VprExtensionPack* extensions = nullptr, const         char* const* layer_names = nullptr, const uint32_t layer_count = 0);
         ~Device();
 
         const VkDevice& vkHandle() const;
@@ -52,7 +55,9 @@ namespace vpr {
         */
         VkQueue GeneralQueue(const uint32_t& idx = 0) const;
 
-        // Attempts to find queue that only does requested operation first, then returns omni-purpose queues.
+        /* Note: While most hardware presents support fpr multiple graphics queues, this is almost certainly not the actual case. 
+         * Instead, it is likely the driver is doing some kind of multiplexing of it's singular graphics queue. By default
+        */
         VkQueue GraphicsQueue(const uint32_t & idx = 0) const;
         VkQueue TransferQueue(const uint32_t & idx = 0) const;
         VkQueue ComputeQueue(const uint32_t & idx = 0) const;
@@ -77,24 +82,22 @@ namespace vpr {
         */
         VkFormat FindDepthFormat() const;
 
-        /*
-            Methods related to physical device
-        */
         uint32_t GetMemoryTypeIdx(const uint32_t& type_bitfield, const VkMemoryPropertyFlags& property_flags, VkBool32* memory_type_found = nullptr) const;
-        uint32_t GetPhysicalDeviceID() const noexcept;
         const PhysicalDevice& GetPhysicalDevice() const noexcept;
-        VkPhysicalDeviceProperties GetPhysicalDeviceProperties() const noexcept;
-        VkPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties() const noexcept;
+        const VkPhysicalDeviceProperties& GetPhysicalDeviceProperties() const noexcept;
+        const VkPhysicalDeviceMemoryProperties& GetPhysicalDeviceMemoryProperties() const noexcept;
+        /* Used to retrieve structure of debug utils function pointers. */
         const VkDebugUtilsFunctions& DebugUtilsHandler() const;
         
-        uint32_t NumGraphicsQueues = 0;
-        uint32_t NumComputeQueues = 0;
-        uint32_t NumTransferQueues = 0;
-        uint32_t NumSparseBindingQueues = 0;
-        vkQueueFamilyIndices QueueFamilyIndices;
+        /* This will be 1, the vast majority of the time. Currently, having more than one graphics queue is effectively unsupported: no
+           hardware actually implements this capability so I didn't bother allowing it to be supported. */
+        const uint32_t& NumGraphicsQueues() const noexcept;
+        const uint32_t& NumComputeQueues() const noexcept;
+        const uint32_t& NumTransferQueues() const noexcept;
+        const uint32_t& NumSparseBindingQueues() const noexcept;
+        const vkQueueFamilyIndices& QueueFamilyIndices() const noexcept;
 
     private:
-
         void verifyPresentationSupport();        
         void checkSurfaceSupport(const VkSurfaceKHR& surf);
         VkDeviceQueueCreateInfo setupQueueFamily(const VkQueueFamilyProperties& family_properties);
@@ -108,6 +111,11 @@ namespace vpr {
         void setupSparseBindingQueues();
         void setupDebugUtilsHandler();
     
+        uint32_t numGraphicsQueues{ 0 };
+        uint32_t numComputeQueues{ 0 };
+        uint32_t numTransferQueues{ 0 };
+        uint32_t numSparseBindingQueues{ 0 };
+        vkQueueFamilyIndices queueFamilyIndices;
         VkDevice handle{ VK_NULL_HANDLE };
         VkDeviceCreateInfo createInfo{ };
         VkDebugUtilsFunctions* debugUtilsHandler{ nullptr };

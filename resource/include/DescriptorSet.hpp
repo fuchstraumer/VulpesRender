@@ -6,8 +6,6 @@
 
 namespace vpr {
 
-    struct DescriptorSetImpl;
-
     /** RAII wrapper around a descriptor set, simplifying adding individual descriptor bindings for whatever stage they're required at.
     *   \ingroup Resources
     */
@@ -29,6 +27,8 @@ namespace vpr {
         /* Add info for a texel buffer. */
         void AddDescriptorInfo(VkDescriptorBufferInfo info, const VkBufferView& view, const VkDescriptorType& type, const size_t& idx);
 
+        void AddSamplerBinding(const size_t& idx, VkSampler sampler_handler);
+
         /**Call after all descriptor bindings and infos required have been added, 
         *  and make sure you have enough space in the given pool for all of these resources. 
         */
@@ -48,7 +48,7 @@ namespace vpr {
 
         VkDevice device{ VK_NULL_HANDLE };
         mutable VkDescriptorSet handle{ VK_NULL_HANDLE };
-        mutable std::unique_ptr<DescriptorSetImpl> impl{ nullptr };
+        mutable std::unique_ptr<struct DescriptorSetImpl> impl{ nullptr };
     };
 
 }
