@@ -1,5 +1,0 @@
-<map id="vpr::DescriptorSet::update" name="vpr::DescriptorSet::update">
-<area shape="rect" id="node2" href="$classvpr_1_1_descriptor_set.html#a8d58aaafd1c068f4921ccdbf1ad692d8" title="Call after all descriptor bindings and infos required have been added, and make sure you have enough ..." alt="" coords="179,5,304,47"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_descriptor_set.html#af0df0abb71f558109686909037de0688" title="vpr::DescriptorSet\l::Update" alt="" coords="179,71,304,112"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_descriptor_set.html#a10bd2e1ea290ca2a02a8b878d92d47dd" title="vpr::DescriptorSet\l::vkHandle" alt="" coords="179,136,304,177"/>
-</map>

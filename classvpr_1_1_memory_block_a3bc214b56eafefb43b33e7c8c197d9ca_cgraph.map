@@ -1,4 +1,0 @@
-<map id="vpr::MemoryBlock::Allocate" name="vpr::MemoryBlock::Allocate">
-<area shape="rect" id="node2" href="$classvpr_1_1_memory_block.html#aca430805fb87da6c9f14facd22166d5f" title="Registers a free suballocation, inserting it into the proper location to keep the sorting intact (via..." alt="" coords="239,5,405,47"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_memory_block.html#afbbaf6e2f0de8d1bed31e8a8cf71cfed" title="Removes a free suballocation, usually indicating that it is about to be made active and used by an ob..." alt="" coords="235,71,409,112"/>
-</map>

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="group___synchronization" kind="group">
+    <compoundname>Synchronization</compoundname>
+    <title>Synchronization</title>
+    <innerclass refid="classvpr_1_1_event" prot="public">vpr::Event</innerclass>
+    <innerclass refid="classvpr_1_1_fence" prot="public">vpr::Fence</innerclass>
+    <innerclass refid="classvpr_1_1_semaphore" prot="public">vpr::Semaphore</innerclass>
+    <briefdescription>
+<para>Vulkan has three primary synchronization primitives, each with distinct use cases and capabilities. </para>    </briefdescription>
+    <detaileddescription>
+<para>The docs for each class representing these primitive do their best to communicate this, but consult the Vulkan programming guide for further guidance and consider checking examples of these primitives in use for further clarification. </para>    </detaileddescription>
+  </compounddef>
+</doxygen>

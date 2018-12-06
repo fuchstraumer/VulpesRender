@@ -1,0 +1,618 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="structvpr_1_1_swapchain_impl" kind="struct" language="C++" prot="public">
+    <compoundname>vpr::SwapchainImpl</compoundname>
+    <innerclass refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info" prot="public">vpr::SwapchainImpl::SwapchainInfo</innerclass>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="group___core_1ga53b8864a06225b92d1a4cf46ea333fbb" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info" kindref="compound">vpr::SwapchainImpl::SwapchainInfo</ref></type>
+        <definition>struct vpr::SwapchainImpl::SwapchainInfo  vpr::SwapchainImpl::info</definition>
+        <argsstring></argsstring>
+        <name>info</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="50" column="1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1afdf0ef2711d213b7020b37785a62a7ad" compoundref="_swapchain_8cpp" startline="242" endline="297">setParameters</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" compoundref="_swapchain_8cpp" startline="299" endline="329">setupCreateInfo</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_swapchain_impl_1a7e5657d05e85893acc16ed3d27d95d79" prot="public" static="no" mutable="no">
+        <type>VkFormat</type>
+        <definition>VkFormat vpr::SwapchainImpl::colorFormat</definition>
+        <argsstring></argsstring>
+        <name>colorFormat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="55" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="55" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1afdf0ef2711d213b7020b37785a62a7ad" compoundref="_swapchain_8cpp" startline="242" endline="297">setParameters</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1aaded5613928f1e39c1a61ac25be8bf88" compoundref="_swapchain_8cpp" startline="338" endline="357">setupImageViews</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_swapchain_impl_1a16472b860e896076f573b5133b16ef55" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t vpr::SwapchainImpl::imageCount</definition>
+        <argsstring></argsstring>
+        <name>imageCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="56" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="56" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1afdf0ef2711d213b7020b37785a62a7ad" compoundref="_swapchain_8cpp" startline="242" endline="297">setParameters</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" compoundref="_swapchain_8cpp" startline="299" endline="329">setupCreateInfo</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1aaded5613928f1e39c1a61ac25be8bf88" compoundref="_swapchain_8cpp" startline="338" endline="357">setupImageViews</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1acc94e08e83ec3857bffdea08e9b4bf65" compoundref="_swapchain_8cpp" startline="331" endline="336">setupSwapImages</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_swapchain_impl_1aaf04b6cc653a8f180be1f6ac1f332ea1" prot="public" static="no" mutable="no">
+        <type>VkColorSpaceKHR</type>
+        <definition>VkColorSpaceKHR vpr::SwapchainImpl::colorSpace</definition>
+        <argsstring></argsstring>
+        <name>colorSpace</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="57" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="57" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" compoundref="_swapchain_8cpp" startline="299" endline="329">setupCreateInfo</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_swapchain_impl_1a4a34f9862f04c466ebbe4659e904ed5b" prot="public" static="no" mutable="no">
+        <type>VkExtent2D</type>
+        <definition>VkExtent2D vpr::SwapchainImpl::extent</definition>
+        <argsstring></argsstring>
+        <name>extent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="58" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="58" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1afdf0ef2711d213b7020b37785a62a7ad" compoundref="_swapchain_8cpp" startline="242" endline="297">setParameters</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" compoundref="_swapchain_8cpp" startline="299" endline="329">setupCreateInfo</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_swapchain_impl_1a041a418f78d24b287337e76f21d54d0a" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; VkImage &gt;</type>
+        <definition>std::vector&lt;VkImage&gt; vpr::SwapchainImpl::images</definition>
+        <argsstring></argsstring>
+        <name>images</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="60" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="60" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1aaded5613928f1e39c1a61ac25be8bf88" compoundref="_swapchain_8cpp" startline="338" endline="357">setupImageViews</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1acc94e08e83ec3857bffdea08e9b4bf65" compoundref="_swapchain_8cpp" startline="331" endline="336">setupSwapImages</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_swapchain_impl_1a8970acfa427e8dfa0dc92680438f5d12" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; VkImageView &gt;</type>
+        <definition>std::vector&lt;VkImageView&gt; vpr::SwapchainImpl::imageViews</definition>
+        <argsstring></argsstring>
+        <name>imageViews</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="61" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="61" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a3c2995780e90567ea32d6b6f72c5d891" compoundref="_swapchain_8cpp" startline="207" endline="221">destroy</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1aaded5613928f1e39c1a61ac25be8bf88" compoundref="_swapchain_8cpp" startline="338" endline="357">setupImageViews</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_swapchain_impl_1a1a07f34fccc495abbacbcb9304f4991c" prot="public" static="no" mutable="no">
+        <type>VkPresentModeKHR</type>
+        <definition>VkPresentModeKHR vpr::SwapchainImpl::presentMode</definition>
+        <argsstring></argsstring>
+        <name>presentMode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="67" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="67" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1afdf0ef2711d213b7020b37785a62a7ad" compoundref="_swapchain_8cpp" startline="242" endline="297">setParameters</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" compoundref="_swapchain_8cpp" startline="299" endline="329">setupCreateInfo</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_swapchain_impl_1a20ec41d1ba4829802c339716b7ddb609" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t vpr::SwapchainImpl::desiredSyncMode</definition>
+        <argsstring></argsstring>
+        <name>desiredSyncMode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="68" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="68" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1afdf0ef2711d213b7020b37785a62a7ad" compoundref="_swapchain_8cpp" startline="242" endline="297">setParameters</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_swapchain_impl_1aa630021e70194a7a44636a679dc9d159" prot="public" static="no" mutable="no">
+        <type>VkSurfaceFormatKHR</type>
+        <definition>VkSurfaceFormatKHR vpr::SwapchainImpl::surfaceFormat</definition>
+        <argsstring></argsstring>
+        <name>surfaceFormat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="69" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="69" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1afdf0ef2711d213b7020b37785a62a7ad" compoundref="_swapchain_8cpp" startline="242" endline="297">setParameters</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" compoundref="_swapchain_8cpp" startline="299" endline="329">setupCreateInfo</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_swapchain_impl_1a74bf63c03840dc00739d2d1df917166f" prot="public" static="no" mutable="no">
+        <type>VkSwapchainCreateInfoKHR</type>
+        <definition>VkSwapchainCreateInfoKHR vpr::SwapchainImpl::createInfo</definition>
+        <argsstring></argsstring>
+        <name>createInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="70" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="70" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a26979c4e9803da67ef61bf098377b341" compoundref="_swapchain_8cpp" startline="88" endline="97">create</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" compoundref="_swapchain_8cpp" startline="299" endline="329">setupCreateInfo</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_swapchain_impl_1aac62079e0f9815e341043173834585f8" prot="public" static="no" mutable="no">
+        <type>VkSwapchainKHR</type>
+        <definition>VkSwapchainKHR vpr::SwapchainImpl::handle</definition>
+        <argsstring></argsstring>
+        <name>handle</name>
+        <initializer>= VK_NULL_HANDLE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="71" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="71" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a26979c4e9803da67ef61bf098377b341" compoundref="_swapchain_8cpp" startline="88" endline="97">create</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a3c2995780e90567ea32d6b6f72c5d891" compoundref="_swapchain_8cpp" startline="207" endline="221">destroy</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1acc94e08e83ec3857bffdea08e9b4bf65" compoundref="_swapchain_8cpp" startline="331" endline="336">setupSwapImages</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_swapchain_impl_1ae2165262ed1575747787c0c89987e3b8" prot="public" static="no" mutable="no">
+        <type>VkSwapchainKHR</type>
+        <definition>VkSwapchainKHR vpr::SwapchainImpl::oldHandle</definition>
+        <argsstring></argsstring>
+        <name>oldHandle</name>
+        <initializer>= VK_NULL_HANDLE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="72" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="72" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a3c2995780e90567ea32d6b6f72c5d891" compoundref="_swapchain_8cpp" startline="207" endline="221">destroy</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_swapchain_impl_1a7ac3954e02fcc657d549df73501050d5" prot="public" static="no" mutable="no">
+        <type>VkSurfaceKHR</type>
+        <definition>VkSurfaceKHR vpr::SwapchainImpl::surface</definition>
+        <argsstring></argsstring>
+        <name>surface</name>
+        <initializer>= VK_NULL_HANDLE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="73" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="73" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" compoundref="_swapchain_8cpp" startline="299" endline="329">setupCreateInfo</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_swapchain_impl_1a82f79b680afc9c9b9d990e5f56a26c47" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacevpr_1ac148f310fbb1e1a34e40a884b25422b1" kindref="member">platform_window_type</ref> *</type>
+        <definition>platform_window_type* vpr::SwapchainImpl::window</definition>
+        <argsstring></argsstring>
+        <name>window</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="74" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="74" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info_1ac8512646cf64bdcfc7b7d004e7e1ab87" compoundref="_swapchain_8cpp" startline="181" endline="190">vpr::SwapchainImpl::SwapchainInfo::ChooseSwapchainExtent</referencedby>
+        <referencedby refid="namespacevpr_1a816f869033b2bb2416d15e050f934240" compoundref="_swapchain_8cpp" startline="170" endline="178">vpr::getBestExtentPlatform</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1afdf0ef2711d213b7020b37785a62a7ad" compoundref="_swapchain_8cpp" startline="242" endline="297">setParameters</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_swapchain_impl_1aeba57cfc9c3adf9076e82df56393850e" prot="public" static="no" mutable="no">
+        <type>const <ref refid="classvpr_1_1_device" kindref="compound">Device</ref> *</type>
+        <definition>const Device* vpr::SwapchainImpl::device</definition>
+        <argsstring></argsstring>
+        <name>device</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="75" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="75" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a26979c4e9803da67ef61bf098377b341" compoundref="_swapchain_8cpp" startline="88" endline="97">create</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a3c2995780e90567ea32d6b6f72c5d891" compoundref="_swapchain_8cpp" startline="207" endline="221">destroy</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" compoundref="_swapchain_8cpp" startline="299" endline="329">setupCreateInfo</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1aaded5613928f1e39c1a61ac25be8bf88" compoundref="_swapchain_8cpp" startline="338" endline="357">setupImageViews</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1acc94e08e83ec3857bffdea08e9b4bf65" compoundref="_swapchain_8cpp" startline="331" endline="336">setupSwapImages</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structvpr_1_1_swapchain_impl_1a14646cf53830d3719e470dd941d430ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::SwapchainImpl::SwapchainImpl</definition>
+        <argsstring>(const Device *device, void *window, VkSurfaceKHR surface, uint32_t mode)</argsstring>
+        <name>SwapchainImpl</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_device" kindref="compound">Device</ref> *</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>window</declname>
+        </param>
+        <param>
+          <type>VkSurfaceKHR</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="34" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="78" bodyend="82"/>
+        <references refid="structvpr_1_1_swapchain_impl_1a26979c4e9803da67ef61bf098377b341" compoundref="_swapchain_8cpp" startline="88" endline="97">create</references>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_swapchain_impl_1acf2d556e0718c579a98f3a3311ff641f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::SwapchainImpl::~SwapchainImpl</definition>
+        <argsstring>()</argsstring>
+        <name>~SwapchainImpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="35" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="84" bodyend="86"/>
+        <references refid="structvpr_1_1_swapchain_impl_1a3c2995780e90567ea32d6b6f72c5d891" compoundref="_swapchain_8cpp" startline="207" endline="221">destroy</references>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_swapchain_impl_1a3c2995780e90567ea32d6b6f72c5d891" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::SwapchainImpl::destroy</definition>
+        <argsstring>()</argsstring>
+        <name>destroy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="52" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="207" bodyend="221"/>
+        <references refid="structvpr_1_1_swapchain_impl_1aeba57cfc9c3adf9076e82df56393850e" compoundref="_swapchain_8cpp" startline="75">device</references>
+        <references refid="structvpr_1_1_swapchain_impl_1aac62079e0f9815e341043173834585f8" compoundref="_swapchain_8cpp" startline="71">handle</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a8970acfa427e8dfa0dc92680438f5d12" compoundref="_swapchain_8cpp" startline="61">imageViews</references>
+        <references refid="structvpr_1_1_swapchain_impl_1ae2165262ed1575747787c0c89987e3b8" compoundref="_swapchain_8cpp" startline="72">oldHandle</references>
+        <references refid="classvpr_1_1_device_1a59882855173bef0b13a17b376ea01d45" compoundref="_logical_device_8cpp" startline="74" endline="76">vpr::Device::vkHandle</references>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1acf2d556e0718c579a98f3a3311ff641f" compoundref="_swapchain_8cpp" startline="84" endline="86">~SwapchainImpl</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_swapchain_impl_1a26979c4e9803da67ef61bf098377b341" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::SwapchainImpl::create</definition>
+        <argsstring>()</argsstring>
+        <name>create</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="53" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="88" bodyend="97"/>
+        <references refid="structvpr_1_1_swapchain_impl_1a74bf63c03840dc00739d2d1df917166f" compoundref="_swapchain_8cpp" startline="70">createInfo</references>
+        <references refid="structvpr_1_1_swapchain_impl_1aeba57cfc9c3adf9076e82df56393850e" compoundref="_swapchain_8cpp" startline="75">device</references>
+        <references refid="structvpr_1_1_swapchain_impl_1aac62079e0f9815e341043173834585f8" compoundref="_swapchain_8cpp" startline="71">handle</references>
+        <references refid="structvpr_1_1_swapchain_impl_1afdf0ef2711d213b7020b37785a62a7ad" compoundref="_swapchain_8cpp" startline="242" endline="297">setParameters</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" compoundref="_swapchain_8cpp" startline="299" endline="329">setupCreateInfo</references>
+        <references refid="structvpr_1_1_swapchain_impl_1aaded5613928f1e39c1a61ac25be8bf88" compoundref="_swapchain_8cpp" startline="338" endline="357">setupImageViews</references>
+        <references refid="structvpr_1_1_swapchain_impl_1acc94e08e83ec3857bffdea08e9b4bf65" compoundref="_swapchain_8cpp" startline="331" endline="336">setupSwapImages</references>
+        <references refid="vk_assert_8hpp_1a92c2e07b0d021fc331be70a65c61dacc" compoundref="vk_assert_8hpp" startline="9">VkAssert</references>
+        <references refid="classvpr_1_1_device_1a59882855173bef0b13a17b376ea01d45" compoundref="_logical_device_8cpp" startline="74" endline="76">vpr::Device::vkHandle</references>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a14646cf53830d3719e470dd941d430ab" compoundref="_swapchain_8cpp" startline="78" endline="82">SwapchainImpl</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_swapchain_impl_1afdf0ef2711d213b7020b37785a62a7ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::SwapchainImpl::setParameters</definition>
+        <argsstring>()</argsstring>
+        <name>setParameters</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="62" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="242" bodyend="297"/>
+        <references refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info_1a497b156087d82550b32ca99c18e357a6" compoundref="_swapchain_8cpp" startline="44">vpr::SwapchainImpl::SwapchainInfo::Capabilities</references>
+        <references refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info_1ac8512646cf64bdcfc7b7d004e7e1ab87" compoundref="_swapchain_8cpp" startline="181" endline="190">vpr::SwapchainImpl::SwapchainInfo::ChooseSwapchainExtent</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a7e5657d05e85893acc16ed3d27d95d79" compoundref="_swapchain_8cpp" startline="55">colorFormat</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a20ec41d1ba4829802c339716b7ddb609" compoundref="_swapchain_8cpp" startline="68">desiredSyncMode</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a4a34f9862f04c466ebbe4659e904ed5b" compoundref="_swapchain_8cpp" startline="58">extent</references>
+        <references refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info_1abb595502d0bc940da0c710b0e5a7393e" compoundref="_swapchain_8cpp" startline="120" endline="134">vpr::SwapchainImpl::SwapchainInfo::GetBestFormat</references>
+        <references refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info_1ac01356957b4cfc44060dc3adf071eecb" compoundref="_swapchain_8cpp" startline="136" endline="157">vpr::SwapchainImpl::SwapchainInfo::GetBestPresentMode</references>
+        <references refid="namespacevpr_1afa4d7a5ad29cbfc728d5c355d990d242" compoundref="_swapchain_8cpp" startline="232" endline="240">vpr::getPresentModeStr</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a16472b860e896076f573b5133b16ef55" compoundref="_swapchain_8cpp" startline="56">imageCount</references>
+        <references refid="group___core_1ga53b8864a06225b92d1a4cf46ea333fbb">info</references>
+        <references refid="group___core_1gga874ec16fda53668c022029810b30d344a6adf97f83acf6453d4a6a4b1070f3754">vpr::None</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a1a07f34fccc495abbacbcb9304f4991c" compoundref="_swapchain_8cpp" startline="67">presentMode</references>
+        <references refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info_1acf50374bf2ed6e17282bfabc8f46754c" compoundref="_swapchain_8cpp" startline="46">vpr::SwapchainImpl::SwapchainInfo::PresentModes</references>
+        <references refid="structvpr_1_1_swapchain_impl_1aa630021e70194a7a44636a679dc9d159" compoundref="_swapchain_8cpp" startline="69">surfaceFormat</references>
+        <references refid="group___core_1gga874ec16fda53668c022029810b30d344ad8c8df02e3ea8c16388590c51ea089ee">vpr::VerticalSync</references>
+        <references refid="group___core_1gga874ec16fda53668c022029810b30d344a9e8c48ae5889c8d59c1534db00c53cbc">vpr::VerticalSyncMailbox</references>
+        <references refid="group___core_1gga874ec16fda53668c022029810b30d344afbbcc162d33d672b5bffae3c7939dc38">vpr::VerticalSyncRelaxed</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a82f79b680afc9c9b9d990e5f56a26c47" compoundref="_swapchain_8cpp" startline="74">window</references>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a26979c4e9803da67ef61bf098377b341" compoundref="_swapchain_8cpp" startline="88" endline="97">create</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::SwapchainImpl::setupCreateInfo</definition>
+        <argsstring>()</argsstring>
+        <name>setupCreateInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="63" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="299" bodyend="329"/>
+        <references refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info_1a497b156087d82550b32ca99c18e357a6" compoundref="_swapchain_8cpp" startline="44">vpr::SwapchainImpl::SwapchainInfo::Capabilities</references>
+        <references refid="structvpr_1_1_swapchain_impl_1aaf04b6cc653a8f180be1f6ac1f332ea1" compoundref="_swapchain_8cpp" startline="57">colorSpace</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a74bf63c03840dc00739d2d1df917166f" compoundref="_swapchain_8cpp" startline="70">createInfo</references>
+        <references refid="structvpr_1_1_swapchain_impl_1aeba57cfc9c3adf9076e82df56393850e" compoundref="_swapchain_8cpp" startline="75">device</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a4a34f9862f04c466ebbe4659e904ed5b" compoundref="_swapchain_8cpp" startline="58">extent</references>
+        <references refid="structvpr_1_1vk_queue_family_indices_1ad7def5d08c30d9fcb6992455de1c868a" compoundref="_logical_device_8hpp" startline="17">vpr::vkQueueFamilyIndices::Graphics</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a16472b860e896076f573b5133b16ef55" compoundref="_swapchain_8cpp" startline="56">imageCount</references>
+        <references refid="group___core_1ga53b8864a06225b92d1a4cf46ea333fbb">info</references>
+        <references refid="structvpr_1_1vk_queue_family_indices_1a418003ff72c5aa57cbec198ca1edee4f" compoundref="_logical_device_8hpp" startline="22">vpr::vkQueueFamilyIndices::Present</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a1a07f34fccc495abbacbcb9304f4991c" compoundref="_swapchain_8cpp" startline="67">presentMode</references>
+        <references refid="classvpr_1_1_device_1ac4cf746c60392ff8164c32868f252f23" compoundref="_logical_device_8cpp" startline="267" endline="269">vpr::Device::QueueFamilyIndices</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a7ac3954e02fcc657d549df73501050d5" compoundref="_swapchain_8cpp" startline="73">surface</references>
+        <references refid="structvpr_1_1_swapchain_impl_1aa630021e70194a7a44636a679dc9d159" compoundref="_swapchain_8cpp" startline="69">surfaceFormat</references>
+        <references refid="namespacevpr_1a0c75a458ad6af928d228d74fd0e867f7" compoundref="_create_info_base_8hpp" startline="253">vpr::vk_swapchain_create_info_base</references>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a26979c4e9803da67ef61bf098377b341" compoundref="_swapchain_8cpp" startline="88" endline="97">create</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_swapchain_impl_1acc94e08e83ec3857bffdea08e9b4bf65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::SwapchainImpl::setupSwapImages</definition>
+        <argsstring>()</argsstring>
+        <name>setupSwapImages</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="64" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="331" bodyend="336"/>
+        <references refid="structvpr_1_1_swapchain_impl_1aeba57cfc9c3adf9076e82df56393850e" compoundref="_swapchain_8cpp" startline="75">device</references>
+        <references refid="structvpr_1_1_swapchain_impl_1aac62079e0f9815e341043173834585f8" compoundref="_swapchain_8cpp" startline="71">handle</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a16472b860e896076f573b5133b16ef55" compoundref="_swapchain_8cpp" startline="56">imageCount</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a041a418f78d24b287337e76f21d54d0a" compoundref="_swapchain_8cpp" startline="60">images</references>
+        <references refid="classvpr_1_1_device_1a59882855173bef0b13a17b376ea01d45" compoundref="_logical_device_8cpp" startline="74" endline="76">vpr::Device::vkHandle</references>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a26979c4e9803da67ef61bf098377b341" compoundref="_swapchain_8cpp" startline="88" endline="97">create</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_swapchain_impl_1aaded5613928f1e39c1a61ac25be8bf88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::SwapchainImpl::setupImageViews</definition>
+        <argsstring>()</argsstring>
+        <name>setupImageViews</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="65" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="338" bodyend="357"/>
+        <references refid="structvpr_1_1_swapchain_impl_1a7e5657d05e85893acc16ed3d27d95d79" compoundref="_swapchain_8cpp" startline="55">colorFormat</references>
+        <references refid="structvpr_1_1_swapchain_impl_1aeba57cfc9c3adf9076e82df56393850e" compoundref="_swapchain_8cpp" startline="75">device</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a16472b860e896076f573b5133b16ef55" compoundref="_swapchain_8cpp" startline="56">imageCount</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a041a418f78d24b287337e76f21d54d0a" compoundref="_swapchain_8cpp" startline="60">images</references>
+        <references refid="structvpr_1_1_swapchain_impl_1a8970acfa427e8dfa0dc92680438f5d12" compoundref="_swapchain_8cpp" startline="61">imageViews</references>
+        <references refid="namespacevpr_1a2b76259ef8a737b97c2f5df038604439" compoundref="_create_info_base_8hpp" startline="218">vpr::vk_image_view_create_info_base</references>
+        <references refid="vk_assert_8hpp_1a92c2e07b0d021fc331be70a65c61dacc" compoundref="vk_assert_8hpp" startline="9">VkAssert</references>
+        <references refid="classvpr_1_1_device_1a59882855173bef0b13a17b376ea01d45" compoundref="_logical_device_8cpp" startline="74" endline="76">vpr::Device::vkHandle</references>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a26979c4e9803da67ef61bf098377b341" compoundref="_swapchain_8cpp" startline="88" endline="97">create</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="362">
+        <label>vpr::Device</label>
+        <link refid="classvpr_1_1_device"/>
+        <childnode refid="363" relation="usage">
+          <edgelabel>dataMembers</edgelabel>
+        </childnode>
+        <childnode refid="369" relation="usage">
+          <edgelabel>queueFamilyIndices</edgelabel>
+        </childnode>
+        <childnode refid="370" relation="usage">
+          <edgelabel>parent</edgelabel>
+        </childnode>
+        <childnode refid="374" relation="usage">
+          <edgelabel>debugUtilsHandler</edgelabel>
+        </childnode>
+        <childnode refid="375" relation="usage">
+          <edgelabel>parentInstance</edgelabel>
+        </childnode>
+      </node>
+      <node id="372">
+        <label>vpr::PhysicalDeviceImpl</label>
+        <link refid="classvpr_1_1_physical_device_impl"/>
+        <childnode refid="373" relation="usage">
+          <edgelabel>queueFamilyProperties</edgelabel>
+        </childnode>
+      </node>
+      <node id="371">
+        <label>std::unique_ptr&lt; vpr::PhysicalDeviceImpl &gt;</label>
+        <childnode refid="372" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="369">
+        <label>vpr::vkQueueFamilyIndices</label>
+        <link refid="structvpr_1_1vk_queue_family_indices"/>
+      </node>
+      <node id="377">
+        <label>std::vector&lt; VkImage &gt;</label>
+      </node>
+      <node id="381">
+        <label>std::vector&lt; VkPresentModeKHR &gt;</label>
+      </node>
+      <node id="363">
+        <label>vpr::DeviceDataMembers</label>
+        <link refid="structvpr_1_1_device_data_members"/>
+        <childnode refid="362" relation="usage">
+          <edgelabel>device</edgelabel>
+        </childnode>
+        <childnode refid="364" relation="usage">
+          <edgelabel>queueInfos</edgelabel>
+        </childnode>
+        <childnode refid="365" relation="usage">
+          <edgelabel>enabledExtensions</edgelabel>
+        </childnode>
+        <childnode refid="366" relation="usage">
+          <edgelabel>copiedExtensionStrings</edgelabel>
+        </childnode>
+      </node>
+      <node id="368">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="380">
+        <label>std::vector&lt; VkSurfaceFormatKHR &gt;</label>
+      </node>
+      <node id="361">
+        <label>vpr::SwapchainImpl</label>
+        <link refid="structvpr_1_1_swapchain_impl"/>
+        <childnode refid="362" relation="usage">
+          <edgelabel>device</edgelabel>
+        </childnode>
+        <childnode refid="377" relation="usage">
+          <edgelabel>images</edgelabel>
+        </childnode>
+        <childnode refid="378" relation="usage">
+          <edgelabel>imageViews</edgelabel>
+        </childnode>
+        <childnode refid="379" relation="usage">
+          <edgelabel>info</edgelabel>
+        </childnode>
+      </node>
+      <node id="376">
+        <label>vpr::InstanceExtensionHandler</label>
+        <link refid="structvpr_1_1_instance_extension_handler"/>
+        <childnode refid="365" relation="usage">
+          <edgelabel>extensionStrings</edgelabel>
+        </childnode>
+        <childnode refid="366" relation="usage">
+          <edgelabel>copiedExtensionStrings</edgelabel>
+        </childnode>
+      </node>
+      <node id="366">
+        <label>std::vector&lt; std::string &gt;</label>
+        <childnode refid="367" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="378">
+        <label>std::vector&lt; VkImageView &gt;</label>
+      </node>
+      <node id="374">
+        <label>vpr::VkDebugUtilsFunctions</label>
+        <link refid="structvpr_1_1_vk_debug_utils_functions"/>
+      </node>
+      <node id="373">
+        <label>std::vector&lt; VkQueueFamilyProperties &gt;</label>
+      </node>
+      <node id="364">
+        <label>std::map&lt; VkQueueFlags, VkDeviceQueueCreateInfo &gt;</label>
+      </node>
+      <node id="379">
+        <label>vpr::SwapchainImpl::SwapchainInfo</label>
+        <link refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info"/>
+        <childnode refid="380" relation="usage">
+          <edgelabel>Formats</edgelabel>
+        </childnode>
+        <childnode refid="381" relation="usage">
+          <edgelabel>PresentModes</edgelabel>
+        </childnode>
+      </node>
+      <node id="375">
+        <label>vpr::Instance</label>
+        <link refid="classvpr_1_1_instance"/>
+        <childnode refid="376" relation="usage">
+          <edgelabel>extensionHandler</edgelabel>
+        </childnode>
+      </node>
+      <node id="370">
+        <label>vpr::PhysicalDevice</label>
+        <link refid="classvpr_1_1_physical_device"/>
+        <childnode refid="371" relation="usage">
+          <edgelabel>impl</edgelabel>
+        </childnode>
+      </node>
+      <node id="365">
+        <label>std::vector&lt; const char *&gt;</label>
+      </node>
+      <node id="367">
+        <label>std::string</label>
+        <childnode refid="368" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="core/src/Swapchain.cpp" line="32" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="32" bodyend="76"/>
+    <listofallmembers>
+      <member refid="structvpr_1_1_swapchain_impl_1a7e5657d05e85893acc16ed3d27d95d79" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>colorFormat</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1aaf04b6cc653a8f180be1f6ac1f332ea1" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>colorSpace</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1a26979c4e9803da67ef61bf098377b341" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>create</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1a74bf63c03840dc00739d2d1df917166f" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>createInfo</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1a20ec41d1ba4829802c339716b7ddb609" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>desiredSyncMode</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1a3c2995780e90567ea32d6b6f72c5d891" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>destroy</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1aeba57cfc9c3adf9076e82df56393850e" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>device</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1a4a34f9862f04c466ebbe4659e904ed5b" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>extent</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1aac62079e0f9815e341043173834585f8" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>handle</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1a16472b860e896076f573b5133b16ef55" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>imageCount</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1a041a418f78d24b287337e76f21d54d0a" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>images</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1a8970acfa427e8dfa0dc92680438f5d12" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>imageViews</name></member>
+      <member refid="group___core_1ga53b8864a06225b92d1a4cf46ea333fbb" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>info</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1ae2165262ed1575747787c0c89987e3b8" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>oldHandle</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1a1a07f34fccc495abbacbcb9304f4991c" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>presentMode</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1afdf0ef2711d213b7020b37785a62a7ad" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>setParameters</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>setupCreateInfo</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1aaded5613928f1e39c1a61ac25be8bf88" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>setupImageViews</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1acc94e08e83ec3857bffdea08e9b4bf65" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>setupSwapImages</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1a7ac3954e02fcc657d549df73501050d5" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>surface</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1aa630021e70194a7a44636a679dc9d159" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>surfaceFormat</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1a14646cf53830d3719e470dd941d430ab" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>SwapchainImpl</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1a82f79b680afc9c9b9d990e5f56a26c47" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>window</name></member>
+      <member refid="structvpr_1_1_swapchain_impl_1acf2d556e0718c579a98f3a3311ff641f" prot="public" virt="non-virtual"><scope>vpr::SwapchainImpl</scope><name>~SwapchainImpl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

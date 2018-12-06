@@ -1,9 +1,0 @@
-<map id="alloc/src/AllocationCollection.cpp" name="alloc/src/AllocationCollection.cpp">
-<area shape="rect" id="node2" href="$vpr__stdafx_8h.html" title="vpr_stdafx.h" alt="" coords="75,304,166,331"/>
-<area shape="rect" id="node4" href="$_allocation_collection_8hpp.html" title="AllocationCollection.hpp" alt="" coords="176,155,337,181"/>
-<area shape="rect" id="node9" href="$_allocator_8hpp.html" title="Allocator.hpp" alt="" coords="35,155,134,181"/>
-<area shape="rect" id="node10" href="$_memory_block_8hpp.html" title="MemoryBlock.hpp" alt="" coords="312,80,438,107"/>
-<area shape="rect" id="node5" href="$_forward_decl_8hpp.html" title="ForwardDecl.hpp" alt="" coords="504,304,622,331"/>
-<area shape="rect" id="node11" href="$_alloc_common_8hpp.html" title="AllocCommon.hpp" alt="" coords="684,229,812,256"/>
-<area shape="rect" id="node15" href="$_suballocation_8hpp.html" title="Suballocation.hpp" alt="" coords="447,155,572,181"/>
-</map>

@@ -1,4 +1,0 @@
-<map id="vpr::CheckBufferImageGranularityConflict" name="vpr::CheckBufferImageGranularityConflict">
-<area shape="rect" id="node2" href="$classvpr_1_1_memory_block.html#a3eb796b49ef07360203e2fe8c099809b" title="Verifies that requested suballocation can be added to this object, and sets dest_offset to reflect of..." alt="" coords="268,5,435,47"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_memory_block.html#acd06cfdc8c15616243b296be79e7a63f" title="Fills the given SuballocationRequest struct with information about where to place the suballocation..." alt="" coords="483,5,665,47"/>
-</map>

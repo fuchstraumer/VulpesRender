@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_allocator_8cpp" kind="file" language="C++">
+    <compoundname>Allocator.cpp</compoundname>
+    <includes refid="vpr__stdafx_8h" local="yes">vpr_stdafx.h</includes>
+    <includes refid="_allocator_8hpp" local="yes">Allocator.hpp</includes>
+    <includes refid="_allocator_impl_8hpp" local="yes">AllocatorImpl.hpp</includes>
+    <includes local="yes">easylogging++.h</includes>
+    <incdepgraph>
+      <node id="105">
+        <label>list</label>
+      </node>
+      <node id="109">
+        <label>limits</label>
+      </node>
+      <node id="112">
+        <label>easylogging++.h</label>
+      </node>
+      <node id="104">
+        <label>Suballocation.hpp</label>
+        <link refid="_suballocation_8hpp"/>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="105" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+      </node>
+      <node id="97">
+        <label>cassert</label>
+      </node>
+      <node id="96">
+        <label>stdexcept</label>
+      </node>
+      <node id="111">
+        <label>map</label>
+      </node>
+      <node id="110">
+        <label>unordered_set</label>
+      </node>
+      <node id="106">
+        <label>vkAssert.hpp</label>
+        <link refid="vk_assert_8hpp"/>
+        <childnode refid="107" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+      </node>
+      <node id="108">
+        <label>CreateInfoBase.hpp</label>
+        <link refid="_create_info_base_8hpp"/>
+        <childnode refid="109" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+      </node>
+      <node id="101">
+        <label>Allocation.hpp</label>
+        <link refid="_allocation_8hpp"/>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+      </node>
+      <node id="88">
+        <label>vpr_stdafx.h</label>
+        <link refid="vpr__stdafx_8h"/>
+        <childnode refid="89" relation="include">
+        </childnode>
+      </node>
+      <node id="103">
+        <label>MemoryBlock.hpp</label>
+        <link refid="_memory_block_8hpp"/>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="104" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="99">
+        <label>vector</label>
+      </node>
+      <node id="98">
+        <label>AllocationCollection.hpp</label>
+        <link refid="_allocation_collection_8hpp"/>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="95">
+        <label>utility</label>
+      </node>
+      <node id="89">
+        <label>vulkan/vulkan.h</label>
+      </node>
+      <node id="94">
+        <label>AllocCommon.hpp</label>
+        <link refid="_alloc_common_8hpp"/>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+      </node>
+      <node id="102">
+        <label>AllocationRequirements.hpp</label>
+        <link refid="_allocation_requirements_8hpp"/>
+        <childnode refid="88" relation="include">
+        </childnode>
+      </node>
+      <node id="107">
+        <label>iostream</label>
+      </node>
+      <node id="90">
+        <label>Allocator.hpp</label>
+        <link refid="_allocator_8hpp"/>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+      </node>
+      <node id="93">
+        <label>AllocatorImpl.hpp</label>
+        <link refid="_allocator_impl_8hpp"/>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
+        </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="110" relation="include">
+        </childnode>
+        <childnode refid="111" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+      </node>
+      <node id="100">
+        <label>mutex</label>
+      </node>
+      <node id="87">
+        <label>alloc/src/Allocator.cpp</label>
+        <link refid="_allocator_8cpp"/>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+        <childnode refid="112" relation="include">
+        </childnode>
+      </node>
+      <node id="91">
+        <label>ForwardDecl.hpp</label>
+        <link refid="_forward_decl_8hpp"/>
+      </node>
+      <node id="92">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="alloc/src/Allocator.cpp"/>
+  </compounddef>
+</doxygen>

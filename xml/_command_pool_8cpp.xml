@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_command_pool_8cpp" kind="file" language="C++">
+    <compoundname>CommandPool.cpp</compoundname>
+    <includes refid="vpr__stdafx_8h" local="yes">vpr_stdafx.h</includes>
+    <includes refid="_command_pool_8hpp" local="yes">CommandPool.hpp</includes>
+    <includes refid="vk_assert_8hpp" local="yes">vkAssert.hpp</includes>
+    <includes refid="_create_info_base_8hpp" local="yes">CreateInfoBase.hpp</includes>
+    <includes local="yes">easylogging++.h</includes>
+    <includes local="no">vector</includes>
+    <incdepgraph>
+      <node id="283">
+        <label>command/src/CommandPool.cpp</label>
+        <link refid="_command_pool_8cpp"/>
+        <childnode refid="284" relation="include">
+        </childnode>
+        <childnode refid="286" relation="include">
+        </childnode>
+        <childnode refid="289" relation="include">
+        </childnode>
+        <childnode refid="292" relation="include">
+        </childnode>
+        <childnode refid="294" relation="include">
+        </childnode>
+        <childnode refid="295" relation="include">
+        </childnode>
+      </node>
+      <node id="293">
+        <label>limits</label>
+      </node>
+      <node id="294">
+        <label>easylogging++.h</label>
+      </node>
+      <node id="291">
+        <label>cassert</label>
+      </node>
+      <node id="286">
+        <label>CommandPool.hpp</label>
+        <link refid="_command_pool_8hpp"/>
+        <childnode refid="284" relation="include">
+        </childnode>
+        <childnode refid="287" relation="include">
+        </childnode>
+        <childnode refid="288" relation="include">
+        </childnode>
+      </node>
+      <node id="289">
+        <label>vkAssert.hpp</label>
+        <link refid="vk_assert_8hpp"/>
+        <childnode refid="290" relation="include">
+        </childnode>
+        <childnode refid="291" relation="include">
+        </childnode>
+        <childnode refid="285" relation="include">
+        </childnode>
+      </node>
+      <node id="292">
+        <label>CreateInfoBase.hpp</label>
+        <link refid="_create_info_base_8hpp"/>
+        <childnode refid="293" relation="include">
+        </childnode>
+        <childnode refid="285" relation="include">
+        </childnode>
+      </node>
+      <node id="284">
+        <label>vpr_stdafx.h</label>
+        <link refid="vpr__stdafx_8h"/>
+        <childnode refid="285" relation="include">
+        </childnode>
+      </node>
+      <node id="295">
+        <label>vector</label>
+      </node>
+      <node id="285">
+        <label>vulkan/vulkan.h</label>
+      </node>
+      <node id="290">
+        <label>iostream</label>
+      </node>
+      <node id="287">
+        <label>ForwardDecl.hpp</label>
+        <link refid="_forward_decl_8hpp"/>
+      </node>
+      <node id="288">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structvpr_1_1_command_buffers" prot="public">vpr::CommandBuffers</innerclass>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="command/src/CommandPool.cpp"/>
+  </compounddef>
+</doxygen>

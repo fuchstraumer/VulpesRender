@@ -1,5 +1,0 @@
-<map id="vpr::Allocation::IsPrivateAllocation" name="vpr::Allocation::IsPrivateAllocation">
-<area shape="rect" id="node2" href="$classvpr_1_1_allocator.html#a438bbd88a3f18c741f7de90f528300b1" title="vpr::Allocator::FreeMemory" alt="" coords="213,5,392,32"/>
-<area shape="rect" id="node3" href="$structvpr_1_1_allocator_impl.html#a4d132f78ac784684f0384127ff5c8624" title="vpr::AllocatorImpl\l::freePrivateMemory" alt="" coords="234,57,371,98"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_allocation.html#add3be5fd7fee67744d380e74b0c5bfb3" title="vpr::Allocation::operator==" alt="" coords="215,123,390,149"/>
-</map>

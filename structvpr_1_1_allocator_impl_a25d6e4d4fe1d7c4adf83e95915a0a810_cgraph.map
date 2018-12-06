@@ -1,8 +1,0 @@
-<map id="vpr::AllocatorImpl::allocateMemoryType" name="vpr::AllocatorImpl::allocateMemoryType">
-<area shape="rect" id="node2" href="$structvpr_1_1_allocator_impl.html#a2ec18969e688b4cb472a16535482208d" title="vpr::AllocatorImpl\l::allocatePrivateMemory" alt="" coords="215,5,376,47"/>
-<area shape="rect" id="node4" href="$structvpr_1_1_allocator_impl.html#af2ca13cb9b36bb5dd5d937d1ecd8aa78" title="vpr::AllocatorImpl\l::GetAllocSize" alt="" coords="235,71,356,112"/>
-<area shape="rect" id="node5" href="$structvpr_1_1_allocator_impl.html#af4cde12705894f4ac76aa4d1eeeec6e7" title="vpr::AllocatorImpl\l::GetBufferImageGranularity" alt="" coords="204,136,387,177"/>
-<area shape="rect" id="node6" href="$structvpr_1_1_allocator_impl.html#af42f00943ffa38d2f02d24886f549911" title="vpr::AllocatorImpl\l::GetPreferredBlockSize" alt="" coords="214,201,377,243"/>
-<area shape="rect" id="node7" href="$classvpr_1_1_allocation.html#ad5d461398f23e593c58f70a8cac78922" title="vpr::Allocation::Init" alt="" coords="231,267,359,294"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_allocation.html#ad680abfd77facfe5efcc222b154b595d" title="vpr::Allocation::InitPrivate" alt="" coords="435,13,601,39"/>
-</map>

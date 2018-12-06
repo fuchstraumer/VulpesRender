@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_image_deprecated_8cpp" kind="file" language="C++">
+    <compoundname>ImageDeprecated.cpp</compoundname>
+    <includes refid="vpr__stdafx_8h" local="yes">vpr_stdafx.h</includes>
+    <includes local="yes">resource/Image.hpp</includes>
+    <includes local="yes">core/LogicalDevice.hpp</includes>
+    <includes local="yes">command/CommandPool.hpp</includes>
+    <includes local="yes">alloc/Allocator.hpp</includes>
+    <includes local="yes">alloc/AllocationRequirements.hpp</includes>
+    <includes refid="vk_assert_8hpp" local="yes">common/vkAssert.hpp</includes>
+    <includes refid="_create_info_base_8hpp" local="yes">common/CreateInfoBase.hpp</includes>
+    <incdepgraph>
+      <node id="742">
+        <label>limits</label>
+      </node>
+      <node id="736">
+        <label>alloc/Allocator.hpp</label>
+      </node>
+      <node id="730">
+        <label>resource/src/ImageDeprecated.cpp</label>
+        <link refid="_image_deprecated_8cpp"/>
+        <childnode refid="731" relation="include">
+        </childnode>
+        <childnode refid="733" relation="include">
+        </childnode>
+        <childnode refid="734" relation="include">
+        </childnode>
+        <childnode refid="735" relation="include">
+        </childnode>
+        <childnode refid="736" relation="include">
+        </childnode>
+        <childnode refid="737" relation="include">
+        </childnode>
+        <childnode refid="738" relation="include">
+        </childnode>
+        <childnode refid="741" relation="include">
+        </childnode>
+      </node>
+      <node id="740">
+        <label>cassert</label>
+      </node>
+      <node id="738">
+        <label>common/vkAssert.hpp</label>
+        <link refid="vk_assert_8hpp"/>
+        <childnode refid="739" relation="include">
+        </childnode>
+        <childnode refid="740" relation="include">
+        </childnode>
+        <childnode refid="732" relation="include">
+        </childnode>
+      </node>
+      <node id="741">
+        <label>common/CreateInfoBase.hpp</label>
+        <link refid="_create_info_base_8hpp"/>
+        <childnode refid="742" relation="include">
+        </childnode>
+        <childnode refid="732" relation="include">
+        </childnode>
+      </node>
+      <node id="731">
+        <label>vpr_stdafx.h</label>
+        <link refid="vpr__stdafx_8h"/>
+        <childnode refid="732" relation="include">
+        </childnode>
+      </node>
+      <node id="732">
+        <label>vulkan/vulkan.h</label>
+      </node>
+      <node id="735">
+        <label>command/CommandPool.hpp</label>
+      </node>
+      <node id="739">
+        <label>iostream</label>
+      </node>
+      <node id="733">
+        <label>resource/Image.hpp</label>
+      </node>
+      <node id="737">
+        <label>alloc/AllocationRequirements.hpp</label>
+      </node>
+      <node id="734">
+        <label>core/LogicalDevice.hpp</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="resource/src/ImageDeprecated.cpp"/>
+  </compounddef>
+</doxygen>

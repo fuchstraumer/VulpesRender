@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="structvpr_1_1_allocation_impl_1_1block_allocation" kind="struct" language="C++" prot="public">
+    <compoundname>vpr::AllocationImpl::blockAllocation</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvpr_1_1_allocation_impl_1_1block_allocation_1a13b8c05677f7310923d6e7b8005953af" prot="public" static="no" mutable="no">
+        <type><ref refid="classvpr_1_1_memory_block" kindref="compound">MemoryBlock</ref> *</type>
+        <definition>MemoryBlock* vpr::AllocationImpl::blockAllocation::ParentBlock</definition>
+        <argsstring></argsstring>
+        <name>ParentBlock</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/Allocation.cpp" line="19" column="1" bodyfile="alloc/src/Allocation.cpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_allocation_impl_1_1block_allocation_1aefc5312d57bb46a0decb787d60f5d877" prot="public" static="no" mutable="no">
+        <type>VkDeviceSize</type>
+        <definition>VkDeviceSize vpr::AllocationImpl::blockAllocation::Offset</definition>
+        <argsstring></argsstring>
+        <name>Offset</name>
+        <initializer>{ std::numeric_limits&lt;VkDeviceSize&gt;::max() }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/Allocation.cpp" line="20" column="1" bodyfile="alloc/src/Allocation.cpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="74">
+        <label>vpr::AllocationImpl::blockAllocation</label>
+        <link refid="structvpr_1_1_allocation_impl_1_1block_allocation"/>
+        <childnode refid="75" relation="usage">
+          <edgelabel>ParentBlock</edgelabel>
+        </childnode>
+      </node>
+      <node id="79">
+        <label>std::list&lt; T &gt;::iterator</label>
+      </node>
+      <node id="78">
+        <label>std::vector&lt; suballocationList::iterator &gt;</label>
+        <childnode refid="79" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="76">
+        <label>std::list&lt; Suballocation &gt;</label>
+        <childnode refid="77" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="75">
+        <label>vpr::MemoryBlock</label>
+        <link refid="classvpr_1_1_memory_block"/>
+        <childnode refid="76" relation="usage">
+          <edgelabel>Suballocations</edgelabel>
+        </childnode>
+        <childnode refid="78" relation="usage">
+          <edgelabel>availSuballocations</edgelabel>
+        </childnode>
+      </node>
+      <node id="77">
+        <label>vpr::Suballocation</label>
+        <link refid="structvpr_1_1_suballocation"/>
+      </node>
+    </collaborationgraph>
+    <location file="alloc/src/Allocation.cpp" line="18" column="1" bodyfile="alloc/src/Allocation.cpp" bodystart="18" bodyend="21"/>
+    <listofallmembers>
+      <member refid="structvpr_1_1_allocation_impl_1_1block_allocation_1aefc5312d57bb46a0decb787d60f5d877" prot="public" virt="non-virtual"><scope>vpr::AllocationImpl::blockAllocation</scope><name>Offset</name></member>
+      <member refid="structvpr_1_1_allocation_impl_1_1block_allocation_1a13b8c05677f7310923d6e7b8005953af" prot="public" virt="non-virtual"><scope>vpr::AllocationImpl::blockAllocation</scope><name>ParentBlock</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,2649 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="namespacevpr" kind="namespace" language="C++">
+    <compoundname>vpr</compoundname>
+    <innerclass refid="classvpr_1_1_allocation" prot="public">vpr::Allocation</innerclass>
+    <innerclass refid="classvpr_1_1_allocation_collection" prot="public">vpr::AllocationCollection</innerclass>
+    <innerclass refid="structvpr_1_1_allocation_hash" prot="public">vpr::AllocationHash</innerclass>
+    <innerclass refid="structvpr_1_1_allocation_impl" prot="public">vpr::AllocationImpl</innerclass>
+    <innerclass refid="structvpr_1_1_allocation_requirements" prot="public">vpr::AllocationRequirements</innerclass>
+    <innerclass refid="classvpr_1_1_allocator" prot="public">vpr::Allocator</innerclass>
+    <innerclass refid="structvpr_1_1_allocator_impl" prot="public">vpr::AllocatorImpl</innerclass>
+    <innerclass refid="classvpr_1_1_buffer" prot="public">vpr::Buffer</innerclass>
+    <innerclass refid="structvpr_1_1_command_buffers" prot="public">vpr::CommandBuffers</innerclass>
+    <innerclass refid="classvpr_1_1_command_pool" prot="public">vpr::CommandPool</innerclass>
+    <innerclass refid="classvpr_1_1_debug_visualization" prot="public">vpr::DebugVisualization</innerclass>
+    <innerclass refid="structvpr_1_1_debug_visualization_impl" prot="public">vpr::DebugVisualizationImpl</innerclass>
+    <innerclass refid="classvpr_1_1_descriptor_pool" prot="public">vpr::DescriptorPool</innerclass>
+    <innerclass refid="classvpr_1_1_descriptor_set" prot="public">vpr::DescriptorSet</innerclass>
+    <innerclass refid="structvpr_1_1_descriptor_set_impl" prot="public">vpr::DescriptorSetImpl</innerclass>
+    <innerclass refid="classvpr_1_1_descriptor_set_layout" prot="public">vpr::DescriptorSetLayout</innerclass>
+    <innerclass refid="classvpr_1_1_device" prot="public">vpr::Device</innerclass>
+    <innerclass refid="structvpr_1_1_device_data_members" prot="public">vpr::DeviceDataMembers</innerclass>
+    <innerclass refid="classvpr_1_1_event" prot="public">vpr::Event</innerclass>
+    <innerclass refid="classvpr_1_1_fence" prot="public">vpr::Fence</innerclass>
+    <innerclass refid="classvpr_1_1_framebuffer" prot="public">vpr::Framebuffer</innerclass>
+    <innerclass refid="classvpr_1_1_graphics_pipeline" prot="public">vpr::GraphicsPipeline</innerclass>
+    <innerclass refid="structvpr_1_1_graphics_pipeline_info" prot="public">vpr::GraphicsPipelineInfo</innerclass>
+    <innerclass refid="classvpr_1_1_image" prot="public">vpr::Image</innerclass>
+    <innerclass refid="classvpr_1_1_instance" prot="public">vpr::Instance</innerclass>
+    <innerclass refid="structvpr_1_1_instance_extension_handler" prot="public">vpr::InstanceExtensionHandler</innerclass>
+    <innerclass refid="structvpr_1_1_layout_bindings" prot="public">vpr::LayoutBindings</innerclass>
+    <innerclass refid="classvpr_1_1_memory_block" prot="public">vpr::MemoryBlock</innerclass>
+    <innerclass refid="structvpr_1_1_memory_block_info" prot="public">vpr::MemoryBlockInfo</innerclass>
+    <innerclass refid="structvpr_1_1_memory_blocks_group" prot="public">vpr::MemoryBlocksGroup</innerclass>
+    <innerclass refid="classvpr_1_1_physical_device" prot="public">vpr::PhysicalDevice</innerclass>
+    <innerclass refid="classvpr_1_1_physical_device_impl" prot="public">vpr::PhysicalDeviceImpl</innerclass>
+    <innerclass refid="classvpr_1_1_pipeline_cache" prot="public">vpr::PipelineCache</innerclass>
+    <innerclass refid="classvpr_1_1_pipeline_layout" prot="public">vpr::PipelineLayout</innerclass>
+    <innerclass refid="structvpr_1_1queue__priorities__t" prot="public">vpr::queue_priorities_t</innerclass>
+    <innerclass refid="structvpr_1_1raw__equal__comparator" prot="public">vpr::raw_equal_comparator</innerclass>
+    <innerclass refid="classvpr_1_1_renderpass" prot="public">vpr::Renderpass</innerclass>
+    <innerclass refid="structvpr_1_1_renderpass_impl" prot="public">vpr::RenderpassImpl</innerclass>
+    <innerclass refid="structvpr_1_1_resource_type_map" prot="public">vpr::ResourceTypeMap</innerclass>
+    <innerclass refid="classvpr_1_1_sampler" prot="public">vpr::Sampler</innerclass>
+    <innerclass refid="classvpr_1_1_semaphore" prot="public">vpr::Semaphore</innerclass>
+    <innerclass refid="structvpr_1_1_shader_code_file_loader" prot="public">vpr::ShaderCodeFileLoader</innerclass>
+    <innerclass refid="classvpr_1_1_shader_module" prot="public">vpr::ShaderModule</innerclass>
+    <innerclass refid="structvpr_1_1_suballocation" prot="public">vpr::Suballocation</innerclass>
+    <innerclass refid="structvpr_1_1_suballocation_draw_command" prot="public">vpr::SuballocationDrawCommand</innerclass>
+    <innerclass refid="structvpr_1_1_suballocation_request" prot="public">vpr::SuballocationRequest</innerclass>
+    <innerclass refid="structvpr_1_1suballoc_iter_compare" prot="public">vpr::suballocIterCompare</innerclass>
+    <innerclass refid="structvpr_1_1suballoc_offset_compare" prot="public">vpr::suballocOffsetCompare</innerclass>
+    <innerclass refid="classvpr_1_1_surface_k_h_r" prot="public">vpr::SurfaceKHR</innerclass>
+    <innerclass refid="classvpr_1_1_swapchain" prot="public">vpr::Swapchain</innerclass>
+    <innerclass refid="structvpr_1_1_swapchain_impl" prot="public">vpr::SwapchainImpl</innerclass>
+    <innerclass refid="structvpr_1_1_vk_debug_utils_functions" prot="public">vpr::VkDebugUtilsFunctions</innerclass>
+    <innerclass refid="structvpr_1_1vk_queue_family_indices" prot="public">vpr::vkQueueFamilyIndices</innerclass>
+    <innerclass refid="structvpr_1_1_vpr_extension_pack" prot="public">vpr::VprExtensionPack</innerclass>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacevpr_1a494552c6fdda99313008c4a5e61a79fc" prot="public" static="no" strong="yes">
+        <type>uint32_t</type>
+        <name>AllocationType</name>
+        <enumvalue id="namespacevpr_1a494552c6fdda99313008c4a5e61a79fcaccc0377a8afbf50e7094f5c23a8af223" prot="public">
+          <name>INVALID</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacevpr_1a494552c6fdda99313008c4a5e61a79fca7e62bc342f41c946868f0ea6f0b712d8" prot="public">
+          <name>Buffer</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacevpr_1a494552c6fdda99313008c4a5e61a79fcabb63562f6302e971e7c3095b4746816f" prot="public">
+          <name>ImageLinear</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacevpr_1a494552c6fdda99313008c4a5e61a79fcaa89b23279cca789eae30f24b8eb80d91" prot="public">
+          <name>ImageTiled</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacevpr_1a494552c6fdda99313008c4a5e61a79fca88183b946cc5f0e8c96b2e66e1c74a7e" prot="public">
+          <name>Unknown</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/Allocator.hpp" line="36" column="1" bodyfile="alloc/include/Allocator.hpp" bodystart="36" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___allocation_1gaba421ef06b1d6b910602d0180c9eff78" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>ValidationCode</name>
+        <enumvalue id="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a76c3ec4c3969badcdd02e0c88b07077f" prot="public">
+          <name>VALIDATION_PASSED</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a641efe802ee0e2d0cbc7a0c46e91e687" prot="public">
+          <name>NULL_MEMORY_HANDLE</name>
+          <briefdescription>
+<para><ref refid="structvpr_1_1_suballocation" kindref="compound">Suballocation</ref>&apos;s memory handle is invalid. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a2ceb3550d64b57a93e2896bcf767112c" prot="public">
+          <name>ZERO_MEMORY_SIZE</name>
+          <briefdescription>
+<para><ref refid="structvpr_1_1_suballocation" kindref="compound">Suballocation</ref>&apos;s memory size is zero. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a76d83e278aa0df0c5edd0e99d70ee768" prot="public">
+          <name>INCORRECT_SUBALLOC_OFFSET</name>
+          <briefdescription>
+<para>Offset of suballocation is incorrect: it may overlap with another, or it may be placed beyond the range of the allocation. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a81f141477ffccd0d5a9c6a2353348cc7" prot="public">
+          <name>NEED_MERGE_SUBALLOCS</name>
+          <briefdescription>
+<para>Two adjacent free suballoctions: merge them into one bigger suballocation. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78ac38471be1ba1406851e804110887b573" prot="public">
+          <name>FREE_SUBALLOC_COUNT_MISMATCH</name>
+          <briefdescription>
+<para>We found more free suballocations while validating than there are in the free suballocation list. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a99db430a4a1b654dc0c46b77a028d4a5" prot="public">
+          <name>USED_SUBALLOC_IN_FREE_LIST</name>
+          <briefdescription>
+<para>Non-free suballocation in free suballocation list. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a4510c59ac7d838e715255649c3fd77a5" prot="public">
+          <name>FREE_SUBALLOC_SORT_INCORRECT</name>
+          <briefdescription>
+<para>Free suballocation list is sorted by available space descending: sorting is incorrect and smaller free region is before larger free region. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a88ad6448cd6f1d495139e026eb3424dc" prot="public">
+          <name>FINAL_SIZE_MISMATCH</name>
+          <briefdescription>
+<para>Calculated offset as sum of all suballoc sizes is not equal to allocations total size. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a9d79688e901f5c4aa31129a2fe7f3451" prot="public">
+          <name>FINAL_FREE_SIZE_MISMATCH</name>
+          <briefdescription>
+<para>Calculated total available size doesn&apos;t match stored available size. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>These validation codes are returned by the memory validation routine, giving information on the error encountered. </para>        </briefdescription>
+        <detaileddescription>
+<para>They will also be printed to the console, if it is enabled, and logged to the log file as well. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/AllocCommon.hpp" line="33" column="1" bodyfile="alloc/src/AllocCommon.hpp" bodystart="33" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacevpr_1a0e514923b7b5d7b161e485c8b3ae2e15" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>memory_attributes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/DebugVisualization.cpp" line="8" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="8" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacevpr_1a729c04888e8a0b67bdb473c36221615e" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>SuballocationType</name>
+        <enumvalue id="namespacevpr_1a729c04888e8a0b67bdb473c36221615eab24ce0cd392a5b0b8dedc66c25213594" prot="public">
+          <name>Free</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacevpr_1a729c04888e8a0b67bdb473c36221615ea88183b946cc5f0e8c96b2e66e1c74a7e" prot="public">
+          <name>Unknown</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacevpr_1a729c04888e8a0b67bdb473c36221615ea7e62bc342f41c946868f0ea6f0b712d8" prot="public">
+          <name>Buffer</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacevpr_1a729c04888e8a0b67bdb473c36221615ea7d16f3f47038f8ac0d8615e4b83f55d9" prot="public">
+          <name>ImageUnknown</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacevpr_1a729c04888e8a0b67bdb473c36221615eabb63562f6302e971e7c3095b4746816f" prot="public">
+          <name>ImageLinear</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacevpr_1a729c04888e8a0b67bdb473c36221615ead21ea5ec68ed3adc669014fe4ca2daef" prot="public">
+          <name>ImageOptimal</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/Suballocation.hpp" line="12" column="1" bodyfile="alloc/src/Suballocation.hpp" bodystart="12" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___core_1ga874ec16fda53668c022029810b30d344" prot="public" static="no" strong="yes">
+        <type>uint32_t</type>
+        <name>vertical_sync_mode</name>
+        <enumvalue id="group___core_1gga874ec16fda53668c022029810b30d344a6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+          <name>None</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>Aliases to immediate present mode. </para>          </briefdescription>
+          <detaileddescription>
+<para>No buffering, high incidences of tearing. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___core_1gga874ec16fda53668c022029810b30d344ad8c8df02e3ea8c16388590c51ea089ee" prot="public">
+          <name>VerticalSync</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>Aliases to simple FIFO mode - vertical sync and double-buffering, effectively. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___core_1gga874ec16fda53668c022029810b30d344afbbcc162d33d672b5bffae3c7939dc38" prot="public">
+          <name>VerticalSyncRelaxed</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+<para>Aliases to relaxed FIFO mode - if a frame is missed, tearing is allowed. </para>          </briefdescription>
+          <detaileddescription>
+<para>Efficient and most effective on mobile platforms. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___core_1gga874ec16fda53668c022029810b30d344a9e8c48ae5889c8d59c1534db00c53cbc" prot="public">
+          <name>VerticalSyncMailbox</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+<para>Aliases to Vulkan&apos;s mailbox mode, which effectively becomes triple-buffering. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Used to select which of the presentation modes are to be used by a <ref refid="classvpr_1_1_swapchain" kindref="compound">Swapchain</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Consult Vulkan docs for more info on presentation modes. Currently missing shared presentation modes for the mobile-specific swapchain extensions for better presentation. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/Swapchain.hpp" line="15" column="1" bodyfile="core/include/Swapchain.hpp" bodystart="15" bodyend="24"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacevpr_1a2eaaed43241e0415151f981de244eae8" prot="public" static="no">
+        <type>std::vector&lt; <ref refid="classvpr_1_1_memory_block" kindref="compound">MemoryBlock</ref> * &gt;::iterator</type>
+        <definition>typedef std::vector&lt;MemoryBlock*&gt;::iterator vpr::allocation_iterator_t</definition>
+        <argsstring></argsstring>
+        <name>allocation_iterator_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/MemoryBlock.hpp" line="117" column="1" bodyfile="alloc/src/MemoryBlock.hpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacevpr_1a5e5c4f19e6c891c34199ef44be0e8cca" prot="public" static="no">
+        <type>std::vector&lt; <ref refid="classvpr_1_1_memory_block" kindref="compound">MemoryBlock</ref> * &gt;::const_iterator</type>
+        <definition>typedef std::vector&lt;MemoryBlock*&gt;::const_iterator vpr::const_allocation_iterator_t</definition>
+        <argsstring></argsstring>
+        <name>const_allocation_iterator_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/MemoryBlock.hpp" line="118" column="1" bodyfile="alloc/src/MemoryBlock.hpp" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacevpr_1a699fcbdac72f032ac918ffa160703c20" prot="public" static="no">
+        <type>std::list&lt; <ref refid="structvpr_1_1_suballocation" kindref="compound">Suballocation</ref> &gt;</type>
+        <definition>using vpr::suballocationList = typedef std::list&lt;Suballocation&gt;</definition>
+        <argsstring></argsstring>
+        <name>suballocationList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/Suballocation.hpp" line="40" column="1" bodyfile="alloc/src/Suballocation.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacevpr_1ae45fb55dc24425884ab5770dfdb39cdb" prot="public" static="no">
+        <type>std::vector&lt; suballocationList::iterator &gt;::iterator</type>
+        <definition>using vpr::avail_suballocation_iterator_t = typedef std::vector&lt;suballocationList::iterator&gt;::iterator</definition>
+        <argsstring></argsstring>
+        <name>avail_suballocation_iterator_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/Suballocation.hpp" line="57" column="1" bodyfile="alloc/src/Suballocation.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacevpr_1a532ca90a6e5307a71ef40c54e6a68964" prot="public" static="no">
+        <type>std::vector&lt; suballocationList::iterator &gt;::const_iterator</type>
+        <definition>using vpr::const_avail_suballocation_iterator_t = typedef std::vector&lt;suballocationList::iterator&gt;::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_avail_suballocation_iterator_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/Suballocation.hpp" line="58" column="1" bodyfile="alloc/src/Suballocation.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacevpr_1a43160a49c54463723cf97f5d8c51e1f2" prot="public" static="no">
+        <type>suballocationList::iterator</type>
+        <definition>using vpr::suballocation_iterator_t = typedef suballocationList::iterator</definition>
+        <argsstring></argsstring>
+        <name>suballocation_iterator_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/Suballocation.hpp" line="59" column="1" bodyfile="alloc/src/Suballocation.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacevpr_1ab423494fb93a04bbd6bd02f5b3b4b393" prot="public" static="no">
+        <type>suballocationList::const_iterator</type>
+        <definition>using vpr::const_suballocation_iterator_t = typedef suballocationList::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_suballocation_iterator_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/Suballocation.hpp" line="60" column="1" bodyfile="alloc/src/Suballocation.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacevpr_1ac148f310fbb1e1a34e40a884b25422b1" prot="public" static="no">
+        <type>GLFWwindow</type>
+        <definition>typedef GLFWwindow vpr::platform_window_type</definition>
+        <argsstring></argsstring>
+        <name>platform_window_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/SurfaceKHR.cpp" line="15" column="1" bodyfile="core/src/SurfaceKHR.cpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacevpr_1a04dcff83681377b8bd95e65a3353cd58" prot="public" static="yes" mutable="no">
+        <type>constexpr size_t</type>
+        <definition>constexpr size_t vpr::vkMaxMemoryTypes</definition>
+        <argsstring></argsstring>
+        <name>vkMaxMemoryTypes</name>
+        <initializer>= 32</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/AllocCommon.hpp" line="11" column="1" bodyfile="alloc/src/AllocCommon.hpp" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1af60ac795045569a749bb2df8977d893b" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDeviceSize</type>
+        <definition>constexpr VkDeviceSize vpr::MinSuballocationSizeToRegister</definition>
+        <argsstring></argsstring>
+        <name>MinSuballocationSizeToRegister</name>
+        <initializer>= 16</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/AllocCommon.hpp" line="12" column="1" bodyfile="alloc/src/AllocCommon.hpp" bodystart="12" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_memory_block_1aca430805fb87da6c9f14facd22166d5f" compoundref="_memory_block_8cpp" startline="536" endline="549">vpr::MemoryBlock::insertFreeSuballocation</referencedby>
+        <referencedby refid="classvpr_1_1_memory_block_1afbbaf6e2f0de8d1bed31e8a8cf71cfed" compoundref="_memory_block_8cpp" startline="551" endline="559">vpr::MemoryBlock::removeFreeSuballocation</referencedby>
+        <referencedby refid="classvpr_1_1_memory_block_1ac05d7c8692b9d305726c1d948a3ec6d9" compoundref="_memory_block_8cpp" startline="145" endline="229">vpr::MemoryBlock::Validate</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a64120fd5b133bb49dbe54f20c62289b1" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDeviceSize</type>
+        <definition>constexpr VkDeviceSize vpr::SmallHeapMaxSize</definition>
+        <argsstring></argsstring>
+        <name>SmallHeapMaxSize</name>
+        <initializer>= 64 * 1024 * 1024</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/AllocCommon.hpp" line="14" column="1" bodyfile="alloc/src/AllocCommon.hpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a252c3121a6d349509e2184d4d4641152" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDeviceSize</type>
+        <definition>constexpr VkDeviceSize vpr::DefaultLargeHeapBlockSize</definition>
+        <argsstring></argsstring>
+        <name>DefaultLargeHeapBlockSize</name>
+        <initializer>= 256 * 1024 * 1024</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/AllocCommon.hpp" line="16" column="1" bodyfile="alloc/src/AllocCommon.hpp" bodystart="16" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a25d6e4d4fe1d7c4adf83e95915a0a810" compoundref="_allocator_impl_8cpp" startline="129" endline="266">vpr::AllocatorImpl::allocateMemoryType</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ab07aac59268ca38105a0594265b8b930" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDeviceSize</type>
+        <definition>constexpr VkDeviceSize vpr::LargeBlockSingleAllocSize</definition>
+        <argsstring></argsstring>
+        <name>LargeBlockSingleAllocSize</name>
+        <initializer>= 512 * 16384</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/AllocCommon.hpp" line="17" column="1" bodyfile="alloc/src/AllocCommon.hpp" bodystart="17" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_allocator_impl_1af2ca13cb9b36bb5dd5d937d1ecd8aa78" compoundref="_allocator_impl_8cpp" startline="59" endline="73">vpr::AllocatorImpl::GetAllocSize</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a5bba3da651d451dc432584c42b9e4ef2" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDeviceSize</type>
+        <definition>constexpr VkDeviceSize vpr::DefaultMediumHeapBlockSize</definition>
+        <argsstring></argsstring>
+        <name>DefaultMediumHeapBlockSize</name>
+        <initializer>= 16777216</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/AllocCommon.hpp" line="18" column="1" bodyfile="alloc/src/AllocCommon.hpp" bodystart="18" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a25d6e4d4fe1d7c4adf83e95915a0a810" compoundref="_allocator_impl_8cpp" startline="129" endline="266">vpr::AllocatorImpl::allocateMemoryType</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a77400da4edea43dcef9869495bf7357c" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDeviceSize</type>
+        <definition>constexpr VkDeviceSize vpr::MediumBlockSingleAllocSize</definition>
+        <argsstring></argsstring>
+        <name>MediumBlockSingleAllocSize</name>
+        <initializer>= 262144 * 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/AllocCommon.hpp" line="19" column="1" bodyfile="alloc/src/AllocCommon.hpp" bodystart="19" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_allocator_impl_1af2ca13cb9b36bb5dd5d937d1ecd8aa78" compoundref="_allocator_impl_8cpp" startline="59" endline="73">vpr::AllocatorImpl::GetAllocSize</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a8ca1df7d6fffb8c6c1730dfd4b7780bf" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDeviceSize</type>
+        <definition>constexpr VkDeviceSize vpr::DefaultSmallHeapBlockSize</definition>
+        <argsstring></argsstring>
+        <name>DefaultSmallHeapBlockSize</name>
+        <initializer>= 16 * 4096</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/AllocCommon.hpp" line="20" column="1" bodyfile="alloc/src/AllocCommon.hpp" bodystart="20" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a25d6e4d4fe1d7c4adf83e95915a0a810" compoundref="_allocator_impl_8cpp" startline="129" endline="266">vpr::AllocatorImpl::allocateMemoryType</referencedby>
+        <referencedby refid="structvpr_1_1_allocator_impl_1af42f00943ffa38d2f02d24886f549911" compoundref="_allocator_impl_8cpp" startline="54" endline="57">vpr::AllocatorImpl::GetPreferredBlockSize</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a484021b88b79f2fc9b5bf590f5241cd2" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDeviceSize</type>
+        <definition>constexpr VkDeviceSize vpr::SmallBlockSingleAllocSize</definition>
+        <argsstring></argsstring>
+        <name>SmallBlockSingleAllocSize</name>
+        <initializer>= 4096</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/AllocCommon.hpp" line="21" column="1" bodyfile="alloc/src/AllocCommon.hpp" bodystart="21" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_allocator_impl_1af2ca13cb9b36bb5dd5d937d1ecd8aa78" compoundref="_allocator_impl_8cpp" startline="59" endline="73">vpr::AllocatorImpl::GetAllocSize</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1adb4fbe461c1ece0fd2c3f56bbb3f55e7" prot="public" static="no" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool vpr::VALIDATE_MEMORY</definition>
+        <argsstring></argsstring>
+        <name>VALIDATE_MEMORY</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/AllocCommon.hpp" line="24" column="1" bodyfile="alloc/src/AllocCommon.hpp" bodystart="24" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a25d6e4d4fe1d7c4adf83e95915a0a810" compoundref="_allocator_impl_8cpp" startline="129" endline="266">vpr::AllocatorImpl::allocateMemoryType</referencedby>
+        <referencedby refid="classvpr_1_1_memory_block_1a88cde43def4e7d21b8a782554497b064" compoundref="_memory_block_8cpp" startline="405" endline="420">vpr::MemoryBlock::Free</referencedby>
+        <referencedby refid="classvpr_1_1_allocator_1a438bbd88a3f18c741f7de90f528300b1" compoundref="_allocator_8cpp" startline="62" endline="111">vpr::Allocator::FreeMemory</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ac04a7888cedcf72461459232fd5ccc9a" prot="public" static="yes" mutable="no">
+        <type>const std::map&lt; <ref refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615e" kindref="member">SuballocationType</ref>, ImVec4 &gt;</type>
+        <definition>const std::map&lt;SuballocationType, ImVec4&gt; vpr::TypeColors</definition>
+        <argsstring></argsstring>
+        <name>TypeColors</name>
+        <initializer>{
+        { <ref refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615eab24ce0cd392a5b0b8dedc66c25213594" kindref="member">SuballocationType::Free</ref>, ImVec4(0.0f, 0.1f, 0.9f, 1.0f) },
+        { SuballocationType::Buffer, ImVec4(119.0f / 255.0f, 244.0f / 255.0f, 66.0f / 255.0f, 1.0f) },
+        { SuballocationType::ImageLinear, ImVec4(244.0f / 255.0f, 226.0f / 255.0f, 66.0f / 255.0f, 1.0f) },
+        { SuballocationType::ImageOptimal, ImVec4(244.0f / 255.0f, 179.0f / 255.0f, 66.0f / 255.0f, 1.0f) },   
+        { SuballocationType::Unknown, ImVec4(240.0f / 255.0f, 10.0f / 255.0f, 10.0f / 255.0f, 1.0f) },
+        { SuballocationType::ImageUnknown, ImVec4(1.0f, 220.0f / 255.0f, 30.0f / 255.0f, 1.0f) }
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/DebugVisualization.cpp" line="12" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a386b8228079a9d82883cb1b818fec3e9" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDeviceSize</type>
+        <definition>constexpr VkDeviceSize vpr::DEBUG_PADDING</definition>
+        <argsstring></argsstring>
+        <name>DEBUG_PADDING</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/MemoryBlock.cpp" line="46" column="1" bodyfile="alloc/src/MemoryBlock.cpp" bodystart="46" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_memory_block_1a3eb796b49ef07360203e2fe8c099809b" compoundref="_memory_block_8cpp" startline="268" endline="348">vpr::MemoryBlock::VerifySuballocation</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a9eebf0b16450e842d624bda2a7783f63" prot="public" static="yes" mutable="no">
+        <type>constexpr VkApplicationInfo</type>
+        <definition>constexpr VkApplicationInfo vpr::vk_base_application_info</definition>
+        <argsstring></argsstring>
+        <name>vk_base_application_info</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_APPLICATION_INFO,
+		nullptr,
+		&quot;!!(Update Application Info pApplicationName field)!!&quot;,
+		VK_MAKE_VERSION(0, 1, 0),
+		&quot;VulpesRender&quot;,
+		VK_MAKE_VERSION(0, 1, 0),
+		VK_API_VERSION_1_0
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="24" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a3d7ce4ebd0c2b8e5a53368f6c69a572a" prot="public" static="yes" mutable="no">
+        <type>constexpr VkInstanceCreateInfo</type>
+        <definition>constexpr VkInstanceCreateInfo vpr::vk_base_instance_info</definition>
+        <argsstring></argsstring>
+        <name>vk_base_instance_info</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
+		nullptr,					
+		0,							
+		&amp;<ref refid="namespacevpr_1a9eebf0b16450e842d624bda2a7783f63" kindref="member">vk_base_application_info</ref>,	
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="35" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ad5bda8c603cad763e4146bb6dacb716d" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDebugReportCallbackCreateInfoEXT</type>
+        <definition>constexpr VkDebugReportCallbackCreateInfoEXT vpr::vk_debug_callback_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_debug_callback_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,
+		nullptr,
+		0,
+		nullptr,
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="43" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a1f4584791e4f10ebfe800bfa1c8f47f5" prot="public" static="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float vpr::default_priorityf</definition>
+        <argsstring></argsstring>
+        <name>default_priorityf</name>
+        <initializer>= 1.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="52" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a263af5b003f0153684813cd1f0647516" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDeviceQueueCreateInfo</type>
+        <definition>constexpr VkDeviceQueueCreateInfo vpr::vk_device_queue_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_device_queue_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO,
+		nullptr,
+		0,
+		std::numeric_limits&lt;uint32_t&gt;::max(), 
+		1, 
+		nullptr 
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="53" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="53" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_device_1a4884447888b9c8aacc288591056db19d" compoundref="_logical_device_8cpp" startline="432" endline="436">vpr::Device::setupQueueFamily</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a34a10f7084a96a1b3c6862a3e1146ec6" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDeviceCreateInfo</type>
+        <definition>constexpr VkDeviceCreateInfo vpr::vk_device_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_device_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
+		nullptr,
+		0,
+		1,
+		&amp;<ref refid="namespacevpr_1a263af5b003f0153684813cd1f0647516" kindref="member">vk_device_queue_create_info_base</ref>
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="63" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="63" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_device_1a3b0734cd598d9a64f3c459e9dc4e84ce" compoundref="_logical_device_8cpp" startline="271" endline="297">vpr::Device::create</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a4e3d32c1636a5f4959a4e32cf4c4fd20" prot="public" static="yes" mutable="no">
+        <type>constexpr VkBufferCreateInfo</type>
+        <definition>constexpr VkBufferCreateInfo vpr::vk_buffer_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_buffer_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+		nullptr,
+		0,
+		0,
+		VK_BUFFER_USAGE_FLAG_BITS_MAX_ENUM,
+		VK_SHARING_MODE_EXCLUSIVE,
+		0,
+		nullptr
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="72" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="72" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_buffer_1add8b2dbfd79028bedfd30b5c5f48b3b2" compoundref="_buffer_deprecated_8cpp" startline="231" endline="245">vpr::Buffer::CreateStagingBuffer</referencedby>
+        <referencedby refid="classvpr_1_1_buffer_1ac367138a3788a0a6df49c5c2ad890774" compoundref="_buffer_deprecated_8cpp" startline="264" endline="278">vpr::Buffer::createStagingBuffer</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a24e23c05f762016d0e7d2af5dea96f92" prot="public" static="yes" mutable="no">
+        <type>constexpr VkMemoryAllocateInfo</type>
+        <definition>constexpr VkMemoryAllocateInfo vpr::vk_allocation_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_allocation_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="84" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1af8ca9d6703e68c8c19b0f9590ef25ff9" prot="public" static="yes" mutable="no">
+        <type>constexpr VkMappedMemoryRange</type>
+        <definition>constexpr VkMappedMemoryRange vpr::vk_mapped_memory_base</definition>
+        <argsstring></argsstring>
+        <name>vk_mapped_memory_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE,
+		nullptr,
+		VK_NULL_HANDLE,
+		0,
+		0,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="90" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a0f3608c6e29e4465175df545a55413c4" prot="public" static="yes" mutable="no">
+        <type>constexpr VkCommandPoolCreateInfo</type>
+        <definition>constexpr VkCommandPoolCreateInfo vpr::vk_command_pool_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_command_pool_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO,
+		nullptr,
+		0,
+		std::numeric_limits&lt;uint32_t&gt;::max(),
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="99" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a570f1edb395e4e16019d1a4c71969be4" prot="public" static="yes" mutable="no">
+        <type>constexpr VkCommandBufferAllocateInfo</type>
+        <definition>constexpr VkCommandBufferAllocateInfo vpr::vk_command_buffer_allocate_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_command_buffer_allocate_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO,
+		nullptr,
+		VK_NULL_HANDLE,
+		VK_COMMAND_BUFFER_LEVEL_PRIMARY,
+		0,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="107" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="107" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_command_pool_1a3df787753ace292c1b295907754172a3" compoundref="_command_pool_8cpp" startline="59" endline="73">vpr::CommandPool::AllocateCmdBuffers</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a5c977d90503781293d3a720e89c43753" prot="public" static="yes" mutable="no">
+        <type>constexpr VkCommandBufferBeginInfo</type>
+        <definition>constexpr VkCommandBufferBeginInfo vpr::vk_command_buffer_begin_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_command_buffer_begin_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO,
+		nullptr,
+		0,
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="115" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a8292f59b8bb0632b074e2f9917f99648" prot="public" static="yes" mutable="no">
+        <type>constexpr VkCommandBufferInheritanceInfo</type>
+        <definition>constexpr VkCommandBufferInheritanceInfo vpr::vk_command_buffer_inheritance_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_command_buffer_inheritance_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO,
+		nullptr,
+		VK_NULL_HANDLE,
+		0,
+		VK_NULL_HANDLE,
+		VK_FALSE,
+		0,
+		0,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="122" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1afc8e1d24aefba0a7119ee1e78c470b9e" prot="public" static="yes" mutable="no">
+        <type>constexpr VkRenderPassBeginInfo</type>
+        <definition>constexpr VkRenderPassBeginInfo vpr::vk_renderpass_begin_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_renderpass_begin_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO, 
+		nullptr,
+		VK_NULL_HANDLE, 
+		VK_NULL_HANDLE, 
+		VkRect2D { },
+		0,
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="133" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a5f1f5c4fdf2f0f598dd76e6ea4708cd9" prot="public" static="yes" mutable="no">
+        <type>constexpr VkSubmitInfo</type>
+        <definition>constexpr VkSubmitInfo vpr::vk_submit_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_submit_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_SUBMIT_INFO,
+		nullptr,
+		0,
+		nullptr,
+		nullptr,
+		0,
+		nullptr,
+		0,
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="144" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a383ce267f4c15be17e424c49aded58bc" prot="public" static="yes" mutable="no">
+        <type>constexpr VkFenceCreateInfo</type>
+        <definition>constexpr VkFenceCreateInfo vpr::vk_fence_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_fence_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_FENCE_CREATE_INFO,
+		nullptr,
+		0,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="157" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="157" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_fence_1a1c5ab83cc8c2f5ef29dd23cee8b8c2ac" compoundref="_fence_8cpp" startline="7" endline="12">vpr::Fence::Fence</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a1346102d98732cb43a0934865767f14c" prot="public" static="yes" mutable="no">
+        <type>constexpr VkImageCreateInfo</type>
+        <definition>constexpr VkImageCreateInfo vpr::vk_image_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_image_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+		nullptr,
+		0,
+		VK_IMAGE_TYPE_2D,
+		VK_FORMAT_UNDEFINED,
+		VkExtent3D{ 0, 0, 1 },
+		1,
+		1,
+		VK_SAMPLE_COUNT_1_BIT,
+		VK_IMAGE_TILING_LINEAR,
+		0,
+		VK_SHARING_MODE_EXCLUSIVE,
+		0,
+		nullptr,
+		VK_IMAGE_LAYOUT_UNDEFINED,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="164" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1aec3138915f105df1ff16048caa9dc82c" prot="public" static="yes" mutable="no">
+        <type>constexpr VkSamplerCreateInfo</type>
+        <definition>constexpr VkSamplerCreateInfo vpr::vk_sampler_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_sampler_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
+		nullptr,
+		0,
+		VK_FILTER_NEAREST,
+		VK_FILTER_NEAREST,
+		VK_SAMPLER_MIPMAP_MODE_NEAREST,
+		VK_SAMPLER_ADDRESS_MODE_REPEAT,
+        VK_SAMPLER_ADDRESS_MODE_REPEAT,
+        VK_SAMPLER_ADDRESS_MODE_REPEAT,
+		0.0f,
+		VK_FALSE,
+		0.0f,
+		VK_FALSE,
+		VK_COMPARE_OP_NEVER,
+		0.0f,
+		0.0f,
+		VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE,
+		VK_FALSE,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="182" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="182" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1adaa14201fd51fb34600c8c932e6aa4b8" prot="public" static="yes" mutable="no">
+        <type>constexpr VkImageMemoryBarrier</type>
+        <definition>constexpr VkImageMemoryBarrier vpr::vk_image_mem_barrier_base</definition>
+        <argsstring></argsstring>
+        <name>vk_image_mem_barrier_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER,
+		nullptr,
+		0,
+		0,
+		VK_IMAGE_LAYOUT_UNDEFINED,
+		VK_IMAGE_LAYOUT_UNDEFINED,
+		std::numeric_limits&lt;uint32_t&gt;::max(),
+		std::numeric_limits&lt;uint32_t&gt;::max(),
+		VK_NULL_HANDLE,
+        {VK_NULL_HANDLE},
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="203" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="203" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a2b76259ef8a737b97c2f5df038604439" prot="public" static="yes" mutable="no">
+        <type>constexpr VkImageViewCreateInfo</type>
+        <definition>constexpr VkImageViewCreateInfo vpr::vk_image_view_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_image_view_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+		nullptr,
+		0,
+		VK_NULL_HANDLE,
+		VK_IMAGE_VIEW_TYPE_2D,
+		VK_FORMAT_UNDEFINED,
+		{ VK_COMPONENT_SWIZZLE_R, VK_COMPONENT_SWIZZLE_G, VK_COMPONENT_SWIZZLE_B, VK_COMPONENT_SWIZZLE_A },
+		{ VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1 },
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="218" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="218" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_image_1a40c04ea34c1c47fd1b1dcbe43aeb8346" compoundref="_image_deprecated_8cpp" startline="60" endline="67">vpr::Image::CreateView</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1aaded5613928f1e39c1a61ac25be8bf88" compoundref="_swapchain_8cpp" startline="338" endline="357">vpr::SwapchainImpl::setupImageViews</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a9b6573a1f1d2f16ac30718a19e9b2aa0" prot="public" static="yes" mutable="no">
+        <type>constexpr VkRenderPassCreateInfo</type>
+        <definition>constexpr VkRenderPassCreateInfo vpr::vk_render_pass_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_render_pass_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO,
+		nullptr,
+		0,
+		0,
+		nullptr,
+		0,
+		nullptr,
+		0,
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="229" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="229" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a99f08d8ef9fb0cbdc918322e3546eae5" prot="public" static="yes" mutable="no">
+        <type>constexpr VkFramebufferCreateInfo</type>
+        <definition>constexpr VkFramebufferCreateInfo vpr::vk_framebuffer_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_framebuffer_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO,
+		nullptr,
+		0,
+		VK_NULL_HANDLE,
+		0,
+		nullptr,
+		0,
+		0,
+		0,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="241" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="241" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a0c75a458ad6af928d228d74fd0e867f7" prot="public" static="yes" mutable="no">
+        <type>constexpr VkSwapchainCreateInfoKHR</type>
+        <definition>constexpr VkSwapchainCreateInfoKHR vpr::vk_swapchain_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_swapchain_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR,
+		nullptr, 
+		0,
+		VK_NULL_HANDLE,
+		0,
+		VK_FORMAT_UNDEFINED,
+		VK_COLOR_SPACE_PASS_THROUGH_EXT,
+		VkExtent2D{},
+		0,
+		0,
+		VK_SHARING_MODE_EXCLUSIVE,
+		0,
+		nullptr,
+		VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR,
+		VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
+		VK_PRESENT_MODE_FIFO_KHR,
+		VK_FALSE,
+		VK_NULL_HANDLE,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="253" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="253" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" compoundref="_swapchain_8cpp" startline="299" endline="329">vpr::SwapchainImpl::setupCreateInfo</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1aaa86c2ac16d683dcc0d8f8176784df4e" prot="public" static="yes" mutable="no">
+        <type>constexpr VkPresentInfoKHR</type>
+        <definition>constexpr VkPresentInfoKHR vpr::vk_present_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_present_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_PRESENT_INFO_KHR,
+		nullptr,
+		0,
+		nullptr,
+		0,
+		nullptr,
+		nullptr,
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="274" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="274" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ac5287046e7113ad06ea5045449717205" prot="public" static="yes" mutable="no">
+        <type>constexpr VkShaderModuleCreateInfo</type>
+        <definition>constexpr VkShaderModuleCreateInfo vpr::vk_shader_module_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_shader_module_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO,
+		nullptr,
+		0,
+		0,
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="285" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="285" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_shader_module_1abc93a8112697e4990bbd74d2c4100769" compoundref="_shader_module_8cpp" startline="57" endline="72">vpr::ShaderModule::ShaderModule</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a7326eb5b7e23a4f852eb1dffac781fb0" prot="public" static="yes" mutable="no">
+        <type>constexpr VkPipelineShaderStageCreateInfo</type>
+        <definition>constexpr VkPipelineShaderStageCreateInfo vpr::vk_pipeline_shader_stage_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_pipeline_shader_stage_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,
+		nullptr,
+		0,
+		VK_SHADER_STAGE_FLAG_BITS_MAX_ENUM,
+		VK_NULL_HANDLE,
+		nullptr,
+		nullptr
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="293" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="293" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_shader_module_1abc93a8112697e4990bbd74d2c4100769" compoundref="_shader_module_8cpp" startline="57" endline="72">vpr::ShaderModule::ShaderModule</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a4687617519c0ca0f5f75ae1e25caf1b0" prot="public" static="yes" mutable="no">
+        <type>constexpr VkPipelineInputAssemblyStateCreateInfo</type>
+        <definition>constexpr VkPipelineInputAssemblyStateCreateInfo vpr::vk_pipeline_input_assembly_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_pipeline_input_assembly_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO,
+		nullptr,
+		0,
+		VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST,
+		VK_FALSE,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="307" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="307" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ad3281921dc4d8b7f288ad77b06758318" prot="public" static="yes" mutable="no">
+        <type>constexpr VkPipelineRasterizationStateCreateInfo</type>
+        <definition>constexpr VkPipelineRasterizationStateCreateInfo vpr::vk_pipeline_rasterization_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_pipeline_rasterization_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO,
+		nullptr,
+		0,
+		VK_FALSE, 
+		VK_FALSE, 
+		VK_POLYGON_MODE_FILL, 
+		VK_CULL_MODE_BACK_BIT,
+        VK_FRONT_FACE_COUNTER_CLOCKWISE,
+		VK_FALSE,
+		0.0f,
+		0.0f,
+		0.0f,
+		1.0f,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="315" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="315" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ab86974f170fe762d886f3da553c6cbbe" prot="public" static="yes" mutable="no">
+        <type>constexpr VkPipelineTessellationStateCreateInfo</type>
+        <definition>constexpr VkPipelineTessellationStateCreateInfo vpr::vk_pipeline_tesselation_state_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_pipeline_tesselation_state_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO,
+		nullptr,
+		0,
+		0,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="333" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="333" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ad52fa06aab57ed41d980f92bafedb12b" prot="public" static="yes" mutable="no">
+        <type>constexpr VkPipelineColorBlendAttachmentState</type>
+        <definition>constexpr VkPipelineColorBlendAttachmentState vpr::vk_pipeline_color_blend_attachment_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_pipeline_color_blend_attachment_info_base</name>
+        <initializer>{
+		VK_TRUE,
+		VK_BLEND_FACTOR_SRC_ALPHA,
+		VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA,
+		VK_BLEND_OP_ADD,
+		VK_BLEND_FACTOR_SRC_ALPHA,
+		VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA,
+		VK_BLEND_OP_ADD,
+		VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="340" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="340" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a51b085d779d43876871e9836aa8c8a1e" prot="public" static="yes" mutable="no">
+        <type>constexpr VkPipelineColorBlendStateCreateInfo</type>
+        <definition>constexpr VkPipelineColorBlendStateCreateInfo vpr::vk_pipeline_color_blend_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_pipeline_color_blend_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO,
+		nullptr,
+		0,
+		VK_FALSE,
+		VK_LOGIC_OP_COPY,
+		1,
+		&amp;<ref refid="namespacevpr_1ad52fa06aab57ed41d980f92bafedb12b" kindref="member">vk_pipeline_color_blend_attachment_info_base</ref>,
+		{1.0f, 1.0f, 1.0f, 1.0f},
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="351" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="351" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a8f57d96ec5a8771ef4ac98a4f820ec08" prot="public" static="yes" mutable="no">
+        <type>constexpr VkPipelineDepthStencilStateCreateInfo</type>
+        <definition>constexpr VkPipelineDepthStencilStateCreateInfo vpr::vk_pipeline_depth_stencil_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_pipeline_depth_stencil_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO,
+		nullptr,
+		0,
+		VK_TRUE,
+		VK_TRUE,
+		VK_COMPARE_OP_LESS,
+		VK_FALSE,
+		VK_FALSE,
+		{},
+		{},
+		0.0f, 
+		1.0f,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="362" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="362" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a041fb415b4ee08fad14e09150f4d1c73" prot="public" static="yes" mutable="no">
+        <type>constexpr VkViewport</type>
+        <definition>constexpr VkViewport vpr::vk_default_viewport</definition>
+        <argsstring></argsstring>
+        <name>vk_default_viewport</name>
+        <initializer>{
+		0, 0, 
+		1024, 720, 
+		0.0f, 1.0f 
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="377" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="377" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a7293ce4f531ad7cb1d801677d7859f61" prot="public" static="yes" mutable="no">
+        <type>constexpr VkRect2D</type>
+        <definition>constexpr VkRect2D vpr::vk_default_viewport_scissor</definition>
+        <argsstring></argsstring>
+        <name>vk_default_viewport_scissor</name>
+        <initializer>{
+        {0, 0}, 
+		VkExtent2D{static_cast&lt;uint32_t&gt;(vk_default_viewport.width), static_cast&lt;uint32_t&gt;(vk_default_viewport.height)}, 
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="383" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="383" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ac1e4d8d99388be7f1cf9563483bcefa4" prot="public" static="yes" mutable="no">
+        <type>constexpr VkPipelineViewportStateCreateInfo</type>
+        <definition>constexpr VkPipelineViewportStateCreateInfo vpr::vk_pipeline_viewport_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_pipeline_viewport_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO,
+		nullptr,
+		0,
+		1, 
+		nullptr,
+		1, 
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="388" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="388" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1acc661dbbbc559c2e7fcd5fe12fcf6acf" prot="public" static="yes" mutable="no">
+        <type>constexpr VkPipelineMultisampleStateCreateInfo</type>
+        <definition>constexpr VkPipelineMultisampleStateCreateInfo vpr::vk_pipeline_multisample_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_pipeline_multisample_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO,
+		nullptr,
+		0,
+		VK_SAMPLE_COUNT_1_BIT,
+		VK_FALSE,
+		0.0f, 
+		nullptr, 
+		VK_FALSE,
+		VK_FALSE,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="398" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="398" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a2202274b3eb94b6a4685bc4810ff4084" prot="public" static="yes" mutable="no">
+        <type>constexpr VkPipelineLayoutCreateInfo</type>
+        <definition>constexpr VkPipelineLayoutCreateInfo vpr::vk_pipeline_layout_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_pipeline_layout_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO,
+		nullptr,
+		0,
+		0,
+		nullptr,
+		0,
+		nullptr
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="410" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="410" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_pipeline_layout_1a843c3d13e26edb0d7ce6a808848a640a" compoundref="_pipeline_layout_8cpp" startline="40" endline="51">vpr::PipelineLayout::Create</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a29a50be8591e2424104148c468fb11b9" prot="public" static="yes" mutable="no">
+        <type>constexpr VkPipelineDynamicStateCreateInfo</type>
+        <definition>constexpr VkPipelineDynamicStateCreateInfo vpr::vk_pipeline_dynamic_state_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_pipeline_dynamic_state_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO,
+		nullptr,
+		0,
+		0,
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="420" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="420" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a673fde58ee3e106b03264c62ae5dc5ac" prot="public" static="yes" mutable="no">
+        <type>constexpr VkGraphicsPipelineCreateInfo</type>
+        <definition>constexpr VkGraphicsPipelineCreateInfo vpr::vk_graphics_pipeline_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_graphics_pipeline_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO,
+		nullptr,
+		0,
+		0,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		VK_NULL_HANDLE,
+		VK_NULL_HANDLE,
+		std::numeric_limits&lt;uint32_t&gt;::max(),
+		VK_NULL_HANDLE,
+		-1,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="428" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="428" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_graphics_pipeline_info_1a65a7a63d7097bd86f0967d84a1fbde3c" compoundref="_graphics_pipeline_8cpp" startline="14" endline="26">vpr::GraphicsPipelineInfo::GetPipelineCreateInfo</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a284ba6d1ee6cb4d1b38e63241e0008ca" prot="public" static="yes" mutable="no">
+        <type>constexpr VkPipelineVertexInputStateCreateInfo</type>
+        <definition>constexpr VkPipelineVertexInputStateCreateInfo vpr::vk_pipeline_vertex_input_state_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_pipeline_vertex_input_state_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO,
+		nullptr,
+		0,
+		0,
+		nullptr,
+		0,
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="450" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="450" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a9e58dbf8f7fac43cc98007d4910dd54b" prot="public" static="yes" mutable="no">
+        <type>constexpr VkAttachmentDescription</type>
+        <definition>constexpr VkAttachmentDescription vpr::vk_attachment_description_base</definition>
+        <argsstring></argsstring>
+        <name>vk_attachment_description_base</name>
+        <initializer>{
+		0,
+		VK_FORMAT_UNDEFINED,
+		VK_SAMPLE_COUNT_1_BIT,
+		VK_ATTACHMENT_LOAD_OP_DONT_CARE,
+		VK_ATTACHMENT_STORE_OP_DONT_CARE,
+		VK_ATTACHMENT_LOAD_OP_DONT_CARE,
+		VK_ATTACHMENT_STORE_OP_DONT_CARE,
+		VK_IMAGE_LAYOUT_UNDEFINED,
+		VK_IMAGE_LAYOUT_UNDEFINED,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="460" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="460" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a957c23e6065a31315d09fc83d513abcd" prot="public" static="yes" mutable="no">
+        <type>constexpr VkSubpassDescription</type>
+        <definition>constexpr VkSubpassDescription vpr::vk_subpass_description_base</definition>
+        <argsstring></argsstring>
+        <name>vk_subpass_description_base</name>
+        <initializer>{
+		0,
+		VK_PIPELINE_BIND_POINT_GRAPHICS,
+		0,
+		nullptr,
+		0,
+		nullptr,
+		nullptr,
+		nullptr,
+		0,
+		nullptr
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="472" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="472" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a0a52e1cc004fc92f8861eb3bbe0aa47f" prot="public" static="yes" mutable="no">
+        <type>constexpr VkPipelineCacheCreateInfo</type>
+        <definition>constexpr VkPipelineCacheCreateInfo vpr::vk_pipeline_cache_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_pipeline_cache_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO,
+		nullptr,
+		0,
+		0,
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="485" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="485" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1acbbb28e95ff4d23c6b4805c875bb5566" prot="public" static="yes" mutable="no">
+        <type>constexpr VkImageMemoryBarrier</type>
+        <definition>constexpr VkImageMemoryBarrier vpr::vk_image_memory_barrier_base</definition>
+        <argsstring></argsstring>
+        <name>vk_image_memory_barrier_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER,
+		nullptr,
+		0,
+		0,
+		VK_IMAGE_LAYOUT_UNDEFINED,
+		VK_IMAGE_LAYOUT_UNDEFINED,
+		VK_QUEUE_FAMILY_IGNORED,
+		VK_QUEUE_FAMILY_IGNORED,
+		VK_NULL_HANDLE,
+        VkImageSubresourceRange{},
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="493" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="493" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_image_1a27901dcfdf4bf4df50dcd759052ed7de" compoundref="_image_deprecated_8cpp" startline="77" endline="149">vpr::Image::GetMemoryBarrier</referencedby>
+        <referencedby refid="classvpr_1_1_image_1af859b6a324c843f53bc822fcb90fdf33" compoundref="_image_deprecated_8cpp" startline="69" endline="75">vpr::Image::TransitionLayout</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a400d661ec0f10c8a6308ad0497de9ec6" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDescriptorSetLayoutCreateInfo</type>
+        <definition>constexpr VkDescriptorSetLayoutCreateInfo vpr::vk_descriptor_set_layout_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_descriptor_set_layout_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO,
+		nullptr,
+		0,
+		0,
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="506" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="506" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_descriptor_set_layout_1a1e22c5f5bab22786c71d280940b92b63" compoundref="_descriptor_set_layout_8cpp" startline="60" endline="75">vpr::DescriptorSetLayout::create</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a4d6af135af0ae5f8de1f17810fdf5837" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDescriptorPoolCreateInfo</type>
+        <definition>constexpr VkDescriptorPoolCreateInfo vpr::vk_descriptor_pool_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_descriptor_pool_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO,
+		nullptr,
+		0,
+		1,
+		0,
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="514" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="514" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_descriptor_pool_1a970a61cfde29654c3bac86b6e8fbb445" compoundref="_descriptor_pool_8cpp" startline="57" endline="77">vpr::DescriptorPool::Create</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a27b96cc4b5f4578e9446f849876c36c5" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDescriptorSetAllocateInfo</type>
+        <definition>constexpr VkDescriptorSetAllocateInfo vpr::vk_descriptor_set_alloc_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_descriptor_set_alloc_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO,
+		nullptr,
+		VK_NULL_HANDLE,
+		1,
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="523" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="523" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a3f90e39823801c8c37e2e89f3c262c72" compoundref="_descriptor_set_8cpp" startline="112" endline="126">vpr::DescriptorSet::allocate</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ab46c785268a28b874c218a11fc4d35b0" prot="public" static="yes" mutable="no">
+        <type>constexpr VkComputePipelineCreateInfo</type>
+        <definition>constexpr VkComputePipelineCreateInfo vpr::vk_compute_pipeline_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_compute_pipeline_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO,
+		nullptr,
+		0,
+		<ref refid="namespacevpr_1a7326eb5b7e23a4f852eb1dffac781fb0" kindref="member">vk_pipeline_shader_stage_create_info_base</ref>,
+		VK_NULL_HANDLE,
+		VK_NULL_HANDLE,
+		-1
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="532" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="532" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a7027e8abf6c28de607da66370d6d7b2d" prot="public" static="yes" mutable="no">
+        <type>constexpr VkBufferMemoryBarrier</type>
+        <definition>constexpr VkBufferMemoryBarrier vpr::vk_buffer_memory_barrier_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_buffer_memory_barrier_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER,
+		nullptr,
+		0,
+		0,
+		std::numeric_limits&lt;uint32_t&gt;::max(),
+		std::numeric_limits&lt;uint32_t&gt;::max(),
+		VK_NULL_HANDLE,
+		0,
+		0,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="542" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="542" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ab091815fd2a722b77e5aa924667a75eb" prot="public" static="yes" mutable="no">
+        <type>constexpr VkDebugMarkerObjectNameInfoEXT</type>
+        <definition>constexpr VkDebugMarkerObjectNameInfoEXT vpr::vk_debug_marker_object_name_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_debug_marker_object_name_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT,
+		nullptr,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="554" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="554" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ab0551f43b9a16599f843c2caecd3b96d" prot="public" static="yes" mutable="no">
+        <type>constexpr VkQueryPoolCreateInfo</type>
+        <definition>constexpr VkQueryPoolCreateInfo vpr::vk_query_pool_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_query_pool_create_info_base</name>
+        <initializer>{
+		VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO,
+		nullptr,
+		0,
+		VK_QUERY_TYPE_MAX_ENUM,
+		0,
+		0,
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="559" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="559" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a45bb22caa779047d62afe5d20e7c3393" prot="public" static="yes" mutable="no">
+        <type>constexpr VkSemaphoreCreateInfo</type>
+        <definition>constexpr VkSemaphoreCreateInfo vpr::vk_semaphore_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_semaphore_create_info_base</name>
+        <initializer>{
+        VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO,
+        nullptr,
+        0
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="568" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="568" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_semaphore_1a4a3be2d6f3cbc15538d57d8798e3397b" compoundref="_semaphore_8cpp" startline="7" endline="9">vpr::Semaphore::Semaphore</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a9afd956451263d552a1d9e90a4d8676e" prot="public" static="yes" mutable="no">
+        <type>constexpr VkEventCreateInfo</type>
+        <definition>constexpr VkEventCreateInfo vpr::vk_event_create_info_base</definition>
+        <argsstring></argsstring>
+        <name>vk_event_create_info_base</name>
+        <initializer>{
+        VK_STRUCTURE_TYPE_EVENT_CREATE_INFO,
+        nullptr,
+        0
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="574" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="574" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_event_1aa0caf00452e301cb6220e2394b102084" compoundref="_event_8cpp" startline="7" endline="10">vpr::Event::Event</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a2bc55ee52a1acae337862efbe04c80db" prot="public" static="yes" mutable="no">
+        <type>constexpr VkMemoryDedicatedRequirementsKHR</type>
+        <definition>constexpr VkMemoryDedicatedRequirementsKHR vpr::vk_dedicated_memory_requirements_khr_base</definition>
+        <argsstring></argsstring>
+        <name>vk_dedicated_memory_requirements_khr_base</name>
+        <initializer>{
+        VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS_KHR,
+        nullptr,
+        VK_FALSE,
+        VK_FALSE
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="580" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="580" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a28efd3faba024a98f8248ed47ccf16e0" compoundref="_allocator_impl_8cpp" startline="312" endline="334">vpr::AllocatorImpl::getBufferMemReqs</referencedby>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a6c291f049e194c616fba17b070dacd0a" compoundref="_allocator_impl_8cpp" startline="336" endline="358">vpr::AllocatorImpl::getImageMemReqs</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ab69b199ec3cbc823169b2f7964f192e7" prot="public" static="yes" mutable="no">
+        <type>constexpr VkMemoryDedicatedAllocateInfoKHR</type>
+        <definition>constexpr VkMemoryDedicatedAllocateInfoKHR vpr::vk_dedicated_allocate_info_khr_base</definition>
+        <argsstring></argsstring>
+        <name>vk_dedicated_allocate_info_khr_base</name>
+        <initializer>{
+        VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO_KHR,
+        nullptr,
+        VK_NULL_HANDLE,
+        VK_NULL_HANDLE
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="587" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="587" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ad538fcb0f871555b51406d7e80686287" prot="public" static="yes" mutable="no">
+        <type>constexpr VkBufferMemoryRequirementsInfo2KHR</type>
+        <definition>constexpr VkBufferMemoryRequirementsInfo2KHR vpr::vk_buffer_memory_requirements_info_khr_base</definition>
+        <argsstring></argsstring>
+        <name>vk_buffer_memory_requirements_info_khr_base</name>
+        <initializer>{
+        VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2_KHR,
+        nullptr,
+        VK_NULL_HANDLE
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="594" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="594" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a28efd3faba024a98f8248ed47ccf16e0" compoundref="_allocator_impl_8cpp" startline="312" endline="334">vpr::AllocatorImpl::getBufferMemReqs</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a8d7d04f5ccd5b03b8ef03bc10f463cb1" prot="public" static="yes" mutable="no">
+        <type>constexpr VkImageMemoryRequirementsInfo2KHR</type>
+        <definition>constexpr VkImageMemoryRequirementsInfo2KHR vpr::vk_image_memory_requirements_info_khr_base</definition>
+        <argsstring></argsstring>
+        <name>vk_image_memory_requirements_info_khr_base</name>
+        <initializer>{
+        VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2_KHR,
+        nullptr,
+        VK_NULL_HANDLE
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="600" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="600" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a6c291f049e194c616fba17b070dacd0a" compoundref="_allocator_impl_8cpp" startline="336" endline="358">vpr::AllocatorImpl::getImageMemReqs</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1aa1d90ab013977f5147dafc2bb9605727" prot="public" static="yes" mutable="no">
+        <type>constexpr VkImageSparseMemoryRequirementsInfo2KHR</type>
+        <definition>constexpr VkImageSparseMemoryRequirementsInfo2KHR vpr::vk_image_sparse_memory_requirements_info_khr_base</definition>
+        <argsstring></argsstring>
+        <name>vk_image_sparse_memory_requirements_info_khr_base</name>
+        <initializer>{
+        VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2_KHR,
+        nullptr,
+        VK_NULL_HANDLE
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="606" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="606" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ac766a293c48713df69cb70b0be896faa" prot="public" static="yes" mutable="no">
+        <type>constexpr VkMemoryRequirements2KHR</type>
+        <definition>constexpr VkMemoryRequirements2KHR vpr::vk_memory_requirements_2_khr_base</definition>
+        <argsstring></argsstring>
+        <name>vk_memory_requirements_2_khr_base</name>
+        <initializer>{
+        VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2_KHR,
+        nullptr,
+        VkMemoryRequirements{}
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="612" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="612" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a28efd3faba024a98f8248ed47ccf16e0" compoundref="_allocator_impl_8cpp" startline="312" endline="334">vpr::AllocatorImpl::getBufferMemReqs</referencedby>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a6c291f049e194c616fba17b070dacd0a" compoundref="_allocator_impl_8cpp" startline="336" endline="358">vpr::AllocatorImpl::getImageMemReqs</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a3f8a0cb6b260c65229ad6517ea2004df" prot="public" static="yes" mutable="no">
+        <type>constexpr VkSparseImageMemoryRequirements2KHR</type>
+        <definition>constexpr VkSparseImageMemoryRequirements2KHR vpr::vk_sparse_image_memory_requirements_2_khr_base</definition>
+        <argsstring></argsstring>
+        <name>vk_sparse_image_memory_requirements_2_khr_base</name>
+        <initializer>{
+        VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2_KHR,
+        nullptr,
+        VkSparseImageMemoryRequirements{}
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="618" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="618" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a5612b1abb66a8ffa657c07954c3598f1" prot="public" static="yes" mutable="no">
+        <type>constexpr VkOffset2D</type>
+        <definition>constexpr VkOffset2D vpr::vk_offset_2d_base</definition>
+        <argsstring></argsstring>
+        <name>vk_offset_2d_base</name>
+        <initializer>{
+		std::numeric_limits&lt;int32_t&gt;::max(),
+		std::numeric_limits&lt;int32_t&gt;::max()
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="624" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="624" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a23ce16aa6ca989fda9a6aa9a238eba2d" prot="public" static="yes" mutable="no">
+        <type>constexpr VkExtent2D</type>
+        <definition>constexpr VkExtent2D vpr::vk_extent_2d_base</definition>
+        <argsstring></argsstring>
+        <name>vk_extent_2d_base</name>
+        <initializer>{
+		std::numeric_limits&lt;uint32_t&gt;::max(),
+		std::numeric_limits&lt;uint32_t&gt;::max()
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="629" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="629" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a4bbe3be8ff28f6f0c29189a18989b2cb" prot="public" static="yes" mutable="no">
+        <type>constexpr VkOffset3D</type>
+        <definition>constexpr VkOffset3D vpr::vk_offset_3d_base</definition>
+        <argsstring></argsstring>
+        <name>vk_offset_3d_base</name>
+        <initializer>{
+		std::numeric_limits&lt;int32_t&gt;::max(),
+		std::numeric_limits&lt;int32_t&gt;::max(),
+		std::numeric_limits&lt;int32_t&gt;::max()
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="634" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="634" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1abd1ad91af875f9996dfa569b94ac9db5" prot="public" static="yes" mutable="no">
+        <type>constexpr VkExtent3D</type>
+        <definition>constexpr VkExtent3D vpr::vk_extent_3d_base</definition>
+        <argsstring></argsstring>
+        <name>vk_extent_3d_base</name>
+        <initializer>{
+		std::numeric_limits&lt;uint32_t&gt;::max(),
+		std::numeric_limits&lt;uint32_t&gt;::max(),
+		std::numeric_limits&lt;uint32_t&gt;::max()
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="640" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="640" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a309a56466361df3642a0831e3a1ab885" prot="public" static="yes" mutable="no">
+        <type>constexpr VkImageSubresource</type>
+        <definition>constexpr VkImageSubresource vpr::vk_image_subresource_base</definition>
+        <argsstring></argsstring>
+        <name>vk_image_subresource_base</name>
+        <initializer>{
+		VK_IMAGE_ASPECT_FLAG_BITS_MAX_ENUM,
+		std::numeric_limits&lt;uint32_t&gt;::max(),
+		std::numeric_limits&lt;uint32_t&gt;::max()
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="646" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="646" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1abba82de9a3fde0142492c961dd4aecb8" prot="public" static="yes" mutable="no">
+        <type>constexpr VkSubresourceLayout</type>
+        <definition>constexpr VkSubresourceLayout vpr::vk_subresource_layout_base</definition>
+        <argsstring></argsstring>
+        <name>vk_subresource_layout_base</name>
+        <initializer>{
+		std::numeric_limits&lt;VkDeviceSize&gt;::max(),
+		std::numeric_limits&lt;VkDeviceSize&gt;::max(),
+		std::numeric_limits&lt;VkDeviceSize&gt;::max(),
+		std::numeric_limits&lt;VkDeviceSize&gt;::max(),
+		std::numeric_limits&lt;VkDeviceSize&gt;::max()
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="652" column="1" bodyfile="common/CreateInfoBase.hpp" bodystart="652" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a85a5d8c5ba83b162eda5df835a7e6e4d" prot="public" static="no" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool vpr::VERBOSE_LOGGING</definition>
+        <argsstring></argsstring>
+        <name>VERBOSE_LOGGING</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/vpr_stdafx.h" line="31" column="1" bodyfile="common/vpr_stdafx.h" bodystart="31" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_command_pool_1a3df787753ace292c1b295907754172a3" compoundref="_command_pool_8cpp" startline="59" endline="73">vpr::CommandPool::AllocateCmdBuffers</referencedby>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a25d6e4d4fe1d7c4adf83e95915a0a810" compoundref="_allocator_impl_8cpp" startline="129" endline="266">vpr::AllocatorImpl::allocateMemoryType</referencedby>
+        <referencedby refid="structvpr_1_1_device_data_members_1a74aa0fff140d4e0d31d913975a186f31" compoundref="_logical_device_8cpp" startline="493" endline="510">vpr::DeviceDataMembers::checkDedicatedAllocExtensions</referencedby>
+        <referencedby refid="classvpr_1_1_memory_block_1a7e2257b40f455628483cda1e2303f2a3" compoundref="_memory_block_8cpp" startline="117" endline="131">vpr::MemoryBlock::Destroy</referencedby>
+        <referencedby refid="classvpr_1_1_command_pool_1ad40b0becc578d8291780202126f119ee" compoundref="_command_pool_8cpp" startline="48" endline="57">vpr::CommandPool::destroy</referencedby>
+        <referencedby refid="classvpr_1_1_command_pool_1a7c6a4a50328cf4dd6ac76760001f68ab" compoundref="_command_pool_8cpp" startline="75" endline="80">vpr::CommandPool::FreeCommandBuffers</referencedby>
+        <referencedby refid="classvpr_1_1_allocator_1a438bbd88a3f18c741f7de90f528300b1" compoundref="_allocator_8cpp" startline="62" endline="111">vpr::Allocator::FreeMemory</referencedby>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a4d132f78ac784684f0384127ff5c8624" compoundref="_allocator_impl_8cpp" startline="291" endline="310">vpr::AllocatorImpl::freePrivateMemory</referencedby>
+        <referencedby refid="classvpr_1_1_memory_block_1a17a120123d73a99fde3105f17fa6d721" compoundref="_memory_block_8cpp" startline="97" endline="115">vpr::MemoryBlock::Init</referencedby>
+        <referencedby refid="classvpr_1_1_allocation_1a52b6b1170c2ecf99175ca809d5e89e75" compoundref="_allocation_8cpp" startline="90" endline="123">vpr::Allocation::Map</referencedby>
+        <referencedby refid="classvpr_1_1_allocation_collection_1a8a66b73729415adc78507ace1a938f8c" compoundref="_allocation_collection_8cpp" startline="47" endline="61">vpr::AllocationCollection::RemoveBlock</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a783133e45fba2121d3007dd6a34112f2" prot="public" static="no" mutable="no">
+        <type>constexpr const char *const</type>
+        <definition>constexpr const char* const vpr::RECOMMENDED_REQUIRED_EXTENSION</definition>
+        <argsstring></argsstring>
+        <name>RECOMMENDED_REQUIRED_EXTENSION</name>
+        <initializer>= &quot;VK_KHR_swapchain&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="29" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1aec73dccfad949403c3a61b7bb4def901" prot="public" static="yes" mutable="no">
+        <type>constexpr std::array&lt; const char *, 3 &gt;</type>
+        <definition>constexpr std::array&lt;const char*, 3&gt; vpr::RECOMMENDED_OPTIONAL_EXTENSIONS</definition>
+        <argsstring></argsstring>
+        <name>RECOMMENDED_OPTIONAL_EXTENSIONS</name>
+        <initializer>{
+        VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME, 
+        VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="31" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a4bf381588c8fc655f17c38e1fd78739e" prot="public" static="no" mutable="no">
+        <type>constexpr <ref refid="structvpr_1_1_vpr_extension_pack" kindref="compound">VprExtensionPack</ref></type>
+        <definition>constexpr VprExtensionPack vpr::RECOMMENDED_EXTENSIONS</definition>
+        <argsstring></argsstring>
+        <name>RECOMMENDED_EXTENSIONS</name>
+        <initializer>{
+        &amp;<ref refid="namespacevpr_1a783133e45fba2121d3007dd6a34112f2" kindref="member">RECOMMENDED_REQUIRED_EXTENSION</ref>,
+        1,
+        &amp;<ref refid="namespacevpr_1aec73dccfad949403c3a61b7bb4def901" kindref="member">RECOMMENDED_OPTIONAL_EXTENSIONS</ref>[0],
+        static_cast&lt;uint32_t&gt;(RECOMMENDED_OPTIONAL_EXTENSIONS.size())
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="36" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="36" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_device_1ad1a8ebd06d5d8b3de5ce0c8d1ce93277" compoundref="_logical_device_8cpp" startline="54" endline="62">vpr::Device::Device</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a41f4e9004d0d504471306d39072c24e0" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structvpr_1_1queue__priorities__t" kindref="compound">vpr::queue_priorities_t</ref></type>
+        <definition>struct vpr::queue_priorities_t  vpr::queue_priorities</definition>
+        <argsstring></argsstring>
+        <name>queue_priorities</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="48" column="1"/>
+        <referencedby refid="classvpr_1_1_device_1abdb29331fbcc15a242b3f0e82b02beef" compoundref="_logical_device_8cpp" startline="354" endline="373">vpr::Device::setupComputeQueues</referencedby>
+        <referencedby refid="classvpr_1_1_device_1adbe15d529a11af4d7034a2135255e773" compoundref="_logical_device_8cpp" startline="343" endline="352">vpr::Device::setupGraphicsQueues</referencedby>
+        <referencedby refid="classvpr_1_1_device_1a22ee8e6517d4898282d9d6385545100a" compoundref="_logical_device_8cpp" startline="394" endline="411">vpr::Device::setupSparseBindingQueues</referencedby>
+        <referencedby refid="classvpr_1_1_device_1aa64b2412561fa0950722c2dc4997da9f" compoundref="_logical_device_8cpp" startline="375" endline="392">vpr::Device::setupTransferQueues</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a14cb4a052f00e9a6b156d00a002a8f12" prot="public" static="yes" mutable="no">
+        <type>std::map&lt; int32_t, VkPhysicalDevice &gt;</type>
+        <definition>std::map&lt;int32_t, VkPhysicalDevice&gt; vpr::physicalDevices</definition>
+        <argsstring></argsstring>
+        <name>physicalDevices</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="8" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="8" bodyend="-1"/>
+        <referencedby refid="namespacevpr_1ac9ad3c752dabd8483c29187ef86587c9" compoundref="_physical_device_8cpp" startline="11" endline="16">GetBestAvailPhysicalDevice</referencedby>
+        <referencedby refid="classvpr_1_1_physical_device_impl_1aa96226c99de9aff7ad9f6e7b96e89444" compoundref="_physical_device_8cpp" startline="124" endline="134">vpr::PhysicalDeviceImpl::PhysicalDeviceImpl</referencedby>
+        <referencedby refid="namespacevpr_1add78d0571fc38d8ee80c540f9754ca50" compoundref="_physical_device_8cpp" startline="84" endline="96">PopulatePhysicalDeviceMap</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1abf1367b87f4ad1de7f979b299e7a6c3f" prot="public" static="yes" mutable="no">
+        <type>const std::unordered_map&lt; VkPresentModeKHR, std::string &gt;</type>
+        <definition>const std::unordered_map&lt;VkPresentModeKHR, std::string&gt; vpr::present_mode_strings</definition>
+        <argsstring></argsstring>
+        <name>present_mode_strings</name>
+        <initializer>{
+        { VK_PRESENT_MODE_IMMEDIATE_KHR, &quot;VK_PRESENT_MODE_IMMEDIATE_KHR&quot; },
+        { VK_PRESENT_MODE_FIFO_KHR, &quot;VK_PRESENT_MODE_FIFO_KHR&quot; },
+        { VK_PRESENT_MODE_FIFO_RELAXED_KHR, &quot;VK_PRESENT_MODE_FIFO_RELAXED_KHR&quot; },
+        { VK_PRESENT_MODE_MAILBOX_KHR, &quot;VK_PRESENT_MODE_MAILBOX_KHR&quot; },
+        { VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR, &quot;VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR&quot; },
+        { VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR, &quot;VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR&quot; }
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="223" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="223" bodyend="-1"/>
+        <referencedby refid="namespacevpr_1afa4d7a5ad29cbfc728d5c355d990d242" compoundref="_swapchain_8cpp" startline="232" endline="240">getPresentModeStr</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1a2156abb1c1cc42fde7b0a0755491f539" prot="public" static="yes" mutable="no">
+        <type>const VkBufferViewCreateInfo</type>
+        <definition>const VkBufferViewCreateInfo vpr::base_view_info</definition>
+        <argsstring></argsstring>
+        <name>base_view_info</name>
+        <initializer>{ VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO, nullptr, 0, VK_NULL_HANDLE, VK_FORMAT_UNDEFINED, 0, 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/src/BufferDeprecated.cpp" line="10" column="1" bodyfile="resource/src/BufferDeprecated.cpp" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ab21fa0d40941a97c77d37f00adde7af1" prot="public" static="yes" mutable="no">
+        <type>constexpr std::array&lt; VkDescriptorType, 11 &gt;</type>
+        <definition>constexpr std::array&lt;VkDescriptorType, 11&gt; vpr::descriptor_types</definition>
+        <argsstring></argsstring>
+        <name>descriptor_types</name>
+        <initializer>{
+        VK_DESCRIPTOR_TYPE_SAMPLER,
+        VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+        VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+        VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,
+        VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER,
+        VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER,
+        VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+        VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+        VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC,
+        VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC,
+        VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/src/DescriptorPool.cpp" line="15" column="1" bodyfile="resource/src/DescriptorPool.cpp" bodystart="15" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_descriptor_pool_1a06083280be32e9ae0c6a1834371b241e" compoundref="_descriptor_pool_8cpp" startline="29" endline="33">vpr::DescriptorPool::DescriptorPool</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacevpr_1ab813db0f97b6fc66b92e763f94952eda" prot="public" static="yes" mutable="no">
+        <type>constexpr VkPipelineCacheCreateInfo</type>
+        <definition>constexpr VkPipelineCacheCreateInfo vpr::base_create_info</definition>
+        <argsstring></argsstring>
+        <name>base_create_info</name>
+        <initializer>{ VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO, nullptr, 0, 0, nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/src/PipelineCache.cpp" line="20" column="1" bodyfile="resource/src/PipelineCache.cpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacevpr_1a367db2fdf35ae5bab8689bf5c734d8e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="vpr__stdafx_8h_1a4b940ef35de523c8e5f22898d34635f1" kindref="member">VPR_API</ref> void</type>
+        <definition>void vpr::SetLoggingRepository_VprAlloc</definition>
+        <argsstring>(void *storage_ptr)</argsstring>
+        <name>SetLoggingRepository_VprAlloc</name>
+        <param>
+          <type>void *</type>
+          <declname>storage_ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/Allocator.hpp" line="83" column="1" bodyfile="alloc/src/Allocator.cpp" bodystart="8" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacevpr_1a8d7c2b273af89f550d0b15572c432699" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="vpr__stdafx_8h_1a4b940ef35de523c8e5f22898d34635f1" kindref="member">VPR_API</ref> void *</type>
+        <definition>void * vpr::GetLoggingRepository_VprAlloc</definition>
+        <argsstring>()</argsstring>
+        <name>GetLoggingRepository_VprAlloc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/Allocator.hpp" line="84" column="1" bodyfile="alloc/src/Allocator.cpp" bodystart="14" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacevpr_1afb6cf1dbd1d7b9e7d5dfa97f3d5bd205" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615e" kindref="member">vpr::SuballocationType</ref></type>
+        <definition>vpr::SuballocationType vpr::suballocTypeFromAllocType</definition>
+        <argsstring>(const AllocationType &amp;alloc_type)</argsstring>
+        <name>suballocTypeFromAllocType</name>
+        <param>
+          <type>const <ref refid="namespacevpr_1a494552c6fdda99313008c4a5e61a79fc" kindref="member">AllocationType</ref> &amp;</type>
+          <declname>alloc_type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/Allocator.cpp" line="19" column="1" bodyfile="alloc/src/Allocator.cpp" bodystart="19" bodyend="32"/>
+        <references refid="namespacevpr_1a494552c6fdda99313008c4a5e61a79fca7e62bc342f41c946868f0ea6f0b712d8">Buffer</references>
+        <references refid="namespacevpr_1a494552c6fdda99313008c4a5e61a79fcabb63562f6302e971e7c3095b4746816f">ImageLinear</references>
+        <references refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615ead21ea5ec68ed3adc669014fe4ca2daef">ImageOptimal</references>
+        <references refid="namespacevpr_1a494552c6fdda99313008c4a5e61a79fcaa89b23279cca789eae30f24b8eb80d91">ImageTiled</references>
+        <references refid="namespacevpr_1a494552c6fdda99313008c4a5e61a79fca88183b946cc5f0e8c96b2e66e1c74a7e">Unknown</references>
+        <referencedby refid="classvpr_1_1_allocator_1ab5457af65cbb081b295f323c13a7843a" compoundref="_allocator_8cpp" startline="49" endline="60">vpr::Allocator::AllocateMemory</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacevpr_1ab931a1e0f8e5e163a3c6b47c28deff38" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr T</type>
+        <definition>static constexpr T vpr::AlignUp</definition>
+        <argsstring>(const T &amp;offset, const T &amp;alignment)</argsstring>
+        <name>AlignUp</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>alignment</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/AllocCommon.hpp" line="56" column="1" bodyfile="alloc/src/AllocCommon.hpp" bodystart="56" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="group___allocation_1ga8cf57df2fccbbe7a68b713d93db023c1" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>static constexpr bool vpr::CheckBlocksOnSamePage</definition>
+        <argsstring>(const VkDeviceSize &amp;item_a_offset, const VkDeviceSize &amp;item_a_size, const VkDeviceSize &amp;item_b_offset, const VkDeviceSize &amp;page_size)</argsstring>
+        <name>CheckBlocksOnSamePage</name>
+        <param>
+          <type>const VkDeviceSize &amp;</type>
+          <declname>item_a_offset</declname>
+        </param>
+        <param>
+          <type>const VkDeviceSize &amp;</type>
+          <declname>item_a_size</declname>
+        </param>
+        <param>
+          <type>const VkDeviceSize &amp;</type>
+          <declname>item_b_offset</declname>
+        </param>
+        <param>
+          <type>const VkDeviceSize &amp;</type>
+          <declname>page_size</declname>
+        </param>
+        <briefdescription>
+<para>Taken from the Vulkan specification, section 11.6 Essentially, we need to ensure that linear and non-linear resources are properly placed on separate memory pages so that they avoid any accidental aliasing. </para>        </briefdescription>
+        <detaileddescription>
+<para>Linear resources are just those that could be read like any other memory region, without any particular optimization for size or access speed. Optimally tiled resources are those that are tiled either by the hardware drivers, or the Vulkan implementation. Think of things like Z-Order curve encoding for texture data, or block-based compression for DDS/KTX texture formats. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>item_a_offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>non-linear object&apos;s offset </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>item_a_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>non-linear object&apos;s size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>item_b_offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>linear object&apos;s offset </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>item_b_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>linear object&apos;s size </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>page_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>almost universally tends to be the bufferImageGranularity value retrieved by the parent <ref refid="classvpr_1_1_allocator" kindref="compound">Allocator</ref> class. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/AllocCommon.hpp" line="74" column="1" bodyfile="alloc/src/AllocCommon.hpp" bodystart="74" bodyend="80"/>
+        <referencedby refid="classvpr_1_1_memory_block_1a3eb796b49ef07360203e2fe8c099809b" compoundref="_memory_block_8cpp" startline="268" endline="348">vpr::MemoryBlock::VerifySuballocation</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacevpr_1a4670febea81bc9a6a25fb8b1cf1afaaa" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr uint32_t</type>
+        <definition>static constexpr uint32_t vpr::countBitsSet</definition>
+        <argsstring>(const uint32_t &amp;val)</argsstring>
+        <name>countBitsSet</name>
+        <param>
+          <type>const uint32_t &amp;</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/AllocCommon.hpp" line="82" column="1" bodyfile="alloc/src/AllocCommon.hpp" bodystart="82" bodyend="89"/>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a5990c518d05b0fad50f65d11df659a39" compoundref="_allocator_impl_8cpp" startline="87" endline="127">vpr::AllocatorImpl::findMemoryTypeIdx</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___allocation_1ga568ec6e09a10a255e22519e4e1a4f2e3" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>static constexpr bool vpr::CheckBufferImageGranularityConflict</definition>
+        <argsstring>(SuballocationType type_a, SuballocationType type_b)</argsstring>
+        <name>CheckBufferImageGranularityConflict</name>
+        <param>
+          <type><ref refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615e" kindref="member">SuballocationType</ref></type>
+          <declname>type_a</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615e" kindref="member">SuballocationType</ref></type>
+          <declname>type_b</declname>
+        </param>
+        <briefdescription>
+<para>Checks to make sure the two objects of type &quot;type_a&quot; and &quot;type_b&quot; wouldn&apos;t cause a conflict with the buffer-image granularity values. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns true if conflict, false if no conflict. This is unlike the CheckBlocksOnSamePage method, in that it doesn&apos;t check memory location and alignment values, merely comparing the resource types for incompatabilities. This is used to avoid the more detailed checks like CheckBlocksOnSamePage (and the corrections required if this also fails)</para><para>BufferImageGranularity specifies interactions between linear and non-linear resources, so we check based on those. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/MemoryBlock.cpp" line="21" column="1" bodyfile="alloc/src/MemoryBlock.cpp" bodystart="21" bodyend="44"/>
+        <references refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615ea7e62bc342f41c946868f0ea6f0b712d8">Buffer</references>
+        <references refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615eab24ce0cd392a5b0b8dedc66c25213594">Free</references>
+        <references refid="namespacevpr_1a494552c6fdda99313008c4a5e61a79fcabb63562f6302e971e7c3095b4746816f">ImageLinear</references>
+        <references refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615ead21ea5ec68ed3adc669014fe4ca2daef">ImageOptimal</references>
+        <references refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615ea7d16f3f47038f8ac0d8615e4b83f55d9">ImageUnknown</references>
+        <references refid="namespacevpr_1a494552c6fdda99313008c4a5e61a79fca88183b946cc5f0e8c96b2e66e1c74a7e">Unknown</references>
+        <referencedby refid="classvpr_1_1_memory_block_1a3eb796b49ef07360203e2fe8c099809b" compoundref="_memory_block_8cpp" startline="268" endline="348">vpr::MemoryBlock::VerifySuballocation</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___allocation_1gabf0854824912bca3e22929b2407b1273" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::ostream &amp;</type>
+        <definition>std::ostream &amp; vpr::operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;os, const ValidationCode &amp;code)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>os</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___allocation_1gaba421ef06b1d6b910602d0180c9eff78" kindref="member">ValidationCode</ref> &amp;</type>
+          <declname>code</declname>
+        </param>
+        <briefdescription>
+<para>This is a simple and common overload to print enum info to any stream (this also works, FYI, with easylogging++). </para>        </briefdescription>
+        <detaileddescription>
+<para>A note to make, however, is that compilers running at W4/Wall warning levels will warn that this method is unreferenced in release mode, if validation is not forced. As the memory verification routine is not used in this case, much of that code will fold away but should still be left in for debug builds. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/MemoryBlock.cpp" line="53" column="1" bodyfile="alloc/src/MemoryBlock.cpp" bodystart="53" bodyend="86"/>
+        <references refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a9d79688e901f5c4aa31129a2fe7f3451">FINAL_FREE_SIZE_MISMATCH</references>
+        <references refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a88ad6448cd6f1d495139e026eb3424dc">FINAL_SIZE_MISMATCH</references>
+        <references refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78ac38471be1ba1406851e804110887b573">FREE_SUBALLOC_COUNT_MISMATCH</references>
+        <references refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a4510c59ac7d838e715255649c3fd77a5">FREE_SUBALLOC_SORT_INCORRECT</references>
+        <references refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a76d83e278aa0df0c5edd0e99d70ee768">INCORRECT_SUBALLOC_OFFSET</references>
+        <references refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a81f141477ffccd0d5a9c6a2353348cc7">NEED_MERGE_SUBALLOCS</references>
+        <references refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a641efe802ee0e2d0cbc7a0c46e91e687">NULL_MEMORY_HANDLE</references>
+        <references refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a99db430a4a1b654dc0c46b77a028d4a5">USED_SUBALLOC_IN_FREE_LIST</references>
+        <references refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a2ceb3550d64b57a93e2896bcf767112c">ZERO_MEMORY_SIZE</references>
+      </memberdef>
+      <memberdef kind="function" id="namespacevpr_1a2c7121d97fc888141bf3cdfba95aea8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="vpr__stdafx_8h_1a4b940ef35de523c8e5f22898d34635f1" kindref="member">VPR_API</ref> void</type>
+        <definition>void vpr::SetLoggingRepository_VprCommand</definition>
+        <argsstring>(void *repo)</argsstring>
+        <name>SetLoggingRepository_VprCommand</name>
+        <param>
+          <type>void *</type>
+          <declname>repo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="command/include/CommandPool.hpp" line="83" column="1" bodyfile="command/src/CommandPool.cpp" bodystart="12" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="group___core_1gae0969d6f5ba5ffde94ef44d056fcbba2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="vpr__stdafx_8h_1a4b940ef35de523c8e5f22898d34635f1" kindref="member">VPR_API</ref> void</type>
+        <definition>void vpr::SetLoggingRepository_VprCore</definition>
+        <argsstring>(void *logging_repo)</argsstring>
+        <name>SetLoggingRepository_VprCore</name>
+        <param>
+          <type>void *</type>
+          <declname>logging_repo</declname>
+        </param>
+        <briefdescription>
+<para>Pass an easyloggingpp logging repository pointer into this function, and it will be set as the repository for this module to use. </para>        </briefdescription>
+        <detaileddescription>
+<para>That way, all log messages from all modules (even when using this as a shared library) will go to the same sinks </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/Instance.hpp" line="79" column="1" bodyfile="core/src/Instance.cpp" bodystart="20" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacevpr_1ae58c1352831f5a17460e877d6023a63b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="vpr__stdafx_8h_1a4b940ef35de523c8e5f22898d34635f1" kindref="member">VPR_API</ref> void *</type>
+        <definition>void * vpr::GetLoggingRepository_VprCore</definition>
+        <argsstring>()</argsstring>
+        <name>GetLoggingRepository_VprCore</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/Instance.hpp" line="80" column="1" bodyfile="core/src/Instance.cpp" bodystart="25" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="group___core_1ga812ad3570ad63ddcbc18e03988bd60bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void <ref refid="vpr__stdafx_8h_1a4b940ef35de523c8e5f22898d34635f1" kindref="member">VPR_API</ref></type>
+        <definition>void vpr::RecreateSwapchainAndSurface</definition>
+        <argsstring>(Swapchain *swap, SurfaceKHR *surface)</argsstring>
+        <name>RecreateSwapchainAndSurface</name>
+        <param>
+          <type><ref refid="classvpr_1_1_swapchain" kindref="compound">Swapchain</ref> *</type>
+          <declname>swap</declname>
+        </param>
+        <param>
+          <type><ref refid="classvpr_1_1_surface_k_h_r" kindref="compound">SurfaceKHR</ref> *</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Pass a swapchain and surface pointer to this to have the swapchain and surface destroyed and recreated in the proper order. </para>        </briefdescription>
+        <detaileddescription>
+<para>If done incorrectly, the validation layers will give you errors about a surface being destroyed before it&apos;s swapchain is (in the best case), or crash in the worst case </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/Swapchain.hpp" line="69" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="391" bodyend="395"/>
+        <references refid="classvpr_1_1_swapchain_1af29e2c4245bd5694afadc579783e5432" compoundref="_swapchain_8cpp" startline="359" endline="361">vpr::Swapchain::Destroy</references>
+        <references refid="classvpr_1_1_surface_k_h_r_1a35b9db127a998f70bea3ebbdeef97f5d" compoundref="_surface_k_h_r_8cpp" startline="39" endline="42">vpr::SurfaceKHR::Recreate</references>
+        <references refid="classvpr_1_1_swapchain_1a34c3d73db1e99d3a395398fc0dbb5dc6" compoundref="_swapchain_8cpp" startline="200" endline="205">vpr::Swapchain::Recreate</references>
+        <references refid="classvpr_1_1_surface_k_h_r_1a07171777b06b36cb0e6874cdcb2f9e4e" compoundref="_surface_k_h_r_8cpp" startline="44" endline="46">vpr::SurfaceKHR::vkHandle</references>
+      </memberdef>
+      <memberdef kind="function" id="namespacevpr_1ac9ad3c752dabd8483c29187ef86587c9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>VkPhysicalDevice</type>
+        <definition>static VkPhysicalDevice vpr::GetBestAvailPhysicalDevice</definition>
+        <argsstring>()</argsstring>
+        <name>GetBestAvailPhysicalDevice</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="11" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="11" bodyend="16"/>
+        <references refid="namespacevpr_1a14cb4a052f00e9a6b156d00a002a8f12" compoundref="_physical_device_8cpp" startline="8">physicalDevices</references>
+        <referencedby refid="classvpr_1_1_physical_device_impl_1aa96226c99de9aff7ad9f6e7b96e89444" compoundref="_physical_device_8cpp" startline="124" endline="134">vpr::PhysicalDeviceImpl::PhysicalDeviceImpl</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacevpr_1ac7aa57a8b381b41b0230767e64e08bfe" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int32_t</type>
+        <definition>static int32_t vpr::ScoreDevice</definition>
+        <argsstring>(const VkPhysicalDevice &amp;dvc)</argsstring>
+        <name>ScoreDevice</name>
+        <param>
+          <type>const VkPhysicalDevice &amp;</type>
+          <declname>dvc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="18" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="18" bodyend="82"/>
+        <referencedby refid="namespacevpr_1add78d0571fc38d8ee80c540f9754ca50" compoundref="_physical_device_8cpp" startline="84" endline="96">PopulatePhysicalDeviceMap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacevpr_1add78d0571fc38d8ee80c540f9754ca50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::PopulatePhysicalDeviceMap</definition>
+        <argsstring>(const VkInstance &amp;parent_instance)</argsstring>
+        <name>PopulatePhysicalDeviceMap</name>
+        <param>
+          <type>const VkInstance &amp;</type>
+          <declname>parent_instance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="84" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="84" bodyend="96"/>
+        <references refid="namespacevpr_1a14cb4a052f00e9a6b156d00a002a8f12" compoundref="_physical_device_8cpp" startline="8">physicalDevices</references>
+        <references refid="namespacevpr_1ac7aa57a8b381b41b0230767e64e08bfe" compoundref="_physical_device_8cpp" startline="18" endline="82">ScoreDevice</references>
+        <referencedby refid="classvpr_1_1_physical_device_impl_1aa96226c99de9aff7ad9f6e7b96e89444" compoundref="_physical_device_8cpp" startline="124" endline="134">vpr::PhysicalDeviceImpl::PhysicalDeviceImpl</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacevpr_1a816f869033b2bb2416d15e050f934240" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>VkExtent2D</type>
+        <definition>VkExtent2D vpr::getBestExtentPlatform</definition>
+        <argsstring>(platform_window_type *window, const VkSurfaceCapabilitiesKHR &amp;Capabilities)</argsstring>
+        <name>getBestExtentPlatform</name>
+        <param>
+          <type><ref refid="namespacevpr_1ac148f310fbb1e1a34e40a884b25422b1" kindref="member">platform_window_type</ref> *</type>
+          <declname>window</declname>
+        </param>
+        <param>
+          <type>const VkSurfaceCapabilitiesKHR &amp;</type>
+          <declname>Capabilities</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="170" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="170" bodyend="178"/>
+        <references refid="structvpr_1_1_swapchain_impl_1a82f79b680afc9c9b9d990e5f56a26c47" compoundref="_swapchain_8cpp" startline="74">vpr::SwapchainImpl::window</references>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info_1ac8512646cf64bdcfc7b7d004e7e1ab87" compoundref="_swapchain_8cpp" startline="181" endline="190">vpr::SwapchainImpl::SwapchainInfo::ChooseSwapchainExtent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacevpr_1afa4d7a5ad29cbfc728d5c355d990d242" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string vpr::getPresentModeStr</definition>
+        <argsstring>(const VkPresentModeKHR &amp;mode)</argsstring>
+        <name>getPresentModeStr</name>
+        <param>
+          <type>const VkPresentModeKHR &amp;</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="232" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="232" bodyend="240"/>
+        <references refid="namespacevpr_1abf1367b87f4ad1de7f979b299e7a6c3f" compoundref="_swapchain_8cpp" startline="223">present_mode_strings</references>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1afdf0ef2711d213b7020b37785a62a7ad" compoundref="_swapchain_8cpp" startline="242" endline="297">vpr::SwapchainImpl::setParameters</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___resources_1ga15cb81d86cd2049d31138af8286c4f8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="vpr__stdafx_8h_1a4b940ef35de523c8e5f22898d34635f1" kindref="member">VPR_API</ref> void</type>
+        <definition>void vpr::SetLoggingRepository_VprResource</definition>
+        <argsstring>(void *repo)</argsstring>
+        <name>SetLoggingRepository_VprResource</name>
+        <param>
+          <type>void *</type>
+          <declname>repo</declname>
+        </param>
+        <briefdescription>
+<para>Pass an easyloggingpp logging repository pointer into this function, and it will be set as the repository for this module to use. </para>        </briefdescription>
+        <detaileddescription>
+<para>That way, all log messages from all modules (even when using this as a shared library) will go to the same sinks </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="67" column="1" bodyfile="resource/src/PipelineCache.cpp" bodystart="15" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacevpr_1a58bb6255831c206417425e6e7ea6c4e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void <ref refid="vpr__stdafx_8h_1a4b940ef35de523c8e5f22898d34635f1" kindref="member">VPR_API</ref></type>
+        <definition>void VPR_API vpr::SetLoggingRepository</definition>
+        <argsstring>(void *storage_ptr)</argsstring>
+        <name>SetLoggingRepository</name>
+        <param>
+          <type>void *</type>
+          <declname>storage_ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineLayout.hpp" line="39" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The VulpesRender namespace containing this libraries objects. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="alloc/include/Allocation.hpp" line="8" column="1"/>
+  </compounddef>
+</doxygen>

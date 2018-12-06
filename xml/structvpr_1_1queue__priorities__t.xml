@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="structvpr_1_1queue__priorities__t" kind="struct" language="C++" prot="public">
+    <compoundname>vpr::queue_priorities_t</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvpr_1_1queue__priorities__t_1ad917c2184f8cdeef1b9b298aee35090a" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; float &gt;</type>
+        <definition>std::vector&lt;float&gt; vpr::queue_priorities_t::graphics</definition>
+        <argsstring></argsstring>
+        <name>graphics</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="44" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="44" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_device_1adbe15d529a11af4d7034a2135255e773" compoundref="_logical_device_8cpp" startline="343" endline="352">vpr::Device::setupGraphicsQueues</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1queue__priorities__t_1a771c074b241d2c2e84c2ba55735d23a9" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; float &gt;</type>
+        <definition>std::vector&lt;float&gt; vpr::queue_priorities_t::transfer</definition>
+        <argsstring></argsstring>
+        <name>transfer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="45" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="45" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_device_1aa64b2412561fa0950722c2dc4997da9f" compoundref="_logical_device_8cpp" startline="375" endline="392">vpr::Device::setupTransferQueues</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1queue__priorities__t_1a76694cbd8084cf8b028d756b78977704" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; float &gt;</type>
+        <definition>std::vector&lt;float&gt; vpr::queue_priorities_t::compute</definition>
+        <argsstring></argsstring>
+        <name>compute</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="46" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="46" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_device_1abdb29331fbcc15a242b3f0e82b02beef" compoundref="_logical_device_8cpp" startline="354" endline="373">vpr::Device::setupComputeQueues</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1queue__priorities__t_1a821fc74d08d8df5bec19d8e85496a797" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; float &gt;</type>
+        <definition>std::vector&lt;float&gt; vpr::queue_priorities_t::sparse_binding</definition>
+        <argsstring></argsstring>
+        <name>sparse_binding</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="47" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="47" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_device_1a22ee8e6517d4898282d9d6385545100a" compoundref="_logical_device_8cpp" startline="394" endline="411">vpr::Device::setupSparseBindingQueues</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="290">
+        <label>std::vector&lt; float &gt;</label>
+      </node>
+      <node id="289">
+        <label>vpr::queue_priorities_t</label>
+        <link refid="structvpr_1_1queue__priorities__t"/>
+        <childnode refid="290" relation="usage">
+          <edgelabel>graphics</edgelabel>
+          <edgelabel>transfer</edgelabel>
+          <edgelabel>compute</edgelabel>
+          <edgelabel>sparse_binding</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="core/src/LogicalDevice.cpp" line="43" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="43" bodyend="48"/>
+    <listofallmembers>
+      <member refid="structvpr_1_1queue__priorities__t_1a76694cbd8084cf8b028d756b78977704" prot="public" virt="non-virtual"><scope>vpr::queue_priorities_t</scope><name>compute</name></member>
+      <member refid="structvpr_1_1queue__priorities__t_1ad917c2184f8cdeef1b9b298aee35090a" prot="public" virt="non-virtual"><scope>vpr::queue_priorities_t</scope><name>graphics</name></member>
+      <member refid="structvpr_1_1queue__priorities__t_1a821fc74d08d8df5bec19d8e85496a797" prot="public" virt="non-virtual"><scope>vpr::queue_priorities_t</scope><name>sparse_binding</name></member>
+      <member refid="structvpr_1_1queue__priorities__t_1a771c074b241d2c2e84c2ba55735d23a9" prot="public" virt="non-virtual"><scope>vpr::queue_priorities_t</scope><name>transfer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="structvpr_1_1_suballocation_draw_command" kind="struct" language="C++" prot="public">
+    <compoundname>vpr::SuballocationDrawCommand</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvpr_1_1_suballocation_draw_command_1a2ffc91e17e70c805afccc91f6886d5e0" prot="public" static="no" mutable="no">
+        <type>const ImVec4 &amp;</type>
+        <definition>const ImVec4&amp; vpr::SuballocationDrawCommand::Color</definition>
+        <argsstring></argsstring>
+        <name>Color</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/DebugVisualization.cpp" line="23" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_suballocation_draw_command_1ab63fef7000899aa4f148271525c4501d" prot="public" static="no" mutable="no">
+        <type>ImVec2</type>
+        <definition>ImVec2 vpr::SuballocationDrawCommand::Size</definition>
+        <argsstring></argsstring>
+        <name>Size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/DebugVisualization.cpp" line="24" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_suballocation_draw_command_1a6689efc2837f25480ff458f2934ddbdf" prot="public" static="no" mutable="no">
+        <type>ImVec2</type>
+        <definition>ImVec2 vpr::SuballocationDrawCommand::Offset</definition>
+        <argsstring></argsstring>
+        <name>Offset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/DebugVisualization.cpp" line="25" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structvpr_1_1_suballocation_draw_command_1ab80eb00a96cfa38ff22d6d3b3112a567" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>vpr::SuballocationDrawCommand::SuballocationDrawCommand</definition>
+        <argsstring>(const ImVec4 &amp;color, ImVec2 sz, ImVec2 offset)</argsstring>
+        <name>SuballocationDrawCommand</name>
+        <param>
+          <type>const ImVec4 &amp;</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>ImVec2</type>
+          <declname>sz</declname>
+        </param>
+        <param>
+          <type>ImVec2</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/DebugVisualization.cpp" line="22" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_suballocation_draw_command_1a1d4f3453e45463972a4d830e20584028" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::SuballocationDrawCommand::Draw</definition>
+        <argsstring>()</argsstring>
+        <name>Draw</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/DebugVisualization.cpp" line="26" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="alloc/src/DebugVisualization.cpp" line="21" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="21" bodyend="27"/>
+    <listofallmembers>
+      <member refid="structvpr_1_1_suballocation_draw_command_1a2ffc91e17e70c805afccc91f6886d5e0" prot="public" virt="non-virtual"><scope>vpr::SuballocationDrawCommand</scope><name>Color</name></member>
+      <member refid="structvpr_1_1_suballocation_draw_command_1a1d4f3453e45463972a4d830e20584028" prot="public" virt="non-virtual"><scope>vpr::SuballocationDrawCommand</scope><name>Draw</name></member>
+      <member refid="structvpr_1_1_suballocation_draw_command_1a6689efc2837f25480ff458f2934ddbdf" prot="public" virt="non-virtual"><scope>vpr::SuballocationDrawCommand</scope><name>Offset</name></member>
+      <member refid="structvpr_1_1_suballocation_draw_command_1ab63fef7000899aa4f148271525c4501d" prot="public" virt="non-virtual"><scope>vpr::SuballocationDrawCommand</scope><name>Size</name></member>
+      <member refid="structvpr_1_1_suballocation_draw_command_1ab80eb00a96cfa38ff22d6d3b3112a567" prot="public" virt="non-virtual"><scope>vpr::SuballocationDrawCommand</scope><name>SuballocationDrawCommand</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

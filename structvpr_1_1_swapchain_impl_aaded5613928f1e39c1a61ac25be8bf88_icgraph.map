@@ -1,6 +1,0 @@
-<map id="vpr::SwapchainImpl::setupImageViews" name="vpr::SwapchainImpl::setupImageViews">
-<area shape="rect" id="node2" href="$structvpr_1_1_swapchain_impl.html#a26979c4e9803da67ef61bf098377b341" title="vpr::SwapchainImpl\l::create" alt="" coords="187,35,320,76"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_swapchain.html#a34c3d73db1e99d3a395398fc0dbb5dc6" title="vpr::Swapchain::Recreate" alt="" coords="368,13,537,39"/>
-<area shape="rect" id="node5" href="$structvpr_1_1_swapchain_impl.html#aa1b6cf08451eb2e7bebdbf5ce10a09ed" title="vpr::SwapchainImpl\l::SwapchainImpl" alt="" coords="386,64,519,105"/>
-<area shape="rect" id="node4" href="$namespacevpr.html#a812ad3570ad63ddcbc18e03988bd60bd" title="Pass a swapchain and surface pointer to this to have the swapchain and surface destroyed and recreate..." alt="" coords="585,5,769,47"/>
-</map>

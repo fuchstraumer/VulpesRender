@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="classvpr_1_1_framebuffer" kind="class" language="C++" prot="public">
+    <compoundname>vpr::Framebuffer</compoundname>
+    <includes refid="_framebuffer_8hpp" local="no">Framebuffer.hpp</includes>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classvpr_1_1_framebuffer_1ab8c4f8727b5342ba063631190310340b" prot="protected" static="no" mutable="no">
+        <type>VkDevice</type>
+        <definition>VkDevice vpr::Framebuffer::parent</definition>
+        <argsstring></argsstring>
+        <name>parent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/Framebuffer.hpp" line="31" column="1" bodyfile="render/include/Framebuffer.hpp" bodystart="31" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_framebuffer_1a23680b07a937e5dc08995dc88ebeb091" compoundref="_framebuffer_8cpp" startline="32" endline="36">Destroy</referencedby>
+        <referencedby refid="classvpr_1_1_framebuffer_1a89f0568cd606dcb2b9a2210bacc2fbae" compoundref="_framebuffer_8cpp" startline="7" endline="11">Framebuffer</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_framebuffer_1ab95929c5bd9ef0d51ac83ea3c298b4ea" prot="protected" static="no" mutable="no">
+        <type>VkFramebuffer</type>
+        <definition>VkFramebuffer vpr::Framebuffer::handle</definition>
+        <argsstring></argsstring>
+        <name>handle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/Framebuffer.hpp" line="32" column="1" bodyfile="render/include/Framebuffer.hpp" bodystart="32" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_framebuffer_1a23680b07a937e5dc08995dc88ebeb091" compoundref="_framebuffer_8cpp" startline="32" endline="36">Destroy</referencedby>
+        <referencedby refid="classvpr_1_1_framebuffer_1a89f0568cd606dcb2b9a2210bacc2fbae" compoundref="_framebuffer_8cpp" startline="7" endline="11">Framebuffer</referencedby>
+        <referencedby refid="classvpr_1_1_framebuffer_1a8f3af474b62d6ed410ec533e35168cac" compoundref="_framebuffer_8cpp" startline="28" endline="30">vkHandle</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classvpr_1_1_framebuffer_1a57bd522a4ff0c33d9796be19408b3e6d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::Framebuffer::Framebuffer</definition>
+        <argsstring>(const Framebuffer &amp;)=delete</argsstring>
+        <name>Framebuffer</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_framebuffer" kindref="compound">Framebuffer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/Framebuffer.hpp" line="16" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_framebuffer_1a4d28318492b272461a3ed7604f527000" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_framebuffer" kindref="compound">Framebuffer</ref> &amp;</type>
+        <definition>Framebuffer&amp; vpr::Framebuffer::operator=</definition>
+        <argsstring>(const Framebuffer &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_framebuffer" kindref="compound">Framebuffer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/Framebuffer.hpp" line="17" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classvpr_1_1_framebuffer_1a89f0568cd606dcb2b9a2210bacc2fbae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::Framebuffer::Framebuffer</definition>
+        <argsstring>(const VkDevice &amp;parent, const VkFramebufferCreateInfo &amp;create_info)</argsstring>
+        <name>Framebuffer</name>
+        <param>
+          <type>const VkDevice &amp;</type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type>const VkFramebufferCreateInfo &amp;</type>
+          <declname>create_info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/Framebuffer.hpp" line="19" column="1" bodyfile="render/src/Framebuffer.cpp" bodystart="7" bodyend="11"/>
+        <references refid="classvpr_1_1_framebuffer_1ab95929c5bd9ef0d51ac83ea3c298b4ea" compoundref="_framebuffer_8hpp" startline="32">handle</references>
+        <references refid="classvpr_1_1_framebuffer_1ab8c4f8727b5342ba063631190310340b" compoundref="_framebuffer_8hpp" startline="31">parent</references>
+        <references refid="vk_assert_8hpp_1a92c2e07b0d021fc331be70a65c61dacc" compoundref="vk_assert_8hpp" startline="9">VkAssert</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_framebuffer_1a10b367c640cfc74accc13409e6992711" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::Framebuffer::~Framebuffer</definition>
+        <argsstring>()</argsstring>
+        <name>~Framebuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/Framebuffer.hpp" line="20" column="1" bodyfile="render/src/Framebuffer.cpp" bodystart="13" bodyend="15"/>
+        <references refid="classvpr_1_1_framebuffer_1a23680b07a937e5dc08995dc88ebeb091" compoundref="_framebuffer_8cpp" startline="32" endline="36">Destroy</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_framebuffer_1a4808260af29009f42e171613159754d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_framebuffer" kindref="compound">Framebuffer</ref> &amp;</type>
+        <definition>Framebuffer &amp; vpr::Framebuffer::operator=</definition>
+        <argsstring>(Framebuffer &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classvpr_1_1_framebuffer" kindref="compound">Framebuffer</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/Framebuffer.hpp" line="22" column="1" bodyfile="render/src/Framebuffer.cpp" bodystart="21" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_framebuffer_1a98f307d1821e9734d607d8194c635cff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::Framebuffer::Framebuffer</definition>
+        <argsstring>(Framebuffer &amp;&amp;other) noexcept</argsstring>
+        <name>Framebuffer</name>
+        <param>
+          <type><ref refid="classvpr_1_1_framebuffer" kindref="compound">Framebuffer</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/Framebuffer.hpp" line="23" column="1" bodyfile="render/src/Framebuffer.cpp" bodystart="17" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_framebuffer_1a8f3af474b62d6ed410ec533e35168cac" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const VkFramebuffer &amp;</type>
+        <definition>const VkFramebuffer &amp; vpr::Framebuffer::vkHandle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>vkHandle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/Framebuffer.hpp" line="25" column="1" bodyfile="render/src/Framebuffer.cpp" bodystart="28" bodyend="30"/>
+        <references refid="classvpr_1_1_framebuffer_1ab95929c5bd9ef0d51ac83ea3c298b4ea" compoundref="_framebuffer_8hpp" startline="32">handle</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_framebuffer_1a23680b07a937e5dc08995dc88ebeb091" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::Framebuffer::Destroy</definition>
+        <argsstring>()</argsstring>
+        <name>Destroy</name>
+        <briefdescription>
+<para>Destroys the object by calling vkDestroyFramebuffer() on it. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/Framebuffer.hpp" line="27" column="1" bodyfile="render/src/Framebuffer.cpp" bodystart="32" bodyend="36"/>
+        <references refid="classvpr_1_1_framebuffer_1ab95929c5bd9ef0d51ac83ea3c298b4ea" compoundref="_framebuffer_8hpp" startline="32">handle</references>
+        <references refid="classvpr_1_1_framebuffer_1ab8c4f8727b5342ba063631190310340b" compoundref="_framebuffer_8hpp" startline="31">parent</references>
+        <referencedby refid="classvpr_1_1_framebuffer_1a10b367c640cfc74accc13409e6992711" compoundref="_framebuffer_8cpp" startline="13" endline="15">~Framebuffer</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classvpr_1_1_framebuffer" kindref="compound">Framebuffer</ref> class merely handles lifetime of a VkFramebuffer object. </para>    </briefdescription>
+    <detaileddescription>
+<para>All important information on how to setup this class is provided by the VkFramebufferCreateInfo struct in the constructor. <ref refid="classvpr_1_1_framebuffer_1a23680b07a937e5dc08995dc88ebeb091" kindref="member">Destroy()</ref> method has been publicly exposed to allow one to keep the object around, but destroy and re-create it for swapchain events. </para>    </detaileddescription>
+    <location file="render/include/Framebuffer.hpp" line="15" column="1" bodyfile="render/include/Framebuffer.hpp" bodystart="15" bodyend="33"/>
+    <listofallmembers>
+      <member refid="classvpr_1_1_framebuffer_1a23680b07a937e5dc08995dc88ebeb091" prot="public" virt="non-virtual"><scope>vpr::Framebuffer</scope><name>Destroy</name></member>
+      <member refid="classvpr_1_1_framebuffer_1a57bd522a4ff0c33d9796be19408b3e6d" prot="private" virt="non-virtual"><scope>vpr::Framebuffer</scope><name>Framebuffer</name></member>
+      <member refid="classvpr_1_1_framebuffer_1a89f0568cd606dcb2b9a2210bacc2fbae" prot="public" virt="non-virtual"><scope>vpr::Framebuffer</scope><name>Framebuffer</name></member>
+      <member refid="classvpr_1_1_framebuffer_1a98f307d1821e9734d607d8194c635cff" prot="public" virt="non-virtual"><scope>vpr::Framebuffer</scope><name>Framebuffer</name></member>
+      <member refid="classvpr_1_1_framebuffer_1ab95929c5bd9ef0d51ac83ea3c298b4ea" prot="protected" virt="non-virtual"><scope>vpr::Framebuffer</scope><name>handle</name></member>
+      <member refid="classvpr_1_1_framebuffer_1a4d28318492b272461a3ed7604f527000" prot="private" virt="non-virtual"><scope>vpr::Framebuffer</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_framebuffer_1a4808260af29009f42e171613159754d0" prot="public" virt="non-virtual"><scope>vpr::Framebuffer</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_framebuffer_1ab8c4f8727b5342ba063631190310340b" prot="protected" virt="non-virtual"><scope>vpr::Framebuffer</scope><name>parent</name></member>
+      <member refid="classvpr_1_1_framebuffer_1a8f3af474b62d6ed410ec533e35168cac" prot="public" virt="non-virtual"><scope>vpr::Framebuffer</scope><name>vkHandle</name></member>
+      <member refid="classvpr_1_1_framebuffer_1a10b367c640cfc74accc13409e6992711" prot="public" virt="non-virtual"><scope>vpr::Framebuffer</scope><name>~Framebuffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

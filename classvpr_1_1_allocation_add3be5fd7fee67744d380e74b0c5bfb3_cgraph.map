@@ -1,6 +1,0 @@
-<map id="vpr::Allocation::operator==" name="vpr::Allocation::operator==">
-<area shape="rect" id="node2" href="$classvpr_1_1_allocation.html#ad23615cd9f84e8e2354cf1f1e7e8f162" title="vpr::Allocation::IsPrivate\lAllocation" alt="" coords="249,5,409,47"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_allocation.html#a1a223e41ca865271544ece71d18edce2" title="vpr::Allocation::Memory" alt="" coords="250,71,409,98"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_allocation.html#ab07876bad87d1c3e085ab02c1c608179" title="vpr::Allocation::MemoryTypeIdx" alt="" coords="228,122,431,149"/>
-<area shape="rect" id="node5" href="$classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397" title="vpr::Allocation::Offset" alt="" coords="257,173,402,199"/>
-</map>

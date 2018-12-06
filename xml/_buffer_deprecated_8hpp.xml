@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_buffer_deprecated_8hpp" kind="file" language="C++">
+    <compoundname>BufferDeprecated.hpp</compoundname>
+    <includes refid="vpr__stdafx_8h" local="yes">vpr_stdafx.h</includes>
+    <includes refid="_forward_decl_8hpp" local="yes">ForwardDecl.hpp</includes>
+    <includes refid="_allocation_8hpp" local="yes">Allocation.hpp</includes>
+    <includes local="no">memory</includes>
+    <incdepgraph>
+      <node id="626">
+        <label>resource/include/BufferDeprecated.hpp</label>
+        <link refid="_buffer_deprecated_8hpp"/>
+        <childnode refid="627" relation="include">
+        </childnode>
+        <childnode refid="629" relation="include">
+        </childnode>
+        <childnode refid="630" relation="include">
+        </childnode>
+        <childnode refid="631" relation="include">
+        </childnode>
+      </node>
+      <node id="630">
+        <label>Allocation.hpp</label>
+        <link refid="_allocation_8hpp"/>
+        <childnode refid="627" relation="include">
+        </childnode>
+        <childnode refid="629" relation="include">
+        </childnode>
+        <childnode refid="631" relation="include">
+        </childnode>
+      </node>
+      <node id="627">
+        <label>vpr_stdafx.h</label>
+        <link refid="vpr__stdafx_8h"/>
+        <childnode refid="628" relation="include">
+        </childnode>
+      </node>
+      <node id="628">
+        <label>vulkan/vulkan.h</label>
+      </node>
+      <node id="629">
+        <label>ForwardDecl.hpp</label>
+        <link refid="_forward_decl_8hpp"/>
+      </node>
+      <node id="631">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classvpr_1_1_buffer" prot="public">vpr::Buffer</innerclass>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_buffer_deprecated_8hpp_1aa7c87e8140a19bfa731e4e717f50f39d" prot="public" static="no">
+        <name>VULPES_VK_BUFFER_H</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/BufferDeprecated.hpp" line="3" column="9" bodyfile="resource/include/BufferDeprecated.hpp" bodystart="3" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="resource/include/BufferDeprecated.hpp"/>
+  </compounddef>
+</doxygen>

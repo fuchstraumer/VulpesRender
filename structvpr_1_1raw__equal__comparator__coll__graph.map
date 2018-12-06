@@ -1,4 +1,0 @@
-<map id="vpr::raw_equal_comparator" name="vpr::raw_equal_comparator">
-<area shape="rect" id="node2" href="$classvpr_1_1_allocation.html" title="Allocation class represents a singular allocation: can be a private allocation (i.e, only user of attached DeviceMemory) or a block allocation (bound to sub&#45;region of device memory) " alt="" coords="42,199,145,225"/>
-<area shape="rect" id="node4" href="$namespacevpr.html#structvpr_1_1_allocation_impl" title="vpr::AllocationImpl" alt="" coords="30,5,157,32"/>
-</map>

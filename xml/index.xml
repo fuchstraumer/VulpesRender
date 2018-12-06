@@ -1,0 +1,1237 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.14">
+  <compound refid="classvpr_1_1_allocation" kind="class"><name>vpr::Allocation</name>
+    <member refid="classvpr_1_1_allocation_1aa1c4b67be8e0f44155dcd26ca93f6ec2" kind="variable"><name>Size</name></member>
+    <member refid="classvpr_1_1_allocation_1afa15c9bbc5bbf40d3416f7f5d85bb752" kind="variable"><name>Alignment</name></member>
+    <member refid="classvpr_1_1_allocation_1afd91b0a36dce93976913fb2c0859684a" kind="variable"><name>impl</name></member>
+    <member refid="classvpr_1_1_allocation_1ac55862fc872fc1e9276210eddec744ca" kind="variable"><name>userData</name></member>
+    <member refid="classvpr_1_1_allocation_1af49216f0d72f038145500587f84d30dd" kind="function"><name>Allocation</name></member>
+    <member refid="classvpr_1_1_allocation_1afbf44280b9503d91a56d91479619e6cb" kind="function"><name>~Allocation</name></member>
+    <member refid="classvpr_1_1_allocation_1a4ffd3690b3172c28d0e080739bd83e31" kind="function"><name>Allocation</name></member>
+    <member refid="classvpr_1_1_allocation_1a16abc6fd06477544c4a34a012be850b5" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_allocation_1a4055730036d8cb2032234def146766ba" kind="function"><name>Allocation</name></member>
+    <member refid="classvpr_1_1_allocation_1a75408587e6fce6988e0cc1b0dcb58af1" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_allocation_1ad5d461398f23e593c58f70a8cac78922" kind="function"><name>Init</name></member>
+    <member refid="classvpr_1_1_allocation_1aaa942129013583bd9c1858217e5d5126" kind="function"><name>Update</name></member>
+    <member refid="classvpr_1_1_allocation_1ad680abfd77facfe5efcc222b154b595d" kind="function"><name>InitPrivate</name></member>
+    <member refid="classvpr_1_1_allocation_1a52b6b1170c2ecf99175ca809d5e89e75" kind="function"><name>Map</name></member>
+    <member refid="classvpr_1_1_allocation_1a50c9f0b8277412ee7478939ade2025b8" kind="function"><name>Unmap</name></member>
+    <member refid="classvpr_1_1_allocation_1a1a223e41ca865271544ece71d18edce2" kind="function"><name>Memory</name></member>
+    <member refid="classvpr_1_1_allocation_1acb642a53c185ac6530ed60959b0e4397" kind="function"><name>Offset</name></member>
+    <member refid="classvpr_1_1_allocation_1ab07876bad87d1c3e085ab02c1c608179" kind="function"><name>MemoryTypeIdx</name></member>
+    <member refid="classvpr_1_1_allocation_1aba0b6e2e6c71e801603e6b81c2218f89" kind="function"><name>SetUserData</name></member>
+    <member refid="classvpr_1_1_allocation_1a4991454fa12026f1e25fc56c6791be2d" kind="function"><name>GetUserData</name></member>
+    <member refid="classvpr_1_1_allocation_1ad23615cd9f84e8e2354cf1f1e7e8f162" kind="function"><name>IsPrivateAllocation</name></member>
+    <member refid="classvpr_1_1_allocation_1add3be5fd7fee67744d380e74b0c5bfb3" kind="function"><name>operator==</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_allocation_collection" kind="class"><name>vpr::AllocationCollection</name>
+    <member refid="classvpr_1_1_allocation_collection_1a723a651fdda475182b15d93e131441f7" kind="typedef"><name>iterator</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1a298be5e4cc2173a7c9d8a6701e59e499" kind="typedef"><name>const_iterator</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1a0606e564cb58e6a3c0dad8c4091e91eb" kind="variable"><name>containerMutex</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1a1d13e83ce527ebb61edf3184ed808fce" kind="variable"><name>allocations</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1aaaeba6e3ebc790a836425f662094bf98" kind="variable"><name>allocator</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1a619ce3b614015e030bea8a3239d60fe2" kind="friend"><name>DebugVisualization</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1aa54730353079686243fbe5f8545267d0" kind="friend"><name>DebugVisualizationImpl</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1af26476d0b01af5f4a4442ae27c2592df" kind="function"><name>AllocationCollection</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1a1e9894a592cdafc75b397b732dd5b853" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1a47f08b7e6e95eb14b433759d10baeb7c" kind="function"><name>AllocationCollection</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1af5cd304c15b67a86638b110462424631" kind="function"><name>AllocationCollection</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1aad244bf0ed5c0b9d0ad474df45eeab1e" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1ad0d7f2d163ab8031eb9126fe25f3d896" kind="function"><name>~AllocationCollection</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1a46ab8c77bb2397e34eea28fcd55cb8dd" kind="function"><name>operator[]</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1a0f3acc309968ac65588c61bc2a367ce8" kind="function"><name>operator[]</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1a19339dec3558308c85b547b37dc940ce" kind="function"><name>AddMemoryBlock</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1ad0078fb962f01a4245c8b33a094d3f87" kind="function"><name>Empty</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1a8a66b73729415adc78507ace1a938f8c" kind="function"><name>RemoveBlock</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1a2da5a9d137c84fe3f6739de5fdb7fddc" kind="function"><name>SortAllocations</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1ad6739a1338114724c29dbfd9245fb78c" kind="function"><name>begin</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1a9285cc70c50e9380ecb8dc5667eff759" kind="function"><name>end</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1ac21e7c905d3f4765dc94cb3d1eb7e6d6" kind="function"><name>begin</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1aa970f37eac4a92334165ecf683717c3b" kind="function"><name>end</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1a12cccd841a9a0a02b823c2b6ab6bea2c" kind="function"><name>cbegin</name></member>
+    <member refid="classvpr_1_1_allocation_collection_1acea1a0283cde75ebd517885e79d05a01" kind="function"><name>cend</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_allocation_hash" kind="struct"><name>vpr::AllocationHash</name>
+    <member refid="structvpr_1_1_allocation_hash_1ade2e057ec37776fd84e814f8a9e540f3" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_allocation_impl" kind="struct"><name>vpr::AllocationImpl</name>
+    <member refid="structvpr_1_1_allocation_impl_1ad3d64eb7085a475c1d1e30ba67bcbbe0" kind="variable"><name>typeData</name></member>
+    <member refid="structvpr_1_1_allocation_impl_1a8726eee1d9dd5e9641fa5979162a7d86" kind="variable"><name>userData</name></member>
+    <member refid="structvpr_1_1_allocation_impl_1a21c46d4aa8a786c4358a9e20256e3c9d" kind="function"><name>AllocationImpl</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_allocation_requirements" kind="struct"><name>vpr::AllocationRequirements</name>
+    <member refid="structvpr_1_1_allocation_requirements_1a728999a7c098d84b06ab2ba4373472d0" kind="variable"><name>noNewAllocations</name></member>
+    <member refid="structvpr_1_1_allocation_requirements_1abfa545adb01b6f16b8936561d4a54fd8" kind="variable"><name>privateMemory</name></member>
+    <member refid="structvpr_1_1_allocation_requirements_1ac090af25414224c2fcb36baae16f3265" kind="variable"><name>requiredFlags</name></member>
+    <member refid="structvpr_1_1_allocation_requirements_1aa51fb8ff6e7248e82ec19834c923f5bf" kind="variable"><name>preferredFlags</name></member>
+    <member refid="structvpr_1_1_allocation_requirements_1a164674fd0507f8982e6ec272d1f46ea7" kind="variable"><name>prefersDedicatedKHR</name></member>
+    <member refid="structvpr_1_1_allocation_requirements_1a84e600ef433ac8a3c3964bdc579cd0ee" kind="variable"><name>requiresDedicatedKHR</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_allocator" kind="class"><name>vpr::Allocator</name>
+    <member refid="classvpr_1_1_allocator_1aeb93666035b8e36aa8f2119deb1b4ba1" kind="enum"><name>allocation_extensions</name></member>
+    <member refid="classvpr_1_1_allocator_1aeb93666035b8e36aa8f2119deb1b4ba1a6adf97f83acf6453d4a6a4b1070f3754" kind="enumvalue"><name>None</name></member>
+    <member refid="classvpr_1_1_allocator_1aeb93666035b8e36aa8f2119deb1b4ba1a777aca518cfbfec08624a77a23b5b163" kind="enumvalue"><name>DedicatedAllocations</name></member>
+    <member refid="classvpr_1_1_allocator_1a619ce3b614015e030bea8a3239d60fe2" kind="friend"><name>DebugVisualization</name></member>
+    <member refid="classvpr_1_1_allocator_1aa54730353079686243fbe5f8545267d0" kind="friend"><name>DebugVisualizationImpl</name></member>
+    <member refid="classvpr_1_1_allocator_1aa125427dc233b7a116ae75f58bd56431" kind="variable"><name>impl</name></member>
+    <member refid="classvpr_1_1_allocator_1a17a1897a3de8cd25b9a2d3fc89620352" kind="function"><name>Allocator</name></member>
+    <member refid="classvpr_1_1_allocator_1a7e0d9381325848d4ae8721d503c53d9b" kind="function"><name>Allocator</name></member>
+    <member refid="classvpr_1_1_allocator_1a816077a4ee71487a3c7a45eddfb46644" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_allocator_1a769efe2787e5153c716f7334cdd85d45" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_allocator_1a8bc1ce37f0b4ef95a00d534a6542dd1c" kind="function"><name>Allocator</name></member>
+    <member refid="classvpr_1_1_allocator_1a9db2082e4275074f63a5e1257a89825f" kind="function"><name>~Allocator</name></member>
+    <member refid="classvpr_1_1_allocator_1a4fb24600d3edbff034389a4ea111513f" kind="function"><name>Recreate</name></member>
+    <member refid="classvpr_1_1_allocator_1a1be30aa02991f0323def73b9be9a3c44" kind="function"><name>DeviceHandle</name></member>
+    <member refid="classvpr_1_1_allocator_1ab5457af65cbb081b295f323c13a7843a" kind="function"><name>AllocateMemory</name></member>
+    <member refid="classvpr_1_1_allocator_1a438bbd88a3f18c741f7de90f528300b1" kind="function"><name>FreeMemory</name></member>
+    <member refid="classvpr_1_1_allocator_1a74d845e760e100129d83bc40cd4fb12e" kind="function"><name>AllocateForImage</name></member>
+    <member refid="classvpr_1_1_allocator_1ae8c982057f90fad764d25d8b081e5603" kind="function"><name>AllocateForBuffer</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_allocator_impl" kind="struct"><name>vpr::AllocatorImpl</name>
+    <member refid="structvpr_1_1_allocator_impl_1ac0e602f636913c7510718091629032f2" kind="enum"><name>AllocationSize</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1ac0e602f636913c7510718091629032f2a9b9c17e13f0e3dc9860a26e08b59b2a7" kind="enumvalue"><name>SMALL</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1ac0e602f636913c7510718091629032f2ac87f3be66ffc3c0d4249f1c2cc5f3cce" kind="enumvalue"><name>MEDIUM</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1ac0e602f636913c7510718091629032f2a71726adf0ff60cd03eaf3c515883eeb8" kind="enumvalue"><name>LARGE</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1ac0e602f636913c7510718091629032f2af15a17d42f52702abe251cd13067f199" kind="enumvalue"><name>EXTRA_LARGE</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a1c23a6ef4795d24410b6af8736228717" kind="variable"><name>allocations</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1ae80941f43777e8872bb2feb19ebe82a0" kind="variable"><name>emptyAllocations</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a40fc7285e8f4404facd6b9ece0679e78" kind="variable"><name>privateAllocations</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1aef84c0c451b23346c729753fcb97a5aa" kind="variable"><name>privateMutex</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a7c6d7ed0127f8855626505597f52fbaa" kind="variable"><name>allocMutex</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1af91bd8463e115344416716396c38a558" kind="variable"><name>logicalDevice</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a3d877474ed5d36c1775b8b5f15c3e1fb" kind="variable"><name>physicalDevice</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a0e6f55fc74957e9fbb1eece6951b80ff" kind="variable"><name>deviceProperties</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a08588041240a23937c472696c50ca38e" kind="variable"><name>deviceMemoryProperties</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1ab1cf702b6e6af76558127e563013bcf0" kind="variable"><name>preferredLargeHeapBlockSize</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a5cab97c58e55a21704d5ece6e356df4e" kind="variable"><name>preferredSmallHeapBlockSize</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1adc8fb6b990aabbfa9900fb6c520eecaf" kind="variable"><name>pAllocationCallbacks</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a59efc16df23a49f32b55da6c735fbd0d" kind="variable"><name>usingMemoryExtensions</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a8f9ab69ecc64171b01c1702e84840a3c" kind="variable"><name>pVkGetBufferMemoryRequirements2KHR</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1aa9f5eea17e3de7583a63abf46d2eff5a" kind="variable"><name>pVkGetImageMemoryRequirements2KHR</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a243bf4394ebe9999a421a49e90c25f96" kind="variable"><name>pVkGetImageSparseMemoryRequirements2KHR</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a619ce3b614015e030bea8a3239d60fe2" kind="friend"><name>DebugVisualization</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1aa54730353079686243fbe5f8545267d0" kind="friend"><name>DebugVisualizationImpl</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1ac9ebcb725a5a9aa749108b4752eef0f3" kind="function"><name>AllocatorImpl</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1af42f00943ffa38d2f02d24886f549911" kind="function"><name>GetPreferredBlockSize</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1af4cde12705894f4ac76aa4d1eeeec6e7" kind="function"><name>GetBufferImageGranularity</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a90517febe6d9f3841cdb924d019d11b6" kind="function"><name>GetMemoryHeapCount</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a7848aa696f40eef78c8e380dd578b8ef" kind="function"><name>GetMemoryTypeCount</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a8ff9089978ad4cbc031d2fb067b6de54" kind="function"><name>createAllocationMaps</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1ac1c457665759826825cd1c0d2b5ad78d" kind="function"><name>clearAllocationMaps</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a5990c518d05b0fad50f65d11df659a39" kind="function"><name>findMemoryTypeIdx</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a25d6e4d4fe1d7c4adf83e95915a0a810" kind="function"><name>allocateMemoryType</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a2ec18969e688b4cb472a16535482208d" kind="function"><name>allocatePrivateMemory</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a4d132f78ac784684f0384127ff5c8624" kind="function"><name>freePrivateMemory</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a28efd3faba024a98f8248ed47ccf16e0" kind="function"><name>getBufferMemReqs</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a6c291f049e194c616fba17b070dacd0a" kind="function"><name>getImageMemReqs</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1af2ca13cb9b36bb5dd5d937d1ecd8aa78" kind="function"><name>GetAllocSize</name></member>
+    <member refid="structvpr_1_1_allocator_impl_1a86f11d286906668192d79d69bedda96b" kind="function"><name>fetchAllocFunctionPointersKHR</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_allocation_impl_1_1block_allocation" kind="struct"><name>vpr::AllocationImpl::blockAllocation</name>
+    <member refid="structvpr_1_1_allocation_impl_1_1block_allocation_1a13b8c05677f7310923d6e7b8005953af" kind="variable"><name>ParentBlock</name></member>
+    <member refid="structvpr_1_1_allocation_impl_1_1block_allocation_1aefc5312d57bb46a0decb787d60f5d877" kind="variable"><name>Offset</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_buffer" kind="class"><name>vpr::Buffer</name>
+    <member refid="classvpr_1_1_buffer_1ae8f9c59d2eff06decbf4853a8c22ed49" kind="variable"><name>parent</name></member>
+    <member refid="classvpr_1_1_buffer_1a6365cf8380f808b6377e1d6fd5a8dabc" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_buffer_1a899072855c6876154374aa5f3f6f9930" kind="variable"><name>view</name></member>
+    <member refid="classvpr_1_1_buffer_1a4c5f396675e349cac8fb6fca7ad6cd80" kind="variable"><name>createInfo</name></member>
+    <member refid="classvpr_1_1_buffer_1aaf2339590cf74eac281d09f22af0d8a5" kind="variable"><name>viewCreateInfo</name></member>
+    <member refid="classvpr_1_1_buffer_1a8b5196067a89499585f01e629b7f8b55" kind="variable"><name>mappedMemoryRange</name></member>
+    <member refid="classvpr_1_1_buffer_1a5dd595b4b93d33d49a15e9852381d307" kind="variable"><name>memoryAllocation</name></member>
+    <member refid="classvpr_1_1_buffer_1a9b69d98c01a256db2adc7878f4bed830" kind="variable"><name>size</name></member>
+    <member refid="classvpr_1_1_buffer_1ae153d808e4e2c669e5a925f166aa3e56" kind="variable"><name>dataSize</name></member>
+    <member refid="classvpr_1_1_buffer_1aa3dff6309040e420e748c8b6fc79d345" kind="variable"><name>mappedMemory</name></member>
+    <member refid="classvpr_1_1_buffer_1a10eaeb5b9ea147bc00ca1b58653cdf69" kind="variable"><name>descriptorInfoSet</name></member>
+    <member refid="classvpr_1_1_buffer_1a96bfe91f86798bdd5c4caafd5d03e0ad" kind="variable"><name>descriptor</name></member>
+    <member refid="classvpr_1_1_buffer_1a24dae3446fe85a6f29004853cf5c728a" kind="function"><name>Buffer</name></member>
+    <member refid="classvpr_1_1_buffer_1a9d1cc3aef09675b1d5104916b91f174d" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_buffer_1ac0c82ee1769d0de860e0dc8b25c2d1fa" kind="function"><name>Buffer</name></member>
+    <member refid="classvpr_1_1_buffer_1a7540498f21ea184173975560ff9e6327" kind="function"><name>~Buffer</name></member>
+    <member refid="classvpr_1_1_buffer_1a7ab2098cefe7698b330aa2268b24ba4b" kind="function"><name>Buffer</name></member>
+    <member refid="classvpr_1_1_buffer_1ae5359de9bb68e064331174620d3493e8" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_buffer_1abe56ee5b43a1be73960fa5edae0dcb0b" kind="function"><name>CreateBuffer</name></member>
+    <member refid="classvpr_1_1_buffer_1ac21673494c6f504e886e1e4fc4cacda5" kind="function"><name>CreateBuffer</name></member>
+    <member refid="classvpr_1_1_buffer_1ab832b022c0ae579386133a23844ee5e5" kind="function"><name>Destroy</name></member>
+    <member refid="classvpr_1_1_buffer_1ae38678b302a270b3716b43505e2f7e96" kind="function"><name>CopyToMapped</name></member>
+    <member refid="classvpr_1_1_buffer_1a9c05fd68db6222e85e09f0a1a56f62b9" kind="function"><name>CopyTo</name></member>
+    <member refid="classvpr_1_1_buffer_1a843cf452ecc4aed63fef2915d40ab9c4" kind="function"><name>CopyTo</name></member>
+    <member refid="classvpr_1_1_buffer_1a3a369873112eb478f3dfdf7b1549d2f6" kind="function"><name>CopyTo</name></member>
+    <member refid="classvpr_1_1_buffer_1a9ecbb5e39195c842b83008ca22e3dc10" kind="function"><name>Update</name></member>
+    <member refid="classvpr_1_1_buffer_1ab4f798aaec92861e165cff4e7a12cc18" kind="function"><name>Fill</name></member>
+    <member refid="classvpr_1_1_buffer_1a51dacf22b4cbfcf0224c467e1f7ba7ac" kind="function"><name>CreateMemoryBarrier</name></member>
+    <member refid="classvpr_1_1_buffer_1a8c9624441b1de2b79940cd8cc802b7e2" kind="function"><name>CreateView</name></member>
+    <member refid="classvpr_1_1_buffer_1a4c04d59a27d4c3471bdf90eda1c8b662" kind="function"><name>Map</name></member>
+    <member refid="classvpr_1_1_buffer_1a780ba4c43b7f1a8ec88a5990a76a3cd0" kind="function"><name>Unmap</name></member>
+    <member refid="classvpr_1_1_buffer_1a805e50dbbed7233718d366a9742d3246" kind="function"><name>Flush</name></member>
+    <member refid="classvpr_1_1_buffer_1ae44f3e3a2bcb922d522088c102147663" kind="function"><name>Invalidate</name></member>
+    <member refid="classvpr_1_1_buffer_1a41840496cd50949a36d89d96e5cb52cd" kind="function"><name>vkHandle</name></member>
+    <member refid="classvpr_1_1_buffer_1a786d565bbd6e968395d470fe51f02cde" kind="function"><name>vkHandle</name></member>
+    <member refid="classvpr_1_1_buffer_1a608136242a4072d8c74f5d36868fb72e" kind="function"><name>View</name></member>
+    <member refid="classvpr_1_1_buffer_1a567f2f27453fe745111b34344549ca14" kind="function"><name>GetDescriptor</name></member>
+    <member refid="classvpr_1_1_buffer_1af9dcb09ccc1d047250a579a94827c2fd" kind="function"><name>MappedMemoryRange</name></member>
+    <member refid="classvpr_1_1_buffer_1a05392d328541adc298ff9b5283a9c6ed" kind="function"><name>Size</name></member>
+    <member refid="classvpr_1_1_buffer_1af8411e6c6a353e03d6223c5c991832b1" kind="function"><name>SetMappedMemory</name></member>
+    <member refid="classvpr_1_1_buffer_1a7956ffcc00fd58b07d6a140cd2563c5d" kind="function"><name>Usage</name></member>
+    <member refid="classvpr_1_1_buffer_1add8b2dbfd79028bedfd30b5c5f48b3b2" kind="function"><name>CreateStagingBuffer</name></member>
+    <member refid="classvpr_1_1_buffer_1a14a5f04157433460a41b94ffd1ef7525" kind="function"><name>CreateStagingBuffer</name></member>
+    <member refid="classvpr_1_1_buffer_1ac367138a3788a0a6df49c5c2ad890774" kind="function"><name>createStagingBuffer</name></member>
+    <member refid="classvpr_1_1_buffer_1a07d786f45ff6d6712962da7910f6280c" kind="function"><name>setMappedMemoryRange</name></member>
+    <member refid="classvpr_1_1_buffer_1afbe401f3002cb40c4751ac8653aa9c64" kind="function"><name>setDescriptorInfo</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_command_buffers" kind="struct"><name>vpr::CommandBuffers</name>
+    <member refid="structvpr_1_1_command_buffers_1a51b52b51eede276e7aeabc5a9cb21278" kind="variable"><name>Data</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_command_pool" kind="class"><name>vpr::CommandPool</name>
+    <member refid="classvpr_1_1_command_pool_1a72066e2fd4dbc0f3320a43d8b90db9fa" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_command_pool_1a7b77449cdde922d7dbf7619facb1fcf9" kind="variable"><name>cmdBuffers</name></member>
+    <member refid="classvpr_1_1_command_pool_1ad195ffefa8027dca83d0d3554eb93099" kind="variable"><name>parent</name></member>
+    <member refid="classvpr_1_1_command_pool_1ae7526bd09f8b2407146ff3df1057a959" kind="function"><name>CommandPool</name></member>
+    <member refid="classvpr_1_1_command_pool_1a751041197c520a69652ec0df6ce6385b" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_command_pool_1ad40b0becc578d8291780202126f119ee" kind="function"><name>destroy</name></member>
+    <member refid="classvpr_1_1_command_pool_1a62755d6f74406b1b506cbdebda7620a1" kind="function"><name>CommandPool</name></member>
+    <member refid="classvpr_1_1_command_pool_1a4eb45e5362115372ebcee0a8c59fb5c2" kind="function"><name>CommandPool</name></member>
+    <member refid="classvpr_1_1_command_pool_1a42538efdf3d0cba5bbb4954b28e7e6fd" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_command_pool_1a726585b12ac4f21b74de94c757136c4c" kind="function"><name>~CommandPool</name></member>
+    <member refid="classvpr_1_1_command_pool_1a3df787753ace292c1b295907754172a3" kind="function"><name>AllocateCmdBuffers</name></member>
+    <member refid="classvpr_1_1_command_pool_1aa016e75a990a46203a0b75de317e6f1e" kind="function"><name>ResetCmdPool</name></member>
+    <member refid="classvpr_1_1_command_pool_1aa17782ac38bd5d72a4c7f3867162b03e" kind="function"><name>ResetCmdBuffer</name></member>
+    <member refid="classvpr_1_1_command_pool_1a7c6a4a50328cf4dd6ac76760001f68ab" kind="function"><name>FreeCommandBuffers</name></member>
+    <member refid="classvpr_1_1_command_pool_1a49d7a6a1633737f382dfe1b501f673b2" kind="function"><name>vkHandle</name></member>
+    <member refid="classvpr_1_1_command_pool_1a04e53dde1a3d1d7103eaea6ad7862efe" kind="function"><name>operator[]</name></member>
+    <member refid="classvpr_1_1_command_pool_1af5b53194b4ee68edad5290595623f3bb" kind="function"><name>GetCmdBuffer</name></member>
+    <member refid="classvpr_1_1_command_pool_1a7645594e0dd6952515f1240c75ae248b" kind="function"><name>GetCommandBuffers</name></member>
+    <member refid="classvpr_1_1_command_pool_1a27e9ae2e084faaffe032cb9b92ad2fa4" kind="function"><name>StartSingleCmdBuffer</name></member>
+    <member refid="classvpr_1_1_command_pool_1ac46b6fae9d0650041a4929698d59508a" kind="function"><name>EndSingleCmdBuffer</name></member>
+    <member refid="classvpr_1_1_command_pool_1afc12541bb9b26e7fd4e35b7ad92f3f33" kind="function"><name>size</name></member>
+    <member refid="classvpr_1_1_command_pool_1a1434a842101a0354902fe53140be34ef" kind="function"><name>Data</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_debug_visualization" kind="class"><name>vpr::DebugVisualization</name>
+    <member refid="classvpr_1_1_debug_visualization_1afa5be028ba774ddfe8caf4a6f901a87d" kind="variable"><name>impl</name></member>
+    <member refid="classvpr_1_1_debug_visualization_1a352316570cabf377af1b4e3deae15fb6" kind="function"><name>DebugVisualization</name></member>
+    <member refid="classvpr_1_1_debug_visualization_1a726289e55640f364be47d0262f899398" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_debug_visualization_1a6aac1aab63deb3a6ab3496cf8e46ce0b" kind="function"><name>DebugVisualization</name></member>
+    <member refid="classvpr_1_1_debug_visualization_1a28e3bac78687a88025fb986b34fe27b1" kind="function"><name>Draw</name></member>
+    <member refid="classvpr_1_1_debug_visualization_1a33e94a1b2a97af5f99b369e5b0a4b2ea" kind="function"><name>Update</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_debug_visualization_impl" kind="struct"><name>vpr::DebugVisualizationImpl</name>
+    <member refid="structvpr_1_1_debug_visualization_impl_1acb7edcd1a898ccdce441768a0978cbeb" kind="variable"><name>allocator</name></member>
+    <member refid="structvpr_1_1_debug_visualization_impl_1a7acb06b4ffd4730e4b9cefbba5846d8f" kind="variable"><name>Data</name></member>
+    <member refid="structvpr_1_1_debug_visualization_impl_1a7aeacec82a52138405f20ebf237ed136" kind="function"><name>DebugVisualizationImpl</name></member>
+    <member refid="structvpr_1_1_debug_visualization_impl_1a05eb815c5d4f3a68ca960e420566040a" kind="function"><name>update</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_descriptor_pool" kind="class"><name>vpr::DescriptorPool</name>
+    <member refid="classvpr_1_1_descriptor_pool_1a008d675ccf359562a672178104dbae52" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_descriptor_pool_1a532fbe052ae5a4e2ee8057132f6617f7" kind="variable"><name>maxSets</name></member>
+    <member refid="classvpr_1_1_descriptor_pool_1aba83382992c9afa3f1c80b8af7cae020" kind="variable"><name>device</name></member>
+    <member refid="classvpr_1_1_descriptor_pool_1ac399a91b4d05c2f68bb20c10c95c23d0" kind="variable"><name>typeMap</name></member>
+    <member refid="classvpr_1_1_descriptor_pool_1a591d689c1ccc50fb97961e744c3c214c" kind="function"><name>DescriptorPool</name></member>
+    <member refid="classvpr_1_1_descriptor_pool_1a8a84e04be795635b02ca4370478e99a6" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_descriptor_pool_1a06083280be32e9ae0c6a1834371b241e" kind="function"><name>DescriptorPool</name></member>
+    <member refid="classvpr_1_1_descriptor_pool_1ab67c7a158963b72bb9b844cda238b61b" kind="function"><name>~DescriptorPool</name></member>
+    <member refid="classvpr_1_1_descriptor_pool_1a499bed7ba4bb45208ce73582c66cd940" kind="function"><name>DescriptorPool</name></member>
+    <member refid="classvpr_1_1_descriptor_pool_1a9e680cfbe4c9fc12ef5e71a8c918095b" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_descriptor_pool_1a8ae0686e30437769c4e7e07f97735880" kind="function"><name>AddResourceType</name></member>
+    <member refid="classvpr_1_1_descriptor_pool_1a970a61cfde29654c3bac86b6e8fbb445" kind="function"><name>Create</name></member>
+    <member refid="classvpr_1_1_descriptor_pool_1ad9e6ae11354daa77e3f62c941b9b98eb" kind="function"><name>vkHandle</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_descriptor_set" kind="class"><name>vpr::DescriptorSet</name>
+    <member refid="classvpr_1_1_descriptor_set_1a13fbd330e1749a7b60444526799adb97" kind="variable"><name>device</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1af9e83408f10cec5654a6e512493d2f97" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1a34bbabecf8e5e6528a7a56f68754a47b" kind="variable"><name>impl</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1ab28671946745e441f9d1f66bccdabf76" kind="function"><name>DescriptorSet</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1a18f85f7d39829d83dd2c4b2c2451b015" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1a3f90e39823801c8c37e2e89f3c262c72" kind="function"><name>allocate</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1af60aebdf9d7c13a45e5bb2f87f8dc952" kind="function"><name>update</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1a2706a16b811f223a90f15cad2f5060df" kind="function"><name>DescriptorSet</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1a20cf3ef633ecfbf46b38d32653bad0d6" kind="function"><name>~DescriptorSet</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1a4d573b48ff2dd455951736175efa471f" kind="function"><name>DescriptorSet</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1aca37137b7bac707565b8250f95c58ca2" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1a2aa5678e42c37ef82c863ce52e21d523" kind="function"><name>AddDescriptorInfo</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1a2ef08744f5c75fe13717c4f6d18c85c3" kind="function"><name>AddDescriptorInfo</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1aa886fc7db83d8111dd7ad2a7d2037bb5" kind="function"><name>AddDescriptorInfo</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1a72a1ff35a12b214d310c4bb8181a8af4" kind="function"><name>AddSamplerBinding</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1a8d58aaafd1c068f4921ccdbf1ad692d8" kind="function"><name>Init</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1af0df0abb71f558109686909037de0688" kind="function"><name>Update</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1a47c7509f48d1f8fec24eac8aa412da72" kind="function"><name>Reset</name></member>
+    <member refid="classvpr_1_1_descriptor_set_1a10bd2e1ea290ca2a02a8b878d92d47dd" kind="function"><name>vkHandle</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_descriptor_set_impl" kind="struct"><name>vpr::DescriptorSetImpl</name>
+    <member refid="structvpr_1_1_descriptor_set_impl_1a13c8c2c3d7cf151eb1cbb2c15c38f013" kind="variable"><name>pool</name></member>
+    <member refid="structvpr_1_1_descriptor_set_impl_1ae0541511e5c293b52e21ca7df98dfbea" kind="variable"><name>setLayout</name></member>
+    <member refid="structvpr_1_1_descriptor_set_impl_1a28d978a1434cbd6b21c827d95ac704ff" kind="variable"><name>updated</name></member>
+    <member refid="structvpr_1_1_descriptor_set_impl_1aeafc59f547e37adbb7b703da0ca97663" kind="variable"><name>allocated</name></member>
+    <member refid="structvpr_1_1_descriptor_set_impl_1ac77f0381511627e3aecd25b01c5af4aa" kind="variable"><name>writeDescriptors</name></member>
+    <member refid="structvpr_1_1_descriptor_set_impl_1a2bf5452f0944bfa221213ad325d64082" kind="variable"><name>bufferInfos</name></member>
+    <member refid="structvpr_1_1_descriptor_set_impl_1a9904ac7f91930f9cd80c99a2dcfe51f1" kind="variable"><name>imageInfos</name></member>
+    <member refid="structvpr_1_1_descriptor_set_impl_1af15e44980c3229a2995725e62be27116" kind="variable"><name>bufferViews</name></member>
+    <member refid="structvpr_1_1_descriptor_set_impl_1aaee45e0011828cf962a61548b48009d1" kind="function"><name>DescriptorSetImpl</name></member>
+    <member refid="structvpr_1_1_descriptor_set_impl_1a234d220bfce8ce1d17d0f93160ae26d7" kind="function"><name>~DescriptorSetImpl</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_descriptor_set_layout" kind="class"><name>vpr::DescriptorSetLayout</name>
+    <member refid="classvpr_1_1_descriptor_set_layout_1ae47b4f4a55fcc84ecaaa2b7dc18b7f43" kind="variable"><name>ready</name></member>
+    <member refid="classvpr_1_1_descriptor_set_layout_1a5f778734388912af4202bd741f648d99" kind="variable"><name>device</name></member>
+    <member refid="classvpr_1_1_descriptor_set_layout_1a0aae54b47212fc24031e7633ab7ae04d" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_descriptor_set_layout_1aed5ff96a518362d581fd44e44f5e4ddd" kind="variable"><name>data</name></member>
+    <member refid="classvpr_1_1_descriptor_set_layout_1a4d1f8d5ced9cf60a6e61765e822cb8bb" kind="function"><name>DescriptorSetLayout</name></member>
+    <member refid="classvpr_1_1_descriptor_set_layout_1af24634c627f1b4fe1bfa0207f3e704a0" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_descriptor_set_layout_1a1e22c5f5bab22786c71d280940b92b63" kind="function"><name>create</name></member>
+    <member refid="classvpr_1_1_descriptor_set_layout_1aba3a23a9cfdc3283b2d6cd960ac5c742" kind="function"><name>DescriptorSetLayout</name></member>
+    <member refid="classvpr_1_1_descriptor_set_layout_1ad1d8e86cd2660799258dcc5d077d3b04" kind="function"><name>~DescriptorSetLayout</name></member>
+    <member refid="classvpr_1_1_descriptor_set_layout_1a1e102bd62e56ce8ed6befe9f0589cf4b" kind="function"><name>DescriptorSetLayout</name></member>
+    <member refid="classvpr_1_1_descriptor_set_layout_1a5000286a06dc67a0e2d398129644240c" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_descriptor_set_layout_1a4ba5ab9264f33503e4844262f7e6cc22" kind="function"><name>AddDescriptorBinding</name></member>
+    <member refid="classvpr_1_1_descriptor_set_layout_1aa0e6847616bb3254e7650f4e67762f82" kind="function"><name>AddDescriptorBinding</name></member>
+    <member refid="classvpr_1_1_descriptor_set_layout_1acbf6dcb13b21c4b2b3d65301c452a919" kind="function"><name>AddDescriptorBindings</name></member>
+    <member refid="classvpr_1_1_descriptor_set_layout_1ac798e1138e8a7a380653b27fe7e06058" kind="function"><name>vkHandle</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_device" kind="class"><name>vpr::Device</name>
+    <member refid="classvpr_1_1_device_1a1395be5571d5d2961aacb0c3727ef8b0" kind="variable"><name>numGraphicsQueues</name></member>
+    <member refid="classvpr_1_1_device_1a894511aa70498ce4c6d4f90234fdbeb1" kind="variable"><name>numComputeQueues</name></member>
+    <member refid="classvpr_1_1_device_1a71fb8d05fa54f5b46e2a93d69b4a9e1f" kind="variable"><name>numTransferQueues</name></member>
+    <member refid="classvpr_1_1_device_1a84c3631b86e77b5a52e9933a8309b7c7" kind="variable"><name>numSparseBindingQueues</name></member>
+    <member refid="classvpr_1_1_device_1ae90f098f10ef560b93fb54e29e9578c2" kind="variable"><name>queueFamilyIndices</name></member>
+    <member refid="classvpr_1_1_device_1a5e6c89cf59912690370c11d4c7c2648a" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_device_1a3767828e10f7ebb7eb0e3fff60732c96" kind="variable"><name>createInfo</name></member>
+    <member refid="classvpr_1_1_device_1a8545ca31dfd6a35a0370c7de5b0cc64c" kind="variable"><name>debugUtilsHandler</name></member>
+    <member refid="classvpr_1_1_device_1a39687d150080576e3b0c66873f808d37" kind="variable"><name>parent</name></member>
+    <member refid="classvpr_1_1_device_1afbd33fc31f5c5e1859faf0130e551ed6" kind="variable"><name>parentInstance</name></member>
+    <member refid="classvpr_1_1_device_1a7447e429a7fbed43cf2d7ff8df0c2d1a" kind="variable"><name>surface</name></member>
+    <member refid="classvpr_1_1_device_1a18421f8e6be40e60ffb5e436b6693658" kind="variable"><name>dataMembers</name></member>
+    <member refid="classvpr_1_1_device_1a9b90a786a5125f158805de055930e36f" kind="function"><name>Device</name></member>
+    <member refid="classvpr_1_1_device_1a63860a751568f5dbd5c31ec4b26792d9" kind="function"><name>Device</name></member>
+    <member refid="classvpr_1_1_device_1aebfab03ee3950f6e85579d0988c659c3" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_device_1a057db1be958feed9799066b2dca2b357" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_device_1ac71413f7f9988d9479e27f51fc6de197" kind="function"><name>verifyPresentationSupport</name></member>
+    <member refid="classvpr_1_1_device_1a97c806a212758d83ed537fbf25cf9fe6" kind="function"><name>checkSurfaceSupport</name></member>
+    <member refid="classvpr_1_1_device_1a4884447888b9c8aacc288591056db19d" kind="function"><name>setupQueueFamily</name></member>
+    <member refid="classvpr_1_1_device_1a3b0734cd598d9a64f3c459e9dc4e84ce" kind="function"><name>create</name></member>
+    <member refid="classvpr_1_1_device_1af52c3b24f6bca1308a5170eb3acfeb11" kind="function"><name>setupQueues</name></member>
+    <member refid="classvpr_1_1_device_1a158d56e75fab365778e07a84d090b3f7" kind="function"><name>setupValidation</name></member>
+    <member refid="classvpr_1_1_device_1a165976c19ab59de329855485a9dab5aa" kind="function"><name>setupExtensions</name></member>
+    <member refid="classvpr_1_1_device_1adbe15d529a11af4d7034a2135255e773" kind="function"><name>setupGraphicsQueues</name></member>
+    <member refid="classvpr_1_1_device_1abdb29331fbcc15a242b3f0e82b02beef" kind="function"><name>setupComputeQueues</name></member>
+    <member refid="classvpr_1_1_device_1aa64b2412561fa0950722c2dc4997da9f" kind="function"><name>setupTransferQueues</name></member>
+    <member refid="classvpr_1_1_device_1a22ee8e6517d4898282d9d6385545100a" kind="function"><name>setupSparseBindingQueues</name></member>
+    <member refid="classvpr_1_1_device_1aca69dbf04470b2119a9960047035dc57" kind="function"><name>setupDebugUtilsHandler</name></member>
+    <member refid="classvpr_1_1_device_1ad1a8ebd06d5d8b3de5ce0c8d1ce93277" kind="function"><name>Device</name></member>
+    <member refid="classvpr_1_1_device_1a1e717b4e39da77afd6658b9df6393ee2" kind="function"><name>~Device</name></member>
+    <member refid="classvpr_1_1_device_1a59882855173bef0b13a17b376ea01d45" kind="function"><name>vkHandle</name></member>
+    <member refid="classvpr_1_1_device_1af97db14ae016b678dcb2be6061cac5bd" kind="function"><name>HasDedicatedComputeQueues</name></member>
+    <member refid="classvpr_1_1_device_1a8aa0caf9975fd8eb2948156ee1418044" kind="function"><name>DedicatedAllocationExtensionsEnabled</name></member>
+    <member refid="classvpr_1_1_device_1a2f4378c92e12f529df785293c3a3a40f" kind="function"><name>HasExtension</name></member>
+    <member refid="classvpr_1_1_device_1a2c0889e41254c4778c73ab2a6ff6f1ce" kind="function"><name>GetEnabledExtensions</name></member>
+    <member refid="classvpr_1_1_device_1a69ff6decaf1928df17db723214786ec4" kind="function"><name>UpdateSurface</name></member>
+    <member refid="classvpr_1_1_device_1a6914a8dd1054f00fbdc3454e55b3c14b" kind="function"><name>GeneralQueue</name></member>
+    <member refid="classvpr_1_1_device_1ab4de02f4fcdb84f487c8e8f598cc3a77" kind="function"><name>GraphicsQueue</name></member>
+    <member refid="classvpr_1_1_device_1af7b303fd1d3a080aa4d160f7c3f10ad5" kind="function"><name>TransferQueue</name></member>
+    <member refid="classvpr_1_1_device_1a6a2bdc1c9de2b94e330ba75cb4a0a87b" kind="function"><name>ComputeQueue</name></member>
+    <member refid="classvpr_1_1_device_1a33f34c1c36dc71aa2905bce9e48b3c3f" kind="function"><name>SparseBindingQueue</name></member>
+    <member refid="classvpr_1_1_device_1ad9c1f7de10b5e4b0816bbd8233fa4987" kind="function"><name>GetFormatTiling</name></member>
+    <member refid="classvpr_1_1_device_1a2a58028f056c580337c9454195683eae" kind="function"><name>FindSupportedFormat</name></member>
+    <member refid="classvpr_1_1_device_1a4820a276bf1258c8ad6a5718fc7cd6fb" kind="function"><name>FindDepthFormat</name></member>
+    <member refid="classvpr_1_1_device_1a3c72a3cb6c48025c77a2e5029ff3718c" kind="function"><name>GetMemoryTypeIdx</name></member>
+    <member refid="classvpr_1_1_device_1a25e0b05bb662b335ec214295c46654cc" kind="function"><name>GetPhysicalDevice</name></member>
+    <member refid="classvpr_1_1_device_1a75b50a9b7b72d42932981ad2c8c9318c" kind="function"><name>GetPhysicalDeviceProperties</name></member>
+    <member refid="classvpr_1_1_device_1a3298bf1002853c3cd5b17fba4abc721d" kind="function"><name>GetPhysicalDeviceMemoryProperties</name></member>
+    <member refid="classvpr_1_1_device_1a37104872c409608aac9b91363ce71fc7" kind="function"><name>DebugUtilsHandler</name></member>
+    <member refid="classvpr_1_1_device_1a0462441316d1ac019b586331ee938f79" kind="function"><name>NumGraphicsQueues</name></member>
+    <member refid="classvpr_1_1_device_1abfe0f840688612001a13fe92f6e753da" kind="function"><name>NumComputeQueues</name></member>
+    <member refid="classvpr_1_1_device_1a4bdc3126a75abdcd3f1085cf8ebb83d3" kind="function"><name>NumTransferQueues</name></member>
+    <member refid="classvpr_1_1_device_1ab3d41a32bae7a7f8cf3f7bce630f9a41" kind="function"><name>NumSparseBindingQueues</name></member>
+    <member refid="classvpr_1_1_device_1ac4cf746c60392ff8164c32868f252f23" kind="function"><name>QueueFamilyIndices</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_device_data_members" kind="struct"><name>vpr::DeviceDataMembers</name>
+    <member refid="structvpr_1_1_device_data_members_1a449cf695be146d6e160a8976221fc58a" kind="variable"><name>enabledExtensions</name></member>
+    <member refid="structvpr_1_1_device_data_members_1ab137e7d0db54833e79860886148e1d54" kind="variable"><name>copiedExtensionStrings</name></member>
+    <member refid="structvpr_1_1_device_data_members_1a9ec824eaad8a92d25ebd9d431a00143d" kind="variable"><name>device</name></member>
+    <member refid="structvpr_1_1_device_data_members_1a2749c85ee4120b3d2c68bb746db6035a" kind="variable"><name>queueInfos</name></member>
+    <member refid="structvpr_1_1_device_data_members_1afdb20df24cdc3a4d75ba41f3677e4f3f" kind="variable"><name>enableDedicatedAllocations</name></member>
+    <member refid="structvpr_1_1_device_data_members_1a027813afb6fb9a971001026c54e3e691" kind="function"><name>DeviceDataMembers</name></member>
+    <member refid="structvpr_1_1_device_data_members_1a3d083fd1add161c9cc785e0a57aa6583" kind="function"><name>prepareRequiredExtensions</name></member>
+    <member refid="structvpr_1_1_device_data_members_1a9e4b2ed2f540350ec9642dbf2e24b1d4" kind="function"><name>prepareOptionalExtensions</name></member>
+    <member refid="structvpr_1_1_device_data_members_1a5901117e963f71eaa85717faab3f796d" kind="function"><name>checkExtensions</name></member>
+    <member refid="structvpr_1_1_device_data_members_1a74aa0fff140d4e0d31d913975a186f31" kind="function"><name>checkDedicatedAllocExtensions</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_event" kind="class"><name>vpr::Event</name>
+    <member refid="classvpr_1_1_event_1ad84628d3da32bfa347f385b84124bc59" kind="variable"><name>device</name></member>
+    <member refid="classvpr_1_1_event_1a40c5e09a133ea869f45bde3d184d0e08" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_event_1ac8c4a4985a5121dcb9cf3d7fb2d85b2f" kind="function"><name>Event</name></member>
+    <member refid="classvpr_1_1_event_1a6581a8a04a35539bbc44e52fcd022b4d" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_event_1aa0caf00452e301cb6220e2394b102084" kind="function"><name>Event</name></member>
+    <member refid="classvpr_1_1_event_1a751e895a90d66ce635ce8479dec8e92f" kind="function"><name>~Event</name></member>
+    <member refid="classvpr_1_1_event_1a5e559677956dfabb3a4b612490c437b5" kind="function"><name>Event</name></member>
+    <member refid="classvpr_1_1_event_1a0a2e28f3aa88a4cbf622d63f699654d9" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_event_1a350d16bc60d14a29f99041e91e9be982" kind="function"><name>vkHandle</name></member>
+    <member refid="classvpr_1_1_event_1a0089000d7e4ffd39efab590059c52ca5" kind="function"><name>Set</name></member>
+    <member refid="classvpr_1_1_event_1abf78b8b9982c506d3e85ba5f75c8285c" kind="function"><name>Reset</name></member>
+    <member refid="classvpr_1_1_event_1ac3ba488b1703ded001e55af5ada50849" kind="function"><name>GetStatus</name></member>
+    <member refid="classvpr_1_1_event_1a065551f41d822e7fe5d371d96f23282a" kind="function"><name>IsSet</name></member>
+    <member refid="classvpr_1_1_event_1a136668a70c07e1e3f3801184e6bc80d1" kind="function"><name>IsReset</name></member>
+    <member refid="classvpr_1_1_event_1a4a02a4dbd5693ca95254074ada52286a" kind="function"><name>Set</name></member>
+    <member refid="classvpr_1_1_event_1a2b3891c61c0b78ed8abedef27658aa27" kind="function"><name>Reset</name></member>
+    <member refid="classvpr_1_1_event_1a55ce6fe834e0adb16b0085ad9762233e" kind="function"><name>Wait</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_fence" kind="class"><name>vpr::Fence</name>
+    <member refid="classvpr_1_1_fence_1a953bbb86eaa9e15c00255153a09aa992" kind="variable"><name>device</name></member>
+    <member refid="classvpr_1_1_fence_1ac9af2a4f00f65f4f52a692b6a6865c36" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_fence_1a65415778511c1da4b9ded51aec7f445a" kind="function"><name>Fence</name></member>
+    <member refid="classvpr_1_1_fence_1a2943affff40b67c90e4e0e8e73a4bf56" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_fence_1a1c5ab83cc8c2f5ef29dd23cee8b8c2ac" kind="function"><name>Fence</name></member>
+    <member refid="classvpr_1_1_fence_1ac1f0161242b1cb131a46e028d4e008b1" kind="function"><name>Fence</name></member>
+    <member refid="classvpr_1_1_fence_1a715632e77683a203d22bc717a91bcdde" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_fence_1aa710f8426f0a3d057908c7a79cd0a7b1" kind="function"><name>~Fence</name></member>
+    <member refid="classvpr_1_1_fence_1af162b4facd36841eb6dfd005f5cc5852" kind="function"><name>vkHandle</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_framebuffer" kind="class"><name>vpr::Framebuffer</name>
+    <member refid="classvpr_1_1_framebuffer_1ab8c4f8727b5342ba063631190310340b" kind="variable"><name>parent</name></member>
+    <member refid="classvpr_1_1_framebuffer_1ab95929c5bd9ef0d51ac83ea3c298b4ea" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_framebuffer_1a57bd522a4ff0c33d9796be19408b3e6d" kind="function"><name>Framebuffer</name></member>
+    <member refid="classvpr_1_1_framebuffer_1a4d28318492b272461a3ed7604f527000" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_framebuffer_1a89f0568cd606dcb2b9a2210bacc2fbae" kind="function"><name>Framebuffer</name></member>
+    <member refid="classvpr_1_1_framebuffer_1a10b367c640cfc74accc13409e6992711" kind="function"><name>~Framebuffer</name></member>
+    <member refid="classvpr_1_1_framebuffer_1a4808260af29009f42e171613159754d0" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_framebuffer_1a98f307d1821e9734d607d8194c635cff" kind="function"><name>Framebuffer</name></member>
+    <member refid="classvpr_1_1_framebuffer_1a8f3af474b62d6ed410ec533e35168cac" kind="function"><name>vkHandle</name></member>
+    <member refid="classvpr_1_1_framebuffer_1a23680b07a937e5dc08995dc88ebeb091" kind="function"><name>Destroy</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_graphics_pipeline" kind="class"><name>vpr::GraphicsPipeline</name>
+    <member refid="classvpr_1_1_graphics_pipeline_1a15a2a7ccca9c23a508220ef2450bcb3d" kind="variable"><name>allocators</name></member>
+    <member refid="classvpr_1_1_graphics_pipeline_1a6f4e75798fa5be8be83768cc1c1caa9e" kind="variable"><name>parent</name></member>
+    <member refid="classvpr_1_1_graphics_pipeline_1a7026f50b8f3b75bbbc16891a97eb71d4" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_graphics_pipeline_1a0dd80a9ad43c36eaf6d0be88ff240264" kind="variable"><name>createInfo</name></member>
+    <member refid="classvpr_1_1_graphics_pipeline_1aa64ec5438a3f77ef4b0900dedd088dc3" kind="function"><name>GraphicsPipeline</name></member>
+    <member refid="classvpr_1_1_graphics_pipeline_1a91c924b5f981aa1c11fabd93b8bd0293" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_graphics_pipeline_1a646166a0760f6860f719f646753c5a4c" kind="function"><name>GraphicsPipeline</name></member>
+    <member refid="classvpr_1_1_graphics_pipeline_1a464e53ae6209d6bed77c8be843d9680a" kind="function"><name>GraphicsPipeline</name></member>
+    <member refid="classvpr_1_1_graphics_pipeline_1afcea60d9bb59d7b3613e76f18d4ca763" kind="function"><name>~GraphicsPipeline</name></member>
+    <member refid="classvpr_1_1_graphics_pipeline_1ab3baddf705601751e9041ea3c36253e5" kind="function"><name>GraphicsPipeline</name></member>
+    <member refid="classvpr_1_1_graphics_pipeline_1adea1fd57e923759603b0f6f16b64a636" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_graphics_pipeline_1a6b28822784f8e49222cdaacef49f29de" kind="function"><name>Init</name></member>
+    <member refid="classvpr_1_1_graphics_pipeline_1aea7b8f3af0fb2b0a508f362a791fe957" kind="function"><name>Destroy</name></member>
+    <member refid="classvpr_1_1_graphics_pipeline_1a8252999b7a7b7310172ac585782f31a4" kind="function"><name>vkHandle</name></member>
+    <member refid="classvpr_1_1_graphics_pipeline_1a1c7b5164865ce64a370b6926a714beaa" kind="function"><name>CreateMultiple</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_graphics_pipeline_info" kind="struct"><name>vpr::GraphicsPipelineInfo</name>
+    <member refid="structvpr_1_1_graphics_pipeline_info_1a3960687a5cb9ce1c6aefa1212efe4c27" kind="variable"><name>VertexInfo</name></member>
+    <member refid="structvpr_1_1_graphics_pipeline_info_1aaf19dc8142ff3e90cb6d3428f0c62bce" kind="variable"><name>AssemblyInfo</name></member>
+    <member refid="structvpr_1_1_graphics_pipeline_info_1a70646c5f4516067dcc43868e022baafb" kind="variable"><name>TesselationInfo</name></member>
+    <member refid="structvpr_1_1_graphics_pipeline_info_1ade55e85d8e4b8e783f51cfbffe6c7af9" kind="variable"><name>ViewportInfo</name></member>
+    <member refid="structvpr_1_1_graphics_pipeline_info_1a0f00200c8f085bbd8d58ec7573851b18" kind="variable"><name>RasterizationInfo</name></member>
+    <member refid="structvpr_1_1_graphics_pipeline_info_1ae2d84ab14d44608e727f22960a914fdd" kind="variable"><name>MultisampleInfo</name></member>
+    <member refid="structvpr_1_1_graphics_pipeline_info_1a8f4b01f4c7440cf6be64e30bb4f47942" kind="variable"><name>DepthStencilInfo</name></member>
+    <member refid="structvpr_1_1_graphics_pipeline_info_1a9611975bd0314e5a6b617e738f7c9104" kind="variable"><name>ColorBlendInfo</name></member>
+    <member refid="structvpr_1_1_graphics_pipeline_info_1aec220e52f813d1d8420ba6006bbaa15b" kind="variable"><name>DynamicStateInfo</name></member>
+    <member refid="structvpr_1_1_graphics_pipeline_info_1ac2f843fbface7718bbecb798c8baf11d" kind="function"><name>GraphicsPipelineInfo</name></member>
+    <member refid="structvpr_1_1_graphics_pipeline_info_1a65a7a63d7097bd86f0967d84a1fbde3c" kind="function"><name>GetPipelineCreateInfo</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_image" kind="class"><name>vpr::Image</name>
+    <member refid="classvpr_1_1_image_1a27058aff9d9de3170b3f46877b8db973" kind="variable"><name>parent</name></member>
+    <member refid="classvpr_1_1_image_1aaa79c19d9a06f3b8d73d1595256121a5" kind="variable"><name>allocators</name></member>
+    <member refid="classvpr_1_1_image_1afa1a23fafc949bc7d698660703e43fef" kind="variable"><name>createInfo</name></member>
+    <member refid="classvpr_1_1_image_1aa336162079dd8413ff1fc5dc91a83c01" kind="variable"><name>subresource</name></member>
+    <member refid="classvpr_1_1_image_1af0af766a544e64872a04a90cba0aca99" kind="variable"><name>subresourceLayout</name></member>
+    <member refid="classvpr_1_1_image_1aa40b833691db1d04571ab3327019c139" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_image_1ac7d87f2bbc3f38d34c4b7fc990717131" kind="variable"><name>view</name></member>
+    <member refid="classvpr_1_1_image_1adf7210708610d195f2fb51b5822fe00a" kind="variable"><name>memoryAllocation</name></member>
+    <member refid="classvpr_1_1_image_1a7e35d42ca5828b1fee472e5b6eb0d4ab" kind="variable"><name>finalLayout</name></member>
+    <member refid="classvpr_1_1_image_1aaa366da415c58bf532cdcafcabb1c7c6" kind="function"><name>Image</name></member>
+    <member refid="classvpr_1_1_image_1a610003672980e0c8c2b1e830cfea6d6a" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_image_1ac22c08e48a5b5a2efd881832c8641f33" kind="function"><name>Image</name></member>
+    <member refid="classvpr_1_1_image_1a96c5054eb1e2e1ed3b0b9b47b40d44cb" kind="function"><name>Image</name></member>
+    <member refid="classvpr_1_1_image_1a9dd43a8ef434b45b8e364f71540dcc4c" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_image_1a1287ebb37a0b59f2084e6aed31203c35" kind="function"><name>~Image</name></member>
+    <member refid="classvpr_1_1_image_1a873f753f67d45583eee998d59885d8c5" kind="function"><name>Destroy</name></member>
+    <member refid="classvpr_1_1_image_1aad7662ab3a1496171a826473f9ff98cf" kind="function"><name>Create</name></member>
+    <member refid="classvpr_1_1_image_1a9f06292f9e5c640e706783f5dffdbb7d" kind="function"><name>CreateView</name></member>
+    <member refid="classvpr_1_1_image_1a40c04ea34c1c47fd1b1dcbe43aeb8346" kind="function"><name>CreateView</name></member>
+    <member refid="classvpr_1_1_image_1af859b6a324c843f53bc822fcb90fdf33" kind="function"><name>TransitionLayout</name></member>
+    <member refid="classvpr_1_1_image_1a46bcdfa519f3848965bf01d6615295d6" kind="function"><name>CreateInfo</name></member>
+    <member refid="classvpr_1_1_image_1aff776d763605fa3344db86060e5c0931" kind="function"><name>vkHandle</name></member>
+    <member refid="classvpr_1_1_image_1aac09cd420df8116d129da1c97674ed88" kind="function"><name>View</name></member>
+    <member refid="classvpr_1_1_image_1a8132911d46c4de229ac073150b5d6337" kind="function"><name>MemoryAllocation</name></member>
+    <member refid="classvpr_1_1_image_1a646c4b32dcd65ab4c8a345aca1773288" kind="function"><name>Format</name></member>
+    <member refid="classvpr_1_1_image_1af3f95bd510a2bddce98e2932ff9840c2" kind="function"><name>SetFormat</name></member>
+    <member refid="classvpr_1_1_image_1a62825567a74b2b676b469d545014b566" kind="function"><name>Layout</name></member>
+    <member refid="classvpr_1_1_image_1a8b343c8f58a050829e477ddffe4807d5" kind="function"><name>SetFinalLayout</name></member>
+    <member refid="classvpr_1_1_image_1a27901dcfdf4bf4df50dcd759052ed7de" kind="function"><name>GetMemoryBarrier</name></member>
+    <member refid="classvpr_1_1_image_1a7f1db39dbc01e0775d8ba7adcb8507fa" kind="function"><name>CreateImage</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_instance" kind="class"><name>vpr::Instance</name>
+    <member refid="classvpr_1_1_instance_1ac131eec23cc4eba7cd68bc67de9d8c09" kind="enum"><name>instance_layers</name></member>
+    <member refid="classvpr_1_1_instance_1ac131eec23cc4eba7cd68bc67de9d8c09ab9f5c797ebbf55adccdd8539a65a0241" kind="enumvalue"><name>Disabled</name></member>
+    <member refid="classvpr_1_1_instance_1ac131eec23cc4eba7cd68bc67de9d8c09a30fc6bbba82125243ecf4ddb27fee645" kind="enumvalue"><name>Minimal</name></member>
+    <member refid="classvpr_1_1_instance_1ac131eec23cc4eba7cd68bc67de9d8c09abbd47109890259c0127154db1af26c75" kind="enumvalue"><name>Full</name></member>
+    <member refid="classvpr_1_1_instance_1a0992653af0dbc106f0bec63cdc5925cb" kind="variable"><name>extensionHandler</name></member>
+    <member refid="classvpr_1_1_instance_1aa5c56c4b911020e65be6f77c51c3f2eb" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_instance_1ace35d71f74954c4fadbd42e249935501" kind="variable"><name>createInfo</name></member>
+    <member refid="classvpr_1_1_instance_1ad84c0d2b814c5a7e578df1c33c228cf2" kind="function"><name>Instance</name></member>
+    <member refid="classvpr_1_1_instance_1aca395bdc50c5191872bcdffcd223ccb9" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_instance_1a8e32fee4f0a877997ee6e75ea3d3c3a1" kind="function"><name>prepareValidation</name></member>
+    <member refid="classvpr_1_1_instance_1ad6d5590582b6b4487544954c9d10be5f" kind="function"><name>checkValidationSupport</name></member>
+    <member refid="classvpr_1_1_instance_1a6f41bf0cdb803f57e3f2e97c8e9884c5" kind="function"><name>checkApiVersionSupport</name></member>
+    <member refid="classvpr_1_1_instance_1a89fd4838948bb8ab8eea8337ce1e3cbd" kind="function"><name>Instance</name></member>
+    <member refid="classvpr_1_1_instance_1a1b8c98d92b5f5ad0a607b5e80db2c30d" kind="function"><name>Instance</name></member>
+    <member refid="classvpr_1_1_instance_1a2d0e68a86ecbbceb024dee48885c28d1" kind="function"><name>~Instance</name></member>
+    <member refid="classvpr_1_1_instance_1a6082a006a3f2ab9688d4a14c123cb04a" kind="function"><name>vkHandle</name></member>
+    <member refid="classvpr_1_1_instance_1a34466d6fcc286ef1281b7bdb091ea754" kind="function"><name>ValidationEnabled</name></member>
+    <member refid="classvpr_1_1_instance_1ab9f92d523b1cc59715c6d1b237be3cea" kind="function"><name>HasExtension</name></member>
+    <member refid="classvpr_1_1_instance_1a6b61b801c27856790ab59513f66ce11c" kind="function"><name>GetEnabledExtensions</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_instance_extension_handler" kind="struct"><name>vpr::InstanceExtensionHandler</name>
+    <member refid="structvpr_1_1_instance_extension_handler_1a8d32e1d9c0746bd09330bbb6555d31b3" kind="variable"><name>extensionStrings</name></member>
+    <member refid="structvpr_1_1_instance_extension_handler_1ad198d3ec1133653bf0e9cd3d8d149bc2" kind="variable"><name>copiedExtensionStrings</name></member>
+    <member refid="structvpr_1_1_instance_extension_handler_1ace86eb273138382d28e7ad42b7e48558" kind="variable"><name>validationLayers</name></member>
+    <member refid="structvpr_1_1_instance_extension_handler_1a53f1ab2459ff360915bf6c5f690ca4ca" kind="function"><name>InstanceExtensionHandler</name></member>
+    <member refid="structvpr_1_1_instance_extension_handler_1a05d1f04435599c61498469a134d239e2" kind="function"><name>extensionSetup</name></member>
+    <member refid="structvpr_1_1_instance_extension_handler_1a66b3a869e2404afc912619eb31ae639f" kind="function"><name>prepareRequiredExtensions</name></member>
+    <member refid="structvpr_1_1_instance_extension_handler_1a96067fffda8ffa46cbebb182066e2f68" kind="function"><name>addPlatformRequiredExtensions</name></member>
+    <member refid="structvpr_1_1_instance_extension_handler_1ad84e6c1da712bf8c69efcbbff73f360f" kind="function"><name>prepareOptionalExtensions</name></member>
+    <member refid="structvpr_1_1_instance_extension_handler_1af3fa989227d2da5a214fcb2314b9885f" kind="function"><name>extensionCheck</name></member>
+    <member refid="structvpr_1_1_instance_extension_handler_1a1e0d4cf06ba0cd4c7fae52202ca7a107" kind="function"><name>checkOptionalExtensions</name></member>
+    <member refid="structvpr_1_1_instance_extension_handler_1a6679edf03fdb4190c0a2980dbc477f6e" kind="function"><name>checkRequiredExtensions</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_layout_bindings" kind="struct"><name>vpr::LayoutBindings</name>
+    <member refid="structvpr_1_1_layout_bindings_1a34243756b0b62b2fb4aa117f39e3923e" kind="variable"><name>bindings</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_memory_block" kind="class"><name>vpr::MemoryBlock</name>
+    <member refid="classvpr_1_1_memory_block_1a394e565967332b7b6809cf8b94295832" kind="variable"><name>Size</name></member>
+    <member refid="classvpr_1_1_memory_block_1afeb7274f3b113e063b85e83f588dc76d" kind="variable"><name>Suballocations</name></member>
+    <member refid="classvpr_1_1_memory_block_1a091376bd12781a137242367055e7972c" kind="variable"><name>MemoryTypeIdx</name></member>
+    <member refid="classvpr_1_1_memory_block_1a559f8dc4ea87d657b158f60b28b874b6" kind="variable"><name>parentDevice</name></member>
+    <member refid="classvpr_1_1_memory_block_1ae043175ee50b0fdfccd461fef6d91ea5" kind="variable"><name>guardMutex</name></member>
+    <member refid="classvpr_1_1_memory_block_1ab55a876e7db05f26f8560b28e39e5939" kind="variable"><name>availSize</name></member>
+    <member refid="classvpr_1_1_memory_block_1acc7492cbbd1743eb7f94d9b4d2921d08" kind="variable"><name>freeCount</name></member>
+    <member refid="classvpr_1_1_memory_block_1adcf64572527adcb7b7f38cf020eae14c" kind="variable"><name>memory</name></member>
+    <member refid="classvpr_1_1_memory_block_1a451d65f67ab0323ac98b03fce065595e" kind="variable"><name>availSuballocations</name></member>
+    <member refid="classvpr_1_1_memory_block_1a619ce3b614015e030bea8a3239d60fe2" kind="friend"><name>DebugVisualization</name></member>
+    <member refid="classvpr_1_1_memory_block_1aa54730353079686243fbe5f8545267d0" kind="friend"><name>DebugVisualizationImpl</name></member>
+    <member refid="classvpr_1_1_memory_block_1a9dd70683af87d184163a645890805481" kind="function"><name>MemoryBlock</name></member>
+    <member refid="classvpr_1_1_memory_block_1ad77c40afbc66e75b164a88e305deb066" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_memory_block_1af52bd0fa7795f525c623cb249fe61ab8" kind="function"><name>MemoryBlock</name></member>
+    <member refid="classvpr_1_1_memory_block_1a78760d0be641bf2e3f679b42cf41742b" kind="function"><name>~MemoryBlock</name></member>
+    <member refid="classvpr_1_1_memory_block_1a17a120123d73a99fde3105f17fa6d721" kind="function"><name>Init</name></member>
+    <member refid="classvpr_1_1_memory_block_1a7e2257b40f455628483cda1e2303f2a3" kind="function"><name>Destroy</name></member>
+    <member refid="classvpr_1_1_memory_block_1ad2e69f41347a21089e37266fe24afe88" kind="function"><name>operator&lt;</name></member>
+    <member refid="classvpr_1_1_memory_block_1aa41c2050634b392f64e5fdbe6b57fcd8" kind="function"><name>AvailableMemory</name></member>
+    <member refid="classvpr_1_1_memory_block_1a4aba8e10d9d447c8d87b964ce101915f" kind="function"><name>Memory</name></member>
+    <member refid="classvpr_1_1_memory_block_1ac05d7c8692b9d305726c1d948a3ec6d9" kind="function"><name>Validate</name></member>
+    <member refid="classvpr_1_1_memory_block_1acd06cfdc8c15616243b296be79e7a63f" kind="function"><name>RequestSuballocation</name></member>
+    <member refid="classvpr_1_1_memory_block_1a3eb796b49ef07360203e2fe8c099809b" kind="function"><name>VerifySuballocation</name></member>
+    <member refid="classvpr_1_1_memory_block_1add8139b1ac10a12da486a216ffd26a78" kind="function"><name>Empty</name></member>
+    <member refid="classvpr_1_1_memory_block_1a3bc214b56eafefb43b33e7c8c197d9ca" kind="function"><name>Allocate</name></member>
+    <member refid="classvpr_1_1_memory_block_1a88cde43def4e7d21b8a782554497b064" kind="function"><name>Free</name></member>
+    <member refid="classvpr_1_1_memory_block_1abff18a0397a4aca3cbe99d0206c82981" kind="function"><name>Map</name></member>
+    <member refid="classvpr_1_1_memory_block_1a5aabce50e3026fe98ec6054a37c516b5" kind="function"><name>Unmap</name></member>
+    <member refid="classvpr_1_1_memory_block_1aab73aacb57e8e413c7a9f5847890667e" kind="function"><name>LargestAvailRegion</name></member>
+    <member refid="classvpr_1_1_memory_block_1a71cc027b7cf1cd684c6e15db8a7dcc5f" kind="function"><name>begin</name></member>
+    <member refid="classvpr_1_1_memory_block_1a7d2d5cc6cef21285c6c4eafd7179ccf7" kind="function"><name>end</name></member>
+    <member refid="classvpr_1_1_memory_block_1aad18b96027f7ce38f482292f25eaa4ad" kind="function"><name>begin</name></member>
+    <member refid="classvpr_1_1_memory_block_1aeb98eb131eb46e94af64fd55db21a271" kind="function"><name>end</name></member>
+    <member refid="classvpr_1_1_memory_block_1a16840e2467a8e9ce9fe501deeb474fdc" kind="function"><name>cbegin</name></member>
+    <member refid="classvpr_1_1_memory_block_1a449363f097de81848904e45052a24cd4" kind="function"><name>cend</name></member>
+    <member refid="classvpr_1_1_memory_block_1a6dd6cfc29a6f526325a4b300d2895b50" kind="function"><name>avail_begin</name></member>
+    <member refid="classvpr_1_1_memory_block_1ae96f0557e6f4f62c8bb6520fb98185b7" kind="function"><name>avail_end</name></member>
+    <member refid="classvpr_1_1_memory_block_1ace57d4a06047c2c3cd19196c8a12ebb3" kind="function"><name>avail_begin</name></member>
+    <member refid="classvpr_1_1_memory_block_1a49a8faf530651aa681509f0020f885b3" kind="function"><name>avail_end</name></member>
+    <member refid="classvpr_1_1_memory_block_1ab64ea46be237837e93f1367179dd3832" kind="function"><name>avail_cbegin</name></member>
+    <member refid="classvpr_1_1_memory_block_1a186322b494f2d033d1d481ed689163ec" kind="function"><name>avail_cend</name></member>
+    <member refid="classvpr_1_1_memory_block_1a3aa9297d61b2cd0d71588c7bf8e7b47e" kind="function"><name>freeSuballocation</name></member>
+    <member refid="classvpr_1_1_memory_block_1a37eea135267c92dcac0fc70e7c6f9ad1" kind="function"><name>mergeFreeWithNext</name></member>
+    <member refid="classvpr_1_1_memory_block_1aca430805fb87da6c9f14facd22166d5f" kind="function"><name>insertFreeSuballocation</name></member>
+    <member refid="classvpr_1_1_memory_block_1afbbaf6e2f0de8d1bed31e8a8cf71cfed" kind="function"><name>removeFreeSuballocation</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_memory_block_info" kind="struct"><name>vpr::MemoryBlockInfo</name>
+    <member refid="structvpr_1_1_memory_block_info_1a2f4f2177d856ab14ba1a00c592f24e78" kind="variable"><name>Suballocations</name></member>
+    <member refid="structvpr_1_1_memory_block_info_1a7fb520e9567f5d2ffcf8b7b6c172e1b9" kind="variable"><name>DrawCommands</name></member>
+    <member refid="structvpr_1_1_memory_block_info_1a59c08daa83c1723ef795fe25960c42f2" kind="variable"><name>ParentIdx</name></member>
+    <member refid="structvpr_1_1_memory_block_info_1a0d3c6e95e282d7e7b5979b35a6c47074" kind="variable"><name>TotalSize</name></member>
+    <member refid="structvpr_1_1_memory_block_info_1a06e6af232c6a386b40fc65e441b473e8" kind="variable"><name>BufferImageGranularity</name></member>
+    <member refid="structvpr_1_1_memory_block_info_1a3483cc3a3272f4d54b036196cb05bc2e" kind="function"><name>MemoryBlockInfo</name></member>
+    <member refid="structvpr_1_1_memory_block_info_1a4c85370f5805bd10e954f2f28dc11732" kind="function"><name>Draw</name></member>
+    <member refid="structvpr_1_1_memory_block_info_1a1f4d11307e78e0a1e300ec5b19a38f43" kind="function"><name>UpdateDrawCommands</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_memory_blocks_group" kind="struct"><name>vpr::MemoryBlocksGroup</name>
+    <member refid="structvpr_1_1_memory_blocks_group_1a890fbabbccf4dc4381ef78c3d4938af2" kind="variable"><name>Attributes</name></member>
+    <member refid="structvpr_1_1_memory_blocks_group_1a1620ec39272d7761a4b33e5b19cdc1d7" kind="variable"><name>Blocks</name></member>
+    <member refid="structvpr_1_1_memory_blocks_group_1ab00a2e4897ed34977f35689857e01e50" kind="function"><name>MemoryBlocksGroup</name></member>
+    <member refid="structvpr_1_1_memory_blocks_group_1a938d271cfa0e6ed701695269910c300c" kind="function"><name>MemoryBlocksGroup</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_physical_device" kind="class"><name>vpr::PhysicalDevice</name>
+    <member refid="classvpr_1_1_physical_device_1ae26356b60563a33796338ff0d9f5e65f" kind="variable"><name>impl</name></member>
+    <member refid="classvpr_1_1_physical_device_1a8185e5a07b9a04975a1751c2358bcebe" kind="function"><name>PhysicalDevice</name></member>
+    <member refid="classvpr_1_1_physical_device_1a2314cb016c95404ae4c11b4cb4777544" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_physical_device_1a31404c17e2cc00ed679f13eba689bb1a" kind="function"><name>PhysicalDevice</name></member>
+    <member refid="classvpr_1_1_physical_device_1a3d36239b21d72286460392428b2b5a8f" kind="function"><name>PhysicalDevice</name></member>
+    <member refid="classvpr_1_1_physical_device_1a90104079c41958dd9099ea0f3bf371ea" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_physical_device_1a90f3c207c76cc8ecd39eb80cf2b74050" kind="function"><name>~PhysicalDevice</name></member>
+    <member refid="classvpr_1_1_physical_device_1a00de7d3556d98b1cfda28d1f769f8fa8" kind="function"><name>vkHandle</name></member>
+    <member refid="classvpr_1_1_physical_device_1ac374493c59bb13f5300d1c96b87b8380" kind="function"><name>GetMemoryTypeIdx</name></member>
+    <member refid="classvpr_1_1_physical_device_1af443c2a585d182166c464f252782a57b" kind="function"><name>GetQueueFamilyIndex</name></member>
+    <member refid="classvpr_1_1_physical_device_1a2ee4f96b16a9762953ecad3b658d84e6" kind="function"><name>GetQueueFamilyProperties</name></member>
+    <member refid="classvpr_1_1_physical_device_1a395785af128c95f3098203a0b32f99ed" kind="function"><name>GetProperties</name></member>
+    <member refid="classvpr_1_1_physical_device_1addc7471aceef1ca343cc1b6e5c242278" kind="function"><name>GetFeatures</name></member>
+    <member refid="classvpr_1_1_physical_device_1a1d9827e465aa6c51331bec797d2318f3" kind="function"><name>GetMemoryProperties</name></member>
+    <member refid="classvpr_1_1_physical_device_1a95acb634567ba94471f0e5f6ad5fb4a0" kind="function"><name>GetSubgroupProperties</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_physical_device_impl" kind="class"><name>vpr::PhysicalDeviceImpl</name>
+    <member refid="classvpr_1_1_physical_device_impl_1ae5f0af99ddaf1594899c30c32decbedd" kind="variable"><name>Properties</name></member>
+    <member refid="classvpr_1_1_physical_device_impl_1a8c2c49d40d45147a3e70a305e843a9dd" kind="variable"><name>Features</name></member>
+    <member refid="classvpr_1_1_physical_device_impl_1ada525a9569d432f07c49d694a94538c7" kind="variable"><name>MemoryProperties</name></member>
+    <member refid="classvpr_1_1_physical_device_impl_1af9378d82682afa3c123dfe2ca1100394" kind="variable"><name>SubgroupProperties</name></member>
+    <member refid="classvpr_1_1_physical_device_impl_1a6d26bb1eb93008f04a8fc885f1460e32" kind="variable"><name>queueFamilyProperties</name></member>
+    <member refid="classvpr_1_1_physical_device_impl_1af7b08a7cf734338ee787e015534cfc69" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_physical_device_impl_1ac19f6987df28dcfae6e107d3c4967cb6" kind="function"><name>PhysicalDeviceImpl</name></member>
+    <member refid="classvpr_1_1_physical_device_impl_1a87891e2247f80651e2a7c1c5892b6218" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_physical_device_impl_1aa96226c99de9aff7ad9f6e7b96e89444" kind="function"><name>PhysicalDeviceImpl</name></member>
+    <member refid="classvpr_1_1_physical_device_impl_1a9fd4a91c7268e451603c63fa763216f9" kind="function"><name>PhysicalDeviceImpl</name></member>
+    <member refid="classvpr_1_1_physical_device_impl_1a4fd7907cfe2a054358875ccd83cdf90b" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_physical_device_impl_1a6168130477087e7bc3aeed40d214cc0a" kind="function"><name>~PhysicalDeviceImpl</name></member>
+    <member refid="classvpr_1_1_physical_device_impl_1a228761ffdb770f4690168e2f0e47a0d1" kind="function"><name>GetMemoryTypeIdx</name></member>
+    <member refid="classvpr_1_1_physical_device_impl_1af87fd9143013fabf4df17ca888d541fb" kind="function"><name>getAttributes</name></member>
+    <member refid="classvpr_1_1_physical_device_impl_1a69d80ff2220466001ff60b2703152b66" kind="function"><name>retrieveQueueFamilyProperties</name></member>
+    <member refid="classvpr_1_1_physical_device_impl_1a488d6bf461f75785b039909d6bb6d96e" kind="function"><name>GetQueueFamilyIndex</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_pipeline_cache" kind="class"><name>vpr::PipelineCache</name>
+    <member refid="classvpr_1_1_pipeline_cache_1a948bdea40e76c98ab230109e4cbca797" kind="variable"><name>loadedData</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1a90a35bb2c1214d085c876b015961f19f" kind="variable"><name>filename</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1a82cc192df08e771e1cc9edc6348ff095" kind="variable"><name>hashID</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1ab2cde396822b96c34e4d2950b3bb41f5" kind="variable"><name>parent</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1aca1ef75ae2239a380a1a4d97c338be9c" kind="variable"><name>hostPhysicalDevice</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1a3a335caf23b04122f33ea94b505dd1cc" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1a0071c38e56d6c4ce28eb97eedd912d2e" kind="variable"><name>createInfo</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1a9e2b996c04c92dfbcbe508990d016daf" kind="function"><name>PipelineCache</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1a062529b6e22dff99adda540edb924445" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1a5f5d17b3c6d668d22932ef2b3c6a6122" kind="function"><name>saveToFile</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1a19ed8db620df88ec199f92921501341e" kind="function"><name>PipelineCache</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1a4a492a5e4baa390c5c1ff6d137b74ea9" kind="function"><name>~PipelineCache</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1a32c325ca07c0d33b2469b9f071379695" kind="function"><name>PipelineCache</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1a33ea3e0b57606be603bb49db0119ccb2" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1a21856493d10e08b915ce8278c2bc08b0" kind="function"><name>Verify</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1aa982f664e3dd6c95682bfa1084cf9a80" kind="function"><name>LoadCacheFromFile</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1ae6188934cb00eac8de97550c82869b06" kind="function"><name>vkHandle</name></member>
+    <member refid="classvpr_1_1_pipeline_cache_1a78a37f0e63e2d831370381a4eec032f8" kind="function"><name>MergeCaches</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_pipeline_layout" kind="class"><name>vpr::PipelineLayout</name>
+    <member refid="classvpr_1_1_pipeline_layout_1a6bade07d0e3c4e70f199e9679c6159c3" kind="variable"><name>device</name></member>
+    <member refid="classvpr_1_1_pipeline_layout_1a3b17e4849d80b7072e5b3a782d498261" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_pipeline_layout_1a9d728a47905de179f963bed057d30799" kind="function"><name>PipelineLayout</name></member>
+    <member refid="classvpr_1_1_pipeline_layout_1a866abe69acabb93f1ca1620a2afa4252" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_pipeline_layout_1a5508313b0a3275b3281c80f4e0cf3626" kind="function"><name>PipelineLayout</name></member>
+    <member refid="classvpr_1_1_pipeline_layout_1a20cb2cc8b360a65d0d8454a70580c6f2" kind="function"><name>~PipelineLayout</name></member>
+    <member refid="classvpr_1_1_pipeline_layout_1a71be4dc4eef49f6fbfc025bfa14a88c3" kind="function"><name>PipelineLayout</name></member>
+    <member refid="classvpr_1_1_pipeline_layout_1afcea5dcf6d858441c93fea6154a52e00" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_pipeline_layout_1acf61dd67033f427f1bc0d109973c8835" kind="function"><name>Destroy</name></member>
+    <member refid="classvpr_1_1_pipeline_layout_1a8121008a98c9933450aba418fde5383e" kind="function"><name>Create</name></member>
+    <member refid="classvpr_1_1_pipeline_layout_1a696c23b583965c8963f4f72120ba0538" kind="function"><name>Create</name></member>
+    <member refid="classvpr_1_1_pipeline_layout_1a843c3d13e26edb0d7ce6a808848a640a" kind="function"><name>Create</name></member>
+    <member refid="classvpr_1_1_pipeline_layout_1a066d49e71c647c759ce2d258ce1963ab" kind="function"><name>vkHandle</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_allocation_impl_1_1private_allocation" kind="struct"><name>vpr::AllocationImpl::privateAllocation</name>
+    <member refid="structvpr_1_1_allocation_impl_1_1private_allocation_1a5fe23cb3dca2ba7bb90f75146d2e693e" kind="variable"><name>MemoryTypeIdx</name></member>
+    <member refid="structvpr_1_1_allocation_impl_1_1private_allocation_1a694df8b0667613a5cc03732ee459c178" kind="variable"><name>DvcMemory</name></member>
+    <member refid="structvpr_1_1_allocation_impl_1_1private_allocation_1ae3446d4e983b3a150713140d726dd328" kind="variable"><name>PersistentlyMapped</name></member>
+    <member refid="structvpr_1_1_allocation_impl_1_1private_allocation_1a3be54a020f5ee343078e58d4324702ca" kind="variable"><name>MappedData</name></member>
+  </compound>
+  <compound refid="structvpr_1_1queue__priorities__t" kind="struct"><name>vpr::queue_priorities_t</name>
+    <member refid="structvpr_1_1queue__priorities__t_1ad917c2184f8cdeef1b9b298aee35090a" kind="variable"><name>graphics</name></member>
+    <member refid="structvpr_1_1queue__priorities__t_1a771c074b241d2c2e84c2ba55735d23a9" kind="variable"><name>transfer</name></member>
+    <member refid="structvpr_1_1queue__priorities__t_1a76694cbd8084cf8b028d756b78977704" kind="variable"><name>compute</name></member>
+    <member refid="structvpr_1_1queue__priorities__t_1a821fc74d08d8df5bec19d8e85496a797" kind="variable"><name>sparse_binding</name></member>
+  </compound>
+  <compound refid="structvpr_1_1raw__equal__comparator" kind="struct"><name>vpr::raw_equal_comparator</name>
+    <member refid="structvpr_1_1raw__equal__comparator_1a0af990c18f9ac08d6b61d09178a172f2" kind="variable"><name>ptr</name></member>
+    <member refid="structvpr_1_1raw__equal__comparator_1ac2194f856f4295554c43ebdbc0e552ca" kind="function"><name>raw_equal_comparator</name></member>
+    <member refid="structvpr_1_1raw__equal__comparator_1a13bfbd46bbc4e26bc60cf0b2ff29c652" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_renderpass" kind="class"><name>vpr::Renderpass</name>
+    <member refid="classvpr_1_1_renderpass_1aa0ccc9fb68cf722909ac3d97b5203a0f" kind="variable"><name>parent</name></member>
+    <member refid="classvpr_1_1_renderpass_1aeb5950eb1e8e1adebd502940533bdc51" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_renderpass_1acef3d45b27543e045bd195e2c0b313b1" kind="variable"><name>createInfo</name></member>
+    <member refid="classvpr_1_1_renderpass_1a9d97ce989c62c9b73cd7024e8f984c06" kind="variable"><name>beginInfo</name></member>
+    <member refid="classvpr_1_1_renderpass_1a99dd8bab237385dc139d3f75585371cc" kind="variable"><name>impl</name></member>
+    <member refid="classvpr_1_1_renderpass_1a330c9817c56db50bd08767407681a4eb" kind="function"><name>Renderpass</name></member>
+    <member refid="classvpr_1_1_renderpass_1ad614063be705dff2a38018527ee9b73e" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_renderpass_1a5979cfebed3d030c2718a476c429709c" kind="function"><name>Renderpass</name></member>
+    <member refid="classvpr_1_1_renderpass_1a25c35037ac478b419d88da5ff15d3bf1" kind="function"><name>Renderpass</name></member>
+    <member refid="classvpr_1_1_renderpass_1ae0dca5aadf7dccdce2be32bbeddf3377" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_renderpass_1a4b30aa3fa710beef536db91a95e97a0d" kind="function"><name>~Renderpass</name></member>
+    <member refid="classvpr_1_1_renderpass_1a407631faefbac783a79519160205f927" kind="function"><name>SetupBeginInfo</name></member>
+    <member refid="classvpr_1_1_renderpass_1a7e63eab663c47058ad8fba6ffd5358f0" kind="function"><name>UpdateBeginInfo</name></member>
+    <member refid="classvpr_1_1_renderpass_1a1b2c2f7ebdd9a287a2ad894f626678bb" kind="function"><name>Destroy</name></member>
+    <member refid="classvpr_1_1_renderpass_1a36f37f7e996465e88ac1ee8d1245e26c" kind="function"><name>Recreate</name></member>
+    <member refid="classvpr_1_1_renderpass_1ac68d0fca04ae6d061ae08689474e9f33" kind="function"><name>vkHandle</name></member>
+    <member refid="classvpr_1_1_renderpass_1a7478e628de61be4fef44d4dd4aca3bd7" kind="function"><name>CreateInfo</name></member>
+    <member refid="classvpr_1_1_renderpass_1a2832b3cafd860a23cc223a1410c7935e" kind="function"><name>BeginInfo</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_renderpass_impl" kind="struct"><name>vpr::RenderpassImpl</name>
+    <member refid="structvpr_1_1_renderpass_impl_1a234e4eca12a6b6246b512aa3660cfa7e" kind="variable"><name>clearValues</name></member>
+    <member refid="structvpr_1_1_renderpass_impl_1ab326c4b78d27487e41c8f56dd64b7dd5" kind="variable"><name>allocators</name></member>
+    <member refid="structvpr_1_1_renderpass_impl_1a05dd2dfeb75e5123ab2ee277525b30c7" kind="function"><name>RenderpassImpl</name></member>
+    <member refid="structvpr_1_1_renderpass_impl_1a15bfdd0df421e2f3cf316744542404df" kind="function"><name>~RenderpassImpl</name></member>
+    <member refid="structvpr_1_1_renderpass_impl_1a569bffcd16989045f8a908f94c3442b2" kind="function"><name>RenderpassImpl</name></member>
+    <member refid="structvpr_1_1_renderpass_impl_1a5d37571029174d290c9849dcdac272c2" kind="function"><name>operator=</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_resource_type_map" kind="struct"><name>vpr::ResourceTypeMap</name>
+    <member refid="structvpr_1_1_resource_type_map_1a9e31ab2f2de50a7b38592624bd7a0c92" kind="variable"><name>Resources</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_sampler" kind="class"><name>vpr::Sampler</name>
+    <member refid="classvpr_1_1_sampler_1abe11a09a1866b47f180918a1be18271a" kind="variable"><name>device</name></member>
+    <member refid="classvpr_1_1_sampler_1a46d094a7b9ff505d4d18b84fb31457f9" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_sampler_1ad1ca6b66f7b6ab605f580b26f05afb26" kind="function"><name>Sampler</name></member>
+    <member refid="classvpr_1_1_sampler_1a2bcc30e668ba0887b4f070cdaa4cf3c8" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_sampler_1a4c4a818b0590864ebbc5d17473fb0ca4" kind="function"><name>Sampler</name></member>
+    <member refid="classvpr_1_1_sampler_1a0d152bb179afc601677a3ceff69b31b5" kind="function"><name>~Sampler</name></member>
+    <member refid="classvpr_1_1_sampler_1ac40f4856d1b2034ccafd037012f8c51b" kind="function"><name>Sampler</name></member>
+    <member refid="classvpr_1_1_sampler_1a1f87df788b0b481346cd33b84f0df5c9" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_sampler_1a610a015db087592726db70564caec056" kind="function"><name>vkHandle</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_semaphore" kind="class"><name>vpr::Semaphore</name>
+    <member refid="classvpr_1_1_semaphore_1aaa6537fc68271eb5f84db347505621de" kind="variable"><name>device</name></member>
+    <member refid="classvpr_1_1_semaphore_1a613a6915ff3dc3e7f286c1d40ee285d9" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_semaphore_1abafcf48c972601525447cd31a8ed965b" kind="function"><name>Semaphore</name></member>
+    <member refid="classvpr_1_1_semaphore_1ac01d23148aa4db1d000a305bd0725b29" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_semaphore_1a4a3be2d6f3cbc15538d57d8798e3397b" kind="function"><name>Semaphore</name></member>
+    <member refid="classvpr_1_1_semaphore_1a5d3e88cdff0fd3fe9d6ccfdddf39420e" kind="function"><name>~Semaphore</name></member>
+    <member refid="classvpr_1_1_semaphore_1afda52cb116726cb6d9dc35e27c026781" kind="function"><name>Semaphore</name></member>
+    <member refid="classvpr_1_1_semaphore_1a91a695abe81f52dedb2f7105e476bdcc" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_semaphore_1a7bef04a6c02e7d2b03bc20cf10ade2cc" kind="function"><name>vkHandle</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_shader_code_file_loader" kind="struct"><name>vpr::ShaderCodeFileLoader</name>
+    <member refid="structvpr_1_1_shader_code_file_loader_1ac07d918a3d35ba732704cbcdfe1ce9f0" kind="function"><name>LoadCodeFromFile</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_shader_module" kind="class"><name>vpr::ShaderModule</name>
+    <member refid="classvpr_1_1_shader_module_1ae499f64191c5e8f866eb4d158ff11dae" kind="variable"><name>fileLoader</name></member>
+    <member refid="classvpr_1_1_shader_module_1ae4774b0393c91e856ef23679d4fe5cbc" kind="variable"><name>parent</name></member>
+    <member refid="classvpr_1_1_shader_module_1a945152a93bf4647196b4ea234fe980db" kind="variable"><name>stages</name></member>
+    <member refid="classvpr_1_1_shader_module_1a388c1ef1a0b86a4e34f1c455dc6c0d99" kind="variable"><name>pipelineInfo</name></member>
+    <member refid="classvpr_1_1_shader_module_1a682b809c2972eaf2a0a0401ab62c57dc" kind="variable"><name>createInfo</name></member>
+    <member refid="classvpr_1_1_shader_module_1aed80d0bf55bbe0d86ec887eb2720cea9" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_shader_module_1ab9cbfc46a30a41bab28956d4175de38a" kind="variable"><name>allocators</name></member>
+    <member refid="classvpr_1_1_shader_module_1a12bd4a698a41ca2d94793e2f6326eadc" kind="function"><name>ShaderModule</name></member>
+    <member refid="classvpr_1_1_shader_module_1a43d7836b4e19879023dd43d6cb3e22f4" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_shader_module_1ae830f1030e0c7d5da745836cd976951f" kind="function"><name>ShaderModule</name></member>
+    <member refid="classvpr_1_1_shader_module_1abc93a8112697e4990bbd74d2c4100769" kind="function"><name>ShaderModule</name></member>
+    <member refid="classvpr_1_1_shader_module_1a1972ed580d171dddaaf3f2555fd4b0ca" kind="function"><name>ShaderModule</name></member>
+    <member refid="classvpr_1_1_shader_module_1a692db07eaecd64c280cbdacfc37440ec" kind="function"><name>~ShaderModule</name></member>
+    <member refid="classvpr_1_1_shader_module_1aa1f62437461e5b9d59247ecdd85fe4de" kind="function"><name>ShaderModule</name></member>
+    <member refid="classvpr_1_1_shader_module_1af8cab7f3fa2555557cd96c6788ed69bb" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_shader_module_1a4c798e81970ffb6d5b4d201e920b9c3e" kind="function"><name>vkHandle</name></member>
+    <member refid="classvpr_1_1_shader_module_1a955322640b91687826230a6af5956621" kind="function"><name>StageBits</name></member>
+    <member refid="classvpr_1_1_shader_module_1a4b56c37231c31ddff973e5987f753e13" kind="function"><name>CreateInfo</name></member>
+    <member refid="classvpr_1_1_shader_module_1a65d9a62a6f638bce51839e244dcd0c1c" kind="function"><name>PipelineInfo</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_suballocation" kind="struct"><name>vpr::Suballocation</name>
+    <member refid="structvpr_1_1_suballocation_1ab65ef9ae13c57aee65403240ff1aa0ac" kind="variable"><name>Offset</name></member>
+    <member refid="structvpr_1_1_suballocation_1a692b3dfe078a5d701bbdda192d6cf4c8" kind="variable"><name>Size</name></member>
+    <member refid="structvpr_1_1_suballocation_1aa49dd78d1314b7176aa078b8c110cc9b" kind="variable"><name>Type</name></member>
+    <member refid="structvpr_1_1_suballocation_1a78bbba6098426eb4c463b630a767bf2a" kind="function"><name>operator&lt;</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_suballocation_draw_command" kind="struct"><name>vpr::SuballocationDrawCommand</name>
+    <member refid="structvpr_1_1_suballocation_draw_command_1a2ffc91e17e70c805afccc91f6886d5e0" kind="variable"><name>Color</name></member>
+    <member refid="structvpr_1_1_suballocation_draw_command_1ab63fef7000899aa4f148271525c4501d" kind="variable"><name>Size</name></member>
+    <member refid="structvpr_1_1_suballocation_draw_command_1a6689efc2837f25480ff458f2934ddbdf" kind="variable"><name>Offset</name></member>
+    <member refid="structvpr_1_1_suballocation_draw_command_1ab80eb00a96cfa38ff22d6d3b3112a567" kind="function"><name>SuballocationDrawCommand</name></member>
+    <member refid="structvpr_1_1_suballocation_draw_command_1a1d4f3453e45463972a4d830e20584028" kind="function"><name>Draw</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_suballocation_request" kind="struct"><name>vpr::SuballocationRequest</name>
+    <member refid="structvpr_1_1_suballocation_request_1abec7089fbabe06aa9c849d7c9b165382" kind="variable"><name>FreeSuballocation</name></member>
+    <member refid="structvpr_1_1_suballocation_request_1aa0b7cc608718008b543cea33aab059c3" kind="variable"><name>Offset</name></member>
+  </compound>
+  <compound refid="structvpr_1_1suballoc_iter_compare" kind="struct"><name>vpr::suballocIterCompare</name>
+    <member refid="structvpr_1_1suballoc_iter_compare_1a0185c52b301ef57868a73e221d49bb7f" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structvpr_1_1suballoc_offset_compare" kind="struct"><name>vpr::suballocOffsetCompare</name>
+    <member refid="structvpr_1_1suballoc_offset_compare_1ac608176696badd00001aaba864a51088" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_surface_k_h_r" kind="class"><name>vpr::SurfaceKHR</name>
+    <member refid="classvpr_1_1_surface_k_h_r_1af873c95e506396d5c140203cc421d5c3" kind="variable"><name>window</name></member>
+    <member refid="classvpr_1_1_surface_k_h_r_1ad66bb54b8638a025ea3adadffeb0cf22" kind="variable"><name>parent</name></member>
+    <member refid="classvpr_1_1_surface_k_h_r_1afd00bb9d80680f5f52ebbb1bf3f8858b" kind="variable"><name>device</name></member>
+    <member refid="classvpr_1_1_surface_k_h_r_1a06a6277b08e3a4733de323b2e2c9a3d9" kind="variable"><name>handle</name></member>
+    <member refid="classvpr_1_1_surface_k_h_r_1a808e0928d34255a1cbe80f963c0f92de" kind="function"><name>SurfaceKHR</name></member>
+    <member refid="classvpr_1_1_surface_k_h_r_1aef09d838497579b7e069da3f543cc865" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_surface_k_h_r_1a2c27a5198682d3069e0936dbeb0f24b4" kind="function"><name>create</name></member>
+    <member refid="classvpr_1_1_surface_k_h_r_1a1083d46de78e533a1cabba07b62e1950" kind="function"><name>destroy</name></member>
+    <member refid="classvpr_1_1_surface_k_h_r_1ad0b2ade9a2c234a86f9f465de183c7ea" kind="function"><name>SurfaceKHR</name></member>
+    <member refid="classvpr_1_1_surface_k_h_r_1a1db33f16a86859208e7d4ccf17c68efa" kind="function"><name>SurfaceKHR</name></member>
+    <member refid="classvpr_1_1_surface_k_h_r_1afd9e871893d9acb3222df476dc6f3f98" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_surface_k_h_r_1ae87cbdf79cb326650e1b146f53d6d394" kind="function"><name>~SurfaceKHR</name></member>
+    <member refid="classvpr_1_1_surface_k_h_r_1a35b9db127a998f70bea3ebbdeef97f5d" kind="function"><name>Recreate</name></member>
+    <member refid="classvpr_1_1_surface_k_h_r_1a07171777b06b36cb0e6874cdcb2f9e4e" kind="function"><name>vkHandle</name></member>
+    <member refid="classvpr_1_1_surface_k_h_r_1a0ef5949ff27a03d9281576b1b5c99c35" kind="function"><name>VerifyPresentationSupport</name></member>
+  </compound>
+  <compound refid="classvpr_1_1_swapchain" kind="class"><name>vpr::Swapchain</name>
+    <member refid="classvpr_1_1_swapchain_1a3674f7583ac2844d10aa7a7697fc1fa9" kind="variable"><name>impl</name></member>
+    <member refid="classvpr_1_1_swapchain_1a3e4ce83cae35d2eb7af80e56d67b6282" kind="function"><name>Swapchain</name></member>
+    <member refid="classvpr_1_1_swapchain_1abe10399ef8345a026c2888d0ae5f8376" kind="function"><name>operator=</name></member>
+    <member refid="classvpr_1_1_swapchain_1a37f6f31b03361ad481342b1fe5084487" kind="function"><name>Swapchain</name></member>
+    <member refid="classvpr_1_1_swapchain_1a2dc442a2b5f947c65a9be8278200faa6" kind="function"><name>~Swapchain</name></member>
+    <member refid="classvpr_1_1_swapchain_1a34c3d73db1e99d3a395398fc0dbb5dc6" kind="function"><name>Recreate</name></member>
+    <member refid="classvpr_1_1_swapchain_1af29e2c4245bd5694afadc579783e5432" kind="function"><name>Destroy</name></member>
+    <member refid="classvpr_1_1_swapchain_1aeabe8989b29a1d38dd151160946c26fa" kind="function"><name>vkHandle</name></member>
+    <member refid="classvpr_1_1_swapchain_1a913d385f9a2a0e1d7c11c2bc04902411" kind="function"><name>Extent</name></member>
+    <member refid="classvpr_1_1_swapchain_1a19c9680de1214a5a3326ce77ee9a19b3" kind="function"><name>ImageCount</name></member>
+    <member refid="classvpr_1_1_swapchain_1a88583864a3d23a4049472e480562b539" kind="function"><name>ColorSpace</name></member>
+    <member refid="classvpr_1_1_swapchain_1ae8f6f36da764662b8aabf33093299d8d" kind="function"><name>ColorFormat</name></member>
+    <member refid="classvpr_1_1_swapchain_1a9bcbb78ab6b36c87830db08d48b7b255" kind="function"><name>Image</name></member>
+    <member refid="classvpr_1_1_swapchain_1ae27fa9916dbadf5d8622772a9d7ca3c2" kind="function"><name>ImageView</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_swapchain_impl" kind="struct"><name>vpr::SwapchainImpl</name>
+    <member refid="group___core_1ga53b8864a06225b92d1a4cf46ea333fbb" kind="variable"><name>info</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1a7e5657d05e85893acc16ed3d27d95d79" kind="variable"><name>colorFormat</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1a16472b860e896076f573b5133b16ef55" kind="variable"><name>imageCount</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1aaf04b6cc653a8f180be1f6ac1f332ea1" kind="variable"><name>colorSpace</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1a4a34f9862f04c466ebbe4659e904ed5b" kind="variable"><name>extent</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1a041a418f78d24b287337e76f21d54d0a" kind="variable"><name>images</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1a8970acfa427e8dfa0dc92680438f5d12" kind="variable"><name>imageViews</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1a1a07f34fccc495abbacbcb9304f4991c" kind="variable"><name>presentMode</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1a20ec41d1ba4829802c339716b7ddb609" kind="variable"><name>desiredSyncMode</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1aa630021e70194a7a44636a679dc9d159" kind="variable"><name>surfaceFormat</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1a74bf63c03840dc00739d2d1df917166f" kind="variable"><name>createInfo</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1aac62079e0f9815e341043173834585f8" kind="variable"><name>handle</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1ae2165262ed1575747787c0c89987e3b8" kind="variable"><name>oldHandle</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1a7ac3954e02fcc657d549df73501050d5" kind="variable"><name>surface</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1a82f79b680afc9c9b9d990e5f56a26c47" kind="variable"><name>window</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1aeba57cfc9c3adf9076e82df56393850e" kind="variable"><name>device</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1a14646cf53830d3719e470dd941d430ab" kind="function"><name>SwapchainImpl</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1acf2d556e0718c579a98f3a3311ff641f" kind="function"><name>~SwapchainImpl</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1a3c2995780e90567ea32d6b6f72c5d891" kind="function"><name>destroy</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1a26979c4e9803da67ef61bf098377b341" kind="function"><name>create</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1afdf0ef2711d213b7020b37785a62a7ad" kind="function"><name>setParameters</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" kind="function"><name>setupCreateInfo</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1acc94e08e83ec3857bffdea08e9b4bf65" kind="function"><name>setupSwapImages</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1aaded5613928f1e39c1a61ac25be8bf88" kind="function"><name>setupImageViews</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info" kind="struct"><name>vpr::SwapchainImpl::SwapchainInfo</name>
+    <member refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info_1a497b156087d82550b32ca99c18e357a6" kind="variable"><name>Capabilities</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info_1a178e1eecd43f691102ba9f6f56161826" kind="variable"><name>Formats</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info_1acf50374bf2ed6e17282bfabc8f46754c" kind="variable"><name>PresentModes</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info_1aa3a0386fc6544df198499eecac30bc4a" kind="function"><name>SwapchainInfo</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info_1abb595502d0bc940da0c710b0e5a7393e" kind="function"><name>GetBestFormat</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info_1ac01356957b4cfc44060dc3adf071eecb" kind="function"><name>GetBestPresentMode</name></member>
+    <member refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info_1ac8512646cf64bdcfc7b7d004e7e1ab87" kind="function"><name>ChooseSwapchainExtent</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_vk_debug_utils_functions" kind="struct"><name>vpr::VkDebugUtilsFunctions</name>
+    <member refid="structvpr_1_1_vk_debug_utils_functions_1a5b6d7096f776b8666bbfedfacb45eeac" kind="variable"><name>vkSetDebugUtilsObjectName</name></member>
+    <member refid="structvpr_1_1_vk_debug_utils_functions_1ac46e3a6b7520cc394f858c7e4929a587" kind="variable"><name>vkSetDebugUtilsObjectTag</name></member>
+    <member refid="structvpr_1_1_vk_debug_utils_functions_1a9e6a7e8813980198747d5336c8bb5bae" kind="variable"><name>vkQueueBeginDebugUtilsLabel</name></member>
+    <member refid="structvpr_1_1_vk_debug_utils_functions_1a476791e8ab0d26774dec3ff8bb2db36e" kind="variable"><name>vkQueueEndDebugUtilsLabel</name></member>
+    <member refid="structvpr_1_1_vk_debug_utils_functions_1a750cf21adea7c5cff99f58e372a3b111" kind="variable"><name>vkCmdBeginDebugUtilsLabel</name></member>
+    <member refid="structvpr_1_1_vk_debug_utils_functions_1a8de2e9db851ea7651b92a34547c08f7d" kind="variable"><name>vkCmdEndDebugUtilsLabel</name></member>
+    <member refid="structvpr_1_1_vk_debug_utils_functions_1a4efd3a3ee8d2451da800ca5665dc27f2" kind="variable"><name>vkCmdInsertDebugUtilsLabel</name></member>
+    <member refid="structvpr_1_1_vk_debug_utils_functions_1ad6ededf9664626a2e54ad81088d74b0e" kind="variable"><name>vkCreateDebugUtilsMessenger</name></member>
+    <member refid="structvpr_1_1_vk_debug_utils_functions_1a0db6a9f2bfb7fa348c895adc5d6e929b" kind="variable"><name>vkDestroyDebugUtilsMessenger</name></member>
+    <member refid="structvpr_1_1_vk_debug_utils_functions_1a318aa2ff1139e618c89725fa17664737" kind="variable"><name>vkSubmitDebugUtilsMessage</name></member>
+  </compound>
+  <compound refid="structvpr_1_1vk_queue_family_indices" kind="struct"><name>vpr::vkQueueFamilyIndices</name>
+    <member refid="structvpr_1_1vk_queue_family_indices_1ad7def5d08c30d9fcb6992455de1c868a" kind="variable"><name>Graphics</name></member>
+    <member refid="structvpr_1_1vk_queue_family_indices_1a8b891aa09d67ff61deb750637d3f06ca" kind="variable"><name>Compute</name></member>
+    <member refid="structvpr_1_1vk_queue_family_indices_1a28ae358035391181d9eaa145a9eed738" kind="variable"><name>Transfer</name></member>
+    <member refid="structvpr_1_1vk_queue_family_indices_1ae0e29d580f2551312fdfcc2f1c1f104b" kind="variable"><name>SparseBinding</name></member>
+    <member refid="structvpr_1_1vk_queue_family_indices_1a418003ff72c5aa57cbec198ca1edee4f" kind="variable"><name>Present</name></member>
+    <member refid="structvpr_1_1vk_queue_family_indices_1a73c62adbcc7ed0b43eb87080e2a45cd4" kind="function"><name>vkQueueFamilyIndices</name></member>
+  </compound>
+  <compound refid="structvpr_1_1_vpr_extension_pack" kind="struct"><name>vpr::VprExtensionPack</name>
+    <member refid="structvpr_1_1_vpr_extension_pack_1a54203e2016f033125ec96249d0cc4720" kind="variable"><name>RequiredExtensionNames</name></member>
+    <member refid="structvpr_1_1_vpr_extension_pack_1aa0e225ff9a10af737f99d9568c7de3eb" kind="variable"><name>RequiredExtensionCount</name></member>
+    <member refid="structvpr_1_1_vpr_extension_pack_1ae20618455255f6895bd391d046c2e055" kind="variable"><name>OptionalExtensionNames</name></member>
+    <member refid="structvpr_1_1_vpr_extension_pack_1ac0c9f23a7537fa6546d2a588aa29a7a4" kind="variable"><name>OptionalExtensionCount</name></member>
+  </compound>
+  <compound refid="namespacestd" kind="namespace"><name>std</name>
+  </compound>
+  <compound refid="namespacevpr" kind="namespace"><name>vpr</name>
+    <member refid="namespacevpr_1a494552c6fdda99313008c4a5e61a79fc" kind="enum"><name>AllocationType</name></member>
+    <member refid="namespacevpr_1a494552c6fdda99313008c4a5e61a79fcaccc0377a8afbf50e7094f5c23a8af223" kind="enumvalue"><name>INVALID</name></member>
+    <member refid="namespacevpr_1a494552c6fdda99313008c4a5e61a79fca7e62bc342f41c946868f0ea6f0b712d8" kind="enumvalue"><name>Buffer</name></member>
+    <member refid="namespacevpr_1a494552c6fdda99313008c4a5e61a79fcabb63562f6302e971e7c3095b4746816f" kind="enumvalue"><name>ImageLinear</name></member>
+    <member refid="namespacevpr_1a494552c6fdda99313008c4a5e61a79fcaa89b23279cca789eae30f24b8eb80d91" kind="enumvalue"><name>ImageTiled</name></member>
+    <member refid="namespacevpr_1a494552c6fdda99313008c4a5e61a79fca88183b946cc5f0e8c96b2e66e1c74a7e" kind="enumvalue"><name>Unknown</name></member>
+    <member refid="group___allocation_1gaba421ef06b1d6b910602d0180c9eff78" kind="enum"><name>ValidationCode</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a76c3ec4c3969badcdd02e0c88b07077f" kind="enumvalue"><name>VALIDATION_PASSED</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a641efe802ee0e2d0cbc7a0c46e91e687" kind="enumvalue"><name>NULL_MEMORY_HANDLE</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a2ceb3550d64b57a93e2896bcf767112c" kind="enumvalue"><name>ZERO_MEMORY_SIZE</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a76d83e278aa0df0c5edd0e99d70ee768" kind="enumvalue"><name>INCORRECT_SUBALLOC_OFFSET</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a81f141477ffccd0d5a9c6a2353348cc7" kind="enumvalue"><name>NEED_MERGE_SUBALLOCS</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78ac38471be1ba1406851e804110887b573" kind="enumvalue"><name>FREE_SUBALLOC_COUNT_MISMATCH</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a99db430a4a1b654dc0c46b77a028d4a5" kind="enumvalue"><name>USED_SUBALLOC_IN_FREE_LIST</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a4510c59ac7d838e715255649c3fd77a5" kind="enumvalue"><name>FREE_SUBALLOC_SORT_INCORRECT</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a88ad6448cd6f1d495139e026eb3424dc" kind="enumvalue"><name>FINAL_SIZE_MISMATCH</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a9d79688e901f5c4aa31129a2fe7f3451" kind="enumvalue"><name>FINAL_FREE_SIZE_MISMATCH</name></member>
+    <member refid="namespacevpr_1a0e514923b7b5d7b161e485c8b3ae2e15" kind="enum"><name>memory_attributes</name></member>
+    <member refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615e" kind="enum"><name>SuballocationType</name></member>
+    <member refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615eab24ce0cd392a5b0b8dedc66c25213594" kind="enumvalue"><name>Free</name></member>
+    <member refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615ea88183b946cc5f0e8c96b2e66e1c74a7e" kind="enumvalue"><name>Unknown</name></member>
+    <member refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615ea7e62bc342f41c946868f0ea6f0b712d8" kind="enumvalue"><name>Buffer</name></member>
+    <member refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615ea7d16f3f47038f8ac0d8615e4b83f55d9" kind="enumvalue"><name>ImageUnknown</name></member>
+    <member refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615eabb63562f6302e971e7c3095b4746816f" kind="enumvalue"><name>ImageLinear</name></member>
+    <member refid="namespacevpr_1a729c04888e8a0b67bdb473c36221615ead21ea5ec68ed3adc669014fe4ca2daef" kind="enumvalue"><name>ImageOptimal</name></member>
+    <member refid="group___core_1ga874ec16fda53668c022029810b30d344" kind="enum"><name>vertical_sync_mode</name></member>
+    <member refid="group___core_1gga874ec16fda53668c022029810b30d344a6adf97f83acf6453d4a6a4b1070f3754" kind="enumvalue"><name>None</name></member>
+    <member refid="group___core_1gga874ec16fda53668c022029810b30d344ad8c8df02e3ea8c16388590c51ea089ee" kind="enumvalue"><name>VerticalSync</name></member>
+    <member refid="group___core_1gga874ec16fda53668c022029810b30d344afbbcc162d33d672b5bffae3c7939dc38" kind="enumvalue"><name>VerticalSyncRelaxed</name></member>
+    <member refid="group___core_1gga874ec16fda53668c022029810b30d344a9e8c48ae5889c8d59c1534db00c53cbc" kind="enumvalue"><name>VerticalSyncMailbox</name></member>
+    <member refid="namespacevpr_1a2eaaed43241e0415151f981de244eae8" kind="typedef"><name>allocation_iterator_t</name></member>
+    <member refid="namespacevpr_1a5e5c4f19e6c891c34199ef44be0e8cca" kind="typedef"><name>const_allocation_iterator_t</name></member>
+    <member refid="namespacevpr_1a699fcbdac72f032ac918ffa160703c20" kind="typedef"><name>suballocationList</name></member>
+    <member refid="namespacevpr_1ae45fb55dc24425884ab5770dfdb39cdb" kind="typedef"><name>avail_suballocation_iterator_t</name></member>
+    <member refid="namespacevpr_1a532ca90a6e5307a71ef40c54e6a68964" kind="typedef"><name>const_avail_suballocation_iterator_t</name></member>
+    <member refid="namespacevpr_1a43160a49c54463723cf97f5d8c51e1f2" kind="typedef"><name>suballocation_iterator_t</name></member>
+    <member refid="namespacevpr_1ab423494fb93a04bbd6bd02f5b3b4b393" kind="typedef"><name>const_suballocation_iterator_t</name></member>
+    <member refid="namespacevpr_1ac148f310fbb1e1a34e40a884b25422b1" kind="typedef"><name>platform_window_type</name></member>
+    <member refid="namespacevpr_1a04dcff83681377b8bd95e65a3353cd58" kind="variable"><name>vkMaxMemoryTypes</name></member>
+    <member refid="namespacevpr_1af60ac795045569a749bb2df8977d893b" kind="variable"><name>MinSuballocationSizeToRegister</name></member>
+    <member refid="namespacevpr_1a64120fd5b133bb49dbe54f20c62289b1" kind="variable"><name>SmallHeapMaxSize</name></member>
+    <member refid="namespacevpr_1a252c3121a6d349509e2184d4d4641152" kind="variable"><name>DefaultLargeHeapBlockSize</name></member>
+    <member refid="namespacevpr_1ab07aac59268ca38105a0594265b8b930" kind="variable"><name>LargeBlockSingleAllocSize</name></member>
+    <member refid="namespacevpr_1a5bba3da651d451dc432584c42b9e4ef2" kind="variable"><name>DefaultMediumHeapBlockSize</name></member>
+    <member refid="namespacevpr_1a77400da4edea43dcef9869495bf7357c" kind="variable"><name>MediumBlockSingleAllocSize</name></member>
+    <member refid="namespacevpr_1a8ca1df7d6fffb8c6c1730dfd4b7780bf" kind="variable"><name>DefaultSmallHeapBlockSize</name></member>
+    <member refid="namespacevpr_1a484021b88b79f2fc9b5bf590f5241cd2" kind="variable"><name>SmallBlockSingleAllocSize</name></member>
+    <member refid="namespacevpr_1adb4fbe461c1ece0fd2c3f56bbb3f55e7" kind="variable"><name>VALIDATE_MEMORY</name></member>
+    <member refid="namespacevpr_1ac04a7888cedcf72461459232fd5ccc9a" kind="variable"><name>TypeColors</name></member>
+    <member refid="namespacevpr_1a386b8228079a9d82883cb1b818fec3e9" kind="variable"><name>DEBUG_PADDING</name></member>
+    <member refid="namespacevpr_1a9eebf0b16450e842d624bda2a7783f63" kind="variable"><name>vk_base_application_info</name></member>
+    <member refid="namespacevpr_1a3d7ce4ebd0c2b8e5a53368f6c69a572a" kind="variable"><name>vk_base_instance_info</name></member>
+    <member refid="namespacevpr_1ad5bda8c603cad763e4146bb6dacb716d" kind="variable"><name>vk_debug_callback_create_info_base</name></member>
+    <member refid="namespacevpr_1a1f4584791e4f10ebfe800bfa1c8f47f5" kind="variable"><name>default_priorityf</name></member>
+    <member refid="namespacevpr_1a263af5b003f0153684813cd1f0647516" kind="variable"><name>vk_device_queue_create_info_base</name></member>
+    <member refid="namespacevpr_1a34a10f7084a96a1b3c6862a3e1146ec6" kind="variable"><name>vk_device_create_info_base</name></member>
+    <member refid="namespacevpr_1a4e3d32c1636a5f4959a4e32cf4c4fd20" kind="variable"><name>vk_buffer_create_info_base</name></member>
+    <member refid="namespacevpr_1a24e23c05f762016d0e7d2af5dea96f92" kind="variable"><name>vk_allocation_info_base</name></member>
+    <member refid="namespacevpr_1af8ca9d6703e68c8c19b0f9590ef25ff9" kind="variable"><name>vk_mapped_memory_base</name></member>
+    <member refid="namespacevpr_1a0f3608c6e29e4465175df545a55413c4" kind="variable"><name>vk_command_pool_info_base</name></member>
+    <member refid="namespacevpr_1a570f1edb395e4e16019d1a4c71969be4" kind="variable"><name>vk_command_buffer_allocate_info_base</name></member>
+    <member refid="namespacevpr_1a5c977d90503781293d3a720e89c43753" kind="variable"><name>vk_command_buffer_begin_info_base</name></member>
+    <member refid="namespacevpr_1a8292f59b8bb0632b074e2f9917f99648" kind="variable"><name>vk_command_buffer_inheritance_info_base</name></member>
+    <member refid="namespacevpr_1afc8e1d24aefba0a7119ee1e78c470b9e" kind="variable"><name>vk_renderpass_begin_info_base</name></member>
+    <member refid="namespacevpr_1a5f1f5c4fdf2f0f598dd76e6ea4708cd9" kind="variable"><name>vk_submit_info_base</name></member>
+    <member refid="namespacevpr_1a383ce267f4c15be17e424c49aded58bc" kind="variable"><name>vk_fence_create_info_base</name></member>
+    <member refid="namespacevpr_1a1346102d98732cb43a0934865767f14c" kind="variable"><name>vk_image_create_info_base</name></member>
+    <member refid="namespacevpr_1aec3138915f105df1ff16048caa9dc82c" kind="variable"><name>vk_sampler_create_info_base</name></member>
+    <member refid="namespacevpr_1adaa14201fd51fb34600c8c932e6aa4b8" kind="variable"><name>vk_image_mem_barrier_base</name></member>
+    <member refid="namespacevpr_1a2b76259ef8a737b97c2f5df038604439" kind="variable"><name>vk_image_view_create_info_base</name></member>
+    <member refid="namespacevpr_1a9b6573a1f1d2f16ac30718a19e9b2aa0" kind="variable"><name>vk_render_pass_create_info_base</name></member>
+    <member refid="namespacevpr_1a99f08d8ef9fb0cbdc918322e3546eae5" kind="variable"><name>vk_framebuffer_create_info_base</name></member>
+    <member refid="namespacevpr_1a0c75a458ad6af928d228d74fd0e867f7" kind="variable"><name>vk_swapchain_create_info_base</name></member>
+    <member refid="namespacevpr_1aaa86c2ac16d683dcc0d8f8176784df4e" kind="variable"><name>vk_present_info_base</name></member>
+    <member refid="namespacevpr_1ac5287046e7113ad06ea5045449717205" kind="variable"><name>vk_shader_module_create_info_base</name></member>
+    <member refid="namespacevpr_1a7326eb5b7e23a4f852eb1dffac781fb0" kind="variable"><name>vk_pipeline_shader_stage_create_info_base</name></member>
+    <member refid="namespacevpr_1a4687617519c0ca0f5f75ae1e25caf1b0" kind="variable"><name>vk_pipeline_input_assembly_create_info_base</name></member>
+    <member refid="namespacevpr_1ad3281921dc4d8b7f288ad77b06758318" kind="variable"><name>vk_pipeline_rasterization_create_info_base</name></member>
+    <member refid="namespacevpr_1ab86974f170fe762d886f3da553c6cbbe" kind="variable"><name>vk_pipeline_tesselation_state_create_info_base</name></member>
+    <member refid="namespacevpr_1ad52fa06aab57ed41d980f92bafedb12b" kind="variable"><name>vk_pipeline_color_blend_attachment_info_base</name></member>
+    <member refid="namespacevpr_1a51b085d779d43876871e9836aa8c8a1e" kind="variable"><name>vk_pipeline_color_blend_create_info_base</name></member>
+    <member refid="namespacevpr_1a8f57d96ec5a8771ef4ac98a4f820ec08" kind="variable"><name>vk_pipeline_depth_stencil_create_info_base</name></member>
+    <member refid="namespacevpr_1a041fb415b4ee08fad14e09150f4d1c73" kind="variable"><name>vk_default_viewport</name></member>
+    <member refid="namespacevpr_1a7293ce4f531ad7cb1d801677d7859f61" kind="variable"><name>vk_default_viewport_scissor</name></member>
+    <member refid="namespacevpr_1ac1e4d8d99388be7f1cf9563483bcefa4" kind="variable"><name>vk_pipeline_viewport_create_info_base</name></member>
+    <member refid="namespacevpr_1acc661dbbbc559c2e7fcd5fe12fcf6acf" kind="variable"><name>vk_pipeline_multisample_create_info_base</name></member>
+    <member refid="namespacevpr_1a2202274b3eb94b6a4685bc4810ff4084" kind="variable"><name>vk_pipeline_layout_create_info_base</name></member>
+    <member refid="namespacevpr_1a29a50be8591e2424104148c468fb11b9" kind="variable"><name>vk_pipeline_dynamic_state_create_info_base</name></member>
+    <member refid="namespacevpr_1a673fde58ee3e106b03264c62ae5dc5ac" kind="variable"><name>vk_graphics_pipeline_create_info_base</name></member>
+    <member refid="namespacevpr_1a284ba6d1ee6cb4d1b38e63241e0008ca" kind="variable"><name>vk_pipeline_vertex_input_state_create_info_base</name></member>
+    <member refid="namespacevpr_1a9e58dbf8f7fac43cc98007d4910dd54b" kind="variable"><name>vk_attachment_description_base</name></member>
+    <member refid="namespacevpr_1a957c23e6065a31315d09fc83d513abcd" kind="variable"><name>vk_subpass_description_base</name></member>
+    <member refid="namespacevpr_1a0a52e1cc004fc92f8861eb3bbe0aa47f" kind="variable"><name>vk_pipeline_cache_create_info_base</name></member>
+    <member refid="namespacevpr_1acbbb28e95ff4d23c6b4805c875bb5566" kind="variable"><name>vk_image_memory_barrier_base</name></member>
+    <member refid="namespacevpr_1a400d661ec0f10c8a6308ad0497de9ec6" kind="variable"><name>vk_descriptor_set_layout_create_info_base</name></member>
+    <member refid="namespacevpr_1a4d6af135af0ae5f8de1f17810fdf5837" kind="variable"><name>vk_descriptor_pool_create_info_base</name></member>
+    <member refid="namespacevpr_1a27b96cc4b5f4578e9446f849876c36c5" kind="variable"><name>vk_descriptor_set_alloc_info_base</name></member>
+    <member refid="namespacevpr_1ab46c785268a28b874c218a11fc4d35b0" kind="variable"><name>vk_compute_pipeline_create_info_base</name></member>
+    <member refid="namespacevpr_1a7027e8abf6c28de607da66370d6d7b2d" kind="variable"><name>vk_buffer_memory_barrier_info_base</name></member>
+    <member refid="namespacevpr_1ab091815fd2a722b77e5aa924667a75eb" kind="variable"><name>vk_debug_marker_object_name_info_base</name></member>
+    <member refid="namespacevpr_1ab0551f43b9a16599f843c2caecd3b96d" kind="variable"><name>vk_query_pool_create_info_base</name></member>
+    <member refid="namespacevpr_1a45bb22caa779047d62afe5d20e7c3393" kind="variable"><name>vk_semaphore_create_info_base</name></member>
+    <member refid="namespacevpr_1a9afd956451263d552a1d9e90a4d8676e" kind="variable"><name>vk_event_create_info_base</name></member>
+    <member refid="namespacevpr_1a2bc55ee52a1acae337862efbe04c80db" kind="variable"><name>vk_dedicated_memory_requirements_khr_base</name></member>
+    <member refid="namespacevpr_1ab69b199ec3cbc823169b2f7964f192e7" kind="variable"><name>vk_dedicated_allocate_info_khr_base</name></member>
+    <member refid="namespacevpr_1ad538fcb0f871555b51406d7e80686287" kind="variable"><name>vk_buffer_memory_requirements_info_khr_base</name></member>
+    <member refid="namespacevpr_1a8d7d04f5ccd5b03b8ef03bc10f463cb1" kind="variable"><name>vk_image_memory_requirements_info_khr_base</name></member>
+    <member refid="namespacevpr_1aa1d90ab013977f5147dafc2bb9605727" kind="variable"><name>vk_image_sparse_memory_requirements_info_khr_base</name></member>
+    <member refid="namespacevpr_1ac766a293c48713df69cb70b0be896faa" kind="variable"><name>vk_memory_requirements_2_khr_base</name></member>
+    <member refid="namespacevpr_1a3f8a0cb6b260c65229ad6517ea2004df" kind="variable"><name>vk_sparse_image_memory_requirements_2_khr_base</name></member>
+    <member refid="namespacevpr_1a5612b1abb66a8ffa657c07954c3598f1" kind="variable"><name>vk_offset_2d_base</name></member>
+    <member refid="namespacevpr_1a23ce16aa6ca989fda9a6aa9a238eba2d" kind="variable"><name>vk_extent_2d_base</name></member>
+    <member refid="namespacevpr_1a4bbe3be8ff28f6f0c29189a18989b2cb" kind="variable"><name>vk_offset_3d_base</name></member>
+    <member refid="namespacevpr_1abd1ad91af875f9996dfa569b94ac9db5" kind="variable"><name>vk_extent_3d_base</name></member>
+    <member refid="namespacevpr_1a309a56466361df3642a0831e3a1ab885" kind="variable"><name>vk_image_subresource_base</name></member>
+    <member refid="namespacevpr_1abba82de9a3fde0142492c961dd4aecb8" kind="variable"><name>vk_subresource_layout_base</name></member>
+    <member refid="namespacevpr_1a85a5d8c5ba83b162eda5df835a7e6e4d" kind="variable"><name>VERBOSE_LOGGING</name></member>
+    <member refid="namespacevpr_1a783133e45fba2121d3007dd6a34112f2" kind="variable"><name>RECOMMENDED_REQUIRED_EXTENSION</name></member>
+    <member refid="namespacevpr_1aec73dccfad949403c3a61b7bb4def901" kind="variable"><name>RECOMMENDED_OPTIONAL_EXTENSIONS</name></member>
+    <member refid="namespacevpr_1a4bf381588c8fc655f17c38e1fd78739e" kind="variable"><name>RECOMMENDED_EXTENSIONS</name></member>
+    <member refid="namespacevpr_1a41f4e9004d0d504471306d39072c24e0" kind="variable"><name>queue_priorities</name></member>
+    <member refid="namespacevpr_1a14cb4a052f00e9a6b156d00a002a8f12" kind="variable"><name>physicalDevices</name></member>
+    <member refid="namespacevpr_1abf1367b87f4ad1de7f979b299e7a6c3f" kind="variable"><name>present_mode_strings</name></member>
+    <member refid="namespacevpr_1a2156abb1c1cc42fde7b0a0755491f539" kind="variable"><name>base_view_info</name></member>
+    <member refid="namespacevpr_1ab21fa0d40941a97c77d37f00adde7af1" kind="variable"><name>descriptor_types</name></member>
+    <member refid="namespacevpr_1ab813db0f97b6fc66b92e763f94952eda" kind="variable"><name>base_create_info</name></member>
+    <member refid="namespacevpr_1a367db2fdf35ae5bab8689bf5c734d8e4" kind="function"><name>SetLoggingRepository_VprAlloc</name></member>
+    <member refid="namespacevpr_1a8d7c2b273af89f550d0b15572c432699" kind="function"><name>GetLoggingRepository_VprAlloc</name></member>
+    <member refid="namespacevpr_1afb6cf1dbd1d7b9e7d5dfa97f3d5bd205" kind="function"><name>suballocTypeFromAllocType</name></member>
+    <member refid="namespacevpr_1ab931a1e0f8e5e163a3c6b47c28deff38" kind="function"><name>AlignUp</name></member>
+    <member refid="group___allocation_1ga8cf57df2fccbbe7a68b713d93db023c1" kind="function"><name>CheckBlocksOnSamePage</name></member>
+    <member refid="namespacevpr_1a4670febea81bc9a6a25fb8b1cf1afaaa" kind="function"><name>countBitsSet</name></member>
+    <member refid="group___allocation_1ga568ec6e09a10a255e22519e4e1a4f2e3" kind="function"><name>CheckBufferImageGranularityConflict</name></member>
+    <member refid="group___allocation_1gabf0854824912bca3e22929b2407b1273" kind="function"><name>operator&lt;&lt;</name></member>
+    <member refid="namespacevpr_1a2c7121d97fc888141bf3cdfba95aea8c" kind="function"><name>SetLoggingRepository_VprCommand</name></member>
+    <member refid="group___core_1gae0969d6f5ba5ffde94ef44d056fcbba2" kind="function"><name>SetLoggingRepository_VprCore</name></member>
+    <member refid="namespacevpr_1ae58c1352831f5a17460e877d6023a63b" kind="function"><name>GetLoggingRepository_VprCore</name></member>
+    <member refid="group___core_1ga812ad3570ad63ddcbc18e03988bd60bd" kind="function"><name>RecreateSwapchainAndSurface</name></member>
+    <member refid="namespacevpr_1ac9ad3c752dabd8483c29187ef86587c9" kind="function"><name>GetBestAvailPhysicalDevice</name></member>
+    <member refid="namespacevpr_1ac7aa57a8b381b41b0230767e64e08bfe" kind="function"><name>ScoreDevice</name></member>
+    <member refid="namespacevpr_1add78d0571fc38d8ee80c540f9754ca50" kind="function"><name>PopulatePhysicalDeviceMap</name></member>
+    <member refid="namespacevpr_1a816f869033b2bb2416d15e050f934240" kind="function"><name>getBestExtentPlatform</name></member>
+    <member refid="namespacevpr_1afa4d7a5ad29cbfc728d5c355d990d242" kind="function"><name>getPresentModeStr</name></member>
+    <member refid="group___resources_1ga15cb81d86cd2049d31138af8286c4f8c" kind="function"><name>SetLoggingRepository_VprResource</name></member>
+    <member refid="namespacevpr_1a58bb6255831c206417425e6e7ea6c4e2" kind="function"><name>SetLoggingRepository</name></member>
+  </compound>
+  <compound refid="_allocation_8hpp" kind="file"><name>Allocation.hpp</name>
+    <member refid="_allocation_8hpp_1aa5f59a981de3111f8aa9f8c48521db78" kind="define"><name>VPR_ALLOCATION_HPP</name></member>
+  </compound>
+  <compound refid="_allocation_requirements_8hpp" kind="file"><name>AllocationRequirements.hpp</name>
+    <member refid="_allocation_requirements_8hpp_1acd09439b8d9a4742916d2a7d955eec25" kind="define"><name>VPR_ALLOCATION_REQUIREMENTS_HPP</name></member>
+  </compound>
+  <compound refid="_allocator_8hpp" kind="file"><name>Allocator.hpp</name>
+    <member refid="_allocator_8hpp_1af95f6730cbfe9e1614e8e4886da79f71" kind="define"><name>VULPES_VK_ALLOCATOR_H</name></member>
+  </compound>
+  <compound refid="_debug_visualization_8hpp" kind="file"><name>DebugVisualization.hpp</name>
+    <member refid="_debug_visualization_8hpp_1ad0b1bc068c3fa53679ec61837028e981" kind="define"><name>VPR_ALLOC_DEBUG_VISUALIZATION_HPP</name></member>
+  </compound>
+  <compound refid="_allocation_8cpp" kind="file"><name>Allocation.cpp</name>
+  </compound>
+  <compound refid="_allocation_collection_8cpp" kind="file"><name>AllocationCollection.cpp</name>
+  </compound>
+  <compound refid="_allocation_collection_8hpp" kind="file"><name>AllocationCollection.hpp</name>
+    <member refid="_allocation_collection_8hpp_1aaf2c2582e836c75d8c578cf360e9f79f" kind="define"><name>VPR_ALLOCATION_COLLECTION_HPP</name></member>
+  </compound>
+  <compound refid="_allocator_8cpp" kind="file"><name>Allocator.cpp</name>
+  </compound>
+  <compound refid="_allocator_impl_8cpp" kind="file"><name>AllocatorImpl.cpp</name>
+  </compound>
+  <compound refid="_allocator_impl_8hpp" kind="file"><name>AllocatorImpl.hpp</name>
+    <member refid="_allocator_impl_8hpp_1af28e8ddd058e7d671c7a8dce63ec6fe1" kind="define"><name>VPR_ALLOCATOR_IMPL_HPP</name></member>
+  </compound>
+  <compound refid="_alloc_common_8hpp" kind="file"><name>AllocCommon.hpp</name>
+    <member refid="_alloc_common_8hpp_1a58df9e053a4c17141caaa896685a5efc" kind="define"><name>VPR_ALLOCATOR_COMMON_ITEMS_HPP</name></member>
+  </compound>
+  <compound refid="_debug_visualization_8cpp" kind="file"><name>DebugVisualization.cpp</name>
+  </compound>
+  <compound refid="_memory_block_8cpp" kind="file"><name>MemoryBlock.cpp</name>
+  </compound>
+  <compound refid="_memory_block_8hpp" kind="file"><name>MemoryBlock.hpp</name>
+    <member refid="_memory_block_8hpp_1a51a565dc220a0b7236fe4acf5347b4f0" kind="define"><name>VPR_MEMORY_BLOCK_HPP</name></member>
+  </compound>
+  <compound refid="_suballocation_8hpp" kind="file"><name>Suballocation.hpp</name>
+    <member refid="_suballocation_8hpp_1aab0b4c3d2b85f534eae0ce6c997edabf" kind="define"><name>VPR_SUBALLOCATION_HPP</name></member>
+  </compound>
+  <compound refid="_command_pool_8hpp" kind="file"><name>CommandPool.hpp</name>
+    <member refid="_command_pool_8hpp_1a74f9e587aeff293bdbbe870af5822672" kind="define"><name>VULPES_VK_COMMAND_POOL_H</name></member>
+  </compound>
+  <compound refid="_command_pool_8cpp" kind="file"><name>CommandPool.cpp</name>
+  </compound>
+  <compound refid="_create_info_base_8hpp" kind="file"><name>CreateInfoBase.hpp</name>
+    <member refid="_create_info_base_8hpp_1ac0577ffd133137ebd744b22496fc99e6" kind="define"><name>VULPES_VK_CREATE_INFO_BASE_H</name></member>
+  </compound>
+  <compound refid="_forward_decl_8hpp" kind="file"><name>ForwardDecl.hpp</name>
+    <member refid="_forward_decl_8hpp_1ab56d175c4a6f52774d1110b7418eb77a" kind="define"><name>VULPES_VK_FORWARD_DECL_HPP</name></member>
+  </compound>
+  <compound refid="vk_assert_8hpp" kind="file"><name>vkAssert.hpp</name>
+    <member refid="vk_assert_8hpp_1a0225c47fa83b48a34a0b5de62e7d0961" kind="define"><name>VK_ASSERT_H</name></member>
+    <member refid="vk_assert_8hpp_1a92c2e07b0d021fc331be70a65c61dacc" kind="define"><name>VkAssert</name></member>
+    <member refid="vk_assert_8hpp_1ae69ba6233e866a87c7427b71d4be0563" kind="function"><name>vkErrCheck</name></member>
+  </compound>
+  <compound refid="vpr__stdafx_8h" kind="file"><name>vpr_stdafx.h</name>
+    <member refid="vpr__stdafx_8h_1a3472d8cdbb788d5f1815b3522595bc49" kind="define"><name>EXPORT</name></member>
+    <member refid="vpr__stdafx_8h_1a773175d74e73776d69c3e538f17de1ee" kind="define"><name>IMPORT</name></member>
+    <member refid="vpr__stdafx_8h_1a4b940ef35de523c8e5f22898d34635f1" kind="define"><name>VPR_API</name></member>
+  </compound>
+  <compound refid="_instance_8hpp" kind="file"><name>Instance.hpp</name>
+    <member refid="_instance_8hpp_1aa170be298f20dea0632e4515d9ddc9e9" kind="define"><name>VULPES_VK_INSTANCE_H</name></member>
+  </compound>
+  <compound refid="_logical_device_8hpp" kind="file"><name>LogicalDevice.hpp</name>
+    <member refid="_logical_device_8hpp_1aa86b7190ec5ee21a33dba2e44a0bf0e9" kind="define"><name>VULPES_VK_LOGICAL_DEVICE_H</name></member>
+  </compound>
+  <compound refid="_physical_device_8hpp" kind="file"><name>PhysicalDevice.hpp</name>
+    <member refid="_physical_device_8hpp_1a5f7afd20976d57ce04227354e7cefbee" kind="define"><name>VULPES_VK_PHYSICAL_DEVICE_H</name></member>
+  </compound>
+  <compound refid="_surface_k_h_r_8hpp" kind="file"><name>SurfaceKHR.hpp</name>
+    <member refid="_surface_k_h_r_8hpp_1a59186ef93ecae4f9acfbc224306b517f" kind="define"><name>VULPES_VK_SURFACE_KHR_HPP</name></member>
+  </compound>
+  <compound refid="_swapchain_8hpp" kind="file"><name>Swapchain.hpp</name>
+    <member refid="_swapchain_8hpp_1a0c8f927372192bdf1e8635e10fca197a" kind="define"><name>VULPES_VK_SWAPCHAIN_H</name></member>
+  </compound>
+  <compound refid="_vk_debug_utils_8hpp" kind="file"><name>VkDebugUtils.hpp</name>
+    <member refid="_vk_debug_utils_8hpp_1a9a644ea902e2cacc6e072839459335b1" kind="define"><name>VULKAN_DEBUG_UTILS_FN_POINTER_STRUCT_HPP</name></member>
+  </compound>
+  <compound refid="_instance_8cpp" kind="file"><name>Instance.cpp</name>
+    <member refid="_instance_8cpp_1ab91f325a54d3e35fe831a86d6382c2a9" kind="define"><name>GLFW_INCLUDE_VULKAN</name></member>
+  </compound>
+  <compound refid="_logical_device_8cpp" kind="file"><name>LogicalDevice.cpp</name>
+  </compound>
+  <compound refid="_physical_device_8cpp" kind="file"><name>PhysicalDevice.cpp</name>
+  </compound>
+  <compound refid="_surface_k_h_r_8cpp" kind="file"><name>SurfaceKHR.cpp</name>
+    <member refid="_surface_k_h_r_8cpp_1ab91f325a54d3e35fe831a86d6382c2a9" kind="define"><name>GLFW_INCLUDE_VULKAN</name></member>
+  </compound>
+  <compound refid="_swapchain_8cpp" kind="file"><name>Swapchain.cpp</name>
+    <member refid="_swapchain_8cpp_1ab91f325a54d3e35fe831a86d6382c2a9" kind="define"><name>GLFW_INCLUDE_VULKAN</name></member>
+  </compound>
+  <compound refid="_read_me_8md" kind="file"><name>ReadMe.md</name>
+  </compound>
+  <compound refid="_framebuffer_8hpp" kind="file"><name>Framebuffer.hpp</name>
+    <member refid="_framebuffer_8hpp_1a886163ef577ef669878dd8a37b927abb" kind="define"><name>VULPES_VK_FRAMEBUFFER_H</name></member>
+  </compound>
+  <compound refid="_graphics_pipeline_8hpp" kind="file"><name>GraphicsPipeline.hpp</name>
+    <member refid="_graphics_pipeline_8hpp_1a50f3a09b6298eff2faaaa85759a483bc" kind="define"><name>VULPES_VK_GRAPHICS_PIPELINE_H</name></member>
+  </compound>
+  <compound refid="_renderpass_8hpp" kind="file"><name>Renderpass.hpp</name>
+    <member refid="_renderpass_8hpp_1aae90b3680a41fd5377719cded1cbd01c" kind="define"><name>VULPES_VK_RENDER_PASS_H</name></member>
+  </compound>
+  <compound refid="_framebuffer_8cpp" kind="file"><name>Framebuffer.cpp</name>
+  </compound>
+  <compound refid="_graphics_pipeline_8cpp" kind="file"><name>GraphicsPipeline.cpp</name>
+  </compound>
+  <compound refid="_renderpass_8cpp" kind="file"><name>Renderpass.cpp</name>
+  </compound>
+  <compound refid="_buffer_deprecated_8hpp" kind="file"><name>BufferDeprecated.hpp</name>
+    <member refid="_buffer_deprecated_8hpp_1aa7c87e8140a19bfa731e4e717f50f39d" kind="define"><name>VULPES_VK_BUFFER_H</name></member>
+  </compound>
+  <compound refid="_descriptor_pool_8hpp" kind="file"><name>DescriptorPool.hpp</name>
+    <member refid="_descriptor_pool_8hpp_1ae7f505be0050990bf26b55f4d6bee6d3" kind="define"><name>VULPES_VK_DESCRIPTOR_POOL_H</name></member>
+  </compound>
+  <compound refid="_descriptor_set_8hpp" kind="file"><name>DescriptorSet.hpp</name>
+    <member refid="_descriptor_set_8hpp_1a1fa14a9901736de3d38916168afcd45f" kind="define"><name>VULPES_VK_DESCRIPTOR_SET_H</name></member>
+  </compound>
+  <compound refid="_descriptor_set_layout_8hpp" kind="file"><name>DescriptorSetLayout.hpp</name>
+    <member refid="_descriptor_set_layout_8hpp_1a755f7f6f653dd87686ac87645285c39b" kind="define"><name>VPR_DESCRIPTOR_SET_LAYOUT_HPP</name></member>
+  </compound>
+  <compound refid="_image_deprecated_8hpp" kind="file"><name>ImageDeprecated.hpp</name>
+    <member refid="_image_deprecated_8hpp_1afc61b1ffc6e6314f8d8858a9ed98ea2f" kind="define"><name>VULPES_VK_IMAGE_H</name></member>
+  </compound>
+  <compound refid="_pipeline_cache_8hpp" kind="file"><name>PipelineCache.hpp</name>
+    <member refid="_pipeline_cache_8hpp_1a8c413752ba90bb1a6d08a5f17f466c96" kind="define"><name>VULPES_VK_PIPELINE_CACHE_H</name></member>
+  </compound>
+  <compound refid="_pipeline_layout_8hpp" kind="file"><name>PipelineLayout.hpp</name>
+    <member refid="_pipeline_layout_8hpp_1a485ae1c43bcef6ea0282a1b9f3e827cf" kind="define"><name>VULPES_VK_PIPELINE_LAYOUT_H</name></member>
+  </compound>
+  <compound refid="_sampler_8hpp" kind="file"><name>Sampler.hpp</name>
+    <member refid="_sampler_8hpp_1ae0335a647fc69a1207b02f99fedd14c4" kind="define"><name>VPR_SAMPLER_HPP</name></member>
+  </compound>
+  <compound refid="_shader_module_8hpp" kind="file"><name>ShaderModule.hpp</name>
+    <member refid="_shader_module_8hpp_1a1fe261cc3667e174a7fe41a772432b5c" kind="define"><name>VULPES_VK_SHADER_MODULE_H</name></member>
+  </compound>
+  <compound refid="_buffer_deprecated_8cpp" kind="file"><name>BufferDeprecated.cpp</name>
+  </compound>
+  <compound refid="_descriptor_pool_8cpp" kind="file"><name>DescriptorPool.cpp</name>
+  </compound>
+  <compound refid="_descriptor_set_8cpp" kind="file"><name>DescriptorSet.cpp</name>
+  </compound>
+  <compound refid="_descriptor_set_layout_8cpp" kind="file"><name>DescriptorSetLayout.cpp</name>
+  </compound>
+  <compound refid="_image_deprecated_8cpp" kind="file"><name>ImageDeprecated.cpp</name>
+  </compound>
+  <compound refid="_pipeline_cache_8cpp" kind="file"><name>PipelineCache.cpp</name>
+  </compound>
+  <compound refid="_pipeline_layout_8cpp" kind="file"><name>PipelineLayout.cpp</name>
+  </compound>
+  <compound refid="_sampler_8cpp" kind="file"><name>Sampler.cpp</name>
+  </compound>
+  <compound refid="_shader_module_8cpp" kind="file"><name>ShaderModule.cpp</name>
+  </compound>
+  <compound refid="_event_8hpp" kind="file"><name>Event.hpp</name>
+    <member refid="_event_8hpp_1ac847a293c49e7214be82a7c0697bbb5e" kind="define"><name>VPR_EVENT_HPP</name></member>
+  </compound>
+  <compound refid="_fence_8hpp" kind="file"><name>Fence.hpp</name>
+    <member refid="_fence_8hpp_1ac1c30d463444d65f71e24b60cef55210" kind="define"><name>VPR_FENCE_HPP</name></member>
+  </compound>
+  <compound refid="_semaphore_8hpp" kind="file"><name>Semaphore.hpp</name>
+    <member refid="_semaphore_8hpp_1a3b806b30f0ba5734a091237f3da04ca7" kind="define"><name>VPR_SEMAPHORE_HPP</name></member>
+  </compound>
+  <compound refid="_event_8cpp" kind="file"><name>Event.cpp</name>
+  </compound>
+  <compound refid="_fence_8cpp" kind="file"><name>Fence.cpp</name>
+  </compound>
+  <compound refid="_semaphore_8cpp" kind="file"><name>Semaphore.cpp</name>
+  </compound>
+  <compound refid="group___allocation" kind="group"><name>Allocation</name>
+    <member refid="group___allocation_1gaba421ef06b1d6b910602d0180c9eff78" kind="enum"><name>ValidationCode</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a76c3ec4c3969badcdd02e0c88b07077f" kind="enumvalue"><name>VALIDATION_PASSED</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a641efe802ee0e2d0cbc7a0c46e91e687" kind="enumvalue"><name>NULL_MEMORY_HANDLE</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a2ceb3550d64b57a93e2896bcf767112c" kind="enumvalue"><name>ZERO_MEMORY_SIZE</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a76d83e278aa0df0c5edd0e99d70ee768" kind="enumvalue"><name>INCORRECT_SUBALLOC_OFFSET</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a81f141477ffccd0d5a9c6a2353348cc7" kind="enumvalue"><name>NEED_MERGE_SUBALLOCS</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78ac38471be1ba1406851e804110887b573" kind="enumvalue"><name>FREE_SUBALLOC_COUNT_MISMATCH</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a99db430a4a1b654dc0c46b77a028d4a5" kind="enumvalue"><name>USED_SUBALLOC_IN_FREE_LIST</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a4510c59ac7d838e715255649c3fd77a5" kind="enumvalue"><name>FREE_SUBALLOC_SORT_INCORRECT</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a88ad6448cd6f1d495139e026eb3424dc" kind="enumvalue"><name>FINAL_SIZE_MISMATCH</name></member>
+    <member refid="group___allocation_1ggaba421ef06b1d6b910602d0180c9eff78a9d79688e901f5c4aa31129a2fe7f3451" kind="enumvalue"><name>FINAL_FREE_SIZE_MISMATCH</name></member>
+    <member refid="group___allocation_1ga8cf57df2fccbbe7a68b713d93db023c1" kind="function"><name>CheckBlocksOnSamePage</name></member>
+    <member refid="group___allocation_1ga568ec6e09a10a255e22519e4e1a4f2e3" kind="function"><name>CheckBufferImageGranularityConflict</name></member>
+    <member refid="group___allocation_1gabf0854824912bca3e22929b2407b1273" kind="function"><name>operator&lt;&lt;</name></member>
+  </compound>
+  <compound refid="group___command" kind="group"><name>Command</name>
+  </compound>
+  <compound refid="group___core" kind="group"><name>Core</name>
+    <member refid="group___core_1ga874ec16fda53668c022029810b30d344" kind="enum"><name>vertical_sync_mode</name></member>
+    <member refid="group___core_1gga874ec16fda53668c022029810b30d344a6adf97f83acf6453d4a6a4b1070f3754" kind="enumvalue"><name>None</name></member>
+    <member refid="group___core_1gga874ec16fda53668c022029810b30d344ad8c8df02e3ea8c16388590c51ea089ee" kind="enumvalue"><name>VerticalSync</name></member>
+    <member refid="group___core_1gga874ec16fda53668c022029810b30d344afbbcc162d33d672b5bffae3c7939dc38" kind="enumvalue"><name>VerticalSyncRelaxed</name></member>
+    <member refid="group___core_1gga874ec16fda53668c022029810b30d344a9e8c48ae5889c8d59c1534db00c53cbc" kind="enumvalue"><name>VerticalSyncMailbox</name></member>
+    <member refid="group___core_1ga53b8864a06225b92d1a4cf46ea333fbb" kind="variable"><name>info</name></member>
+    <member refid="group___core_1gae0969d6f5ba5ffde94ef44d056fcbba2" kind="function"><name>SetLoggingRepository_VprCore</name></member>
+    <member refid="group___core_1ga812ad3570ad63ddcbc18e03988bd60bd" kind="function"><name>RecreateSwapchainAndSurface</name></member>
+  </compound>
+  <compound refid="group___rendering" kind="group"><name>Rendering</name>
+  </compound>
+  <compound refid="group___resources" kind="group"><name>Resources</name>
+    <member refid="group___resources_1ga15cb81d86cd2049d31138af8286c4f8c" kind="function"><name>SetLoggingRepository_VprResource</name></member>
+  </compound>
+  <compound refid="group___synchronization" kind="group"><name>Synchronization</name>
+  </compound>
+  <compound refid="md__read_me" kind="page"><name>md_ReadMe</name>
+  </compound>
+  <compound refid="todo" kind="page"><name>todo</name>
+  </compound>
+  <compound refid="deprecated" kind="page"><name>deprecated</name>
+  </compound>
+  <compound refid="dir_a8d82a6dd2c7da2c7fdd2fdcbd97acf9" kind="dir"><name>alloc</name>
+  </compound>
+  <compound refid="dir_689a8946103f9323d050afa7f32bd943" kind="dir"><name>command</name>
+  </compound>
+  <compound refid="dir_bdd9a5d540de89e9fe90efdfc6973a4f" kind="dir"><name>common</name>
+  </compound>
+  <compound refid="dir_4270bfced15e0e73154b13468c7c9ad9" kind="dir"><name>core</name>
+  </compound>
+  <compound refid="dir_11e447e913e5e5335b13051300067258" kind="dir"><name>alloc/include</name>
+  </compound>
+  <compound refid="dir_24d671cfcbc5d5238a6bd565a49d198f" kind="dir"><name>core/include</name>
+  </compound>
+  <compound refid="dir_75c4835b571214d99de7f64a6aa48552" kind="dir"><name>command/include</name>
+  </compound>
+  <compound refid="dir_cdca6beb3e98f91c543628435b6839a4" kind="dir"><name>sync/include</name>
+  </compound>
+  <compound refid="dir_d61154396d6320dc7c48f1e39f3bcee8" kind="dir"><name>render/include</name>
+  </compound>
+  <compound refid="dir_4b01a22ef9265eb061c6caff6ccca058" kind="dir"><name>resource/include</name>
+  </compound>
+  <compound refid="dir_c30bb48f042946ebe97e62b65a0197ba" kind="dir"><name>render</name>
+  </compound>
+  <compound refid="dir_1ac2fdee2362a08fc0358dcef45d782c" kind="dir"><name>resource</name>
+  </compound>
+  <compound refid="dir_4e823c83c548b903d8f3c3f138ec0b92" kind="dir"><name>resource/src</name>
+  </compound>
+  <compound refid="dir_f99d96cca7f4096ec2fb87dfa6d7800f" kind="dir"><name>command/src</name>
+  </compound>
+  <compound refid="dir_9cc27a6b038b2d4d542061134f8f01c2" kind="dir"><name>render/src</name>
+  </compound>
+  <compound refid="dir_90fd98a0ba30abf7a6068a44995d2d6b" kind="dir"><name>core/src</name>
+  </compound>
+  <compound refid="dir_58e5f2a4233ba279856a8dd6086673b0" kind="dir"><name>sync/src</name>
+  </compound>
+  <compound refid="dir_c264934deb5881eb87aeacee0a8612c7" kind="dir"><name>alloc/src</name>
+  </compound>
+  <compound refid="dir_60f2dbb6714164eb829ccd5e05ded1f4" kind="dir"><name>sync</name>
+  </compound>
+</doxygenindex>

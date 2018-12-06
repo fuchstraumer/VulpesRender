@@ -1,0 +1,327 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="classvpr_1_1_graphics_pipeline" kind="class" language="C++" prot="public">
+    <compoundname>vpr::GraphicsPipeline</compoundname>
+    <includes refid="_graphics_pipeline_8hpp" local="no">GraphicsPipeline.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classvpr_1_1_graphics_pipeline_1a15a2a7ccca9c23a508220ef2450bcb3d" prot="private" static="no" mutable="no">
+        <type>const VkAllocationCallbacks *</type>
+        <definition>const VkAllocationCallbacks* vpr::GraphicsPipeline::allocators</definition>
+        <argsstring></argsstring>
+        <name>allocators</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/GraphicsPipeline.hpp" line="82" column="1" bodyfile="render/include/GraphicsPipeline.hpp" bodystart="82" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_graphics_pipeline_1aea7b8f3af0fb2b0a508f362a791fe957" compoundref="_graphics_pipeline_8cpp" startline="54" endline="58">Destroy</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_graphics_pipeline_1a6f4e75798fa5be8be83768cc1c1caa9e" prot="private" static="no" mutable="no">
+        <type>VkDevice</type>
+        <definition>VkDevice vpr::GraphicsPipeline::parent</definition>
+        <argsstring></argsstring>
+        <name>parent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/GraphicsPipeline.hpp" line="83" column="1" bodyfile="render/include/GraphicsPipeline.hpp" bodystart="83" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_graphics_pipeline_1aea7b8f3af0fb2b0a508f362a791fe957" compoundref="_graphics_pipeline_8cpp" startline="54" endline="58">Destroy</referencedby>
+        <referencedby refid="classvpr_1_1_graphics_pipeline_1a6b28822784f8e49222cdaacef49f29de" compoundref="_graphics_pipeline_8cpp" startline="48" endline="52">Init</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_graphics_pipeline_1a7026f50b8f3b75bbbc16891a97eb71d4" prot="private" static="no" mutable="no">
+        <type>VkPipeline</type>
+        <definition>VkPipeline vpr::GraphicsPipeline::handle</definition>
+        <argsstring></argsstring>
+        <name>handle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/GraphicsPipeline.hpp" line="84" column="1" bodyfile="render/include/GraphicsPipeline.hpp" bodystart="84" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_graphics_pipeline_1aea7b8f3af0fb2b0a508f362a791fe957" compoundref="_graphics_pipeline_8cpp" startline="54" endline="58">Destroy</referencedby>
+        <referencedby refid="classvpr_1_1_graphics_pipeline_1a6b28822784f8e49222cdaacef49f29de" compoundref="_graphics_pipeline_8cpp" startline="48" endline="52">Init</referencedby>
+        <referencedby refid="classvpr_1_1_graphics_pipeline_1a8252999b7a7b7310172ac585782f31a4" compoundref="_graphics_pipeline_8cpp" startline="60" endline="62">vkHandle</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_graphics_pipeline_1a0dd80a9ad43c36eaf6d0be88ff240264" prot="private" static="no" mutable="no">
+        <type>VkGraphicsPipelineCreateInfo</type>
+        <definition>VkGraphicsPipelineCreateInfo vpr::GraphicsPipeline::createInfo</definition>
+        <argsstring></argsstring>
+        <name>createInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/GraphicsPipeline.hpp" line="85" column="1" bodyfile="render/include/GraphicsPipeline.hpp" bodystart="85" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_graphics_pipeline_1a6b28822784f8e49222cdaacef49f29de" compoundref="_graphics_pipeline_8cpp" startline="48" endline="52">Init</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classvpr_1_1_graphics_pipeline_1aa64ec5438a3f77ef4b0900dedd088dc3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::GraphicsPipeline::GraphicsPipeline</definition>
+        <argsstring>(const GraphicsPipeline &amp;)=delete</argsstring>
+        <name>GraphicsPipeline</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_graphics_pipeline" kindref="compound">GraphicsPipeline</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/GraphicsPipeline.hpp" line="56" column="1"/>
+        <referencedby refid="classvpr_1_1_graphics_pipeline_1a1c7b5164865ce64a370b6926a714beaa" compoundref="_graphics_pipeline_8cpp" startline="64" endline="71">CreateMultiple</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_graphics_pipeline_1a91c924b5f981aa1c11fabd93b8bd0293" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_graphics_pipeline" kindref="compound">GraphicsPipeline</ref> &amp;</type>
+        <definition>GraphicsPipeline&amp; vpr::GraphicsPipeline::operator=</definition>
+        <argsstring>(const GraphicsPipeline &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_graphics_pipeline" kindref="compound">GraphicsPipeline</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/GraphicsPipeline.hpp" line="57" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classvpr_1_1_graphics_pipeline_1a646166a0760f6860f719f646753c5a4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::GraphicsPipeline::GraphicsPipeline</definition>
+        <argsstring>(const VkDevice &amp;parent, VkGraphicsPipelineCreateInfo create_info, VkPipeline handle)</argsstring>
+        <name>GraphicsPipeline</name>
+        <param>
+          <type>const VkDevice &amp;</type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type>VkGraphicsPipelineCreateInfo</type>
+          <declname>create_info</declname>
+        </param>
+        <param>
+          <type>VkPipeline</type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>One-step initialization constructor for this object. </para>        </briefdescription>
+        <detaileddescription>
+<para>Fully ready to use when created with this constructor. Assumes object has been already created, but keeps create_info around in case it might be needed. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/GraphicsPipeline.hpp" line="62" column="1" bodyfile="render/src/GraphicsPipeline.cpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_graphics_pipeline_1a464e53ae6209d6bed77c8be843d9680a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::GraphicsPipeline::GraphicsPipeline</definition>
+        <argsstring>(const VkDevice &amp;parent)</argsstring>
+        <name>GraphicsPipeline</name>
+        <param>
+          <type>const VkDevice &amp;</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Two-step initialization constructor for this object. </para>        </briefdescription>
+        <detaileddescription>
+<para>Requires a further call to <ref refid="classvpr_1_1_graphics_pipeline_1a6b28822784f8e49222cdaacef49f29de" kindref="member">Init()</ref> to be useable. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/GraphicsPipeline.hpp" line="64" column="1" bodyfile="render/src/GraphicsPipeline.cpp" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_graphics_pipeline_1afcea60d9bb59d7b3613e76f18d4ca763" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::GraphicsPipeline::~GraphicsPipeline</definition>
+        <argsstring>()</argsstring>
+        <name>~GraphicsPipeline</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/GraphicsPipeline.hpp" line="65" column="1" bodyfile="render/src/GraphicsPipeline.cpp" bodystart="44" bodyend="46"/>
+        <references refid="classvpr_1_1_graphics_pipeline_1aea7b8f3af0fb2b0a508f362a791fe957" compoundref="_graphics_pipeline_8cpp" startline="54" endline="58">Destroy</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_graphics_pipeline_1ab3baddf705601751e9041ea3c36253e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::GraphicsPipeline::GraphicsPipeline</definition>
+        <argsstring>(GraphicsPipeline &amp;&amp;other) noexcept</argsstring>
+        <name>GraphicsPipeline</name>
+        <param>
+          <type><ref refid="classvpr_1_1_graphics_pipeline" kindref="compound">GraphicsPipeline</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/GraphicsPipeline.hpp" line="67" column="1" bodyfile="render/src/GraphicsPipeline.cpp" bodystart="32" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_graphics_pipeline_1adea1fd57e923759603b0f6f16b64a636" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_graphics_pipeline" kindref="compound">GraphicsPipeline</ref> &amp;</type>
+        <definition>GraphicsPipeline &amp; vpr::GraphicsPipeline::operator=</definition>
+        <argsstring>(GraphicsPipeline &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classvpr_1_1_graphics_pipeline" kindref="compound">GraphicsPipeline</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/GraphicsPipeline.hpp" line="68" column="1" bodyfile="render/src/GraphicsPipeline.cpp" bodystart="36" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_graphics_pipeline_1a6b28822784f8e49222cdaacef49f29de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::GraphicsPipeline::Init</definition>
+        <argsstring>(VkGraphicsPipelineCreateInfo &amp;create_info, const VkPipelineCache &amp;cache=VK_NULL_HANDLE)</argsstring>
+        <name>Init</name>
+        <param>
+          <type>VkGraphicsPipelineCreateInfo &amp;</type>
+          <declname>create_info</declname>
+        </param>
+        <param>
+          <type>const VkPipelineCache &amp;</type>
+          <declname>cache</declname>
+          <defval>VK_NULL_HANDLE</defval>
+        </param>
+        <briefdescription>
+<para>Fully initializes the object - attaches a <ref refid="classvpr_1_1_pipeline_cache" kindref="compound">PipelineCache</ref> if a handle is provided. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/GraphicsPipeline.hpp" line="70" column="1" bodyfile="render/src/GraphicsPipeline.cpp" bodystart="48" bodyend="52"/>
+        <references refid="classvpr_1_1_graphics_pipeline_1a0dd80a9ad43c36eaf6d0be88ff240264" compoundref="_graphics_pipeline_8hpp" startline="85">createInfo</references>
+        <references refid="classvpr_1_1_graphics_pipeline_1a7026f50b8f3b75bbbc16891a97eb71d4" compoundref="_graphics_pipeline_8hpp" startline="84">handle</references>
+        <references refid="classvpr_1_1_graphics_pipeline_1a6f4e75798fa5be8be83768cc1c1caa9e" compoundref="_graphics_pipeline_8hpp" startline="83">parent</references>
+        <references refid="vk_assert_8hpp_1a92c2e07b0d021fc331be70a65c61dacc" compoundref="vk_assert_8hpp" startline="9">VkAssert</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_graphics_pipeline_1aea7b8f3af0fb2b0a508f362a791fe957" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::GraphicsPipeline::Destroy</definition>
+        <argsstring>()</argsstring>
+        <name>Destroy</name>
+        <briefdescription>
+<para>Will destroy the underlying pipeline, and can&apos;t be used again until <ref refid="classvpr_1_1_graphics_pipeline_1a6b28822784f8e49222cdaacef49f29de" kindref="member">Init()</ref> is called once more. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/GraphicsPipeline.hpp" line="72" column="1" bodyfile="render/src/GraphicsPipeline.cpp" bodystart="54" bodyend="58"/>
+        <references refid="classvpr_1_1_graphics_pipeline_1a15a2a7ccca9c23a508220ef2450bcb3d" compoundref="_graphics_pipeline_8hpp" startline="82">allocators</references>
+        <references refid="classvpr_1_1_graphics_pipeline_1a7026f50b8f3b75bbbc16891a97eb71d4" compoundref="_graphics_pipeline_8hpp" startline="84">handle</references>
+        <references refid="classvpr_1_1_graphics_pipeline_1a6f4e75798fa5be8be83768cc1c1caa9e" compoundref="_graphics_pipeline_8hpp" startline="83">parent</references>
+        <referencedby refid="classvpr_1_1_graphics_pipeline_1afcea60d9bb59d7b3613e76f18d4ca763" compoundref="_graphics_pipeline_8cpp" startline="44" endline="46">~GraphicsPipeline</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_graphics_pipeline_1a8252999b7a7b7310172ac585782f31a4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const VkPipeline &amp;</type>
+        <definition>const VkPipeline &amp; vpr::GraphicsPipeline::vkHandle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>vkHandle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/GraphicsPipeline.hpp" line="73" column="1" bodyfile="render/src/GraphicsPipeline.cpp" bodystart="60" bodyend="62"/>
+        <references refid="classvpr_1_1_graphics_pipeline_1a7026f50b8f3b75bbbc16891a97eb71d4" compoundref="_graphics_pipeline_8hpp" startline="84">handle</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classvpr_1_1_graphics_pipeline_1a1c7b5164865ce64a370b6926a714beaa" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::GraphicsPipeline::CreateMultiple</definition>
+        <argsstring>(const VkDevice &amp;device, const VkGraphicsPipelineCreateInfo *infos, const size_t num_infos, VkPipelineCache cache, GraphicsPipeline **dest_array)</argsstring>
+        <name>CreateMultiple</name>
+        <param>
+          <type>const VkDevice &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>const VkGraphicsPipelineCreateInfo *</type>
+          <declname>infos</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>num_infos</declname>
+        </param>
+        <param>
+          <type>VkPipelineCache</type>
+          <declname>cache</declname>
+        </param>
+        <param>
+          <type><ref refid="classvpr_1_1_graphics_pipeline" kindref="compound">GraphicsPipeline</ref> **</type>
+          <declname>dest_array</declname>
+        </param>
+        <briefdescription>
+<para>In the case of pipelines that are derivatives of each other, or that share a singular pipeline cache, using this method can be more efficient. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest_array</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of POINTERS that will have values written to by calling &quot;new GraphicsPipeline(dvc, info, handle)&quot; </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>infos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of pipeline infos to use - if possible, make sure to set the basePipelineIndex bits and the appropriate pipeline derivative flags! </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/GraphicsPipeline.hpp" line="79" column="1" bodyfile="render/src/GraphicsPipeline.cpp" bodystart="64" bodyend="71"/>
+        <references refid="classvpr_1_1_graphics_pipeline_1aa64ec5438a3f77ef4b0900dedd088dc3">GraphicsPipeline</references>
+        <references refid="vk_assert_8hpp_1a92c2e07b0d021fc331be70a65c61dacc" compoundref="vk_assert_8hpp" startline="9">VkAssert</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classvpr_1_1_graphics_pipeline" kindref="compound">GraphicsPipeline</ref> object is an RAII wrapper around a vkGraphicsPipeline object, handling construction and destruction alone. </para>    </briefdescription>
+    <detaileddescription>
+<para>The <ref refid="structvpr_1_1_graphics_pipeline_info" kindref="compound">GraphicsPipelineInfo</ref> structure is, truthfully, much more important and much complex than this class is. </para>    </detaileddescription>
+    <location file="render/include/GraphicsPipeline.hpp" line="55" column="1" bodyfile="render/include/GraphicsPipeline.hpp" bodystart="55" bodyend="87"/>
+    <listofallmembers>
+      <member refid="classvpr_1_1_graphics_pipeline_1a15a2a7ccca9c23a508220ef2450bcb3d" prot="private" virt="non-virtual"><scope>vpr::GraphicsPipeline</scope><name>allocators</name></member>
+      <member refid="classvpr_1_1_graphics_pipeline_1a0dd80a9ad43c36eaf6d0be88ff240264" prot="private" virt="non-virtual"><scope>vpr::GraphicsPipeline</scope><name>createInfo</name></member>
+      <member refid="classvpr_1_1_graphics_pipeline_1a1c7b5164865ce64a370b6926a714beaa" prot="public" virt="non-virtual"><scope>vpr::GraphicsPipeline</scope><name>CreateMultiple</name></member>
+      <member refid="classvpr_1_1_graphics_pipeline_1aea7b8f3af0fb2b0a508f362a791fe957" prot="public" virt="non-virtual"><scope>vpr::GraphicsPipeline</scope><name>Destroy</name></member>
+      <member refid="classvpr_1_1_graphics_pipeline_1aa64ec5438a3f77ef4b0900dedd088dc3" prot="private" virt="non-virtual"><scope>vpr::GraphicsPipeline</scope><name>GraphicsPipeline</name></member>
+      <member refid="classvpr_1_1_graphics_pipeline_1a646166a0760f6860f719f646753c5a4c" prot="public" virt="non-virtual"><scope>vpr::GraphicsPipeline</scope><name>GraphicsPipeline</name></member>
+      <member refid="classvpr_1_1_graphics_pipeline_1a464e53ae6209d6bed77c8be843d9680a" prot="public" virt="non-virtual"><scope>vpr::GraphicsPipeline</scope><name>GraphicsPipeline</name></member>
+      <member refid="classvpr_1_1_graphics_pipeline_1ab3baddf705601751e9041ea3c36253e5" prot="public" virt="non-virtual"><scope>vpr::GraphicsPipeline</scope><name>GraphicsPipeline</name></member>
+      <member refid="classvpr_1_1_graphics_pipeline_1a7026f50b8f3b75bbbc16891a97eb71d4" prot="private" virt="non-virtual"><scope>vpr::GraphicsPipeline</scope><name>handle</name></member>
+      <member refid="classvpr_1_1_graphics_pipeline_1a6b28822784f8e49222cdaacef49f29de" prot="public" virt="non-virtual"><scope>vpr::GraphicsPipeline</scope><name>Init</name></member>
+      <member refid="classvpr_1_1_graphics_pipeline_1a91c924b5f981aa1c11fabd93b8bd0293" prot="private" virt="non-virtual"><scope>vpr::GraphicsPipeline</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_graphics_pipeline_1adea1fd57e923759603b0f6f16b64a636" prot="public" virt="non-virtual"><scope>vpr::GraphicsPipeline</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_graphics_pipeline_1a6f4e75798fa5be8be83768cc1c1caa9e" prot="private" virt="non-virtual"><scope>vpr::GraphicsPipeline</scope><name>parent</name></member>
+      <member refid="classvpr_1_1_graphics_pipeline_1a8252999b7a7b7310172ac585782f31a4" prot="public" virt="non-virtual"><scope>vpr::GraphicsPipeline</scope><name>vkHandle</name></member>
+      <member refid="classvpr_1_1_graphics_pipeline_1afcea60d9bb59d7b3613e76f18d4ca763" prot="public" virt="non-virtual"><scope>vpr::GraphicsPipeline</scope><name>~GraphicsPipeline</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

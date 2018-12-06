@@ -1,4 +1,0 @@
-<map id="vpr::Swapchain::Destroy" name="vpr::Swapchain::Destroy">
-<area shape="rect" id="node2" href="$namespacevpr.html#a812ad3570ad63ddcbc18e03988bd60bd" title="Pass a swapchain and surface pointer to this to have the swapchain and surface destroyed and recreate..." alt="" coords="218,5,402,47"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_swapchain.html#a2dc442a2b5f947c65a9be8278200faa6" title="vpr::Swapchain::~Swapchain" alt="" coords="216,71,404,98"/>
-</map>

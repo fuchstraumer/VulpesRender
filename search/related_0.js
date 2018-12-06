@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['debugvisualization',['DebugVisualization',['../classvpr_1_1_allocator.html#a619ce3b614015e030bea8a3239d60fe2',1,'vpr::Allocator::DebugVisualization()'],['../classvpr_1_1_allocation_collection.html#a619ce3b614015e030bea8a3239d60fe2',1,'vpr::AllocationCollection::DebugVisualization()'],['../structvpr_1_1_allocator_impl.html#a619ce3b614015e030bea8a3239d60fe2',1,'vpr::AllocatorImpl::DebugVisualization()'],['../classvpr_1_1_memory_block.html#a619ce3b614015e030bea8a3239d60fe2',1,'vpr::MemoryBlock::DebugVisualization()']]],
-  ['debugvisualizationimpl',['DebugVisualizationImpl',['../classvpr_1_1_allocator.html#aa54730353079686243fbe5f8545267d0',1,'vpr::Allocator::DebugVisualizationImpl()'],['../classvpr_1_1_allocation_collection.html#aa54730353079686243fbe5f8545267d0',1,'vpr::AllocationCollection::DebugVisualizationImpl()'],['../structvpr_1_1_allocator_impl.html#aa54730353079686243fbe5f8545267d0',1,'vpr::AllocatorImpl::DebugVisualizationImpl()'],['../classvpr_1_1_memory_block.html#aa54730353079686243fbe5f8545267d0',1,'vpr::MemoryBlock::DebugVisualizationImpl()']]]
-];

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_semaphore_8hpp" kind="file" language="C++">
+    <compoundname>Semaphore.hpp</compoundname>
+    <includes refid="vpr__stdafx_8h" local="yes">vpr_stdafx.h</includes>
+    <includes refid="_forward_decl_8hpp" local="yes">ForwardDecl.hpp</includes>
+    <includedby refid="_semaphore_8cpp" local="yes">sync/src/Semaphore.cpp</includedby>
+    <incdepgraph>
+      <node id="798">
+        <label>sync/include/Semaphore.hpp</label>
+        <link refid="_semaphore_8hpp"/>
+        <childnode refid="799" relation="include">
+        </childnode>
+        <childnode refid="801" relation="include">
+        </childnode>
+      </node>
+      <node id="799">
+        <label>vpr_stdafx.h</label>
+        <link refid="vpr__stdafx_8h"/>
+        <childnode refid="800" relation="include">
+        </childnode>
+      </node>
+      <node id="800">
+        <label>vulkan/vulkan.h</label>
+      </node>
+      <node id="801">
+        <label>ForwardDecl.hpp</label>
+        <link refid="_forward_decl_8hpp"/>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="802">
+        <label>sync/include/Semaphore.hpp</label>
+        <link refid="_semaphore_8hpp"/>
+        <childnode refid="803" relation="include">
+        </childnode>
+      </node>
+      <node id="803">
+        <label>sync/src/Semaphore.cpp</label>
+        <link refid="_semaphore_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classvpr_1_1_semaphore" prot="public">vpr::Semaphore</innerclass>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_semaphore_8hpp_1a3b806b30f0ba5734a091237f3da04ca7" prot="public" static="no">
+        <name>VPR_SEMAPHORE_HPP</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="sync/include/Semaphore.hpp" line="3" column="9" bodyfile="sync/include/Semaphore.hpp" bodystart="3" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="sync/include/Semaphore.hpp"/>
+  </compounddef>
+</doxygen>

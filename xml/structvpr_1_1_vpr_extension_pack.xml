@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="structvpr_1_1_vpr_extension_pack" kind="struct" language="C++" prot="public">
+    <compoundname>vpr::VprExtensionPack</compoundname>
+    <includes refid="_instance_8hpp" local="no">Instance.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvpr_1_1_vpr_extension_pack_1a54203e2016f033125ec96249d0cc4720" prot="public" static="no" mutable="no">
+        <type>const char *const  *</type>
+        <definition>const char* const* vpr::VprExtensionPack::RequiredExtensionNames</definition>
+        <argsstring></argsstring>
+        <name>RequiredExtensionNames</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/Instance.hpp" line="24" column="1" bodyfile="core/include/Instance.hpp" bodystart="24" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_instance_extension_handler_1a66b3a869e2404afc912619eb31ae639f" compoundref="_instance_8cpp" startline="202" endline="218">vpr::InstanceExtensionHandler::prepareRequiredExtensions</referencedby>
+        <referencedby refid="structvpr_1_1_device_data_members_1a3d083fd1add161c9cc785e0a57aa6583" compoundref="_logical_device_8cpp" startline="438" endline="447">vpr::DeviceDataMembers::prepareRequiredExtensions</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_vpr_extension_pack_1aa0e225ff9a10af737f99d9568c7de3eb" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t vpr::VprExtensionPack::RequiredExtensionCount</definition>
+        <argsstring></argsstring>
+        <name>RequiredExtensionCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/Instance.hpp" line="25" column="1" bodyfile="core/include/Instance.hpp" bodystart="25" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_instance_extension_handler_1a66b3a869e2404afc912619eb31ae639f" compoundref="_instance_8cpp" startline="202" endline="218">vpr::InstanceExtensionHandler::prepareRequiredExtensions</referencedby>
+        <referencedby refid="structvpr_1_1_device_data_members_1a3d083fd1add161c9cc785e0a57aa6583" compoundref="_logical_device_8cpp" startline="438" endline="447">vpr::DeviceDataMembers::prepareRequiredExtensions</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_vpr_extension_pack_1ae20618455255f6895bd391d046c2e055" prot="public" static="no" mutable="no">
+        <type>const char *const  *</type>
+        <definition>const char* const* vpr::VprExtensionPack::OptionalExtensionNames</definition>
+        <argsstring></argsstring>
+        <name>OptionalExtensionNames</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/Instance.hpp" line="26" column="1" bodyfile="core/include/Instance.hpp" bodystart="26" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_instance_extension_handler_1a05d1f04435599c61498469a134d239e2" compoundref="_instance_8cpp" startline="165" endline="176">vpr::InstanceExtensionHandler::extensionSetup</referencedby>
+        <referencedby refid="structvpr_1_1_instance_extension_handler_1ad84e6c1da712bf8c69efcbbff73f360f" compoundref="_instance_8cpp" startline="220" endline="231">vpr::InstanceExtensionHandler::prepareOptionalExtensions</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_vpr_extension_pack_1ac0c9f23a7537fa6546d2a588aa29a7a4" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t vpr::VprExtensionPack::OptionalExtensionCount</definition>
+        <argsstring></argsstring>
+        <name>OptionalExtensionCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/Instance.hpp" line="27" column="1" bodyfile="core/include/Instance.hpp" bodystart="27" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_instance_extension_handler_1ad84e6c1da712bf8c69efcbbff73f360f" compoundref="_instance_8cpp" startline="220" endline="231">vpr::InstanceExtensionHandler::prepareOptionalExtensions</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="structvpr_1_1_vpr_extension_pack" kindref="compound">VprExtensionPack</ref> structure makes requesting extensions in the device and instance constructors easier and more robust, by allowing the specification of required and optional extensions. </para>    </briefdescription>
+    <detaileddescription>
+<para>The inability or failure to enable a required extension will cause an exception ot be thrown, while issues with optional extensions will log the extension unable (at a WARNING level) to be enabled or used - then it will be removed from the list of extensions submitted to the constructor. </para>    </detaileddescription>
+    <location file="core/include/Instance.hpp" line="23" column="1" bodyfile="core/include/Instance.hpp" bodystart="23" bodyend="28"/>
+    <listofallmembers>
+      <member refid="structvpr_1_1_vpr_extension_pack_1ac0c9f23a7537fa6546d2a588aa29a7a4" prot="public" virt="non-virtual"><scope>vpr::VprExtensionPack</scope><name>OptionalExtensionCount</name></member>
+      <member refid="structvpr_1_1_vpr_extension_pack_1ae20618455255f6895bd391d046c2e055" prot="public" virt="non-virtual"><scope>vpr::VprExtensionPack</scope><name>OptionalExtensionNames</name></member>
+      <member refid="structvpr_1_1_vpr_extension_pack_1aa0e225ff9a10af737f99d9568c7de3eb" prot="public" virt="non-virtual"><scope>vpr::VprExtensionPack</scope><name>RequiredExtensionCount</name></member>
+      <member refid="structvpr_1_1_vpr_extension_pack_1a54203e2016f033125ec96249d0cc4720" prot="public" virt="non-virtual"><scope>vpr::VprExtensionPack</scope><name>RequiredExtensionNames</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

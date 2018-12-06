@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_framebuffer_8hpp" kind="file" language="C++">
+    <compoundname>Framebuffer.hpp</compoundname>
+    <includes refid="vpr__stdafx_8h" local="yes">vpr_stdafx.h</includes>
+    <includes refid="_forward_decl_8hpp" local="yes">ForwardDecl.hpp</includes>
+    <includedby refid="_framebuffer_8cpp" local="yes">render/src/Framebuffer.cpp</includedby>
+    <incdepgraph>
+      <node id="574">
+        <label>vpr_stdafx.h</label>
+        <link refid="vpr__stdafx_8h"/>
+        <childnode refid="575" relation="include">
+        </childnode>
+      </node>
+      <node id="575">
+        <label>vulkan/vulkan.h</label>
+      </node>
+      <node id="576">
+        <label>ForwardDecl.hpp</label>
+        <link refid="_forward_decl_8hpp"/>
+      </node>
+      <node id="573">
+        <label>render/include/Framebuffer.hpp</label>
+        <link refid="_framebuffer_8hpp"/>
+        <childnode refid="574" relation="include">
+        </childnode>
+        <childnode refid="576" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="577">
+        <label>render/include/Framebuffer.hpp</label>
+        <link refid="_framebuffer_8hpp"/>
+        <childnode refid="578" relation="include">
+        </childnode>
+      </node>
+      <node id="578">
+        <label>render/src/Framebuffer.cpp</label>
+        <link refid="_framebuffer_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classvpr_1_1_framebuffer" prot="public">vpr::Framebuffer</innerclass>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_framebuffer_8hpp_1a886163ef577ef669878dd8a37b927abb" prot="public" static="no">
+        <name>VULPES_VK_FRAMEBUFFER_H</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="render/include/Framebuffer.hpp" line="3" column="9" bodyfile="render/include/Framebuffer.hpp" bodystart="3" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="render/include/Framebuffer.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="classvpr_1_1_sampler" kind="class" language="C++" prot="public">
+    <compoundname>vpr::Sampler</compoundname>
+    <includes refid="_sampler_8hpp" local="no">Sampler.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classvpr_1_1_sampler_1abe11a09a1866b47f180918a1be18271a" prot="private" static="no" mutable="no">
+        <type>VkDevice</type>
+        <definition>VkDevice vpr::Sampler::device</definition>
+        <argsstring></argsstring>
+        <name>device</name>
+        <initializer>{ VK_NULL_HANDLE }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/Sampler.hpp" line="25" column="1" bodyfile="resource/include/Sampler.hpp" bodystart="25" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_sampler_1a4c4a818b0590864ebbc5d17473fb0ca4" compoundref="_sampler_8cpp" startline="7" endline="10">Sampler</referencedby>
+        <referencedby refid="classvpr_1_1_sampler_1a0d152bb179afc601677a3ceff69b31b5" compoundref="_sampler_8cpp" startline="12" endline="16">~Sampler</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_sampler_1a46d094a7b9ff505d4d18b84fb31457f9" prot="private" static="no" mutable="no">
+        <type>VkSampler</type>
+        <definition>VkSampler vpr::Sampler::handle</definition>
+        <argsstring></argsstring>
+        <name>handle</name>
+        <initializer>{ VK_NULL_HANDLE }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/Sampler.hpp" line="26" column="1" bodyfile="resource/include/Sampler.hpp" bodystart="26" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_sampler_1a4c4a818b0590864ebbc5d17473fb0ca4" compoundref="_sampler_8cpp" startline="7" endline="10">Sampler</referencedby>
+        <referencedby refid="classvpr_1_1_sampler_1a610a015db087592726db70564caec056" compoundref="_sampler_8cpp" startline="28" endline="30">vkHandle</referencedby>
+        <referencedby refid="classvpr_1_1_sampler_1a0d152bb179afc601677a3ceff69b31b5" compoundref="_sampler_8cpp" startline="12" endline="16">~Sampler</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classvpr_1_1_sampler_1ad1ca6b66f7b6ab605f580b26f05afb26" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::Sampler::Sampler</definition>
+        <argsstring>(const Sampler &amp;)=delete</argsstring>
+        <name>Sampler</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_sampler" kindref="compound">Sampler</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/Sampler.hpp" line="14" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_sampler_1a2bcc30e668ba0887b4f070cdaa4cf3c8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_sampler" kindref="compound">Sampler</ref> &amp;</type>
+        <definition>Sampler&amp; vpr::Sampler::operator=</definition>
+        <argsstring>(const Sampler &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_sampler" kindref="compound">Sampler</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/Sampler.hpp" line="15" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classvpr_1_1_sampler_1a4c4a818b0590864ebbc5d17473fb0ca4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::Sampler::Sampler</definition>
+        <argsstring>(const VkDevice &amp;dvc, const VkSamplerCreateInfo &amp;info)</argsstring>
+        <name>Sampler</name>
+        <param>
+          <type>const VkDevice &amp;</type>
+          <declname>dvc</declname>
+        </param>
+        <param>
+          <type>const VkSamplerCreateInfo &amp;</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/Sampler.hpp" line="17" column="1" bodyfile="resource/src/Sampler.cpp" bodystart="7" bodyend="10"/>
+        <references refid="classvpr_1_1_sampler_1abe11a09a1866b47f180918a1be18271a" compoundref="_sampler_8hpp" startline="25">device</references>
+        <references refid="classvpr_1_1_sampler_1a46d094a7b9ff505d4d18b84fb31457f9" compoundref="_sampler_8hpp" startline="26">handle</references>
+        <references refid="vk_assert_8hpp_1a92c2e07b0d021fc331be70a65c61dacc" compoundref="vk_assert_8hpp" startline="9">VkAssert</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_sampler_1a0d152bb179afc601677a3ceff69b31b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::Sampler::~Sampler</definition>
+        <argsstring>()</argsstring>
+        <name>~Sampler</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/Sampler.hpp" line="18" column="1" bodyfile="resource/src/Sampler.cpp" bodystart="12" bodyend="16"/>
+        <references refid="classvpr_1_1_sampler_1abe11a09a1866b47f180918a1be18271a" compoundref="_sampler_8hpp" startline="25">device</references>
+        <references refid="classvpr_1_1_sampler_1a46d094a7b9ff505d4d18b84fb31457f9" compoundref="_sampler_8hpp" startline="26">handle</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_sampler_1ac40f4856d1b2034ccafd037012f8c51b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::Sampler::Sampler</definition>
+        <argsstring>(Sampler &amp;&amp;other) noexcept</argsstring>
+        <name>Sampler</name>
+        <param>
+          <type><ref refid="classvpr_1_1_sampler" kindref="compound">Sampler</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/Sampler.hpp" line="19" column="1" bodyfile="resource/src/Sampler.cpp" bodystart="18" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_sampler_1a1f87df788b0b481346cd33b84f0df5c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_sampler" kindref="compound">Sampler</ref> &amp;</type>
+        <definition>Sampler &amp; vpr::Sampler::operator=</definition>
+        <argsstring>(Sampler &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classvpr_1_1_sampler" kindref="compound">Sampler</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/Sampler.hpp" line="20" column="1" bodyfile="resource/src/Sampler.cpp" bodystart="21" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_sampler_1a610a015db087592726db70564caec056" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const VkSampler &amp;</type>
+        <definition>const VkSampler &amp; vpr::Sampler::vkHandle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>vkHandle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/Sampler.hpp" line="22" column="1" bodyfile="resource/src/Sampler.cpp" bodystart="28" bodyend="30"/>
+        <references refid="classvpr_1_1_sampler_1a46d094a7b9ff505d4d18b84fb31457f9" compoundref="_sampler_8hpp" startline="26">handle</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Bare minimum RAII wrapper around Vulkan sampler object. </para>    </briefdescription>
+    <detaileddescription>
+<para>Can be helpful in facilitating an approach wherein descriptors use multiple textures, but each texture shares/uses different samplers in the shader based on the kind of sampling being performed. </para>    </detaileddescription>
+    <location file="resource/include/Sampler.hpp" line="13" column="1" bodyfile="resource/include/Sampler.hpp" bodystart="13" bodyend="27"/>
+    <listofallmembers>
+      <member refid="classvpr_1_1_sampler_1abe11a09a1866b47f180918a1be18271a" prot="private" virt="non-virtual"><scope>vpr::Sampler</scope><name>device</name></member>
+      <member refid="classvpr_1_1_sampler_1a46d094a7b9ff505d4d18b84fb31457f9" prot="private" virt="non-virtual"><scope>vpr::Sampler</scope><name>handle</name></member>
+      <member refid="classvpr_1_1_sampler_1a2bcc30e668ba0887b4f070cdaa4cf3c8" prot="private" virt="non-virtual"><scope>vpr::Sampler</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_sampler_1a1f87df788b0b481346cd33b84f0df5c9" prot="public" virt="non-virtual"><scope>vpr::Sampler</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_sampler_1ad1ca6b66f7b6ab605f580b26f05afb26" prot="private" virt="non-virtual"><scope>vpr::Sampler</scope><name>Sampler</name></member>
+      <member refid="classvpr_1_1_sampler_1a4c4a818b0590864ebbc5d17473fb0ca4" prot="public" virt="non-virtual"><scope>vpr::Sampler</scope><name>Sampler</name></member>
+      <member refid="classvpr_1_1_sampler_1ac40f4856d1b2034ccafd037012f8c51b" prot="public" virt="non-virtual"><scope>vpr::Sampler</scope><name>Sampler</name></member>
+      <member refid="classvpr_1_1_sampler_1a610a015db087592726db70564caec056" prot="public" virt="non-virtual"><scope>vpr::Sampler</scope><name>vkHandle</name></member>
+      <member refid="classvpr_1_1_sampler_1a0d152bb179afc601677a3ceff69b31b5" prot="public" virt="non-virtual"><scope>vpr::Sampler</scope><name>~Sampler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

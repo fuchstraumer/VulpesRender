@@ -1,6 +1,0 @@
-<map id="vpr::SurfaceKHR" name="vpr::SurfaceKHR">
-<area shape="rect" id="node2" href="$classvpr_1_1_instance.html" title="Instance is a wrapper around the base Vulkan object that must be initialized first. " alt="" coords="96,379,191,405"/>
-<area shape="rect" id="node3" href="$structvpr_1_1_instance_extension_handler.html" title="vpr::InstanceExtensionHandler" alt="" coords="45,289,242,316"/>
-<area shape="rect" id="node6" title="STL class. " alt="" coords="198,96,278,123"/>
-<area shape="rect" id="node7" title="STL class. " alt="" coords="175,5,301,47"/>
-</map>

@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="structvpr_1_1_allocation_requirements" kind="struct" language="C++" prot="public">
+    <compoundname>vpr::AllocationRequirements</compoundname>
+    <includes refid="_allocation_requirements_8hpp" local="no">AllocationRequirements.hpp</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structvpr_1_1_allocation_requirements_1a728999a7c098d84b06ab2ba4373472d0" prot="public" static="yes" mutable="no">
+        <type>VkBool32</type>
+        <definition>VkBool32 vpr::AllocationRequirements::noNewAllocations</definition>
+        <argsstring></argsstring>
+        <name>noNewAllocations</name>
+        <initializer>= VK_FALSE</initializer>
+        <briefdescription>
+<para>Defaults to false. </para>        </briefdescription>
+        <detaileddescription>
+<para>If true, no new allocations are created beyond the set created upon initilization of the allocator system. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/AllocationRequirements.hpp" line="14" column="1" bodyfile="alloc/include/AllocationRequirements.hpp" bodystart="14" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a25d6e4d4fe1d7c4adf83e95915a0a810" compoundref="_allocator_impl_8cpp" startline="129" endline="266">vpr::AllocatorImpl::allocateMemoryType</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvpr_1_1_allocation_requirements_1abfa545adb01b6f16b8936561d4a54fd8" prot="public" static="no" mutable="no">
+        <type>VkBool32</type>
+        <definition>VkBool32 vpr::AllocationRequirements::privateMemory</definition>
+        <argsstring></argsstring>
+        <name>privateMemory</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>True if whatever allocation this belongs to should be in its own device memory object. </para>        </briefdescription>
+        <detaileddescription>
+<para>Don&apos;t use this too often, of course. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/AllocationRequirements.hpp" line="16" column="1" bodyfile="alloc/include/AllocationRequirements.hpp" bodystart="16" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_buffer_1abe56ee5b43a1be73960fa5edae0dcb0b" compoundref="_buffer_deprecated_8cpp" startline="40" endline="53">vpr::Buffer::CreateBuffer</referencedby>
+        <referencedby refid="classvpr_1_1_buffer_1add8b2dbfd79028bedfd30b5c5f48b3b2" compoundref="_buffer_deprecated_8cpp" startline="231" endline="245">vpr::Buffer::CreateStagingBuffer</referencedby>
+        <referencedby refid="classvpr_1_1_buffer_1ac367138a3788a0a6df49c5c2ad890774" compoundref="_buffer_deprecated_8cpp" startline="264" endline="278">vpr::Buffer::createStagingBuffer</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_allocation_requirements_1ac090af25414224c2fcb36baae16f3265" prot="public" static="no" mutable="no">
+        <type>VkMemoryPropertyFlags</type>
+        <definition>VkMemoryPropertyFlags vpr::AllocationRequirements::requiredFlags</definition>
+        <argsstring></argsstring>
+        <name>requiredFlags</name>
+        <briefdescription>
+<para>The memory properties that are absolutely required by the item you are allocating for. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/AllocationRequirements.hpp" line="18" column="1" bodyfile="alloc/include/AllocationRequirements.hpp" bodystart="18" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a25d6e4d4fe1d7c4adf83e95915a0a810" compoundref="_allocator_impl_8cpp" startline="129" endline="266">vpr::AllocatorImpl::allocateMemoryType</referencedby>
+        <referencedby refid="classvpr_1_1_buffer_1abe56ee5b43a1be73960fa5edae0dcb0b" compoundref="_buffer_deprecated_8cpp" startline="40" endline="53">vpr::Buffer::CreateBuffer</referencedby>
+        <referencedby refid="classvpr_1_1_image_1a7f1db39dbc01e0775d8ba7adcb8507fa" compoundref="_image_deprecated_8cpp" startline="151" endline="159">vpr::Image::CreateImage</referencedby>
+        <referencedby refid="classvpr_1_1_buffer_1add8b2dbfd79028bedfd30b5c5f48b3b2" compoundref="_buffer_deprecated_8cpp" startline="231" endline="245">vpr::Buffer::CreateStagingBuffer</referencedby>
+        <referencedby refid="classvpr_1_1_buffer_1ac367138a3788a0a6df49c5c2ad890774" compoundref="_buffer_deprecated_8cpp" startline="264" endline="278">vpr::Buffer::createStagingBuffer</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_allocation_requirements_1aa51fb8ff6e7248e82ec19834c923f5bf" prot="public" static="no" mutable="no">
+        <type>VkMemoryPropertyFlags</type>
+        <definition>VkMemoryPropertyFlags vpr::AllocationRequirements::preferredFlags</definition>
+        <argsstring></argsstring>
+        <name>preferredFlags</name>
+        <initializer>= VkMemoryPropertyFlags(0)</initializer>
+        <briefdescription>
+<para>Additional flags that would be nice/useful to have, but are not required. </para>        </briefdescription>
+        <detaileddescription>
+<para>An attempt to meet these will be made, but not meeting them won&apos;t be considered a failure. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/AllocationRequirements.hpp" line="21" column="1" bodyfile="alloc/include/AllocationRequirements.hpp" bodystart="21" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_buffer_1abe56ee5b43a1be73960fa5edae0dcb0b" compoundref="_buffer_deprecated_8cpp" startline="40" endline="53">vpr::Buffer::CreateBuffer</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_allocation_requirements_1a164674fd0507f8982e6ec272d1f46ea7" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vpr::AllocationRequirements::prefersDedicatedKHR</definition>
+        <argsstring></argsstring>
+        <name>prefersDedicatedKHR</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Set if this allocation benefits from a private/unique VkDeviceMemory instance, but doesn&apos;t require it. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/AllocationRequirements.hpp" line="23" column="1" bodyfile="alloc/include/AllocationRequirements.hpp" bodystart="23" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_allocator_1ae8c982057f90fad764d25d8b081e5603" compoundref="_allocator_8cpp" startline="123" endline="131">vpr::Allocator::AllocateForBuffer</referencedby>
+        <referencedby refid="classvpr_1_1_allocator_1a74d845e760e100129d83bc40cd4fb12e" compoundref="_allocator_8cpp" startline="113" endline="121">vpr::Allocator::AllocateForImage</referencedby>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a25d6e4d4fe1d7c4adf83e95915a0a810" compoundref="_allocator_impl_8cpp" startline="129" endline="266">vpr::AllocatorImpl::allocateMemoryType</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_allocation_requirements_1a84e600ef433ac8a3c3964bdc579cd0ee" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vpr::AllocationRequirements::requiresDedicatedKHR</definition>
+        <argsstring></argsstring>
+        <name>requiresDedicatedKHR</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>This allocation requires a unique VkDeviceMemory instance, and will fail if we&apos;re unable to meet this requirement. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/AllocationRequirements.hpp" line="25" column="1" bodyfile="alloc/include/AllocationRequirements.hpp" bodystart="25" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_allocator_1ae8c982057f90fad764d25d8b081e5603" compoundref="_allocator_8cpp" startline="123" endline="131">vpr::Allocator::AllocateForBuffer</referencedby>
+        <referencedby refid="classvpr_1_1_allocator_1a74d845e760e100129d83bc40cd4fb12e" compoundref="_allocator_8cpp" startline="113" endline="121">vpr::Allocator::AllocateForImage</referencedby>
+        <referencedby refid="structvpr_1_1_allocator_impl_1a25d6e4d4fe1d7c4adf83e95915a0a810" compoundref="_allocator_impl_8cpp" startline="129" endline="266">vpr::AllocatorImpl::allocateMemoryType</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This struct is the primary item submitted to allocator methods for resource creation. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="alloc/include/AllocationRequirements.hpp" line="11" column="1" bodyfile="alloc/include/AllocationRequirements.hpp" bodystart="11" bodyend="26"/>
+    <listofallmembers>
+      <member refid="structvpr_1_1_allocation_requirements_1a728999a7c098d84b06ab2ba4373472d0" prot="public" virt="non-virtual"><scope>vpr::AllocationRequirements</scope><name>noNewAllocations</name></member>
+      <member refid="structvpr_1_1_allocation_requirements_1aa51fb8ff6e7248e82ec19834c923f5bf" prot="public" virt="non-virtual"><scope>vpr::AllocationRequirements</scope><name>preferredFlags</name></member>
+      <member refid="structvpr_1_1_allocation_requirements_1a164674fd0507f8982e6ec272d1f46ea7" prot="public" virt="non-virtual"><scope>vpr::AllocationRequirements</scope><name>prefersDedicatedKHR</name></member>
+      <member refid="structvpr_1_1_allocation_requirements_1abfa545adb01b6f16b8936561d4a54fd8" prot="public" virt="non-virtual"><scope>vpr::AllocationRequirements</scope><name>privateMemory</name></member>
+      <member refid="structvpr_1_1_allocation_requirements_1ac090af25414224c2fcb36baae16f3265" prot="public" virt="non-virtual"><scope>vpr::AllocationRequirements</scope><name>requiredFlags</name></member>
+      <member refid="structvpr_1_1_allocation_requirements_1a84e600ef433ac8a3c3964bdc579cd0ee" prot="public" virt="non-virtual"><scope>vpr::AllocationRequirements</scope><name>requiresDedicatedKHR</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

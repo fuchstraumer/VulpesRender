@@ -1,7 +1,0 @@
-<map id="render/src/Renderpass.cpp" name="render/src/Renderpass.cpp">
-<area shape="rect" id="node2" href="$vpr__stdafx_8h.html" title="vpr_stdafx.h" alt="" coords="5,155,96,181"/>
-<area shape="rect" id="node4" href="$_renderpass_8hpp.html" title="Renderpass.hpp" alt="" coords="182,80,298,107"/>
-<area shape="rect" id="node7" href="$vk_assert_8hpp.html" title="vkAssert.hpp" alt="" coords="395,80,493,107"/>
-<area shape="rect" id="node10" href="$_create_info_base_8hpp.html" title="CreateInfoBase.hpp" alt="" coords="529,80,663,107"/>
-<area shape="rect" id="node5" href="$_forward_decl_8hpp.html" title="ForwardDecl.hpp" alt="" coords="121,155,239,181"/>
-</map>

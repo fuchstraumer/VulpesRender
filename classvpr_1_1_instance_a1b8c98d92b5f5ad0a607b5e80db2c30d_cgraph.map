@@ -1,6 +1,0 @@
-<map id="vpr::Instance::Instance" name="vpr::Instance::Instance">
-<area shape="rect" id="node2" href="$classvpr_1_1_instance.html#a6f41bf0cdb803f57e3f2e97c8e9884c5" title="vpr::Instance::checkApiVersion\lSupport" alt="" coords="206,5,407,47"/>
-<area shape="rect" id="node3" href="$structvpr_1_1_instance_extension_handler.html#a05d1f04435599c61498469a134d239e2" title="vpr::InstanceExtensionHandler\l::extensionSetup" alt="" coords="208,71,405,112"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_instance.html#a8e32fee4f0a877997ee6e75ea3d3c3a1" title="vpr::Instance::prepareValidation" alt="" coords="205,137,408,163"/>
-<area shape="rect" id="node5" href="$classvpr_1_1_instance.html#ad6d5590582b6b4487544954c9d10be5f" title="vpr::Instance::checkValidation\lSupport" alt="" coords="456,129,651,171"/>
-</map>

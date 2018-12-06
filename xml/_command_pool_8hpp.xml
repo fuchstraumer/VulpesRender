@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_command_pool_8hpp" kind="file" language="C++">
+    <compoundname>CommandPool.hpp</compoundname>
+    <includes refid="vpr__stdafx_8h" local="yes">vpr_stdafx.h</includes>
+    <includes refid="_forward_decl_8hpp" local="yes">ForwardDecl.hpp</includes>
+    <includes local="no">memory</includes>
+    <includedby refid="_command_pool_8cpp" local="yes">command/src/CommandPool.cpp</includedby>
+    <incdepgraph>
+      <node id="276">
+        <label>command/include/CommandPool.hpp</label>
+        <link refid="_command_pool_8hpp"/>
+        <childnode refid="277" relation="include">
+        </childnode>
+        <childnode refid="279" relation="include">
+        </childnode>
+        <childnode refid="280" relation="include">
+        </childnode>
+      </node>
+      <node id="277">
+        <label>vpr_stdafx.h</label>
+        <link refid="vpr__stdafx_8h"/>
+        <childnode refid="278" relation="include">
+        </childnode>
+      </node>
+      <node id="278">
+        <label>vulkan/vulkan.h</label>
+      </node>
+      <node id="279">
+        <label>ForwardDecl.hpp</label>
+        <link refid="_forward_decl_8hpp"/>
+      </node>
+      <node id="280">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="282">
+        <label>command/src/CommandPool.cpp</label>
+        <link refid="_command_pool_8cpp"/>
+      </node>
+      <node id="281">
+        <label>command/include/CommandPool.hpp</label>
+        <link refid="_command_pool_8hpp"/>
+        <childnode refid="282" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classvpr_1_1_command_pool" prot="public">vpr::CommandPool</innerclass>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_command_pool_8hpp_1a74f9e587aeff293bdbbe870af5822672" prot="public" static="no">
+        <name>VULPES_VK_COMMAND_POOL_H</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="command/include/CommandPool.hpp" line="3" column="9" bodyfile="command/include/CommandPool.hpp" bodystart="3" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="command/include/CommandPool.hpp"/>
+  </compounddef>
+</doxygen>

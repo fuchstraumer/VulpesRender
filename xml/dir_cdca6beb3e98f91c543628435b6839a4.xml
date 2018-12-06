@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="dir_cdca6beb3e98f91c543628435b6839a4" kind="dir">
+    <compoundname>sync/include</compoundname>
+    <innerfile refid="_event_8hpp">Event.hpp</innerfile>
+    <innerfile refid="_fence_8hpp">Fence.hpp</innerfile>
+    <innerfile refid="_semaphore_8hpp">Semaphore.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="sync/include/"/>
+  </compounddef>
+</doxygen>

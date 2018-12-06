@@ -1,6 +1,0 @@
-<map id="resource/src/PipelineLayout.cpp" name="resource/src/PipelineLayout.cpp">
-<area shape="rect" id="node2" href="$vpr__stdafx_8h.html" title="vpr_stdafx.h" alt="" coords="15,155,105,181"/>
-<area shape="rect" id="node4" href="$_pipeline_layout_8hpp.html" title="PipelineLayout.hpp" alt="" coords="23,80,155,107"/>
-<area shape="rect" id="node5" href="$vk_assert_8hpp.html" title="vkAssert.hpp" alt="" coords="179,80,277,107"/>
-<area shape="rect" id="node8" href="$_create_info_base_8hpp.html" title="CreateInfoBase.hpp" alt="" coords="313,80,447,107"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="vpr::SurfaceKHR::Recreate" name="vpr::SurfaceKHR::Recreate">
-<area shape="rect" id="node2" href="$classvpr_1_1_surface_k_h_r.html#a2c27a5198682d3069e0936dbeb0f24b4" title="vpr::SurfaceKHR::create" alt="" coords="234,21,395,47"/>
-<area shape="rect" id="node5" href="$classvpr_1_1_surface_k_h_r.html#a1083d46de78e533a1cabba07b62e1950" title="vpr::SurfaceKHR::destroy" alt="" coords="231,71,399,98"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_surface_k_h_r.html#a0ef5949ff27a03d9281576b1b5c99c35" title="vpr::SurfaceKHR::VerifyPresentation\lSupport" alt="" coords="447,5,677,47"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_instance.html#a6082a006a3f2ab9688d4a14c123cb04a" title="vpr::Instance::vkHandle" alt="" coords="485,71,639,98"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="command/src/CommandPool.cpp" name="command/src/CommandPool.cpp">
-<area shape="rect" id="node2" href="$vpr__stdafx_8h.html" title="vpr_stdafx.h" alt="" coords="5,155,96,181"/>
-<area shape="rect" id="node4" href="$_command_pool_8hpp.html" title="CommandPool.hpp" alt="" coords="174,80,306,107"/>
-<area shape="rect" id="node7" href="$vk_assert_8hpp.html" title="vkAssert.hpp" alt="" coords="395,80,493,107"/>
-<area shape="rect" id="node10" href="$_create_info_base_8hpp.html" title="CreateInfoBase.hpp" alt="" coords="517,80,651,107"/>
-<area shape="rect" id="node5" href="$_forward_decl_8hpp.html" title="ForwardDecl.hpp" alt="" coords="121,155,239,181"/>
-</map>

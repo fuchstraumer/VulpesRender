@@ -1,3 +1,0 @@
-<map id="vpr::CommandPool::destroy" name="vpr::CommandPool::destroy">
-<area shape="rect" id="node2" href="$classvpr_1_1_command_pool.html#a7c6a4a50328cf4dd6ac76760001f68ab" title="Frees the memory used for all command buffers in this pool, which effectively &quot;deletes&quot; them..." alt="" coords="236,5,460,47"/>
-</map>

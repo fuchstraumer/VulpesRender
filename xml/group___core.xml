@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="group___core" kind="group">
+    <compoundname>Core</compoundname>
+    <title>Core</title>
+    <innerclass refid="structvpr_1_1_vpr_extension_pack" prot="public">vpr::VprExtensionPack</innerclass>
+    <innerclass refid="classvpr_1_1_instance" prot="public">vpr::Instance</innerclass>
+    <innerclass refid="structvpr_1_1vk_queue_family_indices" prot="public">vpr::vkQueueFamilyIndices</innerclass>
+    <innerclass refid="classvpr_1_1_device" prot="public">vpr::Device</innerclass>
+    <innerclass refid="classvpr_1_1_physical_device" prot="public">vpr::PhysicalDevice</innerclass>
+    <innerclass refid="classvpr_1_1_surface_k_h_r" prot="public">vpr::SurfaceKHR</innerclass>
+    <innerclass refid="classvpr_1_1_swapchain" prot="public">vpr::Swapchain</innerclass>
+    <innerclass refid="structvpr_1_1_vk_debug_utils_functions" prot="public">vpr::VkDebugUtilsFunctions</innerclass>
+    <innerclass refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info" prot="public">vpr::SwapchainImpl::SwapchainInfo</innerclass>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="group___core_1ga874ec16fda53668c022029810b30d344" prot="public" static="no" strong="yes">
+        <type>uint32_t</type>
+        <name>vertical_sync_mode</name>
+        <enumvalue id="group___core_1gga874ec16fda53668c022029810b30d344a6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+          <name>None</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>Aliases to immediate present mode. </para>          </briefdescription>
+          <detaileddescription>
+<para>No buffering, high incidences of tearing. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___core_1gga874ec16fda53668c022029810b30d344ad8c8df02e3ea8c16388590c51ea089ee" prot="public">
+          <name>VerticalSync</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>Aliases to simple FIFO mode - vertical sync and double-buffering, effectively. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___core_1gga874ec16fda53668c022029810b30d344afbbcc162d33d672b5bffae3c7939dc38" prot="public">
+          <name>VerticalSyncRelaxed</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+<para>Aliases to relaxed FIFO mode - if a frame is missed, tearing is allowed. </para>          </briefdescription>
+          <detaileddescription>
+<para>Efficient and most effective on mobile platforms. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___core_1gga874ec16fda53668c022029810b30d344a9e8c48ae5889c8d59c1534db00c53cbc" prot="public">
+          <name>VerticalSyncMailbox</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+<para>Aliases to Vulkan&apos;s mailbox mode, which effectively becomes triple-buffering. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Used to select which of the presentation modes are to be used by a <ref refid="classvpr_1_1_swapchain" kindref="compound">Swapchain</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Consult Vulkan docs for more info on presentation modes. Currently missing shared presentation modes for the mobile-specific swapchain extensions for better presentation. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/Swapchain.hpp" line="15" column="1" bodyfile="core/include/Swapchain.hpp" bodystart="15" bodyend="24"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="group___core_1ga53b8864a06225b92d1a4cf46ea333fbb" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structvpr_1_1_swapchain_impl_1_1_swapchain_info" kindref="compound">vpr::SwapchainImpl::SwapchainInfo</ref></type>
+        <definition>struct vpr::SwapchainImpl::SwapchainInfo  vpr::SwapchainImpl::info</definition>
+        <argsstring></argsstring>
+        <name>info</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Swapchain.cpp" line="50" column="1"/>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1afdf0ef2711d213b7020b37785a62a7ad" compoundref="_swapchain_8cpp" startline="242" endline="297">vpr::SwapchainImpl::setParameters</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" compoundref="_swapchain_8cpp" startline="299" endline="329">vpr::SwapchainImpl::setupCreateInfo</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group___core_1gae0969d6f5ba5ffde94ef44d056fcbba2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="vpr__stdafx_8h_1a4b940ef35de523c8e5f22898d34635f1" kindref="member">VPR_API</ref> void</type>
+        <definition>void vpr::SetLoggingRepository_VprCore</definition>
+        <argsstring>(void *logging_repo)</argsstring>
+        <name>SetLoggingRepository_VprCore</name>
+        <param>
+          <type>void *</type>
+          <declname>logging_repo</declname>
+        </param>
+        <briefdescription>
+<para>Pass an easyloggingpp logging repository pointer into this function, and it will be set as the repository for this module to use. </para>        </briefdescription>
+        <detaileddescription>
+<para>That way, all log messages from all modules (even when using this as a shared library) will go to the same sinks </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/Instance.hpp" line="79" column="1" bodyfile="core/src/Instance.cpp" bodystart="20" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="group___core_1ga812ad3570ad63ddcbc18e03988bd60bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void <ref refid="vpr__stdafx_8h_1a4b940ef35de523c8e5f22898d34635f1" kindref="member">VPR_API</ref></type>
+        <definition>void vpr::RecreateSwapchainAndSurface</definition>
+        <argsstring>(Swapchain *swap, SurfaceKHR *surface)</argsstring>
+        <name>RecreateSwapchainAndSurface</name>
+        <param>
+          <type>Swapchain *</type>
+          <declname>swap</declname>
+        </param>
+        <param>
+          <type>SurfaceKHR *</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Pass a swapchain and surface pointer to this to have the swapchain and surface destroyed and recreated in the proper order. </para>        </briefdescription>
+        <detaileddescription>
+<para>If done incorrectly, the validation layers will give you errors about a surface being destroyed before it&apos;s swapchain is (in the best case), or crash in the worst case </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/Swapchain.hpp" line="69" column="1" bodyfile="core/src/Swapchain.cpp" bodystart="391" bodyend="395"/>
+        <references refid="classvpr_1_1_swapchain_1af29e2c4245bd5694afadc579783e5432" compoundref="_swapchain_8cpp" startline="359" endline="361">vpr::Swapchain::Destroy</references>
+        <references refid="classvpr_1_1_surface_k_h_r_1a35b9db127a998f70bea3ebbdeef97f5d" compoundref="_surface_k_h_r_8cpp" startline="39" endline="42">vpr::SurfaceKHR::Recreate</references>
+        <references refid="classvpr_1_1_swapchain_1a34c3d73db1e99d3a395398fc0dbb5dc6" compoundref="_swapchain_8cpp" startline="200" endline="205">vpr::Swapchain::Recreate</references>
+        <references refid="classvpr_1_1_surface_k_h_r_1a07171777b06b36cb0e6874cdcb2f9e4e" compoundref="_surface_k_h_r_8cpp" startline="44" endline="46">vpr::SurfaceKHR::vkHandle</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The Core group handles the base Vulkan resources and objects: LogicalDevice, <ref refid="classvpr_1_1_physical_device" kindref="compound">PhysicalDevice</ref>, <ref refid="classvpr_1_1_instance" kindref="compound">Instance</ref>, and Window. </para>    </briefdescription>
+    <detaileddescription>
+<para>It also includes the InputHandler class, which is responsible for handling input events and updats from the Window class. </para>    </detaileddescription>
+  </compounddef>
+</doxygen>

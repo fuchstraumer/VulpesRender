@@ -1,5 +1,0 @@
-<map id="vpr::MemoryBlock::removeFreeSuballocation" name="vpr::MemoryBlock::removeFreeSuballocation">
-<area shape="rect" id="node2" href="$classvpr_1_1_memory_block.html#a3bc214b56eafefb43b33e7c8c197d9ca" title="Performs the actual allocation, once &quot;request&quot; has been checked and made valid. " alt="" coords="254,5,435,32"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_memory_block.html#a3aa9297d61b2cd0d71588c7bf8e7b47e" title="Changes the item pointed to by the iterator to be a free type, then adds the now&#45;available size to av..." alt="" coords="228,56,461,83"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_memory_block.html#a88cde43def4e7d21b8a782554497b064" title="Frees memory in region specified (i.e frees/destroys a suballocation) " alt="" coords="509,56,669,83"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="vpr::Buffer::Size" name="vpr::Buffer::Size">
-<area shape="rect" id="node2" href="$classvpr_1_1_buffer.html#a9c05fd68db6222e85e09f0a1a56f62b9" title="Copies the data in the given Buffer pointer to this object. " alt="" coords="190,5,321,32"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_buffer.html#ae38678b302a270b3716b43505e2f7e96" title="Maps this object, copies data to this object, then ensures to unmap this object. " alt="" coords="167,56,344,83"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_buffer.html#ab4f798aaec92861e165cff4e7a12cc18" title="Fills buffer with given value. " alt="" coords="203,107,307,133"/>
-</map>

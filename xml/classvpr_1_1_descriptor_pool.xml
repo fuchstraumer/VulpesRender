@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="classvpr_1_1_descriptor_pool" kind="class" language="C++" prot="public">
+    <compoundname>vpr::DescriptorPool</compoundname>
+    <includes refid="_descriptor_pool_8hpp" local="no">DescriptorPool.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classvpr_1_1_descriptor_pool_1a008d675ccf359562a672178104dbae52" prot="private" static="no" mutable="no">
+        <type>VkDescriptorPool</type>
+        <definition>VkDescriptorPool vpr::DescriptorPool::handle</definition>
+        <argsstring></argsstring>
+        <name>handle</name>
+        <initializer>{ VK_NULL_HANDLE }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorPool.hpp" line="35" column="1" bodyfile="resource/include/DescriptorPool.hpp" bodystart="35" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_descriptor_pool_1a970a61cfde29654c3bac86b6e8fbb445" compoundref="_descriptor_pool_8cpp" startline="57" endline="77">Create</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_pool_1ad9e6ae11354daa77e3f62c941b9b98eb" compoundref="_descriptor_pool_8cpp" startline="79" endline="81">vkHandle</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_pool_1ab67c7a158963b72bb9b844cda238b61b" compoundref="_descriptor_pool_8cpp" startline="35" endline="39">~DescriptorPool</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_descriptor_pool_1a532fbe052ae5a4e2ee8057132f6617f7" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t vpr::DescriptorPool::maxSets</definition>
+        <argsstring></argsstring>
+        <name>maxSets</name>
+        <initializer>{ std::numeric_limits&lt;size_t&gt;::max() }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorPool.hpp" line="36" column="1" bodyfile="resource/include/DescriptorPool.hpp" bodystart="36" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_descriptor_pool_1a970a61cfde29654c3bac86b6e8fbb445" compoundref="_descriptor_pool_8cpp" startline="57" endline="77">Create</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_descriptor_pool_1aba83382992c9afa3f1c80b8af7cae020" prot="private" static="no" mutable="no">
+        <type>VkDevice</type>
+        <definition>VkDevice vpr::DescriptorPool::device</definition>
+        <argsstring></argsstring>
+        <name>device</name>
+        <initializer>{ VK_NULL_HANDLE }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorPool.hpp" line="37" column="1" bodyfile="resource/include/DescriptorPool.hpp" bodystart="37" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_descriptor_pool_1a970a61cfde29654c3bac86b6e8fbb445" compoundref="_descriptor_pool_8cpp" startline="57" endline="77">Create</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_pool_1ab67c7a158963b72bb9b844cda238b61b" compoundref="_descriptor_pool_8cpp" startline="35" endline="39">~DescriptorPool</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_descriptor_pool_1ac399a91b4d05c2f68bb20c10c95c23d0" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="structvpr_1_1_resource_type_map" kindref="compound">ResourceTypeMap</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;ResourceTypeMap&gt; vpr::DescriptorPool::typeMap</definition>
+        <argsstring></argsstring>
+        <name>typeMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorPool.hpp" line="38" column="1" bodyfile="resource/include/DescriptorPool.hpp" bodystart="38" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_descriptor_pool_1a8ae0686e30437769c4e7e07f97735880" compoundref="_descriptor_pool_8cpp" startline="53" endline="55">AddResourceType</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_pool_1a970a61cfde29654c3bac86b6e8fbb445" compoundref="_descriptor_pool_8cpp" startline="57" endline="77">Create</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_pool_1a06083280be32e9ae0c6a1834371b241e" compoundref="_descriptor_pool_8cpp" startline="29" endline="33">DescriptorPool</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classvpr_1_1_descriptor_pool_1a591d689c1ccc50fb97961e744c3c214c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::DescriptorPool::DescriptorPool</definition>
+        <argsstring>(const DescriptorPool &amp;)=delete</argsstring>
+        <name>DescriptorPool</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_descriptor_pool" kindref="compound">DescriptorPool</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorPool.hpp" line="16" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_pool_1a8a84e04be795635b02ca4370478e99a6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_descriptor_pool" kindref="compound">DescriptorPool</ref> &amp;</type>
+        <definition>DescriptorPool&amp; vpr::DescriptorPool::operator=</definition>
+        <argsstring>(const DescriptorPool &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_descriptor_pool" kindref="compound">DescriptorPool</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorPool.hpp" line="17" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classvpr_1_1_descriptor_pool_1a06083280be32e9ae0c6a1834371b241e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::DescriptorPool::DescriptorPool</definition>
+        <argsstring>(const VkDevice &amp;_device, const size_t &amp;max_sets)</argsstring>
+        <name>DescriptorPool</name>
+        <param>
+          <type>const VkDevice &amp;</type>
+          <declname>_device</declname>
+        </param>
+        <param>
+          <type>const size_t &amp;</type>
+          <declname>max_sets</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorPool.hpp" line="20" column="1" bodyfile="resource/src/DescriptorPool.cpp" bodystart="29" bodyend="33"/>
+        <references refid="namespacevpr_1ab21fa0d40941a97c77d37f00adde7af1" compoundref="_descriptor_pool_8cpp" startline="15">vpr::descriptor_types</references>
+        <references refid="classvpr_1_1_descriptor_pool_1ac399a91b4d05c2f68bb20c10c95c23d0" compoundref="_descriptor_pool_8hpp" startline="38">typeMap</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_pool_1ab67c7a158963b72bb9b844cda238b61b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::DescriptorPool::~DescriptorPool</definition>
+        <argsstring>()</argsstring>
+        <name>~DescriptorPool</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorPool.hpp" line="21" column="1" bodyfile="resource/src/DescriptorPool.cpp" bodystart="35" bodyend="39"/>
+        <references refid="classvpr_1_1_descriptor_pool_1aba83382992c9afa3f1c80b8af7cae020" compoundref="_descriptor_pool_8hpp" startline="37">device</references>
+        <references refid="classvpr_1_1_descriptor_pool_1a008d675ccf359562a672178104dbae52" compoundref="_descriptor_pool_8hpp" startline="35">handle</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_pool_1a499bed7ba4bb45208ce73582c66cd940" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::DescriptorPool::DescriptorPool</definition>
+        <argsstring>(DescriptorPool &amp;&amp;other) noexcept</argsstring>
+        <name>DescriptorPool</name>
+        <param>
+          <type><ref refid="classvpr_1_1_descriptor_pool" kindref="compound">DescriptorPool</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorPool.hpp" line="23" column="1" bodyfile="resource/src/DescriptorPool.cpp" bodystart="41" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_pool_1a9e680cfbe4c9fc12ef5e71a8c918095b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_descriptor_pool" kindref="compound">DescriptorPool</ref> &amp;</type>
+        <definition>DescriptorPool &amp; vpr::DescriptorPool::operator=</definition>
+        <argsstring>(DescriptorPool &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classvpr_1_1_descriptor_pool" kindref="compound">DescriptorPool</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorPool.hpp" line="24" column="1" bodyfile="resource/src/DescriptorPool.cpp" bodystart="44" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_pool_1a8ae0686e30437769c4e7e07f97735880" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DescriptorPool::AddResourceType</definition>
+        <argsstring>(const VkDescriptorType &amp;descriptor_type, const uint32_t &amp;descriptor_count)</argsstring>
+        <name>AddResourceType</name>
+        <param>
+          <type>const VkDescriptorType &amp;</type>
+          <declname>descriptor_type</declname>
+        </param>
+        <param>
+          <type>const uint32_t &amp;</type>
+          <declname>descriptor_count</declname>
+        </param>
+        <briefdescription>
+<para>Effectively requests that this pool adds the given quantity of the given descriptor types to its eventual allocation call. </para>        </briefdescription>
+        <detaileddescription>
+<para>If you try to use more of a given descriptor type than has been allocated, bad things will almost certainly occur. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorPool.hpp" line="27" column="1" bodyfile="resource/src/DescriptorPool.cpp" bodystart="53" bodyend="55"/>
+        <references refid="classvpr_1_1_descriptor_pool_1ac399a91b4d05c2f68bb20c10c95c23d0" compoundref="_descriptor_pool_8hpp" startline="38">typeMap</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_pool_1a970a61cfde29654c3bac86b6e8fbb445" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DescriptorPool::Create</definition>
+        <argsstring>()</argsstring>
+        <name>Create</name>
+        <briefdescription>
+<para>Make sure to call this AFTER setting how many descriptors you require, otherwise nothing will really be created and attempting to use any descriptor sets with this pool will fail. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorPool.hpp" line="29" column="1" bodyfile="resource/src/DescriptorPool.cpp" bodystart="57" bodyend="77"/>
+        <references refid="classvpr_1_1_descriptor_pool_1aba83382992c9afa3f1c80b8af7cae020" compoundref="_descriptor_pool_8hpp" startline="37">device</references>
+        <references refid="classvpr_1_1_descriptor_pool_1a008d675ccf359562a672178104dbae52" compoundref="_descriptor_pool_8hpp" startline="35">handle</references>
+        <references refid="classvpr_1_1_descriptor_pool_1a532fbe052ae5a4e2ee8057132f6617f7" compoundref="_descriptor_pool_8hpp" startline="36">maxSets</references>
+        <references refid="classvpr_1_1_descriptor_pool_1ac399a91b4d05c2f68bb20c10c95c23d0" compoundref="_descriptor_pool_8hpp" startline="38">typeMap</references>
+        <references refid="namespacevpr_1a4d6af135af0ae5f8de1f17810fdf5837" compoundref="_create_info_base_8hpp" startline="514">vpr::vk_descriptor_pool_create_info_base</references>
+        <references refid="vk_assert_8hpp_1a92c2e07b0d021fc331be70a65c61dacc" compoundref="vk_assert_8hpp" startline="9">VkAssert</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_pool_1ad9e6ae11354daa77e3f62c941b9b98eb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const VkDescriptorPool &amp;</type>
+        <definition>const VkDescriptorPool &amp; vpr::DescriptorPool::vkHandle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>vkHandle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorPool.hpp" line="31" column="1" bodyfile="resource/src/DescriptorPool.cpp" bodystart="79" bodyend="81"/>
+        <references refid="classvpr_1_1_descriptor_pool_1a008d675ccf359562a672178104dbae52" compoundref="_descriptor_pool_8hpp" startline="35">handle</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>RAII wrapper around a VkDescriptorPool intended to facilitate sharing of descriptor pools between disparate objects, thus increasing resource sharing and avoiding allocating single-use descriptor pools (as this is an expensive operation). </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="155">
+        <label>vpr::ResourceTypeMap</label>
+        <link refid="structvpr_1_1_resource_type_map"/>
+        <childnode refid="156" relation="usage">
+          <edgelabel>Resources</edgelabel>
+        </childnode>
+      </node>
+      <node id="153">
+        <label>vpr::DescriptorPool</label>
+        <link refid="classvpr_1_1_descriptor_pool"/>
+        <childnode refid="154" relation="usage">
+          <edgelabel>typeMap</edgelabel>
+        </childnode>
+      </node>
+      <node id="154">
+        <label>std::unique_ptr&lt; vpr::ResourceTypeMap &gt;</label>
+        <childnode refid="155" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="156">
+        <label>std::map&lt; VkDescriptorType, size_t &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="resource/include/DescriptorPool.hpp" line="15" column="1" bodyfile="resource/include/DescriptorPool.hpp" bodystart="15" bodyend="39"/>
+    <listofallmembers>
+      <member refid="classvpr_1_1_descriptor_pool_1a8ae0686e30437769c4e7e07f97735880" prot="public" virt="non-virtual"><scope>vpr::DescriptorPool</scope><name>AddResourceType</name></member>
+      <member refid="classvpr_1_1_descriptor_pool_1a970a61cfde29654c3bac86b6e8fbb445" prot="public" virt="non-virtual"><scope>vpr::DescriptorPool</scope><name>Create</name></member>
+      <member refid="classvpr_1_1_descriptor_pool_1a591d689c1ccc50fb97961e744c3c214c" prot="private" virt="non-virtual"><scope>vpr::DescriptorPool</scope><name>DescriptorPool</name></member>
+      <member refid="classvpr_1_1_descriptor_pool_1a06083280be32e9ae0c6a1834371b241e" prot="public" virt="non-virtual"><scope>vpr::DescriptorPool</scope><name>DescriptorPool</name></member>
+      <member refid="classvpr_1_1_descriptor_pool_1a499bed7ba4bb45208ce73582c66cd940" prot="public" virt="non-virtual"><scope>vpr::DescriptorPool</scope><name>DescriptorPool</name></member>
+      <member refid="classvpr_1_1_descriptor_pool_1aba83382992c9afa3f1c80b8af7cae020" prot="private" virt="non-virtual"><scope>vpr::DescriptorPool</scope><name>device</name></member>
+      <member refid="classvpr_1_1_descriptor_pool_1a008d675ccf359562a672178104dbae52" prot="private" virt="non-virtual"><scope>vpr::DescriptorPool</scope><name>handle</name></member>
+      <member refid="classvpr_1_1_descriptor_pool_1a532fbe052ae5a4e2ee8057132f6617f7" prot="private" virt="non-virtual"><scope>vpr::DescriptorPool</scope><name>maxSets</name></member>
+      <member refid="classvpr_1_1_descriptor_pool_1a8a84e04be795635b02ca4370478e99a6" prot="private" virt="non-virtual"><scope>vpr::DescriptorPool</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_descriptor_pool_1a9e680cfbe4c9fc12ef5e71a8c918095b" prot="public" virt="non-virtual"><scope>vpr::DescriptorPool</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_descriptor_pool_1ac399a91b4d05c2f68bb20c10c95c23d0" prot="private" virt="non-virtual"><scope>vpr::DescriptorPool</scope><name>typeMap</name></member>
+      <member refid="classvpr_1_1_descriptor_pool_1ad9e6ae11354daa77e3f62c941b9b98eb" prot="public" virt="non-virtual"><scope>vpr::DescriptorPool</scope><name>vkHandle</name></member>
+      <member refid="classvpr_1_1_descriptor_pool_1ab67c7a158963b72bb9b844cda238b61b" prot="public" virt="non-virtual"><scope>vpr::DescriptorPool</scope><name>~DescriptorPool</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

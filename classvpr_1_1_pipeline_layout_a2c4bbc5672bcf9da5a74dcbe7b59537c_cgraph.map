@@ -1,3 +1,0 @@
-<map id="vpr::PipelineLayout::Create" name="vpr::PipelineLayout::Create">
-<area shape="rect" id="node2" href="$classvpr_1_1_pipeline_layout.html#a042b645d2129f5b28693b2b6050acf60" title="Creates a pipeline layout that will only use push constants for setting data in shaders. " alt="" coords="184,5,315,47"/>
-</map>

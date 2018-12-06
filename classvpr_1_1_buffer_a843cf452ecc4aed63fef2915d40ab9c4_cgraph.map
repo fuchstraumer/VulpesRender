@@ -1,5 +1,0 @@
-<map id="vpr::Buffer::CopyTo" name="vpr::Buffer::CopyTo">
-<area shape="rect" id="node2" href="$classvpr_1_1_buffer.html#ac367138a3788a0a6df49c5c2ad890774" title="vpr::Buffer::createStaging\lBuffer" alt="" coords="184,5,351,47"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_allocation.html#a1a223e41ca865271544ece71d18edce2" title="vpr::Allocation::Memory" alt="" coords="188,71,347,98"/>
-<area shape="rect" id="node4" href="$classvpr_1_1_allocation.html#acb642a53c185ac6530ed60959b0e4397" title="vpr::Allocation::Offset" alt="" coords="195,122,340,149"/>
-</map>

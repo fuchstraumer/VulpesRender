@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_create_info_base_8hpp" kind="file" language="C++">
+    <compoundname>CreateInfoBase.hpp</compoundname>
+    <includes local="no">limits</includes>
+    <includes local="no">vulkan/vulkan.h</includes>
+    <includedby refid="_allocator_impl_8hpp" local="yes">alloc/src/AllocatorImpl.hpp</includedby>
+    <includedby refid="_command_pool_8cpp" local="yes">command/src/CommandPool.cpp</includedby>
+    <includedby refid="_instance_8cpp" local="yes">core/src/Instance.cpp</includedby>
+    <includedby refid="_logical_device_8cpp" local="yes">core/src/LogicalDevice.cpp</includedby>
+    <includedby refid="_swapchain_8cpp" local="yes">core/src/Swapchain.cpp</includedby>
+    <includedby refid="_graphics_pipeline_8cpp" local="yes">render/src/GraphicsPipeline.cpp</includedby>
+    <includedby refid="_renderpass_8cpp" local="yes">render/src/Renderpass.cpp</includedby>
+    <includedby refid="_buffer_deprecated_8cpp" local="yes">resource/src/BufferDeprecated.cpp</includedby>
+    <includedby refid="_descriptor_pool_8cpp" local="yes">resource/src/DescriptorPool.cpp</includedby>
+    <includedby refid="_descriptor_set_8cpp" local="yes">resource/src/DescriptorSet.cpp</includedby>
+    <includedby refid="_descriptor_set_layout_8cpp" local="yes">resource/src/DescriptorSetLayout.cpp</includedby>
+    <includedby refid="_image_deprecated_8cpp" local="yes">resource/src/ImageDeprecated.cpp</includedby>
+    <includedby refid="_pipeline_layout_8cpp" local="yes">resource/src/PipelineLayout.cpp</includedby>
+    <includedby refid="_sampler_8cpp" local="yes">resource/src/Sampler.cpp</includedby>
+    <includedby refid="_shader_module_8cpp" local="yes">resource/src/ShaderModule.cpp</includedby>
+    <includedby refid="_event_8cpp" local="yes">sync/src/Event.cpp</includedby>
+    <includedby refid="_fence_8cpp" local="yes">sync/src/Fence.cpp</includedby>
+    <includedby refid="_semaphore_8cpp" local="yes">sync/src/Semaphore.cpp</includedby>
+    <incdepgraph>
+      <node id="298">
+        <label>limits</label>
+      </node>
+      <node id="297">
+        <label>common/CreateInfoBase.hpp</label>
+        <link refid="_create_info_base_8hpp"/>
+        <childnode refid="298" relation="include">
+        </childnode>
+        <childnode refid="299" relation="include">
+        </childnode>
+      </node>
+      <node id="299">
+        <label>vulkan/vulkan.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="305">
+        <label>command/src/CommandPool.cpp</label>
+        <link refid="_command_pool_8cpp"/>
+      </node>
+      <node id="303">
+        <label>alloc/src/AllocatorImpl.cpp</label>
+        <link refid="_allocator_impl_8cpp"/>
+      </node>
+      <node id="320">
+        <label>sync/src/Fence.cpp</label>
+        <link refid="_fence_8cpp"/>
+      </node>
+      <node id="314">
+        <label>resource/src/DescriptorSetLayout.cpp</label>
+        <link refid="_descriptor_set_layout_8cpp"/>
+      </node>
+      <node id="316">
+        <label>resource/src/PipelineLayout.cpp</label>
+        <link refid="_pipeline_layout_8cpp"/>
+      </node>
+      <node id="315">
+        <label>resource/src/ImageDeprecated.cpp</label>
+        <link refid="_image_deprecated_8cpp"/>
+      </node>
+      <node id="304">
+        <label>alloc/src/DebugVisualization.cpp</label>
+        <link refid="_debug_visualization_8cpp"/>
+      </node>
+      <node id="300">
+        <label>common/CreateInfoBase.hpp</label>
+        <link refid="_create_info_base_8hpp"/>
+        <childnode refid="301" relation="include">
+        </childnode>
+        <childnode refid="305" relation="include">
+        </childnode>
+        <childnode refid="306" relation="include">
+        </childnode>
+        <childnode refid="307" relation="include">
+        </childnode>
+        <childnode refid="308" relation="include">
+        </childnode>
+        <childnode refid="309" relation="include">
+        </childnode>
+        <childnode refid="310" relation="include">
+        </childnode>
+        <childnode refid="311" relation="include">
+        </childnode>
+        <childnode refid="312" relation="include">
+        </childnode>
+        <childnode refid="313" relation="include">
+        </childnode>
+        <childnode refid="314" relation="include">
+        </childnode>
+        <childnode refid="315" relation="include">
+        </childnode>
+        <childnode refid="316" relation="include">
+        </childnode>
+        <childnode refid="317" relation="include">
+        </childnode>
+        <childnode refid="318" relation="include">
+        </childnode>
+        <childnode refid="319" relation="include">
+        </childnode>
+        <childnode refid="320" relation="include">
+        </childnode>
+        <childnode refid="321" relation="include">
+        </childnode>
+      </node>
+      <node id="321">
+        <label>sync/src/Semaphore.cpp</label>
+        <link refid="_semaphore_8cpp"/>
+      </node>
+      <node id="317">
+        <label>resource/src/Sampler.cpp</label>
+        <link refid="_sampler_8cpp"/>
+      </node>
+      <node id="312">
+        <label>resource/src/DescriptorPool.cpp</label>
+        <link refid="_descriptor_pool_8cpp"/>
+      </node>
+      <node id="311">
+        <label>resource/src/BufferDeprecated.cpp</label>
+        <link refid="_buffer_deprecated_8cpp"/>
+      </node>
+      <node id="309">
+        <label>render/src/GraphicsPipeline.cpp</label>
+        <link refid="_graphics_pipeline_8cpp"/>
+      </node>
+      <node id="308">
+        <label>core/src/Swapchain.cpp</label>
+        <link refid="_swapchain_8cpp"/>
+      </node>
+      <node id="301">
+        <label>alloc/src/AllocatorImpl.hpp</label>
+        <link refid="_allocator_impl_8hpp"/>
+        <childnode refid="302" relation="include">
+        </childnode>
+        <childnode refid="303" relation="include">
+        </childnode>
+        <childnode refid="304" relation="include">
+        </childnode>
+      </node>
+      <node id="313">
+        <label>resource/src/DescriptorSet.cpp</label>
+        <link refid="_descriptor_set_8cpp"/>
+      </node>
+      <node id="318">
+        <label>resource/src/ShaderModule.cpp</label>
+        <link refid="_shader_module_8cpp"/>
+      </node>
+      <node id="307">
+        <label>core/src/LogicalDevice.cpp</label>
+        <link refid="_logical_device_8cpp"/>
+      </node>
+      <node id="310">
+        <label>render/src/Renderpass.cpp</label>
+        <link refid="_renderpass_8cpp"/>
+      </node>
+      <node id="306">
+        <label>core/src/Instance.cpp</label>
+        <link refid="_instance_8cpp"/>
+      </node>
+      <node id="302">
+        <label>alloc/src/Allocator.cpp</label>
+        <link refid="_allocator_8cpp"/>
+      </node>
+      <node id="319">
+        <label>sync/src/Event.cpp</label>
+        <link refid="_event_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_create_info_base_8hpp_1ac0577ffd133137ebd744b22496fc99e6" prot="public" static="no">
+        <name>VULPES_VK_CREATE_INFO_BASE_H</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="common/CreateInfoBase.hpp" line="3" column="9" bodyfile="common/CreateInfoBase.hpp" bodystart="3" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="common/CreateInfoBase.hpp"/>
+  </compounddef>
+</doxygen>

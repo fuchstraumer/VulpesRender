@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_debug_visualization_8hpp" kind="file" language="C++">
+    <compoundname>DebugVisualization.hpp</compoundname>
+    <includedby refid="_debug_visualization_8cpp" local="yes">alloc/src/DebugVisualization.cpp</includedby>
+    <invincdepgraph>
+      <node id="36">
+        <label>alloc/src/DebugVisualization.cpp</label>
+        <link refid="_debug_visualization_8cpp"/>
+      </node>
+      <node id="35">
+        <label>alloc/include/DebugVisualization.hpp</label>
+        <link refid="_debug_visualization_8hpp"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classvpr_1_1_debug_visualization" prot="public">vpr::DebugVisualization</innerclass>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_debug_visualization_8hpp_1ad0b1bc068c3fa53679ec61837028e981" prot="public" static="no">
+        <name>VPR_ALLOC_DEBUG_VISUALIZATION_HPP</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/DebugVisualization.hpp" line="3" column="9" bodyfile="alloc/include/DebugVisualization.hpp" bodystart="3" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="alloc/include/DebugVisualization.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="classvpr_1_1_physical_device_impl" kind="class" language="C++" prot="public">
+    <compoundname>vpr::PhysicalDeviceImpl</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classvpr_1_1_physical_device_impl_1ae5f0af99ddaf1594899c30c32decbedd" prot="public" static="no" mutable="no">
+        <type>VkPhysicalDeviceProperties</type>
+        <definition>VkPhysicalDeviceProperties vpr::PhysicalDeviceImpl::Properties</definition>
+        <argsstring></argsstring>
+        <name>Properties</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="116" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="116" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_physical_device_impl_1af87fd9143013fabf4df17ca888d541fb" compoundref="_physical_device_8cpp" startline="187" endline="196">getAttributes</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_physical_device_impl_1a8c2c49d40d45147a3e70a305e843a9dd" prot="public" static="no" mutable="no">
+        <type>VkPhysicalDeviceFeatures</type>
+        <definition>VkPhysicalDeviceFeatures vpr::PhysicalDeviceImpl::Features</definition>
+        <argsstring></argsstring>
+        <name>Features</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="117" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="117" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_physical_device_impl_1af87fd9143013fabf4df17ca888d541fb" compoundref="_physical_device_8cpp" startline="187" endline="196">getAttributes</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_physical_device_impl_1ada525a9569d432f07c49d694a94538c7" prot="public" static="no" mutable="no">
+        <type>VkPhysicalDeviceMemoryProperties</type>
+        <definition>VkPhysicalDeviceMemoryProperties vpr::PhysicalDeviceImpl::MemoryProperties</definition>
+        <argsstring></argsstring>
+        <name>MemoryProperties</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="118" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="118" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_physical_device_impl_1af87fd9143013fabf4df17ca888d541fb" compoundref="_physical_device_8cpp" startline="187" endline="196">getAttributes</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_physical_device_impl_1af9378d82682afa3c123dfe2ca1100394" prot="public" static="no" mutable="no">
+        <type>VkPhysicalDeviceSubgroupProperties</type>
+        <definition>VkPhysicalDeviceSubgroupProperties vpr::PhysicalDeviceImpl::SubgroupProperties</definition>
+        <argsstring></argsstring>
+        <name>SubgroupProperties</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="119" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_physical_device_impl_1a6d26bb1eb93008f04a8fc885f1460e32" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; VkQueueFamilyProperties &gt;</type>
+        <definition>std::vector&lt;VkQueueFamilyProperties&gt; vpr::PhysicalDeviceImpl::queueFamilyProperties</definition>
+        <argsstring></argsstring>
+        <name>queueFamilyProperties</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="120" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="120" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_physical_device_impl_1a69d80ff2220466001ff60b2703152b66" compoundref="_physical_device_8cpp" startline="198" endline="203">retrieveQueueFamilyProperties</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_physical_device_impl_1af7b08a7cf734338ee787e015534cfc69" prot="public" static="no" mutable="no">
+        <type>VkPhysicalDevice</type>
+        <definition>VkPhysicalDevice vpr::PhysicalDeviceImpl::handle</definition>
+        <argsstring></argsstring>
+        <name>handle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="121" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="121" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_physical_device_impl_1af87fd9143013fabf4df17ca888d541fb" compoundref="_physical_device_8cpp" startline="187" endline="196">getAttributes</referencedby>
+        <referencedby refid="classvpr_1_1_physical_device_impl_1aa96226c99de9aff7ad9f6e7b96e89444" compoundref="_physical_device_8cpp" startline="124" endline="134">PhysicalDeviceImpl</referencedby>
+        <referencedby refid="classvpr_1_1_physical_device_impl_1a69d80ff2220466001ff60b2703152b66" compoundref="_physical_device_8cpp" startline="198" endline="203">retrieveQueueFamilyProperties</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classvpr_1_1_physical_device_impl_1ac19f6987df28dcfae6e107d3c4967cb6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::PhysicalDeviceImpl::PhysicalDeviceImpl</definition>
+        <argsstring>(const PhysicalDeviceImpl &amp;)=delete</argsstring>
+        <name>PhysicalDeviceImpl</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_physical_device_impl" kindref="compound">PhysicalDeviceImpl</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="100" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_physical_device_impl_1a87891e2247f80651e2a7c1c5892b6218" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_physical_device_impl" kindref="compound">PhysicalDeviceImpl</ref> &amp;</type>
+        <definition>PhysicalDeviceImpl&amp; vpr::PhysicalDeviceImpl::operator=</definition>
+        <argsstring>(const PhysicalDeviceImpl &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_physical_device_impl" kindref="compound">PhysicalDeviceImpl</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="101" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classvpr_1_1_physical_device_impl_1aa96226c99de9aff7ad9f6e7b96e89444" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::PhysicalDeviceImpl::PhysicalDeviceImpl</definition>
+        <argsstring>(const VkInstance &amp;instance)</argsstring>
+        <name>PhysicalDeviceImpl</name>
+        <param>
+          <type>const VkInstance &amp;</type>
+          <declname>instance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="104" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="124" bodyend="134"/>
+        <references refid="classvpr_1_1_physical_device_impl_1af87fd9143013fabf4df17ca888d541fb" compoundref="_physical_device_8cpp" startline="187" endline="196">getAttributes</references>
+        <references refid="namespacevpr_1ac9ad3c752dabd8483c29187ef86587c9" compoundref="_physical_device_8cpp" startline="11" endline="16">vpr::GetBestAvailPhysicalDevice</references>
+        <references refid="classvpr_1_1_physical_device_impl_1af7b08a7cf734338ee787e015534cfc69" compoundref="_physical_device_8cpp" startline="121">handle</references>
+        <references refid="namespacevpr_1a14cb4a052f00e9a6b156d00a002a8f12" compoundref="_physical_device_8cpp" startline="8">vpr::physicalDevices</references>
+        <references refid="namespacevpr_1add78d0571fc38d8ee80c540f9754ca50" compoundref="_physical_device_8cpp" startline="84" endline="96">vpr::PopulatePhysicalDeviceMap</references>
+        <references refid="classvpr_1_1_physical_device_impl_1a69d80ff2220466001ff60b2703152b66" compoundref="_physical_device_8cpp" startline="198" endline="203">retrieveQueueFamilyProperties</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_physical_device_impl_1a9fd4a91c7268e451603c63fa763216f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::PhysicalDeviceImpl::PhysicalDeviceImpl</definition>
+        <argsstring>(PhysicalDeviceImpl &amp;&amp;other) noexcept</argsstring>
+        <name>PhysicalDeviceImpl</name>
+        <param>
+          <type><ref refid="classvpr_1_1_physical_device_impl" kindref="compound">PhysicalDeviceImpl</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="105" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="136" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_physical_device_impl_1a4fd7907cfe2a054358875ccd83cdf90b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_physical_device_impl" kindref="compound">PhysicalDeviceImpl</ref> &amp;</type>
+        <definition>PhysicalDeviceImpl &amp; vpr::PhysicalDeviceImpl::operator=</definition>
+        <argsstring>(PhysicalDeviceImpl &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classvpr_1_1_physical_device_impl" kindref="compound">PhysicalDeviceImpl</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="106" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="139" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_physical_device_impl_1a6168130477087e7bc3aeed40d214cc0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::PhysicalDeviceImpl::~PhysicalDeviceImpl</definition>
+        <argsstring>()</argsstring>
+        <name>~PhysicalDeviceImpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="107" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="149" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_physical_device_impl_1a228761ffdb770f4690168e2f0e47a0d1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t vpr::PhysicalDeviceImpl::GetMemoryTypeIdx</definition>
+        <argsstring>(const uint32_t &amp;type_bitfield, const VkMemoryPropertyFlags &amp;property_flags, VkBool32 *memory_type_found) const noexcept</argsstring>
+        <name>GetMemoryTypeIdx</name>
+        <param>
+          <type>const uint32_t &amp;</type>
+          <declname>type_bitfield</declname>
+        </param>
+        <param>
+          <type>const VkMemoryPropertyFlags &amp;</type>
+          <declname>property_flags</declname>
+        </param>
+        <param>
+          <type>VkBool32 *</type>
+          <declname>memory_type_found</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="109" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="152" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_physical_device_impl_1af87fd9143013fabf4df17ca888d541fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::PhysicalDeviceImpl::getAttributes</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>getAttributes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="111" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="187" bodyend="196"/>
+        <references refid="classvpr_1_1_physical_device_impl_1a8c2c49d40d45147a3e70a305e843a9dd" compoundref="_physical_device_8cpp" startline="117">Features</references>
+        <references refid="classvpr_1_1_physical_device_impl_1af7b08a7cf734338ee787e015534cfc69" compoundref="_physical_device_8cpp" startline="121">handle</references>
+        <references refid="classvpr_1_1_physical_device_impl_1ada525a9569d432f07c49d694a94538c7" compoundref="_physical_device_8cpp" startline="118">MemoryProperties</references>
+        <references refid="classvpr_1_1_physical_device_impl_1ae5f0af99ddaf1594899c30c32decbedd" compoundref="_physical_device_8cpp" startline="116">Properties</references>
+        <referencedby refid="classvpr_1_1_physical_device_impl_1aa96226c99de9aff7ad9f6e7b96e89444" compoundref="_physical_device_8cpp" startline="124" endline="134">PhysicalDeviceImpl</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_physical_device_impl_1a69d80ff2220466001ff60b2703152b66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::PhysicalDeviceImpl::retrieveQueueFamilyProperties</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>retrieveQueueFamilyProperties</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="112" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="198" bodyend="203"/>
+        <references refid="classvpr_1_1_physical_device_impl_1af7b08a7cf734338ee787e015534cfc69" compoundref="_physical_device_8cpp" startline="121">handle</references>
+        <references refid="classvpr_1_1_physical_device_impl_1a6d26bb1eb93008f04a8fc885f1460e32" compoundref="_physical_device_8cpp" startline="120">queueFamilyProperties</references>
+        <referencedby refid="classvpr_1_1_physical_device_impl_1aa96226c99de9aff7ad9f6e7b96e89444" compoundref="_physical_device_8cpp" startline="124" endline="134">PhysicalDeviceImpl</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_physical_device_impl_1a488d6bf461f75785b039909d6bb6d96e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t vpr::PhysicalDeviceImpl::GetQueueFamilyIndex</definition>
+        <argsstring>(const VkQueueFlagBits &amp;queue_bits) const noexcept</argsstring>
+        <name>GetQueueFamilyIndex</name>
+        <param>
+          <type>const VkQueueFlagBits &amp;</type>
+          <declname>queue_bits</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/PhysicalDevice.cpp" line="114" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="210" bodyend="235"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="280">
+        <label>vpr::PhysicalDeviceImpl</label>
+        <link refid="classvpr_1_1_physical_device_impl"/>
+        <childnode refid="281" relation="usage">
+          <edgelabel>queueFamilyProperties</edgelabel>
+        </childnode>
+      </node>
+      <node id="281">
+        <label>std::vector&lt; VkQueueFamilyProperties &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/src/PhysicalDevice.cpp" line="99" column="1" bodyfile="core/src/PhysicalDevice.cpp" bodystart="99" bodyend="122"/>
+    <listofallmembers>
+      <member refid="classvpr_1_1_physical_device_impl_1a8c2c49d40d45147a3e70a305e843a9dd" prot="public" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>Features</name></member>
+      <member refid="classvpr_1_1_physical_device_impl_1af87fd9143013fabf4df17ca888d541fb" prot="public" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>getAttributes</name></member>
+      <member refid="classvpr_1_1_physical_device_impl_1a228761ffdb770f4690168e2f0e47a0d1" prot="public" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>GetMemoryTypeIdx</name></member>
+      <member refid="classvpr_1_1_physical_device_impl_1a488d6bf461f75785b039909d6bb6d96e" prot="public" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>GetQueueFamilyIndex</name></member>
+      <member refid="classvpr_1_1_physical_device_impl_1af7b08a7cf734338ee787e015534cfc69" prot="public" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>handle</name></member>
+      <member refid="classvpr_1_1_physical_device_impl_1ada525a9569d432f07c49d694a94538c7" prot="public" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>MemoryProperties</name></member>
+      <member refid="classvpr_1_1_physical_device_impl_1a87891e2247f80651e2a7c1c5892b6218" prot="private" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_physical_device_impl_1a4fd7907cfe2a054358875ccd83cdf90b" prot="public" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_physical_device_impl_1ac19f6987df28dcfae6e107d3c4967cb6" prot="private" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>PhysicalDeviceImpl</name></member>
+      <member refid="classvpr_1_1_physical_device_impl_1aa96226c99de9aff7ad9f6e7b96e89444" prot="public" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>PhysicalDeviceImpl</name></member>
+      <member refid="classvpr_1_1_physical_device_impl_1a9fd4a91c7268e451603c63fa763216f9" prot="public" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>PhysicalDeviceImpl</name></member>
+      <member refid="classvpr_1_1_physical_device_impl_1ae5f0af99ddaf1594899c30c32decbedd" prot="public" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>Properties</name></member>
+      <member refid="classvpr_1_1_physical_device_impl_1a6d26bb1eb93008f04a8fc885f1460e32" prot="public" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>queueFamilyProperties</name></member>
+      <member refid="classvpr_1_1_physical_device_impl_1a69d80ff2220466001ff60b2703152b66" prot="public" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>retrieveQueueFamilyProperties</name></member>
+      <member refid="classvpr_1_1_physical_device_impl_1af9378d82682afa3c123dfe2ca1100394" prot="public" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>SubgroupProperties</name></member>
+      <member refid="classvpr_1_1_physical_device_impl_1a6168130477087e7bc3aeed40d214cc0a" prot="public" virt="non-virtual"><scope>vpr::PhysicalDeviceImpl</scope><name>~PhysicalDeviceImpl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

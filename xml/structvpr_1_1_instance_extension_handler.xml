@@ -1,0 +1,272 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="structvpr_1_1_instance_extension_handler" kind="struct" language="C++" prot="public">
+    <compoundname>vpr::InstanceExtensionHandler</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvpr_1_1_instance_extension_handler_1a8d32e1d9c0746bd09330bbb6555d31b3" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; const char * &gt;</type>
+        <definition>std::vector&lt;const char*&gt; vpr::InstanceExtensionHandler::extensionStrings</definition>
+        <argsstring></argsstring>
+        <name>extensionStrings</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Instance.cpp" line="32" column="1" bodyfile="core/src/Instance.cpp" bodystart="32" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_instance_extension_handler_1a05d1f04435599c61498469a134d239e2" compoundref="_instance_8cpp" startline="165" endline="176">extensionSetup</referencedby>
+        <referencedby refid="classvpr_1_1_instance_1a6b61b801c27856790ab59513f66ce11c" compoundref="_instance_8cpp" startline="91" endline="102">vpr::Instance::GetEnabledExtensions</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_instance_extension_handler_1ad198d3ec1133653bf0e9cd3d8d149bc2" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; vpr::InstanceExtensionHandler::copiedExtensionStrings</definition>
+        <argsstring></argsstring>
+        <name>copiedExtensionStrings</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Instance.cpp" line="33" column="1" bodyfile="core/src/Instance.cpp" bodystart="33" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_instance_extension_handler_1ad84e6c1da712bf8c69efcbbff73f360f" compoundref="_instance_8cpp" startline="220" endline="231">prepareOptionalExtensions</referencedby>
+        <referencedby refid="structvpr_1_1_instance_extension_handler_1a66b3a869e2404afc912619eb31ae639f" compoundref="_instance_8cpp" startline="202" endline="218">prepareRequiredExtensions</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_instance_extension_handler_1ace86eb273138382d28e7ad42b7e48558" prot="public" static="no" mutable="no">
+        <type><ref refid="classvpr_1_1_instance_1ac131eec23cc4eba7cd68bc67de9d8c09" kindref="member">Instance::instance_layers</ref></type>
+        <definition>Instance::instance_layers vpr::InstanceExtensionHandler::validationLayers</definition>
+        <argsstring></argsstring>
+        <name>validationLayers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Instance.cpp" line="34" column="1" bodyfile="core/src/Instance.cpp" bodystart="34" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_instance_1a8e32fee4f0a877997ee6e75ea3d3c3a1" compoundref="_instance_8cpp" startline="119" endline="139">vpr::Instance::prepareValidation</referencedby>
+        <referencedby refid="classvpr_1_1_instance_1a34466d6fcc286ef1281b7bdb091ea754" compoundref="_instance_8cpp" startline="74" endline="76">vpr::Instance::ValidationEnabled</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structvpr_1_1_instance_extension_handler_1a53f1ab2459ff360915bf6c5f690ca4ca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>vpr::InstanceExtensionHandler::InstanceExtensionHandler</definition>
+        <argsstring>(Instance::instance_layers layers)</argsstring>
+        <name>InstanceExtensionHandler</name>
+        <param>
+          <type><ref refid="classvpr_1_1_instance_1ac131eec23cc4eba7cd68bc67de9d8c09" kindref="member">Instance::instance_layers</ref></type>
+          <declname>layers</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Instance.cpp" line="31" column="1" bodyfile="core/src/Instance.cpp" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_instance_extension_handler_1a05d1f04435599c61498469a134d239e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::InstanceExtensionHandler::extensionSetup</definition>
+        <argsstring>(const VprExtensionPack *extensions)</argsstring>
+        <name>extensionSetup</name>
+        <param>
+          <type>const <ref refid="structvpr_1_1_vpr_extension_pack" kindref="compound">VprExtensionPack</ref> *</type>
+          <declname>extensions</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Instance.cpp" line="35" column="1" bodyfile="core/src/Instance.cpp" bodystart="165" bodyend="176"/>
+        <references refid="structvpr_1_1_instance_extension_handler_1a8d32e1d9c0746bd09330bbb6555d31b3" compoundref="_instance_8cpp" startline="32">extensionStrings</references>
+        <references refid="structvpr_1_1_vpr_extension_pack_1ae20618455255f6895bd391d046c2e055" compoundref="_instance_8hpp" startline="26">vpr::VprExtensionPack::OptionalExtensionNames</references>
+        <references refid="structvpr_1_1_instance_extension_handler_1ad84e6c1da712bf8c69efcbbff73f360f" compoundref="_instance_8cpp" startline="220" endline="231">prepareOptionalExtensions</references>
+        <references refid="structvpr_1_1_instance_extension_handler_1a66b3a869e2404afc912619eb31ae639f" compoundref="_instance_8cpp" startline="202" endline="218">prepareRequiredExtensions</references>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_instance_extension_handler_1a66b3a869e2404afc912619eb31ae639f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::InstanceExtensionHandler::prepareRequiredExtensions</definition>
+        <argsstring>(const VprExtensionPack *extensions, std::vector&lt; const char *&gt; &amp;output)</argsstring>
+        <name>prepareRequiredExtensions</name>
+        <param>
+          <type>const <ref refid="structvpr_1_1_vpr_extension_pack" kindref="compound">VprExtensionPack</ref> *</type>
+          <declname>extensions</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; const char *&gt; &amp;</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Instance.cpp" line="36" column="1" bodyfile="core/src/Instance.cpp" bodystart="202" bodyend="218"/>
+        <references refid="structvpr_1_1_instance_extension_handler_1a96067fffda8ffa46cbebb182066e2f68" compoundref="_instance_8cpp" startline="179" endline="188">addPlatformRequiredExtensions</references>
+        <references refid="structvpr_1_1_instance_extension_handler_1a6679edf03fdb4190c0a2980dbc477f6e" compoundref="_instance_8cpp" startline="257" endline="259">checkRequiredExtensions</references>
+        <references refid="structvpr_1_1_instance_extension_handler_1ad198d3ec1133653bf0e9cd3d8d149bc2" compoundref="_instance_8cpp" startline="33">copiedExtensionStrings</references>
+        <references refid="structvpr_1_1_vpr_extension_pack_1aa0e225ff9a10af737f99d9568c7de3eb" compoundref="_instance_8hpp" startline="25">vpr::VprExtensionPack::RequiredExtensionCount</references>
+        <references refid="structvpr_1_1_vpr_extension_pack_1a54203e2016f033125ec96249d0cc4720" compoundref="_instance_8hpp" startline="24">vpr::VprExtensionPack::RequiredExtensionNames</references>
+        <referencedby refid="structvpr_1_1_instance_extension_handler_1a05d1f04435599c61498469a134d239e2" compoundref="_instance_8cpp" startline="165" endline="176">extensionSetup</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_instance_extension_handler_1a96067fffda8ffa46cbebb182066e2f68" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::InstanceExtensionHandler::addPlatformRequiredExtensions</definition>
+        <argsstring>(std::vector&lt; const char *&gt; &amp;output) const</argsstring>
+        <name>addPlatformRequiredExtensions</name>
+        <param>
+          <type>std::vector&lt; const char *&gt; &amp;</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Instance.cpp" line="37" column="1" bodyfile="core/src/Instance.cpp" bodystart="179" bodyend="188"/>
+        <referencedby refid="structvpr_1_1_instance_extension_handler_1a66b3a869e2404afc912619eb31ae639f" compoundref="_instance_8cpp" startline="202" endline="218">prepareRequiredExtensions</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_instance_extension_handler_1ad84e6c1da712bf8c69efcbbff73f360f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::InstanceExtensionHandler::prepareOptionalExtensions</definition>
+        <argsstring>(const VprExtensionPack *extensions, std::vector&lt; const char *&gt; &amp;output)</argsstring>
+        <name>prepareOptionalExtensions</name>
+        <param>
+          <type>const <ref refid="structvpr_1_1_vpr_extension_pack" kindref="compound">VprExtensionPack</ref> *</type>
+          <declname>extensions</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; const char *&gt; &amp;</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Instance.cpp" line="38" column="1" bodyfile="core/src/Instance.cpp" bodystart="220" bodyend="231"/>
+        <references refid="structvpr_1_1_instance_extension_handler_1a1e0d4cf06ba0cd4c7fae52202ca7a107" compoundref="_instance_8cpp" startline="261" endline="263">checkOptionalExtensions</references>
+        <references refid="structvpr_1_1_instance_extension_handler_1ad198d3ec1133653bf0e9cd3d8d149bc2" compoundref="_instance_8cpp" startline="33">copiedExtensionStrings</references>
+        <references refid="structvpr_1_1_vpr_extension_pack_1ac0c9f23a7537fa6546d2a588aa29a7a4" compoundref="_instance_8hpp" startline="27">vpr::VprExtensionPack::OptionalExtensionCount</references>
+        <references refid="structvpr_1_1_vpr_extension_pack_1ae20618455255f6895bd391d046c2e055" compoundref="_instance_8hpp" startline="26">vpr::VprExtensionPack::OptionalExtensionNames</references>
+        <referencedby refid="structvpr_1_1_instance_extension_handler_1a05d1f04435599c61498469a134d239e2" compoundref="_instance_8cpp" startline="165" endline="176">extensionSetup</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_instance_extension_handler_1af3fa989227d2da5a214fcb2314b9885f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::InstanceExtensionHandler::extensionCheck</definition>
+        <argsstring>(std::vector&lt; const char *&gt; &amp;extensions, bool throw_on_error) const</argsstring>
+        <name>extensionCheck</name>
+        <param>
+          <type>std::vector&lt; const char *&gt; &amp;</type>
+          <declname>extensions</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>throw_on_error</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Instance.cpp" line="39" column="1" bodyfile="core/src/Instance.cpp" bodystart="233" bodyend="255"/>
+        <referencedby refid="structvpr_1_1_instance_extension_handler_1a1e0d4cf06ba0cd4c7fae52202ca7a107" compoundref="_instance_8cpp" startline="261" endline="263">checkOptionalExtensions</referencedby>
+        <referencedby refid="structvpr_1_1_instance_extension_handler_1a6679edf03fdb4190c0a2980dbc477f6e" compoundref="_instance_8cpp" startline="257" endline="259">checkRequiredExtensions</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_instance_extension_handler_1a1e0d4cf06ba0cd4c7fae52202ca7a107" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::InstanceExtensionHandler::checkOptionalExtensions</definition>
+        <argsstring>(std::vector&lt; const char *&gt; &amp;optional_extensions) const</argsstring>
+        <name>checkOptionalExtensions</name>
+        <param>
+          <type>std::vector&lt; const char *&gt; &amp;</type>
+          <declname>optional_extensions</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Instance.cpp" line="40" column="1" bodyfile="core/src/Instance.cpp" bodystart="261" bodyend="263"/>
+        <references refid="structvpr_1_1_instance_extension_handler_1af3fa989227d2da5a214fcb2314b9885f" compoundref="_instance_8cpp" startline="233" endline="255">extensionCheck</references>
+        <referencedby refid="structvpr_1_1_instance_extension_handler_1ad84e6c1da712bf8c69efcbbff73f360f" compoundref="_instance_8cpp" startline="220" endline="231">prepareOptionalExtensions</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_instance_extension_handler_1a6679edf03fdb4190c0a2980dbc477f6e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::InstanceExtensionHandler::checkRequiredExtensions</definition>
+        <argsstring>(std::vector&lt; const char *&gt; &amp;required_extensions) const</argsstring>
+        <name>checkRequiredExtensions</name>
+        <param>
+          <type>std::vector&lt; const char *&gt; &amp;</type>
+          <declname>required_extensions</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Instance.cpp" line="41" column="1" bodyfile="core/src/Instance.cpp" bodystart="257" bodyend="259"/>
+        <references refid="structvpr_1_1_instance_extension_handler_1af3fa989227d2da5a214fcb2314b9885f" compoundref="_instance_8cpp" startline="233" endline="255">extensionCheck</references>
+        <referencedby refid="structvpr_1_1_instance_extension_handler_1a66b3a869e2404afc912619eb31ae639f" compoundref="_instance_8cpp" startline="202" endline="218">prepareRequiredExtensions</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="250">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="246">
+        <label>vpr::InstanceExtensionHandler</label>
+        <link refid="structvpr_1_1_instance_extension_handler"/>
+        <childnode refid="247" relation="usage">
+          <edgelabel>extensionStrings</edgelabel>
+        </childnode>
+        <childnode refid="248" relation="usage">
+          <edgelabel>copiedExtensionStrings</edgelabel>
+        </childnode>
+      </node>
+      <node id="248">
+        <label>std::vector&lt; std::string &gt;</label>
+        <childnode refid="249" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="247">
+        <label>std::vector&lt; const char *&gt;</label>
+      </node>
+      <node id="249">
+        <label>std::string</label>
+        <childnode refid="250" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="core/src/Instance.cpp" line="30" column="1" bodyfile="core/src/Instance.cpp" bodystart="30" bodyend="42"/>
+    <listofallmembers>
+      <member refid="structvpr_1_1_instance_extension_handler_1a96067fffda8ffa46cbebb182066e2f68" prot="public" virt="non-virtual"><scope>vpr::InstanceExtensionHandler</scope><name>addPlatformRequiredExtensions</name></member>
+      <member refid="structvpr_1_1_instance_extension_handler_1a1e0d4cf06ba0cd4c7fae52202ca7a107" prot="public" virt="non-virtual"><scope>vpr::InstanceExtensionHandler</scope><name>checkOptionalExtensions</name></member>
+      <member refid="structvpr_1_1_instance_extension_handler_1a6679edf03fdb4190c0a2980dbc477f6e" prot="public" virt="non-virtual"><scope>vpr::InstanceExtensionHandler</scope><name>checkRequiredExtensions</name></member>
+      <member refid="structvpr_1_1_instance_extension_handler_1ad198d3ec1133653bf0e9cd3d8d149bc2" prot="public" virt="non-virtual"><scope>vpr::InstanceExtensionHandler</scope><name>copiedExtensionStrings</name></member>
+      <member refid="structvpr_1_1_instance_extension_handler_1af3fa989227d2da5a214fcb2314b9885f" prot="public" virt="non-virtual"><scope>vpr::InstanceExtensionHandler</scope><name>extensionCheck</name></member>
+      <member refid="structvpr_1_1_instance_extension_handler_1a05d1f04435599c61498469a134d239e2" prot="public" virt="non-virtual"><scope>vpr::InstanceExtensionHandler</scope><name>extensionSetup</name></member>
+      <member refid="structvpr_1_1_instance_extension_handler_1a8d32e1d9c0746bd09330bbb6555d31b3" prot="public" virt="non-virtual"><scope>vpr::InstanceExtensionHandler</scope><name>extensionStrings</name></member>
+      <member refid="structvpr_1_1_instance_extension_handler_1a53f1ab2459ff360915bf6c5f690ca4ca" prot="public" virt="non-virtual"><scope>vpr::InstanceExtensionHandler</scope><name>InstanceExtensionHandler</name></member>
+      <member refid="structvpr_1_1_instance_extension_handler_1ad84e6c1da712bf8c69efcbbff73f360f" prot="public" virt="non-virtual"><scope>vpr::InstanceExtensionHandler</scope><name>prepareOptionalExtensions</name></member>
+      <member refid="structvpr_1_1_instance_extension_handler_1a66b3a869e2404afc912619eb31ae639f" prot="public" virt="non-virtual"><scope>vpr::InstanceExtensionHandler</scope><name>prepareRequiredExtensions</name></member>
+      <member refid="structvpr_1_1_instance_extension_handler_1ace86eb273138382d28e7ad42b7e48558" prot="public" virt="non-virtual"><scope>vpr::InstanceExtensionHandler</scope><name>validationLayers</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

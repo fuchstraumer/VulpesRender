@@ -1,4 +1,0 @@
-<map id="vpr::Device::FindDepthFormat" name="vpr::Device::FindDepthFormat">
-<area shape="rect" id="node2" href="$classvpr_1_1_device.html#a2a58028f056c580337c9454195683eae" title="! Checks a collection of possible formats, returning the one that supports the given tiling and featu..." alt="" coords="245,5,421,47"/>
-<area shape="rect" id="node3" href="$classvpr_1_1_physical_device.html#a00de7d3556d98b1cfda28d1f769f8fa8" title="vpr::PhysicalDevice\l::vkHandle" alt="" coords="469,5,604,47"/>
-</map>

@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_surface_k_h_r_8hpp" kind="file" language="C++">
+    <compoundname>SurfaceKHR.hpp</compoundname>
+    <includes refid="vpr__stdafx_8h" local="yes">vpr_stdafx.h</includes>
+    <includes refid="_forward_decl_8hpp" local="yes">ForwardDecl.hpp</includes>
+    <includedby refid="_surface_k_h_r_8cpp" local="yes">core/src/SurfaceKHR.cpp</includedby>
+    <includedby refid="_swapchain_8cpp" local="yes">core/src/Swapchain.cpp</includedby>
+    <incdepgraph>
+      <node id="477">
+        <label>vpr_stdafx.h</label>
+        <link refid="vpr__stdafx_8h"/>
+        <childnode refid="478" relation="include">
+        </childnode>
+      </node>
+      <node id="476">
+        <label>core/include/SurfaceKHR.hpp</label>
+        <link refid="_surface_k_h_r_8hpp"/>
+        <childnode refid="477" relation="include">
+        </childnode>
+        <childnode refid="479" relation="include">
+        </childnode>
+      </node>
+      <node id="478">
+        <label>vulkan/vulkan.h</label>
+      </node>
+      <node id="479">
+        <label>ForwardDecl.hpp</label>
+        <link refid="_forward_decl_8hpp"/>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="480">
+        <label>core/include/SurfaceKHR.hpp</label>
+        <link refid="_surface_k_h_r_8hpp"/>
+        <childnode refid="481" relation="include">
+        </childnode>
+        <childnode refid="482" relation="include">
+        </childnode>
+      </node>
+      <node id="481">
+        <label>core/src/SurfaceKHR.cpp</label>
+        <link refid="_surface_k_h_r_8cpp"/>
+      </node>
+      <node id="482">
+        <label>core/src/Swapchain.cpp</label>
+        <link refid="_swapchain_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classvpr_1_1_surface_k_h_r" prot="public">vpr::SurfaceKHR</innerclass>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_surface_k_h_r_8hpp_1a59186ef93ecae4f9acfbc224306b517f" prot="public" static="no">
+        <name>VULPES_VK_SURFACE_KHR_HPP</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/SurfaceKHR.hpp" line="3" column="9" bodyfile="core/include/SurfaceKHR.hpp" bodystart="3" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/include/SurfaceKHR.hpp"/>
+  </compounddef>
+</doxygen>

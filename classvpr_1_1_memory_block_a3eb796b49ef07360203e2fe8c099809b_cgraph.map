@@ -1,4 +1,0 @@
-<map id="vpr::MemoryBlock::VerifySuballocation" name="vpr::MemoryBlock::VerifySuballocation">
-<area shape="rect" id="node2" href="$group___allocation.html#ga8cf57df2fccbbe7a68b713d93db023c1" title="Taken from the Vulkan specification, section 11.6 Essentially, we need to ensure that linear and non&#45;..." alt="" coords="225,5,429,32"/>
-<area shape="rect" id="node3" href="$group___allocation.html#ga568ec6e09a10a255e22519e4e1a4f2e3" title="Checks to make sure the two objects of type &quot;type_a&quot; and &quot;type_b&quot; wouldn&#39;t cause a conflict with the ..." alt="" coords="220,57,435,98"/>
-</map>
