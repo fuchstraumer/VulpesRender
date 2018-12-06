@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="dir_11e447e913e5e5335b13051300067258" kind="dir">
+    <compoundname>alloc/include</compoundname>
+    <innerfile refid="_allocation_8hpp">Allocation.hpp</innerfile>
+    <innerfile refid="_allocation_requirements_8hpp">AllocationRequirements.hpp</innerfile>
+    <innerfile refid="_allocator_8hpp">Allocator.hpp</innerfile>
+    <innerfile refid="_debug_visualization_8hpp">DebugVisualization.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="alloc/include/"/>
+  </compounddef>
+</doxygen>

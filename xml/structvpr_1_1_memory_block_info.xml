@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="structvpr_1_1_memory_block_info" kind="struct" language="C++" prot="public">
+    <compoundname>vpr::MemoryBlockInfo</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvpr_1_1_memory_block_info_1a2f4f2177d856ab14ba1a00c592f24e78" prot="public" static="no" mutable="no">
+        <type>const std::list&lt; <ref refid="structvpr_1_1_suballocation" kindref="compound">Suballocation</ref> &gt; *</type>
+        <definition>const std::list&lt;Suballocation&gt;* vpr::MemoryBlockInfo::Suballocations</definition>
+        <argsstring></argsstring>
+        <name>Suballocations</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/DebugVisualization.cpp" line="33" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="33" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_memory_block_info_1a1f4d11307e78e0a1e300ec5b19a38f43" compoundref="_debug_visualization_8cpp" startline="77" endline="82">UpdateDrawCommands</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_memory_block_info_1a7fb520e9567f5d2ffcf8b7b6c172e1b9" prot="public" static="no" mutable="no">
+        <type>std::forward_list&lt; <ref refid="structvpr_1_1_suballocation_draw_command" kindref="compound">SuballocationDrawCommand</ref> &gt;</type>
+        <definition>std::forward_list&lt;SuballocationDrawCommand&gt; vpr::MemoryBlockInfo::DrawCommands</definition>
+        <argsstring></argsstring>
+        <name>DrawCommands</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/DebugVisualization.cpp" line="34" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="34" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_memory_block_info_1a1f4d11307e78e0a1e300ec5b19a38f43" compoundref="_debug_visualization_8cpp" startline="77" endline="82">UpdateDrawCommands</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_memory_block_info_1a59c08daa83c1723ef795fe25960c42f2" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t vpr::MemoryBlockInfo::ParentIdx</definition>
+        <argsstring></argsstring>
+        <name>ParentIdx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/DebugVisualization.cpp" line="35" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_memory_block_info_1a0d3c6e95e282d7e7b5979b35a6c47074" prot="public" static="no" mutable="no">
+        <type>VkDeviceSize</type>
+        <definition>VkDeviceSize vpr::MemoryBlockInfo::TotalSize</definition>
+        <argsstring></argsstring>
+        <name>TotalSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/DebugVisualization.cpp" line="36" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_memory_block_info_1a06e6af232c6a386b40fc65e441b473e8" prot="public" static="no" mutable="no">
+        <type>VkDeviceSize</type>
+        <definition>VkDeviceSize vpr::MemoryBlockInfo::BufferImageGranularity</definition>
+        <argsstring></argsstring>
+        <name>BufferImageGranularity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/DebugVisualization.cpp" line="37" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structvpr_1_1_memory_block_info_1a3483cc3a3272f4d54b036196cb05bc2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::MemoryBlockInfo::MemoryBlockInfo</definition>
+        <argsstring>(const vpr::MemoryBlock &amp;block)</argsstring>
+        <name>MemoryBlockInfo</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_memory_block" kindref="compound">vpr::MemoryBlock</ref> &amp;</type>
+          <declname>block</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/DebugVisualization.cpp" line="30" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_memory_block_info_1a4c85370f5805bd10e954f2f28dc11732" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::MemoryBlockInfo::Draw</definition>
+        <argsstring>()</argsstring>
+        <name>Draw</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/DebugVisualization.cpp" line="31" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_memory_block_info_1a1f4d11307e78e0a1e300ec5b19a38f43" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::MemoryBlockInfo::UpdateDrawCommands</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateDrawCommands</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/src/DebugVisualization.cpp" line="32" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="77" bodyend="82"/>
+        <references refid="structvpr_1_1_memory_block_info_1a7fb520e9567f5d2ffcf8b7b6c172e1b9" compoundref="_debug_visualization_8cpp" startline="34">DrawCommands</references>
+        <references refid="structvpr_1_1_memory_block_info_1a2f4f2177d856ab14ba1a00c592f24e78" compoundref="_debug_visualization_8cpp" startline="33">Suballocations</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="262">
+        <label>std::forward_list&lt; vpr::SuballocationDrawCommand &gt;</label>
+        <childnode refid="263" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="265">
+        <label>vpr::Suballocation</label>
+        <link refid="structvpr_1_1_suballocation"/>
+      </node>
+      <node id="263">
+        <label>vpr::SuballocationDrawCommand</label>
+        <link refid="structvpr_1_1_suballocation_draw_command"/>
+      </node>
+      <node id="264">
+        <label>std::list&lt; vpr::Suballocation &gt;</label>
+        <childnode refid="265" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="261">
+        <label>vpr::MemoryBlockInfo</label>
+        <link refid="structvpr_1_1_memory_block_info"/>
+        <childnode refid="262" relation="usage">
+          <edgelabel>DrawCommands</edgelabel>
+        </childnode>
+        <childnode refid="264" relation="usage">
+          <edgelabel>Suballocations</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="alloc/src/DebugVisualization.cpp" line="29" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="29" bodyend="38"/>
+    <listofallmembers>
+      <member refid="structvpr_1_1_memory_block_info_1a06e6af232c6a386b40fc65e441b473e8" prot="public" virt="non-virtual"><scope>vpr::MemoryBlockInfo</scope><name>BufferImageGranularity</name></member>
+      <member refid="structvpr_1_1_memory_block_info_1a4c85370f5805bd10e954f2f28dc11732" prot="public" virt="non-virtual"><scope>vpr::MemoryBlockInfo</scope><name>Draw</name></member>
+      <member refid="structvpr_1_1_memory_block_info_1a7fb520e9567f5d2ffcf8b7b6c172e1b9" prot="public" virt="non-virtual"><scope>vpr::MemoryBlockInfo</scope><name>DrawCommands</name></member>
+      <member refid="structvpr_1_1_memory_block_info_1a3483cc3a3272f4d54b036196cb05bc2e" prot="public" virt="non-virtual"><scope>vpr::MemoryBlockInfo</scope><name>MemoryBlockInfo</name></member>
+      <member refid="structvpr_1_1_memory_block_info_1a59c08daa83c1723ef795fe25960c42f2" prot="public" virt="non-virtual"><scope>vpr::MemoryBlockInfo</scope><name>ParentIdx</name></member>
+      <member refid="structvpr_1_1_memory_block_info_1a2f4f2177d856ab14ba1a00c592f24e78" prot="public" virt="non-virtual"><scope>vpr::MemoryBlockInfo</scope><name>Suballocations</name></member>
+      <member refid="structvpr_1_1_memory_block_info_1a0d3c6e95e282d7e7b5979b35a6c47074" prot="public" virt="non-virtual"><scope>vpr::MemoryBlockInfo</scope><name>TotalSize</name></member>
+      <member refid="structvpr_1_1_memory_block_info_1a1f4d11307e78e0a1e300ec5b19a38f43" prot="public" virt="non-virtual"><scope>vpr::MemoryBlockInfo</scope><name>UpdateDrawCommands</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

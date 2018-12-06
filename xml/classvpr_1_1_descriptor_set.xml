@@ -1,0 +1,462 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="classvpr_1_1_descriptor_set" kind="class" language="C++" prot="public">
+    <compoundname>vpr::DescriptorSet</compoundname>
+    <includes refid="_descriptor_set_8hpp" local="no">DescriptorSet.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classvpr_1_1_descriptor_set_1a13fbd330e1749a7b60444526799adb97" prot="private" static="no" mutable="no">
+        <type>VkDevice</type>
+        <definition>VkDevice vpr::DescriptorSet::device</definition>
+        <argsstring></argsstring>
+        <name>device</name>
+        <initializer>{ VK_NULL_HANDLE }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="50" column="1" bodyfile="resource/include/DescriptorSet.hpp" bodystart="50" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a3f90e39823801c8c37e2e89f3c262c72" compoundref="_descriptor_set_8cpp" startline="112" endline="126">allocate</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1af60aebdf9d7c13a45e5bb2f87f8dc952" compoundref="_descriptor_set_8cpp" startline="132" endline="156">update</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a20cf3ef633ecfbf46b38d32653bad0d6" compoundref="_descriptor_set_8cpp" startline="24" endline="28">~DescriptorSet</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_descriptor_set_1af9e83408f10cec5654a6e512493d2f97" prot="private" static="no" mutable="yes">
+        <type>VkDescriptorSet</type>
+        <definition>VkDescriptorSet vpr::DescriptorSet::handle</definition>
+        <argsstring></argsstring>
+        <name>handle</name>
+        <initializer>{ VK_NULL_HANDLE }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="51" column="1" bodyfile="resource/include/DescriptorSet.hpp" bodystart="51" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a2aa5678e42c37ef82c863ce52e21d523" compoundref="_descriptor_set_8cpp" startline="41" endline="56">AddDescriptorInfo</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a72a1ff35a12b214d310c4bb8181a8af4" compoundref="_descriptor_set_8cpp" startline="91" endline="105">AddSamplerBinding</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a3f90e39823801c8c37e2e89f3c262c72" compoundref="_descriptor_set_8cpp" startline="112" endline="126">allocate</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1af60aebdf9d7c13a45e5bb2f87f8dc952" compoundref="_descriptor_set_8cpp" startline="132" endline="156">update</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a10bd2e1ea290ca2a02a8b878d92d47dd" compoundref="_descriptor_set_8cpp" startline="158" endline="166">vkHandle</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a20cf3ef633ecfbf46b38d32653bad0d6" compoundref="_descriptor_set_8cpp" startline="24" endline="28">~DescriptorSet</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_descriptor_set_1a34bbabecf8e5e6528a7a56f68754a47b" prot="private" static="no" mutable="yes">
+        <type>std::unique_ptr&lt; struct <ref refid="structvpr_1_1_descriptor_set_impl" kindref="compound">DescriptorSetImpl</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;struct DescriptorSetImpl&gt; vpr::DescriptorSet::impl</definition>
+        <argsstring></argsstring>
+        <name>impl</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="52" column="1" bodyfile="resource/include/DescriptorSet.hpp" bodystart="52" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a2aa5678e42c37ef82c863ce52e21d523" compoundref="_descriptor_set_8cpp" startline="41" endline="56">AddDescriptorInfo</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a72a1ff35a12b214d310c4bb8181a8af4" compoundref="_descriptor_set_8cpp" startline="91" endline="105">AddSamplerBinding</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a3f90e39823801c8c37e2e89f3c262c72" compoundref="_descriptor_set_8cpp" startline="112" endline="126">allocate</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a47c7509f48d1f8fec24eac8aa412da72" compoundref="_descriptor_set_8cpp" startline="168" endline="175">Reset</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1af60aebdf9d7c13a45e5bb2f87f8dc952" compoundref="_descriptor_set_8cpp" startline="132" endline="156">update</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a10bd2e1ea290ca2a02a8b878d92d47dd" compoundref="_descriptor_set_8cpp" startline="158" endline="166">vkHandle</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a20cf3ef633ecfbf46b38d32653bad0d6" compoundref="_descriptor_set_8cpp" startline="24" endline="28">~DescriptorSet</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1ab28671946745e441f9d1f66bccdabf76" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::DescriptorSet::DescriptorSet</definition>
+        <argsstring>(const DescriptorSet &amp;)=delete</argsstring>
+        <name>DescriptorSet</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_descriptor_set" kindref="compound">DescriptorSet</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="15" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1a18f85f7d39829d83dd2c4b2c2451b015" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_descriptor_set" kindref="compound">DescriptorSet</ref> &amp;</type>
+        <definition>DescriptorSet&amp; vpr::DescriptorSet::operator=</definition>
+        <argsstring>(const DescriptorSet &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_descriptor_set" kindref="compound">DescriptorSet</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="16" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1a3f90e39823801c8c37e2e89f3c262c72" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DescriptorSet::allocate</definition>
+        <argsstring>(const VkDescriptorPool &amp;parent_pool, const VkDescriptorSetLayout &amp;set_layout) const</argsstring>
+        <name>allocate</name>
+        <param>
+          <type>const VkDescriptorPool &amp;</type>
+          <declname>parent_pool</declname>
+        </param>
+        <param>
+          <type>const VkDescriptorSetLayout &amp;</type>
+          <declname>set_layout</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="47" column="1" bodyfile="resource/src/DescriptorSet.cpp" bodystart="112" bodyend="126"/>
+        <references refid="classvpr_1_1_descriptor_set_1a13fbd330e1749a7b60444526799adb97" compoundref="_descriptor_set_8hpp" startline="50">device</references>
+        <references refid="classvpr_1_1_descriptor_set_1af9e83408f10cec5654a6e512493d2f97" compoundref="_descriptor_set_8hpp" startline="51">handle</references>
+        <references refid="classvpr_1_1_descriptor_set_1a34bbabecf8e5e6528a7a56f68754a47b" compoundref="_descriptor_set_8hpp" startline="52">impl</references>
+        <references refid="namespacevpr_1a27b96cc4b5f4578e9446f849876c36c5" compoundref="_create_info_base_8hpp" startline="523">vpr::vk_descriptor_set_alloc_info_base</references>
+        <references refid="vk_assert_8hpp_1a92c2e07b0d021fc331be70a65c61dacc" compoundref="vk_assert_8hpp" startline="9">VkAssert</references>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a8d58aaafd1c068f4921ccdbf1ad692d8" compoundref="_descriptor_set_8cpp" startline="107" endline="110">Init</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a10bd2e1ea290ca2a02a8b878d92d47dd" compoundref="_descriptor_set_8cpp" startline="158" endline="166">vkHandle</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1af60aebdf9d7c13a45e5bb2f87f8dc952" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DescriptorSet::update</definition>
+        <argsstring>() const</argsstring>
+        <name>update</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="48" column="1" bodyfile="resource/src/DescriptorSet.cpp" bodystart="132" bodyend="156"/>
+        <references refid="classvpr_1_1_descriptor_set_1a13fbd330e1749a7b60444526799adb97" compoundref="_descriptor_set_8hpp" startline="50">device</references>
+        <references refid="classvpr_1_1_descriptor_set_1af9e83408f10cec5654a6e512493d2f97" compoundref="_descriptor_set_8hpp" startline="51">handle</references>
+        <references refid="classvpr_1_1_descriptor_set_1a34bbabecf8e5e6528a7a56f68754a47b" compoundref="_descriptor_set_8hpp" startline="52">impl</references>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a8d58aaafd1c068f4921ccdbf1ad692d8" compoundref="_descriptor_set_8cpp" startline="107" endline="110">Init</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1af0df0abb71f558109686909037de0688" compoundref="_descriptor_set_8cpp" startline="128" endline="130">Update</referencedby>
+        <referencedby refid="classvpr_1_1_descriptor_set_1a10bd2e1ea290ca2a02a8b878d92d47dd" compoundref="_descriptor_set_8cpp" startline="158" endline="166">vkHandle</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1a2706a16b811f223a90f15cad2f5060df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::DescriptorSet::DescriptorSet</definition>
+        <argsstring>(const VkDevice &amp;parent)</argsstring>
+        <name>DescriptorSet</name>
+        <param>
+          <type>const VkDevice &amp;</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="19" column="1" bodyfile="resource/src/DescriptorSet.cpp" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1a20cf3ef633ecfbf46b38d32653bad0d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::DescriptorSet::~DescriptorSet</definition>
+        <argsstring>()</argsstring>
+        <name>~DescriptorSet</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="20" column="1" bodyfile="resource/src/DescriptorSet.cpp" bodystart="24" bodyend="28"/>
+        <references refid="classvpr_1_1_descriptor_set_1a13fbd330e1749a7b60444526799adb97" compoundref="_descriptor_set_8hpp" startline="50">device</references>
+        <references refid="classvpr_1_1_descriptor_set_1af9e83408f10cec5654a6e512493d2f97" compoundref="_descriptor_set_8hpp" startline="51">handle</references>
+        <references refid="classvpr_1_1_descriptor_set_1a34bbabecf8e5e6528a7a56f68754a47b" compoundref="_descriptor_set_8hpp" startline="52">impl</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1a4d573b48ff2dd455951736175efa471f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::DescriptorSet::DescriptorSet</definition>
+        <argsstring>(DescriptorSet &amp;&amp;other) noexcept</argsstring>
+        <name>DescriptorSet</name>
+        <param>
+          <type><ref refid="classvpr_1_1_descriptor_set" kindref="compound">DescriptorSet</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="22" column="1" bodyfile="resource/src/DescriptorSet.cpp" bodystart="30" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1aca37137b7bac707565b8250f95c58ca2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_descriptor_set" kindref="compound">DescriptorSet</ref> &amp;</type>
+        <definition>DescriptorSet &amp; vpr::DescriptorSet::operator=</definition>
+        <argsstring>(DescriptorSet &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classvpr_1_1_descriptor_set" kindref="compound">DescriptorSet</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="23" column="1" bodyfile="resource/src/DescriptorSet.cpp" bodystart="33" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1a2aa5678e42c37ef82c863ce52e21d523" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DescriptorSet::AddDescriptorInfo</definition>
+        <argsstring>(VkDescriptorImageInfo info, const VkDescriptorType &amp;type, const size_t &amp;item_binding_idx)</argsstring>
+        <name>AddDescriptorInfo</name>
+        <param>
+          <type>VkDescriptorImageInfo</type>
+          <declname>info</declname>
+        </param>
+        <param>
+          <type>const VkDescriptorType &amp;</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const size_t &amp;</type>
+          <declname>item_binding_idx</declname>
+        </param>
+        <briefdescription>
+<para>Sets the required image info for the descriptor at the given index. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="26" column="1" bodyfile="resource/src/DescriptorSet.cpp" bodystart="41" bodyend="56"/>
+        <references refid="classvpr_1_1_descriptor_set_1af9e83408f10cec5654a6e512493d2f97" compoundref="_descriptor_set_8hpp" startline="51">handle</references>
+        <references refid="classvpr_1_1_descriptor_set_1a34bbabecf8e5e6528a7a56f68754a47b" compoundref="_descriptor_set_8hpp" startline="52">impl</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1a2ef08744f5c75fe13717c4f6d18c85c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DescriptorSet::AddDescriptorInfo</definition>
+        <argsstring>(VkDescriptorBufferInfo info, const VkDescriptorType &amp;descr_type, const size_t &amp;item_binding_idx)</argsstring>
+        <name>AddDescriptorInfo</name>
+        <param>
+          <type>VkDescriptorBufferInfo</type>
+          <declname>info</declname>
+        </param>
+        <param>
+          <type>const VkDescriptorType &amp;</type>
+          <declname>descr_type</declname>
+        </param>
+        <param>
+          <type>const size_t &amp;</type>
+          <declname>item_binding_idx</declname>
+        </param>
+        <briefdescription>
+<para>Functionally the same as AddDescriptorInfo with VkDescriptorImageInfo. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="28" column="1" bodyfile="resource/src/DescriptorSet.cpp" bodystart="58" bodyend="72"/>
+        <references refid="classvpr_1_1_descriptor_set_1af9e83408f10cec5654a6e512493d2f97" compoundref="_descriptor_set_8hpp" startline="51">handle</references>
+        <references refid="classvpr_1_1_descriptor_set_1a34bbabecf8e5e6528a7a56f68754a47b" compoundref="_descriptor_set_8hpp" startline="52">impl</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1aa886fc7db83d8111dd7ad2a7d2037bb5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DescriptorSet::AddDescriptorInfo</definition>
+        <argsstring>(VkDescriptorBufferInfo info, const VkBufferView &amp;view, const VkDescriptorType &amp;type, const size_t &amp;idx)</argsstring>
+        <name>AddDescriptorInfo</name>
+        <param>
+          <type>VkDescriptorBufferInfo</type>
+          <declname>info</declname>
+        </param>
+        <param>
+          <type>const VkBufferView &amp;</type>
+          <declname>view</declname>
+        </param>
+        <param>
+          <type>const VkDescriptorType &amp;</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const size_t &amp;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Add info for a texel buffer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="30" column="1" bodyfile="resource/src/DescriptorSet.cpp" bodystart="74" bodyend="89"/>
+        <references refid="classvpr_1_1_descriptor_set_1af9e83408f10cec5654a6e512493d2f97" compoundref="_descriptor_set_8hpp" startline="51">handle</references>
+        <references refid="classvpr_1_1_descriptor_set_1a34bbabecf8e5e6528a7a56f68754a47b" compoundref="_descriptor_set_8hpp" startline="52">impl</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1a72a1ff35a12b214d310c4bb8181a8af4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DescriptorSet::AddSamplerBinding</definition>
+        <argsstring>(const size_t &amp;idx, VkSampler sampler_handler)</argsstring>
+        <name>AddSamplerBinding</name>
+        <param>
+          <type>const size_t &amp;</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>VkSampler</type>
+          <declname>sampler_handler</declname>
+        </param>
+        <briefdescription>
+<para>Binds a separable sampler object to the given index. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="32" column="1" bodyfile="resource/src/DescriptorSet.cpp" bodystart="91" bodyend="105"/>
+        <references refid="classvpr_1_1_descriptor_set_1af9e83408f10cec5654a6e512493d2f97" compoundref="_descriptor_set_8hpp" startline="51">handle</references>
+        <references refid="classvpr_1_1_descriptor_set_1a34bbabecf8e5e6528a7a56f68754a47b" compoundref="_descriptor_set_8hpp" startline="52">impl</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1a8d58aaafd1c068f4921ccdbf1ad692d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DescriptorSet::Init</definition>
+        <argsstring>(const VkDescriptorPool &amp;parent_pool, const VkDescriptorSetLayout &amp;set_layout)</argsstring>
+        <name>Init</name>
+        <param>
+          <type>const VkDescriptorPool &amp;</type>
+          <declname>parent_pool</declname>
+        </param>
+        <param>
+          <type>const VkDescriptorSetLayout &amp;</type>
+          <declname>set_layout</declname>
+        </param>
+        <briefdescription>
+<para>Call after all descriptor bindings and infos required have been added, and make sure you have enough space in the given pool for all of these resources. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="37" column="1" bodyfile="resource/src/DescriptorSet.cpp" bodystart="107" bodyend="110"/>
+        <references refid="classvpr_1_1_descriptor_set_1a3f90e39823801c8c37e2e89f3c262c72" compoundref="_descriptor_set_8cpp" startline="112" endline="126">allocate</references>
+        <references refid="classvpr_1_1_descriptor_set_1af60aebdf9d7c13a45e5bb2f87f8dc952" compoundref="_descriptor_set_8cpp" startline="132" endline="156">update</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1af0df0abb71f558109686909037de0688" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DescriptorSet::Update</definition>
+        <argsstring>() const</argsstring>
+        <name>Update</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="39" column="1" bodyfile="resource/src/DescriptorSet.cpp" bodystart="128" bodyend="130"/>
+        <references refid="classvpr_1_1_descriptor_set_1af60aebdf9d7c13a45e5bb2f87f8dc952" compoundref="_descriptor_set_8cpp" startline="132" endline="156">update</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1a47c7509f48d1f8fec24eac8aa412da72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DescriptorSet::Reset</definition>
+        <argsstring>()</argsstring>
+        <name>Reset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="41" column="1" bodyfile="resource/src/DescriptorSet.cpp" bodystart="168" bodyend="175"/>
+        <references refid="classvpr_1_1_descriptor_set_1a34bbabecf8e5e6528a7a56f68754a47b" compoundref="_descriptor_set_8hpp" startline="52">impl</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_descriptor_set_1a10bd2e1ea290ca2a02a8b878d92d47dd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const VkDescriptorSet &amp;</type>
+        <definition>const VkDescriptorSet &amp; vpr::DescriptorSet::vkHandle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>vkHandle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/DescriptorSet.hpp" line="43" column="1" bodyfile="resource/src/DescriptorSet.cpp" bodystart="158" bodyend="166"/>
+        <references refid="classvpr_1_1_descriptor_set_1a3f90e39823801c8c37e2e89f3c262c72" compoundref="_descriptor_set_8cpp" startline="112" endline="126">allocate</references>
+        <references refid="classvpr_1_1_descriptor_set_1af9e83408f10cec5654a6e512493d2f97" compoundref="_descriptor_set_8hpp" startline="51">handle</references>
+        <references refid="classvpr_1_1_descriptor_set_1a34bbabecf8e5e6528a7a56f68754a47b" compoundref="_descriptor_set_8hpp" startline="52">impl</references>
+        <references refid="classvpr_1_1_descriptor_set_1af60aebdf9d7c13a45e5bb2f87f8dc952" compoundref="_descriptor_set_8cpp" startline="132" endline="156">update</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>RAII wrapper around a descriptor set, simplifying adding individual descriptor bindings for whatever stage they&apos;re required at. </para>    </briefdescription>
+    <detaileddescription>
+<para>Wrapping descriptor functionality in your own way for projects that are even slightly more advanced than test rigs is probably wise, however. Managing descriptor state, reducing bindings, and coalescing what features/resources you can is for the best - along with using update templates, which this implementation does not support. </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="163">
+        <label>std::map&lt; size_t, VkDescriptorBufferInfo &gt;</label>
+      </node>
+      <node id="164">
+        <label>std::map&lt; size_t, VkDescriptorImageInfo &gt;</label>
+      </node>
+      <node id="161">
+        <label>std::map&lt; size_t, VkBufferView &gt;</label>
+      </node>
+      <node id="158">
+        <label>vpr::DescriptorSet</label>
+        <link refid="classvpr_1_1_descriptor_set"/>
+        <childnode refid="159" relation="usage">
+          <edgelabel>impl</edgelabel>
+        </childnode>
+      </node>
+      <node id="162">
+        <label>std::map&lt; size_t, VkWriteDescriptorSet &gt;</label>
+      </node>
+      <node id="160">
+        <label>vpr::DescriptorSetImpl</label>
+        <link refid="structvpr_1_1_descriptor_set_impl"/>
+        <childnode refid="161" relation="usage">
+          <edgelabel>bufferViews</edgelabel>
+        </childnode>
+        <childnode refid="162" relation="usage">
+          <edgelabel>writeDescriptors</edgelabel>
+        </childnode>
+        <childnode refid="163" relation="usage">
+          <edgelabel>bufferInfos</edgelabel>
+        </childnode>
+        <childnode refid="164" relation="usage">
+          <edgelabel>imageInfos</edgelabel>
+        </childnode>
+      </node>
+      <node id="159">
+        <label>std::unique_ptr&lt; struct vpr::DescriptorSetImpl &gt;</label>
+        <childnode refid="160" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="resource/include/DescriptorSet.hpp" line="14" column="1" bodyfile="resource/include/DescriptorSet.hpp" bodystart="14" bodyend="53"/>
+    <listofallmembers>
+      <member refid="classvpr_1_1_descriptor_set_1a2aa5678e42c37ef82c863ce52e21d523" prot="public" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>AddDescriptorInfo</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1a2ef08744f5c75fe13717c4f6d18c85c3" prot="public" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>AddDescriptorInfo</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1aa886fc7db83d8111dd7ad2a7d2037bb5" prot="public" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>AddDescriptorInfo</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1a72a1ff35a12b214d310c4bb8181a8af4" prot="public" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>AddSamplerBinding</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1a3f90e39823801c8c37e2e89f3c262c72" prot="private" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>allocate</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1ab28671946745e441f9d1f66bccdabf76" prot="private" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>DescriptorSet</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1a2706a16b811f223a90f15cad2f5060df" prot="public" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>DescriptorSet</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1a4d573b48ff2dd455951736175efa471f" prot="public" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>DescriptorSet</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1a13fbd330e1749a7b60444526799adb97" prot="private" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>device</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1af9e83408f10cec5654a6e512493d2f97" prot="private" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>handle</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1a34bbabecf8e5e6528a7a56f68754a47b" prot="private" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>impl</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1a8d58aaafd1c068f4921ccdbf1ad692d8" prot="public" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>Init</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1a18f85f7d39829d83dd2c4b2c2451b015" prot="private" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1aca37137b7bac707565b8250f95c58ca2" prot="public" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1a47c7509f48d1f8fec24eac8aa412da72" prot="public" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>Reset</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1af60aebdf9d7c13a45e5bb2f87f8dc952" prot="private" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>update</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1af0df0abb71f558109686909037de0688" prot="public" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>Update</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1a10bd2e1ea290ca2a02a8b878d92d47dd" prot="public" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>vkHandle</name></member>
+      <member refid="classvpr_1_1_descriptor_set_1a20cf3ef633ecfbf46b38d32653bad0d6" prot="public" virt="non-virtual"><scope>vpr::DescriptorSet</scope><name>~DescriptorSet</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

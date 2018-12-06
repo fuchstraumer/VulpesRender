@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="group___rendering" kind="group">
+    <compoundname>Rendering</compoundname>
+    <title>Rendering</title>
+    <innerclass refid="classvpr_1_1_framebuffer" prot="public">vpr::Framebuffer</innerclass>
+    <innerclass refid="structvpr_1_1_graphics_pipeline_info" prot="public">vpr::GraphicsPipelineInfo</innerclass>
+    <innerclass refid="classvpr_1_1_graphics_pipeline" prot="public">vpr::GraphicsPipeline</innerclass>
+    <innerclass refid="classvpr_1_1_renderpass" prot="public">vpr::Renderpass</innerclass>
+    <briefdescription>
+<para>The rendering group is used for objects that are directly related to how things appear on screen, including those classes that are minimum requirements for making things display like the <ref refid="classvpr_1_1_framebuffer" kindref="compound">Framebuffer</ref>, <ref refid="classvpr_1_1_renderpass" kindref="compound">Renderpass</ref>, and the <ref refid="classvpr_1_1_graphics_pipeline" kindref="compound">GraphicsPipeline</ref>. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

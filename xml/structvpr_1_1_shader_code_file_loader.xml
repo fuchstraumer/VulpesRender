@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="structvpr_1_1_shader_code_file_loader" kind="struct" language="C++" prot="public">
+    <compoundname>vpr::ShaderCodeFileLoader</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structvpr_1_1_shader_code_file_loader_1ac07d918a3d35ba732704cbcdfe1ce9f0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::ShaderCodeFileLoader::LoadCodeFromFile</definition>
+        <argsstring>(const char *filename, std::vector&lt; uint32_t &gt; &amp;dest, VkShaderModuleCreateInfo &amp;create_info)</argsstring>
+        <name>LoadCodeFromFile</name>
+        <param>
+          <type>const char *</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint32_t &gt; &amp;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>VkShaderModuleCreateInfo &amp;</type>
+          <declname>create_info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/src/ShaderModule.cpp" line="10" column="1" bodyfile="resource/src/ShaderModule.cpp" bodystart="10" bodyend="33"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="resource/src/ShaderModule.cpp" line="9" column="1" bodyfile="resource/src/ShaderModule.cpp" bodystart="9" bodyend="34"/>
+    <listofallmembers>
+      <member refid="structvpr_1_1_shader_code_file_loader_1ac07d918a3d35ba732704cbcdfe1ce9f0" prot="public" virt="non-virtual"><scope>vpr::ShaderCodeFileLoader</scope><name>LoadCodeFromFile</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

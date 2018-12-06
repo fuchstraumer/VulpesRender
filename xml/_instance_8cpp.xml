@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_instance_8cpp" kind="file" language="C++">
+    <compoundname>Instance.cpp</compoundname>
+    <includes refid="vpr__stdafx_8h" local="yes">vpr_stdafx.h</includes>
+    <includes refid="_instance_8hpp" local="yes">Instance.hpp</includes>
+    <includes refid="_physical_device_8hpp" local="yes">PhysicalDevice.hpp</includes>
+    <includes refid="_logical_device_8hpp" local="yes">LogicalDevice.hpp</includes>
+    <includes refid="vk_assert_8hpp" local="yes">vkAssert.hpp</includes>
+    <includes refid="_create_info_base_8hpp" local="yes">CreateInfoBase.hpp</includes>
+    <includes local="yes">easylogging++.h</includes>
+    <includes local="yes">GLFW/glfw3.h</includes>
+    <includes local="no">vulkan/vulkan.h</includes>
+    <includes local="no">string</includes>
+    <incdepgraph>
+      <node id="506">
+        <label>limits</label>
+      </node>
+      <node id="507">
+        <label>easylogging++.h</label>
+      </node>
+      <node id="504">
+        <label>cassert</label>
+      </node>
+      <node id="509">
+        <label>string</label>
+      </node>
+      <node id="508">
+        <label>GLFW/glfw3.h</label>
+      </node>
+      <node id="502">
+        <label>vkAssert.hpp</label>
+        <link refid="vk_assert_8hpp"/>
+        <childnode refid="503" relation="include">
+        </childnode>
+        <childnode refid="504" relation="include">
+        </childnode>
+        <childnode refid="496" relation="include">
+        </childnode>
+      </node>
+      <node id="505">
+        <label>CreateInfoBase.hpp</label>
+        <link refid="_create_info_base_8hpp"/>
+        <childnode refid="506" relation="include">
+        </childnode>
+        <childnode refid="496" relation="include">
+        </childnode>
+      </node>
+      <node id="497">
+        <label>Instance.hpp</label>
+        <link refid="_instance_8hpp"/>
+        <childnode refid="495" relation="include">
+        </childnode>
+        <childnode refid="498" relation="include">
+        </childnode>
+      </node>
+      <node id="495">
+        <label>vpr_stdafx.h</label>
+        <link refid="vpr__stdafx_8h"/>
+        <childnode refid="496" relation="include">
+        </childnode>
+      </node>
+      <node id="496">
+        <label>vulkan/vulkan.h</label>
+      </node>
+      <node id="503">
+        <label>iostream</label>
+      </node>
+      <node id="499">
+        <label>PhysicalDevice.hpp</label>
+        <link refid="_physical_device_8hpp"/>
+        <childnode refid="495" relation="include">
+        </childnode>
+        <childnode refid="500" relation="include">
+        </childnode>
+      </node>
+      <node id="494">
+        <label>core/src/Instance.cpp</label>
+        <link refid="_instance_8cpp"/>
+        <childnode refid="495" relation="include">
+        </childnode>
+        <childnode refid="497" relation="include">
+        </childnode>
+        <childnode refid="499" relation="include">
+        </childnode>
+        <childnode refid="501" relation="include">
+        </childnode>
+        <childnode refid="502" relation="include">
+        </childnode>
+        <childnode refid="505" relation="include">
+        </childnode>
+        <childnode refid="507" relation="include">
+        </childnode>
+        <childnode refid="508" relation="include">
+        </childnode>
+        <childnode refid="496" relation="include">
+        </childnode>
+        <childnode refid="509" relation="include">
+        </childnode>
+      </node>
+      <node id="501">
+        <label>LogicalDevice.hpp</label>
+        <link refid="_logical_device_8hpp"/>
+        <childnode refid="495" relation="include">
+        </childnode>
+        <childnode refid="498" relation="include">
+        </childnode>
+      </node>
+      <node id="498">
+        <label>ForwardDecl.hpp</label>
+        <link refid="_forward_decl_8hpp"/>
+      </node>
+      <node id="500">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structvpr_1_1_instance_extension_handler" prot="public">vpr::InstanceExtensionHandler</innerclass>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_instance_8cpp_1ab91f325a54d3e35fe831a86d6382c2a9" prot="public" static="no">
+        <name>GLFW_INCLUDE_VULKAN</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/Instance.cpp" line="12" column="9" bodyfile="core/src/Instance.cpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/src/Instance.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,322 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="structvpr_1_1_device_data_members" kind="struct" language="C++" prot="public">
+    <compoundname>vpr::DeviceDataMembers</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvpr_1_1_device_data_members_1a449cf695be146d6e160a8976221fc58a" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; const char * &gt;</type>
+        <definition>std::vector&lt;const char*&gt; vpr::DeviceDataMembers::enabledExtensions</definition>
+        <argsstring></argsstring>
+        <name>enabledExtensions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="17" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="17" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_device_1a2c0889e41254c4778c73ab2a6ff6f1ce" compoundref="_logical_device_8cpp" startline="101" endline="112">vpr::Device::GetEnabledExtensions</referencedby>
+        <referencedby refid="classvpr_1_1_device_1a165976c19ab59de329855485a9dab5aa" compoundref="_logical_device_8cpp" startline="324" endline="341">vpr::Device::setupExtensions</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_device_data_members_1ab137e7d0db54833e79860886148e1d54" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; vpr::DeviceDataMembers::copiedExtensionStrings</definition>
+        <argsstring></argsstring>
+        <name>copiedExtensionStrings</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="19" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="19" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_device_data_members_1a3d083fd1add161c9cc785e0a57aa6583" compoundref="_logical_device_8cpp" startline="438" endline="447">prepareRequiredExtensions</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_device_data_members_1a9ec824eaad8a92d25ebd9d431a00143d" prot="public" static="no" mutable="no">
+        <type>const <ref refid="classvpr_1_1_device" kindref="compound">Device</ref> *</type>
+        <definition>const Device* vpr::DeviceDataMembers::device</definition>
+        <argsstring></argsstring>
+        <name>device</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="20" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="20" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_device_data_members_1a5901117e963f71eaa85717faab3f796d" compoundref="_logical_device_8cpp" startline="461" endline="491">checkExtensions</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_device_data_members_1a2749c85ee4120b3d2c68bb746db6035a" prot="public" static="no" mutable="no">
+        <type>std::map&lt; VkQueueFlags, VkDeviceQueueCreateInfo &gt;</type>
+        <definition>std::map&lt;VkQueueFlags, VkDeviceQueueCreateInfo&gt; vpr::DeviceDataMembers::queueInfos</definition>
+        <argsstring></argsstring>
+        <name>queueInfos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="21" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="21" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_device_1a3b0734cd598d9a64f3c459e9dc4e84ce" compoundref="_logical_device_8cpp" startline="271" endline="297">vpr::Device::create</referencedby>
+        <referencedby refid="classvpr_1_1_device_1abdb29331fbcc15a242b3f0e82b02beef" compoundref="_logical_device_8cpp" startline="354" endline="373">vpr::Device::setupComputeQueues</referencedby>
+        <referencedby refid="classvpr_1_1_device_1adbe15d529a11af4d7034a2135255e773" compoundref="_logical_device_8cpp" startline="343" endline="352">vpr::Device::setupGraphicsQueues</referencedby>
+        <referencedby refid="classvpr_1_1_device_1a22ee8e6517d4898282d9d6385545100a" compoundref="_logical_device_8cpp" startline="394" endline="411">vpr::Device::setupSparseBindingQueues</referencedby>
+        <referencedby refid="classvpr_1_1_device_1aa64b2412561fa0950722c2dc4997da9f" compoundref="_logical_device_8cpp" startline="375" endline="392">vpr::Device::setupTransferQueues</referencedby>
+        <referencedby refid="classvpr_1_1_device_1a33f34c1c36dc71aa2905bce9e48b3c3f" compoundref="_logical_device_8cpp" startline="156" endline="168">vpr::Device::SparseBindingQueue</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1_device_data_members_1afdb20df24cdc3a4d75ba41f3677e4f3f" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vpr::DeviceDataMembers::enableDedicatedAllocations</definition>
+        <argsstring></argsstring>
+        <name>enableDedicatedAllocations</name>
+        <initializer>{ false }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="22" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="22" bodyend="-1"/>
+        <referencedby refid="structvpr_1_1_device_data_members_1a74aa0fff140d4e0d31d913975a186f31" compoundref="_logical_device_8cpp" startline="493" endline="510">checkDedicatedAllocExtensions</referencedby>
+        <referencedby refid="classvpr_1_1_device_1a8aa0caf9975fd8eb2948156ee1418044" compoundref="_logical_device_8cpp" startline="85" endline="87">vpr::Device::DedicatedAllocationExtensionsEnabled</referencedby>
+        <referencedby refid="classvpr_1_1_device_1a165976c19ab59de329855485a9dab5aa" compoundref="_logical_device_8cpp" startline="324" endline="341">vpr::Device::setupExtensions</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structvpr_1_1_device_data_members_1a027813afb6fb9a971001026c54e3e691" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>vpr::DeviceDataMembers::DeviceDataMembers</definition>
+        <argsstring>(const Device *p)</argsstring>
+        <name>DeviceDataMembers</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_device" kindref="compound">Device</ref> *</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="16" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_device_data_members_1a3d083fd1add161c9cc785e0a57aa6583" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DeviceDataMembers::prepareRequiredExtensions</definition>
+        <argsstring>(const VprExtensionPack *extensions, std::vector&lt; const char *&gt; &amp;output)</argsstring>
+        <name>prepareRequiredExtensions</name>
+        <param>
+          <type>const <ref refid="structvpr_1_1_vpr_extension_pack" kindref="compound">VprExtensionPack</ref> *</type>
+          <declname>extensions</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; const char *&gt; &amp;</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="23" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="438" bodyend="447"/>
+        <references refid="structvpr_1_1_device_data_members_1a5901117e963f71eaa85717faab3f796d" compoundref="_logical_device_8cpp" startline="461" endline="491">checkExtensions</references>
+        <references refid="structvpr_1_1_device_data_members_1ab137e7d0db54833e79860886148e1d54" compoundref="_logical_device_8cpp" startline="19">copiedExtensionStrings</references>
+        <references refid="structvpr_1_1_vpr_extension_pack_1aa0e225ff9a10af737f99d9568c7de3eb" compoundref="_instance_8hpp" startline="26">vpr::VprExtensionPack::RequiredExtensionCount</references>
+        <references refid="structvpr_1_1_vpr_extension_pack_1a54203e2016f033125ec96249d0cc4720" compoundref="_instance_8hpp" startline="25">vpr::VprExtensionPack::RequiredExtensionNames</references>
+        <referencedby refid="classvpr_1_1_device_1a165976c19ab59de329855485a9dab5aa" compoundref="_logical_device_8cpp" startline="324" endline="341">vpr::Device::setupExtensions</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_device_data_members_1a9e4b2ed2f540350ec9642dbf2e24b1d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DeviceDataMembers::prepareOptionalExtensions</definition>
+        <argsstring>(const VprExtensionPack *extensions, std::vector&lt; const char *&gt; &amp;output) noexcept</argsstring>
+        <name>prepareOptionalExtensions</name>
+        <param>
+          <type>const <ref refid="structvpr_1_1_vpr_extension_pack" kindref="compound">VprExtensionPack</ref> *</type>
+          <declname>extensions</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; const char *&gt; &amp;</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="24" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="449" bodyend="459"/>
+        <referencedby refid="classvpr_1_1_device_1a165976c19ab59de329855485a9dab5aa" compoundref="_logical_device_8cpp" startline="324" endline="341">vpr::Device::setupExtensions</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_device_data_members_1a5901117e963f71eaa85717faab3f796d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DeviceDataMembers::checkExtensions</definition>
+        <argsstring>(std::vector&lt; const char *&gt; &amp;requested_extensions, bool throw_on_error) const</argsstring>
+        <name>checkExtensions</name>
+        <param>
+          <type>std::vector&lt; const char *&gt; &amp;</type>
+          <declname>requested_extensions</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>throw_on_error</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="25" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="461" bodyend="491"/>
+        <references refid="structvpr_1_1_device_data_members_1a9ec824eaad8a92d25ebd9d431a00143d" compoundref="_logical_device_8cpp" startline="20">device</references>
+        <references refid="classvpr_1_1_device_1a25e0b05bb662b335ec214295c46654cc" compoundref="_logical_device_8cpp" startline="210" endline="212">vpr::Device::GetPhysicalDevice</references>
+        <references refid="classvpr_1_1_physical_device_1a00de7d3556d98b1cfda28d1f769f8fa8" compoundref="_physical_device_8cpp" startline="270" endline="272">vpr::PhysicalDevice::vkHandle</references>
+        <referencedby refid="structvpr_1_1_device_data_members_1a3d083fd1add161c9cc785e0a57aa6583" compoundref="_logical_device_8cpp" startline="438" endline="447">prepareRequiredExtensions</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvpr_1_1_device_data_members_1a74aa0fff140d4e0d31d913975a186f31" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DeviceDataMembers::checkDedicatedAllocExtensions</definition>
+        <argsstring>(const std::vector&lt; const char *&gt; &amp;exts)</argsstring>
+        <name>checkDedicatedAllocExtensions</name>
+        <param>
+          <type>const std::vector&lt; const char *&gt; &amp;</type>
+          <declname>exts</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/src/LogicalDevice.cpp" line="26" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="493" bodyend="510"/>
+        <references refid="structvpr_1_1_device_data_members_1afdb20df24cdc3a4d75ba41f3677e4f3f" compoundref="_logical_device_8cpp" startline="22">enableDedicatedAllocations</references>
+        <references refid="namespacevpr_1a85a5d8c5ba83b162eda5df835a7e6e4d" compoundref="vpr__stdafx_8h" startline="31">vpr::VERBOSE_LOGGING</references>
+        <referencedby refid="classvpr_1_1_device_1a165976c19ab59de329855485a9dab5aa" compoundref="_logical_device_8cpp" startline="324" endline="341">vpr::Device::setupExtensions</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="194">
+        <label>vpr::Device</label>
+        <link refid="classvpr_1_1_device"/>
+        <childnode refid="193" relation="usage">
+          <edgelabel>dataMembers</edgelabel>
+        </childnode>
+        <childnode refid="195" relation="usage">
+          <edgelabel>queueFamilyIndices</edgelabel>
+        </childnode>
+        <childnode refid="196" relation="usage">
+          <edgelabel>parent</edgelabel>
+        </childnode>
+        <childnode refid="200" relation="usage">
+          <edgelabel>debugUtilsHandler</edgelabel>
+        </childnode>
+        <childnode refid="201" relation="usage">
+          <edgelabel>parentInstance</edgelabel>
+        </childnode>
+      </node>
+      <node id="198">
+        <label>vpr::PhysicalDeviceImpl</label>
+        <link refid="classvpr_1_1_physical_device_impl"/>
+        <childnode refid="199" relation="usage">
+          <edgelabel>queueFamilyProperties</edgelabel>
+        </childnode>
+      </node>
+      <node id="197">
+        <label>std::unique_ptr&lt; vpr::PhysicalDeviceImpl &gt;</label>
+        <childnode refid="198" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="195">
+        <label>vpr::vkQueueFamilyIndices</label>
+        <link refid="structvpr_1_1vk_queue_family_indices"/>
+      </node>
+      <node id="193">
+        <label>vpr::DeviceDataMembers</label>
+        <link refid="structvpr_1_1_device_data_members"/>
+        <childnode refid="194" relation="usage">
+          <edgelabel>device</edgelabel>
+        </childnode>
+        <childnode refid="207" relation="usage">
+          <edgelabel>queueInfos</edgelabel>
+        </childnode>
+        <childnode refid="203" relation="usage">
+          <edgelabel>enabledExtensions</edgelabel>
+        </childnode>
+        <childnode refid="204" relation="usage">
+          <edgelabel>copiedExtensionStrings</edgelabel>
+        </childnode>
+      </node>
+      <node id="206">
+        <label>std::basic_string&lt; char &gt;</label>
+      </node>
+      <node id="202">
+        <label>vpr::InstanceExtensionHandler</label>
+        <link refid="structvpr_1_1_instance_extension_handler"/>
+        <childnode refid="203" relation="usage">
+          <edgelabel>extensionStrings</edgelabel>
+        </childnode>
+        <childnode refid="204" relation="usage">
+          <edgelabel>copiedExtensionStrings</edgelabel>
+        </childnode>
+      </node>
+      <node id="204">
+        <label>std::vector&lt; std::string &gt;</label>
+        <childnode refid="205" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="200">
+        <label>vpr::VkDebugUtilsFunctions</label>
+        <link refid="structvpr_1_1_vk_debug_utils_functions"/>
+      </node>
+      <node id="199">
+        <label>std::vector&lt; VkQueueFamilyProperties &gt;</label>
+      </node>
+      <node id="207">
+        <label>std::map&lt; VkQueueFlags, VkDeviceQueueCreateInfo &gt;</label>
+      </node>
+      <node id="201">
+        <label>vpr::Instance</label>
+        <link refid="classvpr_1_1_instance"/>
+        <childnode refid="202" relation="usage">
+          <edgelabel>extensionHandler</edgelabel>
+        </childnode>
+      </node>
+      <node id="196">
+        <label>vpr::PhysicalDevice</label>
+        <link refid="classvpr_1_1_physical_device"/>
+        <childnode refid="197" relation="usage">
+          <edgelabel>impl</edgelabel>
+        </childnode>
+      </node>
+      <node id="203">
+        <label>std::vector&lt; const char *&gt;</label>
+      </node>
+      <node id="205">
+        <label>std::string</label>
+        <childnode refid="206" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="core/src/LogicalDevice.cpp" line="15" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="15" bodyend="27"/>
+    <listofallmembers>
+      <member refid="structvpr_1_1_device_data_members_1a74aa0fff140d4e0d31d913975a186f31" prot="public" virt="non-virtual"><scope>vpr::DeviceDataMembers</scope><name>checkDedicatedAllocExtensions</name></member>
+      <member refid="structvpr_1_1_device_data_members_1a5901117e963f71eaa85717faab3f796d" prot="public" virt="non-virtual"><scope>vpr::DeviceDataMembers</scope><name>checkExtensions</name></member>
+      <member refid="structvpr_1_1_device_data_members_1ab137e7d0db54833e79860886148e1d54" prot="public" virt="non-virtual"><scope>vpr::DeviceDataMembers</scope><name>copiedExtensionStrings</name></member>
+      <member refid="structvpr_1_1_device_data_members_1a9ec824eaad8a92d25ebd9d431a00143d" prot="public" virt="non-virtual"><scope>vpr::DeviceDataMembers</scope><name>device</name></member>
+      <member refid="structvpr_1_1_device_data_members_1a027813afb6fb9a971001026c54e3e691" prot="public" virt="non-virtual"><scope>vpr::DeviceDataMembers</scope><name>DeviceDataMembers</name></member>
+      <member refid="structvpr_1_1_device_data_members_1afdb20df24cdc3a4d75ba41f3677e4f3f" prot="public" virt="non-virtual"><scope>vpr::DeviceDataMembers</scope><name>enableDedicatedAllocations</name></member>
+      <member refid="structvpr_1_1_device_data_members_1a449cf695be146d6e160a8976221fc58a" prot="public" virt="non-virtual"><scope>vpr::DeviceDataMembers</scope><name>enabledExtensions</name></member>
+      <member refid="structvpr_1_1_device_data_members_1a9e4b2ed2f540350ec9642dbf2e24b1d4" prot="public" virt="non-virtual"><scope>vpr::DeviceDataMembers</scope><name>prepareOptionalExtensions</name></member>
+      <member refid="structvpr_1_1_device_data_members_1a3d083fd1add161c9cc785e0a57aa6583" prot="public" virt="non-virtual"><scope>vpr::DeviceDataMembers</scope><name>prepareRequiredExtensions</name></member>
+      <member refid="structvpr_1_1_device_data_members_1a2749c85ee4120b3d2c68bb746db6035a" prot="public" virt="non-virtual"><scope>vpr::DeviceDataMembers</scope><name>queueInfos</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

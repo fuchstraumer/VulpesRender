@@ -1,0 +1,422 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="classvpr_1_1_shader_module" kind="class" language="C++" prot="public">
+    <compoundname>vpr::ShaderModule</compoundname>
+    <includes refid="_shader_module_8hpp" local="no">ShaderModule.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classvpr_1_1_shader_module_1ae499f64191c5e8f866eb4d158ff11dae" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="structvpr_1_1_shader_code_file_loader" kindref="compound">ShaderCodeFileLoader</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;ShaderCodeFileLoader&gt; vpr::ShaderModule::fileLoader</definition>
+        <argsstring></argsstring>
+        <name>fileLoader</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="45" column="1" bodyfile="resource/include/ShaderModule.hpp" bodystart="45" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_shader_module_1ae830f1030e0c7d5da745836cd976951f" compoundref="_shader_module_8cpp" startline="36" endline="55">ShaderModule</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_shader_module_1ae4774b0393c91e856ef23679d4fe5cbc" prot="private" static="no" mutable="no">
+        <type>VkDevice</type>
+        <definition>VkDevice vpr::ShaderModule::parent</definition>
+        <argsstring></argsstring>
+        <name>parent</name>
+        <initializer>{ VK_NULL_HANDLE }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="46" column="1" bodyfile="resource/include/ShaderModule.hpp" bodystart="46" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_shader_module_1ae830f1030e0c7d5da745836cd976951f" compoundref="_shader_module_8cpp" startline="36" endline="55">ShaderModule</referencedby>
+        <referencedby refid="classvpr_1_1_shader_module_1a692db07eaecd64c280cbdacfc37440ec" compoundref="_shader_module_8cpp" startline="85" endline="89">~ShaderModule</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_shader_module_1a945152a93bf4647196b4ea234fe980db" prot="private" static="no" mutable="no">
+        <type>VkShaderStageFlagBits</type>
+        <definition>VkShaderStageFlagBits vpr::ShaderModule::stages</definition>
+        <argsstring></argsstring>
+        <name>stages</name>
+        <initializer>{ VK_SHADER_STAGE_FLAG_BITS_MAX_ENUM }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="47" column="1" bodyfile="resource/include/ShaderModule.hpp" bodystart="47" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_shader_module_1ae830f1030e0c7d5da745836cd976951f" compoundref="_shader_module_8cpp" startline="36" endline="55">ShaderModule</referencedby>
+        <referencedby refid="classvpr_1_1_shader_module_1a955322640b91687826230a6af5956621" compoundref="_shader_module_8cpp" startline="110" endline="112">StageBits</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_shader_module_1a388c1ef1a0b86a4e34f1c455dc6c0d99" prot="private" static="no" mutable="no">
+        <type>VkPipelineShaderStageCreateInfo</type>
+        <definition>VkPipelineShaderStageCreateInfo vpr::ShaderModule::pipelineInfo</definition>
+        <argsstring></argsstring>
+        <name>pipelineInfo</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="48" column="1" bodyfile="resource/include/ShaderModule.hpp" bodystart="48" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_shader_module_1a65d9a62a6f638bce51839e244dcd0c1c" compoundref="_shader_module_8cpp" startline="118" endline="120">PipelineInfo</referencedby>
+        <referencedby refid="classvpr_1_1_shader_module_1ae830f1030e0c7d5da745836cd976951f" compoundref="_shader_module_8cpp" startline="36" endline="55">ShaderModule</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_shader_module_1a682b809c2972eaf2a0a0401ab62c57dc" prot="private" static="no" mutable="no">
+        <type>VkShaderModuleCreateInfo</type>
+        <definition>VkShaderModuleCreateInfo vpr::ShaderModule::createInfo</definition>
+        <argsstring></argsstring>
+        <name>createInfo</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="49" column="1" bodyfile="resource/include/ShaderModule.hpp" bodystart="49" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_shader_module_1a4b56c37231c31ddff973e5987f753e13" compoundref="_shader_module_8cpp" startline="114" endline="116">CreateInfo</referencedby>
+        <referencedby refid="classvpr_1_1_shader_module_1ae830f1030e0c7d5da745836cd976951f" compoundref="_shader_module_8cpp" startline="36" endline="55">ShaderModule</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_shader_module_1aed80d0bf55bbe0d86ec887eb2720cea9" prot="private" static="no" mutable="no">
+        <type>VkShaderModule</type>
+        <definition>VkShaderModule vpr::ShaderModule::handle</definition>
+        <argsstring></argsstring>
+        <name>handle</name>
+        <initializer>{ VK_NULL_HANDLE }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="50" column="1" bodyfile="resource/include/ShaderModule.hpp" bodystart="50" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_shader_module_1ae830f1030e0c7d5da745836cd976951f" compoundref="_shader_module_8cpp" startline="36" endline="55">ShaderModule</referencedby>
+        <referencedby refid="classvpr_1_1_shader_module_1a4c798e81970ffb6d5b4d201e920b9c3e" compoundref="_shader_module_8cpp" startline="106" endline="108">vkHandle</referencedby>
+        <referencedby refid="classvpr_1_1_shader_module_1a692db07eaecd64c280cbdacfc37440ec" compoundref="_shader_module_8cpp" startline="85" endline="89">~ShaderModule</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_shader_module_1ab9cbfc46a30a41bab28956d4175de38a" prot="private" static="no" mutable="no">
+        <type>const VkAllocationCallbacks *</type>
+        <definition>const VkAllocationCallbacks* vpr::ShaderModule::allocators</definition>
+        <argsstring></argsstring>
+        <name>allocators</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="51" column="1" bodyfile="resource/include/ShaderModule.hpp" bodystart="51" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_shader_module_1ae830f1030e0c7d5da745836cd976951f" compoundref="_shader_module_8cpp" startline="36" endline="55">ShaderModule</referencedby>
+        <referencedby refid="classvpr_1_1_shader_module_1a692db07eaecd64c280cbdacfc37440ec" compoundref="_shader_module_8cpp" startline="85" endline="89">~ShaderModule</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classvpr_1_1_shader_module_1a12bd4a698a41ca2d94793e2f6326eadc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::ShaderModule::ShaderModule</definition>
+        <argsstring>(const ShaderModule &amp;)=delete</argsstring>
+        <name>ShaderModule</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_shader_module" kindref="compound">ShaderModule</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="16" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_shader_module_1a43d7836b4e19879023dd43d6cb3e22f4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_shader_module" kindref="compound">ShaderModule</ref> &amp;</type>
+        <definition>ShaderModule&amp; vpr::ShaderModule::operator=</definition>
+        <argsstring>(const ShaderModule &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_shader_module" kindref="compound">ShaderModule</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="17" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classvpr_1_1_shader_module_1ae830f1030e0c7d5da745836cd976951f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::ShaderModule::ShaderModule</definition>
+        <argsstring>(const VkDevice &amp;device, const char *filename, const VkShaderStageFlagBits &amp;stages, const char *entry_point=nullptr)</argsstring>
+        <name>ShaderModule</name>
+        <param>
+          <type>const VkDevice &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>const VkShaderStageFlagBits &amp;</type>
+          <declname>stages</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>entry_point</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Creates a new shader for the given stage by reading from the specified file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entry_point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>This optional parameter decides what point to invoke/execute the given shader from. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="23" column="1" bodyfile="resource/src/ShaderModule.cpp" bodystart="36" bodyend="55"/>
+        <references refid="classvpr_1_1_shader_module_1ab9cbfc46a30a41bab28956d4175de38a" compoundref="_shader_module_8hpp" startline="51">allocators</references>
+        <references refid="classvpr_1_1_shader_module_1a682b809c2972eaf2a0a0401ab62c57dc" compoundref="_shader_module_8hpp" startline="49">createInfo</references>
+        <references refid="classvpr_1_1_shader_module_1ae499f64191c5e8f866eb4d158ff11dae" compoundref="_shader_module_8hpp" startline="45">fileLoader</references>
+        <references refid="classvpr_1_1_shader_module_1aed80d0bf55bbe0d86ec887eb2720cea9" compoundref="_shader_module_8hpp" startline="50">handle</references>
+        <references refid="classvpr_1_1_shader_module_1ae4774b0393c91e856ef23679d4fe5cbc" compoundref="_shader_module_8hpp" startline="46">parent</references>
+        <references refid="classvpr_1_1_shader_module_1a388c1ef1a0b86a4e34f1c455dc6c0d99" compoundref="_shader_module_8hpp" startline="48">pipelineInfo</references>
+        <references refid="classvpr_1_1_shader_module_1a945152a93bf4647196b4ea234fe980db" compoundref="_shader_module_8hpp" startline="47">stages</references>
+        <references refid="vk_assert_8hpp_1a92c2e07b0d021fc331be70a65c61dacc" compoundref="vk_assert_8hpp" startline="9">VkAssert</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_shader_module_1abc93a8112697e4990bbd74d2c4100769" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::ShaderModule::ShaderModule</definition>
+        <argsstring>(const VkDevice &amp;device, const VkShaderStageFlagBits &amp;stages, const uint32_t *binary_source, const uint32_t &amp;binary_source_length)</argsstring>
+        <name>ShaderModule</name>
+        <param>
+          <type>const VkDevice &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>const VkShaderStageFlagBits &amp;</type>
+          <declname>stages</declname>
+        </param>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>binary_source</declname>
+        </param>
+        <param>
+          <type>const uint32_t &amp;</type>
+          <declname>binary_source_length</declname>
+        </param>
+        <briefdescription>
+<para>Creates a new shader for the given stage by using the given binary data array. </para>        </briefdescription>
+        <detaileddescription>
+<para>Will be slightly faster, as it doesn&apos;t have to open a file and copy that data into the program. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="27" column="1" bodyfile="resource/src/ShaderModule.cpp" bodystart="57" bodyend="72"/>
+        <references refid="classvpr_1_1_shader_module_1ab9cbfc46a30a41bab28956d4175de38a" compoundref="_shader_module_8hpp" startline="51">allocators</references>
+        <references refid="classvpr_1_1_shader_module_1a682b809c2972eaf2a0a0401ab62c57dc" compoundref="_shader_module_8hpp" startline="49">createInfo</references>
+        <references refid="classvpr_1_1_shader_module_1aed80d0bf55bbe0d86ec887eb2720cea9" compoundref="_shader_module_8hpp" startline="50">handle</references>
+        <references refid="classvpr_1_1_shader_module_1ae4774b0393c91e856ef23679d4fe5cbc" compoundref="_shader_module_8hpp" startline="46">parent</references>
+        <references refid="classvpr_1_1_shader_module_1a388c1ef1a0b86a4e34f1c455dc6c0d99" compoundref="_shader_module_8hpp" startline="48">pipelineInfo</references>
+        <references refid="classvpr_1_1_shader_module_1a945152a93bf4647196b4ea234fe980db" compoundref="_shader_module_8hpp" startline="47">stages</references>
+        <references refid="namespacevpr_1a7326eb5b7e23a4f852eb1dffac781fb0" compoundref="_create_info_base_8hpp" startline="293">vpr::vk_pipeline_shader_stage_create_info_base</references>
+        <references refid="namespacevpr_1ac5287046e7113ad06ea5045449717205" compoundref="_create_info_base_8hpp" startline="285">vpr::vk_shader_module_create_info_base</references>
+        <references refid="vk_assert_8hpp_1a92c2e07b0d021fc331be70a65c61dacc" compoundref="vk_assert_8hpp" startline="9">VkAssert</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_shader_module_1a1972ed580d171dddaaf3f2555fd4b0ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::ShaderModule::ShaderModule</definition>
+        <argsstring>(const VkDevice &amp;device, const char *filename, VkPipelineShaderStageCreateInfo &amp;create_info)</argsstring>
+        <name>ShaderModule</name>
+        <param>
+          <type>const VkDevice &amp;</type>
+          <declname>device</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>VkPipelineShaderStageCreateInfo &amp;</type>
+          <declname>create_info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="28" column="1" bodyfile="resource/src/ShaderModule.cpp" bodystart="74" bodyend="82"/>
+        <references refid="classvpr_1_1_shader_module_1ab9cbfc46a30a41bab28956d4175de38a" compoundref="_shader_module_8hpp" startline="51">allocators</references>
+        <references refid="classvpr_1_1_shader_module_1a682b809c2972eaf2a0a0401ab62c57dc" compoundref="_shader_module_8hpp" startline="49">createInfo</references>
+        <references refid="classvpr_1_1_shader_module_1ae499f64191c5e8f866eb4d158ff11dae" compoundref="_shader_module_8hpp" startline="45">fileLoader</references>
+        <references refid="classvpr_1_1_shader_module_1aed80d0bf55bbe0d86ec887eb2720cea9" compoundref="_shader_module_8hpp" startline="50">handle</references>
+        <references refid="classvpr_1_1_shader_module_1ae4774b0393c91e856ef23679d4fe5cbc" compoundref="_shader_module_8hpp" startline="46">parent</references>
+        <references refid="vk_assert_8hpp_1a92c2e07b0d021fc331be70a65c61dacc" compoundref="vk_assert_8hpp" startline="9">VkAssert</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_shader_module_1a692db07eaecd64c280cbdacfc37440ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::ShaderModule::~ShaderModule</definition>
+        <argsstring>()</argsstring>
+        <name>~ShaderModule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="29" column="1" bodyfile="resource/src/ShaderModule.cpp" bodystart="85" bodyend="89"/>
+        <references refid="classvpr_1_1_shader_module_1ab9cbfc46a30a41bab28956d4175de38a" compoundref="_shader_module_8hpp" startline="51">allocators</references>
+        <references refid="classvpr_1_1_shader_module_1aed80d0bf55bbe0d86ec887eb2720cea9" compoundref="_shader_module_8hpp" startline="50">handle</references>
+        <references refid="classvpr_1_1_shader_module_1ae4774b0393c91e856ef23679d4fe5cbc" compoundref="_shader_module_8hpp" startline="46">parent</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_shader_module_1aa1f62437461e5b9d59247ecdd85fe4de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::ShaderModule::ShaderModule</definition>
+        <argsstring>(ShaderModule &amp;&amp;other) noexcept</argsstring>
+        <name>ShaderModule</name>
+        <param>
+          <type><ref refid="classvpr_1_1_shader_module" kindref="compound">ShaderModule</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="31" column="1" bodyfile="resource/src/ShaderModule.cpp" bodystart="92" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_shader_module_1af8cab7f3fa2555557cd96c6788ed69bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_shader_module" kindref="compound">ShaderModule</ref> &amp;</type>
+        <definition>ShaderModule &amp; vpr::ShaderModule::operator=</definition>
+        <argsstring>(ShaderModule &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classvpr_1_1_shader_module" kindref="compound">ShaderModule</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="32" column="1" bodyfile="resource/src/ShaderModule.cpp" bodystart="96" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_shader_module_1a4c798e81970ffb6d5b4d201e920b9c3e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const VkShaderModule &amp;</type>
+        <definition>const VkShaderModule &amp; vpr::ShaderModule::vkHandle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>vkHandle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="34" column="1" bodyfile="resource/src/ShaderModule.cpp" bodystart="106" bodyend="108"/>
+        <references refid="classvpr_1_1_shader_module_1aed80d0bf55bbe0d86ec887eb2720cea9" compoundref="_shader_module_8hpp" startline="50">handle</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_shader_module_1a955322640b91687826230a6af5956621" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const VkShaderStageFlagBits &amp;</type>
+        <definition>const VkShaderStageFlagBits &amp; vpr::ShaderModule::StageBits</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>StageBits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="36" column="1" bodyfile="resource/src/ShaderModule.cpp" bodystart="110" bodyend="112"/>
+        <references refid="classvpr_1_1_shader_module_1a945152a93bf4647196b4ea234fe980db" compoundref="_shader_module_8hpp" startline="47">stages</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_shader_module_1a4b56c37231c31ddff973e5987f753e13" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const VkShaderModuleCreateInfo &amp;</type>
+        <definition>const VkShaderModuleCreateInfo &amp; vpr::ShaderModule::CreateInfo</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>CreateInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="37" column="1" bodyfile="resource/src/ShaderModule.cpp" bodystart="114" bodyend="116"/>
+        <references refid="classvpr_1_1_shader_module_1a682b809c2972eaf2a0a0401ab62c57dc" compoundref="_shader_module_8hpp" startline="49">createInfo</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_shader_module_1a65d9a62a6f638bce51839e244dcd0c1c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const VkPipelineShaderStageCreateInfo &amp;</type>
+        <definition>const VkPipelineShaderStageCreateInfo &amp; vpr::ShaderModule::PipelineInfo</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>PipelineInfo</name>
+        <briefdescription>
+<para>Retrieves the object required to bind/use this shader in a pipeline. </para>        </briefdescription>
+        <detaileddescription>
+<para>Fields are already filled out: should not be modified. Only potential modification point would be changing the entry point, after creating a fresh copy of this object - this is left to advanced users though, so it won&apos;t be explained more here. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/ShaderModule.hpp" line="42" column="1" bodyfile="resource/src/ShaderModule.cpp" bodystart="118" bodyend="120"/>
+        <references refid="classvpr_1_1_shader_module_1a388c1ef1a0b86a4e34f1c455dc6c0d99" compoundref="_shader_module_8hpp" startline="48">pipelineInfo</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A thoroughly thin wrapper around a VkShaderModule object, whose primary utility beyond RAII resource management is setting up the VkPipelineShaderStageCreateInfo required when creating/setting up an objects graphics pipeline. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="315">
+        <label>std::unique_ptr&lt; vpr::ShaderCodeFileLoader &gt;</label>
+        <childnode refid="316" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="314">
+        <label>vpr::ShaderModule</label>
+        <link refid="classvpr_1_1_shader_module"/>
+        <childnode refid="315" relation="usage">
+          <edgelabel>fileLoader</edgelabel>
+        </childnode>
+      </node>
+      <node id="316">
+        <label>vpr::ShaderCodeFileLoader</label>
+        <link refid="structvpr_1_1_shader_code_file_loader"/>
+      </node>
+    </collaborationgraph>
+    <location file="resource/include/ShaderModule.hpp" line="15" column="1" bodyfile="resource/include/ShaderModule.hpp" bodystart="15" bodyend="52"/>
+    <listofallmembers>
+      <member refid="classvpr_1_1_shader_module_1ab9cbfc46a30a41bab28956d4175de38a" prot="private" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>allocators</name></member>
+      <member refid="classvpr_1_1_shader_module_1a682b809c2972eaf2a0a0401ab62c57dc" prot="private" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>createInfo</name></member>
+      <member refid="classvpr_1_1_shader_module_1a4b56c37231c31ddff973e5987f753e13" prot="public" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>CreateInfo</name></member>
+      <member refid="classvpr_1_1_shader_module_1ae499f64191c5e8f866eb4d158ff11dae" prot="private" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>fileLoader</name></member>
+      <member refid="classvpr_1_1_shader_module_1aed80d0bf55bbe0d86ec887eb2720cea9" prot="private" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>handle</name></member>
+      <member refid="classvpr_1_1_shader_module_1a43d7836b4e19879023dd43d6cb3e22f4" prot="private" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_shader_module_1af8cab7f3fa2555557cd96c6788ed69bb" prot="public" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_shader_module_1ae4774b0393c91e856ef23679d4fe5cbc" prot="private" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>parent</name></member>
+      <member refid="classvpr_1_1_shader_module_1a388c1ef1a0b86a4e34f1c455dc6c0d99" prot="private" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>pipelineInfo</name></member>
+      <member refid="classvpr_1_1_shader_module_1a65d9a62a6f638bce51839e244dcd0c1c" prot="public" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>PipelineInfo</name></member>
+      <member refid="classvpr_1_1_shader_module_1a12bd4a698a41ca2d94793e2f6326eadc" prot="private" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>ShaderModule</name></member>
+      <member refid="classvpr_1_1_shader_module_1ae830f1030e0c7d5da745836cd976951f" prot="public" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>ShaderModule</name></member>
+      <member refid="classvpr_1_1_shader_module_1abc93a8112697e4990bbd74d2c4100769" prot="public" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>ShaderModule</name></member>
+      <member refid="classvpr_1_1_shader_module_1a1972ed580d171dddaaf3f2555fd4b0ca" prot="public" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>ShaderModule</name></member>
+      <member refid="classvpr_1_1_shader_module_1aa1f62437461e5b9d59247ecdd85fe4de" prot="public" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>ShaderModule</name></member>
+      <member refid="classvpr_1_1_shader_module_1a955322640b91687826230a6af5956621" prot="public" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>StageBits</name></member>
+      <member refid="classvpr_1_1_shader_module_1a945152a93bf4647196b4ea234fe980db" prot="private" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>stages</name></member>
+      <member refid="classvpr_1_1_shader_module_1a4c798e81970ffb6d5b4d201e920b9c3e" prot="public" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>vkHandle</name></member>
+      <member refid="classvpr_1_1_shader_module_1a692db07eaecd64c280cbdacfc37440ec" prot="public" virt="non-virtual"><scope>vpr::ShaderModule</scope><name>~ShaderModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

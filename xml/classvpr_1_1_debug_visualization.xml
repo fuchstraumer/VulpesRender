@@ -1,0 +1,305 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="classvpr_1_1_debug_visualization" kind="class" language="C++" prot="public">
+    <compoundname>vpr::DebugVisualization</compoundname>
+    <includes refid="_debug_visualization_8hpp" local="no">DebugVisualization.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classvpr_1_1_debug_visualization_1afa5be028ba774ddfe8caf4a6f901a87d" prot="private" static="no" mutable="no">
+        <type><ref refid="structvpr_1_1_debug_visualization_impl" kindref="compound">DebugVisualizationImpl</ref> *</type>
+        <definition>DebugVisualizationImpl* vpr::DebugVisualization::impl</definition>
+        <argsstring></argsstring>
+        <name>impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/DebugVisualization.hpp" line="21" column="1" bodyfile="alloc/include/DebugVisualization.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classvpr_1_1_debug_visualization_1a352316570cabf377af1b4e3deae15fb6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::DebugVisualization::DebugVisualization</definition>
+        <argsstring>(const DebugVisualization &amp;)=delete</argsstring>
+        <name>DebugVisualization</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_debug_visualization" kindref="compound">DebugVisualization</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/DebugVisualization.hpp" line="11" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_debug_visualization_1a726289e55640f364be47d0262f899398" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_debug_visualization" kindref="compound">DebugVisualization</ref> &amp;</type>
+        <definition>DebugVisualization&amp; vpr::DebugVisualization::operator=</definition>
+        <argsstring>(const DebugVisualization &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_debug_visualization" kindref="compound">DebugVisualization</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/DebugVisualization.hpp" line="12" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classvpr_1_1_debug_visualization_1a6aac1aab63deb3a6ab3496cf8e46ce0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::DebugVisualization::DebugVisualization</definition>
+        <argsstring>(Allocator *allocator)</argsstring>
+        <name>DebugVisualization</name>
+        <param>
+          <type><ref refid="classvpr_1_1_allocator" kindref="compound">Allocator</ref> *</type>
+          <declname>allocator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/DebugVisualization.hpp" line="15" column="1" bodyfile="alloc/src/DebugVisualization.cpp" bodystart="54" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_debug_visualization_1a28e3bac78687a88025fb986b34fe27b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DebugVisualization::Draw</definition>
+        <argsstring>()</argsstring>
+        <name>Draw</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/DebugVisualization.hpp" line="17" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_debug_visualization_1a33e94a1b2a97af5f99b369e5b0a4b2ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::DebugVisualization::Update</definition>
+        <argsstring>()</argsstring>
+        <name>Update</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="alloc/include/DebugVisualization.hpp" line="18" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="116">
+        <label>std::list&lt; T &gt;::iterator</label>
+      </node>
+      <node id="96">
+        <label>std::map&lt; AllocatorImpl::AllocationSize, vpr::MemoryBlocksGroup &gt;</label>
+        <childnode refid="97" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="115">
+        <label>std::vector&lt; suballocationList::iterator &gt;</label>
+        <childnode refid="116" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="111">
+        <label>std::vector&lt; std::unique_ptr&lt; vpr::MemoryBlock &gt; &gt;</label>
+        <childnode refid="112" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="120">
+        <label>vpr::Allocation</label>
+        <link refid="classvpr_1_1_allocation"/>
+        <childnode refid="121" relation="usage">
+          <edgelabel>impl</edgelabel>
+        </childnode>
+      </node>
+      <node id="122">
+        <label>vpr::AllocationImpl</label>
+        <link refid="structvpr_1_1_allocation_impl"/>
+      </node>
+      <node id="121">
+        <label>std::unique_ptr&lt; vpr::AllocationImpl &gt;</label>
+        <childnode refid="122" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="100">
+        <label>std::forward_list&lt; vpr::SuballocationDrawCommand &gt;</label>
+        <childnode refid="101" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="104">
+        <label>vpr::AllocatorImpl</label>
+        <link refid="structvpr_1_1_allocator_impl"/>
+        <childnode refid="105" relation="usage">
+          <edgelabel>allocations</edgelabel>
+        </childnode>
+        <childnode refid="117" relation="usage">
+          <edgelabel>emptyAllocations</edgelabel>
+        </childnode>
+        <childnode refid="119" relation="usage">
+          <edgelabel>privateAllocations</edgelabel>
+        </childnode>
+      </node>
+      <node id="94">
+        <label>vpr::DebugVisualization</label>
+        <link refid="classvpr_1_1_debug_visualization"/>
+        <childnode refid="95" relation="usage">
+          <edgelabel>impl</edgelabel>
+        </childnode>
+      </node>
+      <node id="119">
+        <label>std::unordered_set&lt; vpr::Allocation, vpr::AllocationHash &gt;</label>
+        <childnode refid="120" relation="usage">
+          <edgelabel>keys</edgelabel>
+        </childnode>
+      </node>
+      <node id="114">
+        <label>std::list&lt; Suballocation &gt;</label>
+        <childnode refid="103" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="117">
+        <label>std::map&lt; AllocationSize, std::vector&lt; bool &gt; &gt;</label>
+        <childnode refid="118" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="105">
+        <label>std::map&lt; AllocationSize, std::vector&lt; std::unique_ptr&lt; vpr::AllocationCollection &gt; &gt; &gt;</label>
+        <childnode refid="106" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="108">
+        <label>vpr::AllocationCollection</label>
+        <link refid="classvpr_1_1_allocation_collection"/>
+        <childnode refid="109" relation="usage">
+          <edgelabel>allocator</edgelabel>
+        </childnode>
+        <childnode refid="111" relation="usage">
+          <edgelabel>allocations</edgelabel>
+        </childnode>
+      </node>
+      <node id="110">
+        <label>std::unique_ptr&lt; vpr::AllocatorImpl &gt;</label>
+        <childnode refid="104" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="113">
+        <label>vpr::MemoryBlock</label>
+        <link refid="classvpr_1_1_memory_block"/>
+        <childnode refid="114" relation="usage">
+          <edgelabel>Suballocations</edgelabel>
+        </childnode>
+        <childnode refid="115" relation="usage">
+          <edgelabel>availSuballocations</edgelabel>
+        </childnode>
+      </node>
+      <node id="103">
+        <label>vpr::Suballocation</label>
+        <link refid="structvpr_1_1_suballocation"/>
+      </node>
+      <node id="112">
+        <label>std::unique_ptr&lt; vpr::MemoryBlock &gt;</label>
+        <childnode refid="113" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="101">
+        <label>vpr::SuballocationDrawCommand</label>
+        <link refid="structvpr_1_1_suballocation_draw_command"/>
+      </node>
+      <node id="107">
+        <label>std::unique_ptr&lt; vpr::AllocationCollection &gt;</label>
+        <childnode refid="108" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="118">
+        <label>std::vector&lt; bool &gt;</label>
+      </node>
+      <node id="98">
+        <label>std::vector&lt; vpr::MemoryBlockInfo &gt;</label>
+        <childnode refid="99" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="95">
+        <label>vpr::DebugVisualizationImpl</label>
+        <link refid="structvpr_1_1_debug_visualization_impl"/>
+        <childnode refid="96" relation="usage">
+          <edgelabel>Data</edgelabel>
+        </childnode>
+        <childnode refid="104" relation="usage">
+          <edgelabel>allocator</edgelabel>
+        </childnode>
+      </node>
+      <node id="102">
+        <label>std::list&lt; vpr::Suballocation &gt;</label>
+        <childnode refid="103" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="97">
+        <label>vpr::MemoryBlocksGroup</label>
+        <link refid="structvpr_1_1_memory_blocks_group"/>
+        <childnode refid="98" relation="usage">
+          <edgelabel>Blocks</edgelabel>
+        </childnode>
+      </node>
+      <node id="109">
+        <label>vpr::Allocator</label>
+        <link refid="classvpr_1_1_allocator"/>
+        <childnode refid="110" relation="usage">
+          <edgelabel>impl</edgelabel>
+        </childnode>
+      </node>
+      <node id="106">
+        <label>std::vector&lt; std::unique_ptr&lt; vpr::AllocationCollection &gt; &gt;</label>
+        <childnode refid="107" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="99">
+        <label>vpr::MemoryBlockInfo</label>
+        <link refid="structvpr_1_1_memory_block_info"/>
+        <childnode refid="100" relation="usage">
+          <edgelabel>DrawCommands</edgelabel>
+        </childnode>
+        <childnode refid="102" relation="usage">
+          <edgelabel>Suballocations</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="alloc/include/DebugVisualization.hpp" line="10" column="1" bodyfile="alloc/include/DebugVisualization.hpp" bodystart="10" bodyend="22"/>
+    <listofallmembers>
+      <member refid="classvpr_1_1_debug_visualization_1a352316570cabf377af1b4e3deae15fb6" prot="private" virt="non-virtual"><scope>vpr::DebugVisualization</scope><name>DebugVisualization</name></member>
+      <member refid="classvpr_1_1_debug_visualization_1a6aac1aab63deb3a6ab3496cf8e46ce0b" prot="public" virt="non-virtual"><scope>vpr::DebugVisualization</scope><name>DebugVisualization</name></member>
+      <member refid="classvpr_1_1_debug_visualization_1a28e3bac78687a88025fb986b34fe27b1" prot="public" virt="non-virtual"><scope>vpr::DebugVisualization</scope><name>Draw</name></member>
+      <member refid="classvpr_1_1_debug_visualization_1afa5be028ba774ddfe8caf4a6f901a87d" prot="private" virt="non-virtual"><scope>vpr::DebugVisualization</scope><name>impl</name></member>
+      <member refid="classvpr_1_1_debug_visualization_1a726289e55640f364be47d0262f899398" prot="private" virt="non-virtual"><scope>vpr::DebugVisualization</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_debug_visualization_1a33e94a1b2a97af5f99b369e5b0a4b2ea" prot="public" virt="non-virtual"><scope>vpr::DebugVisualization</scope><name>Update</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

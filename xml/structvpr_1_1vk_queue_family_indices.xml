@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="structvpr_1_1vk_queue_family_indices" kind="struct" language="C++" prot="public">
+    <compoundname>vpr::vkQueueFamilyIndices</compoundname>
+    <includes refid="_logical_device_8hpp" local="no">LogicalDevice.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvpr_1_1vk_queue_family_indices_1ad7def5d08c30d9fcb6992455de1c868a" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t vpr::vkQueueFamilyIndices::Graphics</definition>
+        <argsstring></argsstring>
+        <name>Graphics</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/LogicalDevice.hpp" line="17" column="1" bodyfile="core/include/LogicalDevice.hpp" bodystart="17" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_device_1a6a2bdc1c9de2b94e330ba75cb4a0a87b" compoundref="_logical_device_8cpp" startline="144" endline="154">vpr::Device::ComputeQueue</referencedby>
+        <referencedby refid="classvpr_1_1_device_1a6914a8dd1054f00fbdc3454e55b3c14b" compoundref="_logical_device_8cpp" startline="233" endline="249">vpr::Device::GeneralQueue</referencedby>
+        <referencedby refid="classvpr_1_1_device_1ab4de02f4fcdb84f487c8e8f598cc3a77" compoundref="_logical_device_8cpp" startline="125" endline="130">vpr::Device::GraphicsQueue</referencedby>
+        <referencedby refid="classvpr_1_1_device_1af97db14ae016b678dcb2be6061cac5bd" compoundref="_logical_device_8cpp" startline="78" endline="83">vpr::Device::HasDedicatedComputeQueues</referencedby>
+        <referencedby refid="classvpr_1_1_device_1abdb29331fbcc15a242b3f0e82b02beef" compoundref="_logical_device_8cpp" startline="354" endline="373">vpr::Device::setupComputeQueues</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" compoundref="_swapchain_8cpp" startline="299" endline="329">vpr::SwapchainImpl::setupCreateInfo</referencedby>
+        <referencedby refid="classvpr_1_1_device_1adbe15d529a11af4d7034a2135255e773" compoundref="_logical_device_8cpp" startline="343" endline="352">vpr::Device::setupGraphicsQueues</referencedby>
+        <referencedby refid="classvpr_1_1_device_1a22ee8e6517d4898282d9d6385545100a" compoundref="_logical_device_8cpp" startline="394" endline="411">vpr::Device::setupSparseBindingQueues</referencedby>
+        <referencedby refid="classvpr_1_1_device_1aa64b2412561fa0950722c2dc4997da9f" compoundref="_logical_device_8cpp" startline="375" endline="392">vpr::Device::setupTransferQueues</referencedby>
+        <referencedby refid="classvpr_1_1_device_1a33f34c1c36dc71aa2905bce9e48b3c3f" compoundref="_logical_device_8cpp" startline="156" endline="168">vpr::Device::SparseBindingQueue</referencedby>
+        <referencedby refid="classvpr_1_1_device_1af7b303fd1d3a080aa4d160f7c3f10ad5" compoundref="_logical_device_8cpp" startline="132" endline="142">vpr::Device::TransferQueue</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1vk_queue_family_indices_1a8b891aa09d67ff61deb750637d3f06ca" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t vpr::vkQueueFamilyIndices::Compute</definition>
+        <argsstring></argsstring>
+        <name>Compute</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/LogicalDevice.hpp" line="18" column="1" bodyfile="core/include/LogicalDevice.hpp" bodystart="18" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_device_1a6a2bdc1c9de2b94e330ba75cb4a0a87b" compoundref="_logical_device_8cpp" startline="144" endline="154">vpr::Device::ComputeQueue</referencedby>
+        <referencedby refid="classvpr_1_1_device_1af97db14ae016b678dcb2be6061cac5bd" compoundref="_logical_device_8cpp" startline="78" endline="83">vpr::Device::HasDedicatedComputeQueues</referencedby>
+        <referencedby refid="classvpr_1_1_device_1abdb29331fbcc15a242b3f0e82b02beef" compoundref="_logical_device_8cpp" startline="354" endline="373">vpr::Device::setupComputeQueues</referencedby>
+        <referencedby refid="classvpr_1_1_device_1a33f34c1c36dc71aa2905bce9e48b3c3f" compoundref="_logical_device_8cpp" startline="156" endline="168">vpr::Device::SparseBindingQueue</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1vk_queue_family_indices_1a28ae358035391181d9eaa145a9eed738" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t vpr::vkQueueFamilyIndices::Transfer</definition>
+        <argsstring></argsstring>
+        <name>Transfer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/LogicalDevice.hpp" line="19" column="1" bodyfile="core/include/LogicalDevice.hpp" bodystart="19" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_device_1aa64b2412561fa0950722c2dc4997da9f" compoundref="_logical_device_8cpp" startline="375" endline="392">vpr::Device::setupTransferQueues</referencedby>
+        <referencedby refid="classvpr_1_1_device_1af7b303fd1d3a080aa4d160f7c3f10ad5" compoundref="_logical_device_8cpp" startline="132" endline="142">vpr::Device::TransferQueue</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1vk_queue_family_indices_1ae0e29d580f2551312fdfcc2f1c1f104b" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t vpr::vkQueueFamilyIndices::SparseBinding</definition>
+        <argsstring></argsstring>
+        <name>SparseBinding</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/LogicalDevice.hpp" line="20" column="1" bodyfile="core/include/LogicalDevice.hpp" bodystart="20" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_device_1a22ee8e6517d4898282d9d6385545100a" compoundref="_logical_device_8cpp" startline="394" endline="411">vpr::Device::setupSparseBindingQueues</referencedby>
+        <referencedby refid="classvpr_1_1_device_1a33f34c1c36dc71aa2905bce9e48b3c3f" compoundref="_logical_device_8cpp" startline="156" endline="168">vpr::Device::SparseBindingQueue</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structvpr_1_1vk_queue_family_indices_1a418003ff72c5aa57cbec198ca1edee4f" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t vpr::vkQueueFamilyIndices::Present</definition>
+        <argsstring></argsstring>
+        <name>Present</name>
+        <briefdescription>
+<para>On some hardware, there may be a unique presentation queue. </para>        </briefdescription>
+        <detaileddescription>
+<para>In that case, this will be the index of that queue. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/LogicalDevice.hpp" line="22" column="1" bodyfile="core/include/LogicalDevice.hpp" bodystart="22" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_device_1a97c806a212758d83ed537fbf25cf9fe6" compoundref="_logical_device_8cpp" startline="119" endline="123">vpr::Device::checkSurfaceSupport</referencedby>
+        <referencedby refid="structvpr_1_1_swapchain_impl_1a455468d3084cd9503a64f02d3b53956d" compoundref="_swapchain_8cpp" startline="299" endline="329">vpr::SwapchainImpl::setupCreateInfo</referencedby>
+        <referencedby refid="classvpr_1_1_device_1ac71413f7f9988d9479e27f51fc6de197" compoundref="_logical_device_8cpp" startline="413" endline="430">vpr::Device::verifyPresentationSupport</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structvpr_1_1vk_queue_family_indices_1a73c62adbcc7ed0b43eb87080e2a45cd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::vkQueueFamilyIndices::vkQueueFamilyIndices</definition>
+        <argsstring>()</argsstring>
+        <name>vkQueueFamilyIndices</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/LogicalDevice.hpp" line="16" column="1" bodyfile="core/src/LogicalDevice.cpp" bodystart="51" bodyend="52"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Simple wrapper struct for storing queue family indices. </para>    </briefdescription>
+    <detaileddescription>
+<para>Retrieved from <ref refid="classvpr_1_1_device" kindref="compound">Device</ref> instance. </para>    </detaileddescription>
+    <location file="core/include/LogicalDevice.hpp" line="15" column="1" bodyfile="core/include/LogicalDevice.hpp" bodystart="15" bodyend="23"/>
+    <listofallmembers>
+      <member refid="structvpr_1_1vk_queue_family_indices_1a8b891aa09d67ff61deb750637d3f06ca" prot="public" virt="non-virtual"><scope>vpr::vkQueueFamilyIndices</scope><name>Compute</name></member>
+      <member refid="structvpr_1_1vk_queue_family_indices_1ad7def5d08c30d9fcb6992455de1c868a" prot="public" virt="non-virtual"><scope>vpr::vkQueueFamilyIndices</scope><name>Graphics</name></member>
+      <member refid="structvpr_1_1vk_queue_family_indices_1a418003ff72c5aa57cbec198ca1edee4f" prot="public" virt="non-virtual"><scope>vpr::vkQueueFamilyIndices</scope><name>Present</name></member>
+      <member refid="structvpr_1_1vk_queue_family_indices_1ae0e29d580f2551312fdfcc2f1c1f104b" prot="public" virt="non-virtual"><scope>vpr::vkQueueFamilyIndices</scope><name>SparseBinding</name></member>
+      <member refid="structvpr_1_1vk_queue_family_indices_1a28ae358035391181d9eaa145a9eed738" prot="public" virt="non-virtual"><scope>vpr::vkQueueFamilyIndices</scope><name>Transfer</name></member>
+      <member refid="structvpr_1_1vk_queue_family_indices_1a73c62adbcc7ed0b43eb87080e2a45cd4" prot="public" virt="non-virtual"><scope>vpr::vkQueueFamilyIndices</scope><name>vkQueueFamilyIndices</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

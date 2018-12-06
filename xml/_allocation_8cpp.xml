@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_allocation_8cpp" kind="file" language="C++">
+    <compoundname>Allocation.cpp</compoundname>
+    <includes refid="vpr__stdafx_8h" local="yes">vpr_stdafx.h</includes>
+    <includes refid="_allocation_8hpp" local="yes">Allocation.hpp</includes>
+    <includes refid="_memory_block_8hpp" local="yes">MemoryBlock.hpp</includes>
+    <includes local="yes">easylogging++.h</includes>
+    <includes local="no">variant</includes>
+    <includes local="no">limits</includes>
+    <incdepgraph>
+      <node id="49">
+        <label>list</label>
+      </node>
+      <node id="54">
+        <label>limits</label>
+      </node>
+      <node id="37">
+        <label>alloc/src/Allocation.cpp</label>
+        <link refid="_allocation_8cpp"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>easylogging++.h</label>
+      </node>
+      <node id="48">
+        <label>Suballocation.hpp</label>
+        <link refid="_suballocation_8hpp"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>variant</label>
+      </node>
+      <node id="47">
+        <label>cassert</label>
+      </node>
+      <node id="46">
+        <label>stdexcept</label>
+      </node>
+      <node id="40">
+        <label>Allocation.hpp</label>
+        <link refid="_allocation_8hpp"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>vpr_stdafx.h</label>
+        <link refid="vpr__stdafx_8h"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>MemoryBlock.hpp</label>
+        <link refid="_memory_block_8hpp"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>vector</label>
+      </node>
+      <node id="45">
+        <label>utility</label>
+      </node>
+      <node id="39">
+        <label>vulkan/vulkan.h</label>
+      </node>
+      <node id="44">
+        <label>AllocCommon.hpp</label>
+        <link refid="_alloc_common_8hpp"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>mutex</label>
+      </node>
+      <node id="41">
+        <label>ForwardDecl.hpp</label>
+        <link refid="_forward_decl_8hpp"/>
+      </node>
+      <node id="42">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structvpr_1_1_allocation_impl" prot="public">vpr::AllocationImpl</innerclass>
+    <innerclass refid="structvpr_1_1_allocation_impl_1_1block_allocation" prot="public">vpr::AllocationImpl::blockAllocation</innerclass>
+    <innerclass refid="structvpr_1_1_allocation_impl_1_1private_allocation" prot="public">vpr::AllocationImpl::privateAllocation</innerclass>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="alloc/src/Allocation.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,386 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="classvpr_1_1_pipeline_cache" kind="class" language="C++" prot="public">
+    <compoundname>vpr::PipelineCache</compoundname>
+    <includes refid="_pipeline_cache_8hpp" local="no">PipelineCache.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classvpr_1_1_pipeline_cache_1a948bdea40e76c98ab230109e4cbca797" prot="private" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* vpr::PipelineCache::loadedData</definition>
+        <argsstring></argsstring>
+        <name>loadedData</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="52" column="1" bodyfile="resource/include/PipelineCache.hpp" bodystart="52" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1aa982f664e3dd6c95682bfa1084cf9a80" compoundref="_pipeline_cache_8cpp" startline="122" endline="153">LoadCacheFromFile</referencedby>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a4a492a5e4baa390c5c1ff6d137b74ea9" compoundref="_pipeline_cache_8cpp" startline="52" endline="66">~PipelineCache</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_pipeline_cache_1a90a35bb2c1214d085c876b015961f19f" prot="private" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* vpr::PipelineCache::filename</definition>
+        <argsstring></argsstring>
+        <name>filename</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="53" column="1" bodyfile="resource/include/PipelineCache.hpp" bodystart="53" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a19ed8db620df88ec199f92921501341e" compoundref="_pipeline_cache_8cpp" startline="22" endline="50">PipelineCache</referencedby>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a5f5d17b3c6d668d22932ef2b3c6a6122" compoundref="_pipeline_cache_8cpp" startline="163" endline="205">saveToFile</referencedby>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a4a492a5e4baa390c5c1ff6d137b74ea9" compoundref="_pipeline_cache_8cpp" startline="52" endline="66">~PipelineCache</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_pipeline_cache_1a82cc192df08e771e1cc9edc6348ff095" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t vpr::PipelineCache::hashID</definition>
+        <argsstring></argsstring>
+        <name>hashID</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="55" column="1" bodyfile="resource/include/PipelineCache.hpp" bodystart="55" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1aa982f664e3dd6c95682bfa1084cf9a80" compoundref="_pipeline_cache_8cpp" startline="122" endline="153">LoadCacheFromFile</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_pipeline_cache_1ab2cde396822b96c34e4d2950b3bb41f5" prot="private" static="no" mutable="no">
+        <type>VkDevice</type>
+        <definition>VkDevice vpr::PipelineCache::parent</definition>
+        <argsstring></argsstring>
+        <name>parent</name>
+        <initializer>{ VK_NULL_HANDLE }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="56" column="1" bodyfile="resource/include/PipelineCache.hpp" bodystart="56" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a78a37f0e63e2d831370381a4eec032f8" compoundref="_pipeline_cache_8cpp" startline="159" endline="161">MergeCaches</referencedby>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a19ed8db620df88ec199f92921501341e" compoundref="_pipeline_cache_8cpp" startline="22" endline="50">PipelineCache</referencedby>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a5f5d17b3c6d668d22932ef2b3c6a6122" compoundref="_pipeline_cache_8cpp" startline="163" endline="205">saveToFile</referencedby>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a4a492a5e4baa390c5c1ff6d137b74ea9" compoundref="_pipeline_cache_8cpp" startline="52" endline="66">~PipelineCache</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_pipeline_cache_1aca1ef75ae2239a380a1a4d97c338be9c" prot="private" static="no" mutable="no">
+        <type>VkPhysicalDevice</type>
+        <definition>VkPhysicalDevice vpr::PipelineCache::hostPhysicalDevice</definition>
+        <argsstring></argsstring>
+        <name>hostPhysicalDevice</name>
+        <initializer>{ VK_NULL_HANDLE }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="57" column="1" bodyfile="resource/include/PipelineCache.hpp" bodystart="57" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a21856493d10e08b915ce8278c2bc08b0" compoundref="_pipeline_cache_8cpp" startline="88" endline="120">Verify</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_pipeline_cache_1a3a335caf23b04122f33ea94b505dd1cc" prot="private" static="no" mutable="no">
+        <type>VkPipelineCache</type>
+        <definition>VkPipelineCache vpr::PipelineCache::handle</definition>
+        <argsstring></argsstring>
+        <name>handle</name>
+        <initializer>{ VK_NULL_HANDLE }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="58" column="1" bodyfile="resource/include/PipelineCache.hpp" bodystart="58" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a78a37f0e63e2d831370381a4eec032f8" compoundref="_pipeline_cache_8cpp" startline="159" endline="161">MergeCaches</referencedby>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a19ed8db620df88ec199f92921501341e" compoundref="_pipeline_cache_8cpp" startline="22" endline="50">PipelineCache</referencedby>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a5f5d17b3c6d668d22932ef2b3c6a6122" compoundref="_pipeline_cache_8cpp" startline="163" endline="205">saveToFile</referencedby>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1ae6188934cb00eac8de97550c82869b06" compoundref="_pipeline_cache_8cpp" startline="155" endline="157">vkHandle</referencedby>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a4a492a5e4baa390c5c1ff6d137b74ea9" compoundref="_pipeline_cache_8cpp" startline="52" endline="66">~PipelineCache</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classvpr_1_1_pipeline_cache_1a0071c38e56d6c4ce28eb97eedd912d2e" prot="private" static="no" mutable="no">
+        <type>VkPipelineCacheCreateInfo</type>
+        <definition>VkPipelineCacheCreateInfo vpr::PipelineCache::createInfo</definition>
+        <argsstring></argsstring>
+        <name>createInfo</name>
+        <initializer>{ }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="59" column="1" bodyfile="resource/include/PipelineCache.hpp" bodystart="59" bodyend="-1"/>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1aa982f664e3dd6c95682bfa1084cf9a80" compoundref="_pipeline_cache_8cpp" startline="122" endline="153">LoadCacheFromFile</referencedby>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a19ed8db620df88ec199f92921501341e" compoundref="_pipeline_cache_8cpp" startline="22" endline="50">PipelineCache</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classvpr_1_1_pipeline_cache_1a9e2b996c04c92dfbcbe508990d016daf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::PipelineCache::PipelineCache</definition>
+        <argsstring>(const PipelineCache &amp;other)=delete</argsstring>
+        <name>PipelineCache</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_pipeline_cache" kindref="compound">PipelineCache</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="23" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_pipeline_cache_1a062529b6e22dff99adda540edb924445" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_pipeline_cache" kindref="compound">PipelineCache</ref> &amp;</type>
+        <definition>PipelineCache&amp; vpr::PipelineCache::operator=</definition>
+        <argsstring>(const PipelineCache &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classvpr_1_1_pipeline_cache" kindref="compound">PipelineCache</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="24" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_pipeline_cache_1a5f5d17b3c6d668d22932ef2b3c6a6122" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>VkResult</type>
+        <definition>VkResult vpr::PipelineCache::saveToFile</definition>
+        <argsstring>() const</argsstring>
+        <name>saveToFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="54" column="1" bodyfile="resource/src/PipelineCache.cpp" bodystart="163" bodyend="205"/>
+        <references refid="classvpr_1_1_pipeline_cache_1a90a35bb2c1214d085c876b015961f19f" compoundref="_pipeline_cache_8hpp" startline="53">filename</references>
+        <references refid="classvpr_1_1_pipeline_cache_1a3a335caf23b04122f33ea94b505dd1cc" compoundref="_pipeline_cache_8hpp" startline="58">handle</references>
+        <references refid="classvpr_1_1_pipeline_cache_1ab2cde396822b96c34e4d2950b3bb41f5" compoundref="_pipeline_cache_8hpp" startline="56">parent</references>
+        <references refid="vk_assert_8hpp_1a92c2e07b0d021fc331be70a65c61dacc" compoundref="vk_assert_8hpp" startline="9">VkAssert</references>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a4a492a5e4baa390c5c1ff6d137b74ea9" compoundref="_pipeline_cache_8cpp" startline="52" endline="66">~PipelineCache</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classvpr_1_1_pipeline_cache_1a19ed8db620df88ec199f92921501341e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::PipelineCache::PipelineCache</definition>
+        <argsstring>(const VkDevice &amp;parent, const VkPhysicalDevice &amp;host_phys_device, const size_t hash_id)</argsstring>
+        <name>PipelineCache</name>
+        <param>
+          <type>const VkDevice &amp;</type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type>const VkPhysicalDevice &amp;</type>
+          <declname>host_phys_device</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>hash_id</declname>
+        </param>
+        <briefdescription>
+<para>Creates a pipeline cache, or loads a pre-existing one from file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hash_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>This can be nicely setting by using typeid(owning_type).hash_code(), so that types all share a pipline cache and there is still a unique identifier per type. <linebreak/>
+</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>host_phys_device</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>This is required, as pipeline caches are related to the driver of the physical device they belong to. Thus, we need it for validation purposes. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="31" column="1" bodyfile="resource/src/PipelineCache.cpp" bodystart="22" bodyend="50"/>
+        <references refid="classvpr_1_1_pipeline_cache_1a0071c38e56d6c4ce28eb97eedd912d2e" compoundref="_pipeline_cache_8hpp" startline="59">createInfo</references>
+        <references refid="classvpr_1_1_pipeline_cache_1a90a35bb2c1214d085c876b015961f19f" compoundref="_pipeline_cache_8hpp" startline="53">filename</references>
+        <references refid="classvpr_1_1_pipeline_cache_1a3a335caf23b04122f33ea94b505dd1cc" compoundref="_pipeline_cache_8hpp" startline="58">handle</references>
+        <references refid="classvpr_1_1_pipeline_cache_1aa982f664e3dd6c95682bfa1084cf9a80" compoundref="_pipeline_cache_8cpp" startline="122" endline="153">LoadCacheFromFile</references>
+        <references refid="classvpr_1_1_pipeline_cache_1ab2cde396822b96c34e4d2950b3bb41f5" compoundref="_pipeline_cache_8hpp" startline="56">parent</references>
+        <references refid="vk_assert_8hpp_1a92c2e07b0d021fc331be70a65c61dacc" compoundref="vk_assert_8hpp" startline="9">VkAssert</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_pipeline_cache_1a4a492a5e4baa390c5c1ff6d137b74ea9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::PipelineCache::~PipelineCache</definition>
+        <argsstring>()</argsstring>
+        <name>~PipelineCache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="32" column="1" bodyfile="resource/src/PipelineCache.cpp" bodystart="52" bodyend="66"/>
+        <references refid="classvpr_1_1_pipeline_cache_1a90a35bb2c1214d085c876b015961f19f" compoundref="_pipeline_cache_8hpp" startline="53">filename</references>
+        <references refid="classvpr_1_1_pipeline_cache_1a3a335caf23b04122f33ea94b505dd1cc" compoundref="_pipeline_cache_8hpp" startline="58">handle</references>
+        <references refid="classvpr_1_1_pipeline_cache_1a948bdea40e76c98ab230109e4cbca797" compoundref="_pipeline_cache_8hpp" startline="52">loadedData</references>
+        <references refid="classvpr_1_1_pipeline_cache_1ab2cde396822b96c34e4d2950b3bb41f5" compoundref="_pipeline_cache_8hpp" startline="56">parent</references>
+        <references refid="classvpr_1_1_pipeline_cache_1a5f5d17b3c6d668d22932ef2b3c6a6122" compoundref="_pipeline_cache_8cpp" startline="163" endline="205">saveToFile</references>
+        <references refid="vk_assert_8hpp_1a92c2e07b0d021fc331be70a65c61dacc" compoundref="vk_assert_8hpp" startline="9">VkAssert</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_pipeline_cache_1a32c325ca07c0d33b2469b9f071379695" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>vpr::PipelineCache::PipelineCache</definition>
+        <argsstring>(PipelineCache &amp;&amp;other) noexcept</argsstring>
+        <name>PipelineCache</name>
+        <param>
+          <type><ref refid="classvpr_1_1_pipeline_cache" kindref="compound">PipelineCache</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="34" column="1" bodyfile="resource/src/PipelineCache.cpp" bodystart="68" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_pipeline_cache_1a33ea3e0b57606be603bb49db0119ccb2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvpr_1_1_pipeline_cache" kindref="compound">PipelineCache</ref> &amp;</type>
+        <definition>PipelineCache &amp; vpr::PipelineCache::operator=</definition>
+        <argsstring>(PipelineCache &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classvpr_1_1_pipeline_cache" kindref="compound">PipelineCache</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="35" column="1" bodyfile="resource/src/PipelineCache.cpp" bodystart="75" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_pipeline_cache_1a21856493d10e08b915ce8278c2bc08b0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool vpr::PipelineCache::Verify</definition>
+        <argsstring>(const int8_t *cache_header) const</argsstring>
+        <name>Verify</name>
+        <param>
+          <type>const int8_t *</type>
+          <declname>cache_header</declname>
+        </param>
+        <briefdescription>
+<para>Takes a pipeline cache header and checks it for validity. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="38" column="1" bodyfile="resource/src/PipelineCache.cpp" bodystart="88" bodyend="120"/>
+        <references refid="classvpr_1_1_pipeline_cache_1aca1ef75ae2239a380a1a4d97c338be9c" compoundref="_pipeline_cache_8hpp" startline="57">hostPhysicalDevice</references>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1aa982f664e3dd6c95682bfa1084cf9a80" compoundref="_pipeline_cache_8cpp" startline="122" endline="153">LoadCacheFromFile</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_pipeline_cache_1aa982f664e3dd6c95682bfa1084cf9a80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::PipelineCache::LoadCacheFromFile</definition>
+        <argsstring>(const char *filename)</argsstring>
+        <name>LoadCacheFromFile</name>
+        <param>
+          <type>const char *</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+<para>Loads and overwrites potential contents with data loaded from the given file. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="40" column="1" bodyfile="resource/src/PipelineCache.cpp" bodystart="122" bodyend="153"/>
+        <references refid="classvpr_1_1_pipeline_cache_1a0071c38e56d6c4ce28eb97eedd912d2e" compoundref="_pipeline_cache_8hpp" startline="59">createInfo</references>
+        <references refid="classvpr_1_1_pipeline_cache_1a82cc192df08e771e1cc9edc6348ff095" compoundref="_pipeline_cache_8hpp" startline="55">hashID</references>
+        <references refid="classvpr_1_1_pipeline_cache_1a948bdea40e76c98ab230109e4cbca797" compoundref="_pipeline_cache_8hpp" startline="52">loadedData</references>
+        <references refid="classvpr_1_1_pipeline_cache_1a21856493d10e08b915ce8278c2bc08b0" compoundref="_pipeline_cache_8cpp" startline="88" endline="120">Verify</references>
+        <referencedby refid="classvpr_1_1_pipeline_cache_1a19ed8db620df88ec199f92921501341e" compoundref="_pipeline_cache_8cpp" startline="22" endline="50">PipelineCache</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_pipeline_cache_1ae6188934cb00eac8de97550c82869b06" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const VkPipelineCache &amp;</type>
+        <definition>const VkPipelineCache &amp; vpr::PipelineCache::vkHandle</definition>
+        <argsstring>() const</argsstring>
+        <name>vkHandle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="41" column="1" bodyfile="resource/src/PipelineCache.cpp" bodystart="155" bodyend="157"/>
+        <references refid="classvpr_1_1_pipeline_cache_1a3a335caf23b04122f33ea94b505dd1cc" compoundref="_pipeline_cache_8hpp" startline="58">handle</references>
+      </memberdef>
+      <memberdef kind="function" id="classvpr_1_1_pipeline_cache_1a78a37f0e63e2d831370381a4eec032f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void vpr::PipelineCache::MergeCaches</definition>
+        <argsstring>(const uint32_t num_caches, const VkPipelineCache *caches)</argsstring>
+        <name>MergeCaches</name>
+        <param>
+          <type>const uint32_t</type>
+          <declname>num_caches</declname>
+        </param>
+        <param>
+          <type>const VkPipelineCache *</type>
+          <declname>caches</declname>
+        </param>
+        <briefdescription>
+<para>Merges given cache objects into this object. </para>        </briefdescription>
+        <detaileddescription>
+<para>Useful to generate pipelines across several threads, but merge their cache data back into a single object for later re-use.</para><para>Another potential use can be coalescing all created caches back into a single one at the end of a program, to simplify the re-loading process later. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="49" column="1" bodyfile="resource/src/PipelineCache.cpp" bodystart="159" bodyend="161"/>
+        <references refid="classvpr_1_1_pipeline_cache_1a3a335caf23b04122f33ea94b505dd1cc" compoundref="_pipeline_cache_8hpp" startline="58">handle</references>
+        <references refid="classvpr_1_1_pipeline_cache_1ab2cde396822b96c34e4d2950b3bb41f5" compoundref="_pipeline_cache_8hpp" startline="56">parent</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A <ref refid="classvpr_1_1_pipeline_cache" kindref="compound">PipelineCache</ref> is a wrapper around a VkPipelineCache that takes care of several important details that are otherwise difficult to handle: saving and loading pipeline cache data from a file, verifying integrity of pipeline cache files, and cleaning up / repairing old, unused, and outdated pipeline cache files. </para>    </briefdescription>
+    <detaileddescription>
+<para>This object can be used to increase the speed of creating graphics pipeline objects, and is especially useful for pipelines that are:<itemizedlist>
+<listitem><para>very complex and slow to create/recreate after a swapchain recreation</para></listitem><listitem><para>frequently created as part of other objects</para></listitem><listitem><para>for use with dynamic shader editing and recompiliation, which requires a pipeline recreation to propagate changes</para></listitem></itemizedlist>
+</para><para>The pipeline cache is especially helpful when used in MoltenVk - if one is using the runtime Metal shader compiler, then the cache is used to store the converted Metal shader code. By saving and reloading this cache data, then, one can avoid the significant cost of cross-compiling their shaders everytime they restart the program. </para>    </detaileddescription>
+    <location file="resource/include/PipelineCache.hpp" line="22" column="1" bodyfile="resource/include/PipelineCache.hpp" bodystart="22" bodyend="60"/>
+    <listofallmembers>
+      <member refid="classvpr_1_1_pipeline_cache_1a0071c38e56d6c4ce28eb97eedd912d2e" prot="private" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>createInfo</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1a90a35bb2c1214d085c876b015961f19f" prot="private" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>filename</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1a3a335caf23b04122f33ea94b505dd1cc" prot="private" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>handle</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1a82cc192df08e771e1cc9edc6348ff095" prot="private" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>hashID</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1aca1ef75ae2239a380a1a4d97c338be9c" prot="private" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>hostPhysicalDevice</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1aa982f664e3dd6c95682bfa1084cf9a80" prot="public" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>LoadCacheFromFile</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1a948bdea40e76c98ab230109e4cbca797" prot="private" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>loadedData</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1a78a37f0e63e2d831370381a4eec032f8" prot="public" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>MergeCaches</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1a062529b6e22dff99adda540edb924445" prot="private" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1a33ea3e0b57606be603bb49db0119ccb2" prot="public" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>operator=</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1ab2cde396822b96c34e4d2950b3bb41f5" prot="private" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>parent</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1a9e2b996c04c92dfbcbe508990d016daf" prot="private" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>PipelineCache</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1a19ed8db620df88ec199f92921501341e" prot="public" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>PipelineCache</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1a32c325ca07c0d33b2469b9f071379695" prot="public" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>PipelineCache</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1a5f5d17b3c6d668d22932ef2b3c6a6122" prot="private" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>saveToFile</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1a21856493d10e08b915ce8278c2bc08b0" prot="public" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>Verify</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1ae6188934cb00eac8de97550c82869b06" prot="public" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>vkHandle</name></member>
+      <member refid="classvpr_1_1_pipeline_cache_1a4a492a5e4baa390c5c1ff6d137b74ea9" prot="public" virt="non-virtual"><scope>vpr::PipelineCache</scope><name>~PipelineCache</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_physical_device_8cpp" kind="file" language="C++">
+    <compoundname>PhysicalDevice.cpp</compoundname>
+    <includes refid="vpr__stdafx_8h" local="yes">vpr_stdafx.h</includes>
+    <includes refid="_physical_device_8hpp" local="yes">PhysicalDevice.hpp</includes>
+    <includes local="yes">easylogging++.h</includes>
+    <includes local="no">set</includes>
+    <incdepgraph>
+      <node id="535">
+        <label>easylogging++.h</label>
+      </node>
+      <node id="531">
+        <label>vpr_stdafx.h</label>
+        <link refid="vpr__stdafx_8h"/>
+        <childnode refid="532" relation="include">
+        </childnode>
+      </node>
+      <node id="532">
+        <label>vulkan/vulkan.h</label>
+      </node>
+      <node id="530">
+        <label>core/src/PhysicalDevice.cpp</label>
+        <link refid="_physical_device_8cpp"/>
+        <childnode refid="531" relation="include">
+        </childnode>
+        <childnode refid="533" relation="include">
+        </childnode>
+        <childnode refid="535" relation="include">
+        </childnode>
+        <childnode refid="536" relation="include">
+        </childnode>
+      </node>
+      <node id="533">
+        <label>PhysicalDevice.hpp</label>
+        <link refid="_physical_device_8hpp"/>
+        <childnode refid="531" relation="include">
+        </childnode>
+        <childnode refid="534" relation="include">
+        </childnode>
+      </node>
+      <node id="536">
+        <label>set</label>
+      </node>
+      <node id="534">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classvpr_1_1_physical_device_impl" prot="public">vpr::PhysicalDeviceImpl</innerclass>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/src/PhysicalDevice.cpp"/>
+  </compounddef>
+</doxygen>

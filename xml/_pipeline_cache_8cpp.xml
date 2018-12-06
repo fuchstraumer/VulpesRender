@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_pipeline_cache_8cpp" kind="file" language="C++">
+    <compoundname>PipelineCache.cpp</compoundname>
+    <includes refid="vpr__stdafx_8h" local="yes">vpr_stdafx.h</includes>
+    <includes refid="_pipeline_cache_8hpp" local="yes">PipelineCache.hpp</includes>
+    <includes local="yes">easylogging++.h</includes>
+    <includes refid="vk_assert_8hpp" local="yes">vkAssert.hpp</includes>
+    <includes local="no">experimental/filesystem</includes>
+    <incdepgraph>
+      <node id="744">
+        <label>resource/src/PipelineCache.cpp</label>
+        <link refid="_pipeline_cache_8cpp"/>
+        <childnode refid="745" relation="include">
+        </childnode>
+        <childnode refid="747" relation="include">
+        </childnode>
+        <childnode refid="748" relation="include">
+        </childnode>
+        <childnode refid="749" relation="include">
+        </childnode>
+        <childnode refid="752" relation="include">
+        </childnode>
+      </node>
+      <node id="748">
+        <label>easylogging++.h</label>
+      </node>
+      <node id="751">
+        <label>cassert</label>
+      </node>
+      <node id="749">
+        <label>vkAssert.hpp</label>
+        <link refid="vk_assert_8hpp"/>
+        <childnode refid="750" relation="include">
+        </childnode>
+        <childnode refid="751" relation="include">
+        </childnode>
+        <childnode refid="746" relation="include">
+        </childnode>
+      </node>
+      <node id="745">
+        <label>vpr_stdafx.h</label>
+        <link refid="vpr__stdafx_8h"/>
+        <childnode refid="746" relation="include">
+        </childnode>
+      </node>
+      <node id="747">
+        <label>PipelineCache.hpp</label>
+        <link refid="_pipeline_cache_8hpp"/>
+        <childnode refid="745" relation="include">
+        </childnode>
+      </node>
+      <node id="746">
+        <label>vulkan/vulkan.h</label>
+      </node>
+      <node id="750">
+        <label>iostream</label>
+      </node>
+      <node id="752">
+        <label>experimental/filesystem</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="resource/src/PipelineCache.cpp"/>
+  </compounddef>
+</doxygen>

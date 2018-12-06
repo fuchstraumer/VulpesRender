@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="dir_c264934deb5881eb87aeacee0a8612c7" kind="dir">
+    <compoundname>alloc/src</compoundname>
+    <innerfile refid="_allocation_8cpp">Allocation.cpp</innerfile>
+    <innerfile refid="_allocation_collection_8cpp">AllocationCollection.cpp</innerfile>
+    <innerfile refid="_allocation_collection_8hpp">AllocationCollection.hpp</innerfile>
+    <innerfile refid="_allocator_8cpp">Allocator.cpp</innerfile>
+    <innerfile refid="_allocator_impl_8cpp">AllocatorImpl.cpp</innerfile>
+    <innerfile refid="_allocator_impl_8hpp">AllocatorImpl.hpp</innerfile>
+    <innerfile refid="_alloc_common_8hpp">AllocCommon.hpp</innerfile>
+    <innerfile refid="_debug_visualization_8cpp">DebugVisualization.cpp</innerfile>
+    <innerfile refid="_memory_block_8cpp">MemoryBlock.cpp</innerfile>
+    <innerfile refid="_memory_block_8hpp">MemoryBlock.hpp</innerfile>
+    <innerfile refid="_suballocation_8hpp">Suballocation.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="alloc/src/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_swapchain_8hpp" kind="file" language="C++">
+    <compoundname>Swapchain.hpp</compoundname>
+    <includes refid="vpr__stdafx_8h" local="yes">vpr_stdafx.h</includes>
+    <includes refid="_forward_decl_8hpp" local="yes">ForwardDecl.hpp</includes>
+    <includes local="no">memory</includes>
+    <includedby refid="_swapchain_8cpp" local="yes">core/src/Swapchain.cpp</includedby>
+    <incdepgraph>
+      <node id="483">
+        <label>core/include/Swapchain.hpp</label>
+        <link refid="_swapchain_8hpp"/>
+        <childnode refid="484" relation="include">
+        </childnode>
+        <childnode refid="486" relation="include">
+        </childnode>
+        <childnode refid="487" relation="include">
+        </childnode>
+      </node>
+      <node id="484">
+        <label>vpr_stdafx.h</label>
+        <link refid="vpr__stdafx_8h"/>
+        <childnode refid="485" relation="include">
+        </childnode>
+      </node>
+      <node id="485">
+        <label>vulkan/vulkan.h</label>
+      </node>
+      <node id="486">
+        <label>ForwardDecl.hpp</label>
+        <link refid="_forward_decl_8hpp"/>
+      </node>
+      <node id="487">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="488">
+        <label>core/include/Swapchain.hpp</label>
+        <link refid="_swapchain_8hpp"/>
+        <childnode refid="489" relation="include">
+        </childnode>
+      </node>
+      <node id="489">
+        <label>core/src/Swapchain.cpp</label>
+        <link refid="_swapchain_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classvpr_1_1_swapchain" prot="public">vpr::Swapchain</innerclass>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_swapchain_8hpp_1a0c8f927372192bdf1e8635e10fca197a" prot="public" static="no">
+        <name>VULPES_VK_SWAPCHAIN_H</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/include/Swapchain.hpp" line="3" column="9" bodyfile="core/include/Swapchain.hpp" bodystart="3" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/include/Swapchain.hpp"/>
+  </compounddef>
+</doxygen>

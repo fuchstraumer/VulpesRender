@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_pipeline_cache_8hpp" kind="file" language="C++">
+    <compoundname>PipelineCache.hpp</compoundname>
+    <includes refid="vpr__stdafx_8h" local="yes">vpr_stdafx.h</includes>
+    <includedby refid="_pipeline_cache_8cpp" local="yes">resource/src/PipelineCache.cpp</includedby>
+    <incdepgraph>
+      <node id="658">
+        <label>vpr_stdafx.h</label>
+        <link refid="vpr__stdafx_8h"/>
+        <childnode refid="659" relation="include">
+        </childnode>
+      </node>
+      <node id="657">
+        <label>resource/include/PipelineCache.hpp</label>
+        <link refid="_pipeline_cache_8hpp"/>
+        <childnode refid="658" relation="include">
+        </childnode>
+      </node>
+      <node id="659">
+        <label>vulkan/vulkan.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="661">
+        <label>resource/src/PipelineCache.cpp</label>
+        <link refid="_pipeline_cache_8cpp"/>
+      </node>
+      <node id="660">
+        <label>resource/include/PipelineCache.hpp</label>
+        <link refid="_pipeline_cache_8hpp"/>
+        <childnode refid="661" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classvpr_1_1_pipeline_cache" prot="public">vpr::PipelineCache</innerclass>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_pipeline_cache_8hpp_1a8c413752ba90bb1a6d08a5f17f466c96" prot="public" static="no">
+        <name>VULPES_VK_PIPELINE_CACHE_H</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="resource/include/PipelineCache.hpp" line="3" column="9" bodyfile="resource/include/PipelineCache.hpp" bodystart="3" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="resource/include/PipelineCache.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.14">
+  <compounddef id="_event_8hpp" kind="file" language="C++">
+    <compoundname>Event.hpp</compoundname>
+    <includes refid="_forward_decl_8hpp" local="yes">ForwardDecl.hpp</includes>
+    <includes refid="vpr__stdafx_8h" local="yes">vpr_stdafx.h</includes>
+    <includedby refid="_event_8cpp" local="yes">sync/src/Event.cpp</includedby>
+    <incdepgraph>
+      <node id="788">
+        <label>vpr_stdafx.h</label>
+        <link refid="vpr__stdafx_8h"/>
+        <childnode refid="789" relation="include">
+        </childnode>
+      </node>
+      <node id="789">
+        <label>vulkan/vulkan.h</label>
+      </node>
+      <node id="786">
+        <label>sync/include/Event.hpp</label>
+        <link refid="_event_8hpp"/>
+        <childnode refid="787" relation="include">
+        </childnode>
+        <childnode refid="788" relation="include">
+        </childnode>
+      </node>
+      <node id="787">
+        <label>ForwardDecl.hpp</label>
+        <link refid="_forward_decl_8hpp"/>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="790">
+        <label>sync/include/Event.hpp</label>
+        <link refid="_event_8hpp"/>
+        <childnode refid="791" relation="include">
+        </childnode>
+      </node>
+      <node id="791">
+        <label>sync/src/Event.cpp</label>
+        <link refid="_event_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classvpr_1_1_event" prot="public">vpr::Event</innerclass>
+    <innernamespace refid="namespacevpr">vpr</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_event_8hpp_1ac847a293c49e7214be82a7c0697bbb5e" prot="public" static="no">
+        <name>VPR_EVENT_HPP</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="sync/include/Event.hpp" line="3" column="9" bodyfile="sync/include/Event.hpp" bodystart="3" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="sync/include/Event.hpp"/>
+  </compounddef>
+</doxygen>
