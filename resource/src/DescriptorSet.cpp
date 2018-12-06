@@ -88,7 +88,8 @@ namespace vpr {
         });
     }
 
-    void DescriptorSet::AddSamplerBinding(const size_t & idx) {
+    void DescriptorSet::AddSamplerBinding(const size_t & idx, VkSampler sampler_handle) {
+        impl->imageInfos.emplace(idx, VkDescriptorImageInfo{ sampler_handle, VK_NULL_HANDLE, VK_IMAGE_LAYOUT_UNDEFINED });
         impl->writeDescriptors.emplace(idx, VkWriteDescriptorSet{
             VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
             nullptr,
@@ -97,7 +98,7 @@ namespace vpr {
             0,
             1,
             VK_DESCRIPTOR_TYPE_SAMPLER,
-            nullptr,
+            &impl->imageInfos.at(idx),
             nullptr,
             nullptr
         });
