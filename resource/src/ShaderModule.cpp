@@ -33,11 +33,16 @@ namespace vpr {
         }
     };
 
-    ShaderModule::ShaderModule(const VkDevice& device, const char * filename, const VkShaderStageFlagBits & _stages, const char * shader_name) : pipelineInfo(vk_pipeline_shader_stage_create_info_base), stages(_stages),
+    ShaderModule::ShaderModule(const VkDevice& device, const char * filename, const VkShaderStageFlagBits & _stages, const char* entry_point) : pipelineInfo(vk_pipeline_shader_stage_create_info_base), stages(_stages),
         createInfo(vk_shader_module_create_info_base), parent(device), handle(VK_NULL_HANDLE), fileLoader(std::make_unique<ShaderCodeFileLoader>()) {
 
         pipelineInfo.stage = stages;
-        pipelineInfo.pName = "main";
+        if (entry_point == nullptr) {
+            pipelineInfo.pName = "main";
+        }
+        else {
+            pipelineInfo.pName = entry_point;
+        }
 
         std::vector<uint32_t> binary_src;
         fileLoader->LoadCodeFromFile(filename, binary_src, createInfo);

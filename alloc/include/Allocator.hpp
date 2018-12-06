@@ -28,8 +28,6 @@ namespace vpr {
      *  memory allocator. This would not have been possible without their work: https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator
      * 
      *  \defgroup Allocation
-     *  \todo Further dividing allocation among three size pools, and then still dividing among type in those pools
-     *  \todo Measure costliness of Validate(), possibly use return codes to fix errors when possible.
      */
 
     struct AllocatorImpl;
@@ -59,18 +57,21 @@ namespace vpr {
             DedicatedAllocations = 1
         };
 
-        // Allocator is attached to a single logical device and physical device
+        /** Allocator is attached to a single logical device and physical device. Extensions for improved dedicated allocations are set based on parameter.*/
         Allocator(const VkDevice& parent_device, const VkPhysicalDevice& physical_device, allocation_extensions dedicated_alloc_enabled);
         ~Allocator();
 
+        /**Destroys and re-creates the allocator subsystem. Pre-existing allocations are destroyed and not rebuilt - the allocator is effectively "zeroed out".*/
         void Recreate();
         const VkDevice& DeviceHandle() const noexcept;
+        /**Called by clients to allocate memory into the passed Allocation reference. Usually wiser to just use AllocateForBuffer or AllocateForImage.*/
         VkResult AllocateMemory(const VkMemoryRequirements& memory_reqs, const AllocationRequirements& alloc_details, const AllocationType& suballoc_type, Allocation& dest_allocation);
+        /**Releases the memory used by the given Allocation.*/
         void FreeMemory(const Allocation* memory_to_free);
 
-        // Allocates memory for an image, using given handle to get requirements. Allocation information is written to dest_memory_range, so it can then be used to bind the resources together.
+        /**Allocates memory for an image, using given handle to get requirements. Allocation information is written to dest_memory_range, so it can then be used to bind the resources together.*/
         VkResult AllocateForImage(VkImage& image_handle, const AllocationRequirements& details, const AllocationType& alloc_type, Allocation& dest_allocation);
-        // Much like AllocateForImage: uses given handle to get requirements, writes details of allocation ot given range, making memory valid for binding.
+        /**Much like AllocateForImage: uses given handle to get requirements, writes details of allocation ot given range, making memory valid for binding.*/
         VkResult AllocateForBuffer(VkBuffer& buffer_handle, const AllocationRequirements& details, const AllocationType& alloc_type, Allocation& dest_allocation);
 
     private:
@@ -79,7 +80,6 @@ namespace vpr {
         std::unique_ptr<AllocatorImpl> impl;
     };
 
-    // Pass in a pointer to the shared_ptr retrieved from el::Helpers::getStorage()
     VPR_API void SetLoggingRepository_VprAlloc(void* storage_ptr);
     VPR_API void* GetLoggingRepository_VprAlloc();
 

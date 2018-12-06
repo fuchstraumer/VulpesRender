@@ -6,11 +6,9 @@
 
 namespace vpr {
 
-    /** The rendering group is used for objects that are directly related to how things appear on screen, including those classes
-    *   that are minimum requirements for making things display like Framebuffer, Swapchain, Renderpass, and DepthStencil. Other classes
-    *   exist to make using advanced features like MSAA (Multisampling) easier by handling setup, or by pre-defining advanced renderpass
-    *   setups as OffscreenFramebuffers does.
-    *   \defgroup Rendering
+    /**The rendering group is used for objects that are directly related to how things appear on screen, including those classes
+    *  that are minimum requirements for making things display like the Framebuffer, Renderpass, and the GraphicsPipeline.
+    *  \defgroup Rendering
     */
 
     /** This struct is used to define most of the pipeline state for a Vulkan vkGraphicsPipeline object. All members have default
@@ -52,7 +50,6 @@ namespace vpr {
 
     /** The GraphicsPipeline object is an RAII wrapper around a vkGraphicsPipeline object, handling construction and destruction
     *   alone. The GraphicsPipelineInfo structure is, truthfully, much more important and much complex than this class is.
-    *
     *   \ingroup Rendering
     */
     class VPR_API GraphicsPipeline {
@@ -60,18 +57,26 @@ namespace vpr {
         GraphicsPipeline& operator=(const GraphicsPipeline&) = delete;
     public:
 
+        /**One-step initialization constructor for this object. Fully ready to use when created with this constructor. Assumes object has been already
+         * created, but keeps create_info around in case it might be needed.*/
         GraphicsPipeline(const VkDevice& parent, VkGraphicsPipelineCreateInfo create_info, VkPipeline handle);
+        /**Two-step initialization constructor for this object. Requires a further call to Init() to be useable.*/
         GraphicsPipeline(const VkDevice& parent);
         ~GraphicsPipeline();
         
         GraphicsPipeline(GraphicsPipeline&& other) noexcept;
         GraphicsPipeline& operator=(GraphicsPipeline&& other) noexcept;
-        
+        /**Fully initializes the object - attaches a PipelineCache if a handle is provided.*/
         void Init(VkGraphicsPipelineCreateInfo& create_info, const VkPipelineCache& cache = VK_NULL_HANDLE);
+        /**Will destroy the underlying pipeline, and can't be used again until Init() is called once more.*/
         void Destroy();
         const VkPipeline& vkHandle() const noexcept;
 
-        static void CreateMultiple(const VkDevice& device, const VkGraphicsPipelineCreateInfo* infos, const size_t num_infos, VkPipelineCache cache, GraphicsPipeline** dest_pipelines_array);
+        /**In the case of pipelines that are derivatives of each other, or that share a singular pipeline cache, using this method can be more efficient. 
+         * \param dest_array Array of POINTERS that will have values written to by calling "new GraphicsPipeline(dvc, info, handle)"
+         * \param infos Array of pipeline infos to use - if possible, make sure to set the basePipelineIndex bits and the appropriate pipeline derivative flags!
+        */
+        static void CreateMultiple(const VkDevice& device, const VkGraphicsPipelineCreateInfo* infos, const size_t num_infos, VkPipelineCache cache, GraphicsPipeline** dest_array);
     private:
 
         const VkAllocationCallbacks* allocators = nullptr;

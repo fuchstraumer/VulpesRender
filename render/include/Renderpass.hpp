@@ -26,12 +26,14 @@ namespace vpr {
         
         /** Must be setup before trying to use the VkRenderPassBeginInfo object attached to this class. Will cause validation layer and rendering errors otherwise. */
         void SetupBeginInfo(const VkClearValue* clear_values, const size_t num_values, const VkExtent2D& render_area);
-        /** Call each frame or when changing a framebuffer to ensure the correct framebuffer is rendered to. */
+        /** Call each frame or when changing a framebuffer to ensure the correct framebuffer is rendered to.*/
         void UpdateBeginInfo(const VkFramebuffer& current_framebuffer);
+        /**Effectively resets this object back to a base state.*/
         void Destroy();
+        /**Recreates object after a call to destroy, using pre-existing VkRenderPassCreateInfo that we have stored.*/
+        void Recreate();
 
         const VkRenderPass& vkHandle() const noexcept;
-
         const VkRenderPassCreateInfo& CreateInfo() const noexcept;
         /** This is the object you will need to retrieve inside renderpasses, when calling vkCmdBeginRenderpass. */
         const VkRenderPassBeginInfo& BeginInfo() const noexcept;

@@ -13,6 +13,12 @@
 */
 
 namespace vpr {
+    
+    /**
+     * \file The CreateInfoBase file contains a large host of constexpr static Vulkan create info and info structures, filled out with values 
+     * as appropriate to help ease the burden of a developer (as these structures are quite complex). An attempt to avoid "default" values has been made -
+     * in many cases, the values in these structures that are critical for proper functionality have been intentionally made to break if not changed.
+     */
 
 	// base application info struct
 	constexpr static VkApplicationInfo vk_base_application_info{
