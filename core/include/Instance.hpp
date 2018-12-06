@@ -39,7 +39,10 @@ namespace vpr {
         Instance(const Instance &) = delete;
         Instance& operator=(const Instance &) = delete;
     public:
-    
+
+        /**Currently both minimal and full layers are the same: need some time to better decide 
+         * what the "minimal" layer setup could look like.
+         */
         enum class instance_layers : uint32_t {
             Disabled,
             Minimal,
@@ -68,6 +71,11 @@ namespace vpr {
 
     };
 
+    /**Pass an easyloggingpp logging repository pointer into this function, and it will be set as
+     * the repository for this module to use. That way, all log messages from all modules (even 
+     * when using this as a shared library) will go to the same sinks
+     * \ingroup Core
+     */
     VPR_API void SetLoggingRepository_VprCore(void* logging_repo);
     VPR_API void* GetLoggingRepository_VprCore();
 

@@ -40,7 +40,7 @@ namespace vpr {
         *    bitfields can be passed to the method.
             \return Index of the queue meeting all of the flags specified, or std::numeric_limits<uint32_t>::max() on failure.
         */
-        uint32_t GetQueueFamilyIndex(const VkQueueFlagBits& bitfield) const noexcept ;
+        uint32_t GetQueueFamilyIndex(const VkQueueFlagBits& bitfield) const noexcept;
         VkQueueFamilyProperties GetQueueFamilyProperties(const VkQueueFlagBits& bitfield) const;
         const VkPhysicalDeviceProperties& GetProperties() const noexcept;
         const VkPhysicalDeviceFeatures& GetFeatures() const noexcept;

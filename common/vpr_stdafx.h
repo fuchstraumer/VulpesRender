@@ -32,4 +32,8 @@ namespace vpr {
 }
 #endif
 
-
+namespace vpr {
+    /**@namespace vpr
+     * @brief The VulpesRender namespace containing this libraries objects.
+     */
+}
