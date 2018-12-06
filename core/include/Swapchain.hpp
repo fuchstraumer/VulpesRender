@@ -20,7 +20,11 @@ namespace vpr {
         /**Aliases to relaxed FIFO mode - if a frame is missed, tearing is allowed. Efficient and most effective on mobile platforms.*/
         VerticalSyncRelaxed = 2,
         /**Aliases to Vulkan's mailbox mode, which effectively becomes triple-buffering.*/
-        VerticalSyncMailbox = 3
+        VerticalSyncMailbox = 3,
+        /**Aliases to demand-refresh shared mode. Application may refresh as it wishes, but will also guarantee that it refreshes on a call to present.*/
+        SharedDemandRefresh = 4,
+        /**Alias to the continued-refresh mode. Swapchain will continously refresh the contents of the screen as it sees fit, and makes no guarantee of a refresh upon a call to present.*/
+        SharedContinuousRefresh = 5,
     };
     
 
@@ -38,7 +42,7 @@ namespace vpr {
          * \param surface Surface this swapchain will be presenting images to
          * \param sync_mode One of the potential vertical_sync_mode enum values specified what presentation mode to use. Defaults to mailbox.
         */
-        Swapchain(const Device* _device, void* platform_window, VkSurfaceKHR surface, uint32_t sync_mode);
+        Swapchain(const Device* _device, void* platform_window, VkSurfaceKHR surface, vertical_sync_mode sync_mode);
         ~Swapchain();
 
         /**Required as part of a swapchain recreation event - must take a parameter to the new surface to use for the updated swapchain.*/

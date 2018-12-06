@@ -31,7 +31,7 @@ namespace vpr {
 
     struct SwapchainImpl {
 
-        SwapchainImpl(const Device* device, void* window, VkSurfaceKHR surface, uint32_t mode);
+        SwapchainImpl(const Device* device, void* window, VkSurfaceKHR surface, vertical_sync_mode mode);
         ~SwapchainImpl();
 
         /** SwapchainInfo takes care of hiding away much of the setup work required to create a swapchain. However, it does contain some data
@@ -65,7 +65,7 @@ namespace vpr {
         void setupImageViews();
 
         VkPresentModeKHR presentMode;
-        uint32_t desiredSyncMode;
+        vertical_sync_mode desiredSyncMode;
         VkSurfaceFormatKHR surfaceFormat;
         VkSwapchainCreateInfoKHR createInfo;
         VkSwapchainKHR handle = VK_NULL_HANDLE;
@@ -75,7 +75,7 @@ namespace vpr {
         const Device* device;
     };
 
-    SwapchainImpl::SwapchainImpl(const Device * _device, void* _window, VkSurfaceKHR _surface, uint32_t mode) :
+    SwapchainImpl::SwapchainImpl(const Device * _device, void* _window, VkSurfaceKHR _surface, vertical_sync_mode mode) :
         info(_device->GetPhysicalDevice().vkHandle(), _surface), desiredSyncMode(mode), surface(_surface), 
         window(reinterpret_cast<platform_window_type*>(_window)), device(_device) {
         create();
@@ -189,7 +189,7 @@ namespace vpr {
 
     }
 
-    Swapchain::Swapchain(const Device * _device, void* window, VkSurfaceKHR surface, uint32_t mode) : impl(std::make_unique<SwapchainImpl>(_device, window, surface, mode)) {}
+    Swapchain::Swapchain(const Device * _device, void* window, VkSurfaceKHR surface, vertical_sync_mode mode) : impl(std::make_unique<SwapchainImpl>(_device, window, surface, mode)) {}
 
     Swapchain::~Swapchain(){
         Destroy();
