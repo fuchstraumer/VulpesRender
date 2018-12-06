@@ -16,11 +16,11 @@ namespace vpr {
             return *this;
         }
         std::vector<VkClearValue> clearValues;
-        const VkAllocationCallbacks* allocators = nullptr;
+        const VkAllocationCallbacks* allocators{ nullptr };
     };
 
     Renderpass::Renderpass(const VkDevice& dvc, const VkRenderPassCreateInfo & create_info) : parent(dvc), createInfo(create_info), beginInfo(vk_renderpass_begin_info_base) {
-        VkResult result = vkCreateRenderPass(parent, &create_info, impl->allocators, &handle);
+        VkResult result = vkCreateRenderPass(parent, &createInfo, impl->allocators, &handle);
         VkAssert(result);
     }
 
@@ -69,6 +69,11 @@ namespace vpr {
             vkDestroyRenderPass(parent, handle, impl->allocators);
             handle = VK_NULL_HANDLE;
         }
+    }
+
+    void Renderpass::Recreate() {
+        VkResult result = vkCreateRenderPass(parent, &createInfo, impl->allocators, &handle);
+        VkAssert(result);
     }
 
     const VkRenderPass & Renderpass::vkHandle() const noexcept{
