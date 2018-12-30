@@ -70,7 +70,7 @@ namespace vpr {
     }
 
     void Renderpass::Recreate() {
-        VkResult result = vkCreateRenderPass(parent, &createInfo, impl->allocators, &handle);
+        VkResult result = vkCreateRenderPass(parent, &createInfo, nullptr, &handle);
         VkAssert(result);
     }
 
