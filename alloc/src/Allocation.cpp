@@ -2,11 +2,7 @@
 #include "Allocation.hpp"
 #include "MemoryBlock.hpp"
 #include "easylogging++.h"
-#if defined(__APPLE_CC__) || defined(__linux__)
-#include <boost/variant.hpp>
-#else
-#include <variant>
-#endif
+#include <nonstd/variant.hpp>
 #include <limits>
 
 namespace vpr {
@@ -26,11 +22,8 @@ namespace vpr {
             bool PersistentlyMapped{ false };
             void* MappedData{ nullptr };
         };
-#if defined(__APPLE_CC__) || defined(__linux__)
-        boost::variant<blockAllocation, privateAllocation> typeData;
-#else
-        std::variant<blockAllocation, privateAllocation> typeData;
-#endif
+
+        nonstd::variant<blockAllocation, privateAllocation> typeData;
         void* userData{ nullptr };
     };
 
@@ -67,11 +60,7 @@ namespace vpr {
     }
 
     void Allocation::Update(MemoryBlock * new_parent_block, const VkDeviceSize & new_offset) {
-#if defined(__APPLE_CC__) || defined(__linux__)
-        auto& alloc = boost::get<AllocationImpl::blockAllocation>(impl->typeData);
-#else
-        auto& alloc = std::get<AllocationImpl::blockAllocation>(impl->typeData);
-#endif
+        auto& alloc = nonstd::get<AllocationImpl::blockAllocation>(impl->typeData);
         alloc.ParentBlock = new_parent_block;
         alloc.Offset = new_offset;
     }
@@ -88,28 +77,10 @@ namespace vpr {
     }
 
     void Allocation::Map(const VkDeviceSize& size_to_map, const VkDeviceSize& offset_to_map_at, void** address_to_map_to) const {
-#if defined(__APPLE_CC__) || defined(__linux__)
-        auto map_private_alloc = [&](AllocationImpl::privateAllocation& alloc) {
-            if (alloc.PersistentlyMapped) {
-                *address_to_map_to = alloc.MappedData;
-            }
-            else {
-                throw std::runtime_error("Private allocation cannot be mapped!");
-            }
-        };
-        switch (impl->typeData.which()) {
-        case 0:
-            boost::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Map(this, size_to_map, offset_to_map_at, address_to_map_to);
-            break;
-        case 1:
-            map_private_alloc(boost::get<AllocationImpl::privateAllocation>(impl->typeData));
-            break;
-        };
-#else
-        if (std::holds_alternative<AllocationImpl::blockAllocation>(impl->typeData)) {
-            std::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Map(this, size_to_map, offset_to_map_at, address_to_map_to);
+        if (nonstd::holds_alternative<AllocationImpl::blockAllocation>(impl->typeData)) {
+            nonstd::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Map(this, size_to_map, offset_to_map_at, address_to_map_to);
         }
-        else if (std::holds_alternative<AllocationImpl::privateAllocation>(impl->typeData)) {
+        else if (nonstd::holds_alternative<AllocationImpl::privateAllocation>(impl->typeData)) {
             auto& p_alloc = std::get<AllocationImpl::privateAllocation>(impl->typeData);
             if (p_alloc.PersistentlyMapped) {
                 LOG_IF(VERBOSE_LOGGING, INFO) << "Attempted to map private allocation, setting given address_to_map_to to permanently mapped address.";
@@ -119,104 +90,49 @@ namespace vpr {
                 throw std::runtime_error("Given private allocation is not mapped.");
             }
         }
-#endif
     }
 
     void Allocation::Unmap() const noexcept {
-#if defined(__APPLE_CC__) || defined(__linux__)
-        switch (impl->typeData.which()) {
-        case 0:
-            boost::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Unmap();
-            break;
-        default:
-            break;
-        };
-#else
-        if (std::holds_alternative<AllocationImpl::blockAllocation>(impl->typeData)) {
-            std::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Unmap();
+        if (nonstd::holds_alternative<AllocationImpl::blockAllocation>(impl->typeData)) {
+            nonstd::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Unmap();
         }
-#endif
     }
 
     const VkDeviceMemory& Allocation::Memory() const {
-#if defined(__APPLE_CC__) || defined(__linux__)
-        switch (impl->typeData.which()) {
-        case 0:
-            return boost::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Memory();
-        case 1:
-            return boost::get<AllocationImpl::privateAllocation>(impl->typeData).DvcMemory;
-        default:
-            throw std::runtime_error("Allocation had invalid type!");
-        };
-#else
-        if (std::holds_alternative<AllocationImpl::blockAllocation>(impl->typeData)) {
-            return std::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Memory();
+        if (nonstd::holds_alternative<AllocationImpl::blockAllocation>(impl->typeData)) {
+            return nonstd::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->Memory();
         }
         else if (std::holds_alternative<AllocationImpl::privateAllocation>(impl->typeData)) {
-            return std::get<AllocationImpl::privateAllocation>(impl->typeData).DvcMemory;
+            return nonstd::get<AllocationImpl::privateAllocation>(impl->typeData).DvcMemory;
         }
         else {
             throw std::runtime_error("Allocation had invalid type or was improperly initialized!");
         }
-#endif
     }
 
     VkDeviceSize Allocation::Offset() const noexcept {
-#if defined(__APPLE_CC__) || defined(__linux__)
-        switch (impl->typeData.which()) {
-        case 0:
-            return boost::get<AllocationImpl::blockAllocation>(impl->typeData).Offset;
-        case 1:
-            return VkDeviceSize(0);
-        default:
-            throw std::runtime_error("Allocation had invalid type!");
-        };
-#else
-        if (std::holds_alternative<AllocationImpl::blockAllocation>(impl->typeData)) {
-            return std::get<AllocationImpl::blockAllocation>(impl->typeData).Offset;
+        if (nonstd::holds_alternative<AllocationImpl::blockAllocation>(impl->typeData)) {
+            return nonstd::get<AllocationImpl::blockAllocation>(impl->typeData).Offset;
         }
         else {
             return VkDeviceSize(0);
         }
-#endif
     }
 
     uint32_t Allocation::MemoryTypeIdx() const {
-#if defined(__APPLE_CC__) || defined(__linux__)
-        switch (impl->typeData.which()) {
-        case 0:
-            return boost::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->MemoryTypeIdx;
-        case 1:
-            return boost::get<AllocationImpl::privateAllocation>(impl->typeData).MemoryTypeIdx;
-        default:
-            throw std::runtime_error("Allocation had invalid type!");
-        };
-#else
-        if (std::holds_alternative<AllocationImpl::blockAllocation>(impl->typeData)) {
-            return std::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->MemoryTypeIdx;
+        if (nonstd::holds_alternative<AllocationImpl::blockAllocation>(impl->typeData)) {
+            return nonstd::get<AllocationImpl::blockAllocation>(impl->typeData).ParentBlock->MemoryTypeIdx;
         }
         else if (std::holds_alternative<AllocationImpl::privateAllocation>(impl->typeData)) {
-            return std::get<AllocationImpl::privateAllocation>(impl->typeData).MemoryTypeIdx;
+            return nonstd::get<AllocationImpl::privateAllocation>(impl->typeData).MemoryTypeIdx;
         }
         else {
             throw std::runtime_error("Allocation had invalid type, or was improperly initialized!");
         }
-#endif
     }
 
     bool Allocation::IsPrivateAllocation() const noexcept {
-#if defined(__APPLE_CC__) || defined(__linux__)
-        switch(impl->typeData.which()){
-        case 0:
-            return false;
-        case 1:
-            return true;
-        default:
-            return false;
-        };
-#else
-        return std::holds_alternative<AllocationImpl::privateAllocation>(impl->typeData);
-#endif
+        return nonstd::holds_alternative<AllocationImpl::privateAllocation>(impl->typeData);
     }
 
     bool Allocation::operator==(const Allocation & other) const noexcept {
