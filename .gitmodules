@@ -4,3 +4,6 @@
 [submodule "third_party/glfw"]
 	path = third_party/glfw
 	url = http://github.com/glfw/glfw
+[submodule "third_party/variant_lite"]
+	path = third_party/variant_lite
+	url = https://github.com/martinmoene/variant-lite
