@@ -18,14 +18,5 @@ ADD_VPR_LIBRARY(
 
 TARGET_INCLUDE_DIRECTORIES(vpr_alloc PUBLIC 
     "${CMAKE_CURRENT_SOURCE_DIR}/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../third_party/variant_lite/include"
 )
-
-IF(UNIX)
-# Needed to support Boost variant
-set(boost_min_ver 1.62.0)
-find_package(Boost ${boost_min_ver})
-ENDIF()
-
-IF(APPLE)
-TARGET_INCLUDE_DIRECTORIES(vpr_alloc PRIVATE ${Boost_INCLUDE_DIRS} ${Boost_INCLUDE_DIR})
-ENDIF()

@@ -9,18 +9,16 @@ namespace vpr {
     struct RenderpassImpl {
         RenderpassImpl() = default;
         ~RenderpassImpl() = default;
-        RenderpassImpl(RenderpassImpl&& other) noexcept : clearValues(std::move(other.clearValues)), allocators(nullptr) {}
+        RenderpassImpl(RenderpassImpl&& other) noexcept : clearValues(std::move(other.clearValues)) {}
         RenderpassImpl& operator=(RenderpassImpl&& other) noexcept {
             clearValues = std::move(other.clearValues);
-            allocators = other.allocators;
             return *this;
         }
         std::vector<VkClearValue> clearValues;
-        const VkAllocationCallbacks* allocators{ nullptr };
     };
 
-    Renderpass::Renderpass(const VkDevice& dvc, const VkRenderPassCreateInfo & create_info) : parent(dvc), createInfo(create_info), beginInfo(vk_renderpass_begin_info_base) {
-        VkResult result = vkCreateRenderPass(parent, &createInfo, impl->allocators, &handle);
+    Renderpass::Renderpass(const VkDevice& dvc, const VkRenderPassCreateInfo & create_info) : parent(dvc), createInfo(create_info), beginInfo(vk_renderpass_begin_info_base), impl(std::make_unique<RenderpassImpl>()) {
+        VkResult result = vkCreateRenderPass(parent, &create_info, nullptr, &handle);
         VkAssert(result);
     }
 
@@ -28,7 +26,7 @@ namespace vpr {
         other.handle = VK_NULL_HANDLE;
     }
 
-    Renderpass & Renderpass::operator=(Renderpass && other) noexcept {
+    Renderpass& Renderpass::operator=(Renderpass && other) noexcept {
         handle = std::move(other.handle);
         createInfo = std::move(other.createInfo);
         beginInfo = std::move(other.beginInfo);
@@ -66,13 +64,13 @@ namespace vpr {
 
     void Renderpass::Destroy(){
         if (handle != VK_NULL_HANDLE) {
-            vkDestroyRenderPass(parent, handle, impl->allocators);
+            vkDestroyRenderPass(parent, handle, nullptr);
             handle = VK_NULL_HANDLE;
         }
     }
 
     void Renderpass::Recreate() {
-        VkResult result = vkCreateRenderPass(parent, &createInfo, impl->allocators, &handle);
+        VkResult result = vkCreateRenderPass(parent, &createInfo, nullptr, &handle);
         VkAssert(result);
     }
 
