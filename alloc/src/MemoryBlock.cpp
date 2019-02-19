@@ -197,20 +197,20 @@ namespace vpr {
         }
 
         VkDeviceSize last_entry_size = 0;
-        for (size_t i = 0; i < availSuballocations.size(); ++i) {
-            auto curr_iter = availSuballocations[i];
+        for (auto curr_iter = availSuballocations.begin(); curr_iter != availSuballocations.end(); ++curr_iter) {
+            auto iter = *curr_iter;
 
             // non-free suballoc in free list
-            if (curr_iter->Type != SuballocationType::Free) {
+            if (iter->Type != SuballocationType::Free) {
                 return ValidationCode::USED_SUBALLOC_IN_FREE_LIST;
             }
 
             // sorting of free list is incorrect
-            if (curr_iter->Size < last_entry_size) {
+            if (iter->Size < last_entry_size) {
                 return ValidationCode::FREE_SUBALLOC_SORT_INCORRECT;
             }
 
-            last_entry_size = curr_iter->Size;
+            last_entry_size = iter->Size;
         }
 
         if (calculated_offset != Size) {
@@ -241,7 +241,7 @@ namespace vpr {
         size_t avail_idx = std::numeric_limits<size_t>::max();
         for (auto iter = availSuballocations.cbegin(); iter != availSuballocations.cend(); ++iter) {
             if ((*iter)->Size > allocation_size) {
-                avail_idx = iter - availSuballocations.cbegin();
+                avail_idx = std::distance(availSuballocations.cbegin(), iter);
                 break;
             }
         }
@@ -252,11 +252,12 @@ namespace vpr {
 
         for (size_t idx = avail_idx; idx < numFreeSuballocs; ++idx) {
             VkDeviceSize offset = 0;
-            const auto iter = availSuballocations[idx];
+            auto iter = availSuballocations.begin();
+            std::advance(iter, idx);
             // Check allocation for validity
-            bool allocation_valid = VerifySuballocation(buffer_image_granularity, allocation_size, allocation_alignment, allocation_type, iter, &offset);
+            bool allocation_valid = VerifySuballocation(buffer_image_granularity, allocation_size, allocation_alignment, allocation_type, *iter, &offset);
             if (allocation_valid) {
-                dest_request->FreeSuballocation = iter;
+                dest_request->FreeSuballocation = *iter;
                 dest_request->Offset = offset;
                 return true;
             }

@@ -5,7 +5,6 @@
 #include "ForwardDecl.hpp"
 #include "AllocCommon.hpp"
 #include <list>
-#include <vector>
 
 namespace vpr {
 
@@ -54,8 +53,8 @@ namespace vpr {
         }
     };
 
-    using avail_suballocation_iterator_t = std::vector<suballocationList::iterator>::iterator;
-    using const_avail_suballocation_iterator_t = std::vector<suballocationList::iterator>::const_iterator;
+    using avail_suballocation_iterator_t = std::list<suballocationList::iterator>::iterator;
+    using const_avail_suballocation_iterator_t = std::list<suballocationList::iterator>::const_iterator;
     using suballocation_iterator_t = suballocationList::iterator;
     using const_suballocation_iterator_t = suballocationList::const_iterator;
 

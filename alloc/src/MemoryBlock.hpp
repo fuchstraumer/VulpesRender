@@ -108,7 +108,7 @@ namespace vpr {
         /** This vector stores iterators that can be used to locate suballocations in this object's suballocationList. Using iterators avoids accidental duplication of objects,
          *  (akin to a pointer), but with more safety and extra convienience when it comes to retrieving, modifying, or even removing the object "pointed" to by the iterator.
         */
-        std::vector<suballocationList::iterator> availSuballocations;
+        std::list<suballocationList::iterator> availSuballocations;
 
         friend class DebugVisualization;
         friend struct DebugVisualizationImpl;
