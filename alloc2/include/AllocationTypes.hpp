@@ -221,8 +221,34 @@ class AllocatorImpl;
 
 
     enum MemoryPoolCreateFlagBits {
+        /*
+            \brief Use this flag is you allocate only raw memory, buffers, or LINEAR images. Consider it an optional optimization (not massive, however: it saves a small amount of memory and time)
+
+            If you only allocate buffers, linear images, or raw memory blocks we don't have to consider buffer-image granularity conflicts. Buffer-Image granularity
+            is akin to a page-alignment requirement for optimally tiled images, usually requiring data to be padded or allocated less efficiently. Thus, enabling this
+            flag will both increase memory utilization and lead to less wasted memory and can slightly increase speed as we won't be checking for these conflicts.
+        */
         MEMORY_POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT = 0x00000002,
+        /*
+            \brief Enables an alternative linear allocation algorithm for this pool that will result in less memory re-use but faster allocation speed
+
+            The linear allocation algorithm enabled by this flag will always create new allocations after the last one, and won't attempt to use things like
+            free space in between allocations (or from allocations that have been freed in between). It results in increased memory consumption (potentially by
+            large amounts when used incorrectly) for increased performance and less metadata for us to track.
+
+            This will however allow for behavior akin to a memory arena though, which can be flushed and reset all at once then re-used. 
+
+            When enabled, MemoryPoolCreateInfo::MaxBlockCount *must* be equal to 1 (or 0, in which case it's set internally of course).
+        */
         MEMORY_POOL_CREATE_LINEAR_ALGORITHM_BIT,
+        /*
+            \brief Enables an alternative "buddy" allocation method in the pool
+
+            The buddy allocation algorithm operates on a tree of memory blocks, each having a size that is a power of two and half its parent's size. Compared to the default
+            algorithm this will have much faster allocation and deallocation, and decreased external fragmentation as well. However, there is going to be more wasted memory
+            internally (i.e, internal fragmentation is higher). This internal wasted space occurs when the requested size is not a power of two - so, we have to round up to 
+            the nearest power of two available. This spare region can't be exactly reclaimed or re-used easily, so it's left wasted unfortunately.
+        */
         MEMORY_POOL_CREATE_BUDDY_ALGORITHM_BIT,
         MEMORY_POOL_CREATE_END_RANGE_BIT = 0x7FFFFFFF
     };
@@ -258,6 +284,8 @@ class AllocatorImpl;
         uint32_t FrameInUseCount;
     };
 
+    /* \brief Describes memory statistics for a singular memory pool: all sizes are given in bytes.
+    */
     struct MemoryPoolStats {
         VkDeviceSize Size;
         VkDeviceSize UnusedSize;
