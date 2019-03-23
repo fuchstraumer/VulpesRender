@@ -3,6 +3,7 @@
 #define VPR_ALLOC_2_ALLOCATOR_HPP
 #include "vpr_stdafx.h"
 #include "AllocationTypes.hpp"
+#include "Allocation.hpp"
 
 namespace vpr {
 
@@ -61,6 +62,72 @@ namespace vpr {
     */
    VPR_API void MarkAllMemoryPoolAllocationsLost(Allocator alloc_handle, MemoryPool pool_handle, size_t* lost_alloc_count_ptr);
 
+    /*
+        \brief Most general-purpose allocation function.
+        \param[out] dest_handle Handle to the allocated memory
+        \param[out] dest_alloc_info Optional pointer to the information about the allocated memory
+
+        #AllocationInfo can be retrieved later by calling GetAllocationInfo(), as well.
+    */
+    VPR_API VkResult AllocateMemory(Allocator alloc_handle, const VkMemoryRequirements* memory_reqs, const AllocationCreateInfo* alloc_info, Allocation* dest_handle, AllocationInfo* dest_alloc_info);
+    /*
+        \brief Allocate several allocations at once (potentially more efficient than singular). All from same memory type and pool.
+        \param alloc_handle Allocator object handle
+        \param memory_reqs Pointer to VkMemoryRequirements structure
+        \param alloc_info AllocationCreateInfo structure to use to define properties of all the items allocated
+        \param num_allocations Number of allocations being performed (and size of output arrays)
+        \param[out] dest_handles_array Array of #Allocation handles that will be written to 
+        \param[out] alloc_info_array Optional array of #AllocationInfo objects that can also be written to when creating the object
+    */
+    VPR_API VkResult AllocateMemoryPages(Allocator alloc_handle, const VkMemoryRequirements* memory_reqs, const AllocationCreateInfo* alloc_info, size_t num_allocations,
+        Allocation* dest_handles_array, AllocationInfo* alloc_info_array);
+    /*
+        \brief Frees memory previously allocated through this interface for the given allocator and handle
+        Passing `VK_NULL_HANDLE` as `allocation` is valid, and such calls will just be skipped (similar to calling `delete` on `nullptr`)
+    */
+    VPR_API void FreeMemory(Allocator allocator_handle, Allocation alloc_to_free) noexcept;
+    /*
+        \brief Frees and destroys several memory allocations at once.
+
+        Pages is just a suggestion, like the other function. It's good for use with sparse binding, or for freeing several
+        similar allocations at once (or, emulating things like a single-clear memory arena). It can potentially be internally
+        optimized to be more efficient than calling #FreeMemory `alloc_count` times.
+
+        Passing `VK_NULL_HANDLE` for some of the entries of the input allocation array is valid - these ones will just be 
+        skipped.
+    */
+    VPR_API void FreeMemoryPages(Allocator alloc_handle, size_t alloc_count, Allocation* allocations_to_free);
+    /*
+        \brief Tries to do an in-place resize of an allocation if these is enough free memory after it in it's parent block
+        You can both shrink and grow an allocation through this interface
+    */
+    VPR_API void ResizeAllocation(Allocator alloc_handle, Allocation alloc, AllocationInfo* alloc_info);
+    /*
+        \brief atomically "touches" the given allocation to mark it as used in the current frame
+        Won't throw, and is of course thread-safe.
+    */
+    VPR_API VkResult TouchAllocation(Allocator alloc_handle, Allocation alloc) noexcept;
+    /*
+        \brief Maps the memory and returns the pointer to this mapped region
+    */
+    VPR_API VkResult MapMemory(Allocator alloc_handle, Allocation alloc, void** p_mapped_data);
+    /*
+        \brief Unmaps memory attached to the specified allocation
+    */
+    VPR_API VkResult UnmapMemory(Allocator alloc_handle, Allocation alloc);
+    /*
+        \brief Calls vkFlushMappedMemoryRanges on given allocation, in the given region specified by (offset, size) if non-zero
+    */
+    VPR_API void FlushAllocation(Allocator alloc_handle, Allocation alloc, VkDeviceSize offset, VkDeviceSize size);
+    /*
+        \brief Calls vkInvalidateMemoryRanges on given allocation, in the region specified by (offset, size)
+    */
+    VPR_API void InvalidateAllocation(Allocator alloc_handle, Allocation alloc, VkDeviceSize offset, VkDeviceSize size);
+    /*
+        \brief Checks metadata values padded around allocations of given memory types to see if they have been corrupted (overwritten, incorrectly sized, etc)
+    */
+    VkResult CheckCorruption(Allocator alloc_handle, uint32_t memory_type_bits) noexcept;
+    
 }
 
 #endif //!VPR_ALLOC_2_ALLOCATOR_HPP

@@ -39,6 +39,10 @@ namespace vpr {
         Write = 2
     };
 
+    /*
+        \brief A variant of lock_guard for shared_mutex, that allows for different locking semantics based on the current needs. 
+        This is used in place of the mutex itself where possible, at it can greatly reduce the chance of mis-using mutexes in our code.
+    */
     struct rw_lock_guard {
 
         rw_lock_guard(lock_mode _mode, rw_mutex& _mut) noexcept : mut(_mut), mode(_mode) {
