@@ -141,17 +141,6 @@ namespace vpr {
         */
         ALLOCATION_CREATE_PERSISTENTLY_MAPPED_BIT = 0x00000004,
         /*
-            Allocations with this flag can be made "lost", effectively meaning they are evicted due to high memory pressure and a need 
-            to release some memory for other allocations. Before use, they must be checked for validity. An invalid allocation will
-            have it's `VkDeviceMemory` handle set to `VK_NULL_HANDLE`.
-        */
-        ALLOCATION_CREATE_CAN_BECOME_LOST_BIT = 0x00000008,
-        /* 
-            Allocations with this flag are able to make *other* allocations lost (ones created with `ALLOCATION_CREATE_CAN_BECOME_LOST_BIT`) if
-            we need to make some room to create it. 
-        */
-        ALLOCATION_CREATE_CAN_MAKE_OTHERS_LOST_BIT = 0x00000010,
-        /*
             Interpret the `UserData` pointer as a null-terminated C string and store a copy of it (the actual string data, not the pointer) somewhere. 
             This data will also be used when writing out statistics, to aid visualizations.
         */

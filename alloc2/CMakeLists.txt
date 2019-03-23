@@ -13,7 +13,7 @@ ADD_VPR_LIBRARY(
     "src/impl/MemoryBlock.hpp"
     "src/impl/MemoryBlock.cpp"
     "src/impl/MemoryBlockTechniques.hpp"
-    "src/impl/MemoryBlockTechniques.inl"
+    "src/impl/MemoryBlockTechniques.cpp"
     "src/impl/vprMutex.hpp"
     "src/Allocator.cpp"
     "src/Config.hpp"

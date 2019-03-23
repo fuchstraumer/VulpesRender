@@ -51,7 +51,7 @@ namespace vpr {
         SuballocTypeImageOptimal
     };
 
-    static inline bool CheckBufferImageGranularityConflict(VprSuballocationType type0, VprSuballocationType type1) noexcept {
+    static inline bool CheckBufferImageGranularityConflict(SuballocationType type0, SuballocationType type1) noexcept {
         
         if (type0 > type1) {
             std::swap(type0, type1);

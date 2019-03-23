@@ -46,8 +46,6 @@ namespace vpr {
         bool IsPersistentlyMapped() const noexcept;
 
         void SetUserData(Allocator alloc_handle, void* user_data);
-        bool CmpExchangeLastFrameUsedIdx(uint32_t& expected, uint32_t desired) noexcept;
-        bool ForceLost(uint32_t frame_idx, uint32_t frame_in_use_count);
         void RetrieveDedicatedAllocStats(MemoryPoolStats& output) const noexcept;
 
         VkResult Map(const VkDeviceSize& size_to_map, const VkDeviceSize offset_to_map_at, void** address_to_map);
@@ -66,7 +64,6 @@ namespace vpr {
         uint8_t suballocationType{ 0u };
         uint8_t flags{ 0u };        
         bool canBeLost{ false };
-        std::atomic<uint32_t> lastFrameUsed;
         nonstd::variant<BlockAllocationImpl, PrivateAllocationImpl> data;
         uint32_t creationFrameIdx{ 0u };
         uint32_t bufferImageUsage{ 0u };
