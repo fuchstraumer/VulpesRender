@@ -42,7 +42,7 @@ namespace vpr {
     }
 #endif
 
-    enum VprSuballocationType {
+    enum SuballocationType {
         SuballocTypeFree,
         SuballocTypeUnknown,
         SuballocTypeBuffer,
@@ -78,7 +78,7 @@ namespace vpr {
     }
 
     template<typename CmpLess, typename IteratorType, typename KeyType>
-    static IteratorType VprBinaryFindFirstNotLess(IteratorType begin, IteratorType end, const KeyType& key, CmpLess cmp) {
+    static IteratorType BinaryFindFirstNotLess(IteratorType begin, IteratorType end, const KeyType& key, CmpLess cmp) {
         size_t down{ 0u };
         size_t up{ end - begin };
 
@@ -267,27 +267,27 @@ namespace vpr {
     };
 
     template<typename T, typename Alloc>
-    static void VprVectorInsert(std::vector<T, Alloc>& vector, size_t idx, T&& item) {
+    static void VectorInsert(std::vector<T, Alloc>& vector, size_t idx, T&& item) {
         vector.insert(vector.begin() + idx, std::forward<T>(item));
     }
 
     template<typename T, typename Alloc>
-    static void VprVectorRemove(std::vector<T, Alloc>& vector, size_t idx) {
+    static void VectorRemove(std::vector<T, Alloc>& vector, size_t idx) {
         vector.erase(vector.begin() + idx);
     }
 
     template<typename CmpLess, typename VectorType>
-    static size_t VprVectorInsertSorted(VectorType& vec, const typename VectorType::value_type&& val) {
+    static size_t VectorInsertSorted(VectorType& vec, const typename VectorType::value_type&& val) {
         CmpLess comparator;
-        const size_t indexToInsert = VprBinaryFindFirstNotLess(vec.data(), vec.data() + vec.size(), val, CmpLess()) - vector.data();
-        VprVectorInsert(vec, indexToInsert, std::forward<T>(val));
+        const size_t indexToInsert = BinaryFindFirstNotLess(vec.data(), vec.data() + vec.size(), val, CmpLess()) - vector.data();
+        VectorInsert(vec, indexToInsert, std::forward<T>(val));
         return indexToInsert;
     }
 
     template<typename CmpLess, typename IteratorType, typename KeyType>
-    IteratorType VmaVectorFindSorted(const IteratorType& begin, const IteratorType& end, const KeyType& value) {
+    IteratorType VectorFindSorted(const IteratorType& begin, const IteratorType& end, const KeyType& value) {
         CmpLess cmp;
-        IteratorType iter = VprBinaryFindFirstNotLess<CmpLess, IteratorType, KeyType>(begin, end, value, cmp);
+        IteratorType iter = BinaryFindFirstNotLess<CmpLess, IteratorType, KeyType>(begin, end, value, cmp);
         if (iter == end || (!cmp(*iter, value) && !cmp(value, *iter))) {
             return iter;
         }

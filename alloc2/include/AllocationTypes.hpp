@@ -8,10 +8,12 @@
 
 namespace vpr {
 
-class AllocatorImpl;
+    class AllocatorImpl;
     using Allocator = AllocatorImpl*;
     class MemoryPoolImpl;
     using MemoryPool = MemoryPoolImpl*;
+
+    class AllocatorJsonWriter;
 
     /* \struct AllocatorVulkanFns
        \brief Pointers to subset of Vulkan functions used by this system, if dynamically loaded
