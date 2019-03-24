@@ -9,40 +9,57 @@
 
 namespace vpr {
 
-#if defined(__APPLE__) || defined(__ANDROID__) 
-    void* aligned_alloc_impl(size_t sz, size_t align) {
-        if (alignment < sizeof(void*)) {
+#if defined(__APPLE__) || defined(__ANDROID__)
+
+    void* aligned_alloc_impl(size_t sz, size_t align)
+    {
+        if (alignment < sizeof(void*))
+        {
             alignment = sizeof(void*);
         }
 
         void* ptr{ nullptr };
-        if (posix_memalign(&pointer, align, sz) == 0) {
+        if (posix_memalign(&pointer, align, sz) == 0)
+        {
             return ptr;
         }
-        else {
+        else
+        {
             return nullptr;
         }
 
     }
+
 #endif
 
 #if defined(_WIN32)
-    void* vpr_aligned_alloc(size_t sz, size_t align) {
+
+    void* vpr_aligned_alloc(size_t sz, size_t align)
+    {
         return _aligned_malloc(sz, align);
     }
-    void vpr_aligned_free(void* ptr) {
+
+    void vpr_aligned_free(void* ptr)
+    {
         _aligned_free(ptr);
     }
+
 #else
-    void* vpr_aligned_alloc(size_t sz, size_t align) {
+
+    void* vpr_aligned_alloc(size_t sz, size_t align)
+    {
         return aligned_alloc_impl(align, sz);
     }
-    void vpr_aligned_free(void* ptr) {
+
+    void vpr_aligned_free(void* ptr)
+    {
         free(ptr);
     }
+
 #endif
 
-    enum SuballocationType {
+    enum SuballocationType
+    {
         SuballocTypeFree,
         SuballocTypeUnknown,
         SuballocTypeBuffer,
@@ -51,7 +68,8 @@ namespace vpr {
         SuballocTypeImageOptimal
     };
 
-    static inline bool CheckBufferImageGranularityConflict(SuballocationType type0, SuballocationType type1) noexcept {
+    static inline bool CheckBufferImageGranularityConflict(SuballocationType type0, SuballocationType type1) noexcept
+    {
         
         if (type0 > type1) {
             std::swap(type0, type1);
@@ -78,16 +96,20 @@ namespace vpr {
     }
 
     template<typename CmpLess, typename IteratorType, typename KeyType>
-    static IteratorType BinaryFindFirstNotLess(IteratorType begin, IteratorType end, const KeyType& key, CmpLess cmp) {
+    static IteratorType BinaryFindFirstNotLess(IteratorType begin, IteratorType end, const KeyType& key, CmpLess cmp)
+    {
         size_t down{ 0u };
         size_t up{ end - begin };
 
-        while (down < up) {
+        while (down < up)
+        {
             const size_t middle{ (down + up) / 2u };
-            if (cmp(*(begin + middle), key)) {
+            if (cmp(*(begin + middle), key))
+            {
                 down = middle + 1;
             }
-            else {
+            else
+            {
                 up = middle;
             }
         }
@@ -95,16 +117,20 @@ namespace vpr {
         return begin + down;
     }
 
-    static void* VprMalloc(const VkAllocationCallbacks* alloc_callbacks, size_t size, size_t alignment) {
-        if ((alloc_callbacks != nullptr) && (alloc_callbacks->pfnAllocation != nullptr)) {
+    static void* VprMalloc(const VkAllocationCallbacks* alloc_callbacks, size_t size, size_t alignment)
+    {
+        if ((alloc_callbacks != nullptr) && (alloc_callbacks->pfnAllocation != nullptr))
+        {
             return (*alloc_callbacks->pfnAllocation)(alloc_callbacks->pUserData, size, alignment, VK_SYSTEM_ALLOCATION_SCOPE_OBJECT);
         }
-        else {
+        else
+        {
             return vpr_aligned_alloc(size, alignment);
         }
     }
 
-    static void VprFree(const VkAllocationCallbacks* alloc_callbacks, void* ptr) {
+    static void VprFree(const VkAllocationCallbacks* alloc_callbacks, void* ptr)
+    {
         if ((alloc_callbacks != nullptr) && (alloc_callbacks->pfnFree != nullptr)) {
             (*alloc_callbacks->pfnFree)(alloc_callbacks->pUserData, ptr);
         }
@@ -114,12 +140,14 @@ namespace vpr {
     }
 
     template<typename T>
-    static T* VprAllocate(const VkAllocationCallbacks* alloc_callbacks) {
+    static T* VprAllocate(const VkAllocationCallbacks* alloc_callbacks)
+    {
         return static_cast<T*>(VprMalloc(alloc_callbacks, sizeof(T), alignof(T)));
     }
 
     template<typename T>
-    static T* VprAllocateArray(const VkAllocationCallbacks* alloc_callbacks, size_t count) {
+    static T* VprAllocateArray(const VkAllocationCallbacks* alloc_callbacks, size_t count)
+    {
         return static_cast<T*>(VprMalloc(alloc_callbacks, sizeof(T) * count, alignof(T)));
     }
 
@@ -127,15 +155,19 @@ namespace vpr {
     #define vpr_new_array(allocator, type, count) new(VprAllocateArray<type>((allocator), (count)))(type)
 
     template<typename T>
-    static void vpr_delete(const VkAllocationCallbacks* alloc_callbacks, T* ptr) {
+    static void vpr_delete(const VkAllocationCallbacks* alloc_callbacks, T* ptr)
+    {
         ptr->~T();
         VprFree(alloc_callbacks, ptr);
     }
 
     template<typename T>
-    static void vpr_delete_array(const VkAllocationCallbacks* alloc_callbacks, T* ptr, size_t count) {
-        if (ptr != nullptr) {
-            for (size_t i = count; --i; ) {
+    static void vpr_delete_array(const VkAllocationCallbacks* alloc_callbacks, T* ptr, size_t count)
+    {
+        if (ptr != nullptr)
+        {
+            for (size_t i = count; --i; )
+            {
                 ptr[i].~T();
             }
             VprFree(alloc_callbacks, ptr);
@@ -154,21 +186,25 @@ namespace vpr {
         VprStlAllocator(const VprStlAllocator<U>& src) noexcept : AllocCallbacks{ src.AllocCallbacks } {}
         VprStlAllocator& operator=(const VprStlAllocator&) = delete;
 
-        T* allocate(size_t n) {
+        T* allocate(size_t n)
+        {
             return VprAllocateArray<T>(AllocCallbacks, n);
         }
 
-        void deallocate(T* p, size_t n) {
+        void deallocate(T* p, size_t n)
+        {
             return VprFree(AllocCallbacks, p);
         }
 
         template<typename U>
-        bool operator==(const VprStlAllocator<U>& rhs) const noexcept {
+        bool operator==(const VprStlAllocator<U>& rhs) const noexcept
+        {
             return AllocCallbacks == rhs.AllocCallbacks;
         }
 
         template<typename U>
-        bool operator!=(const VprStlAllocator<U>& rhs) const noexcept {
+        bool operator!=(const VprStlAllocator<U>& rhs) const noexcept
+        {
             return AllocCallbacks != rhs.AllocCallbacks;
         }
 
@@ -267,17 +303,20 @@ namespace vpr {
     };
 
     template<typename T, typename Alloc>
-    static void VectorInsert(std::vector<T, Alloc>& vector, size_t idx, T&& item) {
+    static void VectorInsert(std::vector<T, Alloc>& vector, size_t idx, T&& item)
+    {
         vector.insert(vector.begin() + idx, std::forward<T>(item));
     }
 
     template<typename T, typename Alloc>
-    static void VectorRemove(std::vector<T, Alloc>& vector, size_t idx) {
+    static void VectorRemove(std::vector<T, Alloc>& vector, size_t idx)
+    {
         vector.erase(vector.begin() + idx);
     }
 
     template<typename CmpLess, typename VectorType>
-    static size_t VectorInsertSorted(VectorType& vec, const typename VectorType::value_type&& val) {
+    static size_t VectorInsertSorted(VectorType& vec, const typename VectorType::value_type&& val)
+    {
         CmpLess comparator;
         const size_t indexToInsert = BinaryFindFirstNotLess(vec.data(), vec.data() + vec.size(), val, CmpLess()) - vector.data();
         VectorInsert(vec, indexToInsert, std::forward<T>(val));
@@ -293,6 +332,49 @@ namespace vpr {
         }
         return end;
     }
+
+    struct Suballocation
+    {
+        VkDeviceSize offset{ 0u };
+        VkDeviceSize size{ 0u };
+        Allocation allocHandle{ VK_NULL_HANDLE };
+        SuballocationType type{ SuballocationType::SuballocTypeUnknown };
+    };
+
+    struct SuballocOffsetComparatorLess
+    {
+        constexpr bool operator()(const Suballocation& lhs, const Suballocation& rhs) const noexcept
+        {
+            return lhs.offset < rhs.offset;
+        }
+    };
+
+    struct SuballocOffsetComparatorGreater
+    {
+        constexpr bool operator()(const Suballocation& lhs, const Suballocation& rhs) const noexcept
+        {
+            return lhs.offset > rhs.offset;
+        }
+    };
+
+    using SuballocationList = std::list<Suballocation, VprStlAllocator<Suballocation>>;
+
+    enum class AllocationRequestType : size_t // chosen for alignment
+    {
+        Invalid = 0,
+        Normal,
+        UpperAddress, // for linear algorithm
+        EndOf1st,
+        EndOf2nd
+    };
+
+    struct AllocationRequest
+    {
+        VkDeviceSize offset{ 0u };
+        SuballocationList::iterator itemIter;
+        void* customData{ nullptr };
+        AllocationRequestType type{ AllocationRequestType::Invalid };
+    };
 
 }
 
