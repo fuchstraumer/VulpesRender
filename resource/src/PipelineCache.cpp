@@ -12,6 +12,11 @@ INITIALIZE_EASYLOGGINGPP
 #endif
 namespace vpr {
 
+    namespace fs = std::experimental::filesystem;
+    static const std::string cacheSubdirectoryString{ "/shader_cache/" };
+    static fs::path cachePath = fs::path(fs::temp_directory_path() / cacheSubdirectoryString);
+    static std::string cacheString{ cachePath.string() };
+
     void SetLoggingRepository_VprResource(void* repo) {
         el::Helpers::setStorage(*(el::base::type::StoragePointer*)repo);
         LOG(INFO) << "Updating easyloggingpp storage pointer in vpr_resource module...";
@@ -26,16 +31,13 @@ namespace vpr {
 #else
             namespace fs = std::experimental::filesystem;
 #endif
-        
-        std::string cache_dir = std::string("/shader_cache/");
-        fs::path cache_path(fs::temp_directory_path() / fs::path(cache_dir));
 
-        if (!fs::exists(cache_path)) {
+        if (!fs::exists(cachePath)) {
             LOG(INFO) << "Shader cache path didn't exist, creating...";
-            fs::create_directories(cache_path);
+            fs::create_directories(cachePath);
         }
    
-        std::string fname = cache_path.string() + std::to_string(hash_id) + std::string(".vkdat");
+        std::string fname = cacheString + std::to_string(hash_id) + std::string(".vkdat");
 #ifdef _MSC_VER
         filename = _strdup(fname.c_str());
 #else
@@ -158,6 +160,20 @@ namespace vpr {
 
     void PipelineCache::MergeCaches(const uint32_t num_caches, const VkPipelineCache* caches) {
         vkMergePipelineCaches(parent, handle, num_caches, caches);
+    }
+
+    void PipelineCache::SetCacheDirectory(const char* fname)
+    {
+        if (auto new_path = fs::path(fname); fs::exists(new_path))
+        {
+            cachePath = new_path;
+            cacheString = new_path.string();
+        }
+    }
+
+    const char* PipelineCache::GetCacheDirectory()
+    {
+        return cacheString.c_str();
     }
     
     VkResult PipelineCache::saveToFile() const {

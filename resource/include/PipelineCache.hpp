@@ -48,6 +48,9 @@ namespace vpr {
          */
         void MergeCaches(const uint32_t num_caches, const VkPipelineCache* caches);
 
+        static void SetCacheDirectory(const char* fname);
+        static const char* GetCacheDirectory();
+
     private:
         char* loadedData = nullptr;
         char* filename = nullptr;
