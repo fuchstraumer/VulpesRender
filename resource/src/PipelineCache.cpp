@@ -150,6 +150,11 @@ namespace vpr {
                 LOG(INFO) << "Pre-existing cache file isn't valid: creating new pipeline cache.";
                 createInfo.initialDataSize = 0;
                 createInfo.pInitialData = nullptr;
+                cache.close();
+                if (!std::experimental::filesystem::remove(_filename))
+                {
+                    LOG(WARNING) << "Unable to erase pre-existing cache data. Won't be able to write new contents to disk!";
+                }
             }
         }
     }
