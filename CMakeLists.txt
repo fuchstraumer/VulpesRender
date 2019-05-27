@@ -2,7 +2,7 @@ INCLUDE(ExternalProject)
 CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
 PROJECT(vpr)
 
-OPTION(BUILD_DYNAMIC_LIBRARY "Build VPR as a dynamic library" ON)
+OPTION(BUILD_DYNAMIC_LIBRARY "Build VPR as a dynamic library - static is far easier" OFF)
 OPTION(VERBOSE_LOGGING "Enable extra output from easyloggingpp" OFF)
 OPTION(VPR_BUILD_ANDROID "Build for Android platform" OFF)
 
@@ -45,7 +45,7 @@ ENDFUNCTION()
 
 INSTALL(DIRECTORY "common/" DESTINATION "include/vpr/")
 IF(MSVC)
-SET(VPR_CXX_FLAGS "/std:c++17" "/Gm")
+SET(VPR_CXX_FLAGS "/std:c++17")
 ENDIF()
 
 #ADD_SUBDIRECTORY(alloc)
