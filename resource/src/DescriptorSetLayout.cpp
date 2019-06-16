@@ -10,7 +10,8 @@ namespace vpr {
         std::map<size_t, VkDescriptorSetLayoutBinding> bindings;
     };
 
-    DescriptorSetLayout::DescriptorSetLayout(const VkDevice& _dvc) : device(_dvc), handle(VK_NULL_HANDLE), data(std::make_unique<LayoutBindings>()) {}
+    DescriptorSetLayout::DescriptorSetLayout(const VkDevice& _dvc, const VkDescriptorSetLayoutCreateFlags _flags) : 
+        device(_dvc), handle(VK_NULL_HANDLE), data(std::make_unique<LayoutBindings>()), creationFlags{ _flags } {}
 
     DescriptorSetLayout::~DescriptorSetLayout() {
         if (handle != VK_NULL_HANDLE) {
@@ -68,6 +69,7 @@ namespace vpr {
         VkDescriptorSetLayoutCreateInfo set_layout_create_info = vk_descriptor_set_layout_create_info_base;
         set_layout_create_info.bindingCount = static_cast<uint32_t>(num_bindings);
         set_layout_create_info.pBindings = bindings_vec.data();
+        set_layout_create_info.flags = creationFlags;
 
         VkResult result = vkCreateDescriptorSetLayout(device, &set_layout_create_info, nullptr, &handle);
         VkAssert(result);

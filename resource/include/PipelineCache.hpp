@@ -29,13 +29,16 @@ namespace vpr {
           * \param host_phys_device This is required, as pipeline caches are related to the driver of the physical device they belong to. Thus, we need it for validation purposes.
         */
         PipelineCache(const VkDevice& parent, const VkPhysicalDevice& host_phys_device, const size_t hash_id);
+        /** Creates a pipeline cache using the data from base_cache_handle
+        */
+        PipelineCache(const VkDevice& parent, const VkPhysicalDevice& host_phys_device, const VkPipelineCache& base_cache_handle, const size_t hash_id);
         ~PipelineCache();
 
         PipelineCache(PipelineCache&& other) noexcept;
         PipelineCache& operator=(PipelineCache&& other) noexcept;
 
         /**Takes a pipeline cache header and checks it for validity.*/
-        bool Verify(const int8_t* cache_header) const;
+        bool Verify() const;
         /**Loads and overwrites potential contents with data loaded from the given file.*/
         void LoadCacheFromFile(const char * filename);
         const VkPipelineCache& vkHandle() const;
@@ -48,7 +51,14 @@ namespace vpr {
          */
         void MergeCaches(const uint32_t num_caches, const VkPipelineCache* caches);
 
+        static void SetCacheDirectory(const char* fname);
+        static const char* GetCacheDirectory();
+
     private:
+
+        void setFilename();
+        void copyCacheData(const VkPipelineCache& other_cache);
+
         char* loadedData = nullptr;
         char* filename = nullptr;
         VkResult saveToFile() const;
