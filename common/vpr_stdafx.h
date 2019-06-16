@@ -19,6 +19,8 @@
 #endif
 
 #if defined(VPR_BUILD_DLL) && defined(_MSC_VER)
+// Warning about internal members not having a DLL interface: not needed and redundant.
+// We're aware of structures not being exposed across the DLL, and don't want internal members available anyways
 #pragma warning(disable : 4251)
 #endif
 
@@ -33,6 +35,7 @@ namespace vpr {
 #endif
 
 namespace vpr {
+    // Note: this dummy forward declaration is required for the doxygen-mcss system to generate documentation for the namespace. That's all!
     /**@namespace vpr
      * @brief The VulpesRender namespace containing this libraries objects.
      */

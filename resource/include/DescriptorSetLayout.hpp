@@ -21,7 +21,7 @@ namespace vpr {
         DescriptorSetLayout& operator=(const DescriptorSetLayout&) = delete;
     public:
 
-        DescriptorSetLayout(const VkDevice& _dvc);
+        DescriptorSetLayout(const VkDevice& _dvc, const VkDescriptorSetLayoutCreateFlags _flags = VkDescriptorSetLayoutCreateFlags(0));
         ~DescriptorSetLayout();
         DescriptorSetLayout(DescriptorSetLayout&& other) noexcept;
         DescriptorSetLayout& operator=(DescriptorSetLayout&& other) noexcept;
@@ -39,6 +39,7 @@ namespace vpr {
         mutable bool ready{ false };
         VkDevice device{ VK_NULL_HANDLE };
         mutable VkDescriptorSetLayout handle{ VK_NULL_HANDLE };
+        VkDescriptorSetLayoutCreateFlags creationFlags{ 0 };
         std::unique_ptr<LayoutBindings> data;
     };
 

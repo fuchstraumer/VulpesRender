@@ -12,6 +12,11 @@ INITIALIZE_EASYLOGGINGPP
 #endif
 namespace vpr {
 
+    namespace fs = std::experimental::filesystem;
+    static const std::string cacheSubdirectoryString{ "/shader_cache/" };
+    static fs::path cachePath = fs::path(fs::temp_directory_path() / cacheSubdirectoryString);
+    static std::string cacheString{ cachePath.string() };
+
     void SetLoggingRepository_VprResource(void* repo) {
         el::Helpers::setStorage(*(el::base::type::StoragePointer*)repo);
         LOG(INFO) << "Updating easyloggingpp storage pointer in vpr_resource module...";
@@ -20,33 +25,25 @@ namespace vpr {
     constexpr static VkPipelineCacheCreateInfo base_create_info{ VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO, nullptr, 0, 0, nullptr };
 
     PipelineCache::PipelineCache(const VkDevice& _parent, const VkPhysicalDevice& host_device, const size_t hash_id) : parent(_parent), createInfo(base_create_info), 
-        hostPhysicalDevice(host_device), hashID(std::move(hash_id)), handle(VK_NULL_HANDLE) {
-#ifdef __APPLE_CC__
-            namespace fs = boost::filesystem;
-#else
-            namespace fs = std::experimental::filesystem;
-#endif
-        
-        std::string cache_dir = std::string("/shader_cache/");
-        fs::path cache_path(fs::temp_directory_path() / fs::path(cache_dir));
+        hostPhysicalDevice(host_device), hashID(hash_id), handle(VK_NULL_HANDLE)
+    {
 
-        if (!fs::exists(cache_path)) {
-            LOG(INFO) << "Shader cache path didn't exist, creating...";
-            fs::create_directories(cache_path);
-        }
-   
-        std::string fname = cache_path.string() + std::to_string(hash_id) + std::string(".vkdat");
-#ifdef _MSC_VER
-        filename = _strdup(fname.c_str());
-#else
-        filename = strdup(fname.c_str());
-#endif
-        // Attempts to load cache from file: if failed, doesn't matter much.
-        LoadCacheFromFile(fname.c_str());
+        setFilename();
+        LoadCacheFromFile(filename);
 
         VkResult result = vkCreatePipelineCache(parent, &createInfo, nullptr, &handle);
         VkAssert(result);
 
+    }
+
+    PipelineCache::PipelineCache(const VkDevice& _parent, const VkPhysicalDevice& host_device, const VkPipelineCache& parent_cache, const size_t hash_id) : parent(_parent), createInfo(base_create_info),
+        hostPhysicalDevice(host_device), hashID(hash_id), handle(VK_NULL_HANDLE)
+    {
+        setFilename();
+        copyCacheData(parent_cache);
+
+        VkResult result = vkCreatePipelineCache(parent, &createInfo, nullptr, &handle);
+        VkAssert(result);
     }
 
     PipelineCache::~PipelineCache() {
@@ -85,33 +82,40 @@ namespace vpr {
         return *this;
     }
  
-    bool PipelineCache::Verify(const int8_t* cache_header) const {
+    bool PipelineCache::Verify() const {
 
-        const uint32_t* header = reinterpret_cast<const uint32_t*>(cache_header);
+        uint32_t headerLength{ 0u };
+        uint32_t cacheHeaderVersion{ 0u };
+        uint32_t vendorID{ 0u };
+        uint32_t deviceID{ 0u };
+        uint8_t cacheUUID[VK_UUID_SIZE];
+
+        memcpy_s(&headerLength, sizeof(uint32_t), loadedData + 0u, sizeof(uint32_t));
+        memcpy_s(&cacheHeaderVersion, sizeof(uint32_t), loadedData + sizeof(uint32_t), sizeof(uint32_t));
+        memcpy_s(&vendorID, sizeof(uint32_t), loadedData + sizeof(uint32_t) * 2u, sizeof(uint32_t));
+        memcpy_s(&deviceID, sizeof(uint32_t), loadedData + sizeof(uint32_t) * 3u, sizeof(uint32_t));
+        memcpy_s(cacheUUID, sizeof(uint8_t) * VK_UUID_SIZE, loadedData + 16u, VK_UUID_SIZE);
         
-        if (header[0] != 32) {
+        if (headerLength != 32) {
             return false;
         }
 
-        if (header[1] != static_cast<uint32_t>(VK_PIPELINE_CACHE_HEADER_VERSION_ONE)) {
+        if (cacheHeaderVersion != static_cast<uint32_t>(VK_PIPELINE_CACHE_HEADER_VERSION_ONE)) {
             return false;
         }
 
         VkPhysicalDeviceProperties properties;
         vkGetPhysicalDeviceProperties(hostPhysicalDevice, &properties);
 
-        if (header[2] != properties.vendorID) {
+        if (vendorID != properties.vendorID) {
             return false;
         }
 
-        if (header[3] != properties.deviceID) {
+        if (deviceID != properties.deviceID) {
             return false;
         }
 
-        uint8_t cache_uuid[VK_UUID_SIZE] = {};
-        memcpy(cache_uuid, cache_header + 16, VK_UUID_SIZE);
-
-        if (memcmp(cache_uuid, properties.pipelineCacheUUID, sizeof(cache_uuid)) != 0) {
+        if (memcmp(cacheUUID, properties.pipelineCacheUUID, sizeof(cacheUUID)) != 0) {
             LOG(WARNING) << "Pipeline cache UUID incorrect, requires rebuilding.";
             return false;
         }
@@ -119,36 +123,87 @@ namespace vpr {
         return true;
     }
 
+    void PipelineCache::setFilename()
+    {
+#ifdef __APPLE_CC__
+        namespace fs = boost::filesystem;
+#else
+        namespace fs = std::experimental::filesystem;
+#endif
+
+        if (!fs::exists(cachePath)) {
+            LOG(INFO) << "Shader cache path didn't exist, creating...";
+            fs::create_directories(cachePath);
+        }
+
+        std::string fname = cacheString + std::to_string(hashID) + std::string(".vkdat");
+#ifdef _MSC_VER
+        filename = _strdup(fname.c_str());
+#else
+        filename = strdup(fname.c_str());
+#endif
+    }
+
+    void PipelineCache::copyCacheData(const VkPipelineCache& other_cache)
+    {
+        
+        size_t cache_size{ 0u };
+        VkResult result = vkGetPipelineCacheData(parent, other_cache, &cache_size, nullptr);
+        VkAssert(result);
+
+        if (cache_size <= 36u) // size will include header for default-setup cache
+        {
+            LoadCacheFromFile(filename);
+            return;
+        }
+
+        loadedData = (char*)malloc(sizeof(char) * cache_size);
+        result = vkGetPipelineCacheData(parent, other_cache, &cache_size, loadedData);
+        VkAssert(result);
+
+        createInfo.initialDataSize = cache_size;
+        createInfo.pInitialData = loadedData;
+
+    }
+
     void PipelineCache::LoadCacheFromFile(const char * _filename) {
         /*
         check for pre-existing cache file.
         */
-        std::ifstream cache(_filename, std::ios::in);
-        if (cache) {
+        std::ifstream cache(_filename, std::ios::ate | std::ios::binary);
+        size_t file_size = static_cast<size_t>(cache.tellg());
+        cache.seekg(0, std::ios::beg);
 
-            // get header (4 uint32_t, 16 int8_t) = (32 int8_t)
-            std::vector<int8_t> header(64);
-            cache.get(reinterpret_cast<char*>(header.data()), 64);
+        if (cache && (file_size > 0u)) {
+
+            loadedData = (char*)malloc(sizeof(char) * file_size);
+            if (!cache.read(loadedData, file_size))
+            {
+                LOG(ERROR) << "Failed to read file!";
+                throw std::runtime_error("Failed to read file!");
+            }
 
             // Check to see if header data matches current device.
-            if (Verify(header.data())) {
-                cache.seekg(0, std::ios::beg);
-                LOG(INFO) << "Found valid pipeline cache data with ID # " << std::to_string(hashID) << " .";
-                std::string cache_str((std::istreambuf_iterator<char>(cache)), std::istreambuf_iterator<char>());
-                uint32_t cache_size = static_cast<uint32_t>(cache_str.size() * sizeof(char));
-#ifdef _MSC_VER
-                loadedData = _strdup(cache_str.c_str());
-#else
-                loadedData = strdup(cache_str.c_str());
-#endif
-                createInfo.initialDataSize = cache_size;
+            if (Verify()) {
+                createInfo.initialDataSize = file_size;
                 createInfo.pInitialData = loadedData;
             }
             else {
-                LOG(INFO) << "Pre-existing cache file isn't valid: creating new pipeline cache.";
+                LOG_IF(VERBOSE_LOGGING, INFO) << "Pre-existing cache file isn't valid: creating new pipeline cache.";
                 createInfo.initialDataSize = 0;
                 createInfo.pInitialData = nullptr;
+                cache.close();
+                if (!std::experimental::filesystem::remove(_filename))
+                {
+                    LOG(WARNING) << "Unable to erase pre-existing cache data. Won't be able to write new contents to disk!";
+                }
             }
+        }
+        else
+        {
+            LOG_IF(VERBOSE_LOGGING, INFO) << "No pre-existing cache found.";
+            createInfo.initialDataSize = 0;
+            createInfo.pInitialData = nullptr;
         }
     }
 
@@ -158,6 +213,20 @@ namespace vpr {
 
     void PipelineCache::MergeCaches(const uint32_t num_caches, const VkPipelineCache* caches) {
         vkMergePipelineCaches(parent, handle, num_caches, caches);
+    }
+
+    void PipelineCache::SetCacheDirectory(const char* fname)
+    {
+        if (auto new_path = fs::path(fname); fs::exists(new_path))
+        {
+            cachePath = new_path;
+            cacheString = new_path.string();
+        }
+    }
+
+    const char* PipelineCache::GetCacheDirectory()
+    {
+        return cacheString.c_str();
     }
     
     VkResult PipelineCache::saveToFile() const {
@@ -176,18 +245,17 @@ namespace vpr {
 
         if (cache_size != 0) {
             try {
-                std::ofstream file(filename, std::ios::out | std::ios::trunc);
+                std::ofstream file(filename, std::ios::out | std::ios::trunc | std::ios::binary);
 
-                void* cache_data;
-                cache_data = malloc(cache_size);
+                void* endCacheData = (char*)malloc(sizeof(char) * cache_size);
 
-                result = vkGetPipelineCacheData(parent, handle, &cache_size, cache_data);
+                result = vkGetPipelineCacheData(parent, handle, &cache_size, endCacheData);
                 VkAssert(result);
 
-                file.write(reinterpret_cast<const char*>(cache_data), cache_size);
+                file.write(reinterpret_cast<const char*>(endCacheData), cache_size);
                 file.close();
 
-                free(cache_data);
+                free(endCacheData);
                 LOG(INFO) << "Saved pipeline cache data to file successfully";
 
                 return VK_SUCCESS;
