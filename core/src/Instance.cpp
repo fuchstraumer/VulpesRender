@@ -17,6 +17,75 @@ INITIALIZE_EASYLOGGINGPP
 
 namespace vpr {
 
+    // temporarily used during isntance setup
+    static VKAPI_ATTR VkBool32 VKAPI_CALL DebugUtilsMessengerCallbackTemp(VkDebugUtilsMessageSeverityFlagBitsEXT message_severity, VkDebugUtilsMessageTypeFlagBitsEXT message_type, const VkDebugUtilsMessengerCallbackDataEXT* callback_data,
+        void* user_data)
+    {
+
+        std::stringstream output_string_stream;
+        if (callback_data->messageIdNumber != 0u)
+        {
+            output_string_stream << "VUID:" << callback_data->messageIdNumber << ":VUID_NAME:" << callback_data->pMessageIdName << "\n";
+        }
+
+        const static std::string SKIP_STR{ "CREATE" };
+        const std::string message_str{ callback_data->pMessage };
+        size_t found_skippable = message_str.find(SKIP_STR);
+
+        if (found_skippable != std::string::npos)
+        {
+            return VK_FALSE;
+        }
+
+        output_string_stream << "    Message: " << message_str.c_str() << "\n";
+        if (callback_data->queueLabelCount != 0u)
+        {
+            output_string_stream << "    Error occured in queue: " << callback_data->pQueueLabels[0].pLabelName << "\n";
+        }
+
+        if (callback_data->cmdBufLabelCount != 0u)
+        {
+            output_string_stream << "    Error occured executing command buffer(s): \n";
+            for (uint32_t i = 0; i < callback_data->cmdBufLabelCount; ++i)
+            {
+                output_string_stream << "    " << callback_data->pCmdBufLabels[i].pLabelName << "\n";
+            }
+        }
+        if (callback_data->objectCount != 0u)
+        {
+            auto& p_objects = callback_data->pObjects;
+            output_string_stream << "    Object(s) involved: \n";
+            for (uint32_t i = 0; i < callback_data->objectCount; ++i)
+            {
+                if (p_objects[i].pObjectName)
+                {
+                    output_string_stream << "        ObjectName: " << p_objects[i].pObjectName << "\n";
+                }
+                else
+                {
+                    output_string_stream << "        UNNAMED_OBJECT\n";
+                }
+                output_string_stream << "            ObjectType: " << p_objects[i].objectType << "\n";
+                output_string_stream << "            ObjectHandle: " << std::hex << std::to_string(p_objects[i].objectHandle) << "\n";
+            }
+        }
+
+        if (message_severity == VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT)
+        {
+            LOG(ERROR) << output_string_stream.str();
+        }
+        else if (message_severity == VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT)
+        {
+            LOG(WARNING) << output_string_stream.str();
+        }
+        else if (message_severity <= VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT)
+        {
+            LOG(INFO) << output_string_stream.str();
+        }
+
+        return VK_FALSE;
+    }
+
     void SetLoggingRepository_VprCore(void* repo) {
         el::Helpers::setStorage(*(el::base::type::StoragePointer*)repo);
         LOG(INFO) << "Updated easyloggingpp storage pointer in vpr_core module...";
@@ -55,11 +124,29 @@ namespace vpr {
         }
 #endif //__ANDROID__
 
+        const VkDebugUtilsMessengerCreateInfoEXT messenger_info{
+            VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,
+            nullptr,
+            0,
+            // capture warnings and info that the current one does not
+            VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT,
+            VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT,
+            (PFN_vkDebugUtilsMessengerCallbackEXT)DebugUtilsMessengerCallbackTemp,
+            nullptr
+        };
+
         extensionHandler->extensionSetup(extensions);
         createInfo.ppEnabledExtensionNames = extensionHandler->extensionStrings.data();
         createInfo.enabledExtensionCount = static_cast<uint32_t>(extensionHandler->extensionStrings.size());
         checkApiVersionSupport(&our_info);
         prepareValidation(layers, layer_count);
+
+        const std::string debugUtilsString{ VK_EXT_DEBUG_UTILS_EXTENSION_NAME };
+        if (auto iter = std::find(extensionHandler->copiedExtensionStrings.begin(), extensionHandler->copiedExtensionStrings.end(), debugUtilsString);
+            iter != std::end(extensionHandler->copiedExtensionStrings))
+        {
+            createInfo.pNext = &messenger_info;
+        }
 
         createInfo.pApplicationInfo = &our_info;
         VkResult err = vkCreateInstance(&createInfo, nullptr, &handle);

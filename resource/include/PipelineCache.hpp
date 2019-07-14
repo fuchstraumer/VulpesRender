@@ -39,6 +39,7 @@ namespace vpr {
 
         /**Takes a pipeline cache header and checks it for validity.*/
         bool Verify() const;
+        VkResult DumpToDisk() const;
         /**Loads and overwrites potential contents with data loaded from the given file.*/
         void LoadCacheFromFile(const char * filename);
         const VkPipelineCache& vkHandle() const;

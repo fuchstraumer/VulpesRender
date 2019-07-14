@@ -123,6 +123,11 @@ namespace vpr {
         return true;
     }
 
+    VkResult PipelineCache::DumpToDisk() const
+    {
+        return saveToFile();
+    }
+
     void PipelineCache::setFilename()
     {
 #ifdef __APPLE_CC__
@@ -212,7 +217,11 @@ namespace vpr {
     }
 
     void PipelineCache::MergeCaches(const uint32_t num_caches, const VkPipelineCache* caches) {
-        vkMergePipelineCaches(parent, handle, num_caches, caches);
+        VkResult result = vkMergePipelineCaches(parent, handle, num_caches, caches);
+        if (result != VK_SUCCESS)
+        {
+            LOG_IF(VERBOSE_LOGGING, WARNING) << "Failed to merge pipeline caches: can suggest that the operation simply wasn't useful.";
+        }
     }
 
     void PipelineCache::SetCacheDirectory(const char* fname)

@@ -18,9 +18,11 @@ inline void vkErrCheck(VkResult res, const char* file, unsigned line, bool abort
 }
 
 #else 
-
+#ifndef _MSC_VER
 #define VkAssert(expression) ((void)(0))
-
+#else
+#define VkAssert(expression) (__assume(expression))
+#endif
 #endif // ndef NDEBUG || defined VK_FORCE_ASSERT
 
 #endif // !VK_ASSERT_H
