@@ -1,8 +1,12 @@
 #include "SurfaceKHR.hpp"
 #include "Instance.hpp"
 #ifndef __ANDROID__
+#ifdef VPR_USE_SDL
+#include <SDL2/SDL_vulkan.h>
+#else
 #define GLFW_INCLUDE_VULKAN
 #include "GLFW/glfw3.h"
+#endif
 #else 
 #include <vulkan/vulkan_android.h>
 #endif
@@ -12,7 +16,11 @@
 namespace vpr {
 
 #ifndef __ANDROID__
+#ifdef VPR_USE_SDL
+    using platform_window_type = SDL_Window;
+#else
     using platform_window_type = GLFWwindow;
+#endif
 #else
     using platform_window_type = ANativeWindow;
 #endif
@@ -47,8 +55,12 @@ namespace vpr {
 
 #ifndef __ANDROID__
     void SurfaceKHR::create() {
+#ifdef VPR_USE_SDL
+        assert(SDL_Vulkan_CreateSurface(window, parent->vkHandle(), &handle));
+#else
         VkResult err = glfwCreateWindowSurface(parent->vkHandle(), window, nullptr, &handle);
         VkAssert(err);
+#endif
         if (!VerifyPresentationSupport(device, handle)) {
             throw std::runtime_error("Surfaces are not supported on current physical device!");
         }

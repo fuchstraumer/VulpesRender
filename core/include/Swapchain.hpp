@@ -38,7 +38,7 @@ namespace vpr {
     public:
 
         /**Creates a new swapchain on the specified device.
-         * \param platform_window Is either a GLFWwindow pointer, or an ANativeWindow pointer
+         * \param platform_window Is either a GLFWwindow/SDL_Window pointer, or an ANativeWindow pointer
          * \param surface Surface this swapchain will be presenting images to
          * \param sync_mode One of the potential vertical_sync_mode enum values specified what presentation mode to use. Defaults to mailbox.
         */
