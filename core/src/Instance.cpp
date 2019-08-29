@@ -9,8 +9,13 @@
 INITIALIZE_EASYLOGGINGPP
 #endif
 #ifndef __ANDROID__
+#define VPR_USE_SDL
+#ifdef VPR_USE_SDL
+#include <SDL2/SDL_vulkan.h>
+#else
 #define GLFW_INCLUDE_VULKAN
 #include "GLFW/glfw3.h"
+#endif
 #endif
 #include <vulkan/vulkan.h>
 #include <string>
@@ -117,11 +122,15 @@ namespace vpr {
         VkApplicationInfo our_info = *info;
 
 #ifndef __ANDROID__
+#ifdef VPR_USE_SDL
+        // SDL checks for Vulkan support for us when SDL_CreateWindow is called with the SDL_WINDOW_VULKAN flag
+#else
         // How could we do this on Android?
         if (!glfwVulkanSupported()) {
             LOG(ERROR) << "Vulkan is not supported on the current hardware!";
             throw std::runtime_error("Vulkan not supported!");
         }
+#endif
 #endif //__ANDROID__
 
         const VkDebugUtilsMessengerCreateInfoEXT messenger_info{
@@ -265,11 +274,16 @@ namespace vpr {
 #ifndef __ANDROID__
     void InstanceExtensionHandler::addPlatformRequiredExtensions(std::vector<const char*>& output) const {
         uint32_t req_ext_cnt = 0;
+#ifdef VPR_USE_SDL
+        SDL_Vulkan_GetInstanceExtensions(nullptr, &req_ext_cnt, nullptr);
+        std::vector<const char*> required_extensions{ req_ext_cnt };
+        SDL_Vulkan_GetInstanceExtensions(nullptr, &req_ext_cnt, required_extensions.data());
+#else
         const char** req_ext_names = nullptr;
         req_ext_names = glfwGetRequiredInstanceExtensions(&req_ext_cnt);
-        std::vector<const char*> glfw_required_extensions{ req_ext_names, req_ext_names + req_ext_cnt };
-
-        for (auto&& elem : glfw_required_extensions) {
+        std::vector<const char*> required_extensions{ req_ext_names, req_ext_names + req_ext_cnt };
+#endif
+        for (auto&& elem : required_extensions) {
             output.emplace_back(std::move(elem));
         }
     }
