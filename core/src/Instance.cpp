@@ -9,7 +9,6 @@
 INITIALIZE_EASYLOGGINGPP
 #endif
 #ifndef __ANDROID__
-#define VPR_USE_SDL
 #ifdef VPR_USE_SDL
 #include <SDL2/SDL_vulkan.h>
 #else
