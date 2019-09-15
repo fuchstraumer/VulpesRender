@@ -512,7 +512,7 @@ namespace vpr {
     void Device::setupDebugUtilsHandler() {
         auto check_loaded_pfn = [](const void* ptr, const char* fname) {
             if (!ptr) {
-                LOG(ERROR) << "Failed to load function pointer " << fname << "for debug utils extension!";
+                LOG(ERROR) << "Failed to load function pointer " << fname << " for debug utils extension!";
             }
         };
 
@@ -545,13 +545,13 @@ namespace vpr {
                 reinterpret_cast<PFN_vkCmdInsertDebugUtilsLabelEXT>(vkGetDeviceProcAddr(handle, "vkCmdInsertDebugUtilsLabelEXT"));
             check_loaded_pfn((void*)debugUtilsHandler->vkCmdInsertDebugUtilsLabel, "vkCmdInsertDebugUtilsLabel");
             debugUtilsHandler->vkCreateDebugUtilsMessenger =
-                reinterpret_cast<PFN_vkCreateDebugUtilsMessengerEXT>(vkGetDeviceProcAddr(handle, "vkCreateDebugUtilsMessengerEXT"));
+                reinterpret_cast<PFN_vkCreateDebugUtilsMessengerEXT>(vkGetInstanceProcAddr(parentInstance->vkHandle(), "vkCreateDebugUtilsMessengerEXT"));
             check_loaded_pfn((void*)debugUtilsHandler->vkCreateDebugUtilsMessenger, "vkCreateDebugUtilsMessenger");
             debugUtilsHandler->vkDestroyDebugUtilsMessenger =
-                reinterpret_cast<PFN_vkDestroyDebugUtilsMessengerEXT>(vkGetDeviceProcAddr(handle, "vkDestroyDebugUtilsMessengerEXT"));
+                reinterpret_cast<PFN_vkDestroyDebugUtilsMessengerEXT>(vkGetInstanceProcAddr(parentInstance->vkHandle(), "vkDestroyDebugUtilsMessengerEXT"));
             check_loaded_pfn((void*)debugUtilsHandler->vkDestroyDebugUtilsMessenger, "vkDestroyDebugUtilsMessenger");
             debugUtilsHandler->vkSubmitDebugUtilsMessage =
-                reinterpret_cast<PFN_vkSubmitDebugUtilsMessageEXT>(vkGetDeviceProcAddr(handle, "vkSubmitDebugUtilsMessageEXT"));
+                reinterpret_cast<PFN_vkSubmitDebugUtilsMessageEXT>(vkGetInstanceProcAddr(parentInstance->vkHandle(), "vkSubmitDebugUtilsMessageEXT"));
             check_loaded_pfn((void*)debugUtilsHandler->vkSubmitDebugUtilsMessage, "vkSubmitDebugUtilsMessage");
         }
     }
