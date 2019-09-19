@@ -7,8 +7,8 @@
 namespace vpr {
 
     /**
-     * The bare-minimum required to wrap a VkSurfaceKHR object. Uses the glfwCreateWindowSurface function
-     * to handle the various platform-specific details that would change otherwise.
+     * The bare-minimum required to wrap a VkSurfaceKHR object. Uses the glfwCreateWindowSurface (SDL_Vulkan_CreateSurface
+     * when using SDL) function to handle the various platform-specific details that would change otherwise.
      * 
      * \ingroup Core
      */
@@ -18,7 +18,7 @@ namespace vpr {
     public:
 
         /**Initializes a new surface KHR for the given instance given the parameters. Hosted by the specified physical_device.
-         * \param window Is either a GLFWwindow pointer, or an ANativeWindow pointer. 
+         * \param window Is either a GLFWwindow/SDL_Window pointer, or an ANativeWindow pointer. 
          */
         SurfaceKHR(const Instance* _parent, VkPhysicalDevice physical_device, void* window);
         SurfaceKHR(SurfaceKHR&& other) noexcept;
@@ -38,7 +38,11 @@ namespace vpr {
         void create();
         void destroy();
 #ifndef __ANDROID__
+#ifdef VPR_USE_SDL
+        SDL_Window* window{ nullptr };
+#else
         GLFWwindow* window{ nullptr };
+#endif
 #else
         struct ANativeWindow* window{ nullptr };
 #endif 

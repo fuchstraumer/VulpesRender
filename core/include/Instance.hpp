@@ -31,8 +31,8 @@ namespace vpr {
 
     /**Instance is a wrapper around the base Vulkan object that must be initialized first. The VkInstanceCreateInfo struct passed to the constructor
     * contains information about the current layers enabled, and which Vulkan Instance extensions to enable. By default, this should/will contain
-    * extensions required to support the creation of a window surface (done by calling a glfw function to retrieve required extensions on glfw-enabled
-    * platforms)
+    * extensions required to support the creation of a window surface (done by calling a glfw/SDL function to retrieve required extensions on 
+    * glfw/SDL-enabled platforms)
     *  \ingroup Core
     */
     class VPR_API Instance  {
@@ -51,7 +51,7 @@ namespace vpr {
         
         /**Sets the layer status as specified, and changes the minor state/informational info attached to the instance as specified by the info parameter */
         Instance(instance_layers layers, const VkApplicationInfo* info);
-        /**Uses an extensions list, compared to the other constructor that simply uses what glfw says is required.*/
+        /**Uses an extensions list, compared to the other constructor that simply uses what glfw/SDL says is required.*/
         Instance(instance_layers layers_flags, const VkApplicationInfo* info, const VprExtensionPack* extensions, 
             const char* const* layers = nullptr, const uint32_t layer_count = 0);
         ~Instance();

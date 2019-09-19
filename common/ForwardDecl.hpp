@@ -2,6 +2,7 @@
 #ifndef VULPES_VK_FORWARD_DECL_HPP
 #define VULPES_VK_FORWARD_DECL_HPP
 
+struct SDL_Window;
 struct GLFWwindow;
 
 namespace vpr {

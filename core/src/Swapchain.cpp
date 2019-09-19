@@ -11,8 +11,12 @@
 #include <unordered_map>
 #include "easylogging++.h"
 #ifndef __ANDROID__
+#ifdef VPR_USE_SDL
+#include <SDL2/SDL_vulkan.h>
+#else
 #define GLFW_INCLUDE_VULKAN
 #include "GLFW/glfw3.h"
+#endif
 #ifdef APIENTRY
 #undef APIENTRY
 #endif
@@ -24,7 +28,11 @@
 namespace vpr {
     
 #ifndef __ANDROID__
+#ifdef VPR_USE_SDL
+    using platform_window_type = SDL_Window;
+#else
     using platform_window_type = GLFWwindow;
+#endif
 #else
     using platform_window_type = ANativeWindow;
 #endif
@@ -170,7 +178,11 @@ namespace vpr {
     VkExtent2D getBestExtentPlatform(platform_window_type* window, const VkSurfaceCapabilitiesKHR& Capabilities) {
         int wx{ -1 };
         int wy{ -1 };
+#ifdef VPR_USE_SDL
+        SDL_Vulkan_GetDrawableSize(reinterpret_cast<SDL_Window*>(window), &wx, &wy);
+#else
         glfwGetWindowSize(reinterpret_cast<GLFWwindow*>(window), &wx, &wy);
+#endif
         VkExtent2D actual_extent = { static_cast<uint32_t>(wx), static_cast<uint32_t>(wy) };
         actual_extent.width = std::max(Capabilities.minImageExtent.width, std::min(Capabilities.maxImageExtent.width, actual_extent.width));
         actual_extent.height = std::max(Capabilities.minImageExtent.height, std::min(Capabilities.maxImageExtent.height, actual_extent.height));

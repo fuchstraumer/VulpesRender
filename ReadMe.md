@@ -28,6 +28,8 @@ If you're just starting out with Vulkan and need to get things off the ground th
 
 The primary dependencies, glfw and easyloggingpp, are included as submodules and will need to be cloned before building. If building to a shared library, make sure that `BUILD_SHARED_LIBS` is enabled as glfw behaves oddly when linked to statically then used across multiple shared libraries (unsurprisingly).
 
+If you are using SDL instead of glfw, its header and library files must be in your compiler's include directory.
+
 The dependency on `boost::variant` has been removed, as I'm now using the single header `variant-lite` that can be found as a submodule in `third_party/`. This was super easy to integrate, removed my need for a bunch of nasty preprocessor switches, and should help make builds more lightweight and easy since the build script doesn't need to drag in (or find!) a bunch of `boost` stuff now. Let me know if it doesn't work or acts oddly though!
 
 ### easyloggingpp and Shared Libraries
