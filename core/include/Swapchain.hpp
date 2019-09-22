@@ -5,14 +5,16 @@
 #include "ForwardDecl.hpp"
 #include <memory>
 
-namespace vpr {
+namespace vpr
+{
 
     struct SwapchainImpl;
 
     /**Used to select which of the presentation modes are to be used by a Swapchain. Consult Vulkan docs for more info on presentation modes. Currently missing shared presentation modes for the mobile-specific swapchain extensions for better presentation.
      * \ingroup Core
     */
-    enum class vertical_sync_mode : uint32_t {
+    enum class vertical_sync_mode : uint32_t
+    {
         /**Aliases to immediate present mode. No buffering, high incidences of tearing.*/
         None = 0,
         /**Aliases to simple FIFO mode - vertical sync and double-buffering, effectively.*/
@@ -32,7 +34,8 @@ namespace vpr {
     *  can be done by calling the suitable method, or by using the static method as well.
     *  \ingroup Core
     */
-    class VPR_API Swapchain {
+    class VPR_API Swapchain
+    {
         Swapchain(const Swapchain&) = delete;
         Swapchain& operator=(const Swapchain&) = delete;
     public:
@@ -57,9 +60,9 @@ namespace vpr {
         const VkColorSpaceKHR& ColorSpace() const noexcept;
         const VkFormat& ColorFormat() const noexcept;
         /**Returns handles to the implementation-created and managed backing images used for presentation.*/
-        const VkImage& Image(const size_t& idx) const;
+        const VkImage& Image(const size_t idx) const;
         /**Returns handles to the implementation-created and managed backing image views used for presentation.*/
-        const VkImageView& ImageView(const size_t& idx) const;
+        const VkImageView& ImageView(const size_t idx) const;
 
     private:
         std::unique_ptr<SwapchainImpl> impl;

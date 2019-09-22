@@ -5,7 +5,8 @@
 #include "ForwardDecl.hpp"
 #include <memory>
 
-namespace vpr {
+namespace vpr
+{
 
     struct RenderpassImpl;
 
@@ -14,7 +15,8 @@ namespace vpr {
     *   area and the clear values array after creating the object.
     *   \ingroup Rendering
     */
-    class VPR_API Renderpass {
+    class VPR_API Renderpass
+    {
         Renderpass(const Renderpass&) = delete;
         Renderpass& operator=(const Renderpass&) = delete;
     public:

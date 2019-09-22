@@ -4,7 +4,8 @@
 #include "vpr_stdafx.h"
 #include <memory>
 
-namespace vpr {
+namespace vpr
+{
 
     struct LayoutBindings;
     /**Simple wrapper around the VkDescriptorSetLayout object. No explicit construction function: it is created
@@ -16,7 +17,8 @@ namespace vpr {
      * you will still then need to pass an array of 3 set layouts to the function for binding descriptor sets.
      * \ingroup Resources
      */
-    class VPR_API DescriptorSetLayout {
+    class VPR_API DescriptorSetLayout
+    {
         DescriptorSetLayout(const DescriptorSetLayout&) = delete;
         DescriptorSetLayout& operator=(const DescriptorSetLayout&) = delete;
     public:
@@ -27,7 +29,7 @@ namespace vpr {
         DescriptorSetLayout& operator=(DescriptorSetLayout&& other) noexcept;
 
         /**Specifies that a descriptor of the given type be accessible from the given stage, and sets the index it will be accessed at in the shader. */
-        void AddDescriptorBinding(const VkDescriptorType& descriptor_type, const VkShaderStageFlags& shader_stage, const uint32_t& descriptor_binding_loc) noexcept;
+        void AddDescriptorBinding(const VkDescriptorType descriptor_type, const VkShaderStageFlags shader_stage, const uint32_t descriptor_binding_loc) noexcept;
         void AddDescriptorBinding(const VkDescriptorSetLayoutBinding& binding);
         void AddDescriptorBindings(const uint32_t num_bindings, const VkDescriptorSetLayoutBinding* bindings);
 

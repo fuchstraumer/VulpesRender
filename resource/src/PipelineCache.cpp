@@ -10,14 +10,17 @@ INITIALIZE_EASYLOGGINGPP
 #else
 #include <experimental/filesystem>
 #endif
-namespace vpr {
+
+namespace vpr
+{
 
     namespace fs = std::experimental::filesystem;
     static const std::string cacheSubdirectoryString{ "/shader_cache/" };
     static fs::path cachePath = fs::path(fs::temp_directory_path() / cacheSubdirectoryString);
     static std::string cacheString{ cachePath.string() };
 
-    void SetLoggingRepository_VprResource(void* repo) {
+    void SetLoggingRepository_VprResource(void* repo)
+    {
         el::Helpers::setStorage(*(el::base::type::StoragePointer*)repo);
         LOG(INFO) << "Updating easyloggingpp storage pointer in vpr_resource module...";
     }
@@ -47,29 +50,34 @@ namespace vpr {
     }
 
     PipelineCache::~PipelineCache() {
-        if (handle != VK_NULL_HANDLE) {
+        if (handle != VK_NULL_HANDLE)
+        {
             VkResult saved = saveToFile();
             VkAssert(saved);
             vkDestroyPipelineCache(parent, handle, nullptr);
         }
 
-        if (filename) {
+        if (filename)
+        {
             free(filename);
         }
 
-        if (loadedData) {
+        if (loadedData)
+        {
             free(loadedData);
         }
     }
 
     PipelineCache::PipelineCache(PipelineCache&& other) noexcept : parent(std::move(other.parent)), createInfo(std::move(other.createInfo)),
-        hashID(std::move(other.hashID)), handle(std::move(other.handle)), filename(std::move(other.filename)), loadedData(std::move(other.loadedData)) {
+        hashID(std::move(other.hashID)), handle(std::move(other.handle)), filename(std::move(other.filename)), loadedData(std::move(other.loadedData))
+    {
         other.handle = VK_NULL_HANDLE; 
         other.filename = nullptr;
         other.loadedData = nullptr;
     }
 
-    PipelineCache& PipelineCache::operator=(PipelineCache&& other) noexcept {
+    PipelineCache& PipelineCache::operator=(PipelineCache&& other) noexcept
+    {
         parent = std::move(other.parent);
         createInfo = std::move(other.createInfo);
         hashID = std::move(other.hashID);
@@ -82,7 +90,8 @@ namespace vpr {
         return *this;
     }
  
-    bool PipelineCache::Verify() const {
+    bool PipelineCache::Verify() const
+    {
 
         uint32_t headerLength{ 0u };
         uint32_t cacheHeaderVersion{ 0u };
@@ -90,32 +99,45 @@ namespace vpr {
         uint32_t deviceID{ 0u };
         uint8_t cacheUUID[VK_UUID_SIZE];
 
+#ifdef _MSC_VER
         memcpy_s(&headerLength, sizeof(uint32_t), loadedData + 0u, sizeof(uint32_t));
         memcpy_s(&cacheHeaderVersion, sizeof(uint32_t), loadedData + sizeof(uint32_t), sizeof(uint32_t));
         memcpy_s(&vendorID, sizeof(uint32_t), loadedData + sizeof(uint32_t) * 2u, sizeof(uint32_t));
         memcpy_s(&deviceID, sizeof(uint32_t), loadedData + sizeof(uint32_t) * 3u, sizeof(uint32_t));
         memcpy_s(cacheUUID, sizeof(uint8_t) * VK_UUID_SIZE, loadedData + 16u, VK_UUID_SIZE);
-        
-        if (headerLength != 32) {
+#else // not all unix compilers have this, and MSVC is the only one that complains if we don't use it anyways
+        memcpy(&headerLength, sizeof(uint32_t), loadedData + 0u, sizeof(uint32_t));
+        memcpy(&cacheHeaderVersion, sizeof(uint32_t), loadedData + sizeof(uint32_t), sizeof(uint32_t));
+        memcpy(&vendorID, sizeof(uint32_t), loadedData + sizeof(uint32_t) * 2u, sizeof(uint32_t));
+        memcpy(&deviceID, sizeof(uint32_t), loadedData + sizeof(uint32_t) * 3u, sizeof(uint32_t));
+        memcpy(cacheUUID, sizeof(uint8_t) * VK_UUID_SIZE, loadedData + 16u, VK_UUID_SIZE);
+#endif
+
+        if (headerLength != 32)
+        {
             return false;
         }
 
-        if (cacheHeaderVersion != static_cast<uint32_t>(VK_PIPELINE_CACHE_HEADER_VERSION_ONE)) {
+        if (cacheHeaderVersion != static_cast<uint32_t>(VK_PIPELINE_CACHE_HEADER_VERSION_ONE))
+        {
             return false;
         }
 
         VkPhysicalDeviceProperties properties;
         vkGetPhysicalDeviceProperties(hostPhysicalDevice, &properties);
 
-        if (vendorID != properties.vendorID) {
+        if (vendorID != properties.vendorID)
+        {
             return false;
         }
 
-        if (deviceID != properties.deviceID) {
+        if (deviceID != properties.deviceID)
+        {
             return false;
         }
 
-        if (memcmp(cacheUUID, properties.pipelineCacheUUID, sizeof(cacheUUID)) != 0) {
+        if (memcmp(cacheUUID, properties.pipelineCacheUUID, sizeof(cacheUUID)) != 0)
+        {
             LOG(WARNING) << "Pipeline cache UUID incorrect, requires rebuilding.";
             return false;
         }
@@ -136,7 +158,8 @@ namespace vpr {
         namespace fs = std::experimental::filesystem;
 #endif
 
-        if (!fs::exists(cachePath)) {
+        if (!fs::exists(cachePath))
+        {
             LOG(INFO) << "Shader cache path didn't exist, creating...";
             fs::create_directories(cachePath);
         }
@@ -171,7 +194,8 @@ namespace vpr {
 
     }
 
-    void PipelineCache::LoadCacheFromFile(const char * _filename) {
+    void PipelineCache::LoadCacheFromFile(const char* _filename)
+    {
         /*
         check for pre-existing cache file.
         */
@@ -179,7 +203,8 @@ namespace vpr {
         size_t file_size = static_cast<size_t>(cache.tellg());
         cache.seekg(0, std::ios::beg);
 
-        if (cache && (file_size > 0u)) {
+        if (cache && (file_size > 0u))
+        {
 
             loadedData = (char*)malloc(sizeof(char) * file_size);
             if (!cache.read(loadedData, file_size))
@@ -189,11 +214,13 @@ namespace vpr {
             }
 
             // Check to see if header data matches current device.
-            if (Verify()) {
+            if (Verify())
+            {
                 createInfo.initialDataSize = file_size;
                 createInfo.pInitialData = loadedData;
             }
-            else {
+            else
+            {
                 LOG_IF(VERBOSE_LOGGING, INFO) << "Pre-existing cache file isn't valid: creating new pipeline cache.";
                 createInfo.initialDataSize = 0;
                 createInfo.pInitialData = nullptr;
@@ -212,11 +239,13 @@ namespace vpr {
         }
     }
 
-    const VkPipelineCache& PipelineCache::vkHandle() const{
+    const VkPipelineCache& PipelineCache::vkHandle() const
+    {
         return handle;
     }
 
-    void PipelineCache::MergeCaches(const uint32_t num_caches, const VkPipelineCache* caches) {
+    void PipelineCache::MergeCaches(const uint32_t num_caches, const VkPipelineCache* caches)
+    {
         VkResult result = vkMergePipelineCaches(parent, handle, num_caches, caches);
         if (result != VK_SUCCESS)
         {
@@ -238,12 +267,14 @@ namespace vpr {
         return cacheString.c_str();
     }
     
-    VkResult PipelineCache::saveToFile() const {
+    VkResult PipelineCache::saveToFile() const
+    {
 
         VkResult result = VK_SUCCESS;
         size_t cache_size;
 
-        if (!parent) {
+        if (!parent)
+        {
             LOG(ERROR) << "Attempted to delete/save a non-existent cache!";
             return VK_ERROR_DEVICE_LOST;
         }
@@ -252,8 +283,10 @@ namespace vpr {
         result = vkGetPipelineCacheData(parent, handle, &cache_size, nullptr);
         VkAssert(result);
 
-        if (cache_size != 0) {
-            try {
+        if (cache_size != 0)
+        {
+            try
+            {
                 std::ofstream file(filename, std::ios::out | std::ios::trunc | std::ios::binary);
 
                 void* endCacheData = (char*)malloc(sizeof(char) * cache_size);
@@ -269,12 +302,14 @@ namespace vpr {
 
                 return VK_SUCCESS;
             }
-            catch (std::ofstream::failure&) {
+            catch (std::ofstream::failure&)
+            {
                 LOG(WARNING) << "Saving of pipeline cache to file failed with unindentified exception in std::ofstream.";
                 return VK_ERROR_VALIDATION_FAILED_EXT;
             }
         }
-        else {
+        else
+        {
             LOG(WARNING) << "Cache data was reported empty by Vulkan: errors possible.";
             return VK_SUCCESS;
         }

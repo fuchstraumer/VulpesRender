@@ -4,9 +4,11 @@
 #include <vector>
 #include <map>
 
-namespace vpr {
+namespace vpr
+{
 
-    struct DescriptorSetImpl {
+    struct DescriptorSetImpl
+    {
         DescriptorSetImpl() = default;
         ~DescriptorSetImpl() = default;
         VkDescriptorPool pool{ VK_NULL_HANDLE };
@@ -21,16 +23,22 @@ namespace vpr {
 
     DescriptorSet::DescriptorSet(const VkDevice& parent) : device(parent), handle(VK_NULL_HANDLE), impl(std::make_unique<DescriptorSetImpl>()) { }
 
-    DescriptorSet::~DescriptorSet() {
-        if (handle != VK_NULL_HANDLE) {
+    DescriptorSet::~DescriptorSet()
+    {
+        if (handle != VK_NULL_HANDLE)
+        {
             vkFreeDescriptorSets(device, impl->pool, 1, &handle);
         }
     }
 
     DescriptorSet::DescriptorSet(DescriptorSet&& other) noexcept : device(std::move(other.device)), handle(std::move(other.handle)),
-        impl(std::move(other.impl)) { other.handle = VK_NULL_HANDLE; }
+        impl(std::move(other.impl))
+    { 
+        other.handle = VK_NULL_HANDLE;
+    }
 
-    DescriptorSet& DescriptorSet::operator=(DescriptorSet&& other) noexcept {
+    DescriptorSet& DescriptorSet::operator=(DescriptorSet&& other) noexcept
+    {
         device = std::move(other.device);
         handle = std::move(other.handle);
         impl = std::move(other.impl);
@@ -38,59 +46,74 @@ namespace vpr {
         return *this;
     }
 
-    void DescriptorSet::AddDescriptorInfo(VkDescriptorImageInfo info, const VkDescriptorType& type, const size_t& item_binding_idx) {
+    void DescriptorSet::AddDescriptorInfo(VkDescriptorImageInfo info, const VkDescriptorType type, const size_t item_binding_idx)
+    {
         impl->imageInfos.emplace(item_binding_idx, std::move(info));
-        impl->writeDescriptors.emplace(item_binding_idx, VkWriteDescriptorSet{
-            VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
-            nullptr,
-            handle,
-            static_cast<uint32_t>(item_binding_idx),
-            0,
-            1,
-            type,
-            &impl->imageInfos.at(item_binding_idx),
-            nullptr,
-            nullptr,
-        });
+        impl->writeDescriptors.emplace(item_binding_idx,
+            VkWriteDescriptorSet
+            {
+                VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+                nullptr,
+                handle,
+                static_cast<uint32_t>(item_binding_idx),
+                0,
+                1,
+                type,
+                &impl->imageInfos.at(item_binding_idx),
+                nullptr,
+                nullptr,
+            }
+        );
 
     }
 
-    void DescriptorSet::AddDescriptorInfo(VkDescriptorBufferInfo info, const VkDescriptorType& descr_type, const size_t& item_binding_idx) {
+    void DescriptorSet::AddDescriptorInfo(VkDescriptorBufferInfo info, const VkDescriptorType descr_type, const size_t item_binding_idx)
+    {
         impl->bufferInfos.emplace(item_binding_idx, std::move(info));
-        impl->writeDescriptors.emplace(item_binding_idx, VkWriteDescriptorSet{
-            VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
-            nullptr,
-            handle,
-            static_cast<uint32_t>(item_binding_idx),
-            0,
-            1,
-            descr_type,
-            nullptr,
-            &impl->bufferInfos.at(item_binding_idx),
-            nullptr,
-        });
+        impl->writeDescriptors.emplace(item_binding_idx,
+            VkWriteDescriptorSet
+            {
+                VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+                nullptr,
+                handle,
+                static_cast<uint32_t>(item_binding_idx),
+                0,
+                1,
+                descr_type,
+                nullptr,
+                &impl->bufferInfos.at(item_binding_idx),
+                nullptr,
+            }
+        );
     }
 
-    void DescriptorSet::AddDescriptorInfo(VkDescriptorBufferInfo info, const VkBufferView & view, const VkDescriptorType & type, const size_t & idx) {
+    void DescriptorSet::AddDescriptorInfo(VkDescriptorBufferInfo info, const VkBufferView view, const VkDescriptorType type, const size_t idx)
+    {
         impl->bufferInfos.emplace(idx, std::move(info));
         impl->bufferViews.emplace(idx, view);
-        impl->writeDescriptors.emplace(idx, VkWriteDescriptorSet{
-            VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
-            nullptr,
-            handle,
-            static_cast<uint32_t>(idx),
-            0,
-            1,
-            type,
-            nullptr,
-            &impl->bufferInfos.at(idx),
-            &impl->bufferViews.at(idx)
-        });
+        impl->writeDescriptors.emplace(idx,
+            VkWriteDescriptorSet
+            {
+                VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+                nullptr,
+                handle,
+                static_cast<uint32_t>(idx),
+                0,
+                1,
+                type,
+                nullptr,
+                &impl->bufferInfos.at(idx),
+                &impl->bufferViews.at(idx)
+            }
+        );
     }
 
-    void DescriptorSet::AddSamplerBinding(const size_t & idx, VkSampler sampler_handle) {
+    void DescriptorSet::AddSamplerBinding(const size_t idx, const VkSampler sampler_handle)
+    {
         impl->imageInfos.emplace(idx, VkDescriptorImageInfo{ sampler_handle, VK_NULL_HANDLE, VK_IMAGE_LAYOUT_UNDEFINED });
-        impl->writeDescriptors.emplace(idx, VkWriteDescriptorSet{
+        impl->writeDescriptors.emplace(idx,
+            VkWriteDescriptorSet
+            {
             VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
             nullptr,
             handle, 
@@ -101,15 +124,18 @@ namespace vpr {
             &impl->imageInfos.at(idx),
             nullptr,
             nullptr
-        });
+            }
+        );
     }
 
-    void DescriptorSet::Init(const VkDescriptorPool& parent_pool, const VkDescriptorSetLayout& set_layout) {
+    void DescriptorSet::Init(const VkDescriptorPool& parent_pool, const VkDescriptorSetLayout& set_layout)
+    {
         allocate(parent_pool, set_layout);
         update();
     }
 
-    void DescriptorSet::allocate(const VkDescriptorPool& parent_pool, const VkDescriptorSetLayout& set_layout) const {
+    void DescriptorSet::allocate(const VkDescriptorPool& parent_pool, const VkDescriptorSetLayout& set_layout) const
+    {
         
         impl->pool = parent_pool;
         impl->setLayout = set_layout;
@@ -125,26 +151,32 @@ namespace vpr {
 
     }
 
-    void DescriptorSet::Update() const {
+    void DescriptorSet::Update() const
+    {
         update();
     }
 
-    void DescriptorSet::update() const {
+    void DescriptorSet::update() const
+    {
 
         assert(impl->pool && impl->allocated && !impl->writeDescriptors.empty());
 
         std::vector<VkWriteDescriptorSet> write_descriptors;
 
-        for (const auto& entry : impl->writeDescriptors) {
+        for (const auto& entry : impl->writeDescriptors)
+        {
             write_descriptors.emplace_back(entry.second);
             write_descriptors.back().dstSet = handle;
-            if (entry.second.pBufferInfo != nullptr) {
+            if (entry.second.pBufferInfo != nullptr)
+            {
                 write_descriptors.back().pBufferInfo = entry.second.pBufferInfo;
             }
-            if (entry.second.pImageInfo != nullptr) {
+            if (entry.second.pImageInfo != nullptr)
+            {
                 write_descriptors.back().pImageInfo = entry.second.pImageInfo;
             }
-            if (entry.second.pTexelBufferView != nullptr) {
+            if (entry.second.pTexelBufferView != nullptr)
+            {
                 write_descriptors.back().pTexelBufferView = entry.second.pTexelBufferView;
             }
         }
@@ -155,17 +187,21 @@ namespace vpr {
         
     }
 
-    const VkDescriptorSet & DescriptorSet::vkHandle() const noexcept {
-        if (!impl->allocated) {
+    const VkDescriptorSet& DescriptorSet::vkHandle() const noexcept
+    {
+        if (!impl->allocated)
+        {
             allocate(impl->pool, impl->setLayout);
         }
-        if (!impl->updated) {
+        if (!impl->updated)
+        {
             update();
         }
         return handle;
     }
     
-    void DescriptorSet::Reset() {
+    void DescriptorSet::Reset()
+    {
         VkDescriptorPool pool = impl->pool;
         VkDescriptorSetLayout layout = impl->setLayout;
         impl.reset();

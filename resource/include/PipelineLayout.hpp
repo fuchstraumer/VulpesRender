@@ -3,13 +3,15 @@
 #define VULPES_VK_PIPELINE_LAYOUT_H
 #include "vpr_stdafx.h"
 
-namespace vpr {
+namespace vpr
+{
 
     /** PipelineLayout is an RAII wrapper around a VkPipelineLayout object that also simplifies setting what resources the pipeline layout
     *   will have bound to it. 
     *   \ingroup Resources
     */
-    class VPR_API PipelineLayout {
+    class VPR_API PipelineLayout
+    {
         PipelineLayout(const PipelineLayout&) = delete;
         PipelineLayout& operator=(const PipelineLayout&) = delete;
     public:

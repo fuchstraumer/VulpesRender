@@ -2,9 +2,11 @@
 #include "vkAssert.hpp"
 #include "CreateInfoBase.hpp"
 
-namespace vpr {
+namespace vpr
+{
 
-    Fence::Fence(const VkDevice& dvc, VkFenceCreateFlags flags) : device(dvc) {
+    Fence::Fence(const VkDevice& dvc, VkFenceCreateFlags flags) : device(dvc)
+    {
         VkFenceCreateInfo info = vk_fence_create_info_base;
         info.flags = flags;
         VkResult result = vkCreateFence(device, &info, nullptr, &handle);

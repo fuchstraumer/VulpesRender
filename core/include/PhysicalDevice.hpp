@@ -4,7 +4,8 @@
 #include "vpr_stdafx.h"
 #include <memory>
 
-namespace vpr {
+namespace vpr
+{
 
     class PhysicalDeviceImpl;
 
@@ -14,7 +15,8 @@ namespace vpr {
     *    limits on things like texture and buffer size, supported memory types, supported rendering modes, and supported texture types like cubemaps.
     *    \ingroup Core
     */
-    class VPR_API PhysicalDevice {
+    class VPR_API PhysicalDevice
+    {
         PhysicalDevice(const PhysicalDevice& other) = delete;
         PhysicalDevice& operator=(const PhysicalDevice& other) = delete;
     public:
@@ -35,21 +37,20 @@ namespace vpr {
             \param property_flags - the type of memory requested by the user, commonly device-local or host-coherent memory.
             \return Index of the requested memory type on success, std::numeric_limits<uint32_t>::max() on failure.
         */
-        uint32_t GetMemoryTypeIdx(const uint32_t& type_bitfield, const VkMemoryPropertyFlags& property_flags, VkBool32* memory_type_found = nullptr) const noexcept;
+        uint32_t GetMemoryTypeIdx(const uint32_t type_bitfield, const VkMemoryPropertyFlags property_flags, VkBool32* memory_type_found = nullptr) const noexcept;
         
         /**! Attempts to find a Queue family that supports the full bitfield given: this can be multiple types, so graphics + compute options or compute + transfer
         *    bitfields can be passed to the method.
             \return Index of the queue meeting all of the flags specified, or std::numeric_limits<uint32_t>::max() on failure.
         */
-        uint32_t GetQueueFamilyIndex(const VkQueueFlagBits& bitfield) const noexcept;
-        VkQueueFamilyProperties GetQueueFamilyProperties(const VkQueueFlagBits& bitfield) const;
+        uint32_t GetQueueFamilyIndex(const VkQueueFlagBits bitfield) const noexcept;
+        VkQueueFamilyProperties GetQueueFamilyProperties(const VkQueueFlagBits bitfield) const;
         const VkPhysicalDeviceProperties& GetProperties() const noexcept;
         const VkPhysicalDeviceFeatures& GetFeatures() const noexcept;
         const VkPhysicalDeviceMemoryProperties& GetMemoryProperties() const noexcept;
         const VkPhysicalDeviceSubgroupProperties& GetSubgroupProperties() const noexcept;
 
     private:
-
         std::unique_ptr<PhysicalDeviceImpl> impl;
     };
 

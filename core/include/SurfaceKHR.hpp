@@ -4,7 +4,8 @@
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 
-namespace vpr {
+namespace vpr
+{
 
     /**
      * The bare-minimum required to wrap a VkSurfaceKHR object. Uses the glfwCreateWindowSurface (SDL_Vulkan_CreateSurface
@@ -12,7 +13,8 @@ namespace vpr {
      * 
      * \ingroup Core
      */
-    class VPR_API SurfaceKHR {
+    class VPR_API SurfaceKHR
+    {
         SurfaceKHR(const SurfaceKHR&) = delete;
         SurfaceKHR& operator=(const SurfaceKHR&) = delete;
     public:

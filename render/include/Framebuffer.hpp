@@ -4,7 +4,8 @@
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 
-namespace vpr {
+namespace vpr
+{
 
     /**The Framebuffer class merely handles lifetime of a VkFramebuffer object. All important information on
     *  how to setup this class is provided by the VkFramebufferCreateInfo struct in the constructor. Destroy()
@@ -12,7 +13,8 @@ namespace vpr {
     *  swapchain events.
     *  \ingroup Rendering
     */
-    class VPR_API Framebuffer {
+    class VPR_API Framebuffer
+    {
         Framebuffer(const Framebuffer&) = delete;
         Framebuffer& operator=(const Framebuffer&) = delete;
     public:
@@ -26,8 +28,7 @@ namespace vpr {
         /**Destroys the object by calling vkDestroyFramebuffer() on it.*/
         void Destroy();
 
-    protected:
-
+    private:
         VkDevice parent;
         VkFramebuffer handle;
     };

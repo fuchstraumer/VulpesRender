@@ -4,7 +4,8 @@
 #include "ForwardDecl.hpp"
 #include "vpr_stdafx.h"
 
-namespace vpr {
+namespace vpr
+{
 
     /**Events are a unique synchronization primitive on Vulkan: unlike fences or semaphores they are not strictly 
      * intended for only use on the device or only use on the host. Events can have their status retrieved and set
@@ -20,7 +21,8 @@ namespace vpr {
      * 
      * \ingroup Synchronization
      */
-    class VPR_API Event {
+    class VPR_API Event
+    {
         Event(const Event&) = delete;
         Event& operator=(const Event&) = delete;
     public:

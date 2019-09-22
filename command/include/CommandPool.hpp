@@ -5,7 +5,8 @@
 #include "ForwardDecl.hpp"
 #include <memory>
 
-namespace vpr {
+namespace vpr
+{
 
     struct CommandBuffers;
 
@@ -21,7 +22,8 @@ namespace vpr {
     *    \todo Remove redundant num_buffers parameter from AllocateCmdBuffers, make the primary/secondary level selected upon alloc not construction.
     *    \ingroup Command
     */
-    class VPR_API CommandPool {
+    class VPR_API CommandPool
+    {
         CommandPool(const CommandPool&) = delete;
         CommandPool& operator=(const CommandPool&) = delete;
     public:
@@ -32,14 +34,14 @@ namespace vpr {
         ~CommandPool();
 
 
-        void AllocateCmdBuffers(const uint32_t& num_buffers, const VkCommandBufferLevel& cmd_buffer_level);
+        void AllocateCmdBuffers(const uint32_t num_buffers, const VkCommandBufferLevel cmd_buffer_level);
         
         /** Resets the entire command pool via a call to VkResetCommandPool. Uses VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT by default, which releases
         *   all resources that the Vulkan implementation internally allocates. This may take time, and may require re-allocation upon reinitialization
         *   but also prevents memory fragmentation when using command pools for quite some time.
         *   \param command_pool_reset_flag_bits - Only current options are VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT, the default, or no flags (thus, no resources released)
         */
-        void ResetCmdPool(const VkCommandPoolResetFlagBits& command_pool_reset_flag_bits = VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
+        void ResetCmdPool(const VkCommandPoolResetFlagBits command_pool_reset_flag_bits = VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT);
         
         /** Resets the single command buffer at the given index. Uses VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT by default, which returns the resources
         *   allocated by the Vulkan implementation for this particular command buffer back to the parent pool. Be careful using this in a pool that doesn't 
@@ -47,7 +49,7 @@ namespace vpr {
         *   the Vulkan implementation to find a suitable memory location to use (or it will have to allocate more memory).
         *   \param command_buffer_reset_flag_bits - Only current options are VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT, the default, or no flags (thus, no resources released)
         */
-        void ResetCmdBuffer(const size_t& idx, const VkCommandBufferResetFlagBits& command_buffer_reset_flag_bits = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT);
+        void ResetCmdBuffer(const size_t idx, const VkCommandBufferResetFlagBits command_buffer_reset_flag_bits = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT);
         
         /** Frees the memory used for all command buffers in this pool, which effectively "deletes" them, unlike resetting a single command buffer or even resetting
         *   the entire pool. This will require calling AllocateCmdBuffers again, as it ultimately resets the object into its base state.
@@ -56,13 +58,13 @@ namespace vpr {
     
         const VkCommandPool& vkHandle() const noexcept;
 
-        VkCommandBuffer& operator[](const size_t& idx);
-        VkCommandBuffer& GetCmdBuffer(const size_t& idx);
+        VkCommandBuffer& operator[](const size_t idx);
+        VkCommandBuffer& GetCmdBuffer(const size_t idx);
 
         /** Gets a range of command buffers, starting at the given offset
         *
         */
-        const VkCommandBuffer* GetCommandBuffers(const size_t& offset) const;
+        const VkCommandBuffer* GetCommandBuffers(const size_t offset) const;
 
         VkCommandBuffer StartSingleCmdBuffer();
         void EndSingleCmdBuffer(VkCommandBuffer& cmd_buffer, const VkQueue & queue);

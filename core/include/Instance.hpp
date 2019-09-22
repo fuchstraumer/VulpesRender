@@ -4,7 +4,8 @@
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 
-namespace vpr {
+namespace vpr
+{
 
     struct InstanceExtensionHandler;
 
@@ -20,7 +21,8 @@ namespace vpr {
      * to be enabled or used - then it will be removed from the list of extensions submitted to the constructor.
      * \ingroup Core
      */
-    struct VPR_API VprExtensionPack {
+    struct VPR_API VprExtensionPack
+    {
         /**These extension names specify what must be loaded - failure to do so results in an exception*/
         const char* const* RequiredExtensionNames;
         uint32_t RequiredExtensionCount;
@@ -35,15 +37,17 @@ namespace vpr {
     * glfw/SDL-enabled platforms)
     *  \ingroup Core
     */
-    class VPR_API Instance  {
-        Instance(const Instance &) = delete;
-        Instance& operator=(const Instance &) = delete;
+    class VPR_API Instance 
+    {
+        Instance(const Instance&) = delete;
+        Instance& operator=(const Instance&) = delete;
     public:
 
         /**Currently both minimal and full layers are the same: need some time to better decide 
          * what the "minimal" layer setup could look like.
          */
-        enum class instance_layers : uint32_t {
+        enum class instance_layers : uint32_t
+        {
             Disabled,
             Minimal,
             Full,
@@ -63,6 +67,8 @@ namespace vpr {
         /**The extensions parameter is set using strdup, so the user MUST be sure to free this memory when finished reading it.*/
         void GetEnabledExtensions(size_t* num_extensions, char** extensions) const;
 
+        const VkApplicationInfo& ApplicationInfo() const noexcept;
+
     private:
 
         void prepareValidation(const char* const* layers, const uint32_t layer_count);
@@ -72,6 +78,7 @@ namespace vpr {
         InstanceExtensionHandler* extensionHandler;
         VkInstance handle;
         VkInstanceCreateInfo createInfo;
+        VkApplicationInfo applicationInfo;
 
     };
 

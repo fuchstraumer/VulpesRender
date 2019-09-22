@@ -7,7 +7,8 @@
 INITIALIZE_EASYLOGGINGPP
 #endif
 #include <vector>
-namespace vpr {
+namespace vpr
+{
 
     void SetLoggingRepository_VprCommand(void* repo) {
         el::Helpers::setStorage(*(el::base::type::StoragePointer*)repo);
@@ -22,18 +23,21 @@ namespace vpr {
         vkCreateCommandPool(parent, &create_info, nullptr, &handle);
     }
 
-    void CommandPool::ResetCmdPool(const VkCommandPoolResetFlagBits& command_pool_reset_flags) {
+    void CommandPool::ResetCmdPool(const VkCommandPoolResetFlagBits command_pool_reset_flags)
+    {
         vkResetCommandPool(parent, handle, command_pool_reset_flags);
     }
 
-    CommandPool::CommandPool(CommandPool && other) noexcept{
+    CommandPool::CommandPool(CommandPool && other) noexcept
+    {
         handle = std::move(other.handle);
         cmdBuffers = std::move(other.cmdBuffers);
         parent = std::move(other.parent);
         other.handle = VK_NULL_HANDLE;
     }
 
-    CommandPool & CommandPool::operator=(CommandPool && other) noexcept{
+    CommandPool & CommandPool::operator=(CommandPool && other) noexcept
+    {
         handle = std::move(other.handle);
         cmdBuffers = std::move(other.cmdBuffers);
         parent = std::move(other.parent);
@@ -41,24 +45,31 @@ namespace vpr {
         return *this;
     }
 
-    CommandPool::~CommandPool(){
+    CommandPool::~CommandPool()
+    {
         destroy();
     }
 
-    void CommandPool::destroy(){
-        if (!cmdBuffers->Data.empty()) {
+    void CommandPool::destroy()
+    {
+        if (!cmdBuffers->Data.empty())
+        {
             FreeCommandBuffers();
         }
-        if (handle != VK_NULL_HANDLE) {
+
+        if (handle != VK_NULL_HANDLE)
+        {
             vkDestroyCommandPool(parent, handle, nullptr);
             LOG_IF(VERBOSE_LOGGING, INFO) << "Command Pool " << handle << " destroyed.";
             handle = VK_NULL_HANDLE;
         }
     }
 
-    void CommandPool::AllocateCmdBuffers(const uint32_t & num_buffers, const VkCommandBufferLevel& cmd_buffer_level){
+    void CommandPool::AllocateCmdBuffers(const uint32_t num_buffers, const VkCommandBufferLevel cmd_buffer_level)
+    {
 
-        if (!cmdBuffers->Data.empty()) {
+        if (!cmdBuffers->Data.empty())
+        {
             return;
         }
 
@@ -72,34 +83,41 @@ namespace vpr {
         VkAssert(result);
     }
 
-    void CommandPool::FreeCommandBuffers(){
+    void CommandPool::FreeCommandBuffers()
+    {
         vkFreeCommandBuffers(parent, handle, static_cast<uint32_t>(cmdBuffers->Data.size()), cmdBuffers->Data.data());
         LOG_IF(VERBOSE_LOGGING, INFO) << std::to_string(cmdBuffers->Data.size()) << " command buffers freed.";
         cmdBuffers->Data.clear();
         cmdBuffers->Data.shrink_to_fit();
     }
 
-    void CommandPool::ResetCmdBuffer(const size_t & idx, const VkCommandBufferResetFlagBits& command_buffer_reset_flag_bits) {
+    void CommandPool::ResetCmdBuffer(const size_t idx, const VkCommandBufferResetFlagBits command_buffer_reset_flag_bits)
+    {
         vkResetCommandBuffer(cmdBuffers->Data[idx], command_buffer_reset_flag_bits);
     }
     
-    const VkCommandPool & CommandPool::vkHandle() const noexcept{
+    const VkCommandPool& CommandPool::vkHandle() const noexcept
+    {
         return handle;
     }
 
-    const VkCommandBuffer* CommandPool::GetCommandBuffers(const size_t& offset) const {
+    const VkCommandBuffer* CommandPool::GetCommandBuffers(const size_t offset) const
+    {
         return &cmdBuffers->Data[offset];
     }
 
-    VkCommandBuffer & CommandPool::operator[](const size_t & idx) {
+    VkCommandBuffer& CommandPool::operator[](const size_t idx)
+    {
         return cmdBuffers->Data[idx];
     }
 
-    VkCommandBuffer & CommandPool::GetCmdBuffer(const size_t & idx) {
+    VkCommandBuffer& CommandPool::GetCmdBuffer(const size_t idx)
+    {
         return cmdBuffers->Data[idx];
     }
 
-    VkCommandBuffer CommandPool::StartSingleCmdBuffer(){
+    VkCommandBuffer CommandPool::StartSingleCmdBuffer()
+    {
         VkCommandBufferAllocateInfo allocInfo = {};
         allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
         allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
@@ -119,7 +137,8 @@ namespace vpr {
         return commandBuffer;
     }
 
-    void CommandPool::EndSingleCmdBuffer(VkCommandBuffer& cmd_buffer, const VkQueue & queue) {
+    void CommandPool::EndSingleCmdBuffer(VkCommandBuffer& cmd_buffer, const VkQueue& queue)
+    {
         VkResult result = vkEndCommandBuffer(cmd_buffer);
         VkAssert(result);
 
@@ -136,11 +155,13 @@ namespace vpr {
         VkAssert(result);
     }
 
-    const size_t CommandPool::size() const noexcept{
+    const size_t CommandPool::size() const noexcept
+    {
         return cmdBuffers->Data.size();
     }
 
-    const VkCommandBuffer* CommandPool::Data() const noexcept {
+    const VkCommandBuffer* CommandPool::Data() const noexcept
+    {
         return cmdBuffers->Data.data();
     }
 

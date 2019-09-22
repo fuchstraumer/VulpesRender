@@ -19,7 +19,8 @@ namespace vpr {
     * cross-compiling their shaders everytime they restart the program.
     * \ingroup Resources 
     */
-    class VPR_API PipelineCache {
+    class VPR_API PipelineCache
+    {
         PipelineCache(const PipelineCache& other) = delete;
         PipelineCache& operator=(const PipelineCache& other) = delete;
     public:

@@ -10,9 +10,11 @@
 #include <vector>
 #include <map>
 
-namespace vpr {
+namespace vpr
+{
 
-    struct DeviceDataMembers {
+    struct DeviceDataMembers
+    {
         DeviceDataMembers(const Device* p) : device(p) {}
         std::vector<const char*> enabledExtensions;
         // Need to copy some strings, or we'll just end up trying to use the address of passed user strings
@@ -28,19 +30,22 @@ namespace vpr {
 
     constexpr const char* const RECOMMENDED_REQUIRED_EXTENSION = "VK_KHR_swapchain";
 
-    constexpr static std::array<const char*, 2> RECOMMENDED_OPTIONAL_EXTENSIONS {
+    constexpr static std::array<const char*, 2> RECOMMENDED_OPTIONAL_EXTENSIONS
+    {
         VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME, 
         VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME
     };
 
-    constexpr VprExtensionPack RECOMMENDED_EXTENSIONS {
+    constexpr VprExtensionPack RECOMMENDED_EXTENSIONS
+    {
         &RECOMMENDED_REQUIRED_EXTENSION,
         1,
         &RECOMMENDED_OPTIONAL_EXTENSIONS[0],
         static_cast<uint32_t>(RECOMMENDED_OPTIONAL_EXTENSIONS.size())
     };
 
-    struct queue_priorities_t {
+    struct queue_priorities_t
+    {
         std::vector<float> graphics;
         std::vector<float> transfer;
         std::vector<float> compute;
@@ -52,56 +57,85 @@ namespace vpr {
         Transfer(std::numeric_limits<uint32_t>::max()), SparseBinding(std::numeric_limits<uint32_t>::max()), Present(std::numeric_limits<uint32_t>::max()) {}
 
     Device::Device(const Instance* instance, const PhysicalDevice* dvc, VkSurfaceKHR _surface, const VprExtensionPack* extensions, const char* const* layer_names,
-        const uint32_t layer_count) : parent(dvc), parentInstance(instance), debugUtilsHandler(nullptr), dataMembers(nullptr), surface(_surface) {
-        if (extensions != nullptr) {
+        const uint32_t layer_count) : parent(dvc), parentInstance(instance), debugUtilsHandler(nullptr), dataMembers(nullptr), surface(_surface)
+    {
+        if (extensions != nullptr)
+        {
             create(extensions, layer_names, layer_count);
         }
-        else {
-            create(&RECOMMENDED_EXTENSIONS, nullptr, 0);
+        else
+        {
+            VprExtensionPack recommendedExtensions{ RECOMMENDED_EXTENSIONS };
+            if (parentInstance->ApplicationInfo().apiVersion >= VK_API_VERSION_1_1)
+            {
+                // we recommend enabling / trying to enable dedicated alloc extensions, but this part of core API on
+                // Vk 1.1+, and enabling them can confuse things like VMA and other plugins into not using these functions
+                // So, we clear the references to them before loading
+                recommendedExtensions.OptionalExtensionCount = 0;
+                recommendedExtensions.OptionalExtensionNames = nullptr;
+            }
+            create(&recommendedExtensions, nullptr, 0);
         }
     }
 
-    Device::~Device(){
-        if (dataMembers) {
+    Device::~Device()
+    {
+        if (dataMembers)
+        {
             delete dataMembers;
         }
-        if (debugUtilsHandler) {
+        if (debugUtilsHandler)
+        {
             delete debugUtilsHandler;
         }
         vkDestroyDevice(handle, nullptr);
     }
 
-    const VkDevice & Device::vkHandle() const{
+    const VkDevice & Device::vkHandle() const
+    {
         return handle;
     }
 
-    bool Device::HasDedicatedComputeQueues() const {
-        if (queueFamilyIndices.Compute != queueFamilyIndices.Graphics) {
+    bool Device::HasDedicatedComputeQueues() const
+    {
+        if (queueFamilyIndices.Compute != queueFamilyIndices.Graphics)
+        {
             return true;
         }
         return false;
     }
 
-    bool Device::DedicatedAllocationExtensionsEnabled() const noexcept {
+    bool Device::DedicatedAllocationExtensionsEnabled() const noexcept
+    {
         return dataMembers->enableDedicatedAllocations;
     }
 
-    bool Device::HasExtension(const char* name) const noexcept {
-        auto iter = std::find_if(std::cbegin(dataMembers->enabledExtensions), std::cend(dataMembers->enabledExtensions), [name](const char* str) {
-            return strcmp(name, str) == 0;
-        });
-        if (iter != std::cend(dataMembers->enabledExtensions)) {
+    bool Device::HasExtension(const char* name) const noexcept
+    {
+        auto iter = std::find_if(std::cbegin(dataMembers->enabledExtensions), std::cend(dataMembers->enabledExtensions),
+            [name](const char* str)
+            {
+                return strcmp(name, str) == 0;
+            }
+        );
+
+        if (iter != std::cend(dataMembers->enabledExtensions))
+        {
             return true;
         }
-        else {
+        else
+        {
             return false;
         }
     }
 
-    void Device::GetEnabledExtensions(size_t * num_extensions, char ** extensions) const {
+    void Device::GetEnabledExtensions(size_t* num_extensions, char** extensions) const
+    {
         *num_extensions = dataMembers->enabledExtensions.size();
-        if (extensions != nullptr) {
-            for (size_t i = 0; i < *num_extensions; ++i) {
+        if (extensions != nullptr)
+        {
+            for (size_t i = 0; i < *num_extensions; ++i)
+            {
 #ifdef _MSC_VER
                 extensions[i] = _strdup(dataMembers->enabledExtensions[i]);
 #else
@@ -111,27 +145,32 @@ namespace vpr {
         }
     }
 
-    void Device::UpdateSurface(VkSurfaceKHR new_surface) {
+    void Device::UpdateSurface(VkSurfaceKHR new_surface)
+    {
         surface = new_surface;
         verifyPresentationSupport();
     }
 
-    void Device::checkSurfaceSupport(const VkSurfaceKHR& surf) {
+    void Device::checkSurfaceSupport(const VkSurfaceKHR& surf)
+    {
         VkBool32 supported;
         vkGetPhysicalDeviceSurfaceSupportKHR(parent->vkHandle(), queueFamilyIndices.Present, surf, &supported);
         assert(supported);
     }
 
-    VkQueue Device::GraphicsQueue(const uint32_t & idx) const{
+    VkQueue Device::GraphicsQueue(const uint32_t idx) const
+    {
         assert(idx < numGraphicsQueues);
         VkQueue result;
         vkGetDeviceQueue(vkHandle(), queueFamilyIndices.Graphics, idx, &result);
         return result;
     }
 
-    VkQueue Device::TransferQueue(const uint32_t & idx) const{
+    VkQueue Device::TransferQueue(const uint32_t idx) const
+    {
         static bool logged_warning = false;
-        if ((queueFamilyIndices.Transfer == queueFamilyIndices.Graphics) && !logged_warning) {
+        if ((queueFamilyIndices.Transfer == queueFamilyIndices.Graphics) && !logged_warning)
+        {
             LOG(WARNING) << "Retrieving queue that supports transfer ops, but isn't dedicated transfer queue. This warning is only issued once - but retrieval is likely occuring multiple times.";
             logged_warning = true;
         }
@@ -141,9 +180,11 @@ namespace vpr {
 
     }
 
-    VkQueue Device::ComputeQueue(const uint32_t & idx) const{
+    VkQueue Device::ComputeQueue(const uint32_t idx) const
+    {
         static bool logged_warning = false;
-        if ((queueFamilyIndices.Compute == queueFamilyIndices.Graphics) && !logged_warning) {
+        if ((queueFamilyIndices.Compute == queueFamilyIndices.Graphics) && !logged_warning)
+        {
             LOG(WARNING) << "Retrieving queue that supports compute ops, but isn't dedicated compute queue. This warning is only issued once - but retrieval is likely occuring multiple times.";
             logged_warning = true;
         }
@@ -153,9 +194,11 @@ namespace vpr {
 
     }
 
-    VkQueue Device::SparseBindingQueue(const uint32_t & idx) const {
+    VkQueue Device::SparseBindingQueue(const uint32_t idx) const
+    {
         
-        if (!dataMembers->queueInfos.count(VK_QUEUE_SPARSE_BINDING_BIT)) {
+        if (!dataMembers->queueInfos.count(VK_QUEUE_SPARSE_BINDING_BIT))
+        {
             LOG(ERROR) << "Current device does not support sparse binding queues!";
             throw std::runtime_error("Requested unsuported queue family (Sparse Binding)");
         }
@@ -167,15 +210,20 @@ namespace vpr {
 
     }
 
-    VkImageTiling Device::GetFormatTiling(const VkFormat & format, const VkFormatFeatureFlags & flags) const {
+    VkImageTiling Device::GetFormatTiling(const VkFormat format, const VkFormatFeatureFlags flags) const
+    {
         VkFormatProperties properties;
         vkGetPhysicalDeviceFormatProperties(parent->vkHandle(), format, &properties);
-        if (properties.optimalTilingFeatures & flags) {
+
+        if (properties.optimalTilingFeatures & flags)
+        {
             return VK_IMAGE_TILING_OPTIMAL;
         }
-        else {
+        else
+        {
             // Check that the device at least supports the desired features for linear tiling
-            if (!(properties.linearTilingFeatures & flags)) {
+            if (!(properties.linearTilingFeatures & flags))
+            {
                 LOG(ERROR) << "Could not retrieve VkImageTiling mode for format, indicating that the format is probably not supported on the current device!";
                 throw std::runtime_error("Requested format is likely not supported on current device!");
             }
@@ -183,60 +231,76 @@ namespace vpr {
         }
     }
 
-    VkFormat Device::FindSupportedFormat(const VkFormat* formats, const size_t num_formats, const VkImageTiling & tiling, const VkFormatFeatureFlags & flags) const {
-        for (size_t i = 0; i < num_formats; ++i) {
+    VkFormat Device::FindSupportedFormat(const VkFormat* formats, const size_t num_formats, const VkImageTiling tiling, const VkFormatFeatureFlags flags) const
+    {
+        for (size_t i = 0; i < num_formats; ++i)
+        {
             VkFormatProperties properties;
             vkGetPhysicalDeviceFormatProperties(parent->vkHandle(), formats[i], &properties);
-            if (tiling == VK_IMAGE_TILING_LINEAR && (properties.linearTilingFeatures & flags) == flags) {
+            if (tiling == VK_IMAGE_TILING_LINEAR && (properties.linearTilingFeatures & flags) == flags)
+            {
                 return formats[i];
             }
-            else if (tiling == VK_IMAGE_TILING_OPTIMAL && (properties.optimalTilingFeatures & flags) == flags) {
+            else if (tiling == VK_IMAGE_TILING_OPTIMAL && (properties.optimalTilingFeatures & flags) == flags)
+            {
                 return formats[i];
             }
         }
+
         LOG(ERROR) << "Could not find texture format that supports requested tiling and feature flags: ( " << std::to_string(tiling) << " , " << std::to_string(flags) << " )";
         throw std::runtime_error("Could not find valid texture format.");
     }
 
-    VkFormat Device::FindDepthFormat() const{
+    VkFormat Device::FindDepthFormat() const
+    {
         static const std::vector<VkFormat> format_options{ VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT };
         return FindSupportedFormat(format_options.data(), format_options.size(), VK_IMAGE_TILING_OPTIMAL, VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
     }
 
-    uint32_t Device::GetMemoryTypeIdx(const uint32_t & type_bitfield, const VkMemoryPropertyFlags & property_flags, VkBool32 * memory_type_found) const{
+    uint32_t Device::GetMemoryTypeIdx(const uint32_t type_bitfield, const VkMemoryPropertyFlags property_flags, VkBool32 * memory_type_found) const
+    {
         return parent->GetMemoryTypeIdx(type_bitfield, property_flags, memory_type_found);
     }
 
-    const PhysicalDevice & Device::GetPhysicalDevice() const noexcept{
+    const PhysicalDevice& Device::GetPhysicalDevice() const noexcept
+    {
         return *parent;
     }
 
-    const VkPhysicalDeviceProperties& Device::GetPhysicalDeviceProperties() const noexcept {
+    const VkPhysicalDeviceProperties& Device::GetPhysicalDeviceProperties() const noexcept
+    {
         return parent->GetProperties();
     }
 
-    const VkPhysicalDeviceMemoryProperties& Device::GetPhysicalDeviceMemoryProperties() const noexcept {
+    const VkPhysicalDeviceMemoryProperties& Device::GetPhysicalDeviceMemoryProperties() const noexcept
+    {
         return parent->GetMemoryProperties();
     }
 
-    const VkDebugUtilsFunctions& Device::DebugUtilsHandler() const {
+    const VkDebugUtilsFunctions& Device::DebugUtilsHandler() const
+    {
         // In case we don't have member to return, return fully empty struct
         static const VkDebugUtilsFunctions fallback{ nullptr };
-        if (debugUtilsHandler) {
+        if (debugUtilsHandler)
+        {
             return *debugUtilsHandler;
         }
-        else {
+        else
+        {
             return fallback;
         }
     }
 
-    VkQueue Device::GeneralQueue(const uint32_t & desired_idx) const {
+    VkQueue Device::GeneralQueue(const uint32_t desired_idx) const
+    {
         
         uint32_t idx = parent->GetQueueFamilyIndex(VkQueueFlagBits(VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_TRANSFER_BIT | VK_QUEUE_COMPUTE_BIT));
-        if (idx == std::numeric_limits<uint32_t>::max()) {
+        if (idx == std::numeric_limits<uint32_t>::max())
+        {
             LOG(WARNING) << "Couldn't find a generalized queue supporting compute, graphics, and transfer: trying graphics and transfer.";
             idx = parent->GetQueueFamilyIndex(VkQueueFlagBits(VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_TRANSFER_BIT));
-            if (idx == std::numeric_limits<uint32_t>::max()) {
+            if (idx == std::numeric_limits<uint32_t>::max())
+            {
                 LOG(WARNING) << "Couldn't find a generalized queue supporting transfer and graphics operations: just returning a graphics queue.";
                 idx = queueFamilyIndices.Graphics;
             }
@@ -245,34 +309,45 @@ namespace vpr {
         VkQueue result;
         vkGetDeviceQueue(vkHandle(), idx, desired_idx, &result);
         return result;
-
     }
 
-    const uint32_t& Device::NumGraphicsQueues() const noexcept {
+    const uint32_t& Device::NumGraphicsQueues() const noexcept
+    {
         return numGraphicsQueues;
     }
 
-    const uint32_t& Device::NumComputeQueues() const noexcept {
+    const uint32_t& Device::NumComputeQueues() const noexcept
+    {
         return numComputeQueues;
     }
 
-    const uint32_t& Device::NumTransferQueues() const noexcept {
+    const uint32_t& Device::NumTransferQueues() const noexcept
+    {
         return numTransferQueues;
     }
 
-    const uint32_t& Device::NumSparseBindingQueues() const noexcept {
+    const uint32_t& Device::NumSparseBindingQueues() const noexcept
+    {
         return numSparseBindingQueues;
     }
 
-    const vkQueueFamilyIndices& Device::QueueFamilyIndices() const noexcept {
+    const vkQueueFamilyIndices& Device::QueueFamilyIndices() const noexcept
+    {
         return queueFamilyIndices;
     }
+
+    const Instance* Device::ParentInstance() const noexcept
+    {
+        return parentInstance;
+    }
     
-    void Device::create(const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count) {
+    void Device::create(const VprExtensionPack* extensions, const char* const* layers, const uint32_t layer_count)
+    {
 
         createInfo = vk_device_create_info_base;
         dataMembers = new DeviceDataMembers(this);
-        if (surface != VK_NULL_HANDLE) {
+        if (surface != VK_NULL_HANDLE)
+        {
             verifyPresentationSupport();
         }
         setupQueues();
@@ -281,7 +356,8 @@ namespace vpr {
 
         // This has to be here so that the queue_infos vector persists through device creation.
         std::vector<VkDeviceQueueCreateInfo> queue_infos;
-        for (const auto& queue_info_entry : dataMembers->queueInfos) {
+        for (const auto& queue_info_entry : dataMembers->queueInfos)
+        {
             queue_infos.emplace_back(queue_info_entry.second);
         }
 
@@ -296,7 +372,8 @@ namespace vpr {
 
     }
 
-    void Device::setupQueues() {
+    void Device::setupQueues()
+    {
 
         setupGraphicsQueues();
         setupComputeQueues();
@@ -305,7 +382,8 @@ namespace vpr {
 
     }
 
-    void Device::setupValidation(const char* const* layers, const uint32_t layer_count) {
+    void Device::setupValidation(const char* const* layers, const uint32_t layer_count)
+    {
         
         if (parentInstance->ValidationEnabled()) {
             if ((layer_count == 0) && (layers == nullptr)) {
@@ -321,18 +399,28 @@ namespace vpr {
 
     }
 
-    void Device::setupExtensions(const VprExtensionPack* extensions) {
-        
-        if (extensions) {
+    void Device::setupExtensions(const VprExtensionPack* extensions)
+    {
+        if (extensions)
+        {
             std::vector<const char*> all_extensions;
             dataMembers->prepareRequiredExtensions(extensions, all_extensions);
             dataMembers->prepareOptionalExtensions(extensions, all_extensions);
-            dataMembers->checkDedicatedAllocExtensions(all_extensions);
+            if (parentInstance->ApplicationInfo().apiVersion < VK_VERSION_1_1)
+            {
+                dataMembers->checkDedicatedAllocExtensions(all_extensions);
+            }
+            else
+            {
+                // Part of core API from Vk 1.1 forward
+                dataMembers->enableDedicatedAllocations = false;
+            }
             dataMembers->enabledExtensions = all_extensions;
             createInfo.enabledExtensionCount = static_cast<uint32_t>(dataMembers->enabledExtensions.size());
             createInfo.ppEnabledExtensionNames = dataMembers->enabledExtensions.data();
         }
-        else {
+        else
+        {
             createInfo.enabledExtensionCount = 0;
             createInfo.ppEnabledExtensionNames = nullptr;
             dataMembers->enableDedicatedAllocations = false;
@@ -340,7 +428,8 @@ namespace vpr {
 
     }
 
-    void Device::setupGraphicsQueues() {
+    void Device::setupGraphicsQueues()
+    {
         queueFamilyIndices.Graphics = parent->GetQueueFamilyIndex(VK_QUEUE_GRAPHICS_BIT);
         auto create_info = setupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_GRAPHICS_BIT));
         create_info.queueFamilyIndex = queueFamilyIndices.Graphics;
@@ -351,9 +440,11 @@ namespace vpr {
         dataMembers->queueInfos.insert(std::make_pair(VK_QUEUE_GRAPHICS_BIT, create_info));
     }
 
-    void Device::setupComputeQueues() {
+    void Device::setupComputeQueues()
+    {
         queueFamilyIndices.Compute = parent->GetQueueFamilyIndex(VK_QUEUE_COMPUTE_BIT);
-        if (queueFamilyIndices.Compute != queueFamilyIndices.Graphics) {
+        if (queueFamilyIndices.Compute != queueFamilyIndices.Graphics)
+        {
             auto compute_info = setupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_COMPUTE_BIT));
             compute_info.queueFamilyIndex = queueFamilyIndices.Compute;
             numComputeQueues = compute_info.queueCount;
@@ -362,9 +453,11 @@ namespace vpr {
             compute_info.pQueuePriorities = queue_priorities.compute.data();
             dataMembers->queueInfos.insert(std::make_pair(VK_QUEUE_COMPUTE_BIT, compute_info));
         }
-        else {
+        else
+        {
             auto queue_properties = parent->GetQueueFamilyProperties(VK_QUEUE_COMPUTE_BIT);
-            if (queue_properties.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
+            if (queue_properties.queueFlags & VK_QUEUE_GRAPHICS_BIT)
+            {
                 queueFamilyIndices.Compute = queueFamilyIndices.Graphics;
                 numComputeQueues = numGraphicsQueues;
 
@@ -372,9 +465,11 @@ namespace vpr {
         }
     }
 
-    void Device::setupTransferQueues() {
+    void Device::setupTransferQueues()
+    {
         queueFamilyIndices.Transfer = parent->GetQueueFamilyIndex(VK_QUEUE_TRANSFER_BIT);
-        if (queueFamilyIndices.Transfer != queueFamilyIndices.Graphics) {
+        if (queueFamilyIndices.Transfer != queueFamilyIndices.Graphics)
+        {
             auto transfer_info = setupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_TRANSFER_BIT));
             transfer_info.queueFamilyIndex = queueFamilyIndices.Transfer;
             numTransferQueues = transfer_info.queueCount;
@@ -382,16 +477,19 @@ namespace vpr {
             transfer_info.pQueuePriorities = queue_priorities.transfer.data();
             dataMembers->queueInfos.insert(std::make_pair(VK_QUEUE_TRANSFER_BIT, transfer_info));
         }
-        else {
+        else
+        {
             auto queue_properties = parent->GetQueueFamilyProperties(VK_QUEUE_TRANSFER_BIT);
-            if (queue_properties.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
+            if (queue_properties.queueFlags & VK_QUEUE_GRAPHICS_BIT)
+            {
                 queueFamilyIndices.Transfer = queueFamilyIndices.Graphics;
                 numTransferQueues = numGraphicsQueues;
             }
         }
     }
 
-    void Device::setupSparseBindingQueues() {
+    void Device::setupSparseBindingQueues()
+    {
         queueFamilyIndices.SparseBinding = parent->GetQueueFamilyIndex(VK_QUEUE_SPARSE_BINDING_BIT);
         if ((queueFamilyIndices.SparseBinding != queueFamilyIndices.Graphics) && (queueFamilyIndices.SparseBinding != std::numeric_limits<uint32_t>::max())) {
             auto sparse_info = setupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT));
@@ -401,88 +499,111 @@ namespace vpr {
             sparse_info.pQueuePriorities = queue_priorities.sparse_binding.data();
             dataMembers->queueInfos.insert(std::make_pair(VK_QUEUE_SPARSE_BINDING_BIT, sparse_info));
         }
-        else {
+        else
+        {
             auto queue_properties = parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT);
-            if (queue_properties.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
+            if (queue_properties.queueFlags & VK_QUEUE_GRAPHICS_BIT)
+            {
                 queueFamilyIndices.SparseBinding = queueFamilyIndices.Graphics;
                 numSparseBindingQueues = numGraphicsQueues;
             }
         }
     }
 
-    void Device::verifyPresentationSupport() {
+    void Device::verifyPresentationSupport()
+    {
     
         // Check presentation support
         VkBool32 present_support = false;
-        for (uint32_t i = 0; i < 3; ++i) {
+        for (uint32_t i = 0; i < 3; ++i)
+        {
             vkGetPhysicalDeviceSurfaceSupportKHR(parent->vkHandle(), i, surface, &present_support);
-            if (present_support) {
+            if (present_support)
+            {
                 queueFamilyIndices.Present = i;
                 break;
             }
         }
 
-        if (!present_support) {
+        if (!present_support)
+        {
             LOG(ERROR) << "No queues found that support presentation to a surface.";
             throw std::runtime_error("No queues found that support presentation to a surface!");
         }
 
     }
 
-    VkDeviceQueueCreateInfo Device::setupQueueFamily(const VkQueueFamilyProperties & family_properties) {
+    VkDeviceQueueCreateInfo Device::setupQueueFamily(const VkQueueFamilyProperties& family_properties)
+    {
         VkDeviceQueueCreateInfo result = vk_device_queue_create_info_base;
         result.queueCount = family_properties.queueCount;
         return result;
     }
 
-    void DeviceDataMembers::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) {
+    void DeviceDataMembers::prepareRequiredExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output)
+    {
         std::vector<const char*> required_extensions{ extensions->RequiredExtensionNames, 
             extensions->RequiredExtensionNames + extensions->RequiredExtensionCount };
         checkExtensions(required_extensions, true);
 
-        for (auto&& elem : required_extensions) {
+        for (auto&& elem : required_extensions)
+        {
             copiedExtensionStrings.emplace_back(std::string(elem));
             output.emplace_back(copiedExtensionStrings.back().c_str());
         }
     }
 
-    void DeviceDataMembers::prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) noexcept {
+    void DeviceDataMembers::prepareOptionalExtensions(const VprExtensionPack* extensions, std::vector<const char*>& output) noexcept
+    {
         std::vector<const char*> optional_extensions{ extensions->OptionalExtensionNames, 
             extensions->OptionalExtensionNames + extensions->OptionalExtensionCount };
         checkExtensions(optional_extensions, false);
 
-        for (auto&& elem : optional_extensions) {
+        for (auto&& elem : optional_extensions)
+        {
             copiedExtensionStrings.emplace_back(std::string(elem));
             output.emplace_back(copiedExtensionStrings.back().c_str());
         }
 
     }
 
-    void DeviceDataMembers::checkExtensions(std::vector<const char*>& extensions, bool throw_on_error) const {
+    void DeviceDataMembers::checkExtensions(std::vector<const char*>& extensions, bool throw_on_error) const
+    {
         uint32_t queried_count = 0;
         vkEnumerateDeviceExtensionProperties(device->GetPhysicalDevice().vkHandle(), nullptr, &queried_count, nullptr);
         std::vector<VkExtensionProperties> queried_extensions(queried_count);
         vkEnumerateDeviceExtensionProperties(device->GetPhysicalDevice().vkHandle(), nullptr, &queried_count, queried_extensions.data());
 
-        auto iter = std::remove_if(std::begin(extensions), std::end(extensions), [queried_extensions, throw_on_error](const char* name) {
-            const auto has_extension = [queried_extensions](const char* name) {
-                const auto req_found = std::find_if(queried_extensions.cbegin(), queried_extensions.cend(), [name](const VkExtensionProperties& p) {
-                    return strcmp(p.extensionName, name) == 0;
-                });
+        auto iter = std::remove_if(std::begin(extensions), std::end(extensions), [queried_extensions, throw_on_error](const char* name)
+            {
+            const auto has_extension = [queried_extensions](const char* name)
+            {
+                const auto req_found = 
+                    std::find_if(queried_extensions.cbegin(), queried_extensions.cend(),
+                        [name](const VkExtensionProperties& p)
+                        {
+                        return strcmp(p.extensionName, name) == 0;
+                        }
+                    );
+
                 return req_found != queried_extensions.end();
             };
 
-            if (!has_extension(name)) {
-                if (throw_on_error) {
+            if (!has_extension(name))
+            {
+                if (throw_on_error)
+                {
                     LOG(ERROR) << "Current VkDevice does not support extension \"" << name << "\" that is required!";
                     throw std::runtime_error("Could not enable/use required extension for the logical device.");
                 }
-                else {
+                else
+                {
                     LOG(WARNING) << "Requested device extension with name \"" << name << "\" is not available, removing from list.";
                 }
                 return true;
             }
-            else {
+            else
+            {
                 return false;
             }
         });
@@ -490,38 +611,49 @@ namespace vpr {
         extensions.erase(iter, extensions.end());
     }
     
-    void DeviceDataMembers::checkDedicatedAllocExtensions(const std::vector<const char*>& exts) {
+    void DeviceDataMembers::checkDedicatedAllocExtensions(const std::vector<const char*>& exts)
+    {
+
         constexpr std::array<const char*, 2> mem_extensions{ VK_KHR_DEDICATED_ALLOCATION_EXTENSION_NAME, VK_KHR_GET_MEMORY_REQUIREMENTS_2_EXTENSION_NAME };
         auto iter = std::find(exts.cbegin(), exts.cend(), mem_extensions[0]);
-        if (iter != exts.cend()) {
+
+        if (iter != exts.cend())
+        {
             iter = std::find(exts.cbegin(), exts.cend(), mem_extensions[1]);
-            if (iter != exts.cend()) {
+            if (iter != exts.cend())
+            {
                 LOG_IF(VERBOSE_LOGGING, INFO) << "Both extensions required to enable better dedicated allocations have been enabled/found.";
                 enableDedicatedAllocations = true;
             }    
-            else {
+            else
+            {
                 LOG_IF(VERBOSE_LOGGING, WARNING) << "Only one of the extensions required for better allocations was found - cannot enable/use.";
                 enableDedicatedAllocations = false;
             }
         }
-        else {
+        else
+        {
             enableDedicatedAllocations = false;
         }
     }
 
-    void Device::setupDebugUtilsHandler() {
-        auto check_loaded_pfn = [](const void* ptr, const char* fname) {
+    void Device::setupDebugUtilsHandler()
+    {
+        auto check_loaded_pfn = [](const void* ptr, const char* fname)
+        {
             if (!ptr) {
                 LOG(ERROR) << "Failed to load function pointer " << fname << " for debug utils extension!";
             }
         };
 
-        if (!parentInstance->ValidationEnabled()) {
+        if (!parentInstance->ValidationEnabled())
+        {
             LOG(WARNING) << "Cannot load requested VkDebugUtils function pointers, as validation layers are not enabled!";
             return;
         }
 
-        if (parentInstance->HasExtension(VK_EXT_DEBUG_UTILS_EXTENSION_NAME)) {
+        if (parentInstance->HasExtension(VK_EXT_DEBUG_UTILS_EXTENSION_NAME))
+        {
             debugUtilsHandler = new VkDebugUtilsFunctions();
             debugUtilsHandler->vkSetDebugUtilsObjectName = 
                 reinterpret_cast<PFN_vkSetDebugUtilsObjectNameEXT>(vkGetDeviceProcAddr(handle, "vkSetDebugUtilsObjectNameEXT"));

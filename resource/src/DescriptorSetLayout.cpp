@@ -4,25 +4,33 @@
 #include <vector>
 #include <map>
 
-namespace vpr {
+namespace vpr
+{
 
-    struct LayoutBindings {
+    struct LayoutBindings
+    {
         std::map<size_t, VkDescriptorSetLayoutBinding> bindings;
     };
 
     DescriptorSetLayout::DescriptorSetLayout(const VkDevice& _dvc, const VkDescriptorSetLayoutCreateFlags _flags) : 
         device(_dvc), handle(VK_NULL_HANDLE), data(std::make_unique<LayoutBindings>()), creationFlags{ _flags } {}
 
-    DescriptorSetLayout::~DescriptorSetLayout() {
-        if (handle != VK_NULL_HANDLE) {
+    DescriptorSetLayout::~DescriptorSetLayout()
+    {
+        if (handle != VK_NULL_HANDLE)
+        {
             vkDestroyDescriptorSetLayout(device, handle, nullptr);
         }
     }
 
     DescriptorSetLayout::DescriptorSetLayout(DescriptorSetLayout&& other) noexcept : device(std::move(other.device)),
-        handle(std::move(other.handle)), ready(std::move(other.ready)), data(std::move(other.data)) { other.handle = VK_NULL_HANDLE; }
+        handle(std::move(other.handle)), ready(std::move(other.ready)), data(std::move(other.data))
+    { 
+        other.handle = VK_NULL_HANDLE;
+    }
 
-    DescriptorSetLayout& DescriptorSetLayout::operator=(DescriptorSetLayout&& other) noexcept {
+    DescriptorSetLayout& DescriptorSetLayout::operator=(DescriptorSetLayout&& other) noexcept
+    {
         device = std::move(other.device);
         handle = std::move(other.handle);
         ready = std::move(other.ready);
@@ -31,38 +39,50 @@ namespace vpr {
         return *this;
     }
     
-    void DescriptorSetLayout::AddDescriptorBinding(const VkDescriptorType& descriptor_type, const VkShaderStageFlags& shader_stage, const uint32_t& descriptor_binding_loc) noexcept {
-        data->bindings.emplace(descriptor_binding_loc, VkDescriptorSetLayoutBinding{
-            descriptor_binding_loc,
-            descriptor_type,
-            1,
-            VkShaderStageFlags(shader_stage),
-            nullptr
-        });
+    void DescriptorSetLayout::AddDescriptorBinding(const VkDescriptorType descriptor_type, const VkShaderStageFlags shader_stage, const uint32_t descriptor_binding_loc) noexcept
+    {
+        data->bindings.emplace(descriptor_binding_loc,
+            VkDescriptorSetLayoutBinding
+            {
+                descriptor_binding_loc,
+                descriptor_type,
+                1,
+                VkShaderStageFlags(shader_stage),
+                nullptr
+            }
+        );
 
     }
 
-    void DescriptorSetLayout::AddDescriptorBinding(const VkDescriptorSetLayoutBinding& binding) {
+    void DescriptorSetLayout::AddDescriptorBinding(const VkDescriptorSetLayoutBinding& binding)
+    {
         data->bindings.emplace(binding.binding, binding);
     }
     
-    void DescriptorSetLayout::AddDescriptorBindings(const uint32_t num_bindings, const VkDescriptorSetLayoutBinding* bindings_ptr) {
-        for (uint32_t i = 0; i < num_bindings; ++i) {
+    void DescriptorSetLayout::AddDescriptorBindings(const uint32_t num_bindings, const VkDescriptorSetLayoutBinding* bindings_ptr)
+    {
+        for (uint32_t i = 0; i < num_bindings; ++i)
+        {
             data->bindings.emplace(bindings_ptr[i].binding, bindings_ptr[i]);
         }
     }
-    const VkDescriptorSetLayout& DescriptorSetLayout::vkHandle() const noexcept {
-        if(!ready) {
+    const VkDescriptorSetLayout& DescriptorSetLayout::vkHandle() const noexcept
+    {
+        if(!ready)
+        {
             create();
         }
         return handle;
     }
 
-    void DescriptorSetLayout::create() const {
+    void DescriptorSetLayout::create() const
+    {
         assert(!data->bindings.empty());
         size_t num_bindings = static_cast<uint32_t>(data->bindings.size());
         std::vector<VkDescriptorSetLayoutBinding> bindings_vec;
-        for(const auto& entry : data->bindings) {
+
+        for(const auto& entry : data->bindings)
+        {
             bindings_vec.emplace_back(entry.second);
         }
 

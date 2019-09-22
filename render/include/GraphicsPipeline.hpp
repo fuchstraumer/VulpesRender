@@ -4,7 +4,8 @@
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 
-namespace vpr {
+namespace vpr
+{
 
     /**The rendering group is used for objects that are directly related to how things appear on screen, including those classes
     *  that are minimum requirements for making things display like the Framebuffer, Renderpass, and the GraphicsPipeline.
@@ -21,7 +22,8 @@ namespace vpr {
     *   - RasterizationInfo: Set culling mode, winding direction, and polygon rendering mode.
     *   \ingroup Rendering
     */
-    struct VPR_API GraphicsPipelineInfo {
+    struct VPR_API GraphicsPipelineInfo
+    {
         GraphicsPipelineInfo();
 
         VkPipelineVertexInputStateCreateInfo VertexInfo;
@@ -52,7 +54,8 @@ namespace vpr {
     *   alone. The GraphicsPipelineInfo structure is, truthfully, much more important and much complex than this class is.
     *   \ingroup Rendering
     */
-    class VPR_API GraphicsPipeline {
+    class VPR_API GraphicsPipeline
+    {
         GraphicsPipeline(const GraphicsPipeline&) = delete;
         GraphicsPipeline& operator=(const GraphicsPipeline&) = delete;
     public:
@@ -77,6 +80,7 @@ namespace vpr {
          * \param infos Array of pipeline infos to use - if possible, make sure to set the basePipelineIndex bits and the appropriate pipeline derivative flags!
         */
         static void CreateMultiple(const VkDevice& device, const VkGraphicsPipelineCreateInfo* infos, const size_t num_infos, VkPipelineCache cache, GraphicsPipeline** dest_array);
+
     private:
 
         const VkAllocationCallbacks* allocators = nullptr;
@@ -86,7 +90,6 @@ namespace vpr {
 
     };
 
-    
-
 }
+
 #endif // !VULPES_VK_GRAPHICS_PIPELINE_H

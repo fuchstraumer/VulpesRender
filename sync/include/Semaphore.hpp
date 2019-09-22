@@ -4,7 +4,8 @@
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 
-namespace vpr {
+namespace vpr
+{
 
     /**Vulkan has three primary synchronization primitives, each with distinct use cases and capabilities. The 
      * docs for each class representing these primitive do their best to communicate this, but consult the Vulkan
@@ -24,7 +25,8 @@ namespace vpr {
      * 
      * \ingroup Synchronization
      */
-    class VPR_API Semaphore {
+    class VPR_API Semaphore
+    {
         Semaphore(const Semaphore&) = delete;
         Semaphore& operator=(const Semaphore&) = delete;
     public:

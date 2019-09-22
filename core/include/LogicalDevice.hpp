@@ -4,7 +4,8 @@
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 
-namespace vpr {
+namespace vpr
+{
 
     struct DeviceDataMembers;
     struct VkDebugUtilsFunctions;
@@ -12,7 +13,8 @@ namespace vpr {
     /**Simple wrapper struct for storing queue family indices. Retrieved from Device instance.
      * \ingroup Core
      */
-    struct VPR_API vkQueueFamilyIndices {
+    struct VPR_API vkQueueFamilyIndices
+    {
         vkQueueFamilyIndices();
         uint32_t Graphics;
         uint32_t Compute;
@@ -31,7 +33,8 @@ namespace vpr {
     *   handle. 
     *   \ingroup Core
     */
-    class VPR_API Device {
+    class VPR_API Device
+    {
         Device(const Device&) = delete;
         Device(Device&&) = delete;
         Device& operator=(const Device&) = delete;
@@ -63,21 +66,21 @@ namespace vpr {
         *    Then proceeds to graphics and compute. Lastly, it will just return a graphics-only queue and log a warning.
         *   \param idx - in the case of a device with several "generalized" queues, selects which queue to return.
         */
-        VkQueue GeneralQueue(const uint32_t& idx = 0) const;
+        VkQueue GeneralQueue(const uint32_t idx = 0) const;
 
         /* Note: While most hardware presents support fpr multiple graphics queues, this is almost certainly not the actual case. 
          * Instead, it is likely the driver is doing some kind of multiplexing of it's singular graphics queue. By default only one
          * graphics queue will be created, as it is not recommended to use more than one anyways.*/
-        VkQueue GraphicsQueue(const uint32_t & idx = 0) const;
-        VkQueue TransferQueue(const uint32_t & idx = 0) const;
-        VkQueue ComputeQueue(const uint32_t & idx = 0) const;
-        VkQueue SparseBindingQueue(const uint32_t& idx = 0) const;
+        VkQueue GraphicsQueue(const uint32_t idx = 0) const;
+        VkQueue TransferQueue(const uint32_t idx = 0) const;
+        VkQueue ComputeQueue(const uint32_t idx = 0) const;
+        VkQueue SparseBindingQueue(const uint32_t idx = 0) const;
 
         /**!Checks whether or not the given format along with the specified flags supports optimal or linear tiling.
         *   \param format - Vulkan format enum specifying the type of image data
         *   \param flags - flags specifying features of format: commonly what it is being used for, e.g cube map, sampled image, storage image, etc
         */
-        VkImageTiling GetFormatTiling(const VkFormat& format, const VkFormatFeatureFlags & flags) const;
+        VkImageTiling GetFormatTiling(const VkFormat format, const VkFormatFeatureFlags flags) const;
         
         /**! Checks a collection of possible formats, returning the one that supports the given tiling and feature flags.
         *   \param options - vector of formats that are usable for the desired task.
@@ -85,7 +88,7 @@ namespace vpr {
         *   \param flags - features required, commonly related to intended use for the image.
         *   \return Returns found format if successful, otherwise returns VK_FORMAT_UNDEFINED and logs a detailed error.
         */
-        VkFormat FindSupportedFormat(const VkFormat* formats, const size_t num_formats, const VkImageTiling& tiling, const VkFormatFeatureFlags& flags) const;
+        VkFormat FindSupportedFormat(const VkFormat* formats, const size_t num_formats, const VkImageTiling tiling, const VkFormatFeatureFlags flags) const;
         
         /**Finds a Vulkan image format suitable for use in the depth buffer. Currently could benefit from better quantification of what defines the "best" depth format, as this will depend on hardware and whether or not we are even using the stencil.*/
         VkFormat FindDepthFormat() const;
@@ -96,7 +99,7 @@ namespace vpr {
          * \param property_flags required properties that the memory type must support
          * \param memory_type_found written to, if non-null, based on search results
          */
-        uint32_t GetMemoryTypeIdx(const uint32_t& type_bitfield, const VkMemoryPropertyFlags& property_flags, VkBool32* memory_type_found = nullptr) const;
+        uint32_t GetMemoryTypeIdx(const uint32_t type_bitfield, const VkMemoryPropertyFlags property_flags, VkBool32* memory_type_found = nullptr) const;
         const PhysicalDevice& GetPhysicalDevice() const noexcept;
         const VkPhysicalDeviceProperties& GetPhysicalDeviceProperties() const noexcept;
         const VkPhysicalDeviceMemoryProperties& GetPhysicalDeviceMemoryProperties() const noexcept;
@@ -109,6 +112,8 @@ namespace vpr {
         const uint32_t& NumTransferQueues() const noexcept;
         const uint32_t& NumSparseBindingQueues() const noexcept;
         const vkQueueFamilyIndices& QueueFamilyIndices() const noexcept;
+
+        const Instance* ParentInstance() const noexcept;
 
     private:
         void verifyPresentationSupport();        

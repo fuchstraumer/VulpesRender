@@ -4,7 +4,8 @@
 #include "vpr_stdafx.h"
 #include "ForwardDecl.hpp"
 
-namespace vpr {
+namespace vpr
+{
 
     /**A fence is the most heavyweight of Vulkan synchronization primitives, and is 
      * for explicitly synchronizating the device and host. Avoid using these unless
@@ -12,7 +13,8 @@ namespace vpr {
      * (requiring full event/pipeline flush), it's still not a cheap operation.
      * \ingroup Synchronization
      */
-    class VPR_API Fence {
+    class VPR_API Fence
+    {
         Fence(const Fence&) = delete;
         Fence& operator=(const Fence&) = delete;
     public:

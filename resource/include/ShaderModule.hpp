@@ -4,7 +4,8 @@
 #include "vpr_stdafx.h"
 #include <memory>
 
-namespace vpr {
+namespace vpr
+{
 
     struct ShaderCodeFileLoader;
 
@@ -12,7 +13,8 @@ namespace vpr {
     *   setting up the VkPipelineShaderStageCreateInfo required when creating/setting up an objects graphics pipeline.
     *   \ingroup Resources
     */
-    class VPR_API ShaderModule {
+    class VPR_API ShaderModule
+    {
         ShaderModule(const ShaderModule&) = delete;
         ShaderModule& operator=(const ShaderModule&) = delete;
     public:
@@ -24,7 +26,7 @@ namespace vpr {
         /**Creates a new shader for the given stage by using the given binary data array. Will be slightly faster, as it doesn't have to open
          * a file and copy that data into the program.
          */
-        ShaderModule(const VkDevice& device, const VkShaderStageFlagBits& stages, const uint32_t* binary_source, const uint32_t& binary_source_length);
+        ShaderModule(const VkDevice& device, const VkShaderStageFlags stages, const uint32_t* binary_source, const uint32_t binary_source_length);
         ShaderModule(const VkDevice& device, const char* filename, VkPipelineShaderStageCreateInfo& create_info);
         ~ShaderModule();
 
