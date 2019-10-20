@@ -8,13 +8,13 @@ INITIALIZE_EASYLOGGINGPP
 #ifdef __APPLE_CC__
 #include <boost/filesystem.hpp>
 #else
-#include <experimental/filesystem>
+#include <filesystem>
 #endif
 
 namespace vpr
 {
 
-    namespace fs = std::experimental::filesystem;
+    namespace fs = std::filesystem;
     static const std::string cacheSubdirectoryString{ "/shader_cache/" };
     static fs::path cachePath = fs::path(fs::temp_directory_path() / cacheSubdirectoryString);
     static std::string cacheString{ cachePath.string() };
@@ -155,7 +155,7 @@ namespace vpr
 #ifdef __APPLE_CC__
         namespace fs = boost::filesystem;
 #else
-        namespace fs = std::experimental::filesystem;
+        namespace fs = std::filesystem;
 #endif
 
         if (!fs::exists(cachePath))
@@ -225,7 +225,7 @@ namespace vpr
                 createInfo.initialDataSize = 0;
                 createInfo.pInitialData = nullptr;
                 cache.close();
-                if (!std::experimental::filesystem::remove(_filename))
+                if (!std::filesystem::remove(_filename))
                 {
                     LOG(WARNING) << "Unable to erase pre-existing cache data. Won't be able to write new contents to disk!";
                 }
