@@ -9,11 +9,18 @@ OPTION(VPR_USE_SDL "Use SDL instead of glfw" OFF)
 
 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Doing this just so we have our own variable scope for GLFW, because we really want to use glfw as a shared 
+# library. Otherwise, variable state and functionality gets weird across separate modules / libraries
+FUNCTION(ADD_GLFW)
+    SET(BUILD_SHARED_LIBS ON)
+    ADD_SUBDIRECTORY(third_party/glfw)
+ENDFUNCTION()
+
 SET(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation")
 SET(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs")
 SET(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs")
 IF(NOT VPR_USE_SDL)
-ADD_SUBDIRECTORY(third_party/glfw)
+    ADD_GLFW()
 ENDIF()
 
 FIND_PACKAGE(Vulkan)
