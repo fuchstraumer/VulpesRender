@@ -29,6 +29,11 @@ namespace vpr
         /**These are "nice to have" extensions that will not compromise required functionality, so failing to load them is a non-issue.*/
         const char* const* OptionalExtensionNames;
         uint32_t OptionalExtensionCount;
+        // Added to device pNext, assuming user has already set pNext after first pointer as needed
+        const void* pNextChainStart{ nullptr };
+        // If not nullptr, will be casted to the DeviceFeatures/PhysicalDeviceFeatures struct and used to overwrite it upon
+        // creation, so that users can pass in their own features to enable
+        const VkPhysicalDeviceFeatures* featuresToEnable{ nullptr };
     };
 
     /**Instance is a wrapper around the base Vulkan object that must be initialized first. The VkInstanceCreateInfo struct passed to the constructor

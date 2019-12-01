@@ -364,6 +364,15 @@ namespace vpr
         createInfo.queueCreateInfoCount = static_cast<uint32_t>(queue_infos.size());
         createInfo.pQueueCreateInfos = queue_infos.data();
         createInfo.pEnabledFeatures = &parent->GetFeatures();
+        if (extensions->featuresToEnable != nullptr)
+        {
+            createInfo.pEnabledFeatures = extensions->featuresToEnable;
+        }
+
+        if (extensions->pNextChainStart != nullptr)
+        {
+            createInfo.pNext = extensions->pNextChainStart;
+        }
 
         VkResult result = vkCreateDevice(parent->vkHandle(), &createInfo, nullptr, &handle);
         VkAssert(result);

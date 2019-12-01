@@ -163,6 +163,10 @@ namespace vpr
         }
 
         createInfo.pApplicationInfo = &applicationInfo;
+        if (extensions->pNextChainStart != nullptr)
+        {
+            createInfo.pNext = extensions->pNextChainStart;
+        }
         VkResult err = vkCreateInstance(&createInfo, nullptr, &handle);
         VkAssert(err);
 
