@@ -10,6 +10,7 @@ namespace vpr
     struct LayoutBindings
     {
         std::map<size_t, VkDescriptorSetLayoutBinding> bindings;
+        std::vector<VkDescriptorBindingFlagsEXT> bindingFlags;
     };
 
     DescriptorSetLayout::DescriptorSetLayout(const VkDevice& _dvc, const VkDescriptorSetLayoutCreateFlags _flags) : 
@@ -66,6 +67,16 @@ namespace vpr
             data->bindings.emplace(bindings_ptr[i].binding, bindings_ptr[i]);
         }
     }
+
+    void DescriptorSetLayout::SetBindingFlags(const uint32_t binding, const VkDescriptorBindingFlagsEXT flags)
+    {
+        if (binding >= data->bindingFlags.size())
+        {
+            data->bindingFlags.resize(static_cast<size_t>(binding), (VkDescriptorBindingFlagsEXT)0);
+        }
+        data->bindingFlags[binding] = flags;
+    }
+
     const VkDescriptorSetLayout& DescriptorSetLayout::vkHandle() const noexcept
     {
         if(!ready)
@@ -90,6 +101,20 @@ namespace vpr
         set_layout_create_info.bindingCount = static_cast<uint32_t>(num_bindings);
         set_layout_create_info.pBindings = bindings_vec.data();
         set_layout_create_info.flags = creationFlags;
+
+        VkDescriptorSetLayoutBindingFlagsCreateInfoEXT flagsInfo{ VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT, nullptr, 0u, nullptr };
+        if (creationFlags & VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT)
+        {
+            flagsInfo.bindingCount = static_cast<uint32_t>(num_bindings);
+            // If this is empty, we've really broken things
+            assert(!data->bindingFlags.empty());
+            if (data->bindingFlags.size() != num_bindings)
+            {
+                data->bindingFlags.resize(num_bindings, (VkDescriptorBindingFlagsEXT)0);
+            }
+            flagsInfo.pBindingFlags = data->bindingFlags.data();
+            set_layout_create_info.pNext = &flagsInfo;
+        }
 
         VkResult result = vkCreateDescriptorSetLayout(device, &set_layout_create_info, nullptr, &handle);
         VkAssert(result);
