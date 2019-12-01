@@ -19,7 +19,7 @@ namespace vpr
         DescriptorPool& operator=(const DescriptorPool&) = delete;
     public:
 
-        DescriptorPool(const VkDevice& _device, const size_t max_sets);
+        DescriptorPool(const VkDevice& _device, const size_t max_sets, const VkDescriptorPoolCreateFlags create_flags);
         ~DescriptorPool();
 
         DescriptorPool(DescriptorPool&& other) noexcept;
@@ -34,9 +34,10 @@ namespace vpr
 
     private:
 
-        VkDescriptorPool handle{ VK_NULL_HANDLE };
-        size_t maxSets{ std::numeric_limits<size_t>::max() };
         VkDevice device{ VK_NULL_HANDLE };
+        size_t maxSets{ std::numeric_limits<size_t>::max() };
+        VkDescriptorPoolCreateFlags createFlags{ 0u };
+        VkDescriptorPool handle{ VK_NULL_HANDLE };
         std::unique_ptr<ResourceTypeMap> typeMap;
     };
 

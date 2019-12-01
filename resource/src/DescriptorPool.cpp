@@ -29,7 +29,8 @@ namespace vpr
         VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT
     };
 
-    DescriptorPool::DescriptorPool(const VkDevice& _device, const size_t max_sets) : device(_device), maxSets(max_sets), handle(VK_NULL_HANDLE), typeMap(std::make_unique<ResourceTypeMap>())
+    DescriptorPool::DescriptorPool(const VkDevice& _device, const size_t max_sets, const VkDescriptorPoolCreateFlags create_flags) : device(_device), maxSets(max_sets), createFlags{ create_flags },
+        handle(VK_NULL_HANDLE), typeMap(std::make_unique<ResourceTypeMap>())
     {
         for (const auto& type : descriptor_types)
         {
@@ -81,7 +82,7 @@ namespace vpr
         }
 
         VkDescriptorPoolCreateInfo pool_create_info = vk_descriptor_pool_create_info_base;
-        pool_create_info.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
+        pool_create_info.flags = createFlags;
         pool_create_info.maxSets = static_cast<uint32_t>(maxSets);
         pool_create_info.poolSizeCount = static_cast<uint32_t>(pool_sizes.size());
         pool_create_info.pPoolSizes = pool_sizes.data();
