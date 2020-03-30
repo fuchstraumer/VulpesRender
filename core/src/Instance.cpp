@@ -230,13 +230,26 @@ namespace vpr
 
     void Instance::checkApiVersionSupport(VkApplicationInfo* info)
     {
+        // sets API version to a reasonable value
+        auto vkVersionString = [](const uint32_t ver)
+        {
+            const uint32_t major = VK_VERSION_MAJOR(ver);
+            const uint32_t minor = VK_VERSION_MINOR(ver);
+            const uint32_t patch = VK_VERSION_PATCH(ver);
+            std::string result = std::to_string(major) +
+                "." + std::to_string(minor) +
+                "." + std::to_string(patch);
+            return result;
+        };
+
+        const uint32_t desiredVersion = info->apiVersion != 0 ? info->apiVersion : -1;
         uint32_t api_version = 0;
         vkEnumerateInstanceVersion(&api_version);
-        if (VK_MAKE_VERSION(1, 1, 0) <= api_version) {
-            info->apiVersion = VK_MAKE_VERSION(1, 1, 0);
-        }
-        else {
-            info->apiVersion = VK_MAKE_VERSION(1, 0, 0);
+        if (api_version < desiredVersion)
+        {
+            info->apiVersion = api_version;
+            LOG(WARNING) << "Requested Vulkan API version v" << vkVersionString(desiredVersion) <<
+                " but the Vulkan implementation on this device only supports v" << vkVersionString(api_version);
         }
     }
 

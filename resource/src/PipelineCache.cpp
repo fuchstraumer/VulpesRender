@@ -10,6 +10,7 @@ INITIALIZE_EASYLOGGINGPP
 #else
 #include <filesystem>
 #endif
+#include <iomanip>
 
 namespace vpr
 {
@@ -164,7 +165,16 @@ namespace vpr
             fs::create_directories(cachePath);
         }
 
-        std::string fname = cacheString + std::to_string(hashID) + std::string(".vkdat");
+        std::string fileStr;
+        {
+            std::stringstream strStream;
+            strStream << std::hex << hashID;
+            fileStr = strStream.str();
+        }
+        fileStr += ".vkdat";
+        fs::path filePath = cachePath / fs::path(fileStr);
+
+        std::string fname = filePath.string();
 #ifdef _MSC_VER
         filename = _strdup(fname.c_str());
 #else
