@@ -251,6 +251,11 @@ namespace vpr
             LOG(WARNING) << "Requested Vulkan API version v" << vkVersionString(desiredVersion) <<
                 " but the Vulkan implementation on this device only supports v" << vkVersionString(api_version);
         }
+        else if (api_version > desiredVersion)
+        {
+            LOG_IF(VERBOSE_LOGGING, INFO) << "Requested Vulkan API version v" << vkVersionString(desiredVersion) <<
+                ", but the Vulkan implementation on this device can actually support newer version v" << vkVersionString(api_version);
+        }
     }
 
     void Instance::prepareValidation(const char* const* layers, const uint32_t layer_count)
