@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vulkan/vulkan.h>
+#include <vulkan/vulkan_core.h>
 
 #if defined(__GNUC__)
     #define EXPORT __attribute__((visibility("default")))
