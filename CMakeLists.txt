@@ -2,8 +2,8 @@ INCLUDE(ExternalProject)
 CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
 PROJECT(vpr)
 
-OPTION(BUILD_DYNAMIC_LIBRARY "Build VPR as a dynamic library - static is far easier" OFF)
-OPTION(VERBOSE_LOGGING "Enable extra output from easyloggingpp" OFF)
+OPTION(VPR_BUILD_DYNAMIC_LIBRARY "Build VPR as a dynamic library - static is far easier" OFF)
+OPTION(VPR_VERBOSE_LOGGING "Enable extra output from easyloggingpp" OFF)
 OPTION(VPR_BUILD_ANDROID "Build for Android platform" OFF)
 OPTION(VPR_USE_SDL "Use SDL instead of glfw" OFF)
 
