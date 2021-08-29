@@ -279,7 +279,11 @@ namespace vpr
             }
             else
             {
-                constexpr static const char* const default_layers[1] = { "VK_LAYER_LUNARG_standard_validation" };
+                constexpr static const char* const default_layers[1] = { "VK_LAYER_KHRONOS_validation" };
+                if (!checkValidationSupport(default_layers, 1))
+                {
+                    throw std::runtime_error("Tried to enable Vulkan validation layers, but they're unsupported on the current system!");
+                }
                 createInfo.ppEnabledLayerNames = default_layers;
                 createInfo.enabledLayerCount = 1;
             }
