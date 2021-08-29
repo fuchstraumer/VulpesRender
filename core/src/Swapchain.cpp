@@ -290,7 +290,7 @@ namespace vpr {
         extent = info.ChooseSwapchainExtent(window);
 
         presentMode = info.GetBestPresentMode();
-        VkPresentModeKHR desiredMode = VK_PRESENT_MODE_BEGIN_RANGE_KHR;
+        VkPresentModeKHR desiredMode = VK_PRESENT_MODE_MAX_ENUM_KHR;
         switch (desiredSyncMode)
         {
         case vertical_sync_mode::None:
