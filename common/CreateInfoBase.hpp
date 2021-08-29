@@ -200,7 +200,8 @@ namespace vpr {
 		VK_FALSE,
 	};
 
-	constexpr static VkImageMemoryBarrier vk_image_mem_barrier_base{
+	constexpr static VkImageMemoryBarrier vk_image_mem_barrier_base
+	{
 		VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER,
 		nullptr,
 		0,
@@ -210,7 +211,7 @@ namespace vpr {
 		std::numeric_limits<uint32_t>::max(),
 		std::numeric_limits<uint32_t>::max(),
 		VK_NULL_HANDLE,
-        {VK_NULL_HANDLE},
+		// vkImageSubresourceRange
 	};
 
 	// This should be tuned at least slightly before being used: format at the least needs to be set.
