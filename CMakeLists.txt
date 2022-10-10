@@ -1,4 +1,3 @@
-INCLUDE(ExternalProject)
 CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
 PROJECT(vpr)
 
@@ -6,6 +5,7 @@ OPTION(VPR_BUILD_DYNAMIC_LIBRARY "Build VPR as a dynamic library - static is far
 OPTION(VPR_VERBOSE_LOGGING "Enable extra output from easyloggingpp" OFF)
 OPTION(VPR_BUILD_ANDROID "Build for Android platform" OFF)
 OPTION(VPR_USE_SDL "Use SDL instead of glfw" OFF)
+OPTION(VPR_BUILD_TESTS "Build Unit and Integration tests" ON)
 
 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -26,7 +26,7 @@ ENDIF()
 FIND_PACKAGE(Vulkan)
 
 FUNCTION(ADD_VPR_LIBRARY NAME)
-    IF(BUILD_DYNAMIC_LIBRARY)
+    IF(VPR_BUILD_DYNAMIC_LIBRARY)
         ADD_LIBRARY(${NAME} SHARED ${ARGN} ${easyloggingpp_src})
         TARGET_LINK_LIBRARIES(${NAME} PRIVATE ${Vulkan_LIBRARY})
     ELSE()
@@ -63,3 +63,12 @@ ADD_SUBDIRECTORY(core)
 ADD_SUBDIRECTORY(render)
 ADD_SUBDIRECTORY(resource)
 ADD_SUBDIRECTORY(sync)
+IF (VPR_BUILD_TESTS)
+    ADD_EXECUTABLE(vpr_triangle_test "${CMAKE_CURRENT_SOURCE_DIR}/test/triangle.cpp")
+    TARGET_INCLUDE_DIRECTORIES(vpr_triangle_test PUBLIC
+        "${CMAKE_CURRENT_SOURCE_DIR}/core/include"
+        vpr_core vpr_render vpr_resource vpr_command vpr_sync)
+    TARGET_LINK_LIBRARIES(vpr_triangle_test PRIVATE
+        vpr_core vpr_render vpr_resource vpr_command
+        vpr_sync glfw)
+ENDIF()

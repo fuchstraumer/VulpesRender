@@ -2,6 +2,7 @@
 #include "PhysicalDevice.hpp"
 #include "easylogging++.h"
 #include <set>
+#include <variant>
 
 namespace vpr
 {
@@ -17,14 +18,43 @@ namespace vpr
         return result;
     }
 
-    static inline int32_t ScoreDevice(const VkPhysicalDevice& dvc)
+    static inline int32_t ScoreDevice(const VkPhysicalDevice& dvc, const uint32_t apiVersion)
     {
-
         int32_t score = 0;
         VkPhysicalDeviceFeatures features;
         VkPhysicalDeviceProperties properties;
-        vkGetPhysicalDeviceFeatures(dvc, &features);
-        vkGetPhysicalDeviceProperties(dvc, &properties);
+        if (apiVersion == VK_API_VERSION_1_0)
+        {
+            vkGetPhysicalDeviceFeatures(dvc, &features);
+            vkGetPhysicalDeviceProperties(dvc, &properties);
+        }
+        else if (apiVersion > VK_API_VERSION_1_0)
+        {
+            VkPhysicalDeviceFeatures2 features2
+            {
+                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2,
+                nullptr,
+                VkPhysicalDeviceFeatures{}
+            };
+
+            vkGetPhysicalDeviceFeatures2(dvc, &features2);
+            features = features2.features;
+
+            VkPhysicalDeviceProperties2 properties2
+            {
+                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2,
+                nullptr,
+                VkPhysicalDeviceProperties{}
+            };
+
+            vkGetPhysicalDeviceProperties2(dvc, &properties2);
+            properties = properties2.properties;
+
+        }
+        else
+        {
+            return std::numeric_limits<int32_t>::min();
+        }
 
         if (!features.geometryShader)
         {
@@ -97,7 +127,7 @@ namespace vpr
 
     }
 
-    void PopulatePhysicalDeviceMap(const VkInstance& parent_instance)
+    void PopulatePhysicalDeviceMap(const VkInstance& parent_instance, const uint32_t apiVersion)
     {
 
         // Enumerate devices.
@@ -108,10 +138,30 @@ namespace vpr
 
         for (const auto& dvc : devices)
         {
-            physicalDevices.emplace(ScoreDevice(dvc), dvc);
+            physicalDevices.emplace(ScoreDevice(dvc, apiVersion), dvc);
         }
 
     }
+
+    // Properties for devices created on Vulkan 1.0 instances
+    struct VulkanBasePhysicalDeviceProps
+    {
+        VkPhysicalDeviceProperties Properties;
+        VkPhysicalDeviceFeatures Features;
+        VkPhysicalDeviceMemoryProperties MemoryProperties;
+        VkPhysicalDeviceSubgroupProperties SubgroupProperties;
+        std::vector<VkQueueFamilyProperties> QueueFamilyProperties;
+    };
+
+    // Properties for devices created on Vulkan 1.0+ instances
+    struct VulkanEdgePhysicalDeviceProps
+    {
+        VkPhysicalDeviceProperties2 Properties;
+        VkPhysicalDeviceFeatures Features;
+        VkPhysicalDeviceMemoryProperties2 MemoryProperties;
+        VkPhysicalDeviceSubgroupProperties SubgroupProperties;
+        std::vector<VkQueueFamilyProperties2> QueueFamilyProperties;
+    };
 
     class PhysicalDeviceImpl
     {
@@ -131,20 +181,22 @@ namespace vpr
 
         uint32_t GetQueueFamilyIndex(const VkQueueFlagBits queue_bits) const noexcept;
 
-        VkPhysicalDeviceProperties Properties;
-        VkPhysicalDeviceFeatures Features;
-        VkPhysicalDeviceMemoryProperties MemoryProperties;
-        VkPhysicalDeviceSubgroupProperties SubgroupProperties;
-        std::vector<VkQueueFamilyProperties> queueFamilyProperties;
-        VkPhysicalDevice handle;
+        
+        VkPhysicalDevice handle{ VK_NULL_HANDLE };
+        // set at creation time based on current installed instance version and hardware support
+        uint32_t apiVersion{ 0u };
+        std::variant<VulkanBasePhysicalDeviceProps, VulkanEdgePhysicalDeviceProps> deviceProperties;
     };
 
     PhysicalDeviceImpl::PhysicalDeviceImpl(const VkInstance& instance)
     {
 
+        uint32_t apiVersion = 0u;
+        vkEnumerateInstanceVersion(&apiVersion);
+
         if (physicalDevices.empty())
         {
-            PopulatePhysicalDeviceMap(instance);
+            PopulatePhysicalDeviceMap(instance, apiVersion);
         }
 
         handle = GetBestAvailPhysicalDevice();
@@ -153,17 +205,17 @@ namespace vpr
         retrieveQueueFamilyProperties();
     }
 
-    PhysicalDeviceImpl::PhysicalDeviceImpl(PhysicalDeviceImpl && other) noexcept : Properties(std::move(other.Properties)), Features(std::move(other.Features)), MemoryProperties(std::move(other.MemoryProperties)), SubgroupProperties(std::move(other.SubgroupProperties)), queueFamilyProperties(std::move(other.queueFamilyProperties)),
-        handle(std::move(other.handle)) { other.handle = VK_NULL_HANDLE; }
-
-    PhysicalDeviceImpl & PhysicalDeviceImpl::operator=(PhysicalDeviceImpl && other) noexcept
+    PhysicalDeviceImpl::PhysicalDeviceImpl(PhysicalDeviceImpl&& other) noexcept
+        : handle(std::move(other.handle)), deviceProperties(std::move(other.deviceProperties))
     {
-        Properties = std::move(other.Properties);
-        Features = std::move(other.Features);
-        MemoryProperties = std::move(other.MemoryProperties);
-        queueFamilyProperties = std::move(other.queueFamilyProperties);
-        SubgroupProperties = std::move(other.SubgroupProperties);
+        other.handle = VK_NULL_HANDLE;
+    }
+
+    PhysicalDeviceImpl& PhysicalDeviceImpl::operator=(PhysicalDeviceImpl&& other) noexcept
+    {
+        deviceProperties = std::move(other.deviceProperties);
         handle = std::move(other.handle);
+        other.handle = VK_NULL_HANDLE;
         return *this;
     }
 
@@ -172,27 +224,52 @@ namespace vpr
 
     uint32_t PhysicalDeviceImpl::GetMemoryTypeIdx(const uint32_t type_bitfield, const VkMemoryPropertyFlags property_flags, VkBool32* memory_type_found) const noexcept
     {
-        auto bitfield = type_bitfield;
-        const uint32_t num_memory_types = MemoryProperties.memoryTypeCount;
-
-        for (uint32_t i = 0; i < num_memory_types; ++i)
+        if (std::holds_alternative<VulkanBasePhysicalDeviceProps>(deviceProperties))
         {
-            if (bitfield & 1)
-            {
-                // check if property flags match
-                if ((MemoryProperties.memoryTypes[i].propertyFlags & property_flags) == property_flags)
-                {
-                    if (memory_type_found)
-                    {
-                        *memory_type_found = true;
-                    }
-                    return i;
-                }
-            }
-            bitfield >>= 1;
-        }
+            auto bitfield = type_bitfield;
+            auto& MemoryProperties = std::get<VulkanBasePhysicalDeviceProps>(deviceProperties).MemoryProperties;
+            const uint32_t num_memory_types = MemoryProperties.memoryTypeCount;
 
-        LOG(WARNING) << "Failed to find suitable memory type index.";
+            for (uint32_t i = 0; i < num_memory_types; ++i)
+            {
+                if (bitfield & 1)
+                {
+                    // check if property flags match
+                    if ((MemoryProperties.memoryTypes[i].propertyFlags & property_flags) == property_flags)
+                    {
+                        if (memory_type_found)
+                        {
+                            *memory_type_found = true;
+                        }
+                        return i;
+                    }
+                }
+                bitfield >>= 1;
+            }
+        }
+        else if (std::holds_alternative<VulkanEdgePhysicalDeviceProps>(deviceProperties))
+        {
+            auto bitfield = type_bitfield;
+            auto& MemoryProperties = std::get<VulkanEdgePhysicalDeviceProps>(deviceProperties).MemoryProperties;
+            const uint32_t numMemoryTypes = MemoryProperties.memoryProperties.memoryTypeCount;
+
+            for (uint32_t i = 0; i < numMemoryTypes; ++i)
+            {
+                if (bitfield & 1)
+                {
+                    if ((MemoryProperties.memoryProperties.memoryTypes[i].propertyFlags & property_flags) == property_flags)
+                    {
+                        if (memory_type_found)
+                        {
+                            *memory_type_found = true;
+                        }
+                        return i;
+                    }
+                }
+                bitfield >>= 1;
+            }
+        }
+        
         return std::numeric_limits<uint32_t>::max();
     }
 

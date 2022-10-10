@@ -12,6 +12,7 @@ ADD_VPR_LIBRARY(vpr_core
     "../third_party/easyloggingpp/src/easylogging++.cc"
 )
 
+
 TARGET_INCLUDE_DIRECTORIES(vpr_core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 IF(BUILD_DYNAMIC_LIBRARY AND NOT VPR_BUILD_ANDROID)
