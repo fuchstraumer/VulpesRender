@@ -55,6 +55,12 @@ namespace vpr
         {
             return std::numeric_limits<int32_t>::min();
         }
+          
+        // if api version supported by driver is less than the active version, we can't use this physical device
+        if (properties.apiVersion < apiVersion)
+        {
+            return std::numeric_limits<int32_t>::min();
+        }
 
         if (!features.geometryShader)
         {
@@ -144,7 +150,7 @@ namespace vpr
     }
 
     // Properties for devices created on Vulkan 1.0 instances
-    struct VulkanBasePhysicalDeviceProps
+    struct VkBasePhysicalDeviceAttributes
     {
         VkPhysicalDeviceProperties Properties;
         VkPhysicalDeviceFeatures Features;
@@ -154,10 +160,10 @@ namespace vpr
     };
 
     // Properties for devices created on Vulkan 1.0+ instances
-    struct VulkanEdgePhysicalDeviceProps
+    struct VkEdgePhysicalDeviceAttributes
     {
         VkPhysicalDeviceProperties2 Properties;
-        VkPhysicalDeviceFeatures Features;
+        VkPhysicalDeviceFeatures2 Features;
         VkPhysicalDeviceMemoryProperties2 MemoryProperties;
         VkPhysicalDeviceSubgroupProperties SubgroupProperties;
         std::vector<VkQueueFamilyProperties2> QueueFamilyProperties;
@@ -185,13 +191,11 @@ namespace vpr
         VkPhysicalDevice handle{ VK_NULL_HANDLE };
         // set at creation time based on current installed instance version and hardware support
         uint32_t apiVersion{ 0u };
-        std::variant<VulkanBasePhysicalDeviceProps, VulkanEdgePhysicalDeviceProps> deviceProperties;
+        std::variant<VkBasePhysicalDeviceAttributes, VkEdgePhysicalDeviceAttributes> deviceAttributes;
     };
 
     PhysicalDeviceImpl::PhysicalDeviceImpl(const VkInstance& instance)
     {
-
-        uint32_t apiVersion = 0u;
         vkEnumerateInstanceVersion(&apiVersion);
 
         if (physicalDevices.empty())
@@ -206,28 +210,30 @@ namespace vpr
     }
 
     PhysicalDeviceImpl::PhysicalDeviceImpl(PhysicalDeviceImpl&& other) noexcept
-        : handle(std::move(other.handle)), deviceProperties(std::move(other.deviceProperties))
+        : handle(std::move(other.handle)), deviceAttributes(std::move(other.deviceAttributes))
     {
         other.handle = VK_NULL_HANDLE;
     }
 
     PhysicalDeviceImpl& PhysicalDeviceImpl::operator=(PhysicalDeviceImpl&& other) noexcept
     {
-        deviceProperties = std::move(other.deviceProperties);
+        deviceAttributes = std::move(other.deviceAttributes);
         handle = std::move(other.handle);
         other.handle = VK_NULL_HANDLE;
         return *this;
     }
 
-    PhysicalDeviceImpl::~PhysicalDeviceImpl() {
+    PhysicalDeviceImpl::~PhysicalDeviceImpl()
+    {
+        
     }
 
     uint32_t PhysicalDeviceImpl::GetMemoryTypeIdx(const uint32_t type_bitfield, const VkMemoryPropertyFlags property_flags, VkBool32* memory_type_found) const noexcept
     {
-        if (std::holds_alternative<VulkanBasePhysicalDeviceProps>(deviceProperties))
+        if (std::holds_alternative<VkBasePhysicalDeviceAttributes>(deviceProperties))
         {
             auto bitfield = type_bitfield;
-            auto& MemoryProperties = std::get<VulkanBasePhysicalDeviceProps>(deviceProperties).MemoryProperties;
+            auto& MemoryProperties = std::get<VkBasePhysicalDeviceAttributes>(deviceProperties).MemoryProperties;
             const uint32_t num_memory_types = MemoryProperties.memoryTypeCount;
 
             for (uint32_t i = 0; i < num_memory_types; ++i)
@@ -247,10 +253,10 @@ namespace vpr
                 bitfield >>= 1;
             }
         }
-        else if (std::holds_alternative<VulkanEdgePhysicalDeviceProps>(deviceProperties))
+        else if (std::holds_alternative<VkEdgePhysicalDeviceAttributes>(deviceProperties))
         {
             auto bitfield = type_bitfield;
-            auto& MemoryProperties = std::get<VulkanEdgePhysicalDeviceProps>(deviceProperties).MemoryProperties;
+            auto& MemoryProperties = std::get<VkEdgePhysicalDeviceAttributes>(deviceProperties).MemoryProperties;
             const uint32_t numMemoryTypes = MemoryProperties.memoryProperties.memoryTypeCount;
 
             for (uint32_t i = 0; i < numMemoryTypes; ++i)
@@ -291,9 +297,59 @@ namespace vpr
 
     void PhysicalDeviceImpl::getAttributes() noexcept
     {
-        vkGetPhysicalDeviceProperties(handle, &Properties);
-        vkGetPhysicalDeviceFeatures(handle, &Features);
-        vkGetPhysicalDeviceMemoryProperties(handle, &MemoryProperties);
+        if (apiVersion > VK_API_VERSION_1_0)
+        {
+            deviceAttributes = VkEdgePhysicalDeviceAttributes();
+            auto& deviceAttribs = std::get<VkEdgePhysicalDeviceAttributes>(deviceAttributes);
+
+            VkPhysicalDeviceProperties2 deviceProperties2
+            {
+                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2,
+                nullptr,
+                VkPhysicalDeviceProperties{}
+            };
+            vkGetPhysicalDeviceProperties2(handle, &deviceProperties2);
+            deviceAttribs.Properties = std::move(deviceProperties2);
+
+            if (deviceAttribs.Properties.properties.apiVersion < apiVersion)
+            {
+                apiVersion = deviceAttribs.Properties.properties.apiVersion;
+            }
+            
+            VkPhysicalDeviceFeatures2 deviceFeatures2
+            {
+                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2,
+                nullptr,
+                VkPhysicalDeviceFeatures{}
+            };
+            vkGetPhysicalDeviceFeatures2(handle, &deviceFeatures2);
+            deviceAttribs.Features = std::move(deviceFeatures2);
+
+            VkPhysicalDeviceMemoryProperties2 memoryProperties2
+            {
+                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2,
+                nullptr,
+                VkPhysicalDeviceMemoryProperties{}
+            };
+            vkGetPhysicalDeviceMemoryProperties2(handle, &memoryProperties2);
+            deviceAttribs.MemoryProperties = std::move(memoryProperties2);
+
+            VkPhysicalDeviceSubgroupProperties subgroupProperties
+            {
+                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES,
+                nullptr,
+                0,
+                0,
+                0,
+                0
+            };
+
+
+        }
+        else
+        {
+            deviceProperties = VkBasePhysicalDeviceAttributes();
+        }
     }
 
     void PhysicalDeviceImpl::retrieveQueueFamilyProperties() noexcept

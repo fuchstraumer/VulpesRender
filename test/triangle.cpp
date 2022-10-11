@@ -230,7 +230,12 @@ void PrepareDrawBuffers(VkDevice deviceHandle, const vpr::PhysicalDevice* gpu)
         nullptr
     };
 
-    void* data = nullptr;
+    VkBindBufferMemoryInfo bindInfos[2u]
+    {
+        VkBindBufferMemoryInfo{ VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO, nullptr },
+        VkBindBufferMemoryInfo{ VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO, nullptr }
+    };
+
     {
         const VkBufferCreateInfo buffer_info
         {
@@ -269,25 +274,20 @@ void PrepareDrawBuffers(VkDevice deviceHandle, const vpr::PhysicalDevice* gpu)
             gpu->GetMemoryProperties());
         vkAllocateMemory(deviceHandle, &alloc_info, nullptr, &Vertices.memory);
 
+        void* data = nullptr;
         vkMapMemory(deviceHandle, Vertices.memory, 0, alloc_info.allocationSize, 0, &data);
         memcpy(data, baseVertices.data(), sizeof(Vertex) * baseVertices.size());
         vkUnmapMemory(deviceHandle, Vertices.memory);
         
-        VkBindBufferMemoryInfo bindInfo
-        {
-            VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO,
-            nullptr,
-            Vertices.buffer,
-            Vertices.memory,
-            0
-        };
-
-        vkBindBufferMemory2(deviceHandle, 1u, &bindInfo);
-
+        bindInfos[0].buffer = Vertices.buffer;
+        bindInfos[0].memory = Vertices.memory;
+        bindInfos[0].memoryOffset = 0;
+        
     }
 
     {
-        const VkBufferCreateInfo buffer_info{
+        const VkBufferCreateInfo buffer_info
+        {
             VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
             nullptr,
             0,
@@ -307,11 +307,19 @@ void PrepareDrawBuffers(VkDevice deviceHandle, const vpr::PhysicalDevice* gpu)
             VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,
             gpu->GetMemoryProperties());
         vkAllocateMemory(deviceHandle, &alloc_info, nullptr, &Indices.memory);
+
+        void* data = nullptr;
         vkMapMemory(deviceHandle, Indices.memory, 0, alloc_info.allocationSize, 0, &data);
         memcpy(data, baseIndices.data(), sizeof(uint16_t) * baseIndices.size());
         vkUnmapMemory(deviceHandle, Indices.memory);
-        vkBindBufferMemory(deviceHandle, Indices.buffer, Indices.memory, 0);
+
+        bindInfos[1].buffer = Indices.buffer;
+        bindInfos[1].memory = Indices.memory;
+        bindInfos[1].memoryOffset = 0;
     }
+
+    vkBindBufferMemory2(deviceHandle, 2u, bindInfos);
+
 }
 
 void PrepareUniformBuffer(VkDevice deviceHandle, const vpr::PhysicalDevice* gpu)
@@ -344,7 +352,7 @@ void PrepareUniformBuffer(VkDevice deviceHandle, const vpr::PhysicalDevice* gpu)
         uniformBufferVS.buffer
     };
 
-    vkGetBufferMemoryRequirements2(deviceHandle, &memreqs, &bufferMemReqs);
+    vkGetBufferMemoryRequirements2(deviceHandle, &bufferMemReqs, &memreqs);
 
 }
 

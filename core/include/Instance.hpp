@@ -23,6 +23,17 @@ namespace vpr
      */
     struct VPR_API VprExtensionPack
     {
+        enum class ApiVersion : uint8_t
+        {
+            BestSupported, // Most supported, being whatever is most compatible with selected options and features
+            Vulkan10, // Vulkan 1.0
+            Vulkan11, // Vulkan 1.1
+            Vulkan12, // Vulkan 1.2
+            Vulkan13, // Vulkan 1.3
+            Latest // Whatever latest API version is. Default value.
+        };
+        /**This is used to decide which version of the API will be used, and then is used to make sure the superset of all options and features requested is valid*/
+        ApiVersion PreferredApiVersion = ApiVersion::Latest;
         /**These extension names specify what must be loaded - failure to do so results in an exception*/
         const char* const* RequiredExtensionNames;
         uint32_t RequiredExtensionCount;
@@ -34,6 +45,10 @@ namespace vpr
         // If not nullptr, will be casted to the DeviceFeatures/PhysicalDeviceFeatures struct and used to overwrite it upon
         // creation, so that users can pass in their own features to enable
         const VkPhysicalDeviceFeatures* featuresToEnable{ nullptr };
+        // if set to non-null, and featuresToEnable is null, we will use this structure for creating things.
+        // physical devices will be assessed based on their ability to satisfy the full pNext->pNext etc list
+        // of extensions once can enable through VkPhysicalDeviceFeatures2 
+        const VkPhysicalDeviceFeatures2* featuresToEnable2{ nullptr };
     };
 
     /**Instance is a wrapper around the base Vulkan object that must be initialized first. The VkInstanceCreateInfo struct passed to the constructor
