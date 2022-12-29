@@ -35,8 +35,11 @@ FUNCTION(ADD_VPR_LIBRARY NAME)
         TARGET_COMPILE_DEFINITIONS(${NAME} PRIVATE VPR_BUILD_STATIC)
     ENDIF()
     TARGET_COMPILE_OPTIONS(${NAME} PRIVATE ${VPR_CXX_FLAGS})
-    TARGET_INCLUDE_DIRECTORIES(${NAME} PUBLIC "${Vulkan_INCLUDE_DIR}" "../common/"
-        "../third_party/easyloggingpp/src")
+    TARGET_INCLUDE_DIRECTORIES(${NAME} PUBLIC 
+        "${Vulkan_INCLUDE_DIR}"
+        "../common/"
+        "../third_party/easyloggingpp/src"
+        "../third_party/variant_lite/include")
     INSTALL(TARGETS ${NAME} LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib"
         RUNTIME DESTINATION "bin")
     INSTALL(DIRECTORY "include/" DESTINATION "include/vpr/")

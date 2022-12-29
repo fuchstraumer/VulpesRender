@@ -23,7 +23,10 @@ namespace vpr
 {
 
     // temporarily used during isntance setup
-    static VKAPI_ATTR VkBool32 VKAPI_CALL DebugUtilsMessengerCallbackTemp(VkDebugUtilsMessageSeverityFlagBitsEXT message_severity, VkDebugUtilsMessageTypeFlagBitsEXT message_type, const VkDebugUtilsMessengerCallbackDataEXT* callback_data,
+    static VKAPI_ATTR VkBool32 VKAPI_CALL DebugUtilsMessengerCallbackTemp(
+        VkDebugUtilsMessageSeverityFlagBitsEXT message_severity,
+        VkDebugUtilsMessageTypeFlagBitsEXT message_type,
+        const VkDebugUtilsMessengerCallbackDataEXT* callback_data,
         void* user_data)
     {
 
@@ -75,11 +78,11 @@ namespace vpr
             }
         }
 
-        if (message_severity == VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT)
+        if (message_severity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT)
         {
             LOG(ERROR) << output_string_stream.str();
         }
-        else if (message_severity == VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT)
+        else if (message_severity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT)
         {
             LOG(WARNING) << output_string_stream.str();
         }
