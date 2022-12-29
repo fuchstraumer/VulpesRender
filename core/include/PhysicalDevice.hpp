@@ -24,7 +24,7 @@ namespace vpr
         /**Automated setup - uses the given instance handle to find the "best" available GPU on a system. This will prefer dedicated cards first, and uses 
          * some other parameters to "score" devices from there.
          */
-        PhysicalDevice(const VkInstance& instance_handle);
+        PhysicalDevice(const VkInstance& instance_handle, const uint32_t instance_version, const struct VprExtensionPack* extension_pack);
         PhysicalDevice(PhysicalDevice&& other) noexcept;
         PhysicalDevice& operator=(PhysicalDevice&& other) noexcept;
         ~PhysicalDevice();
@@ -45,10 +45,11 @@ namespace vpr
         */
         uint32_t GetQueueFamilyIndex(const VkQueueFlagBits bitfield) const noexcept;
         VkQueueFamilyProperties GetQueueFamilyProperties(const VkQueueFlagBits bitfield) const;
-        const VkPhysicalDeviceProperties& GetProperties() const noexcept;
-        const VkPhysicalDeviceFeatures& GetFeatures() const noexcept;
-        const VkPhysicalDeviceMemoryProperties& GetMemoryProperties() const noexcept;
-        const VkPhysicalDeviceSubgroupProperties& GetSubgroupProperties() const noexcept;
+
+        // pass sType for the device properties struct you're curious about, and if it's supported returns true
+        bool HasPropertiesOfType(const size_t sType) const noexcept;
+        // returns read-only const pointer to the physical device properties struct whose type is given by sType, if it's present
+        const void* GetPropertiesOfType(const size_t sType) const noexcept;
 
     private:
         std::unique_ptr<PhysicalDeviceImpl> impl;

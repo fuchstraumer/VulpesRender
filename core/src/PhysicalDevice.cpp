@@ -1,451 +1,250 @@
 #include "vpr_stdafx.h"
 #include "PhysicalDevice.hpp"
-#include "easylogging++.h"
+#include "Instance.hpp"
 #include <set>
-#include <variant>
+#include <unordered_map>
+#include <algorithm>
+#include <iterator>
+#include "nonstd/variant.hpp"
+
 
 namespace vpr
 {
-
-    static std::map<int32_t, VkPhysicalDevice> physicalDevices;
-
-    // Gets best available physical device and removes it from the map, as it's no longer available.
-    static VkPhysicalDevice GetBestAvailPhysicalDevice()
-    {
-        auto best_device = (physicalDevices.rbegin());
-        VkPhysicalDevice result = best_device->second;
-        physicalDevices.erase(best_device->first);
-        return result;
-    }
-
-    static inline int32_t ScoreDevice(const VkPhysicalDevice& dvc, const uint32_t apiVersion)
-    {
-        int32_t score = 0;
-        VkPhysicalDeviceFeatures features;
-        VkPhysicalDeviceProperties properties;
-        if (apiVersion == VK_API_VERSION_1_0)
-        {
-            vkGetPhysicalDeviceFeatures(dvc, &features);
-            vkGetPhysicalDeviceProperties(dvc, &properties);
-        }
-        else if (apiVersion > VK_API_VERSION_1_0)
-        {
-            VkPhysicalDeviceFeatures2 features2
-            {
-                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2,
-                nullptr,
-                VkPhysicalDeviceFeatures{}
-            };
-
-            vkGetPhysicalDeviceFeatures2(dvc, &features2);
-            features = features2.features;
-
-            VkPhysicalDeviceProperties2 properties2
-            {
-                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2,
-                nullptr,
-                VkPhysicalDeviceProperties{}
-            };
-
-            vkGetPhysicalDeviceProperties2(dvc, &properties2);
-            properties = properties2.properties;
-
-        }
-        else
-        {
-            return std::numeric_limits<int32_t>::min();
-        }
-          
-        // if api version supported by driver is less than the active version, we can't use this physical device
-        if (properties.apiVersion < apiVersion)
-        {
-            return std::numeric_limits<int32_t>::min();
-        }
-
-        if (!features.geometryShader)
-        {
-            score -= 1000;
-        }
-
-        if (!features.tessellationShader)
-        {
-            score -= 1000;
-        }
-
-        if (!features.samplerAnisotropy)
-        {
-            score -= 250;
-        }
-
-        if (!features.imageCubeArray)
-        {
-            score -= 250;
-        }
-
-        if (!features.fullDrawIndexUint32)
-        {
-            score -= 500;
-        }
-
-        if (features.multiDrawIndirect)
-        {
-            score += 250;
-        }
-
-        if (features.textureCompressionETC2)
-        {
-            score += 250;
-        }
-
-        if (features.textureCompressionASTC_LDR)
-        {
-            score += 250;
-        }
-
-        score += (10 * properties.limits.maxBoundDescriptorSets);
-        score += (5 * 
-            ( 
-                properties.limits.maxPerStageDescriptorUniformBuffers +
-                properties.limits.maxPerStageDescriptorSampledImages +
-                properties.limits.maxPerStageDescriptorSamplers +
-                properties.limits.maxPerStageDescriptorStorageImages
-            )
-        );
-
-        if (properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
-        {
-            score += 3000;
-        }
-
-        auto tex_sizes =
-        {
-            properties.limits.maxImageDimension1D,
-            properties.limits.maxImageDimension2D,
-            properties.limits.maxImageDimension3D,
-        };
-
-        for (auto& sz : tex_sizes)
-        {
-            score += sz / 100;
-        }
-
-        return score;
-
-    }
-
-    void PopulatePhysicalDeviceMap(const VkInstance& parent_instance, const uint32_t apiVersion)
-    {
-
-        // Enumerate devices.
-        uint32_t dvc_cnt = 0;
-        vkEnumeratePhysicalDevices(parent_instance, &dvc_cnt, nullptr);
-        std::vector<VkPhysicalDevice> devices(dvc_cnt);
-        vkEnumeratePhysicalDevices(parent_instance, &dvc_cnt, devices.data());
-
-        for (const auto& dvc : devices)
-        {
-            physicalDevices.emplace(ScoreDevice(dvc, apiVersion), dvc);
-        }
-
-    }
-
-    // Properties for devices created on Vulkan 1.0 instances
-    struct VkBasePhysicalDeviceAttributes
-    {
-        VkPhysicalDeviceProperties Properties;
-        VkPhysicalDeviceFeatures Features;
-        VkPhysicalDeviceMemoryProperties MemoryProperties;
-        VkPhysicalDeviceSubgroupProperties SubgroupProperties;
-        std::vector<VkQueueFamilyProperties> QueueFamilyProperties;
-    };
-
-    // Properties for devices created on Vulkan 1.0+ instances
-    struct VkEdgePhysicalDeviceAttributes
-    {
-        VkPhysicalDeviceProperties2 Properties;
-        VkPhysicalDeviceFeatures2 Features;
-        VkPhysicalDeviceMemoryProperties2 MemoryProperties;
-        VkPhysicalDeviceSubgroupProperties SubgroupProperties;
-        std::vector<VkQueueFamilyProperties2> QueueFamilyProperties;
-    };
-
-    class PhysicalDeviceImpl
-    {
-        PhysicalDeviceImpl(const PhysicalDeviceImpl&) = delete;
-        PhysicalDeviceImpl& operator=(const PhysicalDeviceImpl&) = delete;
-    public:
-
-        PhysicalDeviceImpl(const VkInstance& instance);
-        PhysicalDeviceImpl(PhysicalDeviceImpl&& other) noexcept;
-        PhysicalDeviceImpl& operator=(PhysicalDeviceImpl&& other) noexcept;
-        ~PhysicalDeviceImpl();
-
-        uint32_t GetMemoryTypeIdx(const uint32_t type_bitfield, const VkMemoryPropertyFlags property_flags, VkBool32* memory_type_found) const noexcept;
-        
-        void getAttributes() noexcept;
-        void retrieveQueueFamilyProperties() noexcept;
-
-        uint32_t GetQueueFamilyIndex(const VkQueueFlagBits queue_bits) const noexcept;
-
-        
-        VkPhysicalDevice handle{ VK_NULL_HANDLE };
-        // set at creation time based on current installed instance version and hardware support
-        uint32_t apiVersion{ 0u };
-        std::variant<VkBasePhysicalDeviceAttributes, VkEdgePhysicalDeviceAttributes> deviceAttributes;
-    };
-
-    PhysicalDeviceImpl::PhysicalDeviceImpl(const VkInstance& instance)
-    {
-        vkEnumerateInstanceVersion(&apiVersion);
-
-        if (physicalDevices.empty())
-        {
-            PopulatePhysicalDeviceMap(instance, apiVersion);
-        }
-
-        handle = GetBestAvailPhysicalDevice();
-
-        getAttributes();
-        retrieveQueueFamilyProperties();
-    }
-
-    PhysicalDeviceImpl::PhysicalDeviceImpl(PhysicalDeviceImpl&& other) noexcept
-        : handle(std::move(other.handle)), deviceAttributes(std::move(other.deviceAttributes))
-    {
-        other.handle = VK_NULL_HANDLE;
-    }
-
-    PhysicalDeviceImpl& PhysicalDeviceImpl::operator=(PhysicalDeviceImpl&& other) noexcept
-    {
-        deviceAttributes = std::move(other.deviceAttributes);
-        handle = std::move(other.handle);
-        other.handle = VK_NULL_HANDLE;
-        return *this;
-    }
-
-    PhysicalDeviceImpl::~PhysicalDeviceImpl()
-    {
-        
-    }
-
-    uint32_t PhysicalDeviceImpl::GetMemoryTypeIdx(const uint32_t type_bitfield, const VkMemoryPropertyFlags property_flags, VkBool32* memory_type_found) const noexcept
-    {
-        if (std::holds_alternative<VkBasePhysicalDeviceAttributes>(deviceProperties))
-        {
-            auto bitfield = type_bitfield;
-            auto& MemoryProperties = std::get<VkBasePhysicalDeviceAttributes>(deviceProperties).MemoryProperties;
-            const uint32_t num_memory_types = MemoryProperties.memoryTypeCount;
-
-            for (uint32_t i = 0; i < num_memory_types; ++i)
-            {
-                if (bitfield & 1)
-                {
-                    // check if property flags match
-                    if ((MemoryProperties.memoryTypes[i].propertyFlags & property_flags) == property_flags)
-                    {
-                        if (memory_type_found)
-                        {
-                            *memory_type_found = true;
-                        }
-                        return i;
-                    }
-                }
-                bitfield >>= 1;
-            }
-        }
-        else if (std::holds_alternative<VkEdgePhysicalDeviceAttributes>(deviceProperties))
-        {
-            auto bitfield = type_bitfield;
-            auto& MemoryProperties = std::get<VkEdgePhysicalDeviceAttributes>(deviceProperties).MemoryProperties;
-            const uint32_t numMemoryTypes = MemoryProperties.memoryProperties.memoryTypeCount;
-
-            for (uint32_t i = 0; i < numMemoryTypes; ++i)
-            {
-                if (bitfield & 1)
-                {
-                    if ((MemoryProperties.memoryProperties.memoryTypes[i].propertyFlags & property_flags) == property_flags)
-                    {
-                        if (memory_type_found)
-                        {
-                            *memory_type_found = true;
-                        }
-                        return i;
-                    }
-                }
-                bitfield >>= 1;
-            }
-        }
-        
-        return std::numeric_limits<uint32_t>::max();
-    }
-
-    PhysicalDevice::PhysicalDevice(const VkInstance& handle) : impl(std::make_unique<PhysicalDeviceImpl>(handle)) {}
-
-    PhysicalDevice::PhysicalDevice(PhysicalDevice&& other) noexcept : impl(std::move(other.impl))
-    {
-        other.impl.reset();
-    }
-
-    PhysicalDevice & PhysicalDevice::operator=(PhysicalDevice && other) noexcept
-    {
-        impl = std::move(other.impl);
-        other.impl.reset();
-        return *this;
-    }
-
-    PhysicalDevice::~PhysicalDevice() {}
-
-    void PhysicalDeviceImpl::getAttributes() noexcept
-    {
-        if (apiVersion > VK_API_VERSION_1_0)
-        {
-            deviceAttributes = VkEdgePhysicalDeviceAttributes();
-            auto& deviceAttribs = std::get<VkEdgePhysicalDeviceAttributes>(deviceAttributes);
-
-            VkPhysicalDeviceProperties2 deviceProperties2
-            {
-                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2,
-                nullptr,
-                VkPhysicalDeviceProperties{}
-            };
-            vkGetPhysicalDeviceProperties2(handle, &deviceProperties2);
-            deviceAttribs.Properties = std::move(deviceProperties2);
-
-            if (deviceAttribs.Properties.properties.apiVersion < apiVersion)
-            {
-                apiVersion = deviceAttribs.Properties.properties.apiVersion;
-            }
-            
-            VkPhysicalDeviceFeatures2 deviceFeatures2
-            {
-                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2,
-                nullptr,
-                VkPhysicalDeviceFeatures{}
-            };
-            vkGetPhysicalDeviceFeatures2(handle, &deviceFeatures2);
-            deviceAttribs.Features = std::move(deviceFeatures2);
-
-            VkPhysicalDeviceMemoryProperties2 memoryProperties2
-            {
-                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2,
-                nullptr,
-                VkPhysicalDeviceMemoryProperties{}
-            };
-            vkGetPhysicalDeviceMemoryProperties2(handle, &memoryProperties2);
-            deviceAttribs.MemoryProperties = std::move(memoryProperties2);
-
-            VkPhysicalDeviceSubgroupProperties subgroupProperties
-            {
-                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES,
-                nullptr,
-                0,
-                0,
-                0,
-                0
-            };
-
-
-        }
-        else
-        {
-            deviceProperties = VkBasePhysicalDeviceAttributes();
-        }
-    }
-
-    void PhysicalDeviceImpl::retrieveQueueFamilyProperties() noexcept
-    {
-        uint32_t queue_family_cnt = 0;
-        vkGetPhysicalDeviceQueueFamilyProperties(handle, &queue_family_cnt, nullptr);
-        queueFamilyProperties.resize(queue_family_cnt);
-        vkGetPhysicalDeviceQueueFamilyProperties(handle, &queue_family_cnt, queueFamilyProperties.data());
-    }
-
-
-    uint32_t PhysicalDevice::GetMemoryTypeIdx(const uint32_t type_bitfield, const VkMemoryPropertyFlags property_flags, VkBool32* memory_type_found) const noexcept
-    {
-        return impl->GetMemoryTypeIdx(type_bitfield, property_flags, memory_type_found);
-    }
-
-    uint32_t PhysicalDeviceImpl::GetQueueFamilyIndex(const VkQueueFlagBits bitfield) const noexcept
-    {
-        if (bitfield & VK_QUEUE_COMPUTE_BIT)
-        {
-            for (uint32_t i = 0; i < static_cast<uint32_t>(queueFamilyProperties.size()); ++i)
-            {
-                if ((queueFamilyProperties[i].queueFlags & bitfield) && ((queueFamilyProperties[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) == 0))
-                {
-                    return i;
-                }
-            }
-        }
-
-        if (bitfield & VK_QUEUE_TRANSFER_BIT)
-        {
-            for (uint32_t i = 0; i < static_cast<uint32_t>(queueFamilyProperties.size()); ++i)
-            {
-                if ((queueFamilyProperties[i].queueFlags & bitfield) && ((queueFamilyProperties[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) == 0) && ((queueFamilyProperties[i].queueFlags & VK_QUEUE_COMPUTE_BIT) == 0))
-                {
-                    return i;
-                }
-            }
-        }
-
-        for (uint32_t i = 0; i < static_cast<uint32_t>(queueFamilyProperties.size()); ++i)
-        {
-            if (queueFamilyProperties[i].queueFlags & bitfield)
-            {
-                return i;
-            }
-        }
-
-        LOG(WARNING) << "Failed to find desired queue family with given flags.";
-        return std::numeric_limits<uint32_t>::max();
-    }
-
-    uint32_t PhysicalDevice::GetQueueFamilyIndex(const VkQueueFlagBits bitfield) const noexcept
-    {
-        return impl->GetQueueFamilyIndex(bitfield);
-    }
-
-    VkQueueFamilyProperties PhysicalDevice::GetQueueFamilyProperties(const VkQueueFlagBits bitfield) const
-    {
-
-        uint32_t idx = GetQueueFamilyIndex(bitfield);
-        if (idx == std::numeric_limits<uint32_t>::max())
-        {
-            LOG(WARNING) << "Failed to retrieve queue family properties: couldn't find queue family with given bitfield.";
-            return VkQueueFamilyProperties();
-        }
-        else
-        {
-            return impl->queueFamilyProperties[idx];
-        }
-        
-    }
-
-    const VkPhysicalDeviceProperties& PhysicalDevice::GetProperties() const noexcept
-    {
-        return impl->Properties;
-    }
-
-    const VkPhysicalDeviceFeatures& PhysicalDevice::GetFeatures() const noexcept
-    {
-        return impl->Features;
-    }
-
-    const VkPhysicalDeviceMemoryProperties& PhysicalDevice::GetMemoryProperties() const noexcept
-    {
-        return impl->MemoryProperties;
-    }
-
-    const VkPhysicalDeviceSubgroupProperties& PhysicalDevice::GetSubgroupProperties() const noexcept
-    {
-        return impl->SubgroupProperties;
-    }
-
-    const VkPhysicalDevice& PhysicalDevice::vkHandle() const noexcept
-    {
-        return impl->handle;
-    }
+	namespace detail
+	{
+
+		constexpr static size_t validDevicePropertyStructTypes[]
+		{
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR), // paired features
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT), // paired features
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV), // paired features
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT), // paired features
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES), // paired features
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_PROPERTIES_KHR),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_PROPERTIES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES_KHR),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES_KHR),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR)
+
+		};
+
+		using PropertyStructVariant = nonstd::variant<
+			VkPhysicalDeviceAccelerationStructurePropertiesKHR,
+			VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT,
+			VkPhysicalDeviceConservativeRasterizationPropertiesEXT,
+			VkPhysicalDeviceCooperativeMatrixPropertiesNV,
+			VkPhysicalDeviceCustomBorderColorPropertiesEXT,
+			VkPhysicalDeviceDepthStencilResolveProperties,
+			VkPhysicalDeviceDepthStencilResolvePropertiesKHR,
+			VkPhysicalDeviceDescriptorIndexingProperties,
+			VkPhysicalDeviceDescriptorIndexingPropertiesEXT,
+			VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV,
+			VkPhysicalDeviceDiscardRectanglePropertiesEXT,
+			VkPhysicalDeviceDriverProperties,
+			VkPhysicalDeviceDriverPropertiesKHR,
+			VkPhysicalDeviceFloatControlsProperties,
+			VkPhysicalDeviceFloatControlsPropertiesKHR,
+			VkPhysicalDeviceExternalMemoryHostPropertiesEXT,
+			VkPhysicalDeviceFragmentDensityMapPropertiesEXT,
+			VkPhysicalDeviceFragmentDensityMap2PropertiesEXT,
+			VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM,
+			VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR,
+			VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT,
+			VkPhysicalDeviceInlineUniformBlockProperties,
+			VkPhysicalDeviceLineRasterizationPropertiesEXT,
+			VkPhysicalDeviceMaintenance3Properties,
+			VkPhysicalDeviceMaintenance3PropertiesKHR,
+			VkPhysicalDeviceMaintenance4Properties,
+			VkPhysicalDeviceMaintenance4PropertiesKHR,
+			VkPhysicalDeviceMeshShaderPropertiesNV,
+			VkPhysicalDeviceMultiDrawPropertiesEXT,
+			VkPhysicalDeviceMultiviewProperties>;
+
+		constexpr static size_t validDeviceFeatureStructTypes[]
+		{
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_KHR),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES_KHR),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR)
+		};
+
+		constexpr static size_t validQueueFamilyPropertyStructTypes[]
+		{
+			static_cast<size_t>(VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT),
+			static_cast<size_t>(VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR)
+		};
+
+		std::vector<size_t> getSTypesFromDeviceFeaturesStruct(const void* pNext)
+		{
+			std::vector<size_t> featureStypes;
+
+			while (pNext != nullptr)
+			{
+				// structures are arranged so that sType is in first 8 bytes, pNext is in second 8 bytes
+				const size_t sType = *reinterpret_cast<const size_t*>(pNext);
+				featureStypes.emplace_back(sType);
+				const std::byte* newAddr = reinterpret_cast<const std::byte*>(pNext);
+				newAddr += sizeof(size_t);
+				pNext = reinterpret_cast<const void*>(newAddr);
+			}
+
+			std::sort(featureStypes.begin(), featureStypes.end());
+
+			return featureStypes;
+		}
+
+		bool featuresAvailableMatchFeaturesRequested(const VkPhysicalDeviceFeatures& requestedFeatures, const VkPhysicalDeviceFeatures& supportedFeatures)
+		{
+			int score = std::memcmp(&requestedFeatures, &supportedFeatures, sizeof(VkPhysicalDeviceFeatures));
+			return score == 0;
+		}
+
+	}
+
+	struct PhysicalDeviceImpl
+	{
+		PhysicalDeviceImpl() = default;
+		~PhysicalDeviceImpl() = default;
+
+		void InitializeDevice(const VkInstance& instance, const uint32_t instance_version, const VprExtensionPack* extension_pack);
+
+		// just returns all available devices on system
+		std::vector<VkPhysicalDevice> getAvailableDevices(const VkInstance& instance);
+		// returns device most compatible with requested extensions
+		VkPhysicalDevice findMostCompatibleDevice(const VprExtensionPack* extension_pack, const std::vector<VkPhysicalDevice>& avail_devices);
+		// when no extensions are really requested from the device, just choose whichever one has the most to offer
+		VkPhysicalDevice chooseIdealDevice(const std::vector<VkPhysicalDevice>& avail_devices);
+	};
+
+	void PhysicalDeviceImpl::InitializeDevice(const VkInstance& instance, const uint32_t instance_version, const VprExtensionPack* extension_pack)
+	{
+		VkPhysicalDevice chosenDevice = VK_NULL_HANDLE;
+		std::vector<VkPhysicalDevice> availDevices = getAvailableDevices(instance);
+
+		if (extension_pack->featuresToEnable2)
+		{
+			chosenDevice = findMostCompatibleDevice(extension_pack, availDevices);
+		}
+		else
+		{
+			chosenDevice = chooseIdealDevice(availDevices);
+		}
+
+	}
+
+	std::vector<VkPhysicalDevice> PhysicalDeviceImpl::getAvailableDevices(const VkInstance& instance)
+	{
+		uint32_t deviceCount = 0u;
+		vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
+		std::vector<VkPhysicalDevice> results(deviceCount, VK_NULL_HANDLE);
+		vkEnumeratePhysicalDevices(instance, &deviceCount, results.data());
+		return results;
+	}
+
+	VkPhysicalDevice PhysicalDeviceImpl::findMostCompatibleDevice(const VprExtensionPack* extension_pack, const std::vector<VkPhysicalDevice>& avail_devices)
+	{
+		// Gather requested device features first
+		std::vector<size_t> requestedFeatureStypes = detail::getSTypesFromDeviceFeaturesStruct(extension_pack->featuresToEnable2->pNext);
+		// we need to store compatible devices as we go - on some systems, we may get multiple results (like CPU graphics) being supported
+		// with smaller extension sets, alongside the dedicated GPU. So we pass just the list of compatible devices to chooseIdealDevice,
+		// which will choose the best option from the ones that are compatible with the requested features/props :)
+		std::vector<VkPhysicalDevice> compatibleDevices;
+
+		for (size_t i = 0; i < avail_devices.size(); ++i)
+		{
+			VkPhysicalDevice currDevice = avail_devices[i];
+
+			VkPhysicalDeviceFeatures2 supportedFeatures
+			{
+				VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2,
+				nullptr,
+				VkPhysicalDeviceFeatures{}
+			};
+			memset(&supportedFeatures.features, 0, sizeof(VkPhysicalDeviceFeatures));
+
+			vkGetPhysicalDeviceFeatures2(currDevice, &supportedFeatures);
+
+			// compare boolean supported features first
+			const bool baseFeaturesMatch =
+				detail::featuresAvailableMatchFeaturesRequested(extension_pack->featuresToEnable2->features, supportedFeatures.features);
+
+			// find number of common supported advanced/extension-based features
+			std::vector<size_t> availFeatureStypes = detail::getSTypesFromDeviceFeaturesStruct(supportedFeatures.pNext);
+			// get the union of the two above sets, to find the list of features requested that are also supported
+			std::vector<size_t> availAndRequestedFeatures;
+			availAndRequestedFeatures.reserve(requestedFeatureStypes.size());
+			std::set_intersection(
+				requestedFeatureStypes.begin(), requestedFeatureStypes.end(),
+				availFeatureStypes.begin(), availFeatureStypes.end(),
+				std::back_inserter(availAndRequestedFeatures));
+			// now, compare the intersection set with the requested set: if they're equal, we're good to go!
+			const bool allFeaturesSupported = std::equal(
+				requestedFeatureStypes.begin(), requestedFeatureStypes.end(),
+				availAndRequestedFeatures.begin(), availAndRequestedFeatures.end());
+
+			if (baseFeaturesMatch && allFeaturesSupported)
+			{
+				compatibleDevices.emplace_back(currDevice);
+			}
+		}
+
+		return chooseIdealDevice(compatibleDevices);
+	}
+
+	VkPhysicalDevice PhysicalDeviceImpl::chooseIdealDevice(const std::vector<VkPhysicalDevice>& avail_devices)
+	{
+		size_t bestDeviceIdx = 0;
+		size_t bestScore = 0;
+
+		for (size_t i = 0; i < avail_devices.size(); ++i)
+		{
+
+		}
+
+		return avail_devices[bestDeviceIdx];
+	}
 
 }
