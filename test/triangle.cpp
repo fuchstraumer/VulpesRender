@@ -3,6 +3,13 @@
 #include "PhysicalDevice.hpp"
 #include "Swapchain.hpp"
 #include "SurfaceKHR.hpp"
+#include "ShaderModule.hpp"
+#include "PipelineCache.hpp"
+#include "GraphicsPipeline.hpp"
+#include "PipelineLayout.hpp"
+#include "DescriptorSet.hpp"
+#include "DescriptorSetLayout.hpp"
+#include "DescriptorPool.hpp"
 #include <memory>
 #include <vector>
 #include <cstdint>
@@ -16,9 +23,6 @@
 #define GLFW_EXPOSE_NATIVE_WGL
 #include "GLFW/glfw3native.h"
 #endif
-
-#include "easylogging++.h"
-INITIALIZE_EASYLOGGINGPP
 
 constexpr static const uint32_t triangleVertShaderSPV[349] =
 {
@@ -149,11 +153,10 @@ struct DepthStencil
     VkImage Image{ VK_NULL_HANDLE };
     VkDeviceMemory Memory{ VK_NULL_HANDLE };
     VkImageView View{ VK_NULL_HANDLE };
-    VkFormat Format;
+    VkFormat Format{ VK_FORMAT_UNDEFINED };
     VkDevice Parent{ VK_NULL_HANDLE };
 };
 
-uint32_t GetMemoryTypeIndex(uint32_t type_bits, VkMemoryPropertyFlags properties, VkPhysicalDeviceMemoryProperties memory_properties);
 DepthStencil CreateDepthStencil(const vpr::Device* device, const vpr::PhysicalDevice* physical_device, const vpr::Swapchain* swapchain);
 
 struct TriangleSceneState
@@ -212,7 +215,7 @@ struct
     matrix4x4 projection;
 } uboDataVS;
 
-void PrepareDrawBuffers(VkDevice deviceHandle, const vpr::PhysicalDevice* gpu)
+void PrepareDrawBuffers(const vpr::Device* device, const vpr::PhysicalDevice* gpu)
 {
     static const std::vector<Vertex> baseVertices
     {
@@ -249,7 +252,7 @@ void PrepareDrawBuffers(VkDevice deviceHandle, const vpr::PhysicalDevice* gpu)
             nullptr
         };
 
-        vkCreateBuffer(deviceHandle, &buffer_info, nullptr, &Vertices.buffer);
+        vkCreateBuffer(device->vkHandle(), &buffer_info, nullptr, &Vertices.buffer);
         
         VkMemoryRequirements2 memreqs2
         {
@@ -265,19 +268,18 @@ void PrepareDrawBuffers(VkDevice deviceHandle, const vpr::PhysicalDevice* gpu)
             Vertices.buffer
         };
 
-        vkGetBufferMemoryRequirements2(deviceHandle, &bufferMemReqs, &memreqs2);
+        vkGetBufferMemoryRequirements2(device->vkHandle(), &bufferMemReqs, &memreqs2);
         
         alloc_info.allocationSize = memreqs2.memoryRequirements.size;
-        alloc_info.memoryTypeIndex = GetMemoryTypeIndex(
+        alloc_info.memoryTypeIndex = device->GetMemoryTypeIdx(
             memreqs2.memoryRequirements.memoryTypeBits,
-            VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,
-            gpu->GetMemoryProperties());
-        vkAllocateMemory(deviceHandle, &alloc_info, nullptr, &Vertices.memory);
+            VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT);
+        vkAllocateMemory(device->vkHandle(), &alloc_info, nullptr, &Vertices.memory);
 
         void* data = nullptr;
-        vkMapMemory(deviceHandle, Vertices.memory, 0, alloc_info.allocationSize, 0, &data);
+        vkMapMemory(device->vkHandle(), Vertices.memory, 0, alloc_info.allocationSize, 0, &data);
         memcpy(data, baseVertices.data(), sizeof(Vertex) * baseVertices.size());
-        vkUnmapMemory(deviceHandle, Vertices.memory);
+        vkUnmapMemory(device->vkHandle(), Vertices.memory);
         
         bindInfos[0].buffer = Vertices.buffer;
         bindInfos[0].memory = Vertices.memory;
@@ -298,27 +300,26 @@ void PrepareDrawBuffers(VkDevice deviceHandle, const vpr::PhysicalDevice* gpu)
             nullptr
         };
 
-        vkCreateBuffer(deviceHandle, &buffer_info, nullptr, &Indices.buffer);
+        vkCreateBuffer(device->vkHandle(), &buffer_info, nullptr, &Indices.buffer);
         VkMemoryRequirements memreqs{};
-        vkGetBufferMemoryRequirements(deviceHandle, Indices.buffer, &memreqs);
+        vkGetBufferMemoryRequirements(device->vkHandle(), Indices.buffer, &memreqs);
         alloc_info.allocationSize = memreqs.size;
-        alloc_info.memoryTypeIndex = GetMemoryTypeIndex(
+        alloc_info.memoryTypeIndex = device->GetMemoryTypeIdx(
             memreqs.memoryTypeBits,
-            VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,
-            gpu->GetMemoryProperties());
-        vkAllocateMemory(deviceHandle, &alloc_info, nullptr, &Indices.memory);
+            VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT);
+        vkAllocateMemory(device->vkHandle(), &alloc_info, nullptr, &Indices.memory);
 
         void* data = nullptr;
-        vkMapMemory(deviceHandle, Indices.memory, 0, alloc_info.allocationSize, 0, &data);
+        vkMapMemory(device->vkHandle(), Indices.memory, 0, alloc_info.allocationSize, 0, &data);
         memcpy(data, baseIndices.data(), sizeof(uint16_t) * baseIndices.size());
-        vkUnmapMemory(deviceHandle, Indices.memory);
+        vkUnmapMemory(device->vkHandle(), Indices.memory);
 
         bindInfos[1].buffer = Indices.buffer;
         bindInfos[1].memory = Indices.memory;
         bindInfos[1].memoryOffset = 0;
     }
 
-    vkBindBufferMemory2(deviceHandle, 2u, bindInfos);
+    vkBindBufferMemory2(device->vkHandle(), 2u, bindInfos);
 
 }
 
@@ -363,22 +364,6 @@ int main(int numArgs, const char* argv[])
     return static_cast<int>(createWindowResult);
 }
 
-uint32_t GetMemoryTypeIndex(uint32_t type_bits, VkMemoryPropertyFlags properties, VkPhysicalDeviceMemoryProperties memory_properties)
-{
-    for (uint32_t i = 0; i < memory_properties.memoryTypeCount; ++i)
-    {
-        if ((type_bits & 1) == 1)
-        {
-            if ((memory_properties.memoryTypes[i].propertyFlags & properties) == properties)
-            {
-                return i;
-            }
-        }
-        type_bits >>= 1;
-    }
-
-}
-
 DepthStencil CreateDepthStencil(const vpr::Device* device, const vpr::PhysicalDevice* physical_device, const vpr::Swapchain* swapchain)
 {
     DepthStencil depth_stencil;
@@ -410,8 +395,7 @@ DepthStencil CreateDepthStencil(const vpr::Device* device, const vpr::PhysicalDe
     VkMemoryRequirements memreqs{};
     vkGetImageMemoryRequirements(device->vkHandle(), depth_stencil.Image, &memreqs);
     alloc_info.allocationSize = memreqs.size;
-    alloc_info.memoryTypeIndex =
-        GetMemoryTypeIndex(memreqs.memoryTypeBits, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, physical_device->GetMemoryProperties());
+    alloc_info.memoryTypeIndex = device->GetMemoryTypeIdx(memreqs.memoryTypeBits, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
     result = vkAllocateMemory(device->vkHandle(), &alloc_info, nullptr, &depth_stencil.Memory);
     result = vkBindImageMemory(device->vkHandle(), depth_stencil.Image, depth_stencil.Memory, 0);
 
