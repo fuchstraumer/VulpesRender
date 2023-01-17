@@ -2,24 +2,18 @@
 #include "CommandPool.hpp"
 #include "vkAssert.hpp"
 #include "CreateInfoBase.hpp"
-#include "easylogging++.h"
-#if !defined(VPR_BUILD_STATIC)
-INITIALIZE_EASYLOGGINGPP
-#endif
 #include <vector>
+
 namespace vpr
 {
 
-    void SetLoggingRepository_VprCommand(void* repo) {
-        el::Helpers::setStorage(*(el::base::type::StoragePointer*)repo);
-        LOG(INFO) << "Updating easyloggingpp storage pointer in vpr_command module...";
-    }
-
-    struct CommandBuffers  {
+    struct CommandBuffers 
+    {
         std::vector<VkCommandBuffer> Data;
     };
 
-    CommandPool::CommandPool(const VkDevice _parent, const VkCommandPoolCreateInfo & create_info) : parent(_parent), handle(VK_NULL_HANDLE), cmdBuffers(std::make_unique<CommandBuffers>()) {
+    CommandPool::CommandPool(const VkDevice _parent, const VkCommandPoolCreateInfo & create_info) : parent(_parent), handle(VK_NULL_HANDLE), cmdBuffers(std::make_unique<CommandBuffers>())
+    {
         vkCreateCommandPool(parent, &create_info, nullptr, &handle);
     }
 
@@ -60,7 +54,6 @@ namespace vpr
         if (handle != VK_NULL_HANDLE)
         {
             vkDestroyCommandPool(parent, handle, nullptr);
-            LOG_IF(VERBOSE_LOGGING, INFO) << "Command Pool " << handle << " destroyed.";
             handle = VK_NULL_HANDLE;
         }
     }
@@ -79,14 +72,12 @@ namespace vpr
         alloc_info.commandBufferCount = num_buffers;
         alloc_info.level = cmd_buffer_level;
         VkResult result = vkAllocateCommandBuffers(parent, &alloc_info, cmdBuffers->Data.data());
-        LOG_IF(VERBOSE_LOGGING, INFO) << std::to_string(num_buffers) << " command buffers allocated for command pool " << handle;
         VkAssert(result);
     }
 
     void CommandPool::FreeCommandBuffers()
     {
         vkFreeCommandBuffers(parent, handle, static_cast<uint32_t>(cmdBuffers->Data.size()), cmdBuffers->Data.data());
-        LOG_IF(VERBOSE_LOGGING, INFO) << std::to_string(cmdBuffers->Data.size()) << " command buffers freed.";
         cmdBuffers->Data.clear();
         cmdBuffers->Data.shrink_to_fit();
     }

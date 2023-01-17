@@ -5,10 +5,10 @@
 #include "Instance.hpp"
 #include "vkAssert.hpp"
 #include "CreateInfoBase.hpp"
-#include "easylogging++.h"
 #include <array>
 #include <vector>
 #include <map>
+#include <string>
 
 namespace vpr
 {
@@ -38,10 +38,14 @@ namespace vpr
 
     constexpr VprExtensionPack RECOMMENDED_EXTENSIONS
     {
+        VprExtensionPack::ApiVersion::BestSupported,
         &RECOMMENDED_REQUIRED_EXTENSION,
         1,
         &RECOMMENDED_OPTIONAL_EXTENSIONS[0],
-        static_cast<uint32_t>(RECOMMENDED_OPTIONAL_EXTENSIONS.size())
+        static_cast<uint32_t>(RECOMMENDED_OPTIONAL_EXTENSIONS.size()),
+        nullptr,
+        nullptr,
+        nullptr
     };
 
     struct queue_priorities_t
@@ -112,7 +116,9 @@ namespace vpr
 
     bool Device::HasExtension(const char* name) const noexcept
     {
-        auto iter = std::find_if(std::cbegin(dataMembers->enabledExtensions), std::cend(dataMembers->enabledExtensions),
+        auto iter = std::find_if(
+            std::cbegin(dataMembers->enabledExtensions),
+            std::cend(dataMembers->enabledExtensions),
             [name](const char* str)
             {
                 return strcmp(name, str) == 0;
@@ -171,7 +177,7 @@ namespace vpr
         static bool logged_warning = false;
         if ((queueFamilyIndices.Transfer == queueFamilyIndices.Graphics) && !logged_warning)
         {
-            LOG(WARNING) << "Retrieving queue that supports transfer ops, but isn't dedicated transfer queue. This warning is only issued once - but retrieval is likely occuring multiple times.";
+            std::cerr << "Retrieving queue that supports transfer ops, but isn't dedicated transfer queue. This warning is only issued once - but retrieval is likely occuring multiple times.";
             logged_warning = true;
         }
         VkQueue result;
@@ -185,7 +191,7 @@ namespace vpr
         static bool logged_warning = false;
         if ((queueFamilyIndices.Compute == queueFamilyIndices.Graphics) && !logged_warning)
         {
-            LOG(WARNING) << "Retrieving queue that supports compute ops, but isn't dedicated compute queue. This warning is only issued once - but retrieval is likely occuring multiple times.";
+            std::cerr << "Retrieving queue that supports compute ops, but isn't dedicated compute queue. This warning is only issued once - but retrieval is likely occuring multiple times.";
             logged_warning = true;
         }
         VkQueue result;
@@ -195,15 +201,18 @@ namespace vpr
     }
 
     VkQueue Device::SparseBindingQueue(const uint32_t idx) const
-    {
-        
+    {  
         if (!dataMembers->queueInfos.count(VK_QUEUE_SPARSE_BINDING_BIT))
         {
-            LOG(ERROR) << "Current device does not support sparse binding queues!";
+            std::cerr << "Current device does not support sparse binding queues!\n";
             throw std::runtime_error("Requested unsuported queue family (Sparse Binding)");
         }
+        
+        if (queueFamilyIndices.Compute == queueFamilyIndices.Graphics)
+        {
+            std::cout << "Retrieving queue that supports sparse binding, but isn't dedicated sparse binding queue.\n";
+        }
 
-        LOG_IF(queueFamilyIndices.Compute == queueFamilyIndices.Graphics, INFO) << "Retrieving queue that supports sparse binding, but isn't dedicated sparse binding queue.";
         VkQueue result;
         vkGetDeviceQueue(handle, queueFamilyIndices.SparseBinding, idx, &result);
         return result;
@@ -224,7 +233,7 @@ namespace vpr
             // Check that the device at least supports the desired features for linear tiling
             if (!(properties.linearTilingFeatures & flags))
             {
-                LOG(ERROR) << "Could not retrieve VkImageTiling mode for format, indicating that the format is probably not supported on the current device!";
+                std::cerr << "Could not retrieve VkImageTiling mode for format, indicating that the format is probably not supported on the current device!\n";
                 throw std::runtime_error("Requested format is likely not supported on current device!");
             }
             return VK_IMAGE_TILING_LINEAR;
@@ -247,7 +256,7 @@ namespace vpr
             }
         }
 
-        LOG(ERROR) << "Could not find texture format that supports requested tiling and feature flags: ( " << std::to_string(tiling) << " , " << std::to_string(flags) << " )";
+        std::cerr << "Could not find texture format that supports requested tiling and feature flags: ( " << std::to_string(tiling) << " , " << std::to_string(flags) << " )\n";
         throw std::runtime_error("Could not find valid texture format.");
     }
 
@@ -257,9 +266,31 @@ namespace vpr
         return FindSupportedFormat(format_options.data(), format_options.size(), VK_IMAGE_TILING_OPTIMAL, VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
     }
 
-    uint32_t Device::GetMemoryTypeIdx(const uint32_t type_bitfield, const VkMemoryPropertyFlags property_flags, VkBool32 * memory_type_found) const
+    uint32_t Device::GetMemoryTypeIdx(const uint32_t type_bitfield, const VkMemoryPropertyFlags property_flags, VkBool32* memory_type_found) const
     {
-        return parent->GetMemoryTypeIdx(type_bitfield, property_flags, memory_type_found);
+        const VkPhysicalDeviceMemoryProperties& memoryProperties = GetPhysicalDeviceMemoryProperties();
+        const uint32_t num_memory_types = memoryProperties.memoryTypeCount;
+        uint32_t bitfield = type_bitfield;
+        *memory_type_found = false;
+
+        for (uint32_t i = 0; i < num_memory_types; ++i)
+        {
+            if (bitfield & 1)
+            {
+                // check if property flags match
+                if ((memoryProperties.memoryTypes[i].propertyFlags & property_flags) == property_flags)
+                {
+                    if (memory_type_found)
+                    {
+                        *memory_type_found = true;
+                    }
+                    return i;
+                }
+            }
+            bitfield >>= 1;
+        }
+
+        return std::numeric_limits<uint32_t>::max();
     }
 
     const PhysicalDevice& Device::GetPhysicalDevice() const noexcept
@@ -267,14 +298,9 @@ namespace vpr
         return *parent;
     }
 
-    const VkPhysicalDeviceProperties& Device::GetPhysicalDeviceProperties() const noexcept
-    {
-        return parent->GetProperties();
-    }
-
     const VkPhysicalDeviceMemoryProperties& Device::GetPhysicalDeviceMemoryProperties() const noexcept
     {
-        return parent->GetMemoryProperties();
+        return parent->MemoryProperties();
     }
 
     const VkDebugUtilsFunctions& Device::DebugUtilsHandler() const
@@ -297,11 +323,11 @@ namespace vpr
         uint32_t idx = parent->GetQueueFamilyIndex(VkQueueFlagBits(VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_TRANSFER_BIT | VK_QUEUE_COMPUTE_BIT));
         if (idx == std::numeric_limits<uint32_t>::max())
         {
-            LOG(WARNING) << "Couldn't find a generalized queue supporting compute, graphics, and transfer: trying graphics and transfer.";
+            std::cerr << "Couldn't find a generalized queue supporting compute, graphics, and transfer: trying graphics and transfer.\n";
             idx = parent->GetQueueFamilyIndex(VkQueueFlagBits(VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_TRANSFER_BIT));
             if (idx == std::numeric_limits<uint32_t>::max())
             {
-                LOG(WARNING) << "Couldn't find a generalized queue supporting transfer and graphics operations: just returning a graphics queue.";
+                std::cerr << "Couldn't find a generalized queue supporting transfer and graphics operations: just returning a graphics queue.\n";
                 idx = queueFamilyIndices.Graphics;
             }
         }
@@ -363,7 +389,8 @@ namespace vpr
 
         createInfo.queueCreateInfoCount = static_cast<uint32_t>(queue_infos.size());
         createInfo.pQueueCreateInfos = queue_infos.data();
-        createInfo.pEnabledFeatures = &parent->GetFeatures();
+        createInfo.pEnabledFeatures = nullptr;
+
         if (extensions->featuresToEnable != nullptr)
         {
             createInfo.pEnabledFeatures = extensions->featuresToEnable;
@@ -393,14 +420,16 @@ namespace vpr
 
     void Device::setupValidation(const char* const* layers, const uint32_t layer_count)
     {
-        
-        if (parentInstance->ValidationEnabled()) {
-            if ((layer_count == 0) && (layers == nullptr)) {
+        if (parentInstance->ValidationEnabled())
+        {
+            if ((layer_count == 0) && (layers == nullptr))
+            {
                 constexpr static const char* const default_layer = "VK_LAYER_LUNARG_standard_validation";
                 createInfo.enabledLayerCount = 1;
                 createInfo.ppEnabledLayerNames = &default_layer;
             }
-            else {
+            else
+            {
                 createInfo.enabledLayerCount = layer_count;
                 createInfo.ppEnabledLayerNames = layers;
             }
@@ -500,7 +529,8 @@ namespace vpr
     void Device::setupSparseBindingQueues()
     {
         queueFamilyIndices.SparseBinding = parent->GetQueueFamilyIndex(VK_QUEUE_SPARSE_BINDING_BIT);
-        if ((queueFamilyIndices.SparseBinding != queueFamilyIndices.Graphics) && (queueFamilyIndices.SparseBinding != std::numeric_limits<uint32_t>::max())) {
+        if ((queueFamilyIndices.SparseBinding != queueFamilyIndices.Graphics) && (queueFamilyIndices.SparseBinding != std::numeric_limits<uint32_t>::max()))
+        {
             auto sparse_info = setupQueueFamily(parent->GetQueueFamilyProperties(VK_QUEUE_SPARSE_BINDING_BIT));
             sparse_info.queueFamilyIndex = queueFamilyIndices.SparseBinding;
             numSparseBindingQueues = sparse_info.queueCount;
@@ -536,7 +566,7 @@ namespace vpr
 
         if (!present_support)
         {
-            LOG(ERROR) << "No queues found that support presentation to a surface.";
+            std::cerr << "No queues found that support presentation to a surface.\n";
             throw std::runtime_error("No queues found that support presentation to a surface!");
         }
 
@@ -602,12 +632,12 @@ namespace vpr
             {
                 if (throw_on_error)
                 {
-                    LOG(ERROR) << "Current VkDevice does not support extension \"" << name << "\" that is required!";
+                    std::cerr << "Current VkDevice does not support extension \"" << name << "\" that is required!\n";
                     throw std::runtime_error("Could not enable/use required extension for the logical device.");
                 }
                 else
                 {
-                    LOG(WARNING) << "Requested device extension with name \"" << name << "\" is not available, removing from list.";
+                    std::cerr << "Requested device extension with name \"" << name << "\" is not available, removing from list.\n";
                 }
                 return true;
             }
@@ -631,12 +661,12 @@ namespace vpr
             iter = std::find(exts.cbegin(), exts.cend(), mem_extensions[1]);
             if (iter != exts.cend())
             {
-                LOG_IF(VERBOSE_LOGGING, INFO) << "Both extensions required to enable better dedicated allocations have been enabled/found.";
+                std::cout << "Both extensions required to enable better dedicated allocations have been enabled/found.\n";
                 enableDedicatedAllocations = true;
             }    
             else
             {
-                LOG_IF(VERBOSE_LOGGING, WARNING) << "Only one of the extensions required for better allocations was found - cannot enable/use.";
+                std::cerr << "Only one of the extensions required for better allocations was found - cannot enable/use.\n";
                 enableDedicatedAllocations = false;
             }
         }
@@ -650,14 +680,15 @@ namespace vpr
     {
         auto check_loaded_pfn = [](const void* ptr, const char* fname)
         {
-            if (!ptr) {
-                LOG(ERROR) << "Failed to load function pointer " << fname << " for debug utils extension!";
+            if (!ptr)
+            {
+                std::cerr << "Failed to load function pointer " << fname << " for debug utils extension!\n";
             }
         };
 
         if (!parentInstance->ValidationEnabled())
         {
-            LOG(WARNING) << "Cannot load requested VkDebugUtils function pointers, as validation layers are not enabled!";
+            std::cerr << "Cannot load requested VkDebugUtils function pointers, as validation layers are not enabled!\n";
             return;
         }
 

@@ -4,10 +4,6 @@
 #include "LogicalDevice.hpp"
 #include "vkAssert.hpp"
 #include "CreateInfoBase.hpp"
-#include "easylogging++.h"
-#if !defined(VPR_BUILD_STATIC)
-INITIALIZE_EASYLOGGINGPP
-#endif
 #ifndef __ANDROID__
 #ifdef VPR_USE_SDL
 #include <SDL2/SDL_vulkan.h>
@@ -18,6 +14,9 @@ INITIALIZE_EASYLOGGINGPP
 #endif
 #include <vulkan/vulkan.h>
 #include <string>
+#include <sstream>
+#include <iostream>
+#include <vector>
 
 namespace vpr
 {
@@ -80,30 +79,18 @@ namespace vpr
 
         if (message_severity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT)
         {
-            LOG(ERROR) << output_string_stream.str();
+            std::cerr << output_string_stream.str() << "\n";
         }
         else if (message_severity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT)
         {
-            LOG(WARNING) << output_string_stream.str();
+            std::cerr << output_string_stream.str() << "\n";
         }
         else if (message_severity <= VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT)
         {
-            LOG(INFO) << output_string_stream.str();
+            std::cout << output_string_stream.str() << "\n";
         }
 
         return VK_FALSE;
-    }
-
-    void SetLoggingRepository_VprCore(void* repo)
-    {
-        el::Helpers::setStorage(*(el::base::type::StoragePointer*)repo);
-        LOG(INFO) << "Updated easyloggingpp storage pointer in vpr_core module...";
-    }
-
-    void* GetLoggingRepository_VprCore()
-    {
-        static el::base::type::StoragePointer ptr = el::Helpers::storage();
-        return ptr.get();
     }
 
     struct InstanceExtensionHandler
@@ -134,7 +121,7 @@ namespace vpr
         // How could we do this on Android?
         if (!glfwVulkanSupported())
         {
-            LOG(ERROR) << "Vulkan is not supported on the current hardware!";
+            std::cerr << "Vulkan is not supported on the current hardware!\n";
             throw std::runtime_error("Vulkan not supported!");
         }
 #endif
@@ -251,13 +238,13 @@ namespace vpr
         if (api_version < desiredVersion)
         {
             info->apiVersion = api_version;
-            LOG(WARNING) << "Requested Vulkan API version v" << vkVersionString(desiredVersion) <<
-                " but the Vulkan implementation on this device only supports v" << vkVersionString(api_version);
+            std::cerr << "Requested Vulkan API version v" << vkVersionString(desiredVersion) <<
+                " but the Vulkan implementation on this device only supports v" << vkVersionString(api_version) << "\n";
         }
-        else if (api_version > desiredVersion)
+        else if (api_version > desiredVersion && VERBOSE_LOGGING)
         {
-            LOG_IF(VERBOSE_LOGGING, INFO) << "Requested Vulkan API version v" << vkVersionString(desiredVersion) <<
-                ", but the Vulkan implementation on this device can actually support newer version v" << vkVersionString(api_version);
+            std::cout << "Requested Vulkan API version v" << vkVersionString(desiredVersion) <<
+                ", but the Vulkan implementation on this device can actually support newer version v" << vkVersionString(api_version) << "\n";
         }
     }
 
@@ -430,12 +417,12 @@ namespace vpr
                 bool result = (req_found != queried_extensions.cend());
                 if (throw_on_error && !result)
                 {
-                    LOG(ERROR) << "Required extension \"" << name << "\" not supported for instance in construction!";
+                    std::cerr << "Required extension \"" << name << "\" not supported for instance in construction!\n";
                     throw std::runtime_error("Instance does not support a required extension!");
                 }
                 else if (!result)
                 {
-                    LOG(WARNING) << "Extension with name \"" << name << "\" requested but isn't supported. Removing from list attached to Instance's creation info.";
+                    std::cerr << "Extension with name \"" << name << "\" requested but isn't supported. Removing from list attached to Instance's creation info.\n";
                 }
 
                 return !result;

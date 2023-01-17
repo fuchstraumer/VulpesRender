@@ -27,7 +27,7 @@ FIND_PACKAGE(Vulkan)
 
 FUNCTION(ADD_VPR_LIBRARY NAME)
     IF(VPR_BUILD_DYNAMIC_LIBRARY)
-        ADD_LIBRARY(${NAME} SHARED ${ARGN} ${easyloggingpp_src})
+        ADD_LIBRARY(${NAME} SHARED ${ARGN})
         TARGET_LINK_LIBRARIES(${NAME} PRIVATE ${Vulkan_LIBRARY})
     ELSE()
         ADD_LIBRARY(${NAME} STATIC ${ARGN})
@@ -37,9 +37,7 @@ FUNCTION(ADD_VPR_LIBRARY NAME)
     TARGET_COMPILE_OPTIONS(${NAME} PRIVATE ${VPR_CXX_FLAGS})
     TARGET_INCLUDE_DIRECTORIES(${NAME} PUBLIC 
         "${Vulkan_INCLUDE_DIR}"
-        "../common/"
-        "../third_party/easyloggingpp/src"
-        "../third_party/variant_lite/include")
+        "../common/")
     INSTALL(TARGETS ${NAME} LIBRARY DESTINATION "lib" ARCHIVE DESTINATION "lib"
         RUNTIME DESTINATION "bin")
     INSTALL(DIRECTORY "include/" DESTINATION "include/vpr/")

@@ -2,7 +2,8 @@
 #include "ShaderModule.hpp"
 #include "vkAssert.hpp"
 #include "CreateInfoBase.hpp"
-#include "easylogging++.h"
+#include <vector>
+#include <fstream>
 
 namespace vpr
 {
@@ -18,7 +19,8 @@ namespace vpr
                 input.exceptions(std::ios::failbit | std::ios::badbit);
 
                 const uint32_t code_size = static_cast<uint32_t>(input.tellg());
-                if (code_size <= 1) {
+                if (code_size <= 1)
+                {
                     throw std::runtime_error("File opened for loading shader code from file is invalid!");
                 }
 
@@ -35,7 +37,7 @@ namespace vpr
             }
             catch (std::ifstream::failure&)
             {
-                LOG(ERROR) << "OBJECTS::RESOURCE::SHADER_MODULE: Failure opening or reading shader file: " << std::string(filename);
+                std::cerr << "OBJECTS::RESOURCE::SHADER_MODULE: Failure opening or reading shader file: " << std::string(filename) << "\n";
                 throw(std::runtime_error("OBJECTS::RESOURCE::SHADER_MODULE: Failure opening or reading shader file."));
             }
         }

@@ -9,7 +9,6 @@
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
-#include "easylogging++.h"
 #ifndef __ANDROID__
 #ifdef VPR_USE_SDL
 #include <SDL2/SDL_vulkan.h>
@@ -316,8 +315,8 @@ namespace vpr {
             auto iter = std::find(std::begin(avail_modes), std::end(avail_modes), desiredMode);
             if (iter == std::cend(avail_modes))
             {
-                LOG(WARNING) << "Desired vertical sync mode is " << getPresentModeStr(desiredMode) << "not available on current hardware!";
-                LOG(INFO) << "Falling back to supported present mode " << getPresentModeStr(presentMode);
+                std::cerr << "Desired vertical sync mode is " << getPresentModeStr(desiredMode) << "not available on current hardware!\n";
+                std::cerr << "Falling back to supported present mode " << getPresentModeStr(presentMode) << "\n";
             }
             else
             {

@@ -81,8 +81,6 @@ namespace vpr
         VkDevice parent;
 
     };
-
-    VPR_API void SetLoggingRepository_VprCommand(void* repo);
     
 }
 #endif // !VULPES_VK_COMMAND_POOL_H

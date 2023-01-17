@@ -7,7 +7,7 @@
 namespace vpr
 {
 
-    class PhysicalDeviceImpl;
+    struct PhysicalDeviceImpl;
 
     /**! PhysicalDevice is a wrapper around a VkPhysicalDevice object, which is itself merely a handle representing a Vulkan-compatible
     *    hardware device in a user's system. This class stores the relevant VkPhysicalDeviceProperties, VkPhysicalDeviceFeatures, and 
@@ -24,32 +24,16 @@ namespace vpr
         /**Automated setup - uses the given instance handle to find the "best" available GPU on a system. This will prefer dedicated cards first, and uses 
          * some other parameters to "score" devices from there.
          */
-        PhysicalDevice(const VkInstance& instance_handle, const uint32_t instance_version, const struct VprExtensionPack* extension_pack);
+        PhysicalDevice(const VkInstance& instance_handle, const struct VprExtensionPack* extension_pack);
         PhysicalDevice(PhysicalDevice&& other) noexcept;
         PhysicalDevice& operator=(PhysicalDevice&& other) noexcept;
         ~PhysicalDevice();
         
         const VkPhysicalDevice& vkHandle() const noexcept;
+        const VkPhysicalDeviceMemoryProperties& MemoryProperties() const noexcept;
 
-        /**! Attempts to find the hardware-appropriate index of a memory type that meets the flags given.
-            \param type_bitfield - the memoryTypeBits field of a VkMemoryRequirements struct, retrieved from a 
-                    vkGetImageMemoryRequirements/vkGetBufferMemoryRequirements call.
-            \param property_flags - the type of memory requested by the user, commonly device-local or host-coherent memory.
-            \return Index of the requested memory type on success, std::numeric_limits<uint32_t>::max() on failure.
-        */
-        uint32_t GetMemoryTypeIdx(const uint32_t type_bitfield, const VkMemoryPropertyFlags property_flags, VkBool32* memory_type_found = nullptr) const noexcept;
-        
-        /**! Attempts to find a Queue family that supports the full bitfield given: this can be multiple types, so graphics + compute options or compute + transfer
-        *    bitfields can be passed to the method.
-            \return Index of the queue meeting all of the flags specified, or std::numeric_limits<uint32_t>::max() on failure.
-        */
         uint32_t GetQueueFamilyIndex(const VkQueueFlagBits bitfield) const noexcept;
         VkQueueFamilyProperties GetQueueFamilyProperties(const VkQueueFlagBits bitfield) const;
-
-        // pass sType for the device properties struct you're curious about, and if it's supported returns true
-        bool HasPropertiesOfType(const size_t sType) const noexcept;
-        // returns read-only const pointer to the physical device properties struct whose type is given by sType, if it's present
-        const void* GetPropertiesOfType(const size_t sType) const noexcept;
 
     private:
         std::unique_ptr<PhysicalDeviceImpl> impl;

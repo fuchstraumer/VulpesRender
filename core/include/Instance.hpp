@@ -102,14 +102,6 @@ namespace vpr
 
     };
 
-    /**Pass an easyloggingpp logging repository pointer into this function, and it will be set as
-     * the repository for this module to use. That way, all log messages from all modules (even 
-     * when using this as a shared library) will go to the same sinks
-     * \ingroup Core
-     */
-    VPR_API void SetLoggingRepository_VprCore(void* logging_repo);
-    VPR_API void* GetLoggingRepository_VprCore();
-
 }
 
 #endif // !INSTANCE_H
