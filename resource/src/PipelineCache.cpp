@@ -1,16 +1,12 @@
 #include "vpr_stdafx.h"
 #include "PipelineCache.hpp"
-#include "easylogging++.h"
-#if !defined(VPR_BUILD_STATIC)
-INITIALIZE_EASYLOGGINGPP
-#endif
 #include "vkAssert.hpp"
-#ifdef __APPLE_CC__
-#include <boost/filesystem.hpp>
-#else
 #include <filesystem>
-#endif
 #include <iomanip>
+// HOW MANY STREAMS DO I NEED
+#include <iostream>
+#include <sstream>
+#include <fstream>
 
 namespace vpr
 {
@@ -20,12 +16,6 @@ namespace vpr
     static fs::path cachePath = fs::path(fs::temp_directory_path() / cacheSubdirectoryString);
     static std::string cacheString{ cachePath.string() };
 
-    void SetLoggingRepository_VprResource(void* repo)
-    {
-        el::Helpers::setStorage(*(el::base::type::StoragePointer*)repo);
-        LOG(INFO) << "Updating easyloggingpp storage pointer in vpr_resource module...";
-    }
-    
     constexpr static VkPipelineCacheCreateInfo base_create_info{ VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO, nullptr, 0, 0, nullptr };
 
     PipelineCache::PipelineCache(const VkDevice& _parent, const VkPhysicalDevice& host_device, const size_t hash_id) : parent(_parent), createInfo(base_create_info), 
@@ -139,7 +129,7 @@ namespace vpr
 
         if (memcmp(cacheUUID, properties.pipelineCacheUUID, sizeof(cacheUUID)) != 0)
         {
-            LOG(WARNING) << "Pipeline cache UUID incorrect, requires rebuilding.";
+            std::cerr << "Pipeline cache UUID incorrect, requires rebuilding.\n";
             return false;
         }
 
@@ -153,15 +143,11 @@ namespace vpr
 
     void PipelineCache::setFilename()
     {
-#ifdef __APPLE_CC__
-        namespace fs = boost::filesystem;
-#else
         namespace fs = std::filesystem;
-#endif
 
         if (!fs::exists(cachePath))
         {
-            LOG(INFO) << "Shader cache path didn't exist, creating...";
+            std::cout << "Shader cache path didn't exist, creating...\n";
             fs::create_directories(cachePath);
         }
 
@@ -219,8 +205,8 @@ namespace vpr
             loadedData = (char*)malloc(sizeof(char) * file_size);
             if (!cache.read(loadedData, file_size))
             {
-                LOG(ERROR) << "Failed to read file!";
-                throw std::runtime_error("Failed to read file!");
+                std::cerr << "Failed to read in vpr::PipelineCache::LoadCacheFromFile!\n";
+                throw std::runtime_error("Failed to read pipeline cache file in vpr::PipelineCache::LoadCacheFromFile");
             }
 
             // Check to see if header data matches current device.
@@ -231,19 +217,17 @@ namespace vpr
             }
             else
             {
-                LOG_IF(VERBOSE_LOGGING, INFO) << "Pre-existing cache file isn't valid: creating new pipeline cache.";
                 createInfo.initialDataSize = 0;
                 createInfo.pInitialData = nullptr;
                 cache.close();
                 if (!std::filesystem::remove(_filename))
                 {
-                    LOG(WARNING) << "Unable to erase pre-existing cache data. Won't be able to write new contents to disk!";
+                    std::cerr << "Unable to erase pre-existing cache data. Won't be able to write new contents to disk!\n";
                 }
             }
         }
         else
         {
-            LOG_IF(VERBOSE_LOGGING, INFO) << "No pre-existing cache found.";
             createInfo.initialDataSize = 0;
             createInfo.pInitialData = nullptr;
         }
@@ -259,7 +243,7 @@ namespace vpr
         VkResult result = vkMergePipelineCaches(parent, handle, num_caches, caches);
         if (result != VK_SUCCESS)
         {
-            LOG_IF(VERBOSE_LOGGING, WARNING) << "Failed to merge pipeline caches: can suggest that the operation simply wasn't useful.";
+            std::cerr << "Failed to merge pipeline caches: can suggest that the operation simply wasn't useful.";
         }
     }
 
@@ -285,7 +269,7 @@ namespace vpr
 
         if (!parent)
         {
-            LOG(ERROR) << "Attempted to delete/save a non-existent cache!";
+            std::cerr << "Attempted to delete/save a non-existent cache!\n";
             return VK_ERROR_DEVICE_LOST;
         }
 
@@ -308,19 +292,17 @@ namespace vpr
                 file.close();
 
                 free(endCacheData);
-                LOG(INFO) << "Saved pipeline cache data to file successfully";
 
                 return VK_SUCCESS;
             }
-            catch (std::ofstream::failure&)
+            catch (std::ofstream::failure& e)
             {
-                LOG(WARNING) << "Saving of pipeline cache to file failed with unindentified exception in std::ofstream.";
-                return VK_ERROR_VALIDATION_FAILED_EXT;
+                std::cerr << e.what();
+                throw e;
             }
         }
         else
         {
-            LOG(WARNING) << "Cache data was reported empty by Vulkan: errors possible.";
             return VK_SUCCESS;
         }
         
