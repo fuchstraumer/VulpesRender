@@ -399,6 +399,11 @@ namespace vpr
             createInfo.pEnabledFeatures = extensions->featuresToEnable;
         }
 
+        if (extensions->featuresToEnable2 != nullptr)
+        {
+            createInfo.pNext = extensions->featuresToEnable2;
+        }
+
         if (extensions->pNextChainStart != nullptr)
         {
             createInfo.pNext = extensions->pNextChainStart;
