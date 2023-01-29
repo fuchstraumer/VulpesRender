@@ -271,7 +271,10 @@ namespace vpr
         const VkPhysicalDeviceMemoryProperties& memoryProperties = GetPhysicalDeviceMemoryProperties();
         const uint32_t num_memory_types = memoryProperties.memoryTypeCount;
         uint32_t bitfield = type_bitfield;
-        *memory_type_found = false;
+        if (memory_type_found)
+        {
+            *memory_type_found = false;
+        }
 
         for (uint32_t i = 0; i < num_memory_types; ++i)
         {

@@ -39,5 +39,11 @@ namespace vpr
         std::unique_ptr<PhysicalDeviceImpl> impl;
     };
 
+    // Use this if higher level setup functionality needs to scout out devices for supported features etc etc, and then call this 
+    // after using VkEnumeratePhysicalDevices there. By doing this, you can find what the best scoring physical device is and thus
+    // which one this system will choose - so you can match them up ahead of time, and only query / enable features on the device
+    // that we'll end up using :)
+    VPR_API VkPhysicalDevice ChooseBestScoringPhysicalDevice(const size_t numDevices, const VkPhysicalDevice* devices);
+
 }
 #endif // !VULPES_VK_PHYSICAL_DEVICE_H

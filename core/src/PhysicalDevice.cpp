@@ -11,53 +11,10 @@ namespace vpr
 {
 	namespace detail
 	{
-
-		std::vector<size_t> getSTypesFromDeviceFeaturesStruct(const void* pNext)
-		{
-			std::vector<size_t> featureStypes;
-
-			while (pNext != nullptr)
-			{
-				// structures are arranged so that sType is in first 8 bytes, pNext is in second 8 bytes
-				const size_t sType = *reinterpret_cast<const size_t*>(pNext);
-				featureStypes.emplace_back(sType);
-				const std::byte* newAddr = reinterpret_cast<const std::byte*>(pNext);
-				newAddr += sizeof(size_t);
-				pNext = reinterpret_cast<const void*>(newAddr);
-			}
-
-			std::sort(featureStypes.begin(), featureStypes.end());
-
-			return featureStypes;
-		}
-
-		bool featuresAvailableMatchFeaturesRequested(const VkPhysicalDeviceFeatures& requestedFeatures, const VkPhysicalDeviceFeatures& supportedFeatures)
-		{
-			int score = std::memcmp(&requestedFeatures, &supportedFeatures, sizeof(VkPhysicalDeviceFeatures));
-			return score == 0;
-		}
-
-		constexpr uint32_t convertApiVersion(const VprExtensionPack::ApiVersion version)
-		{
-			switch (version)
-			{
-			case VprExtensionPack::ApiVersion::BestSupported:
-				// we check if supported < desired, so when desired is 0 the check always passes
-				// and we just run with whatever the current device supports
-				return 0;
-			case VprExtensionPack::ApiVersion::Vulkan10:
-				return VK_API_VERSION_1_0;
-			case VprExtensionPack::ApiVersion::Vulkan11:
-				return VK_API_VERSION_1_1;
-			case VprExtensionPack::ApiVersion::Vulkan12:
-				return VK_API_VERSION_1_2;
-			case VprExtensionPack::ApiVersion::Vulkan13:
-				return VK_API_VERSION_1_3;
-			default:
-				return VK_API_VERSION_1_3;
-			}
-		}
-
+		std::vector<size_t> getSTypesFromDeviceFeaturesStruct(const void* pNext);
+		bool featuresAvailableMatchFeaturesRequested(const VkPhysicalDeviceFeatures& requestedFeatures, const VkPhysicalDeviceFeatures& supportedFeatures);
+		constexpr uint32_t convertApiVersion(const VprExtensionPack::ApiVersion version);
+		VkPhysicalDevice chooseBestDevice(const size_t numDevices, const VkPhysicalDevice* devicesArray, const VprExtensionPack::ApiVersion _desiredApiVersion);
 	}
 
 	struct PhysicalDeviceImpl
@@ -98,6 +55,8 @@ namespace vpr
 		{
 			chosenDevice = chooseIdealDevice(availDevices, extension_pack->PreferredApiVersion);
 		}
+
+		handle = chosenDevice;
 
 		vkGetPhysicalDeviceMemoryProperties(handle, &memoryProperties);
 		getQueueFamilyProperties();
@@ -164,94 +123,7 @@ namespace vpr
 
 	VkPhysicalDevice PhysicalDeviceImpl::chooseIdealDevice(const std::vector<VkPhysicalDevice>& avail_devices, const VprExtensionPack::ApiVersion _desiredApiVersion)
 	{
-		uint32_t desiredApiVersion = detail::convertApiVersion(_desiredApiVersion);
-
-		size_t bestDeviceIdx = 0;
-		size_t bestScore = 0;
-
-		for (size_t i = 0; i < avail_devices.size(); ++i)
-		{
-			size_t deviceScore = 0;
-			// use the simple device properties function. the stuff returned by deviceProperties2 is mostly 
-			// relevant later, but here we're gonna use simple metrics to land on whichever device has the most Oomph
-			VkPhysicalDeviceProperties properties;
-			vkGetPhysicalDeviceProperties(avail_devices[i], &properties);
-
-			if (properties.apiVersion < desiredApiVersion)
-			{
-				// try the next one, I guess
-				continue;
-			}
-
-			if (properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
-			{
-				deviceScore += 10000;
-			}
-			else if (properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU)
-			{
-				deviceScore += 1000;
-			}
-
-			VkPhysicalDeviceFeatures features;
-			vkGetPhysicalDeviceFeatures(avail_devices[i], &features);
-
-			if (features.geometryShader)
-			{
-				deviceScore += 1000;
-			}
-
-			if (features.tessellationShader)
-			{
-				deviceScore += 1000;
-			}
-
-			if (features.samplerAnisotropy)
-			{
-				deviceScore += 250;
-			}
-
-			if (features.imageCubeArray)
-			{
-				deviceScore += 250;
-			}
-
-			if (features.fullDrawIndexUint32)
-			{
-				deviceScore += 500;
-			}
-
-			if (features.multiDrawIndirect)
-			{
-				deviceScore += 500;
-			}
-
-			if (features.textureCompressionETC2)
-			{
-				deviceScore += 250;
-			}
-
-			if (features.textureCompressionASTC_LDR)
-			{
-				deviceScore += 250;
-			}
-
-			// what happens in case of a tie? multi-GPU mode
-			if (deviceScore > bestScore)
-			{
-				bestDeviceIdx = i;
-				bestScore = deviceScore;
-			}
-		}
-
-		if (bestScore != 0u)
-		{
-			return avail_devices[bestDeviceIdx];
-		}
-		else
-		{
-			// likely no devices that supported requested version of the API
-			return VK_NULL_HANDLE;
-		}
+		return detail::chooseBestDevice(avail_devices.size(), avail_devices.data(), _desiredApiVersion);
 	}
 
 	void PhysicalDeviceImpl::getQueueFamilyProperties()
@@ -348,6 +220,154 @@ namespace vpr
 			return VkQueueFamilyProperties();
 		}
 
+	}
+
+	VPR_API VkPhysicalDevice ChooseBestScoringPhysicalDevice(const size_t numDevices, const VkPhysicalDevice* devices)
+	{
+		return detail::chooseBestDevice(numDevices, devices, vpr::VprExtensionPack::ApiVersion::BestSupported);
+	}
+
+
+	namespace detail
+	{
+
+		std::vector<size_t> getSTypesFromDeviceFeaturesStruct(const void* pNext)
+		{
+			std::vector<size_t> featureStypes;
+
+			while (pNext != nullptr)
+			{
+				// structures are arranged so that sType is in first 8 bytes, pNext is in second 8 bytes
+				const size_t sType = *reinterpret_cast<const size_t*>(pNext);
+				featureStypes.emplace_back(sType);
+				const std::byte* newAddr = reinterpret_cast<const std::byte*>(pNext);
+				newAddr += sizeof(size_t);
+				pNext = reinterpret_cast<const void*>(newAddr);
+			}
+
+			std::sort(featureStypes.begin(), featureStypes.end());
+
+			return featureStypes;
+		}
+
+		bool featuresAvailableMatchFeaturesRequested(const VkPhysicalDeviceFeatures& requestedFeatures, const VkPhysicalDeviceFeatures& supportedFeatures)
+		{
+			int score = std::memcmp(&requestedFeatures, &supportedFeatures, sizeof(VkPhysicalDeviceFeatures));
+			return score == 0;
+		}
+
+		constexpr uint32_t convertApiVersion(const VprExtensionPack::ApiVersion version)
+		{
+			switch (version)
+			{
+			case VprExtensionPack::ApiVersion::BestSupported:
+				// we check if supported < desired, so when desired is 0 the check always passes
+				// and we just run with whatever the current device supports
+				return 0;
+			case VprExtensionPack::ApiVersion::Vulkan10:
+				return VK_API_VERSION_1_0;
+			case VprExtensionPack::ApiVersion::Vulkan11:
+				return VK_API_VERSION_1_1;
+			case VprExtensionPack::ApiVersion::Vulkan12:
+				return VK_API_VERSION_1_2;
+			case VprExtensionPack::ApiVersion::Vulkan13:
+				return VK_API_VERSION_1_3;
+			default:
+				return VK_API_VERSION_1_3;
+			}
+		}
+
+		VkPhysicalDevice chooseBestDevice(const size_t numDevices, const VkPhysicalDevice* devicesArray, const VprExtensionPack::ApiVersion _desiredApiVersion)
+		{
+			uint32_t desiredApiVersion = detail::convertApiVersion(_desiredApiVersion);
+
+			size_t bestDeviceIdx = 0;
+			size_t bestScore = 0;
+
+			for (size_t i = 0; i < numDevices; ++i)
+			{
+				size_t deviceScore = 0;
+				// use the simple device properties function. the stuff returned by deviceProperties2 is mostly 
+				// relevant later, but here we're gonna use simple metrics to land on whichever device has the most Oomph
+				VkPhysicalDeviceProperties properties;
+				vkGetPhysicalDeviceProperties(devicesArray[i], &properties);
+
+				if (properties.apiVersion < desiredApiVersion)
+				{
+					// try the next one, I guess
+					continue;
+				}
+
+				if (properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
+				{
+					deviceScore += 10000;
+				}
+				else if (properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU)
+				{
+					deviceScore += 1000;
+				}
+
+				VkPhysicalDeviceFeatures features;
+				vkGetPhysicalDeviceFeatures(devicesArray[i], &features);
+
+				if (features.geometryShader)
+				{
+					deviceScore += 1000;
+				}
+
+				if (features.tessellationShader)
+				{
+					deviceScore += 1000;
+				}
+
+				if (features.samplerAnisotropy)
+				{
+					deviceScore += 250;
+				}
+
+				if (features.imageCubeArray)
+				{
+					deviceScore += 250;
+				}
+
+				if (features.fullDrawIndexUint32)
+				{
+					deviceScore += 500;
+				}
+
+				if (features.multiDrawIndirect)
+				{
+					deviceScore += 500;
+				}
+
+				if (features.textureCompressionETC2)
+				{
+					deviceScore += 250;
+				}
+
+				if (features.textureCompressionASTC_LDR)
+				{
+					deviceScore += 250;
+				}
+
+				// what happens in case of a tie? multi-GPU mode
+				if (deviceScore > bestScore)
+				{
+					bestDeviceIdx = i;
+					bestScore = deviceScore;
+				}
+			}
+
+			if (bestScore != 0u)
+			{
+				return devicesArray[bestDeviceIdx];
+			}
+			else
+			{
+				// likely no devices that supported requested version of the API
+				return VK_NULL_HANDLE;
+			}
+		}
 	}
 
 }

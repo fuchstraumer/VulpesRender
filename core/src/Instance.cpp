@@ -241,7 +241,7 @@ namespace vpr
             std::cerr << "Requested Vulkan API version v" << vkVersionString(desiredVersion) <<
                 " but the Vulkan implementation on this device only supports v" << vkVersionString(api_version) << "\n";
         }
-        else if (api_version > desiredVersion && VERBOSE_LOGGING)
+        else if (api_version > desiredVersion)
         {
             std::cout << "Requested Vulkan API version v" << vkVersionString(desiredVersion) <<
                 ", but the Vulkan implementation on this device can actually support newer version v" << vkVersionString(api_version) << "\n";
