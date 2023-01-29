@@ -28,8 +28,6 @@ namespace vpr
 
 		// just returns all available devices on system
 		std::vector<VkPhysicalDevice> getAvailableDevices(const VkInstance& instance);
-		// returns device most compatible with requested extensions
-		VkPhysicalDevice findMostCompatibleDevice(const VprExtensionPack* extension_pack, const std::vector<VkPhysicalDevice>& avail_devices);
 		// returns "best" device by looking for one with least restrictive limits and biggest texture sizes 
 		VkPhysicalDevice chooseIdealDevice(const std::vector<VkPhysicalDevice>& avail_devices, const VprExtensionPack::ApiVersion desiredApiVersion);
 
@@ -47,14 +45,7 @@ namespace vpr
 		VkPhysicalDevice chosenDevice = VK_NULL_HANDLE;
 		std::vector<VkPhysicalDevice> availDevices = getAvailableDevices(instance);
 
-		if (extension_pack->featuresToEnable2)
-		{
-			chosenDevice = findMostCompatibleDevice(extension_pack, availDevices);
-		}
-		else
-		{
-			chosenDevice = chooseIdealDevice(availDevices, extension_pack->PreferredApiVersion);
-		}
+		chosenDevice = chooseIdealDevice(availDevices, extension_pack->PreferredApiVersion);
 
 		handle = chosenDevice;
 
@@ -69,56 +60,6 @@ namespace vpr
 		std::vector<VkPhysicalDevice> results(deviceCount, VK_NULL_HANDLE);
 		vkEnumeratePhysicalDevices(instance, &deviceCount, results.data());
 		return results;
-	}
-
-	VkPhysicalDevice PhysicalDeviceImpl::findMostCompatibleDevice(const VprExtensionPack* extension_pack, const std::vector<VkPhysicalDevice>& avail_devices)
-	{
-		// Gather requested device features first
-		std::vector<size_t> requestedFeatureStypes = detail::getSTypesFromDeviceFeaturesStruct(extension_pack->featuresToEnable2->pNext);
-		// we need to store compatible devices as we go - on some systems, we may get multiple results (like CPU graphics) being supported
-		// with smaller extension sets, alongside the dedicated GPU. So we pass just the list of compatible devices to chooseIdealDevice,
-		// which will choose the best option from the ones that are compatible with the requested features/props :)
-		std::vector<VkPhysicalDevice> compatibleDevices;
-
-		for (size_t i = 0; i < avail_devices.size(); ++i)
-		{
-			VkPhysicalDevice currDevice = avail_devices[i];
-
-			VkPhysicalDeviceFeatures2 supportedFeatures
-			{
-				VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2,
-				nullptr,
-				VkPhysicalDeviceFeatures{}
-			};
-			memset(&supportedFeatures.features, 0, sizeof(VkPhysicalDeviceFeatures));
-
-			vkGetPhysicalDeviceFeatures2(currDevice, &supportedFeatures);
-
-			// compare boolean supported features first
-			const bool baseFeaturesMatch =
-				detail::featuresAvailableMatchFeaturesRequested(extension_pack->featuresToEnable2->features, supportedFeatures.features);
-
-			// find number of common supported advanced/extension-based features
-			std::vector<size_t> availFeatureStypes = detail::getSTypesFromDeviceFeaturesStruct(supportedFeatures.pNext);
-			// get the union of the two above sets, to find the list of features requested that are also supported
-			std::vector<size_t> availAndRequestedFeatures;
-			availAndRequestedFeatures.reserve(requestedFeatureStypes.size());
-			std::set_intersection(
-				requestedFeatureStypes.begin(), requestedFeatureStypes.end(),
-				availFeatureStypes.begin(), availFeatureStypes.end(),
-				std::back_inserter(availAndRequestedFeatures));
-			// now, compare the intersection set with the requested set: if they're equal, we're good to go!
-			const bool allFeaturesSupported = std::equal(
-				requestedFeatureStypes.begin(), requestedFeatureStypes.end(),
-				availAndRequestedFeatures.begin(), availAndRequestedFeatures.end());
-
-			if (baseFeaturesMatch && allFeaturesSupported)
-			{
-				compatibleDevices.emplace_back(currDevice);
-			}
-		}
-
-		return chooseIdealDevice(compatibleDevices, extension_pack->PreferredApiVersion);
 	}
 
 	VkPhysicalDevice PhysicalDeviceImpl::chooseIdealDevice(const std::vector<VkPhysicalDevice>& avail_devices, const VprExtensionPack::ApiVersion _desiredApiVersion)
@@ -231,6 +172,12 @@ namespace vpr
 	namespace detail
 	{
 
+		struct VkStructureTypeHeader
+		{
+			VkStructureType type;
+			void* pNext;
+		};
+
 		std::vector<size_t> getSTypesFromDeviceFeaturesStruct(const void* pNext)
 		{
 			std::vector<size_t> featureStypes;
@@ -238,11 +185,9 @@ namespace vpr
 			while (pNext != nullptr)
 			{
 				// structures are arranged so that sType is in first 8 bytes, pNext is in second 8 bytes
-				const size_t sType = *reinterpret_cast<const size_t*>(pNext);
-				featureStypes.emplace_back(sType);
-				const std::byte* newAddr = reinterpret_cast<const std::byte*>(pNext);
-				newAddr += sizeof(size_t);
-				pNext = reinterpret_cast<const void*>(newAddr);
+				const VkStructureTypeHeader* header = reinterpret_cast<const VkStructureTypeHeader*>(pNext);
+				featureStypes.emplace_back(header->type);
+				pNext = header->pNext;
 			}
 
 			std::sort(featureStypes.begin(), featureStypes.end());
