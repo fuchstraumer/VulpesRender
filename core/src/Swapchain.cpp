@@ -315,7 +315,7 @@ namespace vpr {
             auto iter = std::find(std::begin(avail_modes), std::end(avail_modes), desiredMode);
             if (iter == std::cend(avail_modes))
             {
-                std::cerr << "Desired vertical sync mode is " << getPresentModeStr(desiredMode) << "not available on current hardware!\n";
+                std::cerr << "Desired vertical sync mode is " << getPresentModeStr(desiredMode) << " not available on current hardware!\n";
                 std::cerr << "Falling back to supported present mode " << getPresentModeStr(presentMode) << "\n";
             }
             else
